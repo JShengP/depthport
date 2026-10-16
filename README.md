@@ -7,7 +7,7 @@
 
 English · [繁體中文](README.zh-TW.md)
 
-**Experimental alpha** · **Local-first** · **English / 繁體中文** · **AGPL-3.0-only**
+**Experimental 0.2 alpha** · **Local-first** · **English / 繁體中文** · **AGPL-3.0-only**
 
 </div>
 
@@ -20,6 +20,12 @@ DepthPort integrates existing pretrained models; it does **not** introduce a new
 *Screenshot: the actual UI showing synthetic test data. No camera or AI model produced this point cloud.*
 
 > **Status:** source-release alpha, not a production or metrology system. Automated tests validate application contracts, geometry and UI behavior; they do not prove pretrained-model inference. Real-model runs, fresh installation on target systems, CUDA, physical cameras and depth accuracy are not yet validated. Read the [validation record](docs/en/validation.md).
+
+## New in v0.2 — Spatial Analysis Lab
+
+Open **[Spatial Analysis](/spatial)** on a running local server (`http://127.0.0.1:8000/spatial`): clickable camera-space XYZ / raw depth inspector, sequential four-engine still-image comparison with native-unit histograms and 3D previews, optional YOLO26 Detect/Segment instance-to-point fusion, and pinhole checkerboard calibration / candidate plane fitting / independent metric-error checks. The original viewer, four depth engines, image/RTSP input, exports and bilingual UI remain available. Analysis is a single-worker experimental feature: **models/RTSP/hardware have not been physically validated**.
+
+[English implementation & acceptance](docs/en/spatial-analysis.md) · [繁體中文實作與驗收](docs/zh-TW/spatial-analysis.md)
 
 ## What you can explore
 

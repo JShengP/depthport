@@ -1,5 +1,15 @@
 # Changelog / 版本紀錄
 
+## 0.2.0-alpha.1 — 2026-10-17 (development branch only)
+
+- Added Spatial Analysis Lab (`/spatial`) with clickable point inspection, stale-frame detection, native-unit four-model sequential comparison, YOLO Detect/Segment 2D→3D object point subsets, and camera calibration / candidate-plane / independent validation tools.
+- Added deterministic comparison archives and current-frame `spatial_analysis.json` in the existing export ZIP, keeping all original raw depth and geometry outputs.
+- Preserved the four existing depth adapters, RTSP latest-frame source, English/Traditional Chinese and AGPL-3.0-only. No pretrained-model or RTSP hardware performance is asserted.
+
+- 新增 `/spatial` 點位查詢、四模型同圖依序比較、YOLO 物件語意融合、棋盤格標定與獨立誤差驗證。
+- 比較包與同影格 ZIP 保留原始深度、單位與追溯資訊。原有四模型／RTSP／雙語／授權不變。
+- 此版本僅為功能開發分支，尚未發布正式 Release，也尚未實機驗證。
+
 ## 0.1.0-alpha.1 — 2026-10-16
 
 First independently named **DepthPort** source-release candidate, derived from a four-model prototype. This starts a public-facing version line; it is not an upstream model release.

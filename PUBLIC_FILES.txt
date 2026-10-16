@@ -95,3 +95,17 @@ tools/build_site.py
 tools/check_release.py
 tools/http_smoke.py
 tools/stage_public.py
+# v0.2 Spatial Analysis extension
+depthport/spatial.py
+depthport/semantic.py
+depthport/comparison.py
+static/spatial.html
+static/spatial.css
+static/spatial.js
+tests/test_spatial.py
+tests/test_spatial_i18n.cjs
+tools/calibrate_camera.py
+docs/en/spatial-analysis.md
+docs/zh-TW/spatial-analysis.md
+tools/spatial_browser_smoke.py
+docs/validation/v0.2-summary.json

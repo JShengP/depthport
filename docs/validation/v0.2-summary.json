@@ -1,0 +1,22 @@
+{
+  "project": "DepthPort",
+  "version": "0.2.0-alpha.1",
+  "verification_scope": "experimental spatial analysis source",
+  "python_tests": {"passed": 116, "skipped_real_model": 4, "failed": 0},
+  "i18n": {"main_bilingual_keys": 170, "spatial_bilingual_keys": 82},
+  "spatial_browser": {
+    "transport": "FastAPI TestClient inline bridge; not browser-to-real HTTP",
+    "model_backend": "explicit fake depth and fake semantic engines; NOT AI inference",
+    "point_inspection": "PASS",
+    "comparison_four_engines": "PASS with fake models",
+    "semantic_mask_to_point_cloud": "PASS with fake semantic mask",
+    "candidate_plane": "PASS with synthetic flat depth",
+    "english_and_traditional_chinese": "PASS",
+    "browser_js_errors": 0,
+    "mobile_horizontal_overflow_px": 0
+  },
+  "real_model_inference": "NOT TESTED: Ultralytics, DA V2, DA3 dependencies/weights not available in runner",
+  "real_gpu_rtsp_physical_accuracy": "NOT TESTED",
+  "clean_target_installation": "NOT TESTED",
+  "recommended_next_gate": "GPU machine fresh Python 3.11/3.12 install, one real image with each of four engines, YOLO Segment real inference, calibration checkerboard, RTSP long-running tests, empirical depth ground truth"
+}

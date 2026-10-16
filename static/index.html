@@ -9,7 +9,7 @@
 <title>DepthPort | Monocular Depth &amp; Point Cloud Workbench</title>
 <link href="/static/style.css" rel="stylesheet"/>
 </head>
-<body data-release="0.1.0-alpha.1">
+<body data-release="0.2.0-alpha.1">
 <div class="app-shell">
 <header class="topbar">
 <div class="brand">
@@ -53,6 +53,7 @@
 <div class="side-foot" data-i18n="safety.short">V2 / DA3-Small are not meters. V2 is display-only geometry. Hidden surfaces are not reconstructed.</div>
 </aside>
 <main class="main"><div class="static-banner" data-i18n="demo.staticBanner" hidden="" id="staticBanner">Static viewer demo — synthetic data, no AI inference or RTSP connection.</div>
+<div class="static-banner" id="spatialLinkBox" style="display:block;border-color:#27695f;background:#102e34;color:#b9ede4"><a href="/spatial" id="spatialLink" data-i18n="spatial.open" style="color:#70e5cb;font-weight:800">◈ Spatial Analysis Lab — Point Inspector · 4-model Comparison · Semantic 3D · Calibration →</a></div>
 <div class="page-heading"><div><div class="eyebrow" data-i18n="page.eyebrow">ONE CAMERA / FOUR DEPTH ENGINES</div><h1 data-i18n="page.heading">From pixels to point clouds</h1><p data-i18n="page.sub">RGB images &amp; RTSP · Explore visible-surface geometry locally.</p></div><div class="online-indicator" id="stateText"><span class="pulse"></span><span data-i18n="state.waiting">Waiting for input</span></div></div>
 <section aria-label="Depth model switching" class="model-switcher" data-i18n-aria-label="models.section">
 <div class="model-selector">

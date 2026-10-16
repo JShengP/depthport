@@ -1,7 +1,13 @@
 <div align="center">
 
 # DepthPort
-### 單目深度與點雲工作台
+### v0.2 新功能 — Spatial Analysis 空間分析工作台
+
+啟動本地服務後開啟 **http://127.0.0.1:8000/spatial**，可進行 RGB／深度圖點選後取得相機 XYZ／原始深度、同張圖片四模型依序比較（保留不同尺度語義，顯示深度圖／點雲／直方圖／耗時）、額外 YOLO26 Detect／Segment 2D→3D 語意融合，以及棋盤格相機標定、候選平面、已知距離參考與獨立驗證誤差。原本四模型、RTSP、主介面、匯出與雙語功能都保留。**此為尚未做真模型／相機／GPU 驗收的 Alpha 功能，非安全測距工具。**
+
+[English implementation & acceptance](docs/en/spatial-analysis.md) · [繁體中文實作與驗收](docs/zh-TW/spatial-analysis.md)
+
+## 單目深度與點雲工作台
 
 **一支相機。四種深度引擎。另一個觀察視角。**
 
