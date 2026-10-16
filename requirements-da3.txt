@@ -1,25 +1,25 @@
 # Runtime dependencies for the selected DA3 Small/Metric single-view APIs.
 # Source is installed separately with --no-deps by install.py.
 # Do NOT let xformers automatically replace a working CUDA torch installation.
-numpy==1.26.4
-opencv-python==4.11.0.86
+numpy==2.5.4
+opencv-python==5.0.0.93
 addict>=2.4,<3
-omegaconf>=2.3,<3
-einops>=0.7,<1
-huggingface_hub>=0.34,<1
-safetensors>=0.4,<1
-scipy>=1.11,<2
-e3nn>=0.5,<0.6
-evo>=1.28,<2
-trimesh>=4,<5
-open3d>=0.18,<1
-pycolmap>=3.10,<5
-plyfile>=1,<2
-pillow-heif>=0.18,<2
-imageio>=2.34,<3
-imageio-ffmpeg>=0.5,<1
-moviepy==1.0.3
-requests>=2.32,<3
-typer>=0.12,<1
-tqdm>=4.66,<5
-matplotlib>=3.8,<4
+omegaconf>=2.4.0,<3
+einops>=0.8.2,<1
+huggingface_hub>=2.2.0,<3
+safetensors>=0.8.0,<1
+scipy>=1.18.1,<2
+e3nn>=0.6.0,<0.7
+evo>=1.38.0,<2
+trimesh>=5.1.1,<6
+open3d>=0.20.0,<1
+pycolmap>=4.2.1,<5
+plyfile>=1.1.5,<2
+pillow-heif>=1.8.1,<2
+imageio>=2.38.1,<3
+imageio-ffmpeg>=0.6.0,<1
+moviepy==2.2.1
+requests>=2.34.2,<3
+typer>=0.27.3,<1
+tqdm>=4.70.1,<5
+matplotlib>=3.11.2,<4
