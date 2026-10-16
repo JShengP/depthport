@@ -2,7 +2,7 @@ name: Bootstrap DepthPort v0.2 spatial analysis (one-time)
 on:
   push:
     branches: ["feature/spatial-analysis-v0.2"]
-    paths: [".depthport-v0.2.patch.base64"]
+    paths: [".depthport-v0.2.patch.base64", ".github/workflows/depthport-v0.2-bootstrap.yml"]
 permissions:
   contents: write
 jobs:
@@ -14,7 +14,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: true
-          fetch-depth: 2
+          fetch-depth: 0
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.11"
@@ -25,7 +25,7 @@ jobs:
           import base64,hashlib,lzma,subprocess
           from pathlib import Path
           base = 'a8fce96e1f83886410d31832055e3a5af8381386'
-          assert subprocess.check_output(['git','rev-parse','HEAD^'],text=True).strip()==base, "Unexpected branch base; refusing patch"
+          assert subprocess.check_output(['git','rev-parse','origin/main'],text=True).strip()==base, "Unexpected branch base; refusing patch"
           encoded=Path('.depthport-v0.2.patch.base64').read_text(encoding='ascii').strip()
           content=base64.b64decode(encoded,validate=True)
           expected='2320073a7bf0299c06fde3199b3a1ffbbbb60bf4beaa86caeba2781683864992'
@@ -51,9 +51,13 @@ jobs:
           node tests/test_i18n.cjs
           node tests/test_spatial_i18n.cjs
           python tools/http_smoke.py
+          git restore --source=HEAD -- .github/workflows/ci.yml
           git rm -f .depthport-v0.2.patch.base64 .github/workflows/depthport-v0.2-bootstrap.yml
           git add -A
           python tools/check_release.py
+          # Restore this bootstrap workflow unchanged for a GITHUB_TOKEN push that has no workflows permission.
+          # The connected maintainer removes the temporary workflow in a separate Git API commit after the push.
+          git restore --source=HEAD --staged --worktree .github/workflows/depthport-v0.2-bootstrap.yml
       - name: Commit reviewed v0.2 source to feature branch only
         shell: bash
         run: |
