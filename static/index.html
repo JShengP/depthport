@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<link href="/static/favicon.svg" rel="icon"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#081324" name="theme-color"/>
+<title>DepthPort | Monocular Depth &amp; Point Cloud Workbench</title>
+<link href="/static/style.css" rel="stylesheet"/>
+</head>
+<body data-release="0.1.0-alpha.1">
+<div class="app-shell">
+<header class="topbar">
+<div class="brand">
+<div aria-hidden="true" class="brand-glyph"><span></span><span></span><span></span><span></span></div>
+<div><div class="brand-title">DEPTH<span>PORT</span></div><div class="brand-sub" data-i18n="brand.sub">MONOCULAR DEPTH / LOCAL WORKBENCH</div></div>
+</div>
+<div class="header-right"><select aria-label="Language" class="language-select" data-i18n-aria-label="lang.label" id="languageSelect"><option value="en">English</option><option value="zh-TW">繁體中文</option></select><span class="badge badge-outline">RTSP / RGB</span><span class="badge" id="sourceBadge"><i class="dot"></i><span data-i18n="source.standby">STANDBY</span></span></div>
+</header>
+<aside class="sidebar">
+<div class="side-heading"><span class="eyebrow" data-i18n="side.index">01 / INPUT SOURCE</span><h2 data-i18n="source.heading">Image source</h2></div>
+<section class="side-section">
+<div class="section-label"><span data-i18n="source.rtsp">RTSP stream</span><span class="tiny-label" data-i18n="side.live">LIVE SOURCE</span></div>
+<label class="field-label" data-i18n="source.label" for="rtspInput">IP camera RTSP URL</label>
+<input autocomplete="off" id="rtspInput" placeholder="rtsp://camera.example.invalid/stream" spellcheck="false" type="password"/>
+<p class="help-text" data-i18n="source.help">The Python host receives RTSP. It must be able to reach your camera.</p>
+<div class="button-row"><button class="btn primary" data-i18n="source.connect" id="connectBtn">◉ Connect camera</button><button class="btn secondary" data-i18n="source.stop" id="disconnectBtn">Stop source</button></div>
+</section>
+<div class="or-divider"><span data-i18n="common.or">or</span></div>
+<section class="side-section">
+<div class="section-label"><span data-i18n="source.image">Single image</span><span class="tiny-label" data-i18n="side.image">STATIC IMAGE</span></div>
+<input accept="image/png,image/jpeg,image/webp" class="hidden-file" id="fileInput" type="file"/>
+<button class="btn upload" id="uploadBtn"><span class="upload-symbol">↥</span><span><strong data-i18n="source.upload">Choose image &amp; build cloud</strong><small>JPG / PNG / WEBP · ≤ 12 MB</small></span></button>
+</section>
+<section class="side-section side-line">
+<div class="section-label"><span data-i18n="viewer.options">3D display</span><span class="tiny-label" data-i18n="side.viewer">VISUALIZER</span></div>
+<div class="slider-head"><label data-i18n="viewer.pointSize" for="sizeSlider">Point size</label><output id="sizeValue">3.0 px</output></div>
+<input class="slider" id="sizeSlider" max="8" min="1" step="0.5" type="range" value="3"/>
+<div class="slider-head"><label data-i18n="viewer.stretch" for="depthSlider">Display depth stretch</label><output id="depthValue">1.0×</output></div>
+<input class="slider" id="depthSlider" max="2.5" min="0.4" step="0.1" type="range" value="1"/>
+<p class="help-text" data-i18n="viewer.stretchDefault" id="stretchNote">1.0× preserves the current cloud. Display stretch never changes PLY / NPY.</p>
+<div aria-label="Point color mode" class="segmented" data-i18n-aria-label="viewer.colorLabel" role="group"><button class="selected" data-i18n="viewer.rgb" id="rgbMode">RGB colors</button><button data-i18n="viewer.depth" id="depthMode">Depth colors</button></div>
+<div class="button-row"><button class="btn secondary" data-i18n="viewer.reset" id="resetBtn">⤾ Reset view</button><button class="btn secondary" data-i18n="viewer.rotate" id="rotateBtn">⟳ Auto rotate</button></div>
+</section>
+<section class="side-section side-line">
+<div class="section-label"><span data-i18n="export.heading">Export data</span><span class="tiny-label" data-i18n="side.export">EXPORT</span></div>
+<button class="btn secondary full" data-i18n="export.ply" disabled="" id="exportBtn">↓ Point cloud (.PLY)</button>
+<button class="btn secondary full" data-i18n="export.npy" disabled="" id="depthExportBtn">↓ Depth array (.NPY)</button>
+<button class="btn secondary full" data-i18n="export.zip" disabled="" id="bundleExportBtn">↓ Same-frame bundle (.ZIP)</button>
+<button class="btn text-button full" data-i18n="demo.button" id="demoBtn">Try viewer · synthetic data →</button>
+</section>
+<div class="side-foot" data-i18n="safety.short">V2 / DA3-Small are not meters. V2 is display-only geometry. Hidden surfaces are not reconstructed.</div>
+</aside>
+<main class="main"><div class="static-banner" data-i18n="demo.staticBanner" hidden="" id="staticBanner">Static viewer demo — synthetic data, no AI inference or RTSP connection.</div>
+<div class="page-heading"><div><div class="eyebrow" data-i18n="page.eyebrow">ONE CAMERA / FOUR DEPTH ENGINES</div><h1 data-i18n="page.heading">From pixels to point clouds</h1><p data-i18n="page.sub">RGB images &amp; RTSP · Explore visible-surface geometry locally.</p></div><div class="online-indicator" id="stateText"><span class="pulse"></span><span data-i18n="state.waiting">Waiting for input</span></div></div>
+<section aria-label="Depth model switching" class="model-switcher" data-i18n-aria-label="models.section">
+<div class="model-selector">
+<label class="eyebrow" data-i18n="models.label" for="engineSelect">Depth engine</label>
+<select id="engineSelect">
+<option data-i18n="models.yolo26" value="yolo26">YOLO26 Depth · estimated meters</option>
+<option data-i18n="models.da2-small" value="da2-small">Depth Anything V2 Small · virtual depth</option>
+<option data-i18n="models.da3-small" value="da3-small">DA3-Small · relative depth</option>
+<option data-i18n="models.da3-metric" value="da3-metric">DA3Metric-Large · focal-scaled meters</option>
+</select>
+<p class="help-text" id="engineHint">Estimated meters from the YOLO API. Validate scale with field measurements.</p>
+</div>
+<div class="model-actions">
+<span class="badge badge-outline" data-i18n="state.not_loaded" id="modelStateChip">NOT LOADED</span>
+<button class="btn primary" data-i18n="models.apply" id="applyModelBtn">Apply / retry model</button>
+<button class="btn secondary" data-i18n="models.reprocess" disabled="" id="reprocessBtn">Reprocess current image</button>
+</div>
+<div class="model-policy"><span data-i18n="unit.metricBadge" id="unitsBadge">ESTIMATED m / NOT VERIFIED</span><span data-i18n="models.policy">One active model · unload before switching</span></div>
+</section>
+<section aria-label="Inference information" class="metrics" data-i18n-aria-label="metrics.section">
+<div class="metric"><div class="metric-label"><span data-i18n="metrics.points">POINTS</span><span>↗</span></div><div class="metric-main" id="pointsCount">—</div><div class="metric-note" data-i18n="metrics.pointsNote">Colored 3D points</div></div>
+<div class="metric"><div class="metric-label"><span data-i18n="metrics.pipeline">PIPELINE</span><span>↗</span></div><div class="metric-main"><span id="inferenceMs">—</span><small> ms</small></div><div class="metric-note" data-i18n="metrics.pipelineNote" id="inferenceDetail">Model + cloud; excludes capture / network</div></div>
+<div class="metric"><div class="metric-label"><span data-i18n="metrics.frames">FRAMES</span><span>↗</span></div><div class="metric-main" id="frameCount">—</div><div class="metric-note" data-i18n="metrics.framesNote">Processed frame counter</div></div>
+<div class="metric"><div class="metric-label"><span data-i18n="metrics.device">AI DEVICE</span><span>↗</span></div><div class="metric-main metric-device" data-i18n="state.not_loaded" id="deviceValue">NOT LOADED</div><div class="metric-note" data-i18n="metrics.deviceNote">GPU / CPU inference</div></div>
+</section>
+<div class="content-grid">
+<section class="panel viewer-panel">
+<div class="panel-header"><div class="panel-title"><span class="panel-index">A /</span><span data-i18n="viewer.title">3D POINT CLOUD</span><span class="sub-tag">WEBGL</span></div><div class="panel-tools"><span class="live-chip" data-i18n="cloud.noData" id="cloudTag">NO DATA</span><span class="toolbar-icon" data-i18n-title="viewer.hint" title="Left drag: orbit; right drag: pan; wheel: zoom">◎</span></div></div>
+<div class="viewer-wrap"><canvas aria-label="Interactive three-dimensional point cloud" data-i18n-aria-label="viewer.canvas" id="cloudCanvas"></canvas><div aria-hidden="true" class="viewer-crosshair">+</div><div class="viewer-corner viewer-corner-tl"></div><div class="viewer-corner viewer-corner-br"></div><div class="viewer-overlay" id="viewerOverlay"><span class="orbit-icon">◎</span><strong data-i18n="viewer.ready">A new perspective awaits</strong><span data-i18n="viewer.start">Upload an image or connect your IP camera to begin.</span><button class="inline-demo" data-i18n="demo.inline" id="inlineDemoBtn">Explore the synthetic demo →</button></div><div class="viewer-bottom"><span><span class="cyan-dot">●</span><span data-i18n="viewer.orbit">ORBIT</span><kbd data-i18n="viewer.drag">DRAG</kbd></span><span><span data-i18n="viewer.zoom">ZOOM</span><kbd data-i18n="viewer.scroll">SCROLL</kbd></span><span><span data-i18n="viewer.pan">PAN</span><kbd data-i18n="viewer.rightDrag">RIGHT DRAG</kbd></span></div></div>
+<div class="panel-footer"><span data-i18n="cloud.initial" id="viewCaption">Waiting for an image · visible surfaces only</span><span data-i18n="unit.follow" id="cloudUnits">UNITS FOLLOW MODEL</span></div>
+</section>
+<div class="preview-column">
+<section class="panel image-panel"><div class="panel-header"><div class="panel-title"><span class="panel-index">B /</span><span data-i18n="preview.rgb">RGB SOURCE</span></div><div class="sub-tag" data-i18n="preview.color">COLOR IMAGE</div></div><div class="image-well"><div class="image-placeholder" id="rgbPlaceholder"><div class="placeholder-icon">▧</div><span data-i18n="preview.rgbWait">Waiting for a camera frame / image</span></div><img alt="Input RGB image" data-i18n-alt="preview.rgbAlt" id="previewRgb"/></div><div class="panel-footer"><span data-i18n="preview.frame">INPUT / CAMERA FRAME</span><span id="rgbResolution">—</span></div></section>
+<section class="panel image-panel"><div class="panel-header"><div class="panel-title"><span class="panel-index">C /</span><span data-i18n="preview.depth">AI DEPTH MAP</span></div><div class="sub-tag" id="modelTag">YOLO26n DEPTH</div></div><div class="image-well"><div class="image-placeholder" id="depthPlaceholder"><div class="placeholder-icon">◫</div><span data-i18n="preview.depthWait">Estimated depth from the selected model</span></div><img alt="Estimated depth map" data-i18n-alt="preview.depthAlt" id="previewDepth"/></div><div class="panel-footer"><span><span data-i18n="preview.near">NEAR</span><b class="near-mark">●</b> → FAR <b class="far-mark">●</b></span><span id="colorRange">—</span></div></section>
+</div>
+</div>
+<section aria-label="Depth and camera information" class="depth-info" data-i18n-aria-label="info.section">
+<span><b data-i18n="info.depth">DEPTH</b> <span data-i18n="depth.waiting" id="depthRange">Waiting for inference</span></span>
+<span><b data-i18n="info.camera">CAMERA</b> <span data-i18n="camera.estimated" id="intrinsicsInfo">Estimated HFOV · not calibrated</span></span>
+<span><b data-i18n="info.model">MODEL</b> <span id="modelInfo">yolo26n-depth.pt · 768</span></span>
+</section>
+<section class="status-panel"><div><span class="status-check">●</span><strong data-i18n="status.heading">SYSTEM STATUS</strong> <span data-i18n="status.initial" id="statusDetail">Waiting for an image. Models load only when requested.</span></div><span data-i18n="status.version" id="updateDetail">v0.1 ALPHA / LOCAL WORKBENCH</span></section>
+<div aria-live="polite" id="toast" role="status"></div>
+<footer class="project-footer"><span data-i18n="footer.alpha">Experimental alpha · not a distance sensor</span><a data-i18n="footer.license" href="/api/license" id="licenseLink">License · no warranty</a><a data-i18n="footer.source" href="/api/source-code.zip" id="sourceCodeLink">Source code · AGPL-3.0</a></footer></main>
+</div>
+<script src="/static/i18n.js"></script><script src="/static/viewer.js"></script>
+<script src="/static/main.js"></script>
+</body>
+</html>
+

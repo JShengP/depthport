@@ -1,0 +1,26 @@
+# Developer tools
+[繁體中文](README.zh-TW.md)
+
+All commands run from the project root. None of these tools publishes to an external repository by itself.
+
+| Tool | Purpose | Dependencies / boundary |
+|---|---|---|
+| `tools/check_release.py` | Check public manifest, local Markdown links and obvious secrets | Standard library; not a complete security/history scan |
+| `tools/build_release.py` | Build manifest-only source ZIP and SHA-256 | Standard library; no model download |
+| `tools/stage_public.py` | Stage only manifest files | Git; does not commit or push |
+| `tools/build_site.py` | Build static synthetic demo in `_site` | Standard library; AI/RTSP inputs disabled |
+| `tools/http_smoke.py` | Start actual Uvicorn and test routes via HTTP | Base app requirements; no model loaded |
+| `tools/browser_offline_smoke.py` | Test UI with explicit FakeEngine and TestClient bridge | Test dependencies, CPU torch, Playwright and Chromium; not browser-to-HTTP or pretrained inference |
+| `tests/test_i18n.cjs` | Translation keys, placeholders, preferences and DOM references | Node.js; no npm dependencies |
+
+Optional browser setup:
+
+```bash
+python -m pip install -r requirements-test.txt playwright
+python -m playwright install chromium
+python tools/browser_offline_smoke.py
+```
+
+The tool uses Playwright's installed Chromium unless `CHROMIUM_PATH` names a local executable. It creates local reports and captures only the explicitly labeled synthetic viewer for documentation screenshots. Read the reported renderer: Canvas fallback is not a WebGL GPU test. UI tests cover both languages, no inference triggered by language changes, all four mock-backed model switches, same-source exports, synthetic interaction and narrow layout.
+
+`check_env.py --all --image camera.jpg` is the separate **real** inference path. Its success requires actual model calls; no fake fallback exists.

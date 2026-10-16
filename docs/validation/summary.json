@@ -1,0 +1,47 @@
+{
+  "project": "DepthPort",
+  "version": "0.1.0-alpha.1",
+  "checked_on": "2026-10-16",
+  "unit_tests": {
+    "tests": 106,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 4,
+    "passed": 102
+  },
+  "translation_keys_per_language": 169,
+  "languages": [
+    "en",
+    "zh-TW"
+  ],
+  "browser_test_transport": "Inline assets + explicit TestClient fetch bridge, no browser HTTP",
+  "browser_renderer": "CANVAS 3D FALLBACK",
+  "browser_js_errors": [],
+  "model_tests": "Explicit FakeEngine/API doubles; CPU tensor operations used, not pretrained models",
+  "http_routes_without_models": "PASS",
+  "static_demo_standard_library_build": "PASS",
+  "public_manifest_and_local_links": "PASS",
+  "yaml_parse_and_js_bash_python_syntax": "PASS",
+  "pretrained_models": "NOT RUN: ultralytics / transformers / depth_anything_3 not installed",
+  "browser_to_local_http": "NOT VERIFIED: environment browser policy blocked localhost navigation",
+  "real_gpu_camera_or_distance_validation": "NOT RUN",
+  "fresh_target_install": "NOT RUN",
+  "github_hosted_ci_release_and_pages": "NOT RUN; no external repository or site created",
+  "test_environment": {
+    "os": "Linux",
+    "python": "3.13.5",
+    "packages": {
+      "numpy": "2.3.5",
+      "opencv-python": "4.13.0.92",
+      "torch": "2.10.0+cpu",
+      "fastapi": "0.128.2",
+      "starlette": "0.50.0",
+      "pytest": "9.0.2",
+      "httpx": "0.28.1",
+      "playwright": "1.57.0"
+    }
+  },
+  "target_install_profile": "Python 3.10–3.12; NumPy 1.26.4 / OpenCV 4.11.0.86; differs from test environment",
+  "screen_capture": "Actual UI synthetic demo only, not camera/AI output",
+  "security_scope": "Simple manifest, path and obvious-secret checks; not a full audit or ownership review"
+}

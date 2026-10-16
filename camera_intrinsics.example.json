@@ -1,0 +1,11 @@
+{
+  "note": "ILLUSTRATIVE ONLY. Replace with your camera calibration before enabling.",
+  "camera_model": "pinhole",
+  "image_width": 1920,
+  "image_height": 1080,
+  "fx": 1500.0,
+  "fy": 1500.0,
+  "cx": 959.5,
+  "cy": 539.5,
+  "dist_coeffs": []
+}

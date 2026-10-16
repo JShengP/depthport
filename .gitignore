@@ -1,0 +1,46 @@
+# Local runtime and credentials
+.venv*/
+.env
+.env.*
+!.env.example
+.installed*.json
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.py[cod]
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+# Private input, output and cached models
+outputs/
+private/
+models/*
+!models/README.md
+!models/README.zh-TW.md
+*.pt
+*.pth
+*.safetensors
+*.onnx
+*.engine
+*.npy
+*.ply
+*.pcd
+*.pem
+*.key
+camera_intrinsics.json
+# Local tests and build artifacts (curated public evidence lives in docs/validation/)
+coverage.xml
+.coverage
+htmlcov/
+dist/
+_site/
+site-build/
+artifacts/
+*_test_report.json
+*_test_report.txt
+http_smoke_*.json
+environment_check.txt
+
+preview.png

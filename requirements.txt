@@ -1,0 +1,6 @@
+-r requirements-base.txt
+# Reference API from previous YOLO26 PoC. Real hardware install still needs validation.
+ultralytics==8.4.115
+# Install an appropriate CUDA pair in this venv first when using NVIDIA GPU.
+torch>=2.3,<3
+torchvision>=0.18,<1

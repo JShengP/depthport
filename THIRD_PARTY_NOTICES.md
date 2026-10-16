@@ -1,0 +1,32 @@
+# Third-party notices / 第三方聲明
+
+This is a source-only application release. It does not ship model weights, CUDA libraries, fonts, or a vendored copy of an upstream model repository. Installed runtime packages retain their own notices and licenses. This file is a curated inventory, **not** a complete transitive SBOM or a legal clearance certificate.
+
+本版只發布應用原始碼，不附模型權重、CUDA 函式庫、字型或上游模型 repo 複本。安裝套件保留各自授權。此處是人工整理的來源清單，**不是完整遞迴 SBOM 或法律合規證明**。
+
+| Component / 組件 | Use / 用途 | License / 授權 | Primary reference / 原始來源 |
+|---|---|---|---|
+| Ultralytics / YOLO26 Depth | Optional Python inference adapter | AGPL-3.0; separate Enterprise option | [License](https://www.ultralytics.com/license), [Depth API](https://docs.ultralytics.com/tasks/depth/) |
+| Depth Anything V2 Small HF | Relative-depth checkpoint | Apache-2.0 for the selected Small checkpoint | [Model card](https://huggingface.co/depth-anything/Depth-Anything-V2-Small-hf), [authors' repository](https://github.com/DepthAnything/Depth-Anything-V2) |
+| Transformers / Hugging Face Hub | V2 runtime / model acquisition | Apache-2.0 | [Transformers](https://github.com/huggingface/transformers), [Hub](https://github.com/huggingface/huggingface_hub) |
+| Depth Anything 3 code | Optional DA3 runtime | Apache-2.0 code | [Repository](https://github.com/ByteDance-Seed/Depth-Anything-3) |
+| DA3-SMALL / DA3METRIC-LARGE | Selected DA3 weights | Apache-2.0 on these model cards | [Small](https://huggingface.co/depth-anything/DA3-SMALL), [Metric](https://huggingface.co/depth-anything/DA3METRIC-LARGE) |
+| PyTorch / torchvision | Tensor runtime | BSD-style; preserve installed notices | [PyTorch license](https://github.com/pytorch/pytorch/blob/main/LICENSE), [torchvision](https://github.com/pytorch/vision/blob/main/LICENSE) |
+| FastAPI / Starlette / Uvicorn | Web service | MIT / BSD-3-Clause / BSD-3-Clause | [FastAPI](https://github.com/fastapi/fastapi), [Starlette](https://github.com/encode/starlette), [Uvicorn](https://github.com/encode/uvicorn) |
+| NumPy / OpenCV / Pillow | Geometry / decoding / image handling | BSD-3-Clause / Apache-2.0 for OpenCV 4.11 / HPND | [NumPy](https://github.com/numpy/numpy), [OpenCV](https://github.com/opencv/opencv), [Pillow](https://github.com/python-pillow/Pillow) |
+
+## Adaptation provenance / 改寫來源
+
+The DA3 adapter in `depthport/engines.py` follows the upstream `DepthAnything3` API flow and overrides its forward/autocast selection to allow explicit CPU FP32 or CUDA precision. It is an application-side adaptation of the [reference API](https://github.com/ByteDance-Seed/Depth-Anything-3/blob/3d835ec/src/depth_anything_3/api.py); upstream copyright remains with the original authors. A copy of Apache-2.0 is included in [LICENSES/Apache-2.0.txt](LICENSES/Apache-2.0.txt). The model structure and weights are not rewritten or claimed as original work.
+
+DA3 adapter 參考原廠 API，僅在應用側調整 forward／autocast 精度選擇；保留上游權利與來源聲明，不宣稱模型結構或權重為本專案原創。
+
+V2 uses the official Transformers API. The virtual 1–5 mapping is DepthPort's demonstration policy, **not** an upstream promise of metric geometry. Selected model cards must not be generalized to other sizes: some other DA3 and V2 weights have non-commercial licenses.
+
+V2 虛擬映射是本程式的展示策略，不是上游的公尺幾何保證。其他模型尺寸可能有非商用限制，不可直接套用本表。
+
+## Distribution boundary / 散布範圍
+
+The application's AGPL license does not remove third-party obligations, guarantee employer/IP clearance or grant model trademarks. Obtain permissions for your source contributions and images before publication. For binary/container/hosted distribution, inventory the actual installed versions, bundled libraries and their corresponding-source obligations. A source-download endpoint and this table are helpful mechanisms, not an automatic legal determination. No blanket “commercial use forbidden” claim is made about AGPL; consult the actual terms and the selected upstream licensing route.
+
+AGPL 不會消除第三方義務，也不代表已取得雇主／智慧財產權核准或模型商標授權。發布前確認程式與圖片的權利。散布容器、二進位或提供服務時，需依實際套件與函式庫版本檢查 notices 與 corresponding-source 義務；原始碼下載入口與本表不會自動完成法律判斷。AGPL 不等於禁止商用，仍應閱讀實際條款與所選上游授權路線。

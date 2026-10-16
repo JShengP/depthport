@@ -1,0 +1,21 @@
+name: Feature request / 功能建議
+description: Describe the problem and a verifiable improvement.
+title: "[Feature] "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / 想解決的問題
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposal and alternatives / 建議與替代方案
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence, tests and licensing impact / 證據、驗收與授權影響
+      description: Do not equate estimated depth with measured safety distance.

@@ -1,0 +1,20 @@
+DepthPort — Monocular depth & point cloud workbench
+Copyright (c) 2026 DepthPort contributors, for their original contributions.
+
+DepthPort application code is licensed under GNU AGPL version 3 only
+(SPDX: AGPL-3.0-only). See LICENSE. This grant applies only to rights the
+contributors hold; third-party code and model weights keep their licenses.
+
+DepthPort integrates pretrained model APIs and does not claim authorship of
+YOLO26, Depth Anything V2 or Depth Anything 3. Names identify compatible
+upstream projects, not affiliation or endorsement. Third-party attribution,
+source references and adaptation notes are in THIRD_PARTY_NOTICES.md.
+
+This software is provided without warranty. Estimated geometry is not
+validated distance or a safety signal. The public source manifest must be
+maintained when modifying a served version. This source snapshot does not
+contain private inputs, weights or a remote repository's commit history.
+
+DepthPort 原創應用程式碼採 AGPL-3.0-only；外部程式／權重保留原授權。
+模型與研究成果屬上游作者，名稱不代表合作、背書或商標授權。
+本軟體不提供保證，估計幾何不是量測真值或安全訊號。
