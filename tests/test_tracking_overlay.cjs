@@ -2148,3 +2148,141 @@ test('M cannot mark the prior Session during transition and requires a displayed
  await showSaved(ui,1,{sid:'session-b'});const requests=ui.pending.length;pressMarkKey(ui);
  assert.equal(e.rgb.src,'data:image/png;base64,session-b-1');assert.equal(e['bookmark-note'].value,'');assert.equal(ui.pending.length,requests);assert.equal(bookmarkWrites(ui).length,0);
 });
+
+function pressNoteSaveKey(ui,properties={}){
+ const note=ui.elements['bookmark-note'];
+ const event={key:'Enter',ctrlKey:true,target:note,defaultPrevented:false,...properties,preventDefault(){this.defaultPrevented=true}};
+ event.completion=note.onkeydown?.(event);return event;
+}
+async function finishNoteSave(ui,index,note,tags=[],{sid='session-a',bookmarks}={}){
+ const write=bookmarkWrites(ui).at(-1);assert.ok(write,'an admitted shortcut issues a bookmark request');
+ assert.equal(write.url,'/api/sessions/'+sid+'/frames/'+index+'/bookmark');assert.equal(write.opt.method,'PUT');
+ assert.deepEqual(JSON.parse(write.opt.body),{snapshot_sha256:hash,note,tags});
+ ui.respond(write.url,bookmarkResponse(sid,bookmarks||[bookmarkRecord(index,{note,tags})]));await flush();return write;
+}
+
+test('M then Ctrl+Enter saves the focused shown-frame note and tags once without changing its images or Object IDs',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showSaved(ui,2);configureLoop(ui,1,3);
+ e['playback-play'].onclick();await ui.tick(0);ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await flush();
+ pressMarkKey(ui);const image=e.rgb,depth=e.depth;editBookmark(ui,'synthetic keyboard review\n遮擋與交會',['id-switch','occlusion']);
+ assert.equal(typeof e['bookmark-note'].onkeydown,'function');const saving=pressNoteSaveKey(ui);assert.equal(saving.defaultPrevented,true);await flush();
+ assert.equal(bookmarkWrites(ui).length,1);assert.equal(e['bookmark-save'].disabled,true);assert.equal(e['bookmark-note'].disabled,true);
+ assert.equal(pressNoteSaveKey(ui).defaultPrevented,false);assert.equal(pressNoteSaveKey(ui,{repeat:true}).defaultPrevented,false);await flush();assert.equal(bookmarkWrites(ui).length,1);
+ await finishNoteSave(ui,2,'synthetic keyboard review\n遮擋與交會',['id-switch','occlusion']);await saving.completion;await ui.decodeFrame('session-a',3);await ui.tick(1000);
+ assert.equal(e.rgb,image);assert.equal(e.depth,depth);assertShownFrame(ui,2);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0002');
+ assert.match(e['playback-status'].textContent,/Paused/);assertLoopValues(ui,1,3,true);assert.equal(e['bookmark-note'].disabled,false);assert.equal(e['bookmark-save'].disabled,false);
+ assert.match(e['bookmark-editor-status'].textContent,/Bookmark saved/);assert.ok(e['bookmarks-list'].textContent.includes('synthetic keyboard review'));assert.equal(bookmarkWrites(ui).length,1);
+});
+
+test('Ctrl+Enter requires both the exact note target and active note focus and never saves from search, controls or the page',async()=>{
+ const ui=await startUI(),e=ui.elements;await showSaved(ui,2);editBookmark(ui,'synthetic focus guard');const requests=ui.pending.length;
+ const others=[null,e['bookmark-search'],e['bookmark-filter-tag'],e['bookmark-tag-crossing'],e['bookmark-save'],e['bookmark-mark'],e['replay-progress'],new Element('textarea'),new Element('div')];
+ for(const active of others){ui.document.activeElement=active;assert.equal(pressNoteSaveKey(ui).defaultPrevented,false,'a note target without note focus is insufficient')}
+ e['bookmark-note'].focus();
+ for(const target of others){assert.equal(pressNoteSaveKey(ui,{target}).defaultPrevented,false,'a focused note without the exact event target is insufficient');assert.equal(pressBookmarkKey(ui,'Enter',{ctrlKey:true,target}).defaultPrevented,false)}
+ const child=new Element('span');e['bookmark-note'].append(child);assert.equal(pressNoteSaveKey(ui,{target:child,composedPath:()=>[child,e['bookmark-note']]}).defaultPrevented,false);
+ assert.equal(pressBookmarkKey(ui,'Enter',{ctrlKey:true,target:e['bookmark-note']}).defaultPrevented,false,'the global replay handler does not capture note saves');
+ await flush();assert.equal(ui.pending.length,requests);assert.equal(bookmarkWrites(ui).length,0);assert.equal(e['bookmark-note'].value,'synthetic focus guard');
+});
+
+test('plain Enter keeps its native newline behavior and other keys and modified Enter combinations do not save',async()=>{
+ const ui=await startUI(),e=ui.elements;await showSaved(ui,2);e['bookmark-note'].focus();editBookmark(ui,'synthetic first line');const requests=ui.pending.length;
+ for(const properties of [{ctrlKey:false},{ctrlKey:false,shiftKey:true},{ctrlKey:false,metaKey:true},{altKey:true},{metaKey:true},{shiftKey:true},{repeat:true}])assert.equal(pressNoteSaveKey(ui,properties).defaultPrevented,false,JSON.stringify(properties));
+ for(const key of ['NumpadEnter','Return','enter',' ','m','M','[',']','ArrowRight','Escape','Process','Dead',''])assert.equal(pressNoteSaveKey(ui,{key}).defaultPrevented,false,key);
+ const consumed=pressNoteSaveKey(ui,{defaultPrevented:true});assert.equal(consumed.defaultPrevented,true);assert.equal(consumed.completion,undefined);
+ editBookmark(ui,'synthetic first line\nsecond line');await flush();assert.equal(e['bookmark-note'].value,'synthetic first line\nsecond line');assert.equal(ui.pending.length,requests);assert.equal(bookmarkWrites(ui).length,0);
+});
+
+test('Ctrl+Enter cannot submit during IME composition through event flags, key code or the document composition state',async()=>{
+ const ui=await startUI(),e=ui.elements;await showSaved(ui,2);e['bookmark-note'].focus();editBookmark(ui,'合成測試');const requests=ui.pending.length;
+ for(const properties of [{isComposing:true},{keyCode:229},{isComposing:true,keyCode:229}])assert.equal(pressNoteSaveKey(ui,properties).defaultPrevented,false);
+ ui.dispatch('compositionstart',{target:e['bookmark-note']});assert.equal(pressNoteSaveKey(ui,{isComposing:false,keyCode:13}).defaultPrevented,false);
+ ui.dispatch('compositionend',{target:e['bookmark-note']});await flush();assert.equal(ui.pending.length,requests);assert.equal(bookmarkWrites(ui).length,0);
+ const saving=pressNoteSaveKey(ui);assert.equal(saving.defaultPrevented,true);await flush();await finishNoteSave(ui,2,'合成測試');await saving.completion;
+ assert.equal(e['bookmark-note'].value,'合成測試');assert.match(e['bookmark-editor-status'].textContent,/Bookmark saved/);
+});
+
+test('hidden pages reject Ctrl+Enter and composition state resets on visibility and window blur',async()=>{
+ const ui=await startUI(),e=ui.elements;await showSaved(ui,2);e['bookmark-note'].focus();editBookmark(ui,'synthetic visibility review');
+ ui.dispatch('compositionstart');ui.hide();assert.equal(pressNoteSaveKey(ui).defaultPrevented,false);assert.equal(bookmarkWrites(ui).length,0);
+ ui.document.hidden=false;let saving=pressNoteSaveKey(ui);assert.equal(saving.defaultPrevented,true);await flush();await finishNoteSave(ui,2,'synthetic visibility review');await saving.completion;
+ ui.dispatch('compositionstart');assert.equal(pressNoteSaveKey(ui).defaultPrevented,false);ui.windowEvents.blur();
+ saving=pressNoteSaveKey(ui);assert.equal(saving.defaultPrevented,true);await flush();await finishNoteSave(ui,2,'synthetic visibility review');await saving.completion;assert.equal(bookmarkWrites(ui).length,2);
+});
+
+test('the shared shortcut switch clears Control+Enter metadata and disables only the shortcut while explicit Save remains available',async()=>{
+ const ui=await startUI(),e=ui.elements;await showSaved(ui,2);e['bookmark-note'].focus();editBookmark(ui,'synthetic opted-out review');
+ assert.ok(e['bookmark-save-shortcut-help'],'the note editor has a dedicated save shortcut hint');
+ for(const id of ['bookmark-note','bookmark-save'])assert.equal(e[id].getAttribute('aria-keyshortcuts'),'Control+Enter');
+ e['bookmark-shortcuts-enabled'].checked=false;e['bookmark-shortcuts-enabled'].onchange();
+ for(const id of ['bookmark-note','bookmark-save'])assert.equal(e[id].getAttribute('aria-keyshortcuts')||'','');
+ assert.equal(pressNoteSaveKey(ui).defaultPrevented,false);assert.equal(bookmarkWrites(ui).length,0);assert.equal(e['bookmark-save'].disabled,false);
+ const saving=e['bookmark-save'].onclick();await flush();await finishNoteSave(ui,2,'synthetic opted-out review');await saving;
+ e['bookmark-shortcuts-enabled'].checked=true;e['bookmark-shortcuts-enabled'].onchange();for(const id of ['bookmark-note','bookmark-save'])assert.equal(e[id].getAttribute('aria-keyshortcuts'),'Control+Enter');
+ const fresh=await startUI();assert.equal(fresh.elements['bookmark-shortcuts-enabled'].checked,true);assert.equal(fresh.elements['bookmark-note'].getAttribute('aria-keyshortcuts'),'Control+Enter');
+});
+
+test('Ctrl+Enter follows note and Save availability before display, during bookmark loading and after a rejected list',async()=>{
+ for(const response of [null,{detail:'Unavailable'},bookmarkResponse('session-a',[bookmarkRecord(1,{snapshot_sha256:otherHash})])]){
+  const ui=await startUI({delayBookmarks:true}),e=ui.elements;ui.document.activeElement=e['bookmark-note'];assert.equal(pressNoteSaveKey(ui).defaultPrevented,false);
+  await showSaved(ui,2);assert.equal(e['bookmark-note'].disabled,true);assert.equal(pressNoteSaveKey(ui).defaultPrevented,false);
+  if(response){ui.respond('/api/sessions/session-a/bookmarks',response,!response.detail,response.detail?500:200);await flush();assert.equal(pressNoteSaveKey(ui).defaultPrevented,false)}
+  assert.equal(bookmarkWrites(ui).length,0);assertProgress(ui,2,3);
+ }
+ const ready=await startUI();ready.document.activeElement=ready.elements['bookmark-note'];assert.equal(pressNoteSaveKey(ready).defaultPrevented,false);assert.equal(bookmarkWrites(ready).length,0);
+});
+
+test('Ctrl+Enter rejects invalid Unicode, control characters and overlong notes but saves permitted Unicode and empty general bookmarks',async()=>{
+ const ui=await startUI(),e=ui.elements;await showSaved(ui,2);e['bookmark-note'].focus();
+ for(const note of ['x'.repeat(1001),'hidden\u0000control','hidden\u0085control','unpaired\ud800','unpaired\udfff']){
+  editBookmark(ui,note);assert.equal(e['bookmark-save'].disabled,true);assert.equal(pressNoteSaveKey(ui).defaultPrevented,false);assert.equal(bookmarkWrites(ui).length,0);
+ }
+ for(const note of ['😀'.repeat(997)+'\n\t終','']){
+  editBookmark(ui,note);assert.equal(e['bookmark-save'].disabled,false);const saving=pressNoteSaveKey(ui);assert.equal(saving.defaultPrevented,true);await flush();await finishNoteSave(ui,2,note);await saving.completion;
+  assert.equal(e['bookmark-note'].value,note);assert.match(e['bookmark-editor-status'].textContent,/Bookmark saved/);
+ }
+ assert.equal(bookmarkWrites(ui).length,2);
+});
+
+test('Ctrl+Enter saves the committed snapshot rather than a selected target and does not submit an active progress preview',async()=>{
+ const ui=await startUI({frameIndices:[12,4,9]}),e=ui.elements;await showSaved(ui,4,{total:12});e['bookmark-note'].focus();editBookmark(ui,'synthetic exact snapshot',['crossing']);
+ e['frames-list'].value='9';const saving=pressNoteSaveKey(ui);assert.equal(saving.defaultPrevented,true);await flush();await finishNoteSave(ui,4,'synthetic exact snapshot',['crossing']);await saving.completion;
+ assert.equal(e.rgb.src,'data:image/png;base64,session-a-4');assertProgress(ui,2,3);assert.equal(bookmarkWrites(ui).length,1);
+ e['replay-progress'].value='3';e['replay-progress'].oninput();assert.equal(e['bookmark-note'].disabled,true);assert.equal(pressNoteSaveKey(ui).defaultPrevented,false);assert.equal(bookmarkWrites(ui).length,1);
+});
+
+test('Ctrl+Enter does not interrupt pending progress seeks, bookmark jumps or cleared manual replays when the note is unavailable',async()=>{
+ for(const kind of ['seek','jump','manual']){
+  const ui=await startUI({trackingReport:trackedSequence(),bookmarks:[bookmarkRecord(3)]}),e=ui.elements;await showSaved(ui,2);e['bookmark-note'].focus();editBookmark(ui,'synthetic retained draft');
+  let loading;if(kind==='seek')loading=scrub(ui,3);else if(kind==='jump')loading=e['bookmark-next'].onclick();else{e['frames-list'].value='3';loading=e.replay.onclick()}
+  await flush();assert.equal(e['bookmark-note'].disabled,true);assert.equal(pressNoteSaveKey(ui).defaultPrevented,false);assert.equal(bookmarkWrites(ui).length,0);
+  await completeReplay(ui,3);await loading;assertShownFrame(ui,3);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0003');
+  await showSaved(ui,2);assert.equal(e['bookmark-note'].value,'synthetic retained draft');assert.equal(bookmarkWrites(ui).length,0);
+ }
+});
+
+test('Ctrl+Enter failure keeps the draft and prior saved note and permits a later explicit keyboard retry',async()=>{
+ const original=bookmarkRecord(2,{note:'synthetic original note',tags:['crossing']}),ui=await startUI({bookmarks:[original]}),e=ui.elements;await showSaved(ui,2);e['bookmark-note'].focus();editBookmark(ui,'synthetic retry draft',['occlusion']);
+ let saving=pressNoteSaveKey(ui);assert.equal(saving.defaultPrevented,true);await flush();ui.respond('/api/sessions/session-a/frames/2/bookmark',{detail:'Storage unavailable'},false,500);await saving.completion;
+ assert.equal(e['bookmark-note'].value,'synthetic retry draft');assert.equal(e['bookmark-tag-occlusion'].checked,true);assert.ok(e['bookmarks-list'].textContent.includes('synthetic original note'));assert.equal(e['bookmark-save'].disabled,false);assert.match(e['bookmarks-status'].textContent,/error|fail|Storage/i);
+ saving=pressNoteSaveKey(ui);assert.equal(saving.defaultPrevented,true);await flush();await finishNoteSave(ui,2,'synthetic retry draft',['occlusion']);await saving.completion;
+ assert.equal(bookmarkWrites(ui).length,2);assert.ok(e['bookmarks-list'].textContent.includes('synthetic retry draft'));assert.equal(e['bookmarks-list'].textContent.includes('synthetic original note'),false);
+});
+
+test('a Ctrl+Enter save finishing in an old Session cannot replace the new Session list or draft',async()=>{
+ const ui=await startUI(),e=ui.elements;await showSaved(ui,2);e['bookmark-note'].focus();editBookmark(ui,'synthetic old Session save',['occlusion']);
+ const saving=pressNoteSaveKey(ui);assert.equal(saving.defaultPrevented,true);await flush();e['sessions-list'].value='session-b';const switched=e['sessions-list'].onchange();await flush();
+ assert.equal(pressNoteSaveKey(ui).defaultPrevented,false);await finishFrames(ui,'session-b',true,null,[1,2,3],[bookmarkRecord(1,{note:'synthetic B saved'})]);await switched;
+ assert.equal(pressNoteSaveKey(ui).defaultPrevented,false);await showSaved(ui,1,{sid:'session-b'});e['bookmark-note'].focus();editBookmark(ui,'synthetic B draft',['crossing']);
+ ui.respond('/api/sessions/session-a/frames/2/bookmark',bookmarkResponse('session-a',[bookmarkRecord(2,{note:'synthetic old Session save',tags:['occlusion']})]));await saving.completion;
+ assert.equal(e['bookmark-note'].value,'synthetic B draft');assert.equal(e['bookmark-tag-crossing'].checked,true);assert.ok(e['bookmarks-list'].textContent.includes('synthetic B saved'));assert.equal(e['bookmarks-list'].textContent.includes('synthetic old Session save'),false);
+ const next=pressNoteSaveKey(ui);assert.equal(next.defaultPrevented,true);await flush();await finishNoteSave(ui,1,'synthetic B draft',['crossing'],{sid:'session-b'});await next.completion;assert.equal(bookmarkWrites(ui).length,2);
+});
+
+test('Ctrl+Enter refreshes filtered matches and bookmark neighbors without clearing the query, category or A/B loop',async()=>{
+ const one=bookmarkRecord(1,{note:'synthetic review first',tags:['crossing']}),three=bookmarkRecord(3,{note:'synthetic review last',tags:['crossing']});
+ const ui=await startUI({bookmarks:[one,three]}),e=ui.elements;await showSaved(ui,2);configureLoop(ui,1,3);filterBookmarkTag(ui,'crossing');searchBookmarkNotes(ui,'review');assertBookmarkNav(ui,1,3);
+ e['bookmark-note'].focus();editBookmark(ui,'synthetic review middle',['crossing']);const saving=pressNoteSaveKey(ui);assert.equal(saving.defaultPrevented,true);await flush();
+ await finishNoteSave(ui,2,'synthetic review middle',['crossing'],{bookmarks:[one,bookmarkRecord(2,{note:'synthetic review middle',tags:['crossing']}),three]});await saving.completion;
+ assert.equal(e['bookmark-filter-tag'].value,'crossing');assert.equal(e['bookmark-search'].value,'review');assertBookmarkNav(ui,1,3);assertBookmarkNavPosition(ui,2,3);assert.equal(bookmarkJumpButtons(ui).length,3);assertLoopValues(ui,1,3,true);
+});

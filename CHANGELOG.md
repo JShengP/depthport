@@ -44,6 +44,9 @@
 - Added M to pause replay, mark the last fully displayed exact frame and focus its bookmark note, using the shared shortcut switch and typing/IME guards. Pending replay is cancelled; notes, tags, drafts, A/B settings and filters are retained. The shortcut follows the Mark shown frame button's availability and never saves automatically.
 - 新增 M 暫停回放、標記最後完整顯示的同快照影格，並跳至書籤備註欄，沿用共用快捷鍵開關與輸入／組字防護。取消待顯示結果，保留備註、分類、草稿、A／B 與篩選；可用條件與「標記目前顯示影格」按鈕相同，不會自動保存。
 
+- Added Ctrl + Enter to explicitly save the displayed frame's bookmark and note only while the enabled note field has focus and Save/update is available. It uses the shared shortcut switch and existing snapshot/write checks, ignores IME composition, repeats and extra modifiers, and keeps plain Enter for newlines. Other editing controls remain protected; failed saves retain the draft, and records stay in the local private bookmark file.
+- 新增 Ctrl＋Enter，僅在已啟用的備註欄有焦點且「保存／更新」可用時，明確保存目前顯示影格的書籤與備註。沿用共用快捷鍵開關與同快照／寫入檢查，忽略輸入法組字、長按及額外修飾鍵，一般 Enter 仍可換行。其他編輯欄不觸發，保存失敗保留草稿，紀錄只存本機私人書籤檔。
+
 # Changelog / 版本紀錄
 
 ## 0.2.0-alpha.1 — 2026-10-17 (experimental Alpha pre-release)

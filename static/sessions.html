@@ -84,8 +84,9 @@
 <label><input id="bookmark-tag-occlusion" type="checkbox" disabled><span data-i="bookmarkOcclusion">Occlusion</span></label>
 <label><input id="bookmark-tag-crossing" type="checkbox" disabled><span data-i="bookmarkCrossing">Object crossing</span></label></fieldset>
 <label for="bookmark-note" data-i="bookmarkNote">Note (up to 1000 characters)</label>
-<textarea id="bookmark-note" rows="3" maxlength="2000" disabled aria-describedby="bookmark-editor-status"></textarea>
-<button id="bookmark-save" data-i="bookmarkSave" disabled>Save frame bookmark</button>
+<textarea id="bookmark-note" rows="3" maxlength="2000" disabled aria-describedby="bookmark-editor-status bookmark-save-shortcut-help"></textarea>
+<p id="bookmark-save-shortcut-help" class="bookmark-shortcut-help" data-i="bookmarkSaveShortcutHelp">With Keyboard shortcuts enabled: Ctrl+Enter saves this frame’s bookmark and note from the note field only. Enter adds a new line; ignored during IME composition.</p>
+<button id="bookmark-save" data-i="bookmarkSave" aria-describedby="bookmark-save-shortcut-help" disabled>Save frame bookmark</button>
 <button id="bookmark-delete" data-i="bookmarkDelete" disabled>Remove frame bookmark</button>
 </section>
 <section><h2 data-i="consistency">Temporal depth consistency</h2>
