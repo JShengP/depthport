@@ -650,3 +650,33 @@ def test_bookmark_transfer_api_gates_before_reading_body(monkeypatch, tmp_path):
     with TestClient(api.app, client=('192.0.2.11', 42)) as c:
         assert c.get(prefix + '/export').status_code == 403
         assert c.post(prefix + '/import?dry_run=private', content=b'private').status_code == 403
+
+
+def test_create_only_bookmark_preserves_existing_bytes_and_timestamp(tmp_path):
+    store, sid, row, path = bookmark_fixture(tmp_path)
+    created = store.save_bookmark(sid, 1, row['sha256'], create_only=True)
+    assert created['bookmarks'][0]['tags'] == [] and created['bookmarks'][0]['note'] == ''
+    saved = store.save_bookmark(sid, 1, row['sha256'], ['crossing', 'occlusion'], 'Synthetic existing note')
+    before = path.read_bytes();mtime = path.stat().st_mtime_ns
+    assert store.save_bookmark(sid, 1, row['sha256'], [], '', create_only=True) == saved
+    assert path.read_bytes() == before and path.stat().st_mtime_ns == mtime
+    with pytest.raises(SessionIntegrity):
+        store.save_bookmark(sid, 1, '0' * 64, create_only=True)
+    with pytest.raises(SessionError):
+        store.save_bookmark(sid, 1, row['sha256'], create_only='true')
+    assert path.read_bytes() == before
+
+
+def test_create_only_bookmark_api_strict_flag_and_preserved_external_update(client_enabled):
+    c = client_enabled;store = api.app.state.session_store
+    sid = store.create()['session_id'];frame, bundle = sample_frame();row = store.capture(sid, bundle, frame)
+    url = f'/api/sessions/{sid}/frames/1/bookmark'
+    body = {'snapshot_sha256': row['sha256'], 'tags': [], 'note': '', 'create_only': True}
+    response = c.put(url, json=body)
+    assert response.status_code == 200 and response.json()['bookmarks'][0]['tags'] == []
+    saved = store.save_bookmark(sid, 1, row['sha256'], ['id-switch'], 'Synthetic other-page update')
+    assert c.put(url, json=body).json() == saved
+    for flag in ['true', 1, None]:
+        assert c.put(url, json={**body, 'create_only': flag}).status_code == 422
+    normal = c.put(url, json={**body, 'create_only': False, 'note': 'Explicit edit'})
+    assert normal.status_code == 200 and normal.json()['bookmarks'][0]['note'] == 'Explicit edit'

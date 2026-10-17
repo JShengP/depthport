@@ -2021,7 +2021,7 @@ function pressMarkKey(ui,key='m',properties={}){
 
 test('M focuses the shown frame note with lowercase or Caps Lock values without saving or loading another frame',async()=>{
  const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showSaved(ui,2);const requests=ui.pending.length,image=e.rgb,depth=e.depth;
- assert.equal(e['bookmark-mark'].getAttribute('aria-keyshortcuts'),'m');assert.equal(e['bookmark-shortcuts-enabled'].checked,true);
+ assert.equal(e['bookmark-mark'].getAttribute('aria-keyshortcuts'),'m Shift+m');assert.equal(e['bookmark-shortcuts-enabled'].checked,true);
  pressMarkKey(ui);assert.match(e['playback-status'].textContent,/Paused/);assertShownFrame(ui,2);
  ui.document.activeElement=null;pressMarkKey(ui,'M');await flush();
  assert.equal(e.rgb,image);assert.equal(e.depth,depth);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0002');
@@ -2125,7 +2125,7 @@ test('M typing guards protect native controls, editable descendants, accessible 
 test('M ignores modifiers, held keys, IME, consumed keys and hidden pages without leaving composition stuck',async()=>{
  const ui=await startUI();await showSaved(ui,2);const requests=ui.pending.length;
  for(const key of ['m','M']){
-  for(const properties of [{ctrlKey:true},{altKey:true},{metaKey:true},{shiftKey:true},{repeat:true},{isComposing:true},{keyCode:229}])assert.equal(pressBookmarkKey(ui,key,properties).defaultPrevented,false,key+' '+JSON.stringify(properties));
+  for(const properties of [{ctrlKey:true},{altKey:true},{metaKey:true},{shiftKey:true,ctrlKey:true},{repeat:true},{isComposing:true},{keyCode:229}])assert.equal(pressBookmarkKey(ui,key,properties).defaultPrevented,false,key+' '+JSON.stringify(properties));
   assert.equal(pressBookmarkKey(ui,key,{defaultPrevented:true}).defaultPrevented,true);
  }
  for(const key of ['KeyM','ｍ','mm','Enter','Escape','Process','Dead',''])assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false,key);
@@ -2137,11 +2137,11 @@ test('M ignores modifiers, held keys, IME, consumed keys and hidden pages withou
 
 test('the shared shortcut switch removes M metadata and keeps the manual mark button available',async()=>{
  const ui=await startUI(),e=ui.elements;await showSaved(ui,2);const requests=ui.pending.length;
- assert.equal(e['bookmark-mark'].getAttribute('aria-keyshortcuts'),'m');e['bookmark-shortcuts-enabled'].checked=false;e['bookmark-shortcuts-enabled'].onchange();
+ assert.equal(e['bookmark-mark'].getAttribute('aria-keyshortcuts'),'m Shift+m');e['bookmark-shortcuts-enabled'].checked=false;e['bookmark-shortcuts-enabled'].onchange();
  assert.equal(e['bookmark-mark'].getAttribute('aria-keyshortcuts')||'','');for(const key of ['m','M'])assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false);
  assert.equal(ui.document.activeElement,null);e['bookmark-mark'].onclick();assert.equal(ui.document.activeElement,e['bookmark-note']);
- ui.document.activeElement=null;e['bookmark-shortcuts-enabled'].checked=true;e['bookmark-shortcuts-enabled'].onchange();assert.equal(e['bookmark-mark'].getAttribute('aria-keyshortcuts'),'m');pressMarkKey(ui);
- assert.equal(ui.pending.length,requests);const fresh=await startUI();assert.equal(fresh.elements['bookmark-shortcuts-enabled'].checked,true);assert.equal(fresh.elements['bookmark-mark'].getAttribute('aria-keyshortcuts'),'m');
+ ui.document.activeElement=null;e['bookmark-shortcuts-enabled'].checked=true;e['bookmark-shortcuts-enabled'].onchange();assert.equal(e['bookmark-mark'].getAttribute('aria-keyshortcuts'),'m Shift+m');pressMarkKey(ui);
+ assert.equal(ui.pending.length,requests);const fresh=await startUI();assert.equal(fresh.elements['bookmark-shortcuts-enabled'].checked,true);assert.equal(fresh.elements['bookmark-mark'].getAttribute('aria-keyshortcuts'),'m Shift+m');
 });
 
 test('M cannot mark the prior Session during transition and requires a displayed snapshot in the newly selected Session',async()=>{
@@ -3055,4 +3055,36 @@ test('Shift bracket endpoints serialize pending bookmark jumps and preserve expl
 
 test('Shift bracket endpoint failure retains snapshot and Session switch invalidates stale decoding',async()=>{
  const ui=await startUI({bookmarks:[bookmarkRecord(1),bookmarkRecord(3)],trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);assert.equal(pressBookmarkKey(ui,'}',{shiftKey:true}).defaultPrevented,true);await flush();ui.respond('/api/sessions/session-a/frames/3/replay',{detail:'synthetic unavailable'},false,404);await flush();assertShownFrame(ui,1);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');assert.equal(pressBookmarkKey(ui,'}',{shiftKey:true}).defaultPrevented,true);await flush();ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await flush();e['sessions-list'].value='session-b';const switched=e['sessions-list'].onchange();await flush();assert.equal(pressBookmarkKey(ui,'{',{shiftKey:true}).defaultPrevented,false);await finishFrames(ui,'session-b',true,null,[1,2,3],[bookmarkRecord(2)]);await switched;await ui.decodeFrame('session-a',3);await flush();assert.equal(e.result.hidden,true);assert.equal(pressBookmarkKey(ui,'}',{shiftKey:true}).defaultPrevented,true);await flush();await completeReplay(ui,2,{sid:'session-b'});await flush();assert.equal(e.rgb.src,'data:image/png;base64,session-b-2');assert.equal(bookmarkWrites(ui).length,0);
+});
+
+async function finishQuickSave(ui,index,note='',tags=[]){
+ const write=bookmarkWrites(ui).at(-1);assert.equal(write.url,'/api/sessions/session-a/frames/'+index+'/bookmark');assert.equal(write.opt.method,'PUT');assert.deepEqual(JSON.parse(write.opt.body),{snapshot_sha256:hash,note:'',tags:[],create_only:true});ui.respond(write.url,bookmarkResponse('session-a',[bookmarkRecord(index,{note,tags})]));await flush();return write;
+}
+
+test('Shift M creates an empty general bookmark for the shown snapshot without focusing the editor',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showSaved(ui,2);configureLoop(ui,1,3);filterBookmarkTag(ui,'crossing');searchBookmarkNotes(ui,'retained query');e.result.focus();const calls=replayRequests(ui).length;assert.equal(pressBookmarkKey(ui,'M',{shiftKey:true,target:e.result}).defaultPrevented,true);await flush();const writes=bookmarkWrites(ui);assert.equal(writes.length,1);assert.deepEqual(JSON.parse(writes[0].opt.body),{snapshot_sha256:hash,note:'',tags:[],create_only:true});assert.match(writes[0].url,/frames\/2\/bookmark$/);await finishQuickSave(ui,2,'',[]);assert.equal(ui.document.activeElement,e.result);assertShownFrame(ui,2);assert.equal(e['bookmark-note'].value,'');assert.equal(e['bookmark-tag-crossing'].checked,false);assert.match(e['bookmark-editor-status'].textContent,/Bookmark saved/);assertLoopValues(ui,1,3,true);assert.equal(e['bookmark-search'].value,'retained query');assert.equal(e['bookmark-filter-tag'].value,'crossing');assert.equal(replayRequests(ui).length,calls);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0002');assert.match(e['playback-status'].textContent,/Paused/);
+ const html=fs.readFileSync(path.join(root,'static/sessions.html'),'utf8');assert.match(html,/data-i="shortcutHelpQuickMark"/);assert.match(sessionsSource,/shortcutHelpQuickMark:"Pause and save a general bookmark/);assert.match(sessionsSource,/shortcutHelpQuickMark:"暫停並將目前顯示影格存成一般書籤/);assert.equal(e['bookmark-mark'].getAttribute('aria-keyshortcuts'),'m Shift+m');
+});
+
+test('Shift M preserves server-side saved notes/tags and leaves unsaved or invalid drafts separate',async()=>{
+ for(const draft of [null,'synthetic retained draft','x'.repeat(1001)]){
+  const ui=await startUI({bookmarks:[bookmarkRecord(2,{note:'old visible note',tags:['occlusion']})]}),e=ui.elements;await showSaved(ui,2);if(draft!==null)editBookmark(ui,draft,['crossing']);e.result.focus();assert.equal(pressBookmarkKey(ui,'m',{shiftKey:true,target:e.result}).defaultPrevented,true);await flush();assert.equal(JSON.parse(bookmarkWrites(ui)[0].opt.body).create_only,true);await finishQuickSave(ui,2,'synthetic other-page update',['id-switch']);assert.equal(e['bookmark-note'].value,draft??'synthetic other-page update');assert.equal(e['bookmark-tag-crossing'].checked,draft!==null);assert.equal(e['bookmark-tag-id-switch'].checked,draft===null);assert.equal(ui.document.activeElement,e.result);if(draft!==null)assert.match(e['bookmark-editor-status'].textContent,draft.length>1000?/1000/:/Unsaved/);assert.equal(bookmarkWrites(ui).length,1);
+ }
+ const ui=await startUI(),e=ui.elements;await showSaved(ui,2);editBookmark(ui,'new-frame draft',['crossing']);e.result.focus();pressBookmarkKey(ui,'M',{shiftKey:true,target:e.result});await flush();await finishQuickSave(ui,2,'',[]);assert.equal(e['bookmark-note'].value,'new-frame draft');assert.equal(e['bookmark-tag-crossing'].checked,true);assert.match(e['bookmark-editor-status'].textContent,/Unsaved/);
+});
+
+test('Shift M cancels pending playback/seek and saves the last complete displayed snapshot',async()=>{
+ for(const mode of ['autoplay','seek']){
+  const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);let pending;if(mode==='autoplay'){e['playback-play'].onclick();await ui.tick(0)}else pending=scrub(ui,2);await flush();ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();ui.decode('data:image/png;base64,session-a-2');await flush();assert.equal(pressBookmarkKey(ui,'M',{shiftKey:true,target:e.result}).defaultPrevented,true);await flush();assert.match(bookmarkWrites(ui)[0].url,/frames\/1\/bookmark$/);ui.decode('data:image/jpeg;base64,session-a-depth-2');await flush();if(pending)await pending;await finishQuickSave(ui,1,'',[]);assertShownFrame(ui,1);assert.match(e['playback-status'].textContent,/Paused/);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');
+ }
+});
+
+test('Shift M ignores editors, IME, modifiers, opt-out/modal and unavailable or busy bookmarks',async()=>{
+ const ui=await startUI({bookmarks:[bookmarkRecord(1),bookmarkRecord(3)]}),e=ui.elements;await showSaved(ui,2);e.result.focus();const editors=[e['bookmark-note'],e['bookmark-search'],e['bookmark-filter-tag'],e['replay-progress']];for(const role of ['textbox','searchbox','combobox','slider','grid']){const n=new Element('div');n.setAttribute('role',role);editors.push(n)}const editable=new Element('div');editable.setAttribute('contenteditable','true');editors.push(editable);
+ for(const target of editors){assert.equal(pressBookmarkKey(ui,'M',{shiftKey:true,target}).defaultPrevented,false);const child=new Element('span');child.parentElement=target;assert.equal(pressBookmarkKey(ui,'M',{shiftKey:true,composedPath:()=>[child,target]}).defaultPrevented,false)}for(const target of [e['bookmark-note'],e['bookmark-search']]){target.focus();assert.equal(pressBookmarkKey(ui,'M',{shiftKey:true,target:e.result}).defaultPrevented,false)}e.result.focus();for(const props of [{ctrlKey:true},{altKey:true},{metaKey:true},{repeat:true},{isComposing:true},{keyCode:229}])assert.equal(pressBookmarkKey(ui,'M',{shiftKey:true,...props}).defaultPrevented,false);ui.dispatch('compositionstart');assert.equal(pressBookmarkKey(ui,'M',{shiftKey:true}).defaultPrevented,false);ui.dispatch('compositionend');ui.hide();assert.equal(pressBookmarkKey(ui,'M',{shiftKey:true}).defaultPrevented,false);ui.document.hidden=false;e['bookmark-shortcuts-enabled'].checked=false;e['bookmark-shortcuts-enabled'].onchange();assert.equal(pressBookmarkKey(ui,'M',{shiftKey:true}).defaultPrevented,false);e['bookmark-shortcuts-enabled'].checked=true;e['bookmark-shortcuts-enabled'].onchange();e['shortcut-help-open'].onclick();assert.equal(pressBookmarkKey(ui,'M',{shiftKey:true,target:e.result}).defaultPrevented,false);e['shortcut-help-close'].onclick();assert.equal(bookmarkWrites(ui).length,0);
+ assert.equal(pressBookmarkKey(ui,'}',{shiftKey:true}).defaultPrevented,true);await flush();assert.equal(pressBookmarkKey(ui,'M',{shiftKey:true}).defaultPrevented,false);await completeReplay(ui,3);await flush();e.result.focus();assert.equal(pressBookmarkKey(ui,'M',{shiftKey:true}).defaultPrevented,true);await flush();assert.equal(pressBookmarkKey(ui,'M',{shiftKey:true}).defaultPrevented,false);await finishQuickSave(ui,3,'',[]);assert.equal(bookmarkWrites(ui).length,1);const empty=await startUI();assert.equal(pressBookmarkKey(empty,'M',{shiftKey:true}).defaultPrevented,false);const waiting=await startUI({delayBookmarks:true});await showFirst(waiting);assert.equal(pressBookmarkKey(waiting,'M',{shiftKey:true}).defaultPrevented,false);
+});
+
+test('Shift M failure keeps drafts and stale Session replies cannot overwrite the new editor',async()=>{
+ const ui=await startUI(),e=ui.elements;await showSaved(ui,2);editBookmark(ui,'synthetic retry draft',['crossing']);e.result.focus();pressBookmarkKey(ui,'M',{shiftKey:true});await flush();ui.respond('/api/sessions/session-a/frames/2/bookmark',{detail:'synthetic unavailable'},false,409);await flush();assert.equal(e['bookmark-note'].value,'synthetic retry draft');assert.equal(e['bookmark-tag-crossing'].checked,true);assert.match(e['bookmarks-status'].textContent,/failed/i);pressBookmarkKey(ui,'M',{shiftKey:true});await flush();e['sessions-list'].value='session-b';const switched=e['sessions-list'].onchange();await flush();await finishFrames(ui,'session-b');await switched;ui.respond('/api/sessions/session-a/frames/2/bookmark',bookmarkResponse('session-a',[bookmarkRecord(2)]));await flush();assert.equal(e.result.hidden,true);await showSaved(ui,1,{sid:'session-b'});assert.equal(e['bookmark-note'].value,'');assert.equal(bookmarkWrites(ui).length,2);
 });

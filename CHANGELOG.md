@@ -1,5 +1,8 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 
+- Added **Shift+M** to pause and create a general bookmark for the shown snapshot, atomically preserving existing saved notes/tags and keeping drafts separate. Updated bilingual help and input/IME guards.
+- 新增 **Shift＋M** 暫停並將目前快照建立為一般書籤，以原子操作保留已有備註／標籤及未保存草稿，更新雙語說明與輸入／組字防護。
+
 - Added **Shift+[ / Shift+]** to pause and jump to the first/last filtered bookmark, retaining review settings through the exact-snapshot bookmark path; updated bilingual help and input/IME guard coverage.
 - 新增 **Shift＋[／Shift＋]** 暫停並跳到第一個／最後一個篩選書籤，沿用精確快照跳轉與輸入／組字防護，更新雙語說明。
 

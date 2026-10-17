@@ -923,6 +923,7 @@ class BookmarkIdentity(BaseModel):
 
 
 class BookmarkRequest(BookmarkIdentity):
+    create_only: bool = False
     tags: list[Literal['id-switch', 'occlusion', 'crossing']] = Field(default_factory=list, max_length=3)
     note: str = Field(default='', max_length=1000)
 
@@ -1012,7 +1013,7 @@ async def sessions_bookmark_import(request: Request, sid: str):
 @app.put('/api/sessions/{sid}/frames/{index}/bookmark')
 def sessions_bookmark_save(request: Request, sid: str, index: int, body: BookmarkRequest):
     store = local_session_store(request)
-    try:return store.save_bookmark(sid, index, body.snapshot_sha256, body.tags, body.note)
+    try:return store.save_bookmark(sid, index, body.snapshot_sha256, body.tags, body.note, create_only=body.create_only)
     except SessionError as exc:raise session_failure(exc) from exc
 
 

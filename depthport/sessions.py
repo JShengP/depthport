@@ -406,12 +406,16 @@ class SessionStore:
             tmp.unlink(missing_ok=True)
 
     def save_bookmark(self, sid: str, index: int, snapshot_sha256: str,
-                      tags: list | None = None, note: str = '') -> dict:
+                      tags: list | None = None, note: str = '', *, create_only: bool = False) -> dict:
+        if type(create_only) is not bool:
+            raise SessionError('create_only must be a boolean')
         tags = [] if tags is None else tags
         self._bookmark_values(snapshot_sha256, tags, note)
         with self.lock:
             self._bookmark_anchor(sid, index, snapshot_sha256)
             data = self._read_bookmarks(sid)
+            if create_only and any(r['index'] == index for r in data['bookmarks']):
+                return data
             records = [r for r in data['bookmarks'] if r['index'] != index]
             records.append({'index': index, 'snapshot_sha256': snapshot_sha256,
                             'tags': tags.copy(), 'note': note, 'updated_at': time.time()})
