@@ -406,7 +406,11 @@ class SessionStore:
             tmp.unlink(missing_ok=True)
 
     def save_bookmark(self, sid: str, index: int, snapshot_sha256: str,
-                      tags: list | None = None, note: str = '', *, create_only: bool = False, add_tag: str | None = None) -> dict:
+                      tags: list | None = None, note: str = '', *, create_only: bool = False, add_tag: str | None = None, clear_tags: bool = False) -> dict:
+        if type(clear_tags) is not bool:
+            raise SessionError('clear_tags must be a boolean')
+        if clear_tags and (create_only or add_tag is not None or tags or note):
+            raise SessionError('clear_tags requires empty note/tags without other modes')
         if type(create_only) is not bool:
             raise SessionError('create_only must be a boolean')
         tags = [] if tags is None else tags
@@ -417,8 +421,10 @@ class SessionStore:
             self._bookmark_anchor(sid, index, snapshot_sha256)
             data = self._read_bookmarks(sid)
             existing = next((r for r in data['bookmarks'] if r['index'] == index), None)
-            if existing and (create_only or (add_tag is not None and add_tag in existing['tags'])):
+            if existing and (create_only or (add_tag is not None and add_tag in existing['tags']) or (clear_tags and not existing['tags'])):
                 return data
+            if clear_tags:
+                note = existing['note'] if existing else ''
             if add_tag is not None:
                 tags = (existing['tags'].copy() if existing else []) + [add_tag]
                 note = existing['note'] if existing else ''

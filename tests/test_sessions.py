@@ -727,3 +727,47 @@ def test_add_tag_api_strict_mode_and_external_updates(client_enabled):
     for invalid in [{'add_tag': True}, {'add_tag': []}, {'add_tag': 'unsupported'},
                     {'create_only': True}, {'note': 'ambiguous'}, {'tags': ['crossing']}]:
         assert c.put(url, json={**body, **invalid}).status_code == 422
+
+
+def test_clear_tags_keeps_latest_note_and_general_noop_bytes(tmp_path):
+    store, sid, row, path = bookmark_fixture(tmp_path)
+    store.save_bookmark(sid, 1, row['sha256'], ['id-switch', 'occlusion', 'crossing'], 'Synthetic retained note')
+    saved = store.save_bookmark(sid, 1, row['sha256'], clear_tags=True)
+    assert saved['bookmarks'][0]['tags'] == [] and saved['bookmarks'][0]['note'] == 'Synthetic retained note'
+    before = path.read_bytes();mtime = path.stat().st_mtime_ns
+    assert store.save_bookmark(sid, 1, row['sha256'], clear_tags=True) == saved
+    assert path.read_bytes() == before and path.stat().st_mtime_ns == mtime
+    with pytest.raises(SessionIntegrity):
+        store.save_bookmark(sid, 1, '0' * 64, clear_tags=True)
+    for options in [{'clear_tags': 'true'}, {'clear_tags': True, 'create_only': True},
+                    {'clear_tags': True, 'add_tag': 'crossing'}, {'clear_tags': True, 'note': 'ambiguous'},
+                    {'clear_tags': True, 'tags': ['crossing']}]:
+        with pytest.raises(SessionError):
+            store.save_bookmark(sid, 1, row['sha256'], **options)
+    assert path.read_bytes() == before
+
+
+def test_clear_tags_creates_missing_general_and_preserves_external_note_update(tmp_path):
+    store, sid, row, path = bookmark_fixture(tmp_path)
+    new = store.save_bookmark(sid, 1, row['sha256'], clear_tags=True)['bookmarks'][0]
+    assert new['tags'] == [] and new['note'] == ''
+    store.save_bookmark(sid, 1, row['sha256'], ['occlusion'], 'Synthetic other-page note')
+    cleared = store.save_bookmark(sid, 1, row['sha256'], clear_tags=True)['bookmarks'][0]
+    assert cleared['tags'] == [] and cleared['note'] == 'Synthetic other-page note'
+
+
+def test_clear_tags_api_strict_mode_preserves_note_and_other_operations(client_enabled):
+    c = client_enabled;store = api.app.state.session_store
+    sid = store.create()['session_id'];frame, bundle = sample_frame();row = store.capture(sid, bundle, frame)
+    url = f'/api/sessions/{sid}/frames/1/bookmark'
+    store.save_bookmark(sid, 1, row['sha256'], ['crossing'], 'Synthetic API note')
+    body = {'snapshot_sha256': row['sha256'], 'note': '', 'tags': [], 'clear_tags': True}
+    response = c.put(url, json=body)
+    assert response.status_code == 200
+    assert response.json()['bookmarks'][0]['note'] == 'Synthetic API note'
+    assert response.json()['bookmarks'][0]['tags'] == []
+    for invalid in [{'clear_tags': 'true'}, {'clear_tags': 1}, {'clear_tags': None},
+                    {'create_only': True}, {'add_tag': 'crossing'}, {'tags': ['id-switch']}, {'note': 'ambiguous'}]:
+        assert c.put(url, json={**body, **invalid}).status_code == 422
+    normal = c.put(url, json={**body, 'clear_tags': False, 'note': 'Explicit edit', 'tags': ['crossing']})
+    assert normal.status_code == 200 and normal.json()['bookmarks'][0]['tags'] == ['crossing']

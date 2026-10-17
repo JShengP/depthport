@@ -1,5 +1,8 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 
+- Added **Shift+4** to convert the shown frame to a general bookmark by atomically clearing saved tags while retaining its latest saved note and separate drafts; updated bilingual help and input/IME protection.
+- 新增 **Shift＋4** 將目前影格改為一般書籤，原子清除已保存標籤並保留最新備註與獨立草稿，更新雙語說明與輸入／組字防護。
+
 - Added **Shift+1 / Shift+2 / Shift+3** to quick-save the shown frame with ID-switch/occlusion/crossing tags, atomically preserving saved notes/other tags and unsaved drafts; updated bilingual help and input/IME guard coverage.
 - 新增 **Shift＋1／2／3** 快速保存目前影格為疑似換 ID／遮擋／物件交會書籤，原子合併標籤並保留備註、其他標籤與草稿，更新雙語說明及輸入／組字防護。
 
