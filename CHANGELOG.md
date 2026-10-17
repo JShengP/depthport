@@ -1,5 +1,8 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 
+- Added **Shift+[ / Shift+]** to pause and jump to the first/last filtered bookmark, retaining review settings through the exact-snapshot bookmark path; updated bilingual help and input/IME guard coverage.
+- 新增 **Shift＋[／Shift＋]** 暫停並跳到第一個／最後一個篩選書籤，沿用精確快照跳轉與輸入／組字防護，更新雙語說明。
+
 - Added **6** to clear only bookmark search text, retaining the tag filter, focus and playback, with bilingual shortcut help and shared input/IME protection.
 - 新增 **6** 只清除書籤搜尋文字，保留標籤篩選、焦點與播放，更新雙語快捷鍵說明並沿用輸入／組字防護。
 
