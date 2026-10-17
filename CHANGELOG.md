@@ -41,6 +41,9 @@
 - Added A / B to mark interval endpoints from the last fully displayed saved frame and L to toggle A/B looping, using the shared shortcut checkbox and typing/IME/modifier guards. Actions pause playback and cancel pending presentation without fetching a frame; invalid endpoint order remains visible, and image/IDs and drafts stay intact. Added bilingual hints beside the interval controls.
 - 新增 A／B 以最後完整顯示影格設定區間端點、L 切換 A／B 循環，沿用共用快捷鍵開關與輸入／組字／修飾鍵防護。操作會暫停並取消待顯示結果，不另載入影格；端點順序無效時保留提示，影像／ID 與草稿不變，區間旁提供雙語按鍵提示。
 
+- Added M to pause replay, mark the last fully displayed exact frame and focus its bookmark note, using the shared shortcut switch and typing/IME guards. Pending replay is cancelled; notes, tags, drafts, A/B settings and filters are retained. The shortcut follows the Mark shown frame button's availability and never saves automatically.
+- 新增 M 暫停回放、標記最後完整顯示的同快照影格，並跳至書籤備註欄，沿用共用快捷鍵開關與輸入／組字防護。取消待顯示結果，保留備註、分類、草稿、A／B 與篩選；可用條件與「標記目前顯示影格」按鈕相同，不會自動保存。
+
 # Changelog / 版本紀錄
 
 ## 0.2.0-alpha.1 — 2026-10-17 (experimental Alpha pre-release)
