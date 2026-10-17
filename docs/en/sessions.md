@@ -52,3 +52,23 @@ python tools/check_release.py
 ```
 
 Tests create *synthetic* fixed-depth fixtures and a fake local inference engine only. They validate ZIP integrity, immutable bytes, replay geometry encoding, session bounds, provenance/units, disabled-by-default behavior and non-loopback denial; **not** real model success, RTSP long-run or real geometric accuracy.
+
+## Offline Semantic Object Tracking (development addition)
+
+The Sessions page includes an explicit **Analyse saved frames** action. With `ENABLE_SESSION_STORAGE=1`, first manually save 2–24 frames into the same Session, select **Instance segmentation** (default) or **Bounding-box regions**, then trigger the analysis. The job runs **on CPU** so that the already-running depth worker does not concurrently allocate additional GPU inference; YOLO Detect/Segment weights may be downloaded on the first run. Existing saved depth is reused; **no additional depth inference, background capture, camera recording, or automatic upload** occurs.
+
+The analysis verifies saved ZIP SHA-256 digests, RGB/depth grid shape and camera intrinsics, then performs YOLO Detect/Segment on each stored aligned RGB image. Its simple association matches objects of the same class using bounding-box IoU plus restricted pixel-center motion. Each continuous association receives a sequential `obj-0001`, `obj-0002`, ... identifier. IDs intentionally reset on changes of source kind, depth engine/model, native depth units, intrinsics or image grid. Missed detections, object crossings and occlusion may produce new IDs or ID switches: **this is not ReID and does not identify people**.
+
+For each observation the report records session frame index, original frame ID/time, 2D bounding box/centroid, class/confidence, native median depth, and camera-frame median XYZ computed from its mask/ROI and the saved camera intrinsics. Detection bounding-box ROI includes background pixels; segmentation is preferred. Relative depths remain relative, while estimated metres remain **unvalidated AI estimates**. Camera XYZ is **not world XYZ**: even if numbers resemble motion, it is not pose-corrected 3D trajectory, speed, metric object dimension or obstacle clearance. Cross-camera/coordinate-frame tracking is not supported.
+
+After the asynchronous CPU job finishes, a `tracking.json` report is stored locally inside the Session directory and can be reviewed/exported. Adding a new saved frame invalidates the report and requires an explicit rerun. One analysis job runs at a time, maximum 24 most recent frames per job and 20 objects per frame. No automatic deletion is performed.
+
+### Tracking API (local loopback only, storage opt-in)
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| POST | `/api/sessions/{sid}/tracking` | Start manual job: `{ "mode": "segment", "confidence": 0.25, "max_frames": 12 }` |
+| GET | `/api/sessions/{sid}/tracking/status` | Job state `idle`, `running`, `completed` or `error` |
+| GET | `/api/sessions/{sid}/tracking/report.json` | Read stored JSON; `?download=true` sets attachment disposition |
+
+The analysis is optional. If `ultralytics` or the selected YOLO weights are absent, the job reports an error rather than synthetic detection results. Model-free tests inject an **explicit fake detector**; the CLI and HTTP tests **do not prove real YOLO tracking works on a physical camera**. Perform a separate CPU YOLO detection/segmentation check and inspect the identities across an authorized multi-frame test before claiming actual tracking performance.

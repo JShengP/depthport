@@ -2,20 +2,20 @@
 (() => {'use strict';
 const by=id=>document.getElementById(id);
 const tr={
-  en:{title:'Session / Replay',language:'Language',subtitle:'Manually save completed AI result frames to local storage. No automatic camera recording; replay does not rerun inference.',sessions:'Sessions',label:'Label (optional)',create:'Create session',refresh:'Refresh',capture:'Save latest frame',scope:'Storage is opt-in (ENABLE_SESSION_STORAGE=1), localhost-only and limited to 20 sessions × 120 frames.',frames:'Saved frames',replay:'Replay selected frame',download:'Download exact snapshot ZIP',view:'Recorded RGB, depth & point cloud',rgb:'Aligned RGB',depth:'Depth preview',trend:'Temporal metadata trends',trendNote:'Frame-level depth median only: not tracked pixels, metric drift or motion-compensated geometry.',consistency:'Temporal depth consistency',consistencyNote:'Same-grid pixel comparison only. No motion compensation, calibrated distance accuracy or continuous video recording.',pair:'Saved pair',nativeMae:'Native MAE',normalizedMae:'Shape MAE',overlap:'Valid overlap',downloadReport:'Export temporal JSON',noPairs:'Save two compatible frames to compare.',skip:'Skipped incompatible pairs',warning:'Recorded depth is an AI estimate. Relative depth is not metres; no safety or accuracy certification.',disabled:'Enable local storage with ENABLE_SESSION_STORAGE=1 then restart the app.',saved:'Frame saved',created:'Session created',failed:'Request failed'},
-  'zh-TW':{title:'工作階段／回放',language:'語言',subtitle:'只在手動操作時將已完成的 AI 影格保存到本機；不會自動錄製相機，也不會在回放時重新推論。',sessions:'工作階段',label:'名稱（可不填）',create:'建立工作階段',refresh:'重新整理',capture:'儲存最新影格',scope:'需主動設定 ENABLE_SESSION_STORAGE=1；僅允許本機，最多 20 個工作階段 × 每個 120 影格。',frames:'已儲存影格',replay:'回放選取影格',download:'下載原始快照 ZIP',view:'已保存的 RGB、深度與 3D 點雲',rgb:'對齊 RGB',depth:'深度預覽',trend:'時間序列摘要',trendNote:'只比較影格層級深度中位數；不表示像素追蹤、物理尺度漂移或姿態補償。',consistency:'時間深度一致性',consistencyNote:'只比較相同影像格點的深度；不含運動補償、測距精度驗證或連續錄影。',pair:'保存影格對',nativeMae:'原始單位 MAE',normalizedMae:'形狀 MAE',overlap:'有效重疊比例',downloadReport:'匯出時間分析 JSON',noPairs:'至少保存兩個相容的影格才能比較。',skip:'不相容而略過的影格對',warning:'深度是 AI 估計；相對深度不是公尺，亦無安全／精度認證。',disabled:'請設定 ENABLE_SESSION_STORAGE=1 後重啟應用。',saved:'影格已保存',created:'工作階段已建立',failed:'操作失敗'}
+  en:{title:'Session / Replay',language:'Language',subtitle:'Manually save completed AI result frames to local storage. No automatic camera recording; replay does not rerun inference.',sessions:'Sessions',label:'Label (optional)',create:'Create session',refresh:'Refresh',capture:'Save latest frame',scope:'Storage is opt-in (ENABLE_SESSION_STORAGE=1), localhost-only and limited to 20 sessions × 120 frames.',frames:'Saved frames',replay:'Replay selected frame',download:'Download exact snapshot ZIP',view:'Recorded RGB, depth & point cloud',rgb:'Aligned RGB',depth:'Depth preview',trend:'Temporal metadata trends',trendNote:'Frame-level depth median only: not tracked pixels, metric drift or motion-compensated geometry.',consistency:'Temporal depth consistency',consistencyNote:'Same-grid pixel comparison only. No motion compensation, calibrated distance accuracy or continuous video recording.',pair:'Saved pair',nativeMae:'Native MAE',normalizedMae:'Shape MAE',overlap:'Valid overlap',downloadReport:'Export temporal JSON',noPairs:'Save two compatible frames to compare.',skip:'Skipped incompatible pairs',warning:'Recorded depth is an AI estimate. Relative depth is not metres; no safety or accuracy certification.',disabled:'Enable local storage with ENABLE_SESSION_STORAGE=1 then restart the app.',saved:'Frame saved',created:'Session created',failed:'Request failed',tracking:'Semantic Object Tracking (offline)',trackingNote:'Manually analyse saved frames with YOLO Detect/Segment. CPU only. Object IDs are heuristic 2D associations, NOT identity or world-space trajectories.',trackMode:'Mode',segment:'Instance segmentation',detect:'Bounding-box regions',trackRun:'Analyse saved frames',trackDownload:'Export tracking JSON',trackEmpty:'Run an analysis to see Object IDs, depth and camera-space XYZ history.',trackCount:'Objects',trackFrame:'Frame',trackClass:'Class',trackDepth:'Depth',trackXYZ:'Camera XYZ',trackWarning:'Object association may fail when objects cross or disappear; XYZ is in unverified native depth units.',trackRunning:'Tracking analysis running on saved frames…',trackDone:'Tracking analysis completed'},
+  'zh-TW':{title:'工作階段／回放',language:'語言',subtitle:'只在手動操作時將已完成的 AI 影格保存到本機；不會自動錄製相機，也不會在回放時重新推論。',sessions:'工作階段',label:'名稱（可不填）',create:'建立工作階段',refresh:'重新整理',capture:'儲存最新影格',scope:'需主動設定 ENABLE_SESSION_STORAGE=1；僅允許本機，最多 20 個工作階段 × 每個 120 影格。',frames:'已儲存影格',replay:'回放選取影格',download:'下載原始快照 ZIP',view:'已保存的 RGB、深度與 3D 點雲',rgb:'對齊 RGB',depth:'深度預覽',trend:'時間序列摘要',trendNote:'只比較影格層級深度中位數；不表示像素追蹤、物理尺度漂移或姿態補償。',consistency:'時間深度一致性',consistencyNote:'只比較相同影像格點的深度；不含運動補償、測距精度驗證或連續錄影。',pair:'保存影格對',nativeMae:'原始單位 MAE',normalizedMae:'形狀 MAE',overlap:'有效重疊比例',downloadReport:'匯出時間分析 JSON',noPairs:'至少保存兩個相容的影格才能比較。',skip:'不相容而略過的影格對',warning:'深度是 AI 估計；相對深度不是公尺，亦無安全／精度認證。',disabled:'請設定 ENABLE_SESSION_STORAGE=1 後重啟應用。',saved:'影格已保存',created:'工作階段已建立',failed:'操作失敗',tracking:'語意物件追蹤（離線）',trackingNote:'手動以 YOLO Detect／Segment 分析已存影格，僅使用 CPU。Object ID 是 2D 關聯結果，不是身份或世界座標軌跡。',trackMode:'模式',segment:'實例分割',detect:'方框區域',trackRun:'分析已存影格',trackDownload:'匯出追蹤 JSON',trackEmpty:'執行分析後會顯示 Object ID、深度與相機座標 XYZ 歷史。',trackCount:'物件數',trackFrame:'影格',trackClass:'類別',trackDepth:'深度',trackXYZ:'相機 XYZ',trackWarning:'物件交會或消失可能造成 ID 中斷；XYZ 使用尚未驗證的深度單位。',trackRunning:'正在分析已存影格…',trackDone:'追蹤分析已完成'}
 };
 let lang=new URLSearchParams(location.search).get('lang');
 if(!tr[lang])try{lang=localStorage.getItem('depthport-language')}catch(e){}
 if(!tr[lang])lang='en';
 function apply(){document.documentElement.lang=lang;by('lang').value=lang;
   document.querySelectorAll('[data-i]').forEach(e=>e.textContent=tr[lang][e.dataset.i]||e.textContent);}
-by('lang').onchange=()=>{lang=by('lang').value;try{localStorage.setItem('depthport-language',lang)}catch(e){}apply();if(lastConsistency)renderConsistency(lastConsistency)};apply();
+by('lang').onchange=()=>{lang=by('lang').value;try{localStorage.setItem('depthport-language',lang)}catch(e){}apply();if(lastConsistency)renderConsistency(lastConsistency);if(lastTracking)renderTracking(lastTracking)};apply();
 async function req(url,opt){const r=await fetch(url,{cache:'no-store',...opt});
  let o;try{o=await r.json()}catch(e){o={detail:'Non-JSON response'}}
  if(!r.ok)throw Error(o.detail||('HTTP '+r.status));return o;}
 function message(s){by('status').textContent=s}
-let viewer=null, lastConsistency=null;
+let viewer=null, lastConsistency=null, lastTracking=null;
 function metric(v){return typeof v==='number' && Number.isFinite(v) ? v.toFixed(4) : '—'}
 function renderConsistency(data){
  lastConsistency=data;
@@ -47,19 +47,58 @@ function renderConsistency(data){
  by('consistency-skips').textContent=data.skipped_pairs.length ? tr[lang].skip+': '+data.skipped_pairs.length : '';
 }
 
+function renderTracking(data){
+ lastTracking=data;
+ const target=by('tracking-result');target.replaceChildren();
+ const headline=document.createElement('p');headline.textContent=tr[lang].trackCount+': '+data.track_count+' · '+data.frames_considered+' '+tr[lang].trackFrame.toLowerCase();target.append(headline);
+ if(!data.tracks.length){target.append(document.createTextNode(tr[lang].trackEmpty));return}
+ const table=document.createElement('table'),head=document.createElement('tr');
+ for(const key of ['Object ID',tr[lang].trackClass,tr[lang].trackFrame,tr[lang].trackDepth,tr[lang].trackXYZ]){
+   const th=document.createElement('th');th.textContent=key;head.append(th)}
+ table.append(head);
+ for(const track of data.tracks){for(const obs of track.observations){
+   const row=document.createElement('tr');const pts=obs.xyz_camera_median;
+   const cells=[track.object_id,track.label+' ('+track.units+')','#'+obs.index,
+       metric(obs.depth_median),pts?pts.map(metric).join(', '):'—'];
+   for(const c of cells){const td=document.createElement('td');td.textContent=c;row.append(td)}table.append(row)
+ }}target.append(table);
+ const warn=document.createElement('p');warn.textContent=tr[lang].trackWarning;target.append(warn);
+}
+async function loadTracking(){const sid=by('sessions-list').value;
+ lastTracking=null;by('tracking-result').textContent=tr[lang].trackEmpty;by('tracking-download').hidden=true;
+ if(!sid)return;
+ try{const report=await req('/api/sessions/'+sid+'/tracking/report.json');renderTracking(report);
+     by('tracking-download').href='/api/sessions/'+sid+'/tracking/report.json?download=true';by('tracking-download').hidden=false}
+ catch(e){if(!String(e.message).includes('404')&&!String(e.message).includes('No saved tracking')){by('tracking-result').textContent=e.message}}
+}
+async function runTracking(){const sid=by('sessions-list').value;if(!sid)throw Error('Select a session');
+ by('tracking-run').disabled=true;
+ try{await req('/api/sessions/'+sid+'/tracking',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({mode:by('tracking-mode').value,confidence:.25,max_frames:12})});
+   message(tr[lang].trackRunning);
+   for(let attempt=0;attempt<240;attempt++){
+     await new Promise(r=>setTimeout(r,1000));
+     const j=await req('/api/sessions/'+sid+'/tracking/status');
+     if(j.state==='completed'){await loadTracking();message(tr[lang].trackDone);return}
+     if(j.state==='error')throw Error(j.error||'Tracking failed');
+   }
+   throw Error('Tracking request still running; check status later.')
+ }finally{by('tracking-run').disabled=false}
+}
 async function sessions(){const data=await req('/api/sessions');const sel=by('sessions-list'),old=sel.value;
  sel.replaceChildren();for(const s of data.sessions){const opt=document.createElement('option');opt.value=s.session_id;opt.textContent=(s.label||s.session_id.slice(0,8))+' ('+s.frame_count+')';sel.append(opt)}
  if(data.sessions.some(s=>s.session_id===old))sel.value=old;
  await frames();}
 async function frames(){const sid=by('sessions-list').value;const sel=by('frames-list');sel.replaceChildren();
- if(!sid){lastConsistency=null;by('temporal').textContent='';by('consistency-table').textContent='';by('consistency-download').hidden=true;return}const data=await req('/api/sessions/'+sid+'/frames');
+ if(!sid){lastConsistency=null;by('temporal').textContent='';by('consistency-table').textContent='';by('consistency-download').hidden=true;await loadTracking();return}const data=await req('/api/sessions/'+sid+'/frames');
  for(const r of data.frames){const o=document.createElement('option');o.value=r.index;o.textContent='#'+r.index+' · '+r.engine+' · '+r.units+' · '+new Date(r.captured_at*1000).toLocaleString();sel.append(o)}
  const t=await req('/api/sessions/'+sid+'/temporal');by('temporal').textContent=JSON.stringify(t.groups,null,2);
  const report=await req('/api/sessions/'+sid+'/consistency');
  renderConsistency(report);
  by('consistency-download').href='/api/sessions/'+sid+'/consistency/report.json';
- by('consistency-download').hidden=false;}
+ by('consistency-download').hidden=false;await loadTracking();}
 async function act(fn){try{message('');await fn()}catch(e){message(tr[lang].failed+': '+e.message)}}
+by('tracking-run').onclick=()=>act(runTracking);
 by('refresh').onclick=()=>act(sessions);
 by('sessions-list').onchange=()=>act(frames);
 by('create').onclick=()=>act(async()=>{const s=await req('/api/sessions',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({label:by('label').value})});await sessions();by('sessions-list').value=s.session_id;await frames();message(tr[lang].created)});

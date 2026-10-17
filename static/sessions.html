@@ -25,6 +25,13 @@
 <canvas id="consistency-chart" width="900" height="190" role="img" aria-label="Normalized depth-shape MAE across compatible saved frame pairs"></canvas>
 <div id="consistency-table" aria-live="polite"></div><p id="consistency-skips"></p>
 <a id="consistency-download" href="#" hidden data-i="downloadReport">Export temporal JSON</a></section>
+<section id="tracking-panel"><h2 data-i="tracking">Semantic Object Tracking (offline)</h2>
+<p data-i="trackingNote">Manually analyse saved frames with YOLO Detect/Segment. CPU only. Object IDs are heuristic 2D associations, not identities or world-space trajectories.</p>
+<label><span data-i="trackMode">Mode</span> <select id="tracking-mode"><option value="segment" data-i="segment">Instance segmentation</option><option value="detect" data-i="detect">Bounding-box regions</option></select></label>
+<button id="tracking-run" data-i="trackRun">Analyse saved frames</button>
+<a id="tracking-download" hidden data-i="trackDownload">Export tracking JSON</a>
+<div id="tracking-result" aria-live="polite" class="tracking-scroll"></div>
+<p data-i="trackWarning">Object association may fail when objects cross or disappear; XYZ is in unverified native depth units.</p></section>
 <section><h2 data-i="trend">Temporal metadata trends</h2><p data-i="trendNote">Frame-level depth median only: not tracked pixels, metric drift or motion-compensated geometry.</p><pre id="temporal"></pre></section>
 <footer><span data-i="warning">Recorded depth is an AI estimate. Relative depth is not metres; no safety or accuracy certification.</span></footer>
 </main><script src="/static/viewer.js"></script><script src="/static/sessions.js"></script></body></html>

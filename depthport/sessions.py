@@ -245,6 +245,41 @@ class SessionStore:
                 'color_range':f.get('color_range',[0.1,20]),
                 'note':'Recorded AI estimate; no inference rerun and no validated metre accuracy.'}
 
+    def save_tracking_report(self, sid: str, report: dict) -> None:
+        """Atomic, opt-in local report; reject stale or unrelated snapshots."""
+        with self.lock:
+            rows = self._read_manifest(sid)['frames']
+            observed = [(r['index'], r['sha256']) for r in rows]
+            selected = [(r['index'], r['snapshot_sha256']) for r in report.get('frames', [])]
+            if (report.get('session_id') != sid or
+                    report.get('total_session_frames') != len(rows) or
+                    not selected or selected != observed[-len(selected):]):
+                raise SessionIntegrity('Session changed during tracking; rerun analysis')
+            raw = (json.dumps(report, ensure_ascii=False, allow_nan=False, separators=(',', ':'))+'\n').encode('utf-8')
+            if len(raw) > 1_000_000:
+                raise SessionLimit('Tracking report exceeded the 1 MiB limit')
+            folder=self._folder(sid)
+            tmp=folder/('tracking.'+uuid.uuid4().hex+'.tmp')
+            _write_private(tmp,raw)
+            try:tmp.replace(folder/'tracking.json')
+            finally:tmp.unlink(missing_ok=True)
+
+    def tracking_report(self, sid: str) -> dict:
+        with self.lock:
+            rows=self._read_manifest(sid)['frames']
+            path=self._folder(sid)/'tracking.json'
+            if path.is_symlink() or not path.is_file():
+                raise SessionNotFound('No saved tracking result; run tracking first')
+            if path.stat().st_size > 1_000_000:
+                raise SessionIntegrity('Tracking report exceeds size limit')
+            try:report=json.loads(path.read_text(encoding='utf-8'))
+            except (ValueError,OSError) as exc:raise SessionIntegrity('Unreadable tracking report') from exc
+            seen=[(r['index'],r['snapshot_sha256']) for r in report['frames']]
+            current=[(r['index'],r['sha256']) for r in rows]
+            if report.get('total_session_frames') != len(rows) or seen != current[-len(seen):]:
+                raise SessionIntegrity('Tracking analysis is stale after a new frame; rerun it')
+            return report
+
     def temporal_consistency(self, sid: str, max_pairs: int = 32) -> dict:
         """Read-only, same-grid offline depth-change report over manual snapshots."""
         from depthport.temporal import analyze_session

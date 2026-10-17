@@ -1,3 +1,5 @@
+**v0.3 離線語意追蹤新增：** 手動分析已存 Session 影格的 YOLO Detect／Segment，使用 2D 匹配建立 Object ID 與候選相機 XYZ／深度歷史；不做身份辨識、不代表世界座標軌跡，也不會自動錄影。詳見 [Session 文件](docs/zh-TW/sessions.md)。
+
 ## v0.3 開發預覽 — Session 與離線回放
 
 新增**預設關閉、僅本機、手動儲存**的影格 Session（RGB／深度／PLY／原始 NPY／metadata），支援 SHA-256 完整性驗證、離線回放及分模型深度摘要趨勢；**不會自動錄製相機，回放不重新呼叫模型。** v0.2 Spatial Analysis 功能仍在。[Session／Replay 操作說明](docs/zh-TW/sessions.md)。本開發分支尚未正式發布。

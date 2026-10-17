@@ -1,3 +1,9 @@
+## v0.3.0-alpha.0 — Offline semantic tracking development addition
+
+- Optional CPU-only manual YOLO Detect/Segment analysis on 2–24 manually archived Session frames, with class-gated short-term 2D Object IDs and candidate camera XYZ/depth history.
+- Local SHA-256-checked tracking report with async status, bilingual Sessions UI, bounded limits and fake-backed regression tests.
+- No ReID, world-coordinate trajectory, continuous RTSP recording, real pretrained YOLO validation, or measurement guarantee.
+
 # Changelog / 版本紀錄
 
 ## 0.2.0-alpha.1 — 2026-10-17 (development branch only)

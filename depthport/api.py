@@ -39,6 +39,7 @@ from depthport.spatial import pixel_inspection, depth_distribution, distance_bet
 from depthport.comparison import compact_card, status_card
 from depthport.semantic import run_ultralytics_semantic
 from depthport.sessions import SessionStore, SessionError, SessionIntegrity, SessionNotFound, SessionLimit
+from depthport.tracking import analyse_session, MAX_TRACK_FRAMES
 
 MAX_UPLOAD = 12 * 1024 * 1024
 
@@ -490,6 +491,8 @@ async def lifespan(app):
     # Explicit opt-in. No silent RTSP archival, default storage is disabled.
     app.state.session_store = (SessionStore(ROOT / 'outputs' / 'sessions')
                                if os.getenv('ENABLE_SESSION_STORAGE', '0') == '1' else None)
+    app.state.tracking_lock = threading.RLock()
+    app.state.tracking_job = {'state':'idle'}
     source = os.getenv('RTSP_URL', '').strip()
     if source:
         try: service.set_source(source)
@@ -1002,6 +1005,70 @@ def sessions_consistency_export(request: Request, sid: str):
     raw = (json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False) + '\n').encode('utf-8')
     return Response(raw, media_type='application/json', headers={
         'Content-Disposition': f'attachment; filename="depthport-temporal-{sid}.json"'})
+
+
+class TrackingRequest(BaseModel):
+    mode: Literal['segment','detect']='segment'
+    confidence: float = Field(default=.25, ge=.05, le=.95)
+    max_frames: int = Field(default=12, ge=2, le=MAX_TRACK_FRAMES)
+
+
+def _tracking_work(app: FastAPI, sid: str, job_id: str, mode: str, confidence: float, max_frames: int):
+    try:
+        # Isolated CPU-only offline job; does not call the live depth worker.
+        store = app.state.session_store
+        report = analyse_session(store,sid,mode=mode,confidence=confidence,
+                                 max_frames=max_frames,device='cpu')
+        store.save_tracking_report(sid,report)
+        result={'state':'completed','id':job_id,'session_id':sid,
+                'track_count':report['track_count'],'frames_considered':report['frames_considered']}
+    except Exception as exc:
+        result={'state':'error','id':job_id,'session_id':sid,'error':safe_error(exc)}
+    with app.state.tracking_lock:
+        if app.state.tracking_job.get('id')==job_id:
+            app.state.tracking_job=result
+
+
+@app.post('/api/sessions/{sid}/tracking',status_code=202)
+def sessions_track(request: Request, sid: str, body: TrackingRequest):
+    store=local_session_store(request)
+    try:
+        f=store.frames(sid)
+        if len(f['frames'])<2:raise SessionError('Save two or more frames first')
+    except SessionError as exc:raise session_failure(exc) from exc
+    with request.app.state.tracking_lock:
+        if request.app.state.tracking_job.get('state') in ('queued','running'):
+            raise HTTPException(409,'One tracking job is already running')
+        job_id=uuid.uuid4().hex
+        request.app.state.tracking_job={'state':'running','id':job_id,'session_id':sid,
+                                         'mode':body.mode}
+        thread=threading.Thread(target=_tracking_work,
+              args=(request.app,sid,job_id,body.mode,body.confidence,body.max_frames),
+              name='depthport-offline-tracking',daemon=True)
+        thread.start()
+    return {'accepted':True,'id':job_id,'state':'running',
+            'note':'Manual saved-frame analysis; CPU-only inference; no auto recording.'}
+
+
+@app.get('/api/sessions/{sid}/tracking/status')
+def sessions_track_status(request: Request, sid: str):
+    store=local_session_store(request)
+    try:store.frames(sid)
+    except SessionError as exc:raise session_failure(exc) from exc
+    with request.app.state.tracking_lock:
+        job=request.app.state.tracking_job.copy()
+    if job.get('session_id')!=sid:return {'state':'idle'}
+    return job
+
+
+@app.get('/api/sessions/{sid}/tracking/report.json')
+def sessions_track_report(request: Request, sid: str, download: bool=False):
+    store=local_session_store(request)
+    try:report=store.tracking_report(sid)
+    except SessionError as exc:raise session_failure(exc) from exc
+    raw=(json.dumps(report,ensure_ascii=False,indent=2,allow_nan=False)+'\n').encode('utf-8')
+    headers={'Content-Disposition':f'attachment; filename="depthport-tracking-{sid}.json"'} if download else {}
+    return Response(raw,media_type='application/json',headers=headers)
 
 
 @app.get('/api/sessions/{sid}/temporal')

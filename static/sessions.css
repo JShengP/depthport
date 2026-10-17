@@ -11,3 +11,5 @@ footer{margin:24px 0;color:#acb9c9}@media(max-width:800px){.panels{grid-template
 
 #consistency-chart{width:100%;height:auto;max-height:240px;background:#101a27;border-radius:8px}
 #consistency-table{overflow-x:auto}#consistency-table table{width:100%;border-collapse:collapse;font-size:13px}#consistency-table th,#consistency-table td{padding:9px;border-bottom:1px solid var(--edge);text-align:left;white-space:nowrap}#consistency-skips{color:#b8c9db}
+
+.tracking-scroll{overflow-x:auto;max-height:500px;overflow-y:auto}.tracking-scroll table{width:100%;border-collapse:collapse;min-width:640px}.tracking-scroll td,.tracking-scroll th{font-size:13px;padding:8px;border-bottom:1px solid var(--edge);text-align:left}#tracking-panel p{color:#ccdbea}

@@ -1,6 +1,6 @@
 ## v0.3 development preview — Manual Sessions & Replay
 
-The next research branch adds **opt-in, local-only, manually captured frame sessions** (RGB/depth/PLY/raw NPY metadata), integrity-checked offline replay, and grouped depth-summary trends. **No automatic camera recording or model inference on replay.** The v0.2 features remain available. See [Session & Replay documentation](docs/en/sessions.md); this development preview is not a tagged release.
+The next research branch adds **opt-in, local-only, manually captured frame sessions** (RGB/depth/PLY/raw NPY metadata), integrity-checked offline replay, and grouped depth-summary trends. A manual CPU-only **Offline Semantic Object Tracking** analysis links saved-frame 2D detections to Object IDs and camera-space depth/XYZ histories (heuristic, not identity or world trajectories). **No automatic camera recording or model inference on replay.** The v0.2 features remain available. See [Session & Replay documentation](docs/en/sessions.md); this development preview is not a tagged release.
 
 <div align="center">
 
