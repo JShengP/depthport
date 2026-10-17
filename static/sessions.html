@@ -7,6 +7,10 @@
 <button id="shortcut-help-open" data-i="shortcutHelpOpen" aria-haspopup="dialog" aria-controls="shortcut-help-dialog" aria-expanded="false">Shortcut help (?)</button></nav></header>
 <p id="subtitle" data-i="subtitle">Manually save completed AI result frames to local storage. No automatic camera recording; replay does not rerun inference.</p>
 <div id="status" role="status"></div>
+<dialog id="bookmark-delete-dialog" aria-labelledby="bookmark-delete-title" aria-describedby="bookmark-delete-prompt">
+<h2 id="bookmark-delete-title" data-i="bookmarkDeleteTitle">Remove saved bookmark?</h2><p id="bookmark-delete-prompt"></p>
+<div class="bookmark-delete-actions"><button id="bookmark-delete-cancel" data-i="bookmarkDeleteCancel" autofocus>Cancel</button><button id="bookmark-delete-confirm" data-i="bookmarkDeleteAccept">Remove bookmark</button></div>
+</dialog>
 <dialog id="shortcut-help-dialog" aria-labelledby="shortcut-help-title" aria-describedby="shortcut-help-intro">
 <header class="shortcut-help-header"><h2 id="shortcut-help-title" data-i="shortcutHelpTitle">Keyboard shortcut help</h2><button id="shortcut-help-close" data-i="shortcutHelpClose" autofocus>Close</button></header>
 <div class="shortcut-help-content"><p id="shortcut-help-intro" data-i="shortcutHelpIntro">Opening help pauses replay. Close it, then press Space to continue.</p>
@@ -32,6 +36,7 @@
 <div><dt><kbd>Shift+[</kbd> / <kbd>Shift+]</kbd></dt><dd data-i="shortcutHelpBookmarkEdges">Pause and jump to the first / last bookmark matching the current tag and search filters.</dd></div>
 <div><dt><kbd>[</kbd> / <kbd>]</kbd></dt><dd data-i="shortcutHelpBookmarks">Previous / next matching bookmark using the current filters.</dd></div>
 <div><dt><kbd>Shift+1</kbd> / <kbd>Shift+2</kbd> / <kbd>Shift+3</kbd></dt><dd data-i="shortcutHelpQuickTags">Shift+1: suspected ID switch · Shift+2: occlusion · Shift+3: object crossing. Pause and save the shown frame, adding the tag while keeping saved notes/other tags and unsaved drafts.</dd></div>
+<div><dt><kbd>Shift+Delete</kbd></dt><dd data-i="shortcutHelpDeleteBookmark">Pause and ask before removing the shown frame’s saved bookmark, including saved note/tags. Cancel keeps it; unsaved drafts stay in this page.</dd></div>
 <div><dt><kbd>Shift+4</kbd></dt><dd data-i="shortcutHelpGeneralize">Pause and save the shown frame as a general bookmark: clear saved tags, keep the saved note and unsaved drafts.</dd></div>
 <div><dt><kbd>Shift+M</kbd></dt><dd data-i="shortcutHelpQuickMark">Pause and save a general bookmark for the shown frame. Keep existing saved notes/tags and unsaved drafts; no editor focus change.</dd></div>
 <div><dt><kbd>M</kbd></dt><dd data-i="shortcutHelpMark">Pause and focus the shown frame’s bookmark note.</dd></div></dl></div>
@@ -123,7 +128,7 @@
 <textarea id="bookmark-note" rows="3" maxlength="2000" disabled aria-describedby="bookmark-editor-status bookmark-save-shortcut-help"></textarea>
 <p id="bookmark-save-shortcut-help" class="bookmark-shortcut-help" data-i="bookmarkSaveShortcutHelp">With Keyboard shortcuts enabled: Ctrl+Enter saves this frame’s bookmark and note from the note field only. Enter adds a new line. Esc returns to replay with unsaved edits kept. Ignored during IME composition.</p>
 <button id="bookmark-save" data-i="bookmarkSave" aria-describedby="bookmark-save-shortcut-help" disabled>Save frame bookmark</button>
-<button id="bookmark-delete" data-i="bookmarkDelete" disabled>Remove frame bookmark</button>
+<button id="bookmark-delete" data-i="bookmarkDelete" aria-haspopup="dialog" aria-controls="bookmark-delete-dialog" disabled>Remove frame bookmark</button>
 </section>
 <section><h2 data-i="consistency">Temporal depth consistency</h2>
 <p data-i="consistencyNote">Same-grid pixel comparison only. No motion compensation, calibrated distance accuracy or continuous video recording.</p>

@@ -79,3 +79,8 @@ footer{margin:24px 0;color:#acb9c9}@media(max-width:800px){.panels{grid-template
 .shortcut-help-group dt,.shortcut-help-group dd{margin:0}.shortcut-help-group kbd{font:inherit;font-size:13px;border:1px solid #7794b3;border-radius:4px;padding:1px 5px;white-space:nowrap}
 .shortcut-help-scope{border-top:1px solid var(--edge);padding-top:12px;margin-bottom:0;line-height:1.6}
 @media(max-width:520px){.shortcut-help-group dl>div{grid-template-columns:110px minmax(0,1fr)}.shortcut-help-header{padding:12px}.shortcut-help-content{padding:0 12px 12px}}
+
+#bookmark-delete-dialog{width:min(480px,calc(100vw - 48px));max-height:85vh;overflow:auto;padding:20px;border:1px solid #7794b3;border-radius:12px;background:var(--panel);color:var(--text)}
+#bookmark-delete-dialog::backdrop{background:rgb(4 9 16 / .72)}
+#bookmark-delete-dialog h2{margin-top:0;font-size:21px}
+.bookmark-delete-actions{display:flex;justify-content:flex-end;gap:12px;flex-wrap:wrap}

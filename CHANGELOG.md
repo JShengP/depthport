@@ -1,5 +1,8 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 
+- Added **Shift+Delete** to pause and confirm removal of the shown snapshot’s saved bookmark, preserving separate drafts and review settings; updated bilingual confirmation/help and input/IME protection.
+- 新增 **Shift＋Delete** 暫停並確認後移除目前快照的已保存書籤，保留獨立草稿與檢查設定，更新雙語確認／說明及輸入／組字防護。
+
 - Added **Shift+4** to convert the shown frame to a general bookmark by atomically clearing saved tags while retaining its latest saved note and separate drafts; updated bilingual help and input/IME protection.
 - 新增 **Shift＋4** 將目前影格改為一般書籤，原子清除已保存標籤並保留最新備註與獨立草稿，更新雙語說明與輸入／組字防護。
 
