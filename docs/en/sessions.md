@@ -148,6 +148,10 @@ The position readout shows the displayed bookmark's place in the filtered result
 
 Both sets of buttons are disabled while a bookmark jump loads. Selecting another bookmark directly, changing filters or Sessions, or navigating manually cancels that jump so its old result cannot replace the new selection. These controls only read local saved frames; they do not change bookmarks, notes or JSON export contents.
 
+With **Keyboard shortcuts** enabled, press **`[`** for the previous filtered bookmark or **`]`** for the next. The checkbox beside the bookmark filters is on by default; clear it to disable these keys, or check it again to re-enable them. Reloading restores the default. Shortcuts use the same nearest-result, no-wrap navigation and loading guards as the buttons, preserving A/B settings and unsaved drafts.
+
+The keys do nothing while focus is in a note, search field, input, select, editable content or another editing control. They also ignore IME composition, held-key repeats, modifier combinations, keys already handled by another control and hidden pages, so typing does not jump frames. The shortcut preference stays in page memory and does not change saved bookmarks or JSON backups.
+
 ### Back up and restore bookmark JSON
 
 Use **Export JSON** to download saved bookmarks to this machine. Save any edited notes first: unsaved drafts are excluded. The UTF-8 JSON contains the format version, Session UUID, saved-frame indices, snapshot SHA-256 digests, tags, notes and `updated_at` values. It contains no images, frame bundles or tracking results. Keep the backup locally; the app does not send it to cloud storage or GitHub.

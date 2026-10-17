@@ -63,3 +63,6 @@ footer{margin:24px 0;color:#acb9c9}@media(max-width:800px){.panels{grid-template
 .bookmark-navigation{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin:10px 0}
 .bookmark-navigation button{margin:0}.bookmark-navigation output{font-size:13px;color:#cce5f8;font-variant-numeric:tabular-nums}
 @media(max-width:520px){.bookmark-navigation output{flex-basis:100%}}
+
+.bookmark-shortcut-toggle{grid-column:1/-1;display:flex;align-items:center;gap:6px;justify-self:start}
+.bookmark-shortcut-help{flex-basis:100%;margin:0;font-size:13px;color:#cce5f8}

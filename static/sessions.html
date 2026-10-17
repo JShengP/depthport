@@ -33,7 +33,8 @@
 <span id="bookmark-replay-nav-label" data-i="bookmarkReplayNav">Replay bookmark navigation</span>
 <button id="bookmark-prev" data-i="bookmarkPrevious" disabled aria-describedby="bookmark-nav-status">Previous bookmark</button>
 <button id="bookmark-next" data-i="bookmarkNext" disabled aria-describedby="bookmark-nav-status">Next bookmark</button>
-<output id="bookmark-nav-status" aria-live="off"></output></div>
+<output id="bookmark-nav-status" aria-live="off"></output>
+<p class="bookmark-shortcut-help" data-i="bookmarkShortcutHelp">Shortcuts: [ previous / ] next filtered bookmark. Inactive in input fields or during IME composition.</p></div>
 <fieldset class="replay-loop-control"><legend data-i="loopTitle">A/B loop</legend>
 <label class="overlay-toggle"><input id="loop-enabled" type="checkbox" disabled aria-describedby="loop-status"><span data-i="loopEnable">Loop A–B</span></label>
 <div class="loop-endpoints"><label for="loop-start" data-i="loopStart">A · Start frame</label>
@@ -57,12 +58,14 @@
 <input id="bookmark-search" type="search" maxlength="1000" disabled aria-describedby="bookmark-filter-help bookmark-filter-status" autocomplete="off" spellcheck="false">
 <button id="bookmark-filter-clear" data-i="bookmarkFilterClear" disabled>Clear filters</button>
 <p id="bookmark-filter-help" data-i="bookmarkFilterHelp">Tag and note keyword must both match. Search is literal and ignores English case.</p>
-<output id="bookmark-filter-status" aria-live="polite"></output></fieldset>
+<output id="bookmark-filter-status" aria-live="polite"></output>
+<label class="bookmark-shortcut-toggle"><input id="bookmark-shortcuts-enabled" type="checkbox" checked><span data-i="bookmarkShortcuts">Keyboard shortcuts</span></label></fieldset>
 <div id="bookmark-list-nav" class="bookmark-navigation" role="group" aria-labelledby="bookmark-list-nav-label">
 <span id="bookmark-list-nav-label" data-i="bookmarkListNav">Filtered bookmark navigation</span>
 <button id="bookmark-list-prev" data-i="bookmarkPrevious" disabled aria-describedby="bookmark-list-nav-status">Previous bookmark</button>
 <button id="bookmark-list-next" data-i="bookmarkNext" disabled aria-describedby="bookmark-list-nav-status">Next bookmark</button>
-<output id="bookmark-list-nav-status" aria-live="off"></output></div>
+<output id="bookmark-list-nav-status" aria-live="off"></output>
+<p class="bookmark-shortcut-help" data-i="bookmarkShortcutHelp">Shortcuts: [ previous / ] next filtered bookmark. Inactive in input fields or during IME composition.</p></div>
 <p id="bookmarks-status" role="status"></p><ul id="bookmarks-list"></ul>
 <fieldset class="bookmark-transfer"><legend data-i="bookmarkBackup">JSON backup / restore</legend>
 <p data-i="bookmarkBackupNote">Export saved bookmarks only; save drafts first. This JSON contains notes, not images. Restore requires the original Session and frames.</p>

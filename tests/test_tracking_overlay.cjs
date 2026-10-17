@@ -21,12 +21,14 @@ class Element {
  setAttribute(key,value){this.attrs[key]=String(value)}
  getAttribute(key){return this.attrs[key]??null}
  append(...nodes){for(const node of nodes)this.appendChild(node)}
- appendChild(node){this.children.push(node);if(this.tagName==='select'&&this._selectedIndex<0)this._selectedIndex=0;return node}
+ appendChild(node){node.parentElement=this;node.ownerDocument=this.ownerDocument;this.children.push(node);if(this.tagName==='select'&&this._selectedIndex<0)this._selectedIndex=0;return node}
  replaceChildren(...nodes){this.children=[];this._text='';if(this.tagName==='select')this._selectedIndex=-1;this.append(...nodes)}
  set textContent(value){this._text=String(value);this.children=[]}
  get textContent(){return this._text+this.children.map(c=>c.textContent).join('')}
  set innerHTML(_value){throw Error('Report content must never be inserted as markup')}
  get options(){return this.tagName==='select'?this.children:[]}
+ get isContentEditable(){const value=this.getAttribute('contenteditable');return this._isContentEditable??(value===null?!!this.parentElement?.isContentEditable:value!=='false')}
+ set isContentEditable(value){this._isContentEditable=!!value}
  set selectedIndex(value){this._selectedIndex=value}
  get selectedIndex(){return this._selectedIndex}
  set value(value){
@@ -35,9 +37,18 @@ class Element {
  }
  get value(){return this.tagName==='select'?(this.options[this._selectedIndex]?.value??''):this._value}
  querySelector(selector){const match=selector.match(/^\[value="([^"]+)"\]$/);return match?this.children.find(c=>c.value===match[1]):null}
+ closest(selector){
+  const matches=node=>selector.split(',').some(part=>{
+   if(/^[a-z]+$/i.test(part))return node.tagName.toLowerCase()===part.toLowerCase();
+   if(part==='[contenteditable]:not([contenteditable="false"])')return node.getAttribute('contenteditable')!==null&&node.getAttribute('contenteditable')!=='false';
+   const role=part.match(/^\[role="([^"]+)"\]$/);return role&&node.getAttribute('role')===role[1];
+  });
+  for(let node=this;node;node=node.parentElement)if(matches(node))return node;
+  return null;
+ }
  getContext(){return null}
  scrollIntoView(){}
- focus(){this.focused=true;this.onfocus?.()}
+ focus(){this.focused=true;if(this.ownerDocument)this.ownerDocument.activeElement=this;this.onfocus?.()}
  replaceWith(node){if(!this._replace)throw Error('Element is not mounted');this._replace(node)}
 }
 function makeOverlay(){
@@ -201,9 +212,10 @@ test('displaced labels have a leader line without changing their detection boxes
 // their order. This verifies observable controls and images, not implementation
 // text or the names of the generation counters.
 function makeUI(){
- const ids=[...fs.readFileSync(path.join(root,'static/sessions.html'),'utf8').matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
- const elements=Object.fromEntries(ids.map(id=>[id,new Element(['lang','sessions-list','frames-list','tracking-mode','tracking-backend','playback-speed','bookmark-import-policy','bookmark-filter-tag'].includes(id)?'select':'div')]));
- function mount(id,node){node.id=id;node._replace=replacement=>mount(id,replacement);elements[id]=node}
+ const markup=fs.readFileSync(path.join(root,'static/sessions.html'),'utf8');
+ const nodes=[...markup.matchAll(/<([a-z][\w-]*)\b[^>]*\bid="([^"]+)"[^>]*>/gi)],ids=nodes.map(m=>m[2]);
+ const elements=Object.fromEntries(nodes.map(m=>[m[2],new Element(m[1].toLowerCase())]));let uiDocument=null;
+ function mount(id,node){node.id=id;node.ownerDocument=uiDocument;node._replace=replacement=>mount(id,replacement);elements[id]=node}
  for(const id of ids)mount(id,elements[id]);
  for(const [id,values] of Object.entries({lang:['en','zh-TW'],'tracking-mode':['segment','detect'],'tracking-backend':['baseline','roboflow-botsort'],'playback-speed':['.25','.5','1','2'],'bookmark-import-policy':['keep','overwrite'],'bookmark-filter-tag':['all','id-switch','occlusion','crossing','general']})){
   if(!elements[id])continue;
@@ -211,13 +223,15 @@ function makeUI(){
  }
  elements['playback-speed'].value='1';
  elements['overlay-enabled'].checked=true;
+ if(elements['bookmark-shortcuts-enabled'])elements['bookmark-shortcuts-enabled'].checked=/\bchecked(?:\s|=|>)/.test(nodes.find(m=>m[2]==='bookmark-shortcuts-enabled')[0]);
  const pending=[],decoding=[],cloudUpdates=[],windowEvents={},documentEvents={},timers=new Map();let time=0,nextTimer=0,cloudError=null;
  const window={DepthPortTrackingOverlay:makeOverlay(),CloudViewer:class{setPacked(...args){if(cloudError)throw cloudError;cloudUpdates.push(args)}},addEventListener:(type,fn)=>{windowEvents[type]=fn}};
  class Image extends Element{
   constructor(){super('img')}
   decode(){return new Promise((resolve,reject)=>decoding.push({image:this,resolve,reject,done:false}))}
  }
- const document={documentElement:{},hidden:false,addEventListener:(type,fn)=>{documentEvents[type]=fn},getElementById:id=>elements[id],querySelectorAll:()=>[],createElement:tag=>new Element(tag),createTextNode:text=>{const n=new Element('#text');n.textContent=text;return n}};
+ const document={documentElement:{},hidden:false,activeElement:null,addEventListener:(type,fn)=>{documentEvents[type]=fn},getElementById:id=>elements[id],querySelectorAll:()=>[],createElement:tag=>{const n=new Element(tag);n.ownerDocument=document;return n},createTextNode:text=>{const n=new Element('#text');n.textContent=text;return n}};
+ uiDocument=document;for(const node of Object.values(elements))node.ownerDocument=document;
  const context={window,document,Image,performance:{now:()=>time},
   location:{search:'?lang=en'},localStorage:{getItem:()=>null,setItem:()=>{}},URLSearchParams,console,
   setTimeout:(fn,delay)=>{const id=++nextTimer;timers.set(id,{fn,at:time+Math.max(0,delay)});return id},clearTimeout:id=>timers.delete(id),
@@ -242,7 +256,8 @@ function makeUI(){
   }
   throw Error('Too many playback timers');
  };
- return {elements,pending,decoding,cloudUpdates,respond,decode,decodeFrame,tick,failCloud:error=>{cloudError=error},
+ const dispatch=(type,properties={})=>{const event={target:new Element('div'),defaultPrevented:false,...properties,preventDefault(){this.defaultPrevented=true}};documentEvents[type]?.(event);return event};
+ return {elements,pending,decoding,cloudUpdates,respond,decode,decodeFrame,tick,document,dispatch,windowEvents,failCloud:error=>{cloudError=error},
   hide:()=>{document.hidden=true;documentEvents.visibilitychange()},pagehide:()=>windowEvents.pagehide()};
 }
 const flush=async()=>{for(let i=0;i<4;i++)await new Promise(resolve=>setImmediate(resolve))};
@@ -1514,4 +1529,139 @@ test('a completed autoplay frame refreshes both bookmark neighbors while ordinar
  await completeReplay(ui,2);assertProgress(ui,2,3);assertBookmarkNav(ui,1,3);assert.match(e['playback-status'].textContent,/Playing/);
  e['bookmark-filter-clear'].onclick();assertBookmarkNav(ui,1,3);assertBookmarkNavPosition(ui,2,3);assert.equal(e['playback-pause'].disabled,false);
  e['playback-pause'].onclick();
+});
+
+function pressBookmarkKey(ui,key,properties={}){return ui.dispatch('keydown',{key,...properties})}
+async function completeBookmarkKey(ui,key,index,properties={}){
+ const event=pressBookmarkKey(ui,key,properties);assert.equal(event.defaultPrevented,true,'a valid bookmark shortcut is consumed');
+ await flush();await completeReplay(ui,index);await flush();return event;
+}
+
+test('bracket shortcuts navigate nearest filtered bookmarks in both directions with coherent frame IDs',async()=>{
+ const bookmarks=[bookmarkRecord(1,{tags:['crossing'],note:'Review first'}),bookmarkRecord(2,{tags:['occlusion'],note:'Review second'}),bookmarkRecord(3,{tags:['crossing'],note:'ＲＥＶＩＥＷ third'})];
+ const ui=await startUI({bookmarks,trackingReport:trackedSequence()}),e=ui.elements;
+ await showSaved(ui,2);filterBookmarkTag(ui,'crossing');searchBookmarkNotes(ui,' review ');
+ await completeBookmarkKey(ui,']',3);assertProgress(ui,3,3);assertBookmarkNavPosition(ui,2,2);
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0003');
+ await completeBookmarkKey(ui,'[',1);assertProgress(ui,1,3);assertBookmarkNavPosition(ui,1,2);
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');
+ assert.equal(bookmarkWrites(ui).length,0);assert.equal(e['bookmark-filter-tag'].value,'crossing');assert.equal(e['bookmark-search'].value,' review ');
+});
+
+test('bookmark shortcuts are unconsumed at boundaries, with no matches or before bookmarks are available',async()=>{
+ const ui=await startUI({bookmarks:[bookmarkRecord(1),bookmarkRecord(3)]});
+ assert.equal(pressBookmarkKey(ui,'[').defaultPrevented,false);await completeBookmarkKey(ui,']',1);
+ const calls=replayRequests(ui).length;assert.equal(pressBookmarkKey(ui,'[').defaultPrevented,false);await flush();assert.equal(replayRequests(ui).length,calls);
+ await completeBookmarkKey(ui,']',3);assert.equal(pressBookmarkKey(ui,']').defaultPrevented,false);
+ searchBookmarkNotes(ui,'no matching note');assert.equal(pressBookmarkKey(ui,'[').defaultPrevented,false);assert.equal(pressBookmarkKey(ui,']').defaultPrevented,false);
+ for(const delayed of [false,true]){
+  const unavailable=await startUI({delayBookmarks:delayed});
+  assert.equal(pressBookmarkKey(unavailable,'[').defaultPrevented,false);assert.equal(pressBookmarkKey(unavailable,']').defaultPrevented,false);
+  assert.equal(replayRequests(unavailable).length,0);
+ }
+});
+
+test('typing in native form controls never triggers bookmark shortcuts or consumes text keys',async()=>{
+ const ui=await startUI({bookmarks:[bookmarkRecord(1),bookmarkRecord(3)]}),e=ui.elements;await showFirst(ui);
+ const calls=replayRequests(ui).length;
+ for(const target of [e['bookmark-note'],e['bookmark-search'],e['bookmark-filter-tag'],e.label,e['replay-progress'],e['bookmark-shortcuts-enabled'],new Element('select'),new Element('input'),new Element('textarea')]){
+  assert.equal(pressBookmarkKey(ui,']',{target}).defaultPrevented,false,target.id||target.tagName);
+  assert.equal(pressBookmarkKey(ui,'[',{target}).defaultPrevented,false,target.id||target.tagName);
+ }
+ e['bookmark-note'].focus();assert.equal(pressBookmarkKey(ui,']',{target:new Element('div')}).defaultPrevented,false,'focused note rejects retargeted events');
+ e['bookmark-search'].focus();assert.equal(pressBookmarkKey(ui,']',{target:new Element('button')}).defaultPrevented,false,'focused search rejects retargeted events');
+ ui.dispatch('paste',{target:e['bookmark-note'],clipboardData:{getData:()=>'] ['}});await flush();
+ assert.equal(replayRequests(ui).length,calls);assertProgress(ui,1,3);assert.equal(bookmarkWrites(ui).length,0);
+ ui.document.activeElement=null;await completeBookmarkKey(ui,']',3);
+});
+
+test('contenteditable and accessible custom editors guard descendants, active focus and shadow event paths',async()=>{
+ const ui=await startUI({bookmarks:[bookmarkRecord(1),bookmarkRecord(3)]});await showFirst(ui);
+ const calls=replayRequests(ui).length;
+ const editors=[];
+ for(const value of ['', 'true', 'plaintext-only']){const editor=new Element('div');editor.setAttribute('contenteditable',value);editors.push(editor)}
+ for(const role of ['textbox','searchbox','combobox','spinbutton']){const editor=new Element('div');editor.setAttribute('role',role);editors.push(editor)}
+ const nativeEditable=new Element('div');nativeEditable.isContentEditable=true;editors.push(nativeEditable);
+ for(const editor of editors){
+  const child=new Element('span');editor.append(child);
+  assert.equal(pressBookmarkKey(ui,']',{target:editor}).defaultPrevented,false);
+  assert.equal(pressBookmarkKey(ui,']',{target:child}).defaultPrevented,false);
+  assert.equal(pressBookmarkKey(ui,']',{composedPath:()=>[new Element('span'),child,editor]}).defaultPrevented,false);
+  ui.document.activeElement=child;assert.equal(pressBookmarkKey(ui,']').defaultPrevented,false);ui.document.activeElement=null;
+ }
+ await flush();assert.equal(replayRequests(ui).length,calls);assertProgress(ui,1,3);
+ const readonly=new Element('div');readonly.setAttribute('contenteditable','false');
+ await completeBookmarkKey(ui,']',3,{target:readonly});
+});
+
+test('bookmark shortcuts ignore modified, repeated, composing, prevented and unrelated key events',async()=>{
+ const ui=await startUI({bookmarks:[bookmarkRecord(1),bookmarkRecord(3)]});await showFirst(ui);
+ const calls=replayRequests(ui).length;
+ for(const properties of [{ctrlKey:true},{altKey:true},{metaKey:true},{shiftKey:true},{repeat:true},{isComposing:true},{keyCode:229}]){
+  const event=pressBookmarkKey(ui,']',properties);assert.equal(event.defaultPrevented,false,JSON.stringify(properties));
+ }
+ const prevented=pressBookmarkKey(ui,']',{defaultPrevented:true});assert.equal(prevented.defaultPrevented,true);
+ for(const key of ['ArrowLeft','ArrowRight','j','k','{','}','Escape','Process','Dead',''])assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false,key);
+ await flush();assert.equal(replayRequests(ui).length,calls);assertProgress(ui,1,3);
+ await completeBookmarkKey(ui,']',3);
+});
+
+test('composition state blocks bookmark navigation even when key events omit the composing flag',async()=>{
+ const ui=await startUI({bookmarks:[bookmarkRecord(1),bookmarkRecord(3)]});await showFirst(ui);
+ ui.dispatch('compositionstart');assert.equal(pressBookmarkKey(ui,']',{isComposing:false}).defaultPrevented,false);await flush();assert.equal(replayRequests(ui).length,1);
+ ui.dispatch('compositionend');await completeBookmarkKey(ui,']',3);
+ ui.dispatch('compositionstart');assert.equal(pressBookmarkKey(ui,'[').defaultPrevented,false);
+ ui.windowEvents.blur();await completeBookmarkKey(ui,'[',1);
+});
+
+test('shortcut opt-out controls both toolbars metadata and does not persist or alter manual navigation',async()=>{
+ const ui=await startUI({bookmarks:[bookmarkRecord(1),bookmarkRecord(3)]}),e=ui.elements;await showFirst(ui);
+ assert.equal(e['bookmark-shortcuts-enabled'].checked,true);
+ for(const [previous,next] of bookmarkNavPairs){assert.equal(e[previous].getAttribute('aria-keyshortcuts'),'[');assert.equal(e[next].getAttribute('aria-keyshortcuts'),']')}
+ e['bookmark-shortcuts-enabled'].checked=false;e['bookmark-shortcuts-enabled'].onchange();
+ for(const ids of bookmarkNavPairs)for(const id of ids)assert.equal(e[id].getAttribute('aria-keyshortcuts')||'', '');
+ assert.equal(pressBookmarkKey(ui,']').defaultPrevented,false);await flush();assert.equal(replayRequests(ui).length,1);
+ await jumpBookmarkNav(ui,'next',3);assertProgress(ui,3,3);
+ e['bookmark-shortcuts-enabled'].checked=true;e['bookmark-shortcuts-enabled'].onchange();await completeBookmarkKey(ui,'[',1);
+ const fresh=await startUI({bookmarks:[bookmarkRecord(1)]});assert.equal(fresh.elements['bookmark-shortcuts-enabled'].checked,true);
+});
+
+test('hidden-page shortcuts stay unconsumed and hiding clears stale composition state',async()=>{
+ const ui=await startUI({bookmarks:[bookmarkRecord(1),bookmarkRecord(3)]});await showFirst(ui);
+ ui.dispatch('compositionstart');ui.hide();assert.equal(pressBookmarkKey(ui,']').defaultPrevented,false);await flush();assert.equal(replayRequests(ui).length,1);
+ ui.document.hidden=false;await completeBookmarkKey(ui,']',3);
+});
+
+test('keyboard bookmark jumps serialize requests while image decoding or annotation writes are pending',async()=>{
+ const ui=await startUI({bookmarks:[bookmarkRecord(1),bookmarkRecord(3)]}),e=ui.elements;await showFirst(ui);
+ assert.equal(pressBookmarkKey(ui,']').defaultPrevented,true);await flush();const calls=replayRequests(ui).length;
+ for(const key of [']','['])assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false);
+ ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await flush();ui.decode('data:image/png;base64,session-a-3');await flush();
+ assert.equal(pressBookmarkKey(ui,'[').defaultPrevented,false);assert.equal(replayRequests(ui).length,calls);
+ ui.decode('data:image/jpeg;base64,session-a-depth-3');await flush();assertProgress(ui,3,3);
+ editBookmark(ui,'synthetic pending review',['crossing']);const saving=e['bookmark-save'].onclick();await flush();
+ assert.equal(pressBookmarkKey(ui,'[').defaultPrevented,false);assert.equal(replayRequests(ui).length,calls);
+ ui.respond('/api/sessions/session-a/frames/3/bookmark',bookmarkResponse('session-a',[bookmarkRecord(1),bookmarkRecord(3,{note:'synthetic pending review',tags:['crossing']})]));await saving;
+ await completeBookmarkKey(ui,'[',1);
+});
+
+test('keyboard navigation cancels a stale seek and preserves saved-snapshot drafts and A/B settings',async()=>{
+ const ui=await startUI({bookmarks:[bookmarkRecord(1,{note:'saved first'}),bookmarkRecord(3,{note:'saved third'})],trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);
+ editBookmark(ui,'synthetic unsaved note',['id-switch']);configureLoop(ui,1,2);
+ const seeking=scrub(ui,2);await flush();ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();
+ await completeBookmarkKey(ui,']',3);await ui.decodeFrame('session-a',2);await seeking;assertProgress(ui,3,3);
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0003');await completeBookmarkKey(ui,'[',1);
+ assert.equal(e['bookmark-note'].value,'synthetic unsaved note');assert.equal(e['bookmark-tag-id-switch'].checked,true);assert.equal(bookmarkWrites(ui).length,0);
+ assert.equal(e['loop-enabled'].checked,true);assert.equal(e['loop-start'].value,'1');assert.equal(e['loop-end'].value,'2');
+});
+
+test('Session changes invalidate a keyboard bookmark jump and leave shortcuts unavailable until the new list is ready',async()=>{
+ const ui=await startUI({bookmarks:[bookmarkRecord(1),bookmarkRecord(3)]}),e=ui.elements;await showFirst(ui);
+ assert.equal(pressBookmarkKey(ui,']').defaultPrevented,true);await flush();ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await flush();
+ e['sessions-list'].value='session-b';const switched=e['sessions-list'].onchange();await flush();
+ for(const key of ['[',']'])assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false);
+ await finishFrames(ui,'session-b',true,null,[1,2,3],[bookmarkRecord(2)]);await switched;await ui.decodeFrame('session-a',3);await flush();
+ assert.equal(e.result.hidden,true);assertBookmarkNav(ui,null,2);
+ assert.equal(pressBookmarkKey(ui,']').defaultPrevented,true);await flush();await completeReplay(ui,2,{sid:'session-b'});await flush();assertProgress(ui,2,3);
+ assert.equal(e.rgb.src,'data:image/png;base64,session-b-2');assert.equal(pressBookmarkKey(ui,']').defaultPrevented,false);
 });

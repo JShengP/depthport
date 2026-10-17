@@ -32,6 +32,9 @@
 - Added Previous/Next bookmark controls above replay and beside the list, following the current tag/keyword results in saved-frame order from the last displayed frame. Position counts and disabled boundaries make each review step clear; jumps pause playback, preserve A/B and drafts, and retain exact-frame RGB/depth/ID presentation. Superseded or failed loads cannot replace the last complete frame. Notes and exports remain unchanged and local.
 - 回放上方與書籤列表旁新增「上一個／下一個書籤」，從目前已顯示影格依分類／關鍵字結果與保存順序逐筆檢查，顯示序位並在邊界停用。跳轉暫停並保留 A／B 與草稿，影像／深度／ID 同步更新；過期或失敗載入不取代上一份完整影格，備註及匯出內容維持本機且不變。
 
+- Added `[` / `]` keyboard shortcuts for previous/next filtered bookmarks with a visible, default-on disable checkbox. Editing controls, IME composition, held-key repeats, modifier combinations, handled keys and hidden pages are ignored. Shortcuts retain the buttons' boundary/loading guards, A/B settings and drafts; the preference stays in page memory.
+- 新增 `[`／`]` 快捷鍵跳到上一個／下一個篩選書籤，提供預設開啟的核取方塊供停用；編輯控制項、輸入法組字、長按重複、修飾鍵組合、已處理按鍵及背景頁面不觸發。沿用按鈕的邊界與載入防護，保留 A／B 與草稿，偏好只留在本頁記憶體。
+
 # Changelog / 版本紀錄
 
 ## 0.2.0-alpha.1 — 2026-10-17 (experimental Alpha pre-release)
