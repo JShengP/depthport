@@ -7,21 +7,19 @@
 <div align="center">
 
 # DepthPort
-### v0.2 新功能 — Spatial Analysis 空間分析工作台
-
-啟動本地服務後開啟 **http://127.0.0.1:8000/spatial**，可進行 RGB／深度圖點選後取得相機 XYZ／原始深度、同張圖片四模型依序比較（保留不同尺度語義，顯示深度圖／點雲／直方圖／耗時）、額外 YOLO26 Detect／Segment 2D→3D 語意融合，以及棋盤格相機標定、候選平面、已知距離參考與獨立驗證誤差。原本四模型、RTSP、主介面、匯出與雙語功能都保留。**此為尚未做真模型／相機／GPU 驗收的 Alpha 功能，非安全測距工具。**
-
-[English implementation & acceptance](docs/en/spatial-analysis.md) · [繁體中文實作與驗收](docs/zh-TW/spatial-analysis.md)
-
-## 單目深度與點雲工作台
+### 單目深度與點雲工作台
 
 **一支相機。四種深度引擎。另一個觀察視角。**
 
 [English](README.md) · 繁體中文
 
-**實驗性 Alpha** · **本地執行** · **英文／繁體中文** · **AGPL-3.0-only**
+**v0.2 Alpha 已發布** · **本地執行** · **英文／繁體中文** · **AGPL-3.0-only**
 
 </div>
+
+**下載 v0.2.0-alpha.1：** [Release 說明與下載](https://github.com/JShengP/depthport/releases/tag/v0.2.0-alpha.1) · [原始碼 ZIP](https://github.com/JShengP/depthport/releases/download/v0.2.0-alpha.1/depthport-0.2.0-alpha.1-source.zip) · [SHA-256 校驗檔](https://github.com/JShengP/depthport/releases/download/v0.2.0-alpha.1/SHA256SUMS.txt)
+
+下載包僅含公開原始碼，Python 依賴與預訓練模型權重需另行安裝。
 
 將 RGB 圖片與 RTSP 相機影格轉成可互動的**單視角點雲**。在同一個本地 Web 介面切換深度模型、觀察可見表面的幾何，並匯出產生畫面所使用的數據。
 
@@ -31,7 +29,22 @@ DepthPort 整合既有預訓練模型，**不是新的深度網路或研究模�
 
 *截圖來自實際 UI 的合成測試資料；不是由相機或 AI 模型產生的點雲。*
 
-> **狀態：** 原始碼發布用 Alpha，不是正式產品或量測系統。自動測試驗證應用契約、數學與 UI 行為，不等於預訓練模型成功推論。真模型、目標設備乾淨安裝、CUDA、實體相機及深度精度仍未驗證。詳見[驗證紀錄](docs/zh-TW/validation.md)。
+> **狀態：** `v0.2.0-alpha.1` 已發布為**實驗性預發行版（Pre-release）**。2026-10-17 已在全新 Ubuntu 24.04／Python 3.12 環境完成四套真深度模型 CUDA smoke test、YOLO 偵測／分割融合及真正瀏覽器 HTTP 操作，輸入為同一張公開範例。這只證明鏈路可執行，不代表測距精度、實體相機運作或正式硬體 benchmark。Windows 完整模型安裝、實體 RTSP、長時間穩定性與 NVIDIA WebGL 繪圖仍未驗證。詳見[驗證紀錄](docs/zh-TW/validation.md)。
+
+## v0.2 新功能 — 空間分析工作台
+
+啟動本地服務後開啟 **http://127.0.0.1:8000/spatial**，可進行像素深度／XYZ 檢查、同圖四模型依序比較、YOLO 偵測／分割 2D→3D 融合，以及相機標定、候選平面與獨立量測誤差記錄。原本四模型、RTSP、主檢視器、匯出及雙語操作均保留。真單圖 CUDA 推論已在上述主機驗證；實體相機與距離精度尚未驗證。
+
+[English implementation & acceptance](docs/en/spatial-analysis.md) · [繁體中文實作與驗收](docs/zh-TW/spatial-analysis.md)
+
+<details>
+<summary>展開 v0.2 完整截圖（真模型推論）</summary>
+
+![空間分析工作台：真模型深度比較與 YOLO 分割](docs/assets/spatial-preview.zh-TW.png)
+
+*公開 [Ultralytics 公車範例](https://github.com/ultralytics/assets/blob/53d4e2a8fd15f473c29a148c317a8477be559327/im/bus.jpg)的真模型推論，非實體 IPCam 或測距精度驗證。[截圖來源](docs/assets/README.md)。*
+
+</details>
 
 ## 可以探索什麼？
 
@@ -135,7 +148,7 @@ node tests/test_i18n.cjs
 python tools/check_release.py
 ```
 
-CI 執行確定性的替身測試，不下載預訓練權重。CI 通過**不等於四模型硬體 benchmark**；這份原始碼快照也不宣稱已在 GitHub 遠端 CI 通過。
+CI 執行確定性的替身測試，不下載預訓練權重。CI 通過**不等於四模型硬體 benchmark**；目前分支與 Commit 的執行結果見 [GitHub Actions](https://github.com/JShengP/depthport/actions/workflows/ci.yml)。
 
 [Tracking 驗收評估](docs/zh-TW/tracking-evaluation.md)・[貢獻指南](CONTRIBUTING.md)・[Roadmap](ROADMAP.md)・[版本紀錄](CHANGELOG.md)・[發布檢查](docs/zh-TW/publishing.md)
 

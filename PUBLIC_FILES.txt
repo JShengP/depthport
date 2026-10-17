@@ -50,6 +50,7 @@ docs/en/publishing.md
 docs/en/usage.md
 docs/en/validation.md
 docs/releases/0.1.0-alpha.1.md
+docs/releases/0.2.0-alpha.1.md
 docs/templates/benchmark.csv
 docs/validation/summary.json
 docs/zh-TW/architecture.md
@@ -133,3 +134,6 @@ docs/en/tracking-evaluation.md
 docs/zh-TW/tracking-evaluation.md
 examples/tracking/tracking.synthetic.json
 examples/tracking/ground_truth.synthetic.json
+docs/assets/README.md
+docs/assets/spatial-preview.en.png
+docs/assets/spatial-preview.zh-TW.png

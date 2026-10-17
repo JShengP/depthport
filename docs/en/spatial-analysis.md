@@ -2,7 +2,9 @@
 
 [繁體中文](../zh-TW/spatial-analysis.md) · [Home](../../README.md)
 
-**Status: experimental branch `v0.2.0-alpha.1`, NOT a production distance sensor.** All default automated tests use explicit fake depth engines. No CUDA, pretrained model, physical IP camera or distance accuracy is implied.
+**2026-10-17 update:** real four-engine CUDA inference, YOLO Detect/Segment and browser-to-HTTP smoke tests passed on one Ubuntu / RTX 4090 host. Deterministic FakeEngine tests remain a separate layer. Physical RTSP, full Windows model installation and measured depth accuracy are still pending. See the [validation record](validation.md).
+
+**Status: experimental alpha `v0.2.0-alpha.1`, not a production distance sensor.** Default application tests use explicit fake depth engines; the separate real-model checks are recorded above. Passing application CI does not establish physical IP-camera operation or measured distance accuracy.
 
 Open `/spatial` after starting DepthPort. This page shares the existing single source and model. Its backend endpoints are same-origin/localhost only. Use the original web UI at `/` to upload an image or connect an RTSP source. The 0.2 extensions never replace the four existing depth models, the existing exports or the English/Traditional Chinese language switch.
 
