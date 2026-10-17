@@ -14,6 +14,9 @@
 - Added Play/Pause and 0.25×–2× saved-frame playback (1× target 5 frames/s), sequential decode/presentation without skipped frames, and pause/cancellation on seeking, Session changes, tracking reruns and tab hiding. Original snapshot/ID matching remains required.
 - Session 回放新增播放／暫停與速度調整；讀取慢時放慢、不中途跳格，影像解碼後同步更新追蹤框／ID，手動操作與背景分頁會暫停。
 
+- Added a bilingual replay progress slider with current/total saved-frame positions, drag-to-preview and release-to-seek, native keyboard controls, and exact-frame overlay commits. Dragging pauses playback; stale seeks are discarded and failed seeks retain the last complete frame.
+- 回放新增可拖曳進度條，顯示目前／總格數；拖曳暫停、放開跳轉，快速跳轉只採最後目標，影像與追蹤框／ID 一起更新。
+
 # Changelog / 版本紀錄
 
 ## 0.2.0-alpha.1 — 2026-10-17 (experimental Alpha pre-release)

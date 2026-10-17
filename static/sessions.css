@@ -26,3 +26,8 @@ footer{margin:24px 0;color:#acb9c9}@media(max-width:800px){.panels{grid-template
 .overlay-controls{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 
 #playback-status{min-height:24px;color:#cce5f8;margin:6px 0}.rgb-panel>p{font-size:13px}
+
+.replay-progress-control{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:6px 12px;margin:10px 0}
+#replay-progress{width:100%;min-width:0;height:28px;padding:0;margin:0;accent-color:#63d9eb;cursor:pointer}
+#replay-progress:disabled{cursor:default;opacity:.45}
+#replay-progress-text{grid-column:1/-1;min-height:22px;font-size:13px;color:#cce5f8;font-variant-numeric:tabular-nums}

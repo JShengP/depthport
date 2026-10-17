@@ -244,15 +244,15 @@ function makeUI(){
   hide:()=>{document.hidden=true;documentEvents.visibilitychange()},pagehide:()=>windowEvents.pagehide()};
 }
 const flush=async()=>{for(let i=0;i<4;i++)await new Promise(resolve=>setImmediate(resolve))};
-async function startUI({delayTracking=false,delayFrames=false,trackingReport=null}={}){
+async function startUI({delayTracking=false,delayFrames=false,trackingReport=null,frameIndices=[1,2,3]}={}){
  const ui=makeUI();
  ui.respond('/api/sessions/status',{tracking_worker_configured:true});await flush();
  ui.respond('/api/sessions',{sessions:[{session_id:'session-a',label:'A',frame_count:3},{session_id:'session-b',label:'B',frame_count:3}]});await flush();
  if(delayFrames)return ui;
- await finishFrames(ui,'session-a',!delayTracking,trackingReport);return ui;
+ await finishFrames(ui,'session-a',!delayTracking,trackingReport,frameIndices);return ui;
 }
-async function finishFrames(ui,sid,withTracking=true,trackingReport=null){
- ui.respond('/api/sessions/'+sid+'/frames',{frames:[1,2,3].map(index=>({index,engine:'da2-small',units:'relative',captured_at:1}))});await flush();
+async function finishFrames(ui,sid,withTracking=true,trackingReport=null,frameIndices=[1,2,3]){
+ ui.respond('/api/sessions/'+sid+'/frames',{frames:frameIndices.map(index=>({index,engine:'da2-small',units:'relative',captured_at:1}))});await flush();
  ui.respond('/api/sessions/'+sid+'/temporal',{groups:[]});await flush();
  ui.respond('/api/sessions/'+sid+'/consistency',{pairs:[],skipped_pairs:[]});await flush();
  if(withTracking){ui.respond('/api/sessions/'+sid+'/tracking/report.json',trackingReport||report({session_id:sid}));await flush()}
@@ -422,4 +422,164 @@ test('pausing during restart decoding keeps the final image, Object IDs and sele
  assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0003');
  assert.equal(ui.cloudUpdates.length,1);assert.match(e['playback-status'].textContent,/Paused/);
  assert.equal(ui.pending.filter(p=>p.url.endsWith('/replay')).length,2);
+});
+
+function replayRequests(ui){return ui.pending.filter(p=>p.url.endsWith('/replay'))}
+function assertProgress(ui,position,total){
+ const e=ui.elements,progress=e['replay-progress'];
+ assert.equal(progress.value,String(position));
+ const count=new RegExp('\\b'+position+'\\s*(?:/|of)\\s*'+total+'\\b');
+ assert.match(e['replay-progress-text'].textContent,count);
+ assert.match(progress.getAttribute('aria-valuetext'),count);
+}
+async function scrub(ui,position){
+ const progress=ui.elements['replay-progress'];progress.value=String(position);progress.oninput();await flush();
+ return progress.onchange();
+}
+
+test('progress range bounds and availability follow zero, one and many saved frames',async()=>{
+ for(const indices of [[],[1],[1,2,3]]){
+  const ui=await startUI({frameIndices:indices}),progress=ui.elements['replay-progress'];
+  assert.equal(progress.min,'1');assert.equal(progress.max,String(Math.max(1,indices.length)));
+  assert.equal(progress.step,'1');assert.equal(progress.value,'1');
+  assert.equal(progress.disabled,indices.length<2);
+  assert.equal(replayRequests(ui).length,0,'listing frames must not trigger a replay');
+  if(!indices.length)assert.match(ui.elements['replay-progress-text'].textContent,/0\s*(?:\/|of)\s*0/);
+ }
+});
+
+test('progress follows decoded manual, stepped and continuously played frames',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);assertProgress(ui,1,3);
+ const stepped=e['frame-next'].onclick();await flush();
+ ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();
+ await ui.decodeFrame('session-a',2);await stepped;assertProgress(ui,2,3);
+ e['frames-list'].value='1';const selected=e['frames-list'].onchange();await flush();
+ ui.respond('/api/sessions/session-a/frames/1/replay',replayResponse('session-a',1));await flush();
+ await ui.decodeFrame('session-a',1);await selected;assertProgress(ui,1,3);
+ e['playback-play'].onclick();await ui.tick(0);
+ ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();
+ assertProgress(ui,1,3);
+ await ui.decodeFrame('session-a',2);assertProgress(ui,2,3);
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0002');
+ e['playback-pause'].onclick();
+});
+
+test('dragging previews the target, pauses autoplay and does not fetch on every movement',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);
+ e['playback-play'].onclick();await ui.tick(0);
+ ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();
+ const image=e.rgb,depth=e.depth,fetches=ui.pending.length;
+ for(const position of [2,1,3]){e['replay-progress'].value=String(position);e['replay-progress'].oninput();await flush()}
+ assert.equal(ui.pending.length,fetches,'drag previews must not request saved frames');
+ assert.match(e['playback-status'].textContent,/Paused/);assert.equal(e['frames-list'].value,'1');
+ assert.equal(e.rgb,image);assert.equal(e.depth,depth);assert.equal(e.result.hidden,false);
+ for(const text of [e['replay-progress-text'].textContent,e['replay-progress'].getAttribute('aria-valuetext')]){
+  assert.match(text,/\b3\b/,'preview identifies the target');assert.match(text,/\b1\b/,'preview identifies the still-displayed frame');
+ }
+ await ui.decodeFrame('session-a',2);await ui.tick(1000);
+ assert.equal(e.rgb,image);assert.equal(e['frames-list'].value,'1');assert.equal(ui.cloudUpdates.length,1);
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');
+ const released=e['replay-progress'].onchange();await flush();
+ ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await flush();
+ assert.equal(e.rgb,image,'seeking keeps the previous image until both new images decode');
+ ui.decode('data:image/png;base64,session-a-3');await flush();assert.equal(e.rgb,image);
+ ui.decode('data:image/jpeg;base64,session-a-depth-3');await released;
+ assert.equal(e.rgb.src,'data:image/png;base64,session-a-3');assert.equal(e['frames-list'].value,'3');
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0003');assertProgress(ui,3,3);
+});
+
+test('dragging back to the displayed frame finishes without requiring a change event',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);
+ const image=e.rgb,depth=e.depth,fetches=ui.pending.length;
+ e['replay-progress'].value='3';e['replay-progress'].oninput();await flush();
+ e['replay-progress'].value='1';e['replay-progress'].oninput();await flush();
+ assert.equal(e.rgb,image);assert.equal(e.depth,depth);assert.equal(e['frames-list'].value,'1');assertProgress(ui,1,3);
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');
+ assert.equal(e['playback-play'].disabled,false,'returning to the shown frame must not leave a pending drag');
+ assert.equal(ui.pending.length,fetches);
+ await e['replay-progress'].onchange();await flush();
+ assert.equal(ui.pending.length,fetches,'a late change event must not replay an unchanged frame');
+ assertProgress(ui,1,3);assert.equal(e['playback-play'].disabled,false);
+});
+
+test('a progress release maps the ordinal to the saved option index',async()=>{
+ const ui=await startUI({frameIndices:[4,9,12]}),e=ui.elements;
+ const released=scrub(ui,2);await flush();
+ assert.equal(replayRequests(ui).length,1);assert.equal(replayRequests(ui)[0].url,'/api/sessions/session-a/frames/9/replay');
+ ui.respond('/api/sessions/session-a/frames/9/replay',{...replayResponse('session-a',9),total_session_frames:12});await flush();
+ await ui.decodeFrame('session-a',9);await released;
+ assert.equal(e['frames-list'].value,'9');assert.equal(e.rgb.src,'data:image/png;base64,session-a-9');assertProgress(ui,2,3);
+});
+
+test('rapid progress releases keep only the latest decoded image, cloud and Object IDs',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);
+ const first=scrub(ui,2);await flush();
+ ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();
+ const second=scrub(ui,3);await flush();
+ ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await flush();
+ await ui.decodeFrame('session-a',3);await second;
+ const image=e.rgb,depth=e.depth;
+ await ui.decodeFrame('session-a',2);await first;
+ assert.equal(e.rgb,image);assert.equal(e.depth,depth);assert.equal(e['frames-list'].value,'3');assertProgress(ui,3,3);
+ assert.equal(ui.cloudUpdates.length,2);assert.equal(ui.cloudUpdates[1][0],'points-session-a-3');
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0003');
+});
+
+test('switching Session clears a drag and cancels a pending progress seek',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);
+ const seek=scrub(ui,2);await flush();
+ ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();
+ e['replay-progress'].value='3';e['replay-progress'].oninput();
+ e['sessions-list'].value='session-b';const switched=e['sessions-list'].onchange();await flush();
+ assert.equal(e['replay-progress'].disabled,true);assert.equal(e['replay-progress'].value,'1');
+ assert.equal(e.result.hidden,true);
+ await ui.decodeFrame('session-a',2);await seek;
+ await finishFrames(ui,'session-b',true,report({session_id:'session-b'}));await switched;
+ assert.equal(e['replay-progress'].value,'1');assert.equal(e['replay-progress'].max,'3');assert.equal(e['replay-progress'].disabled,false);
+ assert.equal(e.result.hidden,true);assert.equal(ui.cloudUpdates.length,1,'old Session must not present after the switch');
+ const next=scrub(ui,2);await flush();
+ ui.respond('/api/sessions/session-b/frames/2/replay',replayResponse('session-b',2));await flush();
+ await ui.decodeFrame('session-b',2);await next;
+ assert.equal(e.rgb.src,'data:image/png;base64,session-b-2');assert.equal(e['frames-list'].value,'2');assertProgress(ui,2,3);
+});
+
+test('keyboard-style Home and End changes seek only the bounded endpoint frames',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);
+ for(const position of [3,1]){
+  const before=replayRequests(ui).length,released=scrub(ui,position);await flush();
+  assert.equal(replayRequests(ui).length,before+1);
+  ui.respond('/api/sessions/session-a/frames/'+position+'/replay',replayResponse('session-a',position));await flush();
+  await ui.decodeFrame('session-a',position);await released;assertProgress(ui,position,3);
+  assert.equal(e['frames-list'].value,String(position));
+  assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-000'+position);
+ }
+});
+
+test('invalid progress values cannot request or present an out-of-bounds frame',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);
+ const fetches=ui.pending.length,image=e.rgb;
+ for(const value of ['', 'NaN','Infinity','1.5','0','-1','4','2x','null']){
+  e['replay-progress'].value=value;e['replay-progress'].oninput();await flush();
+  await e['replay-progress'].onchange();await flush();
+  assert.equal(ui.pending.length,fetches,'invalid progress '+JSON.stringify(value));
+  assert.equal(e.rgb,image);assert.equal(e['frames-list'].value,'1');assertProgress(ui,1,3);
+ }
+});
+
+test('failed seek fetch or image decoding restores coherent displayed progress and IDs',async()=>{
+ for(const failure of ['fetch','decode']){
+  const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);
+  const image=e.rgb,depth=e.depth,released=scrub(ui,3);await flush();
+  if(failure==='fetch')ui.respond('/api/sessions/session-a/frames/3/replay',{detail:'Saved frame unavailable'},false,404);
+  else{
+   ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await flush();
+   ui.decode('data:image/png;base64,session-a-3',Error('Saved image decode failed'));
+   ui.decode('data:image/jpeg;base64,session-a-depth-3');
+  }
+  await released;await flush();
+  assert.equal(e.rgb,image);assert.equal(e.depth,depth);assert.equal(e.result.hidden,false);
+  assert.equal(e['frames-list'].value,'1');assertProgress(ui,1,3);assert.equal(ui.cloudUpdates.length,1);
+  assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');
+  assert.match(e.status.textContent,/Request failed/);
+ }
 });

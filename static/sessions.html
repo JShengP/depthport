@@ -24,6 +24,9 @@
 <button id="frame-next" data-i="nextFrame" disabled>Next frame</button>
 <label class="overlay-toggle"><input type="checkbox" id="overlay-enabled" checked><span data-i="overlayToggle">Tracking boxes and Object IDs</span></label></div>
 <p id="playback-status" role="status"></p><p data-i="playbackNote">Saved-frame playback: 1× targets 5 frames/s; loading may slow it down.</p>
+<div class="replay-progress-control"><label for="replay-progress" data-i="replayPosition">Playback progress</label>
+<input id="replay-progress" type="range" min="1" max="1" step="1" value="1" disabled aria-describedby="replay-progress-text">
+<output id="replay-progress-text" for="replay-progress" aria-live="off">0 / 0</output></div>
 <div class="rgb-stage"><img id="rgb" alt="Saved aligned RGB"><svg id="tracking-overlay" role="img" aria-label="Tracking boxes and Object IDs"></svg></div>
 <p id="overlay-status" role="status"></p></figure>
 <figure><img id="depth" alt="Saved depth preview"><figcaption data-i="depth">Depth preview</figcaption></figure>

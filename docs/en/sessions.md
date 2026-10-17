@@ -100,3 +100,11 @@ Replay a frame (or choose **Replay analysed frames**), then use **Play / Pause**
 Only one automatic replay request/decode runs at a time. The last fully presented RGB/depth/IDs remain visible while the next saved frame loads and decodes; the next image, matching overlay and point cloud are then presented together. Pause keeps the currently displayed frame and invalidates any pending automatic presentation. Changing speed applies to subsequent scheduling without changing tracking IDs or source timestamps.
 
 Playback pauses when you seek, step, change Sessions, refresh, capture, create a Session, rerun tracking, hide the tab or leave the page. It stops at the last saved frame; pressing Play there starts again at the first saved frame. Playback follows the saved-frame list, including frames outside the latest tracking report: those frames show the existing unanalysed/missing-result message, never another frame's IDs. Replay does not record a camera, run a model or upload data.
+
+## Drag the replay progress bar
+
+The **Playback progress** slider shows the displayed saved-frame position and total count, and follows Play/Pause, Previous/Next and the saved-frame selector. Dragging pauses playback and previews the target alongside the still-displayed position. Release to load that frame; its RGB/depth, exact matching boxes/IDs and point cloud appear together once decoded. Loading or failed seeks do not relabel the old image as the target frame.
+
+The bar uses saved-frame order, not elapsed video time or the source `frame_id`. It covers the entire Session, including frames outside the tracking report; the usual unanalysed/missing-result message applies there. Use native keyboard arrows and Home/End for precise movement. The bar is disabled for zero/one saved frame. Dragging back to the displayed frame requires no new request.
+
+Drag movement itself sends no replay requests. New release requests invalidate older pending results; Session changes and page hiding cancel pending previews. A failed jump leaves the last displayed frame, IDs and committed progress intact and reports an error. The progress readout and accessible slider text are available in English and Traditional Chinese; no replay data is uploaded or added to the public source archive.
