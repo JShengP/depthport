@@ -2762,3 +2762,49 @@ test('failed interval jumps keep the complete snapshot and retry, stale Session 
  const ui=await startUI(),e=ui.elements;await showSaved(ui,2);configureLoop(ui,1,3);pressBookmarkKey(ui,'B',{shiftKey:true});await flush();ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await flush();e['sessions-list'].value='session-b';const switched=e['sessions-list'].onchange();await flush();for(const key of ['A','B'])assert.equal(pressBookmarkKey(ui,key,{shiftKey:true}).defaultPrevented,false);await finishFrames(ui,'session-b');await switched;await ui.decodeFrame('session-a',3);assert.equal(e.result.hidden,true);assert.equal(ui.cloudUpdates.length,1);
  const html=fs.readFileSync(path.join(root,'static/sessions.html'),'utf8');assert.match(html,/data-i="shortcutHelpBounds"/);assert.match(html,/<kbd>Shift \+ A<\/kbd> \/ <kbd>Shift \+ B<\/kbd><\/dt><dd data-i="shortcutHelpLoopJump">/);assert.match(sessionsSource,/shortcutHelpLoopJump:"Pause and jump to the configured/);assert.match(sessionsSource,/shortcutHelpLoopJump:"暫停並跳到已設定的/);
 });
+
+test('O toggles the existing overlay checkbox and exact-frame IDs while preserving paused review state without requests or writes',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence(),bookmarks:[bookmarkRecord(2,{note:'saved review',tags:['crossing']})]}),e=ui.elements;await showSaved(ui,2);configureLoop(ui,1,3);filterBookmarkTag(ui,'crossing');searchBookmarkNotes(ui,'saved review');editBookmark(ui,'synthetic overlay draft',['occlusion']);e['playback-speed'].value='.5';e['playback-speed'].onchange();e.result.focus();const image=e.rgb,depth=e.depth,calls=ui.pending.length,clouds=ui.cloudUpdates.length;
+ assert.equal(e['overlay-enabled'].getAttribute('aria-keyshortcuts'),'o');assert.equal(pressBookmarkKey(ui,'o',{target:e.result}).defaultPrevented,true);assert.equal(e['overlay-enabled'].checked,false);assert.equal(e['tracking-overlay'].children.length,0);assert.match(e['overlay-status'].textContent,/hidden/);
+ assert.equal(pressBookmarkKey(ui,'O',{target:e.result}).defaultPrevented,true);assert.equal(e['overlay-enabled'].checked,true);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0002');assert.match(e['overlay-status'].textContent,/Tracked detections: 1.*#2/);
+ assertShownFrame(ui,2);assert.equal(e.rgb,image);assert.equal(e.depth,depth);assert.equal(ui.cloudUpdates.length,clouds);assert.match(e['playback-status'].textContent,/Paused.*0\.5×/);assertLoopValues(ui,1,3,true);assert.equal(e['bookmark-note'].value,'synthetic overlay draft');assert.equal(e['bookmark-tag-occlusion'].checked,true);assert.equal(e['bookmark-filter-tag'].value,'crossing');assert.equal(e['bookmark-search'].value,'saved review');assert.equal(ui.pending.length,calls);assert.equal(bookmarkWrites(ui).length,0);
+});
+
+test('O during autoplay or manual decode neither cancels nor duplicates loading and the new frame respects the display preference',async()=>{
+ for(const mode of ['autoplay','manual']){
+  const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);e.result.focus();let pending;
+  if(mode==='autoplay'){e['playback-play'].onclick();await ui.tick(0)}else{e['frames-list'].value='2';pending=e.replay.onclick();await flush()}
+  ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();ui.decode('data:image/png;base64,session-a-2');await flush();const calls=replayRequests(ui).length;
+  assert.equal(pressBookmarkKey(ui,'o',{target:e.result}).defaultPrevented,true);assert.equal(e['overlay-enabled'].checked,false);assert.equal(e['tracking-overlay'].children.length,0);assert.match(e['playback-status'].textContent,mode==='autoplay'?/Playing/:/Paused/);assert.equal(replayRequests(ui).length,calls);
+  ui.decode('data:image/jpeg;base64,session-a-depth-2');await flush();if(pending)await pending;assertShownFrame(ui,2);assert.equal(e['tracking-overlay'].children.length,0);assert.match(e['overlay-status'].textContent,/hidden/);
+  pressBookmarkKey(ui,'O',{target:e.result});assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0002');assert.equal(replayRequests(ui).length,calls);
+  if(mode==='autoplay'){await ui.tick(199);assert.equal(replayRequests(ui).length,calls);await ui.tick(1);await completeReplay(ui,3);assertShownFrame(ui,3);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0003');e['playback-pause'].onclick()}
+ }
+});
+
+test('O ignores editors, IME, modified/repeated/handled/hidden keys, shortcut opt-out, disabled checkbox and modal focus',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showSaved(ui,2);e.result.focus();const calls=ui.pending.length;
+ const editors=[e['bookmark-note'],e['bookmark-search'],e['overlay-enabled'],e['playback-speed'],e['loop-start'],e['frames-list'],e['replay-progress'],e.label];for(const role of ['textbox','searchbox','combobox','slider','spinbutton','listbox','grid','tablist']){const editor=new Element('div');editor.setAttribute('role',role);editors.push(editor)}const editable=new Element('div');editable.setAttribute('contenteditable','true');editors.push(editable);
+ for(const key of ['o','O']){
+  for(const target of editors){assert.equal(pressBookmarkKey(ui,key,{target}).defaultPrevented,false);const child=new Element('span');child.parentElement=target;assert.equal(pressBookmarkKey(ui,key,{composedPath:()=>[child,target]}).defaultPrevented,false)}
+  e['bookmark-note'].focus();assert.equal(pressBookmarkKey(ui,key,{target:e.result}).defaultPrevented,false);e['bookmark-search'].focus();assert.equal(pressBookmarkKey(ui,key,{target:e.result}).defaultPrevented,false);e.result.focus();
+  for(const props of [{ctrlKey:true},{altKey:true},{metaKey:true},{shiftKey:true},{repeat:true},{isComposing:true},{keyCode:229}])assert.equal(pressBookmarkKey(ui,key,props).defaultPrevented,false);assert.equal(pressBookmarkKey(ui,key,{defaultPrevented:true}).defaultPrevented,true);
+  ui.dispatch('compositionstart');assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false);ui.dispatch('compositionend');ui.hide();assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false);ui.document.hidden=false;
+ }
+ e['bookmark-shortcuts-enabled'].checked=false;e['bookmark-shortcuts-enabled'].onchange();assert.equal(e['overlay-enabled'].getAttribute('aria-keyshortcuts'),'');assert.equal(pressBookmarkKey(ui,'o').defaultPrevented,false);e['bookmark-shortcuts-enabled'].checked=true;e['bookmark-shortcuts-enabled'].onchange();assert.equal(e['overlay-enabled'].getAttribute('aria-keyshortcuts'),'o');e['shortcut-help-open'].onclick();assert.equal(pressBookmarkKey(ui,'o',{target:e['shortcut-help-close']}).defaultPrevented,false);e['shortcut-help-close'].onclick();e['overlay-enabled'].disabled=true;assert.equal(pressBookmarkKey(ui,'o',{target:e.result}).defaultPrevented,false);e['overlay-enabled'].disabled=false;
+ assert.equal(e['overlay-enabled'].checked,true);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0002');assert.equal(ui.pending.length,calls);assert.equal(bookmarkWrites(ui).length,0);
+});
+
+test('enabling O never invents boxes for missing, unanalysed, mismatched or empty tracking reports',async()=>{
+ const cases=[{delayTracking:true}, {trackingReport:report({frames:[]})}, {trackingReport:report({frames:[{...report().frames[0],snapshot_sha256:otherHash}]})}, {trackingReport:report({frames:[{...report().frames[0],objects:[]}]})}];
+ for(const options of cases){
+  const ui=await startUI(options),e=ui.elements;await showFirst(ui);e.result.focus();const calls=ui.pending.length;assert.equal(e['tracking-overlay'].children.length,0);const status=e['overlay-status'].textContent;
+  assert.equal(pressBookmarkKey(ui,'o').defaultPrevented,true);assert.equal(e['tracking-overlay'].children.length,0);assert.match(e['overlay-status'].textContent,/hidden/);assert.equal(pressBookmarkKey(ui,'O').defaultPrevented,true);assert.equal(e['tracking-overlay'].children.length,0);assert.equal(e['overlay-status'].textContent,status);assert.equal(ui.pending.length,calls);assert.equal(bookmarkWrites(ui).length,0);
+ }
+});
+
+test('O can preselect overlays before replay, uses native checkbox behavior and updates bilingual status/help',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;assert.equal(e.result.hidden,true);const calls=ui.pending.length;assert.equal(pressBookmarkKey(ui,'o').defaultPrevented,true);assert.equal(e['overlay-enabled'].checked,false);assert.equal(ui.pending.length,calls);await showFirst(ui);assert.equal(e['tracking-overlay'].children.length,0);assert.match(e['overlay-status'].textContent,/hidden/);
+ e.lang.value='zh-TW';e.lang.onchange();assert.match(e['overlay-status'].textContent,/已隱藏/);e['overlay-enabled'].checked=true;e['overlay-enabled'].onchange();assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');assert.equal(pressBookmarkKey(ui,'o',{target:e['overlay-enabled']}).defaultPrevented,false);assert.equal(e['overlay-enabled'].checked,true);assert.equal(bookmarkWrites(ui).length,0);
+ const html=fs.readFileSync(path.join(root,'static/sessions.html'),'utf8');assert.match(html,/<kbd>O<\/kbd><\/dt><dd data-i="shortcutHelpOverlay">/);assert.match(sessionsSource,/shortcutHelpOverlay:"Toggle tracking boxes and Object IDs/);assert.match(sessionsSource,/shortcutHelpOverlay:"切換追蹤框與 Object ID/);
+});

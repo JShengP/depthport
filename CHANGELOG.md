@@ -1,5 +1,8 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 
+- Added **O** to toggle tracking boxes/Object IDs through the existing overlay checkbox without changing playback or pending loads. Updated bilingual help and shortcut metadata; input/IME/modal guards and exact-snapshot matching remain in effect.
+- 新增 **O** 切換追蹤框／Object ID 疊圖，沿用既有核取方塊，不改變播放或待載入影格；更新雙語說明與快捷鍵提示，保留輸入／組字／面板防護及精確快照驗證。
+
 - Added **Shift+A / Shift+B** to pause and jump to valid configured A/B endpoints, including with looping off, while plain A/B still set bounds. Bilingual help, review-state retention and input/IME/modal protections are included.
 - 新增 **Shift＋A／Shift＋B** 暫停並跳至有效 A／B 端點，循環關閉也適用，單按 A／B 仍設定區間；更新雙語說明並保留檢查內容與輸入／組字／面板防護。
 
