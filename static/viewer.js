@@ -89,13 +89,14 @@ class CloudViewer {
       this._makeGrid();
       gl.enable(gl.DEPTH_TEST);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
     }
-    this.points=0;this.posData=null;this.originalColors=null;this.displayColors=null;this.colormode='rgb';
+    this.disposed=false;this.points=0;this.posData=null;this.originalColors=null;this.displayColors=null;this.colormode='rgb';
     this.size=3;this.exaggeration=1;this.autoSpin=false;this.target=[0,0,-3];this.radius=8.5;
     this.homeTarget=[0,0,-3];this.homeRadius=8.5;this.depthCenter=-3;this.sceneScale=8.5;this.colorRange=[0.1,20];
     this.theta=0.0;this.phi=Math.PI/2.12;this._drag=null;this._last2D=0;
     this._events();
     this._render=this._render.bind(this);requestAnimationFrame(this._render);
   }
+  destroy(){this.disposed=true;}
   reset(){this.target=this.homeTarget.slice();this.radius=this.homeRadius;this.theta=0;this.phi=Math.PI/2.12;}
   setPoints(positions,colors,fit=false){
     const gl=this.gl;this.posData=positions;this.originalColors=colors;this.points=positions.length/3;
@@ -184,6 +185,7 @@ class CloudViewer {
     el.addEventListener('wheel',e=>{e.preventDefault();this.radius=Math.max(this.homeRadius*.02,Math.min(this.homeRadius*30,this.radius*Math.exp(e.deltaY*.0015)));},{passive:false});
   }
   _render(){
+    if(this.disposed)return;
     const gl=this.gl,canvas=this.canvas;
     const dpr=this.is2D?1:Math.min(window.devicePixelRatio||1,2);
     const ww=Math.max(2,Math.round(canvas.clientWidth*dpr)),hh=Math.max(2,Math.round(canvas.clientHeight*dpr));

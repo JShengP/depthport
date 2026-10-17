@@ -1,5 +1,15 @@
 # Changelog / 版本紀錄
 
+## 0.2.0-alpha.1 — 2026-10-17 (experimental alpha; no v0.2 release tag)
+
+- Added Spatial Analysis Lab (`/spatial`) with clickable point inspection, stale-frame detection, native-unit four-model sequential comparison, YOLO Detect/Segment 2D→3D object point subsets, and camera calibration / candidate-plane / independent validation tools.
+- Added deterministic comparison archives and current-frame `spatial_analysis.json` in the existing export ZIP, keeping all original raw depth and geometry outputs.
+- Preserved the four depth adapters, RTSP source and bilingual UI. Added attributed real-inference screenshots, curated Ubuntu / RTX 4090 smoke results, and a regression fix for comparison-cloud camera fitting. No FPS, physical RTSP or field distance accuracy is asserted.
+
+- 新增 `/spatial` 點位查詢、四模型同圖依序比較、YOLO 物件語意融合、棋盤格標定與獨立誤差驗證。
+- 比較包與同影格 ZIP 保留原始深度、單位與追溯資訊。原有四模型／RTSP／雙語／授權不變。
+- 此版本為實驗性 Alpha，尚未建立 v0.2 Release／Tag；2026-10-17 已在 Ubuntu／RTX 4090 通過真單圖 CUDA、四模型與 YOLO 語意 smoke test，實體 RTSP 與測距真值仍未驗證。
+
 ## 0.1.0-alpha.1 — 2026-10-16
 
 First independently named **DepthPort** source-release candidate, derived from a four-model prototype. This starts a public-facing version line; it is not an upstream model release.

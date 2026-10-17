@@ -7,7 +7,7 @@
 
 [English](README.md) · 繁體中文
 
-**實驗性 Alpha** · **本地執行** · **英文／繁體中文** · **AGPL-3.0-only**
+**實驗性 0.2 Alpha** · **本地執行** · **英文／繁體中文** · **AGPL-3.0-only**
 
 </div>
 
@@ -19,18 +19,20 @@ DepthPort 整合既有預訓練模型，**不是新的深度網路或研究模�
 
 *截圖來自實際 UI 的合成測試資料；不是由相機或 AI 模型產生的點雲。*
 
-> **目前發布版：v0.1.0-alpha.1。** `main` 仍是原本的檢視器；這裡的[驗證紀錄](docs/zh-TW/validation.md)記錄 2026-10-16 的初版原始碼。另行開發的 v0.2 已在 Ubuntu／RTX 4090 通過真單圖 CUDA smoke test，見下方預覽。實體 RTSP、測距精度及正式產品驗收仍未完成。
+> **狀態：** 實驗性原始碼 Alpha。2026-10-17 已在全新 Ubuntu 24.04／Python 3.12 環境完成四套真深度模型 CUDA smoke test、YOLO 偵測／分割融合及真正瀏覽器 HTTP 操作，輸入為同一張公開範例。這只證明鏈路可執行，不代表測距精度、實體相機運作或正式硬體 benchmark。Windows 完整模型安裝、實體 RTSP、長時間穩定性與 NVIDIA WebGL 繪圖仍未驗證。詳見[驗證紀錄](docs/zh-TW/validation.md)。
 
-## 開發版預覽 — 空間分析 v0.2
+## v0.2 新功能 — 空間分析工作台
 
-`main` 目前保留原本的檢視器版本；另有 [v0.2 開發分支](https://github.com/JShengP/depthport/tree/feature/spatial-analysis-v0.2)，加入像素 XYZ、多模型比較與 YOLO 2D→3D 融合。[最新驗證紀錄](https://github.com/JShengP/depthport/blob/feature/spatial-analysis-v0.2/docs/zh-TW/validation.md)包含 Ubuntu／RTX 4090 的真單圖 CUDA 測試，結果適用該開發分支。功能 PR 為 [#5](https://github.com/JShengP/depthport/pull/5)。
+啟動本地服務後開啟 **http://127.0.0.1:8000/spatial**，可進行像素深度／XYZ 檢查、同圖四模型依序比較、YOLO 偵測／分割 2D→3D 融合，以及相機標定、候選平面與獨立量測誤差記錄。原本四模型、RTSP、主檢視器、匯出及雙語操作均保留。真單圖 CUDA 推論已在上述主機驗證；實體相機與距離精度尚未驗證。
+
+[English implementation & acceptance](docs/en/spatial-analysis.md) · [繁體中文實作與驗收](docs/zh-TW/spatial-analysis.md)
 
 <details>
 <summary>展開 v0.2 完整截圖（真模型推論）</summary>
 
-![v0.2 開發版：真模型推論的空間分析預覽](docs/assets/spatial-preview.zh-TW.png)
+![空間分析工作台：真模型深度比較與 YOLO 分割](docs/assets/spatial-preview.zh-TW.png)
 
-*此圖來自 v0.2，功能尚未包含在本 `main` 版本。使用公開 [Ultralytics 範例](https://github.com/ultralytics/assets/blob/53d4e2a8fd15f473c29a148c317a8477be559327/im/bus.jpg)，不是實體相機或測距精度示範。[圖像來源](docs/assets/README.md)。*
+*公開 [Ultralytics 公車範例](https://github.com/ultralytics/assets/blob/53d4e2a8fd15f473c29a148c317a8477be559327/im/bus.jpg)的真模型推論，非實體 IPCam 或測距精度驗證。[截圖來源](docs/assets/README.md)。*
 
 </details>
 
@@ -136,7 +138,7 @@ node tests/test_i18n.cjs
 python tools/check_release.py
 ```
 
-CI 執行確定性的替身測試，不下載預訓練權重。CI 通過**不等於四模型硬體 benchmark**；這份原始碼快照也不宣稱已在 GitHub 遠端 CI 通過。
+CI 執行確定性的替身測試，不下載預訓練權重。CI 通過**不等於四模型硬體 benchmark**；目前分支與 Commit 的執行結果見 [GitHub Actions](https://github.com/JShengP/depthport/actions/workflows/ci.yml)。
 
 [貢獻指南](CONTRIBUTING.md)・[Roadmap](ROADMAP.md)・[版本紀錄](CHANGELOG.md)・[發布檢查](docs/zh-TW/publishing.md)
 

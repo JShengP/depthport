@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 import shutil
+import re
 import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -23,6 +24,7 @@ def main() -> None:
     for name in ('style.css', 'viewer.js', 'i18n.js', 'main.js', 'favicon.svg'):
         shutil.copyfile(ROOT/'static'/name, out/'static'/name)
     html = (ROOT/'static/index.html').read_text(encoding='utf-8')
+    html = re.sub(r'<div[^>]*id="spatialLinkBox".*?</div>\s*', '', html, flags=re.S)
     html = html.replace('<html lang="en">', '<html lang="en" data-demo-only="true">')
     if 'data-demo-only="true"' not in html:
         raise SystemExit('The static demo marker was not applied.')
