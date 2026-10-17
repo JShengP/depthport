@@ -1,7 +1,7 @@
 # v0.3 research prototype — Manual Sessions & Offline Replay
 [繁體中文](../zh-TW/sessions.md) · [Home](../../README.md)
 
-**Status: experimental development branch, NOT yet released or hardware verified.** The v0.2 Spatial Analysis code remains integrated; v0.3 adds a **manual, opt-in, local-only** archive viewer. It does not record RTSP video continuously, run model inference on saved data, or offer true pixel-tracking/temporal geometry fusion.
+**Status: experimental development branch, NOT yet released or hardware verified.** The v0.2 Spatial Analysis code remains integrated; v0.3 adds a **manual, opt-in, local-only** archive viewer. It does not record RTSP video continuously or perform pose-compensated pixel/3D tracking. Replay itself never reruns depth inference; a separate, explicitly requested offline tracking action can run YOLO Detect/Segment on saved RGB frames.
 
 ## Enable (local machine only)
 
