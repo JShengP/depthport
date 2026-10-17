@@ -68,3 +68,14 @@ footer{margin:24px 0;color:#acb9c9}@media(max-width:800px){.panels{grid-template
 .bookmark-shortcut-help{flex-basis:100%;margin:0;font-size:13px;color:#cce5f8}
 
 #result:focus{outline:2px solid #63d9eb;outline-offset:3px}
+
+#shortcut-help-dialog{width:min(720px,calc(100vw - 32px));max-height:85vh;padding:0;border:1px solid #7794b3;border-radius:12px;background:var(--panel);color:var(--text);overflow:auto}
+#shortcut-help-dialog::backdrop{background:rgb(4 9 16 / .72)}
+.shortcut-help-header{position:sticky;top:0;padding:12px 18px;background:var(--panel);border-bottom:1px solid var(--edge);flex-wrap:nowrap}
+.shortcut-help-header h2{margin:0;font-size:21px}.shortcut-help-header button{flex-shrink:0;margin:0}
+.shortcut-help-content{padding:0 18px 18px;font-size:14px}.shortcut-help-content>p{color:#cce5f8}
+.shortcut-help-group h3{font-size:16px;margin:18px 0 8px}.shortcut-help-group dl{margin:0}
+.shortcut-help-group dl>div{display:grid;grid-template-columns:150px minmax(0,1fr);gap:8px;padding:7px 0;border-top:1px solid var(--edge)}
+.shortcut-help-group dt,.shortcut-help-group dd{margin:0}.shortcut-help-group kbd{font:inherit;font-size:13px;border:1px solid #7794b3;border-radius:4px;padding:1px 5px;white-space:nowrap}
+.shortcut-help-scope{border-top:1px solid var(--edge);padding-top:12px;margin-bottom:0;line-height:1.6}
+@media(max-width:520px){.shortcut-help-group dl>div{grid-template-columns:110px minmax(0,1fr)}.shortcut-help-header{padding:12px}.shortcut-help-content{padding:0 12px 12px}}

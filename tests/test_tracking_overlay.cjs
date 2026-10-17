@@ -15,7 +15,7 @@ const sessionsSource=fs.readFileSync(path.join(root,'static/sessions.js'),'utf8'
 class Element {
  constructor(tag='div'){
   this.tagName=tag;this.children=[];this.attrs={};this.dataset={};this._text='';
-  this._value='';this._selectedIndex=-1;this.hidden=false;this.disabled=false;
+  this._value='';this._selectedIndex=-1;this.hidden=false;this.disabled=false;this.open=false;
   this.checked=false;this.complete=true;this.naturalWidth=640;this.naturalHeight=480;this.clientWidth=320;
  }
  setAttribute(key,value){this.attrs[key]=String(value)}
@@ -47,6 +47,9 @@ class Element {
   for(let node=this;node;node=node.parentElement)if(matches(node))return node;
   return null;
  }
+ // Model only the native dialog contract; actual focus trapping/Esc are browser-tested.
+ showModal(){this.modalFocus=this.ownerDocument.activeElement;this.open=true;this.modalShows=(this.modalShows||0)+1;this.ownerDocument.getElementById('shortcut-help-close').focus()}
+ close(){if(!this.open)return;this.open=false;this.modalCloses=(this.modalCloses||0)+1;this.modalFocus?.focus();this.onclose?.()}
  getContext(){return null}
  scrollIntoView(options){(this.scrollCalls??=[]).push(options)}
  focus(options){this.focused=true;(this.focusCalls??=[]).push(options);if(this.ownerDocument)this.ownerDocument.activeElement=this;this.onfocus?.()}
@@ -2432,4 +2435,87 @@ test('the replay return target is keyboard-focusable and named by its visible he
  const markup=fs.readFileSync(path.join(root,'static/sessions.html'),'utf8'),result=markup.match(/<section\b[^>]*\bid="result"[^>]*>/)?.[0];
  assert.ok(result,'replay result section exists');assert.match(result,/\btabindex="-1"/);assert.match(result,/\baria-labelledby="replay-title"/);
  assert.match(markup,/<h2\b[^>]*\bid="replay-title"[^>]*data-i="view"/);
+});
+
+function pressHelpKey(ui,properties={}){return pressBookmarkKey(ui,'?',properties)}
+function assertHelpOpen(ui){assert.equal(ui.elements['shortcut-help-dialog'].open,true);assert.equal(ui.document.activeElement,ui.elements['shortcut-help-close']);assert.equal(ui.elements['shortcut-help-open'].getAttribute('aria-expanded'),'true');assert.match(ui.elements['playback-status'].textContent,/Paused|已暫停/)}
+
+test('question mark including Shift opens and closes help before any frame is displayed',async()=>{
+ const ui=await startUI(),e=ui.elements,calls=ui.pending.length;e['shortcut-help-open'].focus();
+ assert.equal(e['shortcut-help-dialog'].open,false);assert.equal(e['shortcut-help-open'].getAttribute('aria-keyshortcuts'),'?');
+ assert.equal(pressHelpKey(ui,{shiftKey:true}).defaultPrevented,true);assertHelpOpen(ui);assert.equal(e['shortcut-help-dialog'].modalShows,1);
+ assert.equal(pressHelpKey(ui,{target:e['shortcut-help-close']}).defaultPrevented,true);assert.equal(e['shortcut-help-dialog'].open,false);assert.equal(ui.document.activeElement,e['shortcut-help-open']);
+ assert.equal(e['shortcut-help-open'].getAttribute('aria-expanded'),'false');assert.equal(ui.pending.length,calls);assert.equal(bookmarkWrites(ui).length,0);
+});
+
+test('help uses a native labeled modal and lists every playback/bookmark/note action',()=>{
+ const html=fs.readFileSync(path.join(root,'static/sessions.html'),'utf8');
+ assert.match(html,/<dialog id="shortcut-help-dialog" aria-labelledby="shortcut-help-title" aria-describedby="shortcut-help-intro">/);
+ assert.match(html,/<button id="shortcut-help-close"[^>]*autofocus/);
+ for(const key of ['shortcutHelpSpace','shortcutHelpFrames','shortcutHelpBounds','shortcutHelpLoop','shortcutHelpBookmarks','shortcutHelpMark','shortcutHelpSave','shortcutHelpEscape','shortcutHelpEnter','shortcutHelpScope'])assert.ok(html.includes('data-i="'+key+'"'),key);
+ assert.match(html,/aria-haspopup="dialog" aria-controls="shortcut-help-dialog"/);
+});
+
+test('question mark is ordinary text in notes/search and cannot bypass focused or custom editors',async()=>{
+ const ui=await startUI(),e=ui.elements;await showFirst(ui);const calls=ui.pending.length;
+ const controls=[e['bookmark-note'],e['bookmark-search'],e['frames-list'],e['replay-progress'],e.label];
+ for(const role of ['textbox','searchbox','combobox','slider','listbox']){const editor=new Element('div');editor.setAttribute('role',role);controls.push(editor)}
+ const editable=new Element('div');editable.setAttribute('contenteditable','true');controls.push(editable);
+ for(const target of controls){assert.equal(pressHelpKey(ui,{target,shiftKey:true}).defaultPrevented,false);const child=new Element('span');target.append(child);assert.equal(pressHelpKey(ui,{composedPath:()=>[child,target],shiftKey:true}).defaultPrevented,false)}
+ e['bookmark-note'].focus();assert.equal(pressHelpKey(ui,{target:e.result}).defaultPrevented,false);e['bookmark-search'].focus();assert.equal(pressHelpKey(ui,{target:e['shortcut-help-open']}).defaultPrevented,false);
+ assert.equal(e['shortcut-help-dialog'].open,false);assert.equal(ui.pending.length,calls);assert.equal(bookmarkWrites(ui).length,0);
+});
+
+test('help ignores composition, modified, repeated, handled, hidden and non-question keys',async()=>{
+ const ui=await startUI(),e=ui.elements;await showFirst(ui);
+ for(const props of [{ctrlKey:true},{altKey:true},{metaKey:true},{repeat:true},{isComposing:true},{keyCode:229}])assert.equal(pressHelpKey(ui,props).defaultPrevented,false);
+ assert.equal(pressHelpKey(ui,{defaultPrevented:true}).defaultPrevented,true);
+ for(const key of ['/','？','Dead','Process'])assert.equal(pressBookmarkKey(ui,key,{shiftKey:true}).defaultPrevented,false);
+ ui.dispatch('compositionstart');assert.equal(pressHelpKey(ui).defaultPrevented,false);ui.dispatch('compositionend');ui.hide();assert.equal(pressHelpKey(ui).defaultPrevented,false);
+ ui.document.hidden=false;assert.equal(e['shortcut-help-dialog'].open,false);assert.equal(pressHelpKey(ui,{shiftKey:true}).defaultPrevented,true);assertHelpOpen(ui);
+});
+
+test('opening help cancels partial autoplay and keeps the previous complete image and IDs until an explicit resume',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);e.result.focus();e['playback-play'].onclick();await ui.tick(0);
+ ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();ui.decode('data:image/png;base64,session-a-2');await flush();
+ assert.equal(pressHelpKey(ui).defaultPrevented,true);assertHelpOpen(ui);ui.decode('data:image/jpeg;base64,session-a-depth-2');await ui.tick(1000);
+ assertShownFrame(ui,1);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');assert.equal(ui.cloudUpdates.length,1);
+ e['shortcut-help-close'].onclick();assert.equal(ui.document.activeElement,e.result);assert.match(e['playback-status'].textContent,/Paused/);assert.equal(pressBookmarkKey(ui,' ',{target:e.result}).defaultPrevented,true);await ui.tick(0);await completeReplay(ui,2);assertShownFrame(ui,2);e['playback-pause'].onclick();
+});
+
+test('help cancels a delayed progress seek and a bookmark jump without replacing the displayed snapshot',async()=>{
+ for(const mode of ['seek','bookmark']){
+  const ui=await startUI({bookmarks:[bookmarkRecord(3)],trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);e.result.focus();
+  const pending=mode==='seek'?scrub(ui,3):e['bookmark-next'].onclick();await flush();ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await flush();
+  assert.equal(pressHelpKey(ui,{target:e.result}).defaultPrevented,true);assertHelpOpen(ui);await ui.decodeFrame('session-a',3);await pending;
+  assertShownFrame(ui,1);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');assert.equal(bookmarkWrites(ui).length,0);e['shortcut-help-close'].onclick();assert.equal(e['playback-play'].disabled,false);
+ }
+});
+
+test('an open help modal never triggers background replay, loop, bookmark or note-save shortcuts',async()=>{
+ const ui=await startUI({bookmarks:[bookmarkRecord(1),bookmarkRecord(3)]}),e=ui.elements;await showSaved(ui,2);configureLoop(ui,1,3);e.result.focus();pressHelpKey(ui);const calls=ui.pending.length;
+ for(const key of [' ','ArrowLeft','ArrowRight','[',']','a','b','l','m'])assert.equal(pressBookmarkKey(ui,key,{target:e['shortcut-help-close']}).defaultPrevented,false,key);
+ ui.document.activeElement=e['bookmark-note'];assert.equal(pressNoteSaveKey(ui).defaultPrevented,false);assert.equal(pressNoteEscape(ui).defaultPrevented,false);ui.document.activeElement=e['shortcut-help-close'];
+ assert.equal(pressBookmarkKey(ui,'Escape',{target:e['shortcut-help-close']}).defaultPrevented,false,'native dialog Escape is not intercepted');
+ assertLoopValues(ui,1,3,true);assertShownFrame(ui,2);assert.equal(ui.pending.length,calls);assert.equal(bookmarkWrites(ui).length,0);
+ e['shortcut-help-dialog'].close();assert.equal(e['shortcut-help-open'].getAttribute('aria-expanded'),'false');assert.equal(ui.document.activeElement,e.result);
+});
+
+test('the help button remains available with shortcuts off and reports the current enabled state',async()=>{
+ const ui=await startUI(),e=ui.elements;e['bookmark-shortcuts-enabled'].checked=false;e['bookmark-shortcuts-enabled'].onchange();
+ assert.equal(e['shortcut-help-open'].getAttribute('aria-keyshortcuts')||'','');assert.equal(pressHelpKey(ui).defaultPrevented,false);e['shortcut-help-open'].focus();e['shortcut-help-open'].onclick();assertHelpOpen(ui);
+ assert.match(e['shortcut-help-status'].textContent,/disabled/);assert.equal(pressHelpKey(ui).defaultPrevented,false);e['shortcut-help-close'].onclick();assert.equal(ui.document.activeElement,e['shortcut-help-open']);
+ e['bookmark-shortcuts-enabled'].checked=true;e['bookmark-shortcuts-enabled'].onchange();pressHelpKey(ui);assert.match(e['shortcut-help-status'].textContent,/enabled/);e.lang.value='zh-TW';e.lang.onchange();assert.match(e['shortcut-help-status'].textContent,/已開啟/);assertHelpOpen(ui);
+});
+
+test('help preserves even invalid unsaved drafts, tags, filters and A/B settings without writes',async()=>{
+ const ui=await startUI({bookmarks:[bookmarkRecord(1,{tags:['crossing'],note:'saved'})]}),e=ui.elements;await showFirst(ui);configureLoop(ui,1,2);filterBookmarkTag(ui,'crossing');searchBookmarkNotes(ui,'saved');editBookmark(ui,'x'.repeat(1001),['occlusion']);e['bookmark-note'].focus();const calls=ui.pending.length;
+ e['shortcut-help-open'].onclick();assertHelpOpen(ui);assert.equal(e['bookmark-save'].disabled,true);e['shortcut-help-close'].onclick();assert.equal(ui.document.activeElement,e['bookmark-note']);
+ assert.equal(e['bookmark-note'].value,'x'.repeat(1001));assert.equal(e['bookmark-tag-occlusion'].checked,true);assert.equal(e['bookmark-filter-tag'].value,'crossing');assert.equal(e['bookmark-search'].value,'saved');assertLoopValues(ui,1,2,true);assert.equal(ui.pending.length,calls);assert.equal(bookmarkWrites(ui).length,0);
+});
+
+test('opening help does not cancel an explicit in-flight bookmark save',async()=>{
+ const ui=await startUI(),e=ui.elements;await showFirst(ui);editBookmark(ui,'synthetic review',['crossing']);e['bookmark-note'].focus();const saving=pressNoteSaveKey(ui);await flush();e['shortcut-help-open'].focus();e['shortcut-help-open'].onclick();assertHelpOpen(ui);assert.equal(bookmarkWrites(ui).length,1);
+ ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',[bookmarkRecord(1,{note:'synthetic review',tags:['crossing']})]));await saving.completion;
+ assert.equal(e['shortcut-help-dialog'].open,true);assert.equal(ui.document.activeElement,e['shortcut-help-close']);assert.equal(e['bookmark-note'].value,'synthetic review');assert.match(e['bookmark-editor-status'].textContent,/Bookmark saved/);e['shortcut-help-close'].onclick();assert.equal(ui.document.activeElement,e['shortcut-help-open']);
 });

@@ -1,5 +1,8 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 
+- Added a bilingual **?** shortcut reference modal for playback/A-B, bookmarks and note editing, with a persistent help button, native focus containment/Esc and focus restoration. Typing/IME guards and opt-out apply; opening pauses/cancels pending replay while retaining drafts and settings, and the modal prevents background shortcut actions. Help adds no writes or uploads.
+- 新增 **?** 快捷鍵說明面板，集中列出播放／A-B、書籤與備註操作，提供常設說明按鈕、原生焦點限制／Esc 關閉與焦點返回。輸入及組字時不誤觸，沿用停用開關；開啟暫停並取消待顯示回放，保留草稿與設定，避免面板內操作觸發背景快捷鍵，不新增寫入或上傳。
+
 - Optional CPU-only manual YOLO Detect/Segment analysis on 2–24 manually archived Session frames, with class-gated short-term 2D Object IDs and candidate camera XYZ/depth history.
 - Local SHA-256-checked tracking report with async status, bilingual Sessions UI, bounded limits and fake-backed regression tests.
 - Genuine CUDA depth and CPU YOLO Detect/Segment passed a 24-frame public-video Session pilot; a separate frozen-detection comparison evaluated eight tracking methods on 179 consecutive public frames. See [the bilingual tracking evidence](docs/en/tracking-evaluation.md).

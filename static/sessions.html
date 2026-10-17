@@ -3,9 +3,28 @@
 <title>DepthPort — Session Replay</title><link rel="stylesheet" href="/static/sessions.css"></head>
 <body><main><header><h1>DepthPort <span data-i="title">Session / Replay</span></h1>
 <nav><a href="/">DepthPort</a> · <a href="/spatial">Spatial Analysis</a> ·
-<label><span data-i="language">Language</span> <select id="lang"><option value="en">English</option><option value="zh-TW">繁體中文</option></select></label></nav></header>
+<label><span data-i="language">Language</span> <select id="lang"><option value="en">English</option><option value="zh-TW">繁體中文</option></select></label>
+<button id="shortcut-help-open" data-i="shortcutHelpOpen" aria-haspopup="dialog" aria-controls="shortcut-help-dialog" aria-expanded="false">Shortcut help (?)</button></nav></header>
 <p id="subtitle" data-i="subtitle">Manually save completed AI result frames to local storage. No automatic camera recording; replay does not rerun inference.</p>
 <div id="status" role="status"></div>
+<dialog id="shortcut-help-dialog" aria-labelledby="shortcut-help-title" aria-describedby="shortcut-help-intro">
+<header class="shortcut-help-header"><h2 id="shortcut-help-title" data-i="shortcutHelpTitle">Keyboard shortcut help</h2><button id="shortcut-help-close" data-i="shortcutHelpClose" autofocus>Close</button></header>
+<div class="shortcut-help-content"><p id="shortcut-help-intro" data-i="shortcutHelpIntro">Opening help pauses replay. Close it, then press Space to continue.</p>
+<p id="shortcut-help-status" role="status"></p>
+<div class="shortcut-help-group"><h3 data-i="shortcutHelpPlayback">Playback and A/B loop</h3><dl>
+<div><dt><kbd data-i="shortcutHelpSpaceKey">Space</kbd></dt><dd data-i="shortcutHelpSpace">Play / pause saved-frame replay.</dd></div>
+<div><dt><kbd>←</kbd> / <kbd>→</kbd></dt><dd data-i="shortcutHelpFrames">Pause and step one saved frame across the full Session.</dd></div>
+<div><dt><kbd>A</kbd> / <kbd>B</kbd></dt><dd data-i="shortcutHelpBounds">Set A / B from the last fully displayed frame; pause replay.</dd></div>
+<div><dt><kbd>L</kbd></dt><dd data-i="shortcutHelpLoop">Toggle A/B looping and pause; press Play to resume.</dd></div></dl></div>
+<div class="shortcut-help-group"><h3 data-i="shortcutHelpBookmarksTitle">Bookmarks</h3><dl>
+<div><dt><kbd>[</kbd> / <kbd>]</kbd></dt><dd data-i="shortcutHelpBookmarks">Previous / next matching bookmark using the current filters.</dd></div>
+<div><dt><kbd>M</kbd></dt><dd data-i="shortcutHelpMark">Pause and focus the shown frame’s bookmark note.</dd></div></dl></div>
+<div class="shortcut-help-group"><h3 data-i="shortcutHelpNotes">Notes</h3><dl>
+<div><dt><kbd>Ctrl</kbd> + <kbd>Enter</kbd></dt><dd data-i="shortcutHelpSave">Save this frame’s tags and note, only from the note field.</dd></div>
+<div><dt><kbd>Esc</kbd></dt><dd data-i="shortcutHelpEscape">Leave the note for replay, keeping unsaved edits.</dd></div>
+<div><dt><kbd>Enter</kbd></dt><dd data-i="shortcutHelpEnter">Insert a new line in the note.</dd></div></dl></div>
+<p class="shortcut-help-scope" data-i="shortcutHelpScope">? toggles this panel outside input fields; Esc also closes the panel. Note and search typing never opens help. IME composition does not trigger shortcuts. Ctrl+Enter and note Esc only work in the note field.</p>
+</div></dialog>
 <section><h2 data-i="sessions">Sessions</h2>
 <label data-i="label">Label (optional)</label> <input id="label" maxlength="80" placeholder="Test scene">
 <button id="create" data-i="create">Create session</button> <button id="refresh" data-i="refresh">Refresh</button>
@@ -34,7 +53,7 @@
 <button id="bookmark-prev" data-i="bookmarkPrevious" disabled aria-describedby="bookmark-nav-status">Previous bookmark</button>
 <button id="bookmark-next" data-i="bookmarkNext" disabled aria-describedby="bookmark-nav-status">Next bookmark</button>
 <output id="bookmark-nav-status" aria-live="off"></output>
-<p class="bookmark-shortcut-help" data-i="bookmarkShortcutHelp">Shortcuts: Space play/pause · ←/→ previous/next frame · [/] filtered bookmarks · A/B set loop bounds · L toggle loop · M mark/note. Inactive in input fields or during IME composition.</p></div>
+<p class="bookmark-shortcut-help" data-i="bookmarkShortcutHelp">Press ? for shortcut help. Replay keys are inactive in input fields or during IME composition.</p></div>
 <fieldset class="replay-loop-control"><legend data-i="loopTitle">A/B loop</legend>
 <label class="overlay-toggle"><input id="loop-enabled" type="checkbox" disabled aria-describedby="loop-status"><span data-i="loopEnable">Loop A–B</span></label>
 <div class="loop-endpoints"><label for="loop-start" data-i="loopStart">A · Start frame</label>
@@ -66,7 +85,7 @@
 <button id="bookmark-list-prev" data-i="bookmarkPrevious" disabled aria-describedby="bookmark-list-nav-status">Previous bookmark</button>
 <button id="bookmark-list-next" data-i="bookmarkNext" disabled aria-describedby="bookmark-list-nav-status">Next bookmark</button>
 <output id="bookmark-list-nav-status" aria-live="off"></output>
-<p class="bookmark-shortcut-help" data-i="bookmarkShortcutHelp">Shortcuts: Space play/pause · ←/→ previous/next frame · [/] filtered bookmarks · A/B set loop bounds · L toggle loop · M mark/note. Inactive in input fields or during IME composition.</p></div>
+<p class="bookmark-shortcut-help" data-i="bookmarkShortcutHelp">Press ? for shortcut help. Replay keys are inactive in input fields or during IME composition.</p></div>
 <p id="bookmarks-status" role="status"></p><ul id="bookmarks-list"></ul>
 <fieldset class="bookmark-transfer"><legend data-i="bookmarkBackup">JSON backup / restore</legend>
 <p data-i="bookmarkBackupNote">Export saved bookmarks only; save drafts first. This JSON contains notes, not images. Restore requires the original Session and frames.</p>
