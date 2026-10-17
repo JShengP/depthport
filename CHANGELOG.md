@@ -47,6 +47,9 @@
 - Added Ctrl + Enter to explicitly save the displayed frame's bookmark and note only while the enabled note field has focus and Save/update is available. It uses the shared shortcut switch and existing snapshot/write checks, ignores IME composition, repeats and extra modifiers, and keeps plain Enter for newlines. Other editing controls remain protected; failed saves retain the draft, and records stay in the local private bookmark file.
 - 新增 Ctrl＋Enter，僅在已啟用的備註欄有焦點且「保存／更新」可用時，明確保存目前顯示影格的書籤與備註。沿用共用快捷鍵開關與同快照／寫入檢查，忽略輸入法組字、長按及額外修飾鍵，一般 Enter 仍可換行。其他編輯欄不觸發，保存失敗保留草稿，紀錄只存本機私人書籤檔。
 
+- Added Esc in the focused bookmark note to pause and return focus to replay while retaining unsaved text and tags, including drafts that cannot yet be saved. It uses the shared shortcut switch and IME/repeat/modifier guards, cancels pending presentation without saving or fetching, and lets replay shortcuts resume immediately. Esc in search and other controls keeps its existing behavior.
+- 新增在書籤備註欄內按 Esc，暫停並將焦點移回回放，保留未保存文字與分類，尚不符合保存條件的草稿也不清除。沿用共用快捷鍵開關與組字／長按／修飾鍵防護，取消待顯示結果但不保存或另載入影格，可接續使用回放快捷鍵；搜尋及其他控制項的 Esc 維持原有行為。
+
 # Changelog / 版本紀錄
 
 ## 0.2.0-alpha.1 — 2026-10-17 (experimental Alpha pre-release)

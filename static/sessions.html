@@ -15,7 +15,7 @@
 <section><h2 data-i="frames">Saved frames</h2><select id="frames-list" aria-label="Saved frames"></select>
 <button id="replay" data-i="replay">Replay selected frame</button>
 <a id="download" href="#" hidden data-i="download">Download exact snapshot ZIP</a></section>
-<section id="result" hidden><h2 data-i="view">Recorded RGB, depth &amp; point cloud</h2>
+<section id="result" hidden tabindex="-1" aria-labelledby="replay-title"><h2 id="replay-title" data-i="view">Recorded RGB, depth &amp; point cloud</h2>
 <div class="panels"><figure class="rgb-panel"><figcaption data-i="rgb">Aligned RGB</figcaption>
 <div class="overlay-controls"><button id="playback-play" data-i="play" disabled>Play</button>
 <button id="playback-pause" data-i="pause" disabled>Pause</button>
@@ -85,7 +85,7 @@
 <label><input id="bookmark-tag-crossing" type="checkbox" disabled><span data-i="bookmarkCrossing">Object crossing</span></label></fieldset>
 <label for="bookmark-note" data-i="bookmarkNote">Note (up to 1000 characters)</label>
 <textarea id="bookmark-note" rows="3" maxlength="2000" disabled aria-describedby="bookmark-editor-status bookmark-save-shortcut-help"></textarea>
-<p id="bookmark-save-shortcut-help" class="bookmark-shortcut-help" data-i="bookmarkSaveShortcutHelp">With Keyboard shortcuts enabled: Ctrl+Enter saves this frame’s bookmark and note from the note field only. Enter adds a new line; ignored during IME composition.</p>
+<p id="bookmark-save-shortcut-help" class="bookmark-shortcut-help" data-i="bookmarkSaveShortcutHelp">With Keyboard shortcuts enabled: Ctrl+Enter saves this frame’s bookmark and note from the note field only. Enter adds a new line. Esc returns to replay with unsaved edits kept. Ignored during IME composition.</p>
 <button id="bookmark-save" data-i="bookmarkSave" aria-describedby="bookmark-save-shortcut-help" disabled>Save frame bookmark</button>
 <button id="bookmark-delete" data-i="bookmarkDelete" disabled>Remove frame bookmark</button>
 </section>

@@ -66,3 +66,5 @@ footer{margin:24px 0;color:#acb9c9}@media(max-width:800px){.panels{grid-template
 
 .bookmark-shortcut-toggle{grid-column:1/-1;display:flex;align-items:center;gap:6px;justify-self:start}
 .bookmark-shortcut-help{flex-basis:100%;margin:0;font-size:13px;color:#cce5f8}
+
+#result:focus{outline:2px solid #63d9eb;outline-offset:3px}
