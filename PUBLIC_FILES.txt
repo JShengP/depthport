@@ -95,3 +95,6 @@ tools/build_site.py
 tools/check_release.py
 tools/http_smoke.py
 tools/stage_public.py
+docs/assets/README.md
+docs/assets/spatial-preview.en.png
+docs/assets/spatial-preview.zh-TW.png
