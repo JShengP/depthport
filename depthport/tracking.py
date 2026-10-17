@@ -100,7 +100,7 @@ def analyse_session(store, sid: str, *, mode: str='segment', confidence: float=.
         raise ValueError('v0.3 offline tracking defaults to CPU; GPU scheduling not validated')
     rows=store.frames(sid)['frames'][-max_frames:]
     if len(rows)<2:raise SessionError('Save at least two frames before tracking')
-    model_name=allowed_model(mode)
+    model_name=allowed_model(mode) if detector is None else f'test-double:{mode}'
     model=None
     if detector is None:
         from ultralytics import YOLO
