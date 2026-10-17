@@ -1,5 +1,8 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 
+- Added **C** to clear bookmark query/tag filters via the existing button action, restore all bookmarks and focus search while retaining notes and review state. Updated bilingual shortcut help/metadata with input/IME/modal/opt-out guards.
+- 新增 **C** 沿用清除按鈕操作，重設書籤搜尋／標籤篩選、恢復全部書籤並移入搜尋，保留備註與檢查內容；更新雙語說明與快捷鍵資訊，沿用輸入／組字／面板／停用防護。
+
 - Added search-field **Esc** to pause and return to the displayed replay while retaining query/tag filters and review state. Prevents native query clearing, guards IME, and updates bilingual inline/panel help and shortcut metadata.
 - 新增搜尋欄 **Esc** 暫停並回到已顯示的回放，保留搜尋／標籤與檢查內容，避免原生清空文字並防護中文組字；更新雙語欄位提示、說明面板與快捷鍵資訊。
 
