@@ -13,3 +13,14 @@ footer{margin:24px 0;color:#acb9c9}@media(max-width:800px){.panels{grid-template
 #consistency-table{overflow-x:auto}#consistency-table table{width:100%;border-collapse:collapse;font-size:13px}#consistency-table th,#consistency-table td{padding:9px;border-bottom:1px solid var(--edge);text-align:left;white-space:nowrap}#consistency-skips{color:#b8c9db}
 
 .tracking-scroll{overflow-x:auto;max-height:500px;overflow-y:auto}.tracking-scroll table{width:100%;border-collapse:collapse;min-width:640px}.tracking-scroll td,.tracking-scroll th{font-size:13px;padding:8px;border-bottom:1px solid var(--edge);text-align:left}#tracking-panel p{color:#ccdbea}
+
+/* The SVG and image share one intrinsic aspect ratio, with no letterbox offset. */
+.panels{grid-template-columns:repeat(2,minmax(0,1fr))}.rgb-panel{grid-column:1/-1}
+.rgb-stage{position:relative;max-width:800px;margin:0 auto;background:#080c11}
+.rgb-stage #rgb{width:100%;height:auto;max-height:none;display:block}
+.rgb-stage #tracking-overlay{position:absolute;inset:0;width:100%;height:100%;max-height:none;pointer-events:none;overflow:hidden}
+.overlay-toggle{display:flex;align-items:center;gap:6px;margin:8px 0}.overlay-toggle input{width:auto}
+#overlay-status{min-height:24px;color:#ccdbea;margin:8px 0}
+@media(max-width:800px){.panels{grid-template-columns:1fr}}
+
+.overlay-controls{display:flex;align-items:center;gap:6px;flex-wrap:wrap}

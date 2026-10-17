@@ -8,6 +8,9 @@
 - Added opt-in Roboflow BoT-SORT for v0.3 Session analysis via a disposable NumPy 2 worker; original detection geometry is retained. [Setup and public-sequence validation](docs/en/tracking-worker.md).
 - v0.3 Session 新增選配 BoT-SORT，獨立 NumPy 2 worker 保留原始量測；預設仍為簡易關聯，v0.3 尚未發布。
 
+- Added exact-snapshot RGB replay overlays with original tracking boxes, fixed-color Object IDs, overlap-label connectors, an overlay toggle, and Previous/Next controls. Missing/unanalysed/stale reports never borrow another frame's IDs.
+- 回放 RGB 新增追蹤框／固定顏色 Object ID、標籤連線、疊圖切換與逐格檢視；以快照雜湊與保存序號防止錯格及過期結果。
+
 # Changelog / 版本紀錄
 
 ## 0.2.0-alpha.1 — 2026-10-17 (experimental Alpha pre-release)

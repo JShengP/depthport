@@ -225,7 +225,12 @@ class SessionStore:
             return payload
 
     def replay(self,sid:str,index:int)->dict:
-        payload=self.bundle(sid,index)
+        # Capture the saved-frame identity and session size together. A tracking
+        # overlay must match this exact ZIP, never merely the source frame_id.
+        with self.lock:
+            payload=self.bundle(sid,index)
+            total_session_frames=len(self._read_manifest(sid)['frames'])
+        snapshot_sha256=hashlib.sha256(payload).hexdigest()
         with zipfile.ZipFile(io.BytesIO(payload)) as z:
             if sum(i.file_size for i in z.infolist())>MAX_TOTAL_UNCOMPRESSED:
                 raise SessionIntegrity('Frame archive exceeds replay limit')
@@ -236,6 +241,8 @@ class SessionStore:
             packed,count=_parse_ply(z.read(ply_names[0]))
             rgb=z.read('rgb_aligned.png'); depth=z.read('depth_preview.jpg')
         return {'frame_id':f['frame_id'],'session_id':sid,'index':index,
+                'snapshot_sha256':snapshot_sha256,
+                'total_session_frames':total_session_frames,
                 'engine':f['engine'],'model':f.get('model'), 'units':f['units'],
                 'intrinsics':f.get('intrinsics'), 'depth_stats':f.get('depth_stats'),
                 'frame_timestamp':f.get('timestamp'),
@@ -276,7 +283,9 @@ class SessionStore:
             except (ValueError,OSError) as exc:raise SessionIntegrity('Unreadable tracking report') from exc
             seen=[(r['index'],r['snapshot_sha256']) for r in report['frames']]
             current=[(r['index'],r['sha256']) for r in rows]
-            if report.get('total_session_frames') != len(rows) or seen != current[-len(seen):]:
+            if (report.get('session_id') != sid or not seen or
+                    report.get('total_session_frames') != len(rows) or
+                    seen != current[-len(seen):]):
                 raise SessionIntegrity('Tracking analysis is stale after a new frame; rerun it')
             return report
 

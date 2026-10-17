@@ -157,3 +157,7 @@ tests/test_tracking_worker.py
 docs/en/tracking-worker.md
 docs/zh-TW/tracking-worker.md
 docs/validation/v0.3-botsort-worker.json
+
+# Exact-frame tracking overlays
+static/tracking-overlay.js
+tests/test_tracking_overlay.cjs

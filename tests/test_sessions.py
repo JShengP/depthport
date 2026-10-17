@@ -42,11 +42,52 @@ def test_store_create_capture_replay_units_and_hash(tmp_path):
     assert store.bundle(item['session_id'],1)==bundle
     replay=store.replay(item['session_id'],1)
     assert replay['units']=='estimated_m' and replay['engine']=='yolo26'
+    assert replay['snapshot_sha256']==row['sha256']
+    assert replay['total_session_frames']==1
     assert replay['count']>0 and replay['points'] and replay['rgb_png'] and replay['depth_jpeg']
     trend=store.temporal_summary(item['session_id'])
     assert trend['groups']['yolo26:estimated_m'][0]['delta_from_first']==0
     assert store.list_sessions()[0]['frame_count']==1
     assert (tmp_path/'outputs'/'sessions'/item['session_id']/'frame-00001.zip').exists()
+
+
+def test_replay_identity_uses_saved_index_and_exact_snapshot(tmp_path):
+    store=SessionStore(tmp_path/'sessions')
+    sid=store.create()['session_id']
+    # A camera/model can repeat its frame_id, so it cannot identify a snapshot.
+    f,b=sample_frame(frame_id=91)
+    first=store.capture(sid,b,f)
+    before=store.replay(sid,1)
+    other_frame,other_bundle=sample_frame(frame_id=91,units='relative')
+    second=store.capture(sid,other_bundle,other_frame)
+    after=store.replay(sid,1)
+    other=store.replay(sid,2)
+    assert before['session_id']==after['session_id']==other['session_id']==sid
+    assert before['frame_id']==other['frame_id']==91
+    assert (after['index'],other['index'])==(1,2)
+    assert before['snapshot_sha256']==after['snapshot_sha256']==first['sha256']
+    assert other['snapshot_sha256']==second['sha256']
+    assert other['snapshot_sha256']!=after['snapshot_sha256']
+    assert before['total_session_frames']==1
+    assert after['total_session_frames']==other['total_session_frames']==2
+    assert store.bundle(sid,1)==b and store.bundle(sid,2)==other_bundle
+
+
+def test_tracking_report_rechecks_session_and_nonempty_snapshot_identity(tmp_path):
+    store=SessionStore(tmp_path/'sessions')
+    sid=store.create()['session_id']
+    f,b=sample_frame();row=store.capture(sid,b,f)
+    report={'session_id':sid,'total_session_frames':1,
+            'frames':[{'index':1,'snapshot_sha256':row['sha256']}],
+            'format':'depthport.semantic-tracking.v1'}
+    store.save_tracking_report(sid,report)
+    assert store.tracking_report(sid)==report
+    path=tmp_path/'sessions'/sid/'tracking.json'
+    for changed in ({**report,'session_id':store.create()['session_id']},
+                    {**report,'frames':[]}):
+        path.write_text(json.dumps(changed),encoding='utf-8')
+        with pytest.raises(SessionIntegrity,match='stale'):
+            store.tracking_report(sid)
 
 
 def test_relative_units_retained_and_not_mislabeled(tmp_path):
@@ -140,6 +181,9 @@ def test_real_http_routes_with_fake_inference(client_enabled):
     assert len(frames['frames'])==1
     replay=c.get(f'/api/sessions/{sid}/frames/1/replay')
     assert replay.status_code==200 and replay.json()['count']>0
+    assert replay.json()['session_id']==sid and replay.json()['index']==1
+    assert replay.json()['snapshot_sha256']==frames['frames'][0]['sha256']
+    assert replay.json()['total_session_frames']==1
     bundle=c.get(f'/api/sessions/{sid}/frames/1/bundle.zip')
     assert bundle.status_code==200
     with zipfile.ZipFile(io.BytesIO(bundle.content)) as z:

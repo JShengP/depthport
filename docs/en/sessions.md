@@ -84,3 +84,11 @@ Use the [offline tracking acceptance evaluator](tracking-evaluation.md) to compa
 
 
 Use a shareable video-derived sequence with object entries/exits, occlusion and crossing. Compare track-ID switches, lost tracks and per-class association counts against manually reviewed labels; separately verify median camera-frame XYZ against the saved depth and intrinsics. Only a real YOLO Detect/Segment run with actual weights qualifies as model validation; synthetic fixtures and CI establish software behavior only.
+
+## Inspect tracking IDs on replay
+
+After tracking finishes, select **Replay analysed frames** to open the first frame in that report. The aligned RGB image shows the report's original detection boxes and **Object ID · class** labels. Colors stay fixed for the same ID within an analysis; displaced labels have a connector to their box. Use **Previous frame / Next frame** or choose a saved frame to replay it. The default analysis covers the latest 12 saved frames, so earlier frames may have no analysis.
+
+The **Tracking boxes and Object IDs** checkbox hides/shows the overlay. A frame with no confirmed tracked detections shows no boxes. Unanalysed frames, missing reports and stale or mismatched snapshots show a message rather than borrowing another frame's IDs. Matching requires the same Session, saved index, total frame count and exact snapshot SHA-256, plus model/unit metadata. This also distinguishes saved frames whose original source frame IDs repeat. Switching Sessions, replay requests and tracking reruns clear old overlays; only the latest selected replay response may render.
+
+The display uses original saved-image pixel coordinates, including after resizing. Replay and overlays do not rerun inference or alter RGB/depth, tracking results, downloaded bundles or native geometry. Inspecting an ID across occlusion/crossing is a visual diagnostic; colors and IDs are not proof of person identity or world-space continuity. Browser verification uses local public-sequence frames; screenshots, real imagery and per-frame annotations remain outside the public source archive.
