@@ -7,9 +7,13 @@
 
 English · [繁體中文](README.zh-TW.md)
 
-**Experimental 0.2 alpha** · **Local-first** · **English / 繁體中文** · **AGPL-3.0-only**
+**v0.2 Alpha released** · **Local-first** · **English / 繁體中文** · **AGPL-3.0-only**
 
 </div>
+
+**Download v0.2.0-alpha.1:** [Release notes & downloads](https://github.com/JShengP/depthport/releases/tag/v0.2.0-alpha.1) · [Source ZIP](https://github.com/JShengP/depthport/releases/download/v0.2.0-alpha.1/depthport-0.2.0-alpha.1-source.zip) · [SHA-256 checksums](https://github.com/JShengP/depthport/releases/download/v0.2.0-alpha.1/SHA256SUMS.txt)
+
+The download contains public source only; Python dependencies and pretrained model weights must be installed separately.
 
 Turn RGB images and RTSP camera frames into interactive, **single-view point clouds**. Switch depth engines, inspect visible-surface geometry, and export the data behind the visualization—all in one local web interface.
 
@@ -19,7 +23,7 @@ DepthPort integrates existing pretrained models; it does **not** introduce a new
 
 *Screenshot: the actual UI showing synthetic test data. No camera or AI model produced this point cloud.*
 
-> **Status:** experimental source alpha. On 2026-10-17, a fresh Ubuntu 24.04 / Python 3.12 environment passed all four real pretrained depth-model CUDA smoke tests, YOLO Detect/Segment fusion and browser-to-HTTP checks on one public sample image. This demonstrates execution, not measured distance accuracy, field camera operation or a hardware benchmark. Full Windows model installation, physical RTSP, endurance and NVIDIA WebGL rendering remain unverified. Read the [validation record](docs/en/validation.md).
+> **Status:** `v0.2.0-alpha.1` is published as an **experimental pre-release**. On 2026-10-17, a fresh Ubuntu 24.04 / Python 3.12 environment passed all four real pretrained depth-model CUDA smoke tests, YOLO Detect/Segment fusion and browser-to-HTTP checks on one public sample image. This demonstrates execution, not measured distance accuracy, field camera operation or a hardware benchmark. Full Windows model installation, physical RTSP, endurance and NVIDIA WebGL rendering remain unverified. Read the [validation record](docs/en/validation.md).
 
 ## New in v0.2 — Spatial Analysis Lab
 

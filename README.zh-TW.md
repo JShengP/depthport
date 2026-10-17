@@ -7,9 +7,13 @@
 
 [English](README.md) · 繁體中文
 
-**實驗性 0.2 Alpha** · **本地執行** · **英文／繁體中文** · **AGPL-3.0-only**
+**v0.2 Alpha 已發布** · **本地執行** · **英文／繁體中文** · **AGPL-3.0-only**
 
 </div>
+
+**下載 v0.2.0-alpha.1：** [Release 說明與下載](https://github.com/JShengP/depthport/releases/tag/v0.2.0-alpha.1) · [原始碼 ZIP](https://github.com/JShengP/depthport/releases/download/v0.2.0-alpha.1/depthport-0.2.0-alpha.1-source.zip) · [SHA-256 校驗檔](https://github.com/JShengP/depthport/releases/download/v0.2.0-alpha.1/SHA256SUMS.txt)
+
+下載包僅含公開原始碼，Python 依賴與預訓練模型權重需另行安裝。
 
 將 RGB 圖片與 RTSP 相機影格轉成可互動的**單視角點雲**。在同一個本地 Web 介面切換深度模型、觀察可見表面的幾何，並匯出產生畫面所使用的數據。
 
@@ -19,7 +23,7 @@ DepthPort 整合既有預訓練模型，**不是新的深度網路或研究模�
 
 *截圖來自實際 UI 的合成測試資料；不是由相機或 AI 模型產生的點雲。*
 
-> **狀態：** 實驗性原始碼 Alpha。2026-10-17 已在全新 Ubuntu 24.04／Python 3.12 環境完成四套真深度模型 CUDA smoke test、YOLO 偵測／分割融合及真正瀏覽器 HTTP 操作，輸入為同一張公開範例。這只證明鏈路可執行，不代表測距精度、實體相機運作或正式硬體 benchmark。Windows 完整模型安裝、實體 RTSP、長時間穩定性與 NVIDIA WebGL 繪圖仍未驗證。詳見[驗證紀錄](docs/zh-TW/validation.md)。
+> **狀態：** `v0.2.0-alpha.1` 已發布為**實驗性預發行版（Pre-release）**。2026-10-17 已在全新 Ubuntu 24.04／Python 3.12 環境完成四套真深度模型 CUDA smoke test、YOLO 偵測／分割融合及真正瀏覽器 HTTP 操作，輸入為同一張公開範例。這只證明鏈路可執行，不代表測距精度、實體相機運作或正式硬體 benchmark。Windows 完整模型安裝、實體 RTSP、長時間穩定性與 NVIDIA WebGL 繪圖仍未驗證。詳見[驗證紀錄](docs/zh-TW/validation.md)。
 
 ## v0.2 新功能 — 空間分析工作台
 
