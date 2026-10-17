@@ -19,15 +19,20 @@ DepthPort 整合既有預訓練模型，**不是新的深度網路或研究模�
 
 *截圖來自實際 UI 的合成測試資料；不是由相機或 AI 模型產生的點雲。*
 
-> **狀態：** 原始碼發布用 Alpha，不是正式產品或量測系統。自動測試驗證應用契約、數學與 UI 行為，不等於預訓練模型成功推論。真模型、目標設備乾淨安裝、CUDA、實體相機及深度精度仍未驗證。詳見[驗證紀錄](docs/zh-TW/validation.md)。
+> **目前發布版：v0.1.0-alpha.1。** `main` 仍是原本的檢視器；這裡的[驗證紀錄](docs/zh-TW/validation.md)記錄 2026-10-16 的初版原始碼。另行開發的 v0.2 已在 Ubuntu／RTX 4090 通過真單圖 CUDA smoke test，見下方預覽。實體 RTSP、測距精度及正式產品驗收仍未完成。
 
 ## 開發版預覽 — 空間分析 v0.2
 
 `main` 目前保留原本的檢視器版本；另有 [v0.2 開發分支](https://github.com/JShengP/depthport/tree/feature/spatial-analysis-v0.2)，加入像素 XYZ、多模型比較與 YOLO 2D→3D 融合。[最新驗證紀錄](https://github.com/JShengP/depthport/blob/feature/spatial-analysis-v0.2/docs/zh-TW/validation.md)包含 Ubuntu／RTX 4090 的真單圖 CUDA 測試，結果適用該開發分支。功能 PR 為 [#5](https://github.com/JShengP/depthport/pull/5)。
 
+<details>
+<summary>展開 v0.2 完整截圖（真模型推論）</summary>
+
 ![v0.2 開發版：真模型推論的空間分析預覽](docs/assets/spatial-preview.zh-TW.png)
 
 *此圖來自 v0.2，功能尚未包含在本 `main` 版本。使用公開 [Ultralytics 範例](https://github.com/ultralytics/assets/blob/53d4e2a8fd15f473c29a148c317a8477be559327/im/bus.jpg)，不是實體相機或測距精度示範。[圖像來源](docs/assets/README.md)。*
+
+</details>
 
 ## 可以探索什麼？
 

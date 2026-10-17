@@ -19,15 +19,20 @@ DepthPort integrates existing pretrained models; it does **not** introduce a new
 
 *Screenshot: the actual UI showing synthetic test data. No camera or AI model produced this point cloud.*
 
-> **Status:** source-release alpha, not a production or metrology system. Automated tests validate application contracts, geometry and UI behavior; they do not prove pretrained-model inference. Real-model runs, fresh installation on target systems, CUDA, physical cameras and depth accuracy are not yet validated. Read the [validation record](docs/en/validation.md).
+> **Published version: v0.1.0-alpha.1.** `main` still contains the original viewer. Its [validation record](docs/en/validation.md) describes the 2026-10-16 source snapshot. The separate v0.2 development branch has since passed real single-image CUDA smoke tests on Ubuntu / RTX 4090; see the preview below. Physical RTSP, distance accuracy and production readiness remain unverified.
 
 ## Development preview — Spatial Analysis v0.2
 
 The original viewer remains the version on `main`. The separate [v0.2 development branch](https://github.com/JShengP/depthport/tree/feature/spatial-analysis-v0.2) adds pixel XYZ inspection, sequential four-model comparison and YOLO 2D-to-3D fusion. Its [current validation record](https://github.com/JShengP/depthport/blob/feature/spatial-analysis-v0.2/docs/en/validation.md) documents real single-image CUDA tests on Ubuntu / RTX 4090; those results apply to that development branch. The v0.2 feature PR is [#5](https://github.com/JShengP/depthport/pull/5).
 
+<details>
+<summary>View full v0.2 screenshot (real pretrained inference)</summary>
+
 ![v0.2 development preview with real pretrained inference](docs/assets/spatial-preview.en.png)
 
 *Preview from v0.2, which is not included in this `main` version. Public [Ultralytics example](https://github.com/ultralytics/assets/blob/53d4e2a8fd15f473c29a148c317a8477be559327/im/bus.jpg); not a physical camera or metric-accuracy demonstration. [Image attribution](docs/assets/README.md).*
+
+</details>
 
 ## What you can explore
 
