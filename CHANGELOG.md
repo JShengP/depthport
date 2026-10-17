@@ -20,6 +20,9 @@
 - Added opt-in A/B saved-frame looping with editable start/end positions, buttons to use the displayed frame, inclusive endpoints and the existing playback speeds. Endpoint changes pause and cancel pending presentation; exact-frame RGB/depth/ID commits and failed-read handling also apply across loop boundaries.
 - 回放新增 A／B 區間循環，可輸入起始／結束影格或帶入目前影格，包含兩端並沿用播放速度；修改區間會暫停並取消待顯示結果，循環跳轉仍維持影像／深度／ID 同步與讀取失敗處理。
 
+- Added local per-frame bookmarks with suspected ID-switch, occlusion and crossing tags, plain-text notes, explicit Save/update and removal, and exact-snapshot jumps that preserve A/B settings. Unsaved drafts remain in page memory; saved notes use a separate local `bookmarks.json` and never modify original bundles or tracking reports.
+- 新增本機影格書籤，可標記疑似換 ID／遮擋／物件交會、填寫備註並明確保存／更新或移除；點選書籤會跳回同快照並保留 A／B 設定。草稿暫存本頁，已保存備註獨立於原始影格與追蹤報告，不加入公開封裝或自動上傳。
+
 # Changelog / 版本紀錄
 
 ## 0.2.0-alpha.1 — 2026-10-17 (experimental Alpha pre-release)

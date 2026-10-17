@@ -4,13 +4,16 @@ from __future__ import annotations
 import hashlib
 import io
 import json
+import os
 import re
+import stat
 import zipfile
 from pathlib import Path
 import numpy as np
 import pytest
 from fastapi.testclient import TestClient
-from depthport.sessions import SessionStore, SessionLimit, SessionNotFound, SessionIntegrity, MAX_FRAMES, _parse_ply
+from depthport.sessions import (SessionStore, SessionError, SessionLimit, SessionNotFound,
+                               SessionIntegrity, MAX_FRAMES, BOOKMARK_FORMAT, _parse_ply)
 from depthport.api import bundle_bytes, prepare_cloud
 from depthport.engines import DepthResult
 from tests.helpers import FakeEngine, fixture_image, wait_for
@@ -211,3 +214,191 @@ def test_test_fixture_does_not_store_source_url(tmp_path):
     store.capture(sid,b,{**f,'source':'rtsp'})
     m=(tmp_path/'sessions'/sid/'session.json').read_text()
     assert 'rtsp://' not in m and 'password' not in m
+
+
+def bookmark_fixture(tmp_path):
+    store = SessionStore(tmp_path / 'sessions')
+    sid = store.create('Synthetic bookmarks')['session_id']
+    frame, bundle = sample_frame(frame_id=91)
+    row = store.capture(sid, bundle, frame)
+    return store, sid, row, tmp_path / 'sessions' / sid / 'bookmarks.json'
+
+
+def test_bookmark_roundtrip_update_delete_is_private_and_preserves_bundles(tmp_path):
+    store, sid, row, path = bookmark_fixture(tmp_path)
+    original_manifest = (path.parent / 'session.json').read_bytes()
+    original_bundle = store.bundle(sid, 1)
+    empty = {'format': BOOKMARK_FORMAT, 'session_id': sid, 'bookmarks': []}
+    assert store.bookmarks(sid) == empty and not path.exists()
+    # HTML-like input is stored as plain text for textContent rendering.
+    note = '疑似換 ID 😀 <img src=x onerror=alert(1)>\n下一行\t交會'
+    saved = store.save_bookmark(sid, 1, row['sha256'], ['id-switch', 'crossing'], note)
+    assert saved['bookmarks'][0] == {
+        'index': 1, 'snapshot_sha256': row['sha256'], 'tags': ['id-switch', 'crossing'],
+        'note': note, 'updated_at': saved['bookmarks'][0]['updated_at']}
+    assert saved['bookmarks'][0]['updated_at'] > 0
+    assert SessionStore(path.parent.parent).bookmarks(sid) == saved
+    assert note.encode() in path.read_bytes().replace(b'\\n', b'\n').replace(b'\\t', b'\t')
+    if os.name == 'posix':
+        assert stat.S_IMODE(path.stat().st_mode) == 0o600
+    changed = store.save_bookmark(sid, 1, row['sha256'], [], 'Updated')
+    assert len(changed['bookmarks']) == 1 and changed['bookmarks'][0]['note'] == 'Updated'
+    assert store.bundle(sid, 1) == original_bundle
+    assert (path.parent / 'session.json').read_bytes() == original_manifest
+    assert store.delete_bookmark(sid, 1, row['sha256']) == empty
+    assert store.delete_bookmark(sid, 1, row['sha256']) == empty
+    assert SessionStore(path.parent.parent).bookmarks(sid) == empty
+    assert not list(path.parent.glob('bookmarks.*.tmp'))
+
+
+def test_bookmarks_survive_append_and_tracking_with_repeated_source_frame_ids(tmp_path):
+    store, sid, row, path = bookmark_fixture(tmp_path)
+    store.save_bookmark(sid, 1, row['sha256'], ['occlusion'], 'First saved snapshot')
+    frame, bundle = sample_frame(frame_id=91, units='relative')
+    row2 = store.capture(sid, bundle, frame)
+    assert row2['sha256'] != row['sha256'] and row2['frame_id'] == row['frame_id']
+    store.save_bookmark(sid, 2, row2['sha256'], ['crossing'], 'Second saved snapshot')
+    # Updating the first index preserves separate identities and sorted order.
+    saved = store.save_bookmark(sid, 1, row['sha256'], [], 'First updated')
+    assert [item['index'] for item in saved['bookmarks']] == [1, 2]
+    assert [item['snapshot_sha256'] for item in saved['bookmarks']] == [row['sha256'], row2['sha256']]
+    before = path.read_bytes()
+    report = {'session_id': sid, 'total_session_frames': 2,
+              'frames': [{'index': 1, 'snapshot_sha256': row['sha256']},
+                         {'index': 2, 'snapshot_sha256': row2['sha256']}]}
+    store.save_tracking_report(sid, report)
+    assert store.tracking_report(sid) == report
+    assert path.read_bytes() == before and store.bookmarks(sid) == saved
+
+
+@pytest.mark.parametrize('tags,note', [
+    (['unknown'], ''), (['occlusion', 'occlusion'], ''), ([1], ''), ('crossing', ''),
+    ([], 'x' * 1001), ([], 'private\x00note'), ([], 'private\x7fnote'),
+    ([], 'private\x85note'), ([], 'private\ud800note'), ([], 42),
+])
+def test_bookmarks_reject_invalid_tags_and_notes_without_echo(tmp_path, tags, note):
+    store, sid, row, path = bookmark_fixture(tmp_path)
+    with pytest.raises(SessionError) as error:
+        store.save_bookmark(sid, 1, row['sha256'], tags, note)
+    assert 'private' not in str(error.value) and not path.exists()
+
+
+def test_bookmark_identity_rejects_wrong_missing_or_damaged_frame(tmp_path):
+    store, sid, row, path = bookmark_fixture(tmp_path)
+    for sha in ('', 'z' * 64, 'A' * 64, None):
+        with pytest.raises(SessionError):store.save_bookmark(sid, 1, sha)
+    for index in (0, 2, True, 1.0):
+        with pytest.raises(SessionNotFound):store.save_bookmark(sid, index, row['sha256'])
+    for method in (store.save_bookmark, store.delete_bookmark):
+        with pytest.raises(SessionIntegrity):method(sid, 1, '0' * 64)
+    assert not path.exists()
+    store.save_bookmark(sid, 1, row['sha256'], [], 'Kept')
+    saved = path.read_bytes()
+    bundle_path = path.parent / 'frame-00001.zip'
+    bundle = bytearray(bundle_path.read_bytes());bundle[-1] ^= 1
+    bundle_path.write_bytes(bundle)
+    for action in (lambda:store.bookmarks(sid),
+                   lambda:store.save_bookmark(sid, 1, row['sha256']),
+                   lambda:store.delete_bookmark(sid, 1, row['sha256'])):
+        with pytest.raises(SessionIntegrity):action()
+    assert path.read_bytes() == saved
+
+
+@pytest.mark.parametrize('corruption', [
+    'not-json', 'oversized', 'format', 'session', 'unknown-field', 'duplicate',
+    'wrong-hash', 'missing-frame', 'bool-index', 'bad-time', 'bad-note', 'bad-tag',
+])
+def test_corrupt_bookmarks_cannot_be_read_or_overwritten(tmp_path, corruption):
+    store, sid, row, path = bookmark_fixture(tmp_path)
+    saved = store.save_bookmark(sid, 1, row['sha256'], ['occlusion'], 'Preserved')
+    if corruption == 'not-json':raw = b'{private invalid json'
+    elif corruption == 'oversized':raw = b' ' * (1024 * 1024 + 1)
+    else:
+        record = saved['bookmarks'][0]
+        if corruption == 'format':saved['format'] = 'unknown'
+        elif corruption == 'session':saved['session_id'] = '0' * 32
+        elif corruption == 'unknown-field':saved['unknown'] = 'private'
+        elif corruption == 'duplicate':saved['bookmarks'].append(dict(record))
+        elif corruption == 'wrong-hash':record['snapshot_sha256'] = '0' * 64
+        elif corruption == 'missing-frame':record['index'] = 2
+        elif corruption == 'bool-index':record['index'] = True
+        elif corruption == 'bad-time':record['updated_at'] = float('nan')
+        elif corruption == 'bad-note':record['note'] = 'private\x00note'
+        elif corruption == 'bad-tag':record['tags'] = ['private']
+        raw = json.dumps(saved).encode()
+    path.write_bytes(raw)
+    for action in (lambda:store.bookmarks(sid),
+                   lambda:store.save_bookmark(sid, 1, row['sha256'], [], 'Replacement'),
+                   lambda:store.delete_bookmark(sid, 1, row['sha256'])):
+        with pytest.raises(SessionIntegrity) as error:action()
+        assert 'private' not in str(error.value)
+        assert path.read_bytes() == raw
+
+
+def test_bookmark_symlink_directory_and_duplicate_json_keys_are_refused(tmp_path):
+    store, sid, row, path = bookmark_fixture(tmp_path)
+    target = tmp_path / 'outside.json';target.write_text('private outside')
+    path.symlink_to(target)
+    for action in (lambda:store.bookmarks(sid),
+                   lambda:store.save_bookmark(sid, 1, row['sha256']),
+                   lambda:store.delete_bookmark(sid, 1, row['sha256'])):
+        with pytest.raises(SessionIntegrity):action()
+    assert target.read_text() == 'private outside' and path.is_symlink()
+    path.unlink();path.mkdir()
+    with pytest.raises(SessionIntegrity):store.save_bookmark(sid, 1, row['sha256'])
+    path.rmdir()
+    path.write_text('{"format":"first","format":"second"}')
+    with pytest.raises(SessionIntegrity):store.save_bookmark(sid, 1, row['sha256'])
+
+
+def test_bookmark_atomic_replacement_failure_preserves_existing_file(tmp_path, monkeypatch):
+    store, sid, row, path = bookmark_fixture(tmp_path)
+    store.save_bookmark(sid, 1, row['sha256'], [], 'Original')
+    original = path.read_bytes()
+    def fail_replace(_self, _target):
+        raise OSError('Synthetic replacement failure')
+    monkeypatch.setattr(Path, 'replace', fail_replace)
+    with pytest.raises(OSError):store.save_bookmark(sid, 1, row['sha256'], [], 'New')
+    assert path.read_bytes() == original and not list(path.parent.glob('bookmarks.*.tmp'))
+
+
+def test_bookmark_api_routes_strict_input_and_no_value_echo(client_enabled):
+    c = client_enabled
+    store = api.app.state.session_store
+    sid = store.create()['session_id']
+    frame, bundle = sample_frame();row = store.capture(sid, bundle, frame)
+    url = f'/api/sessions/{sid}/frames/1/bookmark'
+    assert c.get(f'/api/sessions/{sid}/bookmarks').json()['bookmarks'] == []
+    note = '遮擋 <script>plain text</script>\n檢查 ID'
+    body = {'snapshot_sha256': row['sha256'], 'tags': ['occlusion'], 'note': note}
+    put = c.put(url, json=body)
+    assert put.status_code == 200 and put.json()['bookmarks'][0]['note'] == note
+    assert c.get(f'/api/sessions/{sid}/bookmarks').json() == put.json()
+    for rejected in ({**body, 'note': 'private\x00note'}, {**body, 'note': 'private' * 200},
+                     {**body, 'tags': ['private']}, {**body, 'tags': ['occlusion', 'occlusion']},
+                     {**body, 'note': 123}, {**body, 'extra': 'private'}, {'note': 'private'}):
+        response = c.put(url, json=rejected)
+        assert response.status_code == 422 and 'private' not in response.text
+    assert c.put(url, json={'snapshot_sha256': '0' * 64}).status_code == 409
+    assert c.put(f'/api/sessions/{sid}/frames/2/bookmark', json=body).status_code == 404
+    assert c.request('DELETE', url, json={**body}).status_code == 422
+    assert c.request('DELETE', url, json={'snapshot_sha256': row['sha256']}).json()['bookmarks'] == []
+    assert c.request('DELETE', url, json={'snapshot_sha256': row['sha256']}).status_code == 200
+    assert c.put(url, json={'snapshot_sha256': row['sha256']}).json()['bookmarks'][0]['note'] == ''
+
+
+def test_bookmark_routes_are_opt_in_and_loopback_only(monkeypatch, tmp_path):
+    monkeypatch.delenv('ENABLE_SESSION_STORAGE', raising=False)
+    monkeypatch.setattr(api, 'make_engine', lambda key: FakeEngine(key))
+    sid = 'a' * 32;body = {'snapshot_sha256': 'a' * 64}
+    url = f'/api/sessions/{sid}/frames/1/bookmark'
+    with TestClient(api.app, client=('127.0.0.1', 42)) as c:
+        assert c.get(f'/api/sessions/{sid}/bookmarks').status_code == 404
+        assert c.put(url, json=body).status_code == 404
+        assert c.request('DELETE', url, json=body).status_code == 404
+    monkeypatch.setenv('ENABLE_SESSION_STORAGE', '1')
+    monkeypatch.setattr(api, 'SessionStore', lambda _root: SessionStore(tmp_path / 'local'))
+    with TestClient(api.app, client=('192.0.2.11', 42)) as c:
+        assert c.get(f'/api/sessions/{sid}/bookmarks').status_code == 403
+        assert c.put(url, json=body).status_code == 403
+        assert c.request('DELETE', url, json=body).status_code == 403

@@ -39,3 +39,11 @@ footer{margin:24px 0;color:#acb9c9}@media(max-width:800px){.panels{grid-template
 #loop-status{margin:8px 0 0;font-size:13px;color:#cce5f8;min-height:20px;font-variant-numeric:tabular-nums}
 .loop-endpoints input[aria-invalid="true"]{border-color:#ffca91}
 @media(max-width:520px){.loop-endpoints{grid-template-columns:minmax(0,1fr) 90px}.loop-endpoints button{grid-column:1/-1;margin-bottom:5px}}
+
+#bookmark-tags{display:flex;flex-wrap:wrap;gap:8px 16px;border:1px solid var(--edge);border-radius:8px;margin:10px 0;padding:8px 12px}
+#bookmark-tags label{display:flex;align-items:center;gap:4px}
+#bookmark-note{display:block;width:100%;resize:vertical;min-height:80px;margin:8px 0;padding:10px;border:1px solid #7794b3;border-radius:7px;background:#142333;color:var(--text);font:inherit}
+#bookmarks-list{list-style:none;padding:0;max-height:360px;overflow-y:auto}
+#bookmarks-list li{border-top:1px solid var(--edge);padding:8px 0}
+#bookmarks-list p{white-space:pre-wrap;overflow-wrap:anywhere;margin:6px 8px;font-size:14px}
+#bookmark-editor-status,#bookmarks-status{min-height:20px;color:#cce5f8;font-size:13px}

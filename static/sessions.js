@@ -2,8 +2,8 @@
 (() => {'use strict';
 const by=id=>document.getElementById(id);
 const tr={
-  en:{loopTitle:'A/B loop',loopEnable:'Loop A–B',loopStart:'A · Start frame',loopEnd:'B · End frame',loopSetStart:'Set A to shown frame',loopSetEnd:'Set B to shown frame',loopUnavailable:'Save at least two frames to loop.',loopInvalid:'Choose whole-frame positions with A before B.',loopReady:'Loop enabled · Press Play to repeat',loopOff:'Loop off · Saved-frame positions, including both endpoints',replayPosition:'Playback progress',replayFrame:'Frame',seekTarget:'Jump to',seekCurrent:'Shown',seekRelease:'Release to seek',seekLoading:'Loading frame',replayNotShown:'No frame replayed',play:'Play',pause:'Pause',playbackSpeed:'Speed',playbackNote:'Saved-frame playback: 1× targets 5 frames/s; loading may slow it down.',playbackPlaying:'Playing',playbackPaused:'Paused',playbackEnded:'End of saved frames',playbackError:'Playback stopped after an error',previousFrame:'Previous frame',nextFrame:'Next frame',overlayToggle:'Tracking boxes and Object IDs',overlayLabel:'Tracking boxes and Object IDs',overlayOff:'Tracking overlay hidden.',overlayMissing:'Run tracking analysis, then replay an analysed frame to see IDs.',overlayUnanalysed:'This frame was not analysed. Use Replay analysed frames or run tracking again.',overlayMismatch:'Tracking result does not match this snapshot. Refresh and rerun analysis.',overlayLoading:'Loading saved image…',overlayEmpty:'No confirmed tracked detections in this frame.',overlayReady:'Tracked detections',replayTracked:'Replay analysed frames',title:'Session / Replay',language:'Language',subtitle:'Manually save completed AI result frames to local storage. No automatic camera recording; replay does not rerun inference.',sessions:'Sessions',label:'Label (optional)',create:'Create session',refresh:'Refresh',capture:'Save latest frame',scope:'Storage is opt-in (ENABLE_SESSION_STORAGE=1), localhost-only and limited to 20 sessions × 120 frames.',frames:'Saved frames',replay:'Replay selected frame',download:'Download exact snapshot ZIP',view:'Recorded RGB, depth & point cloud',rgb:'Aligned RGB',depth:'Depth preview',trend:'Temporal metadata trends',trendNote:'Frame-level depth median only: not tracked pixels, metric drift or motion-compensated geometry.',consistency:'Temporal depth consistency',consistencyNote:'Same-grid pixel comparison only. No motion compensation, calibrated distance accuracy or continuous video recording.',pair:'Saved pair',nativeMae:'Native MAE',normalizedMae:'Shape MAE',overlap:'Valid overlap',downloadReport:'Export temporal JSON',noPairs:'Save two compatible frames to compare.',skip:'Skipped incompatible pairs',warning:'Recorded depth is an AI estimate. Relative depth is not metres; no safety or accuracy certification.',disabled:'Enable local storage with ENABLE_SESSION_STORAGE=1 then restart the app.',saved:'Frame saved',created:'Session created',failed:'Request failed',tracking:'Semantic Object Tracking (offline)',trackingNote:'Manually analyse saved frames with YOLO Detect/Segment. CPU only. Object IDs are heuristic 2D associations, NOT identity or world-space trajectories.',trackBackend:'Association',trackBaseline:'Simple association',trackBotSort:'Roboflow BoT-SORT',trackWorkerMissing:'BoT-SORT is unavailable until the local worker is configured.',trackMode:'Mode',segment:'Instance segmentation',detect:'Bounding-box regions',trackRun:'Analyse saved frames',trackDownload:'Export tracking JSON',trackEmpty:'Run an analysis to see Object IDs, depth and camera-space XYZ history.',trackCount:'Objects',trackFrame:'Frame',trackClass:'Class',trackDepth:'Depth',trackXYZ:'Camera XYZ',trackWarning:'Object association may fail when objects cross or disappear; XYZ is in unverified native depth units.',trackRunning:'Tracking analysis running on saved frames…',trackDone:'Tracking analysis completed'},
-  'zh-TW':{loopTitle:'A／B 區間循環',loopEnable:'循環播放 A–B',loopStart:'A · 起始影格',loopEnd:'B · 結束影格',loopSetStart:'將目前影格設為 A',loopSetEnd:'將目前影格設為 B',loopUnavailable:'至少保存兩個影格才能循環播放。',loopInvalid:'請輸入整數影格位置，A 必須小於 B。',loopReady:'已啟用循環 · 按播放反覆觀看',loopOff:'循環已關閉 · 使用保存順序，包含起訖影格',replayPosition:'回放進度',replayFrame:'影格',seekTarget:'跳轉至',seekCurrent:'目前顯示',seekRelease:'放開後跳轉',seekLoading:'正在跳轉至',replayNotShown:'尚未回放影格',play:'播放',pause:'暫停',playbackSpeed:'速度',playbackNote:'依保存順序回放：1× 目標為每秒 5 格；載入較慢時會放慢。',playbackPlaying:'播放中',playbackPaused:'已暫停',playbackEnded:'已播至最後一格',playbackError:'播放因錯誤停止',previousFrame:'上一格',nextFrame:'下一格',overlayToggle:'疊加追蹤框與 Object ID',overlayLabel:'追蹤框與 Object ID',overlayOff:'追蹤疊圖已隱藏。',overlayMissing:'請先執行追蹤分析，再回放已分析影格以查看 ID。',overlayUnanalysed:'這格尚未分析；請點「回放已分析影格」，或重新執行追蹤。',overlayMismatch:'追蹤結果與這份快照不符；請重新整理並重跑分析。',overlayLoading:'正在載入已存影像…',overlayEmpty:'這格沒有已確認的追蹤偵測。',overlayReady:'已追蹤偵測數',replayTracked:'回放已分析影格',title:'工作階段／回放',language:'語言',subtitle:'只在手動操作時將已完成的 AI 影格保存到本機；不會自動錄製相機，也不會在回放時重新推論。',sessions:'工作階段',label:'名稱（可不填）',create:'建立工作階段',refresh:'重新整理',capture:'儲存最新影格',scope:'需主動設定 ENABLE_SESSION_STORAGE=1；僅允許本機，最多 20 個工作階段 × 每個 120 影格。',frames:'已儲存影格',replay:'回放選取影格',download:'下載原始快照 ZIP',view:'已保存的 RGB、深度與 3D 點雲',rgb:'對齊 RGB',depth:'深度預覽',trend:'時間序列摘要',trendNote:'只比較影格層級深度中位數；不表示像素追蹤、物理尺度漂移或姿態補償。',consistency:'時間深度一致性',consistencyNote:'只比較相同影像格點的深度；不含運動補償、測距精度驗證或連續錄影。',pair:'保存影格對',nativeMae:'原始單位 MAE',normalizedMae:'形狀 MAE',overlap:'有效重疊比例',downloadReport:'匯出時間分析 JSON',noPairs:'至少保存兩個相容的影格才能比較。',skip:'不相容而略過的影格對',warning:'深度是 AI 估計；相對深度不是公尺，亦無安全／精度認證。',disabled:'請設定 ENABLE_SESSION_STORAGE=1 後重啟應用。',saved:'影格已保存',created:'工作階段已建立',failed:'操作失敗',tracking:'語意物件追蹤（離線）',trackingNote:'手動以 YOLO Detect／Segment 分析已存影格，僅使用 CPU。Object ID 是 2D 關聯結果，不是身份或世界座標軌跡。',trackBackend:'關聯方式',trackBaseline:'簡易關聯',trackBotSort:'Roboflow BoT-SORT',trackWorkerMissing:'本機 worker 尚未設定，BoT-SORT 暫時無法使用。',trackMode:'模式',segment:'實例分割',detect:'方框區域',trackRun:'分析已存影格',trackDownload:'匯出追蹤 JSON',trackEmpty:'執行分析後會顯示 Object ID、深度與相機座標 XYZ 歷史。',trackCount:'物件數',trackFrame:'影格',trackClass:'類別',trackDepth:'深度',trackXYZ:'相機 XYZ',trackWarning:'物件交會或消失可能造成 ID 中斷；XYZ 使用尚未驗證的深度單位。',trackRunning:'正在分析已存影格…',trackDone:'追蹤分析已完成'}
+  en:{bookmarksTitle:'Frame bookmarks & notes',bookmarksNote:'Mark a shown frame to pause playback, add tags and a note, then Save. Saved bookmarks stay in this local Session.',bookmarkMark:'Mark shown frame',bookmarkTags:'Review tags (optional)',bookmarkIdSwitch:'Suspected ID switch',bookmarkOcclusion:'Occlusion',bookmarkCrossing:'Object crossing',bookmarkNote:'Note (up to 1000 characters)',bookmarkSave:'Save frame bookmark',bookmarkDelete:'Remove frame bookmark',bookmarksLoading:'Loading local bookmarks…',bookmarksEmpty:'No saved bookmarks in this Session.',bookmarksCount:'Saved bookmarks',bookmarksFailed:'Could not load local bookmarks. Refresh to retry.',bookmarkChoose:'Replay a frame to add or edit its bookmark.',bookmarkNew:'No saved bookmark',bookmarkSaved:'Bookmark saved',bookmarkRemoved:'Bookmark removed',bookmarkDraft:'Unsaved changes',bookmarkInvalid:'Use up to 1000 text characters; control characters are not allowed.',bookmarkSaving:'Saving bookmark…',bookmarkGeneral:'General bookmark',loopTitle:'A/B loop',loopEnable:'Loop A–B',loopStart:'A · Start frame',loopEnd:'B · End frame',loopSetStart:'Set A to shown frame',loopSetEnd:'Set B to shown frame',loopUnavailable:'Save at least two frames to loop.',loopInvalid:'Choose whole-frame positions with A before B.',loopReady:'Loop enabled · Press Play to repeat',loopOff:'Loop off · Saved-frame positions, including both endpoints',replayPosition:'Playback progress',replayFrame:'Frame',seekTarget:'Jump to',seekCurrent:'Shown',seekRelease:'Release to seek',seekLoading:'Loading frame',replayNotShown:'No frame replayed',play:'Play',pause:'Pause',playbackSpeed:'Speed',playbackNote:'Saved-frame playback: 1× targets 5 frames/s; loading may slow it down.',playbackPlaying:'Playing',playbackPaused:'Paused',playbackEnded:'End of saved frames',playbackError:'Playback stopped after an error',previousFrame:'Previous frame',nextFrame:'Next frame',overlayToggle:'Tracking boxes and Object IDs',overlayLabel:'Tracking boxes and Object IDs',overlayOff:'Tracking overlay hidden.',overlayMissing:'Run tracking analysis, then replay an analysed frame to see IDs.',overlayUnanalysed:'This frame was not analysed. Use Replay analysed frames or run tracking again.',overlayMismatch:'Tracking result does not match this snapshot. Refresh and rerun analysis.',overlayLoading:'Loading saved image…',overlayEmpty:'No confirmed tracked detections in this frame.',overlayReady:'Tracked detections',replayTracked:'Replay analysed frames',title:'Session / Replay',language:'Language',subtitle:'Manually save completed AI result frames to local storage. No automatic camera recording; replay does not rerun inference.',sessions:'Sessions',label:'Label (optional)',create:'Create session',refresh:'Refresh',capture:'Save latest frame',scope:'Storage is opt-in (ENABLE_SESSION_STORAGE=1), localhost-only and limited to 20 sessions × 120 frames.',frames:'Saved frames',replay:'Replay selected frame',download:'Download exact snapshot ZIP',view:'Recorded RGB, depth & point cloud',rgb:'Aligned RGB',depth:'Depth preview',trend:'Temporal metadata trends',trendNote:'Frame-level depth median only: not tracked pixels, metric drift or motion-compensated geometry.',consistency:'Temporal depth consistency',consistencyNote:'Same-grid pixel comparison only. No motion compensation, calibrated distance accuracy or continuous video recording.',pair:'Saved pair',nativeMae:'Native MAE',normalizedMae:'Shape MAE',overlap:'Valid overlap',downloadReport:'Export temporal JSON',noPairs:'Save two compatible frames to compare.',skip:'Skipped incompatible pairs',warning:'Recorded depth is an AI estimate. Relative depth is not metres; no safety or accuracy certification.',disabled:'Enable local storage with ENABLE_SESSION_STORAGE=1 then restart the app.',saved:'Frame saved',created:'Session created',failed:'Request failed',tracking:'Semantic Object Tracking (offline)',trackingNote:'Manually analyse saved frames with YOLO Detect/Segment. CPU only. Object IDs are heuristic 2D associations, NOT identity or world-space trajectories.',trackBackend:'Association',trackBaseline:'Simple association',trackBotSort:'Roboflow BoT-SORT',trackWorkerMissing:'BoT-SORT is unavailable until the local worker is configured.',trackMode:'Mode',segment:'Instance segmentation',detect:'Bounding-box regions',trackRun:'Analyse saved frames',trackDownload:'Export tracking JSON',trackEmpty:'Run an analysis to see Object IDs, depth and camera-space XYZ history.',trackCount:'Objects',trackFrame:'Frame',trackClass:'Class',trackDepth:'Depth',trackXYZ:'Camera XYZ',trackWarning:'Object association may fail when objects cross or disappear; XYZ is in unverified native depth units.',trackRunning:'Tracking analysis running on saved frames…',trackDone:'Tracking analysis completed'},
+  'zh-TW':{bookmarksTitle:'影格書籤與備註',bookmarksNote:'標記目前顯示的影格會暫停回放；選擇標籤、填寫備註後按儲存。已存書籤只保留在本機 Session。',bookmarkMark:'標記目前影格',bookmarkTags:'檢查標籤（可多選）',bookmarkIdSwitch:'疑似換 ID',bookmarkOcclusion:'遮擋',bookmarkCrossing:'物件交會',bookmarkNote:'備註（最多 1000 字）',bookmarkSave:'儲存影格書籤',bookmarkDelete:'移除影格書籤',bookmarksLoading:'正在讀取本機書籤…',bookmarksEmpty:'此 Session 尚無已存書籤。',bookmarksCount:'已存書籤數',bookmarksFailed:'無法讀取本機書籤，請重新整理再試。',bookmarkChoose:'請先回放影格，再新增或編輯書籤。',bookmarkNew:'尚未建立書籤',bookmarkSaved:'書籤已儲存',bookmarkRemoved:'書籤已移除',bookmarkDraft:'尚未儲存的變更',bookmarkInvalid:'備註最多 1000 字，不可含控制字元。',bookmarkSaving:'正在儲存書籤…',bookmarkGeneral:'一般書籤',loopTitle:'A／B 區間循環',loopEnable:'循環播放 A–B',loopStart:'A · 起始影格',loopEnd:'B · 結束影格',loopSetStart:'將目前影格設為 A',loopSetEnd:'將目前影格設為 B',loopUnavailable:'至少保存兩個影格才能循環播放。',loopInvalid:'請輸入整數影格位置，A 必須小於 B。',loopReady:'已啟用循環 · 按播放反覆觀看',loopOff:'循環已關閉 · 使用保存順序，包含起訖影格',replayPosition:'回放進度',replayFrame:'影格',seekTarget:'跳轉至',seekCurrent:'目前顯示',seekRelease:'放開後跳轉',seekLoading:'正在跳轉至',replayNotShown:'尚未回放影格',play:'播放',pause:'暫停',playbackSpeed:'速度',playbackNote:'依保存順序回放：1× 目標為每秒 5 格；載入較慢時會放慢。',playbackPlaying:'播放中',playbackPaused:'已暫停',playbackEnded:'已播至最後一格',playbackError:'播放因錯誤停止',previousFrame:'上一格',nextFrame:'下一格',overlayToggle:'疊加追蹤框與 Object ID',overlayLabel:'追蹤框與 Object ID',overlayOff:'追蹤疊圖已隱藏。',overlayMissing:'請先執行追蹤分析，再回放已分析影格以查看 ID。',overlayUnanalysed:'這格尚未分析；請點「回放已分析影格」，或重新執行追蹤。',overlayMismatch:'追蹤結果與這份快照不符；請重新整理並重跑分析。',overlayLoading:'正在載入已存影像…',overlayEmpty:'這格沒有已確認的追蹤偵測。',overlayReady:'已追蹤偵測數',replayTracked:'回放已分析影格',title:'工作階段／回放',language:'語言',subtitle:'只在手動操作時將已完成的 AI 影格保存到本機；不會自動錄製相機，也不會在回放時重新推論。',sessions:'工作階段',label:'名稱（可不填）',create:'建立工作階段',refresh:'重新整理',capture:'儲存最新影格',scope:'需主動設定 ENABLE_SESSION_STORAGE=1；僅允許本機，最多 20 個工作階段 × 每個 120 影格。',frames:'已儲存影格',replay:'回放選取影格',download:'下載原始快照 ZIP',view:'已保存的 RGB、深度與 3D 點雲',rgb:'對齊 RGB',depth:'深度預覽',trend:'時間序列摘要',trendNote:'只比較影格層級深度中位數；不表示像素追蹤、物理尺度漂移或姿態補償。',consistency:'時間深度一致性',consistencyNote:'只比較相同影像格點的深度；不含運動補償、測距精度驗證或連續錄影。',pair:'保存影格對',nativeMae:'原始單位 MAE',normalizedMae:'形狀 MAE',overlap:'有效重疊比例',downloadReport:'匯出時間分析 JSON',noPairs:'至少保存兩個相容的影格才能比較。',skip:'不相容而略過的影格對',warning:'深度是 AI 估計；相對深度不是公尺，亦無安全／精度認證。',disabled:'請設定 ENABLE_SESSION_STORAGE=1 後重啟應用。',saved:'影格已保存',created:'工作階段已建立',failed:'操作失敗',tracking:'語意物件追蹤（離線）',trackingNote:'手動以 YOLO Detect／Segment 分析已存影格，僅使用 CPU。Object ID 是 2D 關聯結果，不是身份或世界座標軌跡。',trackBackend:'關聯方式',trackBaseline:'簡易關聯',trackBotSort:'Roboflow BoT-SORT',trackWorkerMissing:'本機 worker 尚未設定，BoT-SORT 暫時無法使用。',trackMode:'模式',segment:'實例分割',detect:'方框區域',trackRun:'分析已存影格',trackDownload:'匯出追蹤 JSON',trackEmpty:'執行分析後會顯示 Object ID、深度與相機座標 XYZ 歷史。',trackCount:'物件數',trackFrame:'影格',trackClass:'類別',trackDepth:'深度',trackXYZ:'相機 XYZ',trackWarning:'物件交會或消失可能造成 ID 中斷；XYZ 使用尚未驗證的深度單位。',trackRunning:'正在分析已存影格…',trackDone:'追蹤分析已完成'}
 };
 let lang=new URLSearchParams(location.search).get('lang');
 if(!tr[lang])try{lang=localStorage.getItem('depthport-language')}catch(e){}
@@ -11,7 +11,7 @@ if(!tr[lang])lang='en';
 function apply(){document.documentElement.lang=lang;by('lang').value=lang;
   document.querySelectorAll('[data-i]').forEach(e=>e.textContent=tr[lang][e.dataset.i]||e.textContent);
   by('tracking-overlay').setAttribute('aria-label',tr[lang].overlayLabel);}
-by('lang').onchange=()=>{lang=by('lang').value;try{localStorage.setItem('depthport-language',lang)}catch(e){}apply();if(lastConsistency)renderConsistency(lastConsistency);if(lastTracking)renderTracking(lastTracking);drawOverlay();updatePlaybackControls()};apply();
+by('lang').onchange=()=>{lang=by('lang').value;try{localStorage.setItem('depthport-language',lang)}catch(e){}apply();if(lastConsistency)renderConsistency(lastConsistency);if(lastTracking)renderTracking(lastTracking);drawOverlay();renderBookmarks();updatePlaybackControls()};apply();
 async function req(url,opt){const r=await fetch(url,{cache:'no-store',...opt});
  let o;try{o=await r.json()}catch(e){o={detail:'Non-JSON response'}}
  if(!r.ok)throw Error(o.detail||('HTTP '+r.status));return o;}
@@ -19,6 +19,10 @@ function message(s){by('status').textContent=s}
 let viewer=null,lastConsistency=null,lastTracking=null,currentReplay=null;
 let replayGeneration=0,framesGeneration=0,trackingGeneration=0,replayLoading=false;
 let resizeObserver=null,playbackRestart=false,progressPreview=null;
+let bookmarkRows=[],bookmarkReady=false,bookmarkLoadError=false,bookmarkGeneration=0,bookmarkWrite=null,bookmarkEditorKey=null,bookmarkNotice='';
+const bookmarkDrafts=new Map(),savedFrameHashes=new Map();
+const bookmarkTags=['id-switch','occlusion','crossing'];
+const bookmarkTagKeys={'id-switch':'bookmarkIdSwitch',occlusion:'bookmarkOcclusion',crossing:'bookmarkCrossing'};
 const playback=window.DepthPortReplayPlayback.create({advance:advancePlayback,onState:updatePlaybackControls,
  onError:()=>message(tr[lang].failed+': '+tr[lang].playbackError)});
 function updatePlaybackControls(){
@@ -28,7 +32,7 @@ function updatePlaybackControls(){
  const key={playing:'playbackPlaying',paused:'playbackPaused',ended:'playbackEnded',error:'playbackError'}[state.status];
  const text=tr[lang][key]+' · '+state.speed+'×';
  if(by('playback-status').textContent!==text)by('playback-status').textContent=text;
- by('overlay-status').setAttribute('aria-live',state.playing?'off':'polite');updateProgress();updateLoopControls();
+ by('overlay-status').setAttribute('aria-live',state.playing?'off':'polite');updateProgress();updateLoopControls();updateBookmarkEditor();
 }
 function pausePlayback(){playbackRestart=false;progressPreview=null;playback.pause()}
 function shownPosition(){
@@ -87,7 +91,7 @@ async function decodedImage(src,id){
  if(!image.naturalWidth||!image.naturalHeight)throw Error('Saved frame image could not be decoded');
  return image;
 }
-async function presentReplay(sid,index,valid=()=>true,keepPrevious=false){
+async function presentReplay(sid,index,valid=()=>true,keepPrevious=false,expectedSnapshot=null){
  const generation=++replayGeneration;
  if(!keepPrevious){currentReplay=null;by('result').hidden=true;by('tracking-overlay').replaceChildren();by('overlay-status').textContent='';by('download').hidden=true}
  replayLoading=true;updatePlaybackControls();
@@ -96,6 +100,7 @@ async function presentReplay(sid,index,valid=()=>true,keepPrevious=false){
   const data=await req('/api/sessions/'+sid+'/frames/'+index+'/replay');
   if(!current())return false;
   if(data.session_id!==sid||String(data.index)!==String(index))throw Error('Saved frame response does not match selection');
+  if(expectedSnapshot&&data.snapshot_sha256!==expectedSnapshot)throw Error('Saved frame does not match bookmark snapshot');
   const [image,depth]=await Promise.all([decodedImage('data:image/png;base64,'+data.rgb_png,'rgb'),decodedImage('data:image/jpeg;base64,'+data.depth_jpeg,'depth')]);
   if(!current())return false;
   const oldImage=by('rgb');if(resizeObserver)resizeObserver.unobserve(oldImage);
@@ -155,6 +160,112 @@ async function replaySelected(){
 }
 async function stepReplay(delta){pausePlayback();const sel=by('frames-list');const i=sel.selectedIndex+delta;
  if(i<0||i>=sel.options.length)return;sel.selectedIndex=i;await replaySelected();}
+
+// Bookmarks are private Session data. Drafts live only in this page until Save.
+function bookmarkKey(target){return target.session_id+':'+target.index+':'+target.snapshot_sha256}
+function bookmarkTarget(){
+ if(!shownPosition()||!currentReplay?.imageReady||savedFrameHashes.get(currentReplay.index)!==currentReplay.snapshot_sha256)return null;
+ return {session_id:currentReplay.session_id,index:currentReplay.index,snapshot_sha256:currentReplay.snapshot_sha256};
+}
+function validBookmarkNote(note){
+ if(typeof note!=='string')return false;
+ const chars=[...note];
+ return chars.length<=1000&&!/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f-\u009f]/.test(note)&&
+  chars.every(c=>c.codePointAt(0)<0xd800||c.codePointAt(0)>0xdfff);
+}
+function bookmarkFields(){return {note:by('bookmark-note').value,tags:bookmarkTags.filter(tag=>by('bookmark-tag-'+tag).checked)}}
+function savedBookmark(target){return target&&bookmarkRows.find(row=>row.index===target.index&&row.snapshot_sha256===target.snapshot_sha256)}
+function updateBookmarkEditor(){
+ const target=bookmarkTarget(),key=target?bookmarkKey(target):null,saved=savedBookmark(target);
+ if(key!==bookmarkEditorKey){
+  bookmarkEditorKey=key;const fields=bookmarkDrafts.get(key)||saved||{note:'',tags:[]};
+  by('bookmark-note').value=fields.note;
+  for(const tag of bookmarkTags)by('bookmark-tag-'+tag).checked=fields.tags.includes(tag);
+ }
+ const available=!!target&&bookmarkReady&&!bookmarkWrite,editable=available&&!replayLoading&&!progressPreview;
+ by('bookmark-mark').disabled=!available;
+ by('bookmark-note').disabled=!editable;
+ for(const tag of bookmarkTags)by('bookmark-tag-'+tag).disabled=!editable;
+ const fields=bookmarkFields(),valid=validBookmarkNote(fields.note);
+ by('bookmark-save').disabled=!editable||!valid;
+ by('bookmark-delete').disabled=!editable||!saved;
+ by('bookmark-note').setAttribute('aria-invalid',String(!valid));
+ const draft=bookmarkDrafts.get(key);
+ const text=!target?tr[lang].bookmarkChoose:tr[lang].replayFrame+' '+shownPosition()+' / '+by('frames-list').options.length+' · '+
+  (bookmarkWrite?tr[lang].bookmarkSaving:!valid?tr[lang].bookmarkInvalid:draft?tr[lang].bookmarkDraft:saved?tr[lang].bookmarkSaved:tr[lang].bookmarkNew)+' · '+[...fields.note].length+' / 1000';
+ if(by('bookmark-editor-status').textContent!==text)by('bookmark-editor-status').textContent=text;
+}
+function freezeBookmark(){
+ pausePlayback();replayGeneration++;replayLoading=false;updatePlaybackControls();
+}
+function editBookmark(){
+ if(bookmarkWrite||!bookmarkReady)return;
+ freezeBookmark();const target=bookmarkTarget();if(!target)return;
+ bookmarkDrafts.set(bookmarkKey(target),bookmarkFields());updateBookmarkEditor();
+}
+function markBookmark(){
+ if(by('bookmark-mark').disabled)return;
+ freezeBookmark();by('bookmark-note').focus();
+}
+function checkBookmarks(data,sid){
+ if(data?.format!=='depthport.session-bookmarks.v1'||data.session_id!==sid||!Array.isArray(data.bookmarks)||data.bookmarks.length>120)throw Error('Invalid bookmark response');
+ const seen=new Set();
+ for(const row of data.bookmarks){
+  if(!row||!Number.isInteger(row.index)||seen.has(row.index)||!savedFrameHashes.has(row.index)||
+   typeof row.snapshot_sha256!=='string'||!/^[a-f0-9]{64}$/.test(row.snapshot_sha256)||savedFrameHashes.get(row.index)!==row.snapshot_sha256||
+   !Array.isArray(row.tags)||row.tags.length>3||new Set(row.tags).size!==row.tags.length||row.tags.some(tag=>!bookmarkTags.includes(tag))||
+   !validBookmarkNote(row.note)||!Number.isFinite(row.updated_at))throw Error('Invalid bookmark response');
+  seen.add(row.index);
+ }
+ return data.bookmarks.slice().sort((a,b)=>a.index-b.index);
+}
+function renderBookmarks(){
+ const list=by('bookmarks-list');list.replaceChildren();
+ for(const row of bookmarkRows){
+  const item=document.createElement('li'),button=document.createElement('button'),note=document.createElement('p');
+  const ordinal=[...by('frames-list').options].findIndex(o=>o.value===String(row.index))+1;
+  button.textContent=tr[lang].replayFrame+' '+ordinal+' / '+by('frames-list').options.length+' · '+
+   (row.tags.length?row.tags.map(tag=>tr[lang][bookmarkTagKeys[tag]]).join(' · '):tr[lang].bookmarkGeneral);
+  button.setAttribute('data-index',String(row.index));button.onclick=()=>act(()=>jumpBookmark(row));
+  note.textContent=row.note;item.append(button,note);list.append(item);
+ }
+ by('bookmarks-status').textContent=bookmarkLoadError?tr[lang].bookmarksFailed:!bookmarkReady?tr[lang].bookmarksLoading:
+  (bookmarkNotice?bookmarkNotice+' · ':'')+(bookmarkRows.length?tr[lang].bookmarksCount+': '+bookmarkRows.length:tr[lang].bookmarksEmpty);
+}
+function resetBookmarks(){bookmarkGeneration++;bookmarkRows=[];bookmarkReady=false;bookmarkLoadError=false;bookmarkWrite=null;bookmarkEditorKey=undefined;bookmarkNotice='';renderBookmarks()}
+async function loadBookmarks(sid,frameGeneration){
+ const generation=++bookmarkGeneration;
+ const current=()=>generation===bookmarkGeneration&&frameGeneration===framesGeneration&&sid===by('sessions-list').value;
+ try{const data=await req('/api/sessions/'+sid+'/bookmarks');if(!current())return;
+  bookmarkRows=checkBookmarks(data,sid);bookmarkReady=true;
+ }catch(error){if(!current())return;bookmarkLoadError=true;bookmarkReady=false}
+ if(current()){bookmarkEditorKey=undefined;renderBookmarks();updateBookmarkEditor()}
+}
+async function writeBookmark(remove=false){
+ const target=bookmarkTarget();if(!target||!bookmarkReady||bookmarkWrite)return;
+ freezeBookmark();const fields=bookmarkFields();
+ if(!remove&&!validBookmarkNote(fields.note)){message(tr[lang].bookmarkInvalid);return}
+ const key=bookmarkKey(target),draft=bookmarkDrafts.get(key),token={target,key,framesGeneration};
+ if(remove&&!savedBookmark(target))return;
+ bookmarkWrite=token;bookmarkNotice='';updateBookmarkEditor();
+ const current=()=>bookmarkWrite===token&&token.framesGeneration===framesGeneration&&target.session_id===by('sessions-list').value;
+ try{
+  const data=await req('/api/sessions/'+target.session_id+'/frames/'+target.index+'/bookmark',{method:remove?'DELETE':'PUT',headers:{'Content-Type':'application/json'},
+   body:JSON.stringify({snapshot_sha256:target.snapshot_sha256,...(remove?{}:fields)})});
+  if(!current())return;
+  bookmarkRows=checkBookmarks(data,target.session_id);
+  if(bookmarkDrafts.get(key)===draft)bookmarkDrafts.delete(key);
+  if(bookmarkEditorKey===key)bookmarkEditorKey=undefined;
+  bookmarkNotice=tr[lang][remove?'bookmarkRemoved':'bookmarkSaved'];
+ }catch(error){if(current()){bookmarkNotice=tr[lang].failed+': '+error.message;message(bookmarkNotice)}}
+ finally{if(current()){bookmarkWrite=null;renderBookmarks();updateBookmarkEditor()}}
+}
+async function jumpBookmark(row){
+ const sid=by('sessions-list').value,generation=framesGeneration;
+ if(!bookmarkReady||!bookmarkRows.includes(row)||savedFrameHashes.get(row.index)!==row.snapshot_sha256)return;
+ freezeBookmark();const valid=()=>sid===by('sessions-list').value&&generation===framesGeneration;
+ if(await presentReplay(sid,row.index,valid,true,row.snapshot_sha256))by('result').scrollIntoView({block:'start',behavior:'smooth'});
+}
 
 function metric(v){return typeof v==='number' && Number.isFinite(v) ? v.toFixed(4) : '—'}
 function renderConsistency(data){
@@ -239,13 +350,14 @@ async function sessions(){pausePlayback();const status=await req('/api/sessions/
 async function frames(){
  const generation=++framesGeneration,sid=by('sessions-list').value;clearReplay();trackingGeneration++;lastTracking=null;
  by('tracking-replay').disabled=true;by('tracking-download').hidden=true;by('tracking-result').textContent=tr[lang].trackEmpty;
- const sel=by('frames-list');sel.replaceChildren();resetLoop();updateNavigation();
+ const sel=by('frames-list');sel.replaceChildren();savedFrameHashes.clear();resetBookmarks();resetLoop();updateNavigation();
  lastConsistency=null;by('temporal').textContent='';by('consistency-table').replaceChildren();by('consistency-download').hidden=true;
  if(!sid)return;
  const current=()=>generation===framesGeneration&&sid===by('sessions-list').value;
  const data=await req('/api/sessions/'+sid+'/frames');if(!current())return;
- for(const r of data.frames){const o=document.createElement('option');o.value=r.index;o.textContent='#'+r.index+' · '+r.engine+' · '+r.units+' · '+new Date(r.captured_at*1000).toLocaleString();sel.append(o)}
+ for(const r of data.frames){savedFrameHashes.set(r.index,r.sha256);const o=document.createElement('option');o.value=r.index;o.textContent='#'+r.index+' · '+r.engine+' · '+r.units+' · '+new Date(r.captured_at*1000).toLocaleString();sel.append(o)}
  resetLoop();updateNavigation();
+ await loadBookmarks(sid,generation);if(!current())return;
  const t=await req('/api/sessions/'+sid+'/temporal');if(!current())return;by('temporal').textContent=JSON.stringify(t.groups,null,2);
  const report=await req('/api/sessions/'+sid+'/consistency');if(!current())return;
  renderConsistency(report);by('consistency-download').href='/api/sessions/'+sid+'/consistency/report.json';
@@ -269,6 +381,12 @@ by('loop-enabled').onchange=editLoop;
 for(const id of ['loop-start','loop-end']){by(id).oninput=editLoop;by(id).onchange=editLoop}
 by('loop-set-start').onclick=()=>markLoop('loop-start');
 by('loop-set-end').onclick=()=>markLoop('loop-end');
+by('bookmark-mark').onclick=markBookmark;
+by('bookmark-note').onfocus=()=>{if(bookmarkTarget()&&bookmarkReady&&!bookmarkWrite)freezeBookmark()};
+by('bookmark-note').oninput=editBookmark;
+for(const tag of bookmarkTags){by('bookmark-tag-'+tag).onfocus=()=>{if(bookmarkTarget()&&bookmarkReady&&!bookmarkWrite)freezeBookmark()};by('bookmark-tag-'+tag).onchange=editBookmark}
+by('bookmark-save').onclick=()=>act(()=>writeBookmark());
+by('bookmark-delete').onclick=()=>act(()=>writeBookmark(true));
 by('tracking-replay').onclick=()=>act(async()=>{
  const frame=lastTracking?.frames?.[0];if(!frame||lastTracking.session_id!==by('sessions-list').value)return;
  by('frames-list').value=String(frame.index);await replaySelected();by('result').scrollIntoView({block:'start',behavior:'smooth'});

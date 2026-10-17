@@ -34,6 +34,9 @@
 | POST | `/api/sessions/{sid}/capture` | Save one latest completed result |
 | GET | `/api/sessions/{sid}/frames/{index}/replay` | Read-only RGB/depth/compact 3D viewer payload |
 | GET | `/api/sessions/{sid}/frames/{index}/bundle.zip` | Exact original same-frame ZIP |
+| GET | `/api/sessions/{sid}/bookmarks` | List locally saved frame bookmarks and notes |
+| PUT | `/api/sessions/{sid}/frames/{index}/bookmark` | Save/update one bookmark: `{ "snapshot_sha256": "…", "tags": [], "note": "" }` |
+| DELETE | `/api/sessions/{sid}/frames/{index}/bookmark` | Remove one bookmark: `{ "snapshot_sha256": "…" }` |
 | GET | `/api/sessions/{sid}/temporal` | Per-model depth-summary trend only |
 | GET | `/api/sessions/{sid}/consistency` | Same-grid offline pair metrics and skips |
 | GET | `/api/sessions/{sid}/consistency/report.json` | Download offline JSON report |
@@ -116,3 +119,13 @@ Set **A (start)** and **B (end)** as saved-frame positions, or use each endpoint
 Changing an endpoint or toggling the loop pauses playback and cancels pending presentation. Press Play to resume inside the interval, or start at A if the displayed frame is outside it. The progress bar, saved-frame selector and Previous/Next still cover the whole Session; using them pauses playback and preserves the interval. Changing Sessions or refreshing resets A/B to the full saved range and turns looping off.
 
 A/B uses saved-frame order, not source frame IDs or physical elapsed time. Each loop transition retains the exact-frame checks and presents decoded RGB/depth, matching boxes/IDs and point cloud together. A failed read or decode stops at the last complete frame with an error. Looping only reads the local archive; it does not run inference, change tracking results or upload data.
+
+## Frame bookmarks and notes
+
+Use **Mark shown frame** to pause playback and mark the last fully displayed frame; any pending replay is cancelled first. Select any combination of **Suspected ID switch**, **Occlusion** and **Crossing**, or leave the tags empty for a general bookmark. Add a plain-text note of up to **1000 Unicode characters**, then explicitly **Save/update**. Each saved frame has at most one bookmark. Remove the displayed frame's saved bookmark with **Remove bookmark**.
+
+Choose a bookmark in the list to jump back to its exact saved frame. This pauses playback and retains the A/B interval; RGB/depth, tracking boxes/IDs and progress commit together through the usual replay checks. A bookmark anchors the Session ID, saved frame index and snapshot SHA-256, rather than the source `frame_id`. Tags flag observations for review; they do not establish that an ID switch occurred.
+
+Unsent edits are kept in page memory per exact frame while navigating. Only **Save/update** writes them to disk; reloading the browser retains saved notes and discards unsaved drafts. Saved records live in **`outputs/sessions/<UUID4>/bookmarks.json`**, separate from `session.json`, original frame ZIPs and `tracking.json`. They remain local, are excluded from the public source archive, and are not added to downloaded original bundles or tracking reports. Bookmarking does not capture frames, run analysis/inference or upload anything.
+
+The bookmark API uses the same storage opt-in and loopback restrictions as replay. GET and both mutations return the full `depthport.session-bookmarks.v1` document, containing `session_id` and a `bookmarks` list. PUT accepts unique tags from `id-switch`, `occlusion` and `crossing`; an empty list is allowed. PUT and DELETE require the exact frame's `snapshot_sha256`. Invalid or mismatched snapshots are rejected without changing saved records.

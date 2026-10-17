@@ -916,6 +916,16 @@ class NewSession(BaseModel):
     label: str = Field(default='', max_length=80)
 
 
+class BookmarkIdentity(BaseModel):
+    model_config = {'extra': 'forbid', 'strict': True}
+    snapshot_sha256: str = Field(min_length=64, max_length=64, pattern=r'^[0-9a-f]{64}$')
+
+
+class BookmarkRequest(BookmarkIdentity):
+    tags: list[Literal['id-switch', 'occlusion', 'crossing']] = Field(default_factory=list, max_length=3)
+    note: str = Field(default='', max_length=1000)
+
+
 def session_failure(exc: SessionError):
     if isinstance(exc, SessionNotFound): code=404
     elif isinstance(exc, SessionLimit): code=413
@@ -950,6 +960,27 @@ def sessions_create(request: Request, body: NewSession):
 def sessions_frames(request: Request,sid:str):
     store=local_session_store(request)
     try:return store.frames(sid)
+    except SessionError as exc:raise session_failure(exc) from exc
+
+
+@app.get('/api/sessions/{sid}/bookmarks')
+def sessions_bookmarks(request: Request, sid: str):
+    store = local_session_store(request)
+    try:return store.bookmarks(sid)
+    except SessionError as exc:raise session_failure(exc) from exc
+
+
+@app.put('/api/sessions/{sid}/frames/{index}/bookmark')
+def sessions_bookmark_save(request: Request, sid: str, index: int, body: BookmarkRequest):
+    store = local_session_store(request)
+    try:return store.save_bookmark(sid, index, body.snapshot_sha256, body.tags, body.note)
+    except SessionError as exc:raise session_failure(exc) from exc
+
+
+@app.delete('/api/sessions/{sid}/frames/{index}/bookmark')
+def sessions_bookmark_delete(request: Request, sid: str, index: int, body: BookmarkIdentity):
+    store = local_session_store(request)
+    try:return store.delete_bookmark(sid, index, body.snapshot_sha256)
     except SessionError as exc:raise session_failure(exc) from exc
 
 

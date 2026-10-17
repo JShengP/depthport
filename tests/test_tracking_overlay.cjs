@@ -37,6 +37,7 @@ class Element {
  querySelector(selector){const match=selector.match(/^\[value="([^"]+)"\]$/);return match?this.children.find(c=>c.value===match[1]):null}
  getContext(){return null}
  scrollIntoView(){}
+ focus(){this.focused=true;this.onfocus?.()}
  replaceWith(node){if(!this._replace)throw Error('Element is not mounted');this._replace(node)}
 }
 function makeOverlay(){
@@ -244,19 +245,25 @@ function makeUI(){
   hide:()=>{document.hidden=true;documentEvents.visibilitychange()},pagehide:()=>windowEvents.pagehide()};
 }
 const flush=async()=>{for(let i=0;i<4;i++)await new Promise(resolve=>setImmediate(resolve))};
-async function startUI({delayTracking=false,delayFrames=false,trackingReport=null,frameIndices=[1,2,3]}={}){
+async function startUI({delayTracking=false,delayFrames=false,delayBookmarks=false,bookmarks=[],trackingReport=null,frameIndices=[1,2,3]}={}){
  const ui=makeUI();
  ui.respond('/api/sessions/status',{tracking_worker_configured:true});await flush();
  ui.respond('/api/sessions',{sessions:[{session_id:'session-a',label:'A',frame_count:3},{session_id:'session-b',label:'B',frame_count:3}]});await flush();
  if(delayFrames)return ui;
- await finishFrames(ui,'session-a',!delayTracking,trackingReport,frameIndices);return ui;
+ await finishFrames(ui,'session-a',!delayTracking,trackingReport,frameIndices,bookmarks,delayBookmarks);return ui;
 }
-async function finishFrames(ui,sid,withTracking=true,trackingReport=null,frameIndices=[1,2,3]){
- ui.respond('/api/sessions/'+sid+'/frames',{frames:frameIndices.map(index=>({index,engine:'da2-small',units:'relative',captured_at:1}))});await flush();
+async function finishFrames(ui,sid,withTracking=true,trackingReport=null,frameIndices=[1,2,3],bookmarks=[],delayBookmarks=false){
+ ui.respond('/api/sessions/'+sid+'/frames',{frames:frameIndices.map(index=>({index,sha256:hash,engine:'da2-small',units:'relative',captured_at:1}))});await flush();
+ if(delayBookmarks)return;
+ ui.respond('/api/sessions/'+sid+'/bookmarks',bookmarkResponse(sid,bookmarks));await flush();
  ui.respond('/api/sessions/'+sid+'/temporal',{groups:[]});await flush();
  ui.respond('/api/sessions/'+sid+'/consistency',{pairs:[],skipped_pairs:[]});await flush();
  if(withTracking){ui.respond('/api/sessions/'+sid+'/tracking/report.json',trackingReport||report({session_id:sid}));await flush()}
 }
+function bookmarkRecord(index=1,overrides={}){
+ return {index,snapshot_sha256:hash,tags:[],note:'',updated_at:1767225600,...overrides};
+}
+function bookmarkResponse(sid,bookmarks=[]){return {format:'depthport.session-bookmarks.v1',session_id:sid,bookmarks}}
 function replayResponse(sid,index){
  return {...replay({session_id:sid,index}),rgb_png:sid+'-'+index,depth_jpeg:sid+'-depth-'+index,
   points:'points-'+sid+'-'+index,count:index,intrinsics:{},depth_stats:{},frame_timestamp:1,note:'saved'};
@@ -752,4 +759,192 @@ test('a failed A/B wrap preserves the last complete frame and stops with an erro
   assert.match(e['playback-status'].textContent,/error/);assert.match(e.status.textContent,/Playback stopped after an error/);
   assert.equal(replayRequests(ui).length,2);
  }
+});
+
+function bookmarkWrites(ui){return ui.pending.filter(p=>/\/bookmark$/.test(p.url))}
+function descendants(node){return [node,...node.children.flatMap(descendants)]}
+function bookmarkJumpButtons(ui){return descendants(ui.elements['bookmarks-list']).filter(n=>n.tagName==='button')}
+function editBookmark(ui,note,tags=[]){
+ const e=ui.elements;e['bookmark-note'].value=note;e['bookmark-note'].oninput();
+ for(const tag of ['id-switch','occlusion','crossing']){
+  const input=e['bookmark-tag-'+tag];input.checked=tags.includes(tag);input.onchange();
+ }
+}
+
+test('bookmarks require a committed frame and save explicit notes and tags against its exact snapshot',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;
+ assert.equal(e['bookmark-mark'].disabled,true);assert.equal(e['bookmark-save'].disabled,true);
+ assert.equal(bookmarkWrites(ui).length,0);await showFirst(ui);
+ assert.equal(e['bookmark-mark'].disabled,false);e['bookmark-mark'].onclick();await flush();
+ assert.equal(e['bookmark-note'].focused,true);
+ const note='<img src=x onerror="bad()"> suspected switch & crossing';
+ editBookmark(ui,note,['id-switch','crossing']);assert.equal(bookmarkWrites(ui).length,0,'typing must not save automatically');
+ const saving=e['bookmark-save'].onclick();await flush();
+ const write=bookmarkWrites(ui).at(-1);assert.equal(write.url,'/api/sessions/session-a/frames/1/bookmark');
+ assert.equal(write.opt.method,'PUT');
+ assert.deepEqual(JSON.parse(write.opt.body),{snapshot_sha256:hash,tags:['id-switch','crossing'],note});
+ ui.respond(write.url,bookmarkResponse('session-a',[bookmarkRecord(1,{note,tags:['id-switch','crossing']})]));await saving;
+ assert.ok(e['bookmarks-list'].textContent.includes(note),'saved user text must be displayed literally');
+ assert.equal(bookmarkJumpButtons(ui).length,1);assert.equal(e['bookmark-delete'].disabled,false);
+});
+
+test('saved bookmarks load on Session selection and updating a note is visible after reloading',async()=>{
+ const first=bookmarkRecord(1,{note:'old note',tags:['occlusion']}),ui=await startUI({bookmarks:[first]}),e=ui.elements;
+ assert.equal(bookmarkJumpButtons(ui).length,1);assert.ok(e['bookmarks-list'].textContent.includes('old note'));
+ await showFirst(ui);assert.equal(e['bookmark-note'].value,'old note');assert.equal(e['bookmark-tag-occlusion'].checked,true);
+ editBookmark(ui,'reviewed crossing',['crossing']);const saving=e['bookmark-save'].onclick();await flush();
+ const updated=bookmarkRecord(1,{note:'reviewed crossing',tags:['crossing']});
+ ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',[updated]));await saving;
+ e['sessions-list'].value='session-b';const b=e['sessions-list'].onchange();await flush();await finishFrames(ui,'session-b');await b;
+ e['sessions-list'].value='session-a';const a=e['sessions-list'].onchange();await flush();await finishFrames(ui,'session-a',true,null,[1,2,3],[updated]);await a;
+ await showFirst(ui);assert.equal(e['bookmark-note'].value,'reviewed crossing');
+ assert.equal(e['bookmark-tag-crossing'].checked,true);assert.equal(e['bookmark-tag-occlusion'].checked,false);
+ assert.equal(bookmarkJumpButtons(ui).length,1);
+});
+
+test('marking during pending autoplay binds to the displayed frame and cancels late images',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);
+ e['playback-play'].onclick();await ui.tick(0);
+ ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();
+ e['bookmark-mark'].onclick();editBookmark(ui,'occlusion starts here',['occlusion']);
+ const saving=e['bookmark-save'].onclick();await flush();
+ assert.equal(bookmarkWrites(ui).at(-1).url,'/api/sessions/session-a/frames/1/bookmark');
+ await ui.decodeFrame('session-a',2);await ui.tick(1000);
+ assert.equal(e.rgb.src,'data:image/png;base64,session-a-1');assertProgress(ui,1,3);
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');assert.match(e['playback-status'].textContent,/Paused/);
+ ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',[bookmarkRecord(1,{note:'occlusion starts here',tags:['occlusion']})]));await saving;
+});
+
+test('bookmark focus pauses playback and cancels an in-flight progress seek before editing',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);
+ const seek=scrub(ui,3);await flush();ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await flush();
+ e['bookmark-note'].focus();editBookmark(ui,'shown first frame');
+ await ui.decodeFrame('session-a',3);await seek;assertProgress(ui,1,3);
+ assert.equal(e.rgb.src,'data:image/png;base64,session-a-1');assert.equal(e['frames-list'].value,'1');
+ const saving=e['bookmark-save'].onclick();await flush();assert.equal(bookmarkWrites(ui).at(-1).url,'/api/sessions/session-a/frames/1/bookmark');
+ ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',[bookmarkRecord(1,{note:'shown first frame'})]));await saving;
+});
+
+test('jumping to a bookmark presents matching images, progress and IDs while retaining A/B',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence(),bookmarks:[bookmarkRecord(3,{note:'crossing'})]}),e=ui.elements;
+ await showFirst(ui);configureLoop(ui,1,2);e['playback-play'].onclick();await ui.tick(0);
+ ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();
+ const image=e.rgb,jumping=bookmarkJumpButtons(ui)[0].onclick();await flush();
+ ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await flush();
+ assert.equal(e.rgb,image,'jump keeps the displayed image while the target loads');
+ await ui.decodeFrame('session-a',3);await jumping;await ui.decodeFrame('session-a',2);await ui.tick(1000);
+ assert.equal(e.rgb.src,'data:image/png;base64,session-a-3');assertProgress(ui,3,3);
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0003');
+ assert.equal(e['bookmark-note'].value,'crossing');assert.equal(e['loop-enabled'].checked,true);
+ assert.equal(e['loop-start'].value,'1');assert.equal(e['loop-end'].value,'2');assert.match(e['playback-status'].textContent,/Paused/);
+});
+
+test('a bookmarked jump rejects a changed snapshot and retains the last complete replay',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence(),bookmarks:[bookmarkRecord(3,{note:'original snapshot only'})]}),e=ui.elements;
+ await showFirst(ui);const image=e.rgb,depth=e.depth,jumping=bookmarkJumpButtons(ui)[0].onclick();await flush();
+ ui.respond('/api/sessions/session-a/frames/3/replay',{...replayResponse('session-a',3),snapshot_sha256:otherHash});await jumping;await flush();
+ assert.equal(e.rgb,image);assert.equal(e.depth,depth);assertProgress(ui,1,3);assert.equal(e['frames-list'].value,'1');
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');assert.equal(ui.cloudUpdates.length,1);
+ assert.equal(ui.decoding.filter(item=>!item.done).length,0,'a mismatched bookmark target must not decode or present');
+ assert.match(e.status.textContent,/snapshot|Request failed/i);assert.equal(e['bookmark-note'].value,'');
+});
+
+test('an older Session bookmark list cannot overwrite the newly selected Session',async()=>{
+ const ui=await startUI({delayBookmarks:true}),e=ui.elements;
+ e['sessions-list'].value='session-b';const switched=e['sessions-list'].onchange();await flush();
+ await finishFrames(ui,'session-b',true,null,[1,2,3],[bookmarkRecord(2,{note:'new Session note'})]);await switched;
+ ui.respond('/api/sessions/session-a/bookmarks',bookmarkResponse('session-a',[bookmarkRecord(1,{note:'stale Session note'})]));await flush();
+ assert.equal(e['sessions-list'].value,'session-b');assert.ok(e['bookmarks-list'].textContent.includes('new Session note'));
+ assert.equal(e['bookmarks-list'].textContent.includes('stale Session note'),false);
+ assert.equal(ui.pending.some(p=>p.url==='/api/sessions/session-a/temporal'),false);
+});
+
+test('an old Session save response cannot replace another Session list or discard its draft',async()=>{
+ const ui=await startUI(),e=ui.elements;await showFirst(ui);editBookmark(ui,'saving in A');
+ const saving=e['bookmark-save'].onclick();await flush();
+ e['sessions-list'].value='session-b';const switched=e['sessions-list'].onchange();await flush();
+ await finishFrames(ui,'session-b',true,null,[1,2,3],[bookmarkRecord(1,{note:'B saved note'})]);await switched;
+ await showSaved(ui,1,{sid:'session-b'});editBookmark(ui,'B draft',['crossing']);
+ ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',[bookmarkRecord(1,{note:'saving in A'})]));await saving;
+ assert.equal(e['bookmark-note'].value,'B draft');assert.equal(e['bookmark-tag-crossing'].checked,true);
+ assert.ok(e['bookmarks-list'].textContent.includes('B saved note'));assert.equal(e['bookmarks-list'].textContent.includes('saving in A'),false);
+});
+
+test('failed bookmark updates preserve the draft and saved list without sending parallel writes',async()=>{
+ const saved=bookmarkRecord(1,{note:'saved note'}),ui=await startUI({bookmarks:[saved]}),e=ui.elements;await showFirst(ui);
+ editBookmark(ui,'unsaved review',['id-switch']);const saving=e['bookmark-save'].onclick();await flush();
+ assert.equal(e['bookmark-save'].disabled,true);e['bookmark-save'].onclick();e['bookmark-delete'].onclick();await flush();
+ assert.equal(bookmarkWrites(ui).length,1,'busy mutations must not overlap');
+ ui.respond('/api/sessions/session-a/frames/1/bookmark',{detail:'Storage unavailable'},false,500);await saving;
+ assert.equal(e['bookmark-note'].value,'unsaved review');assert.equal(e['bookmark-tag-id-switch'].checked,true);
+ assert.ok(e['bookmarks-list'].textContent.includes('saved note'));assert.equal(e['bookmarks-list'].textContent.includes('unsaved review'),false);
+ assert.equal(e['bookmark-save'].disabled,false);assert.match(e['bookmarks-status'].textContent,/error|fail|Storage/i);
+ const next=scrub(ui,2);await flush();await completeReplay(ui,2);await next;
+ const back=scrub(ui,1);await flush();await completeReplay(ui,1);await back;
+ assert.equal(e['bookmark-note'].value,'unsaved review');assert.equal(e['bookmark-tag-id-switch'].checked,true);
+ assert.equal(bookmarkWrites(ui).length,1,'navigation must not auto-save a draft');
+});
+
+test('bookmark drafts are independent for saved snapshots with repeated source frame IDs',async()=>{
+ const ui=await startUI(),e=ui.elements;await showFirst(ui);editBookmark(ui,'first snapshot draft',['occlusion']);
+ const next=scrub(ui,2);await flush();
+ ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();await ui.decodeFrame('session-a',2);await next;
+ assert.equal(e['bookmark-note'].value,'');editBookmark(ui,'second snapshot draft',['crossing']);
+ const back=scrub(ui,1);await flush();await completeReplay(ui,1);await back;
+ assert.equal(e['bookmark-note'].value,'first snapshot draft');assert.equal(e['bookmark-tag-occlusion'].checked,true);assert.equal(e['bookmark-tag-crossing'].checked,false);
+ const again=scrub(ui,2);await flush();await completeReplay(ui,2);await again;
+ assert.equal(e['bookmark-note'].value,'second snapshot draft');assert.equal(e['bookmark-tag-crossing'].checked,true);
+ assert.equal(bookmarkWrites(ui).length,0);
+});
+
+test('deleting a bookmark targets the current saved snapshot and leaves other bookmarks intact',async()=>{
+ const one=bookmarkRecord(1,{note:'first'}),two=bookmarkRecord(2,{note:'second'}),ui=await startUI({bookmarks:[one,two]}),e=ui.elements;await showFirst(ui);
+ editBookmark(ui,'x'.repeat(1001));assert.equal(e['bookmark-save'].disabled,true);assert.equal(e['bookmark-delete'].disabled,false);
+ const deleting=e['bookmark-delete'].onclick();await flush();const write=bookmarkWrites(ui).at(-1);
+ assert.equal(write.url,'/api/sessions/session-a/frames/1/bookmark');assert.equal(write.opt.method,'DELETE');
+ assert.deepEqual(JSON.parse(write.opt.body),{snapshot_sha256:hash});
+ ui.respond(write.url,bookmarkResponse('session-a',[two]));await deleting;
+ assert.equal(e['bookmark-delete'].disabled,true);assert.equal(e['bookmark-note'].value,'');assert.equal(bookmarkJumpButtons(ui).length,1);
+ assert.ok(e['bookmarks-list'].textContent.includes('second'));assert.equal(e['bookmarks-list'].textContent.includes('first'),false);
+});
+
+test('an empty general bookmark is allowed, while overlong notes cannot be submitted',async()=>{
+ const ui=await startUI(),e=ui.elements;await showFirst(ui);
+ for(const note of ['x'.repeat(1001),'hidden\u0000control','hidden\u0085control','unpaired\ud800','unpaired\udfff']){
+  editBookmark(ui,note);assert.equal(e['bookmark-save'].disabled,true);
+  e['bookmark-save'].onclick();await flush();assert.equal(bookmarkWrites(ui).length,0);
+ }
+ editBookmark(ui,'');assert.equal(e['bookmark-save'].disabled,false);const saving=e['bookmark-save'].onclick();await flush();
+ assert.deepEqual(JSON.parse(bookmarkWrites(ui).at(-1).opt.body),{snapshot_sha256:hash,tags:[],note:''});
+ ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',[bookmarkRecord(1)]));await saving;
+ assert.equal(bookmarkJumpButtons(ui).length,1);assert.equal(e['bookmark-delete'].disabled,false);
+});
+
+test('bookmark note limits count Unicode characters and preserve permitted tabs and newlines',async()=>{
+ const ui=await startUI(),e=ui.elements;await showFirst(ui);const note='😀'.repeat(997)+'\n\t終';
+ editBookmark(ui,note);assert.equal(e['bookmark-save'].disabled,false);const saving=e['bookmark-save'].onclick();await flush();
+ assert.equal(JSON.parse(bookmarkWrites(ui).at(-1).opt.body).note,note);
+ ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',[bookmarkRecord(1,{note})]));await saving;
+ assert.ok(e['bookmarks-list'].textContent.includes(note));
+});
+
+test('a bookmark list with stale snapshot identity cannot enable annotations or block normal replay',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence(),bookmarks:[bookmarkRecord(1,{snapshot_sha256:otherHash,note:'wrong snapshot note'})]}),e=ui.elements;
+ assert.equal(bookmarkJumpButtons(ui).length,0);assert.equal(e['bookmarks-list'].textContent.includes('wrong snapshot note'),false);
+ await showFirst(ui);assertProgress(ui,1,3);
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');
+ assert.equal(e['bookmark-save'].disabled,true);assert.equal(e['bookmark-delete'].disabled,true);
+ assert.equal(bookmarkWrites(ui).length,0);
+});
+
+test('a save completing after navigation updates its list without overwriting another frame draft',async()=>{
+ const ui=await startUI(),e=ui.elements;await showSaved(ui,2);editBookmark(ui,'keep second frame draft',['crossing']);
+ const first=scrub(ui,1);await flush();await completeReplay(ui,1);await first;editBookmark(ui,'save first frame',['id-switch']);
+ const saving=e['bookmark-save'].onclick();await flush();const next=scrub(ui,2);await flush();await completeReplay(ui,2);await next;
+ assert.equal(e['bookmark-note'].value,'keep second frame draft');assert.equal(e['bookmark-note'].disabled,true);
+ ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',[bookmarkRecord(1,{note:'save first frame',tags:['id-switch']})]));await saving;
+ assertProgress(ui,2,3);assert.equal(e['bookmark-note'].value,'keep second frame draft');assert.equal(e['bookmark-tag-crossing'].checked,true);
+ assert.ok(e['bookmarks-list'].textContent.includes('save first frame'));assert.equal(bookmarkWrites(ui).length,1);
+ const back=scrub(ui,1);await flush();await completeReplay(ui,1);await back;
+ assert.equal(e['bookmark-note'].value,'save first frame');assert.equal(e['bookmark-tag-id-switch'].checked,true);
 });

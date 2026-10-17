@@ -22,6 +22,8 @@
 <label><span data-i="playbackSpeed">Speed</span> <select id="playback-speed"><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label>
 <button id="frame-prev" data-i="previousFrame" disabled>Previous frame</button>
 <button id="frame-next" data-i="nextFrame" disabled>Next frame</button>
+<button id="bookmark-mark" data-i="bookmarkMark" disabled>Mark shown frame</button>
+<a href="#bookmarks-panel" data-i="bookmarksTitle">Frame bookmarks &amp; notes</a>
 <label class="overlay-toggle"><input type="checkbox" id="overlay-enabled" checked><span data-i="overlayToggle">Tracking boxes and Object IDs</span></label></div>
 <p id="playback-status" role="status"></p><p data-i="playbackNote">Saved-frame playback: 1× targets 5 frames/s; loading may slow it down.</p>
 <div class="replay-progress-control"><label for="replay-progress" data-i="replayPosition">Playback progress</label>
@@ -41,6 +43,18 @@
 <figure><img id="depth" alt="Saved depth preview"><figcaption data-i="depth">Depth preview</figcaption></figure>
 <div class="cloud"><canvas id="cloud" aria-label="Stored 3D points"></canvas></div></div>
 <p id="model"></p><pre id="details"></pre></section>
+<section id="bookmarks-panel"><h2 data-i="bookmarksTitle">Frame bookmarks &amp; notes</h2>
+<p data-i="bookmarksNote">Mark a shown frame to pause playback, add tags and a note, then Save. Saved bookmarks stay in this local Session.</p>
+<p id="bookmark-editor-status" role="status"></p>
+<fieldset id="bookmark-tags"><legend data-i="bookmarkTags">Review tags (optional)</legend>
+<label><input id="bookmark-tag-id-switch" type="checkbox" disabled><span data-i="bookmarkIdSwitch">Suspected ID switch</span></label>
+<label><input id="bookmark-tag-occlusion" type="checkbox" disabled><span data-i="bookmarkOcclusion">Occlusion</span></label>
+<label><input id="bookmark-tag-crossing" type="checkbox" disabled><span data-i="bookmarkCrossing">Object crossing</span></label></fieldset>
+<label for="bookmark-note" data-i="bookmarkNote">Note (up to 1000 characters)</label>
+<textarea id="bookmark-note" rows="3" maxlength="2000" disabled aria-describedby="bookmark-editor-status"></textarea>
+<button id="bookmark-save" data-i="bookmarkSave" disabled>Save frame bookmark</button>
+<button id="bookmark-delete" data-i="bookmarkDelete" disabled>Remove frame bookmark</button>
+<p id="bookmarks-status" role="status"></p><ul id="bookmarks-list"></ul></section>
 <section><h2 data-i="consistency">Temporal depth consistency</h2>
 <p data-i="consistencyNote">Same-grid pixel comparison only. No motion compensation, calibrated distance accuracy or continuous video recording.</p>
 <canvas id="consistency-chart" width="900" height="190" role="img" aria-label="Normalized depth-shape MAE across compatible saved frame pairs"></canvas>

@@ -34,6 +34,9 @@
 | POST | `/api/sessions/{sid}/capture` | 手動儲存最後一個已完成影格 |
 | GET | `/api/sessions/{sid}/frames/{index}/replay` | 讀回 RGB、深度和點雲供瀏覽 |
 | GET | `/api/sessions/{sid}/frames/{index}/bundle.zip` | 原始完整 ZIP |
+| GET | `/api/sessions/{sid}/bookmarks` | 列出本機保存的影格書籤與備註 |
+| PUT | `/api/sessions/{sid}/frames/{index}/bookmark` | 保存／更新一筆書籤：`{ "snapshot_sha256": "…", "tags": [], "note": "" }` |
+| DELETE | `/api/sessions/{sid}/frames/{index}/bookmark` | 移除一筆書籤：`{ "snapshot_sha256": "…" }` |
 | GET | `/api/sessions/{sid}/temporal` | 各模型深度摘要曲線資料 |
 | GET | `/api/sessions/{sid}/consistency` | 離線相容影格的像素差分析 |
 | GET | `/api/sessions/{sid}/consistency/report.json` | 下載時間深度分析 JSON |
@@ -105,3 +108,13 @@ python tools/check_release.py
 調整端點或切換循環會暫停，並取消尚未顯示的載入結果。再按播放時，若目前影格在區間內就繼續，否則從 A 開始。進度條、保存影格選單及上一格／下一格仍可瀏覽整個 Session；手動跳轉會暫停，並保留 A／B 設定。更換 Session 或重新整理會將端點重設為完整保存範圍，並關閉循環。
 
 A／B 依保存順序計算，不是來源 frame ID 或實際經過時間。每次循環跳轉仍會核對同影格資料，待 RGB／深度解碼後，一起更新對應框、ID 與點雲。讀取或解碼失敗時，會停在上一份完整影格並回報錯誤。循環只讀取本機封存，不執行推論、不更改追蹤結果，也不上傳資料。
+
+## 影格書籤與備註
+
+按「**標記目前顯示影格**」會先暫停播放、取消待顯示的回放，並標記最後完整顯示的影格。可複選「**疑似換 ID**」、「**遮擋**」、「**物件交會**」，或不選分類作為一般書籤。輸入最多 **1000 個 Unicode 字元**的純文字備註，再明確按下「**保存／更新**」。每個保存影格最多一筆書籤；「**移除書籤**」可刪除目前顯示影格的已保存書籤。
+
+點選書籤列表即可跳回同一個保存影格，會暫停播放並保留 A／B 區間；RGB／深度、追蹤框／ID 與進度仍依原有完整性檢查一起更新。書籤以 Session ID、保存序號及快照 SHA-256 定位，不以來源 `frame_id` 定位。分類是供後續檢查的人工標記，不代表已確認發生 ID Switch。
+
+未送出的編輯會依確切影格暫存在本頁記憶體，換格後回來仍可繼續編輯。只有按「保存／更新」才寫入磁碟；重新載入網頁會保留已保存備註、捨棄未保存草稿。資料只存於本機 **`outputs/sessions/<UUID4>/bookmarks.json`**，獨立於 `session.json`、原始影格 ZIP 及 `tracking.json`；不加入公開原始碼封裝，也不加入下載的原始影格包或追蹤報告。書籤操作不保存新影格、不執行分析／推論，也不上傳資料。
+
+書籤 API 與回放共用儲存功能啟用及 loopback 限制。GET 與兩種修改操作均回傳完整的 `depthport.session-bookmarks.v1` 文件，內含 `session_id` 與 `bookmarks` 列表。PUT 的 `tags` 可複選且不得重複，值為 `id-switch`、`occlusion`、`crossing`，也可為空列表。PUT 與 DELETE 都須提供同影格的 `snapshot_sha256`；快照無效或不符時拒絕操作，不改動已保存紀錄。

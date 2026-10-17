@@ -9,24 +9,31 @@ import base64
 import hashlib
 import io
 import json
+import math
 import os
 from pathlib import Path
 import re
+import stat
 import struct
 import threading
 import time
+import unicodedata
 import uuid
 import zipfile
 
 import numpy as np
 
 FORMAT = 'depthport.session.v1'
+BOOKMARK_FORMAT = 'depthport.session-bookmarks.v1'
+BOOKMARK_TAGS = ('id-switch', 'occlusion', 'crossing')
+MAX_BOOKMARK_BYTES = 1024 * 1024
 MAX_SESSIONS = 20
 MAX_FRAMES = 120
 MAX_SESSION_BYTES = 256 * 1024 * 1024
 MAX_BUNDLE_BYTES = 20 * 1024 * 1024
 MAX_TOTAL_UNCOMPRESSED = 80 * 1024 * 1024
 _ID = re.compile(r'^[0-9a-f]{32}$')
+_SHA256 = re.compile(r'^[0-9a-f]{64}$')
 _PLY_COUNT = re.compile(rb'^element vertex (\d+)$', re.M)
 _PLY_DTYPE = np.dtype([('x','<f4'),('y','<f4'),('z','<f4'),
                        ('red','u1'),('green','u1'),('blue','u1')])
@@ -223,6 +230,137 @@ class SessionStore:
             if hashlib.sha256(payload).hexdigest()!=row['sha256']:
                 raise SessionIntegrity('Frame SHA-256 mismatch; refusing replay')
             return payload
+
+    @staticmethod
+    def _bookmark_values(snapshot_sha256, tags, note):
+        # Notes are plain local text. Fixed errors never echo submitted notes.
+        if not isinstance(snapshot_sha256, str) or not _SHA256.fullmatch(snapshot_sha256):
+            raise SessionError('Bookmark requires a valid snapshot SHA-256')
+        if (not isinstance(tags, list) or len(tags) > len(BOOKMARK_TAGS) or
+                any(not isinstance(tag, str) or tag not in BOOKMARK_TAGS for tag in tags) or
+                len(set(tags)) != len(tags)):
+            raise SessionError('Bookmark tags must be unique supported categories')
+        if (not isinstance(note, str) or len(note) > 1000 or
+                any(unicodedata.category(c) in ('Cc', 'Cs') and c not in '\n\t' for c in note)):
+            raise SessionError('Bookmark note must be at most 1000 characters without control characters')
+
+    def _bookmark_anchor(self, sid: str, index: int, snapshot_sha256: str):
+        if type(index) is not int or not 1 <= index <= MAX_FRAMES:
+            raise SessionNotFound('Frame index does not exist')
+        rows = self._read_manifest(sid)['frames']
+        if any(not isinstance(row, dict) for row in rows):
+            raise SessionIntegrity('Invalid saved-frame identity')
+        selected = [r for r in rows if r.get('index') == index]
+        if not selected:
+            raise SessionNotFound('Frame index does not exist')
+        if len(selected) != 1:
+            raise SessionIntegrity('Ambiguous saved-frame identity')
+        row = selected[0]
+        if row.get('sha256') != snapshot_sha256:
+            raise SessionIntegrity('Bookmark snapshot does not match the saved frame')
+        try:
+            if hashlib.sha256(self.bundle(sid, index)).hexdigest() != snapshot_sha256:
+                raise SessionIntegrity('Bookmark snapshot does not match the saved frame')
+        except (OSError, KeyError, TypeError) as exc:
+            raise SessionIntegrity('Bookmark saved frame cannot be verified') from exc
+
+    def _read_bookmarks(self, sid: str) -> dict:
+        """Read under the shared lock; fail closed before any replacement."""
+        self._read_manifest(sid)
+        empty = {'format': BOOKMARK_FORMAT, 'session_id': sid, 'bookmarks': []}
+        path = self._folder(sid) / 'bookmarks.json'
+        try:
+            existing = path.lstat()
+        except FileNotFoundError:
+            return empty
+        except OSError as exc:
+            raise SessionIntegrity('Local bookmarks cannot be read') from exc
+        if not stat.S_ISREG(existing.st_mode) or existing.st_size > MAX_BOOKMARK_BYTES:
+            raise SessionIntegrity('Invalid local bookmarks file')
+        flags = os.O_RDONLY | getattr(os, 'O_NOFOLLOW', 0) | getattr(os, 'O_NONBLOCK', 0)
+        try:
+            fd = os.open(path, flags)
+            with os.fdopen(fd, 'rb') as source:
+                opened = os.fstat(source.fileno())
+                if not stat.S_ISREG(opened.st_mode) or opened.st_size > MAX_BOOKMARK_BYTES:
+                    raise SessionIntegrity('Invalid local bookmarks file')
+                raw = source.read(MAX_BOOKMARK_BYTES + 1)
+            if len(raw) > MAX_BOOKMARK_BYTES:
+                raise SessionIntegrity('Local bookmarks exceed the 1 MiB limit')
+            def unique_object(pairs):
+                obj = {}
+                for key, value in pairs:
+                    if key in obj:
+                        raise ValueError('Duplicate JSON key')
+                    obj[key] = value
+                return obj
+            data = json.loads(raw.decode('utf-8'), object_pairs_hook=unique_object)
+            if (not isinstance(data, dict) or set(data) != {'format', 'session_id', 'bookmarks'} or
+                    data['format'] != BOOKMARK_FORMAT or data['session_id'] != sid or
+                    not isinstance(data['bookmarks'], list) or len(data['bookmarks']) > MAX_FRAMES):
+                raise ValueError('Invalid bookmark document')
+            seen = set()
+            for item in data['bookmarks']:
+                if not isinstance(item, dict) or set(item) != {'index', 'snapshot_sha256', 'tags', 'note', 'updated_at'}:
+                    raise ValueError('Invalid bookmark record')
+                index = item['index']
+                if type(index) is not int or index in seen:
+                    raise ValueError('Invalid bookmark index')
+                seen.add(index)
+                self._bookmark_values(item['snapshot_sha256'], item['tags'], item['note'])
+                updated = item['updated_at']
+                if type(updated) not in (int, float) or not math.isfinite(updated) or updated <= 0:
+                    raise ValueError('Invalid bookmark timestamp')
+                self._bookmark_anchor(sid, index, item['snapshot_sha256'])
+            data['bookmarks'].sort(key=lambda item: item['index'])
+            return data
+        except (OSError, ValueError, TypeError, KeyError, OverflowError) as exc:
+            # Includes anchor failures: unrelated or damaged bookmarks must not
+            # be silently overwritten by a later edit or deletion.
+            raise SessionIntegrity('Local bookmarks are invalid or do not match saved frames') from exc
+
+    def bookmarks(self, sid: str) -> dict:
+        with self.lock:
+            return self._read_bookmarks(sid)
+
+    def _save_bookmarks(self, sid: str, data: dict):
+        raw = (json.dumps(data, ensure_ascii=False, allow_nan=False, separators=(',', ':')) + '\n').encode('utf-8')
+        if len(raw) > MAX_BOOKMARK_BYTES:
+            raise SessionLimit('Local bookmarks exceed the 1 MiB limit')
+        folder = self._folder(sid)
+        tmp = folder / ('bookmarks.' + uuid.uuid4().hex + '.tmp')
+        try:
+            _write_private(tmp, raw)
+            tmp.replace(folder / 'bookmarks.json')
+        finally:
+            tmp.unlink(missing_ok=True)
+
+    def save_bookmark(self, sid: str, index: int, snapshot_sha256: str,
+                      tags: list | None = None, note: str = '') -> dict:
+        tags = [] if tags is None else tags
+        self._bookmark_values(snapshot_sha256, tags, note)
+        with self.lock:
+            self._bookmark_anchor(sid, index, snapshot_sha256)
+            data = self._read_bookmarks(sid)
+            records = [r for r in data['bookmarks'] if r['index'] != index]
+            records.append({'index': index, 'snapshot_sha256': snapshot_sha256,
+                            'tags': tags.copy(), 'note': note, 'updated_at': time.time()})
+            if len(records) > MAX_FRAMES:
+                raise SessionLimit('Per-session bookmark limit reached')
+            data['bookmarks'] = sorted(records, key=lambda item: item['index'])
+            self._save_bookmarks(sid, data)
+            return data
+
+    def delete_bookmark(self, sid: str, index: int, snapshot_sha256: str) -> dict:
+        self._bookmark_values(snapshot_sha256, [], '')
+        with self.lock:
+            self._bookmark_anchor(sid, index, snapshot_sha256)
+            data = self._read_bookmarks(sid)
+            records = [r for r in data['bookmarks'] if r['index'] != index]
+            if len(records) != len(data['bookmarks']):
+                data['bookmarks'] = records
+                self._save_bookmarks(sid, data)
+            return data
 
     def replay(self,sid:str,index:int)->dict:
         # Capture the saved-frame identity and session size together. A tracking
