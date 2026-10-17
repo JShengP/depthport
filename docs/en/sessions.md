@@ -132,6 +132,14 @@ Unsent edits are kept in page memory per exact frame while navigating. Only **Sa
 
 The bookmark API uses the same storage opt-in and loopback restrictions as replay. GET and both mutations return the full `depthport.session-bookmarks.v1` document, containing `session_id` and a `bookmarks` list. PUT accepts unique tags from `id-switch`, `occlusion` and `crossing`; an empty list is allowed. PUT and DELETE require the exact frame's `snapshot_sha256`. Invalid or mismatched snapshots are rejected without changing saved records.
 
+### Filter bookmarks and search notes
+
+Use the bookmark filter to show **All**, **Suspected ID switch**, **Occlusion**, **Crossing**, or **General** (no tags). Enter a keyword to search saved note text; when both controls are set, a bookmark must match both. Search ignores surrounding spaces and English letter case, and matches equivalent full-width characters. The entire query is a literal phrase, including punctuation; it is not split into words or interpreted as a regular expression. The list shows the matching/total count and a message when nothing matches. **Clear filters** restores All and an empty search.
+
+Filtering only changes the list. It preserves the displayed frame, playback and A/B settings, editor contents and unsaved drafts. Choose a matching bookmark to jump back through the usual exact-frame replay. Search uses **saved notes only**; saving or applying a JSON import updates the results. **Export JSON always includes all saved bookmarks**, even while the list is filtered.
+
+Changing Sessions or refreshing resets the filters. Search keywords stay in page memory; they are not sent in requests, placed in the URL or saved in browser storage. Filtering does not save notes, run tracking or upload data.
+
 ### Back up and restore bookmark JSON
 
 Use **Export JSON** to download saved bookmarks to this machine. Save any edited notes first: unsaved drafts are excluded. The UTF-8 JSON contains the format version, Session UUID, saved-frame indices, snapshot SHA-256 digests, tags, notes and `updated_at` values. It contains no images, frame bundles or tracking results. Keep the backup locally; the app does not send it to cloud storage or GitHub.

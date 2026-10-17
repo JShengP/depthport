@@ -53,3 +53,9 @@ footer{margin:24px 0;color:#acb9c9}@media(max-width:800px){.panels{grid-template
 .bookmark-transfer label{display:block;margin-top:10px}.bookmark-transfer input[type="file"]{display:block;max-width:100%;margin:5px 0}
 #bookmark-export{display:inline-block;margin:4px 0}#bookmark-export[aria-disabled="true"]{opacity:.4;cursor:not-allowed}
 #bookmark-import-status{min-height:20px;margin:8px 0 0;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+
+.bookmark-filters{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:8px 12px;border:1px solid var(--edge);border-radius:8px;margin:12px 0;padding:10px 12px}
+.bookmark-filters select{grid-column:2/-1}.bookmark-filters input,.bookmark-filters select,.bookmark-filters button{min-width:0;margin:0}
+#bookmark-filter-help,#bookmark-filter-status{grid-column:1/-1;margin:0;font-size:13px;color:#cce5f8}
+#bookmark-filter-status{min-height:20px;font-variant-numeric:tabular-nums}
+@media(max-width:520px){.bookmark-filters{grid-template-columns:minmax(0,1fr)}.bookmark-filters select{grid-column:auto}}

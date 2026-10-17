@@ -26,6 +26,9 @@
 - Added local bookmark JSON export/import with whole-file validation, preview counts, explicit apply, keep-local/overwrite conflict policies and revision checks. Backups contain saved notes/tags and exact-frame anchors only; restoring requires the original Session and frames. Media, drafts and tracking results are excluded.
 - 新增書籤 JSON 本機匯出／匯入，整份驗證後預覽筆數、明確套用，可保留本機或覆寫衝突並檢查版本。備份只含已保存備註／分類及同影格定位，還原須保留原 Session 與影格；不含影像、草稿或追蹤結果，不自動上傳。
 
+- Added bookmark tag filters and literal saved-note search with matching/total counts, a no-match message and Clear filters. Tag and keyword conditions combine; search supports case-insensitive and equivalent full-width text. Filtering preserves replay and unsaved edits; JSON export still includes every saved bookmark. Search keywords remain in page memory.
+- 新增書籤分類篩選與已保存備註文字搜尋，可組合分類／關鍵字，顯示符合／總筆數、無結果提示並一鍵清除；支援忽略英文大小寫及對應全形字元。篩選保留回放與未保存編輯，JSON 仍匯出全部已保存書籤；關鍵字只留在本頁記憶體。
+
 # Changelog / 版本紀錄
 
 ## 0.2.0-alpha.1 — 2026-10-17 (experimental Alpha pre-release)

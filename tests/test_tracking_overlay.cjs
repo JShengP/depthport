@@ -202,10 +202,10 @@ test('displaced labels have a leader line without changing their detection boxes
 // text or the names of the generation counters.
 function makeUI(){
  const ids=[...fs.readFileSync(path.join(root,'static/sessions.html'),'utf8').matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
- const elements=Object.fromEntries(ids.map(id=>[id,new Element(['lang','sessions-list','frames-list','tracking-mode','tracking-backend','playback-speed','bookmark-import-policy'].includes(id)?'select':'div')]));
+ const elements=Object.fromEntries(ids.map(id=>[id,new Element(['lang','sessions-list','frames-list','tracking-mode','tracking-backend','playback-speed','bookmark-import-policy','bookmark-filter-tag'].includes(id)?'select':'div')]));
  function mount(id,node){node.id=id;node._replace=replacement=>mount(id,replacement);elements[id]=node}
  for(const id of ids)mount(id,elements[id]);
- for(const [id,values] of Object.entries({lang:['en','zh-TW'],'tracking-mode':['segment','detect'],'tracking-backend':['baseline','roboflow-botsort'],'playback-speed':['.25','.5','1','2'],'bookmark-import-policy':['keep','overwrite']})){
+ for(const [id,values] of Object.entries({lang:['en','zh-TW'],'tracking-mode':['segment','detect'],'tracking-backend':['baseline','roboflow-botsort'],'playback-speed':['.25','.5','1','2'],'bookmark-import-policy':['keep','overwrite'],'bookmark-filter-tag':['all','id-switch','occlusion','crossing','general']})){
   if(!elements[id])continue;
   for(const value of values){const option=new Element('option');option.value=value;elements[id].append(option)}
  }
@@ -1156,4 +1156,154 @@ test('refreshing the current Session clears any selected backup and preview perm
  ui.respond('/api/sessions',{sessions:[{session_id:'session-a',label:'A',frame_count:3}]});await flush();await finishFrames(ui,'session-a');await refreshed;
  assert.equal(e['bookmark-import-preview'].disabled,true);assert.equal(e['bookmark-import-apply'].disabled,true);
  assert.equal(bookmarkJumpButtons(ui).length,0);assert.equal(bookmarkWrites(ui).length,0);
+});
+
+function visibleBookmarkIndices(ui){return bookmarkJumpButtons(ui).map(button=>Number(button.getAttribute('data-index')))}
+function filterBookmarkTag(ui,tag){const input=ui.elements['bookmark-filter-tag'];input.value=tag;input.onchange()}
+function searchBookmarkNotes(ui,query){const input=ui.elements['bookmark-search'];input.value=query;input.oninput()}
+function assertBookmarkCount(ui,matched,total){
+ assert.match(ui.elements['bookmark-filter-status'].textContent,new RegExp('\\b'+matched+'\\s*(?:/|of)\\s*'+total+'\\b'));
+}
+
+test('bookmark categories select saved tags, include multi-tag rows and distinguish general bookmarks',async()=>{
+ const bookmarks=[bookmarkRecord(1,{tags:['id-switch','crossing'],note:'first'}),
+  bookmarkRecord(2,{tags:['occlusion'],note:'second'}),bookmarkRecord(3,{note:'third'})];
+ const ui=await startUI({bookmarks}),e=ui.elements;
+ assert.equal(e['bookmark-filter-tag'].value,'all');assert.equal(e['bookmark-search'].value,'');
+ assert.deepEqual(visibleBookmarkIndices(ui),[1,2,3]);assertBookmarkCount(ui,3,3);
+ for(const [tag,indices] of [['id-switch',[1]],['crossing',[1]],['occlusion',[2]],['general',[3]],['all',[1,2,3]]]){
+  filterBookmarkTag(ui,tag);assert.deepEqual(visibleBookmarkIndices(ui),indices);assertBookmarkCount(ui,indices.length,3);
+ }
+});
+
+test('bookmark note search combines a category and a literal keyword without regex interpretation',async()=>{
+ const bookmarks=[bookmarkRecord(1,{tags:['occlusion'],note:'review [a+b].* crossing'}),
+  bookmarkRecord(2,{tags:['crossing'],note:'review [a+b].* crossing'}),bookmarkRecord(3,{tags:['occlusion'],note:'different'})];
+ const ui=await startUI({bookmarks});filterBookmarkTag(ui,'occlusion');searchBookmarkNotes(ui,'[a+b].*');
+ assert.deepEqual(visibleBookmarkIndices(ui),[1]);assertBookmarkCount(ui,1,3);
+ searchBookmarkNotes(ui,'^review');assert.deepEqual(visibleBookmarkIndices(ui),[]);assertBookmarkCount(ui,0,3);
+ searchBookmarkNotes(ui,'review');filterBookmarkTag(ui,'crossing');assert.deepEqual(visibleBookmarkIndices(ui),[2]);
+ searchBookmarkNotes(ui,'occlusion');assert.deepEqual(visibleBookmarkIndices(ui),[],'category labels are not note keywords');
+});
+
+test('bookmark note matching normalizes English case, fullwidth text and surrounding query whitespace',async()=>{
+ const bookmarks=[bookmarkRecord(1,{note:'疑似換 ＩＤ — ReCHECK 車輛交會'}),
+  bookmarkRecord(2,{note:'ID reassigned after 遮擋'}),bookmarkRecord(3,{note:'ＡＢＣ１２３'})];
+ const ui=await startUI({bookmarks});
+ for(const [query,indices] of [['  id  ',[1,2]],['ＲＥｃｈｅｃｋ',[1]],['車輛交會',[1]],['abc123',[3]],['　　',[1,2,3]],['',[1,2,3]]]){
+  searchBookmarkNotes(ui,query);assert.deepEqual(visibleBookmarkIndices(ui),indices,query);assertBookmarkCount(ui,indices.length,3);
+ }
+});
+
+test('filtering and clearing retain all saved bookmarks, the current draft and replay state without network work',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence(),bookmarks:[bookmarkRecord(1,{note:'saved first',tags:['id-switch']}),bookmarkRecord(3,{note:'saved third'})]}),e=ui.elements;
+ await showFirst(ui);editBookmark(ui,'unsaved crossing investigation',['crossing']);configureLoop(ui,1,2);
+ const image=e.rgb,cloudCount=ui.cloudUpdates.length,fetchCount=ui.pending.length,writeCount=bookmarkWrites(ui).length;
+ const exportHref=e['bookmark-export'].href;
+ filterBookmarkTag(ui,'id-switch');searchBookmarkNotes(ui,'missing');assert.deepEqual(visibleBookmarkIndices(ui),[]);
+ assertBookmarkCount(ui,0,2);assert.match(e['bookmark-filter-status'].textContent,/no match/i);
+ assert.equal(e['bookmark-note'].value,'unsaved crossing investigation');assert.equal(e['bookmark-tag-crossing'].checked,true);
+ e['bookmark-filter-clear'].onclick();await flush();
+ assert.equal(e['bookmark-filter-tag'].value,'all');assert.equal(e['bookmark-search'].value,'');
+ assert.deepEqual(visibleBookmarkIndices(ui),[1,3]);assertBookmarkCount(ui,2,2);
+ assert.equal(e.rgb,image);assertProgress(ui,1,3);assert.equal(e['frames-list'].value,'1');assert.equal(ui.cloudUpdates.length,cloudCount);
+ assert.equal(e['bookmark-note'].value,'unsaved crossing investigation');assert.equal(e['bookmark-tag-crossing'].checked,true);
+ assert.equal(e['loop-enabled'].checked,true);assert.equal(e['loop-start'].value,'1');assert.equal(e['loop-end'].value,'2');
+ assert.equal(ui.pending.length,fetchCount);assert.equal(bookmarkWrites(ui).length,writeCount);
+ assert.equal(e['bookmark-export'].href,exportHref,'export remains the complete saved Session document');
+});
+
+test('searching uses only saved notes while a newer editor draft remains independent',async()=>{
+ const ui=await startUI({bookmarks:[bookmarkRecord(1,{note:'saved occlusion review',tags:['occlusion']})]}),e=ui.elements;await showFirst(ui);
+ editBookmark(ui,'unsaved switch investigation',['id-switch']);searchBookmarkNotes(ui,'unsaved');
+ assert.deepEqual(visibleBookmarkIndices(ui),[]);assertBookmarkCount(ui,0,1);
+ searchBookmarkNotes(ui,'saved occlusion');assert.deepEqual(visibleBookmarkIndices(ui),[1]);
+ filterBookmarkTag(ui,'id-switch');assert.deepEqual(visibleBookmarkIndices(ui),[],'draft tags do not enter saved category results');
+ filterBookmarkTag(ui,'occlusion');assert.deepEqual(visibleBookmarkIndices(ui),[1]);
+ assert.equal(e['bookmark-note'].value,'unsaved switch investigation');assert.equal(e['bookmark-tag-id-switch'].checked,true);
+ assert.equal(bookmarkWrites(ui).length,0);
+});
+
+test('filtering and clearing during autoplay neither pause nor cancel the pending next frame',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence(),bookmarks:[bookmarkRecord(3,{note:'crossing',tags:['crossing']})]}),e=ui.elements;
+ await showFirst(ui);configureLoop(ui,1,3);e['playback-play'].onclick();await ui.tick(0);
+ ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();
+ const requests=ui.pending.length;filterBookmarkTag(ui,'crossing');searchBookmarkNotes(ui,'cross');e['bookmark-filter-clear'].onclick();
+ assert.equal(ui.pending.length,requests);assert.equal(e['playback-pause'].disabled,false);assert.match(e['playback-status'].textContent,/Playing/);
+ await ui.decodeFrame('session-a',2);assertProgress(ui,2,3);assert.equal(e.rgb.src,'data:image/png;base64,session-a-2');
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0002');assert.equal(e['loop-enabled'].checked,true);
+ e['playback-pause'].onclick();assert.equal(bookmarkWrites(ui).length,0);
+});
+
+test('a filtered bookmark jump pauses playback and commits matching replay identity while retaining A/B',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence(),bookmarks:[bookmarkRecord(1,{note:'first'}),bookmarkRecord(3,{note:'intersection crossing',tags:['crossing']})]}),e=ui.elements;
+ await showFirst(ui);configureLoop(ui,1,2);filterBookmarkTag(ui,'crossing');searchBookmarkNotes(ui,'intersection');
+ assert.deepEqual(visibleBookmarkIndices(ui),[3]);e['playback-play'].onclick();await ui.tick(0);
+ ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();
+ const jumping=bookmarkJumpButtons(ui)[0].onclick();await flush();
+ ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await flush();await ui.decodeFrame('session-a',3);await jumping;
+ await ui.decodeFrame('session-a',2);await ui.tick(1000);
+ assertProgress(ui,3,3);assert.equal(e.rgb.src,'data:image/png;base64,session-a-3');assert.equal(e['frames-list'].value,'3');
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0003');assert.equal(e['bookmark-note'].value,'intersection crossing');
+ assert.match(e['playback-status'].textContent,/Paused/);assert.equal(e['loop-enabled'].checked,true);assert.equal(e['loop-start'].value,'1');assert.equal(e['loop-end'].value,'2');
+ assert.equal(e['bookmark-filter-tag'].value,'crossing');assert.equal(e['bookmark-search'].value,'intersection');assertBookmarkCount(ui,1,2);
+});
+
+test('bookmark filter controls distinguish loading, failed and truly empty saved lists',async()=>{
+ const ui=await startUI({delayBookmarks:true}),e=ui.elements;
+ for(const id of ['bookmark-filter-tag','bookmark-search','bookmark-filter-clear'])assert.equal(e[id].disabled,true,id);
+ assert.match(e['bookmarks-status'].textContent,/loading/i);assert.doesNotMatch(e['bookmark-filter-status'].textContent,/no match/i);
+ ui.respond('/api/sessions/session-a/bookmarks',{detail:'Storage unavailable'},false,500);await flush();
+ for(const id of ['bookmark-filter-tag','bookmark-search','bookmark-filter-clear'])assert.equal(e[id].disabled,true,id);
+ assert.match(e['bookmarks-status'].textContent,/could not|fail|error/i);assert.doesNotMatch(e['bookmark-filter-status'].textContent,/no match/i);
+ const empty=await startUI();for(const id of ['bookmark-filter-tag','bookmark-search'])assert.equal(empty.elements[id].disabled,false,id);
+ assert.equal(empty.elements['bookmark-filter-clear'].disabled,true,'neutral filters have nothing to clear');
+ assertBookmarkCount(empty,0,0);assert.doesNotMatch(empty.elements['bookmark-filter-status'].textContent,/no match/i);
+ searchBookmarkNotes(empty,'missing');assertBookmarkCount(empty,0,0);assert.doesNotMatch(empty.elements['bookmark-filter-status'].textContent,/no match/i);
+});
+
+test('switching or refreshing a Session resets transient filters before loading another bookmark list',async()=>{
+ const ui=await startUI({bookmarks:[bookmarkRecord(1,{note:'first',tags:['id-switch']})]}),e=ui.elements;
+ filterBookmarkTag(ui,'id-switch');searchBookmarkNotes(ui,'first');
+ e['sessions-list'].value='session-b';const switched=e['sessions-list'].onchange();await flush();
+ assert.equal(e['bookmark-filter-tag'].value,'all');assert.equal(e['bookmark-search'].value,'');assert.equal(e['bookmark-search'].disabled,true);
+ await finishFrames(ui,'session-b',true,null,[1,2,3],[bookmarkRecord(2,{note:'second',tags:['occlusion']})]);await switched;
+ assert.deepEqual(visibleBookmarkIndices(ui),[2]);assertBookmarkCount(ui,1,1);
+ filterBookmarkTag(ui,'occlusion');searchBookmarkNotes(ui,'second');
+ const refreshed=e.refresh.onclick();await flush();ui.respond('/api/sessions/status',{tracking_worker_configured:true});await flush();
+ ui.respond('/api/sessions',{sessions:[{session_id:'session-b',label:'B',frame_count:3}]});await flush();
+ assert.equal(e['bookmark-filter-tag'].value,'all');assert.equal(e['bookmark-search'].value,'');
+ await finishFrames(ui,'session-b',true,null,[1,2,3],[bookmarkRecord(3,{note:'new list',tags:['crossing']})]);await refreshed;
+ assert.deepEqual(visibleBookmarkIndices(ui),[3]);assertBookmarkCount(ui,1,1);
+});
+
+test('a save and delete re-render the active filter without treating filter changes as bookmark writes',async()=>{
+ const saved=bookmarkRecord(1,{note:'old note',tags:['occlusion']}),other=bookmarkRecord(2,{note:'switch next',tags:['id-switch']});
+ const ui=await startUI({bookmarks:[saved,other]}),e=ui.elements;await showFirst(ui);
+ filterBookmarkTag(ui,'id-switch');searchBookmarkNotes(ui,'switch');assert.deepEqual(visibleBookmarkIndices(ui),[2]);
+ editBookmark(ui,'switch confirmed',['id-switch']);const saving=e['bookmark-save'].onclick();await flush();
+ for(const id of ['bookmark-filter-tag','bookmark-search','bookmark-filter-clear'])assert.equal(e[id].disabled,false,id);
+ searchBookmarkNotes(ui,'confirmed');assert.deepEqual(visibleBookmarkIndices(ui),[]);
+ const updated=bookmarkRecord(1,{note:'switch confirmed',tags:['id-switch']});
+ ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',[updated,other]));await saving;
+ assert.deepEqual(visibleBookmarkIndices(ui),[1]);assertBookmarkCount(ui,1,2);assert.equal(e['bookmark-filter-tag'].value,'id-switch');assert.equal(e['bookmark-search'].value,'confirmed');
+ const deleting=e['bookmark-delete'].onclick();await flush();searchBookmarkNotes(ui,'switch');
+ ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',[other]));await deleting;
+ assert.deepEqual(visibleBookmarkIndices(ui),[2]);assertBookmarkCount(ui,1,1);assert.equal(bookmarkWrites(ui).length,2);
+});
+
+test('import preview preserves active filter results and apply updates them without exporting a filtered subset',async()=>{
+ const saved=bookmarkRecord(1,{note:'saved review',tags:['occlusion']}),incoming=bookmarkRecord(3,{note:'intersection crossing',tags:['crossing']});
+ const ui=await startUI({bookmarks:[saved]}),e=ui.elements;
+ await chooseImport(ui,fakeBookmarkFile(bookmarkResponse('session-a',[incoming])));
+ filterBookmarkTag(ui,'crossing');searchBookmarkNotes(ui,'intersection');assert.deepEqual(visibleBookmarkIndices(ui),[]);
+ const previewing=e['bookmark-import-preview'].onclick();await flush();
+ for(const id of ['bookmark-filter-tag','bookmark-search','bookmark-filter-clear'])assert.equal(e[id].disabled,false,id);
+ ui.respond(importUrl(),bookmarkImportResponse('session-a',[saved,incoming]));await previewing;
+ assert.deepEqual(visibleBookmarkIndices(ui),[]);assertBookmarkCount(ui,0,1);
+ const applying=e['bookmark-import-apply'].onclick();await flush();searchBookmarkNotes(ui,'crossing');
+ ui.respond(importUrl('session-a','keep',false),bookmarkImportResponse('session-a',[saved,incoming],{dryRun:false}));await applying;
+ assert.deepEqual(visibleBookmarkIndices(ui),[3]);assertBookmarkCount(ui,1,2);assert.equal(e['bookmark-filter-tag'].value,'crossing');assert.equal(e['bookmark-search'].value,'crossing');
+ assert.equal(e['bookmark-export'].href,'/api/sessions/session-a/bookmarks/export');assert.equal(bookmarkWrites(ui).length,0);assert.equal(bookmarkImports(ui).length,2);
+ e['bookmark-filter-clear'].onclick();assert.deepEqual(visibleBookmarkIndices(ui),[1,3]);assertBookmarkCount(ui,2,2);
 });

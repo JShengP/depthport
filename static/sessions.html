@@ -45,6 +45,15 @@
 <p id="model"></p><pre id="details"></pre></section>
 <section id="bookmarks-panel"><h2 data-i="bookmarksTitle">Frame bookmarks &amp; notes</h2>
 <p data-i="bookmarksNote">Mark a shown frame to pause playback, add tags and a note, then Save. Saved bookmarks stay in this local Session.</p>
+<fieldset class="bookmark-filters"><legend data-i="bookmarkFind">Find bookmarks</legend>
+<label for="bookmark-filter-tag" data-i="bookmarkFilterTag">Tag</label>
+<select id="bookmark-filter-tag" disabled><option value="all" data-i="bookmarkFilterAll">All tags</option><option value="id-switch" data-i="bookmarkIdSwitch">Suspected ID switch</option><option value="occlusion" data-i="bookmarkOcclusion">Occlusion</option><option value="crossing" data-i="bookmarkCrossing">Object crossing</option><option value="general" data-i="bookmarkGeneral">General bookmark</option></select>
+<label for="bookmark-search" data-i="bookmarkSearch">Search saved notes</label>
+<input id="bookmark-search" type="search" maxlength="1000" disabled aria-describedby="bookmark-filter-help bookmark-filter-status" autocomplete="off" spellcheck="false">
+<button id="bookmark-filter-clear" data-i="bookmarkFilterClear" disabled>Clear filters</button>
+<p id="bookmark-filter-help" data-i="bookmarkFilterHelp">Tag and note keyword must both match. Search is literal and ignores English case.</p>
+<output id="bookmark-filter-status" aria-live="polite"></output></fieldset>
+<p id="bookmarks-status" role="status"></p><ul id="bookmarks-list"></ul>
 <fieldset class="bookmark-transfer"><legend data-i="bookmarkBackup">JSON backup / restore</legend>
 <p data-i="bookmarkBackupNote">Export saved bookmarks only; save drafts first. This JSON contains notes, not images. Restore requires the original Session and frames.</p>
 <a id="bookmark-export" href="#" download aria-disabled="true" data-i="bookmarkExport">Export JSON</a>
@@ -64,7 +73,7 @@
 <textarea id="bookmark-note" rows="3" maxlength="2000" disabled aria-describedby="bookmark-editor-status"></textarea>
 <button id="bookmark-save" data-i="bookmarkSave" disabled>Save frame bookmark</button>
 <button id="bookmark-delete" data-i="bookmarkDelete" disabled>Remove frame bookmark</button>
-<p id="bookmarks-status" role="status"></p><ul id="bookmarks-list"></ul></section>
+</section>
 <section><h2 data-i="consistency">Temporal depth consistency</h2>
 <p data-i="consistencyNote">Same-grid pixel comparison only. No motion compensation, calibrated distance accuracy or continuous video recording.</p>
 <canvas id="consistency-chart" width="900" height="190" role="img" aria-label="Normalized depth-shape MAE across compatible saved frame pairs"></canvas>
