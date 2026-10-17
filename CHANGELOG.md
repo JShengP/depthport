@@ -11,6 +11,9 @@
 - Added exact-snapshot RGB replay overlays with original tracking boxes, fixed-color Object IDs, overlap-label connectors, an overlay toggle, and Previous/Next controls. Missing/unanalysed/stale reports never borrow another frame's IDs.
 - 回放 RGB 新增追蹤框／固定顏色 Object ID、標籤連線、疊圖切換與逐格檢視；以快照雜湊與保存序號防止錯格及過期結果。
 
+- Added Play/Pause and 0.25×–2× saved-frame playback (1× target 5 frames/s), sequential decode/presentation without skipped frames, and pause/cancellation on seeking, Session changes, tracking reruns and tab hiding. Original snapshot/ID matching remains required.
+- Session 回放新增播放／暫停與速度調整；讀取慢時放慢、不中途跳格，影像解碼後同步更新追蹤框／ID，手動操作與背景分頁會暫停。
+
 # Changelog / 版本紀錄
 
 ## 0.2.0-alpha.1 — 2026-10-17 (experimental Alpha pre-release)

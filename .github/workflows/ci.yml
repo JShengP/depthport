@@ -49,6 +49,8 @@ jobs:
           node --check static/viewer.js
           node --check static/spatial.js
           node --check static/sessions.js
+          node --check static/replay-playback.js
+          node tests/test_replay_playback.cjs
           node --check static/tracking-overlay.js
           node tests/test_tracking_overlay.cjs
           node tests/test_sessions_i18n.cjs

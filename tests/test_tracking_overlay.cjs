@@ -7,6 +7,7 @@ const assert=require('node:assert/strict');
 const test=require('node:test');
 const root=path.resolve(__dirname,'..');
 const overlaySource=fs.readFileSync(path.join(root,'static/tracking-overlay.js'),'utf8');
+const playbackSource=fs.readFileSync(path.join(root,'static/replay-playback.js'),'utf8');
 const sessionsSource=fs.readFileSync(path.join(root,'static/sessions.js'),'utf8');
 
 // A deliberately small DOM, with markup insertion forbidden. The production code
@@ -36,6 +37,7 @@ class Element {
  querySelector(selector){const match=selector.match(/^\[value="([^"]+)"\]$/);return match?this.children.find(c=>c.value===match[1]):null}
  getContext(){return null}
  scrollIntoView(){}
+ replaceWith(node){if(!this._replace)throw Error('Element is not mounted');this._replace(node)}
 }
 function makeOverlay(){
  const window={};
@@ -199,35 +201,61 @@ test('displaced labels have a leader line without changing their detection boxes
 // text or the names of the generation counters.
 function makeUI(){
  const ids=[...fs.readFileSync(path.join(root,'static/sessions.html'),'utf8').matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
- const elements=Object.fromEntries(ids.map(id=>[id,new Element(['lang','sessions-list','frames-list','tracking-mode','tracking-backend'].includes(id)?'select':'div')]));
- for(const [id,values] of Object.entries({lang:['en','zh-TW'],'tracking-mode':['segment','detect'],'tracking-backend':['baseline','roboflow-botsort']})){
+ const elements=Object.fromEntries(ids.map(id=>[id,new Element(['lang','sessions-list','frames-list','tracking-mode','tracking-backend','playback-speed'].includes(id)?'select':'div')]));
+ function mount(id,node){node.id=id;node._replace=replacement=>mount(id,replacement);elements[id]=node}
+ for(const id of ids)mount(id,elements[id]);
+ for(const [id,values] of Object.entries({lang:['en','zh-TW'],'tracking-mode':['segment','detect'],'tracking-backend':['baseline','roboflow-botsort'],'playback-speed':['.25','.5','1','2']})){
   for(const value of values){const option=new Element('option');option.value=value;elements[id].append(option)}
  }
+ elements['playback-speed'].value='1';
  elements['overlay-enabled'].checked=true;
- const pending=[],cloudUpdates=[],window={DepthPortTrackingOverlay:makeOverlay(),CloudViewer:class{setPacked(...args){cloudUpdates.push(args)}}};
- const context={window,document:{documentElement:{},getElementById:id=>elements[id],querySelectorAll:()=>[],createElement:tag=>new Element(tag),createTextNode:text=>{const n=new Element('#text');n.textContent=text;return n}},
+ const pending=[],decoding=[],cloudUpdates=[],windowEvents={},documentEvents={},timers=new Map();let time=0,nextTimer=0,cloudError=null;
+ const window={DepthPortTrackingOverlay:makeOverlay(),CloudViewer:class{setPacked(...args){if(cloudError)throw cloudError;cloudUpdates.push(args)}},addEventListener:(type,fn)=>{windowEvents[type]=fn}};
+ class Image extends Element{
+  constructor(){super('img')}
+  decode(){return new Promise((resolve,reject)=>decoding.push({image:this,resolve,reject,done:false}))}
+ }
+ const document={documentElement:{},hidden:false,addEventListener:(type,fn)=>{documentEvents[type]=fn},getElementById:id=>elements[id],querySelectorAll:()=>[],createElement:tag=>new Element(tag),createTextNode:text=>{const n=new Element('#text');n.textContent=text;return n}};
+ const context={window,document,Image,performance:{now:()=>time},
   location:{search:'?lang=en'},localStorage:{getItem:()=>null,setItem:()=>{}},URLSearchParams,console,
-  setTimeout,fetch:(url,opt)=>new Promise(resolve=>pending.push({url,opt,resolve,done:false}))};
+  setTimeout:(fn,delay)=>{const id=++nextTimer;timers.set(id,{fn,at:time+Math.max(0,delay)});return id},clearTimeout:id=>timers.delete(id),
+  fetch:(url,opt)=>new Promise(resolve=>pending.push({url,opt,resolve,done:false}))};
+ vm.runInNewContext(playbackSource,context);
  vm.runInNewContext(sessionsSource,context);
  const respond=(url,data,ok=true,status=200)=>{
   const call=pending.find(p=>!p.done&&p.url===url);assert.ok(call,'Expected pending fetch '+url);
   call.done=true;call.resolve({ok,status,json:async()=>data});return call;
  };
- return {elements,pending,cloudUpdates,respond};
+ const decode=(src,error=null)=>{
+  const call=decoding.find(p=>!p.done&&p.image.src===src);assert.ok(call,'Expected pending decode '+src);
+  call.done=true;if(error)call.reject(error);else call.resolve();return call;
+ };
+ const decodeFrame=async(sid,index)=>{decode('data:image/png;base64,'+sid+'-'+index);decode('data:image/jpeg;base64,'+sid+'-depth-'+index);await flush()};
+ const tick=async(ms)=>{
+  const target=time+ms;await flush();
+  for(let i=0;i<100;i++){
+   const due=[...timers.entries()].filter(([,t])=>t.at<=target).sort((a,b)=>a[1].at-b[1].at)[0];
+   if(!due){time=target;await flush();return}
+   time=due[1].at;timers.delete(due[0]);due[1].fn();await flush();
+  }
+  throw Error('Too many playback timers');
+ };
+ return {elements,pending,decoding,cloudUpdates,respond,decode,decodeFrame,tick,failCloud:error=>{cloudError=error},
+  hide:()=>{document.hidden=true;documentEvents.visibilitychange()},pagehide:()=>windowEvents.pagehide()};
 }
 const flush=async()=>{for(let i=0;i<4;i++)await new Promise(resolve=>setImmediate(resolve))};
-async function startUI({delayTracking=false,delayFrames=false}={}){
+async function startUI({delayTracking=false,delayFrames=false,trackingReport=null}={}){
  const ui=makeUI();
  ui.respond('/api/sessions/status',{tracking_worker_configured:true});await flush();
  ui.respond('/api/sessions',{sessions:[{session_id:'session-a',label:'A',frame_count:3},{session_id:'session-b',label:'B',frame_count:3}]});await flush();
  if(delayFrames)return ui;
- await finishFrames(ui,'session-a',!delayTracking);return ui;
+ await finishFrames(ui,'session-a',!delayTracking,trackingReport);return ui;
 }
-async function finishFrames(ui,sid,withTracking=true){
+async function finishFrames(ui,sid,withTracking=true,trackingReport=null){
  ui.respond('/api/sessions/'+sid+'/frames',{frames:[1,2,3].map(index=>({index,engine:'da2-small',units:'relative',captured_at:1}))});await flush();
  ui.respond('/api/sessions/'+sid+'/temporal',{groups:[]});await flush();
  ui.respond('/api/sessions/'+sid+'/consistency',{pairs:[],skipped_pairs:[]});await flush();
- if(withTracking){ui.respond('/api/sessions/'+sid+'/tracking/report.json',report({session_id:sid}));await flush()}
+ if(withTracking){ui.respond('/api/sessions/'+sid+'/tracking/report.json',trackingReport||report({session_id:sid}));await flush()}
 }
 function replayResponse(sid,index){
  return {...replay({session_id:sid,index}),rgb_png:sid+'-'+index,depth_jpeg:sid+'-depth-'+index,
@@ -238,7 +266,7 @@ test('late replay responses cannot replace the newly selected frame or cloud',as
  const ui=await startUI(),e=ui.elements;
  const first=e.replay.onclick();await flush();
  e['frames-list'].value='2';const second=e['frames-list'].onchange();await flush();
- ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await second;
+ ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();await ui.decodeFrame('session-a',2);await second;
  const src=e.rgb.src,details=e.model.textContent;
  ui.respond('/api/sessions/session-a/frames/1/replay',replayResponse('session-a',1));await first;
  assert.equal(e.rgb.src,src);assert.equal(e.model.textContent,details);
@@ -266,18 +294,132 @@ test('late tracking responses cannot replace the newly selected session report',
  assert.equal(e['tracking-download'].href,'/api/sessions/session-b/tracking/report.json?download=true');
 });
 
-test('overlay waits for the saved image, can be hidden, and clears on frame switch',async()=>{
+test('overlay waits for both saved images, can be hidden, and clears on a manual frame switch',async()=>{
  const ui=await startUI(),e=ui.elements,p=e.replay.onclick();await flush();
- ui.respond('/api/sessions/session-a/frames/1/replay',replayResponse('session-a',1));await p;
- assert.equal(e['tracking-overlay'].children.length,0);assert.match(e['overlay-status'].textContent,/Loading/);
- const oldLoad=e.rgb.onload;e.rgb.onload();assert.equal(e['tracking-overlay'].children.length,1);
+ ui.respond('/api/sessions/session-a/frames/1/replay',replayResponse('session-a',1));await flush();
+ assert.equal(e['tracking-overlay'].children.length,0);assert.equal(e.result.hidden,true);
+ ui.decode('data:image/png;base64,session-a-1');await flush();
+ assert.equal(e['tracking-overlay'].children.length,0);assert.equal(ui.cloudUpdates.length,0);
+ ui.decode('data:image/jpeg;base64,session-a-depth-1');await p;
+ assert.equal(e['tracking-overlay'].children.length,1);assert.equal(e.result.hidden,false);
  const fetchCount=ui.pending.length;e['overlay-enabled'].checked=false;e['overlay-enabled'].onchange();
  assert.equal(e['tracking-overlay'].children.length,0);assert.match(e['overlay-status'].textContent,/hidden/);
  assert.equal(ui.pending.length,fetchCount,'overlay toggle must not rerun inference or replay');
  e['overlay-enabled'].checked=true;e['overlay-enabled'].onchange();assert.equal(e['tracking-overlay'].children.length,1);
  e['frames-list'].value='2';const next=e['frames-list'].onchange();await flush();
  assert.equal(e.result.hidden,true);assert.equal(e['tracking-overlay'].children.length,0);
- oldLoad();assert.equal(e['tracking-overlay'].children.length,0,'a stale image load must not restore prior IDs');
- ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await next;e.rgb.onload();
+ ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();await ui.decodeFrame('session-a',2);await next;
  assert.equal(e['tracking-overlay'].children.length,0);assert.match(e['overlay-status'].textContent,/not analysed/);
+});
+
+test('late image decoding cannot replace a newly selected image, overlay or point cloud',async()=>{
+ const ui=await startUI(),e=ui.elements;
+ const first=e.replay.onclick();await flush();
+ ui.respond('/api/sessions/session-a/frames/1/replay',replayResponse('session-a',1));await flush();
+ e['frames-list'].value='2';const second=e['frames-list'].onchange();await flush();
+ ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();
+ await ui.decodeFrame('session-a',2);await second;
+ const image=e.rgb,depth=e.depth,details=e.model.textContent;
+ await ui.decodeFrame('session-a',1);await first;
+ assert.equal(e.rgb,image);assert.equal(e.depth,depth);assert.equal(e.model.textContent,details);
+ assert.equal(ui.cloudUpdates.length,1);assert.equal(ui.cloudUpdates[0][0],'points-session-a-2');
+ assert.equal(e['tracking-overlay'].children.length,0);assert.match(e['overlay-status'].textContent,/not analysed/);
+});
+
+function trackedSequence(){
+ const r=report();r.frames=[1,2,3].map(index=>({...r.frames[0],index,objects:[observation({object_id:'obj-000'+index})]}));
+ r.frames_considered=3;r.track_count=3;return r;
+}
+async function showFirst(ui){
+ const replaying=ui.elements.replay.onclick();await flush();
+ ui.respond('/api/sessions/session-a/frames/1/replay',replayResponse('session-a',1));await flush();
+ await ui.decodeFrame('session-a',1);await replaying;
+}
+
+test('continuous playback commits the next RGB, depth, cloud and exact Object IDs together',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);
+ const firstImage=e.rgb,firstDepth=e.depth;
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');
+ e['playback-play'].onclick();await ui.tick(0);
+ ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();
+ ui.decode('data:image/png;base64,session-a-2');await flush();
+ assert.equal(e.rgb,firstImage);assert.equal(e.depth,firstDepth);assert.equal(e.result.hidden,false);
+ assert.equal(e['frames-list'].value,'1');assert.equal(ui.cloudUpdates.length,1);
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');
+ ui.decode('data:image/jpeg;base64,session-a-depth-2');await flush();
+ assert.equal(e.rgb.src,'data:image/png;base64,session-a-2');assert.equal(e.depth.src,'data:image/jpeg;base64,session-a-depth-2');
+ assert.equal(e['frames-list'].value,'2');assert.equal(ui.cloudUpdates.length,2);
+ assert.equal(ui.cloudUpdates[1][0],'points-session-a-2');
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0002');
+ e['playback-pause'].onclick();
+});
+
+test('pause while the next images decode retains the displayed frame and Object IDs',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);
+ const image=e.rgb,depth=e.depth;
+ e['playback-play'].onclick();await ui.tick(0);
+ ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();
+ e['playback-pause'].onclick();await ui.decodeFrame('session-a',2);await ui.tick(1000);
+ assert.equal(e.rgb,image);assert.equal(e.depth,depth);assert.equal(e['frames-list'].value,'1');
+ assert.equal(e.result.hidden,false);assert.equal(ui.cloudUpdates.length,1);
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');
+ assert.match(e['playback-status'].textContent,/Paused/);
+ assert.equal(ui.pending.filter(p=>p.url.endsWith('/replay')).length,2);
+});
+
+test('seeking while playback loads invalidates the pending frame before it can present',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);
+ e['playback-play'].onclick();await ui.tick(0);
+ ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();
+ e['frames-list'].value='3';const seek=e['frames-list'].onchange();await flush();
+ ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await flush();
+ await ui.decodeFrame('session-a',3);await seek;await ui.decodeFrame('session-a',2);await ui.tick(1000);
+ assert.equal(e['frames-list'].value,'3');assert.equal(e.rgb.src,'data:image/png;base64,session-a-3');
+ assert.equal(ui.cloudUpdates.length,2);assert.equal(ui.cloudUpdates[1][0],'points-session-a-3');
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0003');
+ assert.match(e['playback-status'].textContent,/Paused/);
+});
+
+test('hiding the page pauses pending playback without presenting another frame',async()=>{
+ for(const event of ['hide','pagehide']){
+  const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);
+  e['playback-play'].onclick();await ui.tick(0);ui[event]();
+  ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();await ui.tick(1000);
+  assert.equal(e['frames-list'].value,'1');assert.equal(ui.cloudUpdates.length,1);
+  assert.match(e['playback-status'].textContent,/Paused/);
+  assert.equal(ui.decoding.filter(d=>!d.done).length,0,'cancelled response must not decode more images');
+ }
+});
+
+test('point-cloud failure cannot retain the previous Object IDs over a newly committed image',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');
+ ui.failCloud(Error('Point-cloud renderer unavailable'));
+ e['playback-play'].onclick();await ui.tick(0);
+ ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();
+ await ui.decodeFrame('session-a',2);await ui.tick(1000);
+ assert.equal(e.rgb.src,'data:image/png;base64,session-a-2');assert.equal(e['frames-list'].value,'2');
+ assert.equal(e['tracking-overlay'].children.length,1);
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0002');
+ assert.equal(ui.cloudUpdates.length,1,'failed cloud update must not be counted as presented');
+ assert.match(e['playback-status'].textContent,/error/);
+ assert.match(e.status.textContent,/Playback stopped after an error/);
+ assert.equal(ui.pending.filter(p=>p.url.endsWith('/replay')).length,2);
+});
+
+test('pausing during restart decoding keeps the final image, Object IDs and selected frame together',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;
+ e['frames-list'].value='3';const last=e.replay.onclick();await flush();
+ ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await flush();
+ await ui.decodeFrame('session-a',3);await last;
+ const image=e.rgb,depth=e.depth;
+ e['playback-play'].onclick();assert.equal(e['frames-list'].value,'3');await ui.tick(0);
+ ui.respond('/api/sessions/session-a/frames/1/replay',replayResponse('session-a',1));await flush();
+ ui.decode('data:image/png;base64,session-a-1');await flush();
+ assert.equal(e['frames-list'].value,'3');assert.equal(e.rgb,image);assert.equal(e.depth,depth);
+ e['playback-pause'].onclick();ui.decode('data:image/jpeg;base64,session-a-depth-1');await ui.tick(1000);
+ assert.equal(e['frames-list'].value,'3');assert.equal(e.rgb,image);assert.equal(e.depth,depth);
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0003');
+ assert.equal(ui.cloudUpdates.length,1);assert.match(e['playback-status'].textContent,/Paused/);
+ assert.equal(ui.pending.filter(p=>p.url.endsWith('/replay')).length,2);
 });

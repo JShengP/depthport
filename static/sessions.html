@@ -17,9 +17,13 @@
 <a id="download" href="#" hidden data-i="download">Download exact snapshot ZIP</a></section>
 <section id="result" hidden><h2 data-i="view">Recorded RGB, depth &amp; point cloud</h2>
 <div class="panels"><figure class="rgb-panel"><figcaption data-i="rgb">Aligned RGB</figcaption>
-<div class="overlay-controls"><button id="frame-prev" data-i="previousFrame" disabled>Previous frame</button>
+<div class="overlay-controls"><button id="playback-play" data-i="play" disabled>Play</button>
+<button id="playback-pause" data-i="pause" disabled>Pause</button>
+<label><span data-i="playbackSpeed">Speed</span> <select id="playback-speed"><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label>
+<button id="frame-prev" data-i="previousFrame" disabled>Previous frame</button>
 <button id="frame-next" data-i="nextFrame" disabled>Next frame</button>
 <label class="overlay-toggle"><input type="checkbox" id="overlay-enabled" checked><span data-i="overlayToggle">Tracking boxes and Object IDs</span></label></div>
+<p id="playback-status" role="status"></p><p data-i="playbackNote">Saved-frame playback: 1× targets 5 frames/s; loading may slow it down.</p>
 <div class="rgb-stage"><img id="rgb" alt="Saved aligned RGB"><svg id="tracking-overlay" role="img" aria-label="Tracking boxes and Object IDs"></svg></div>
 <p id="overlay-status" role="status"></p></figure>
 <figure><img id="depth" alt="Saved depth preview"><figcaption data-i="depth">Depth preview</figcaption></figure>
@@ -42,4 +46,4 @@
 <p data-i="trackWarning">Object association may fail when objects cross or disappear; XYZ is in unverified native depth units.</p></section>
 <section><h2 data-i="trend">Temporal metadata trends</h2><p data-i="trendNote">Frame-level depth median only: not tracked pixels, metric drift or motion-compensated geometry.</p><pre id="temporal"></pre></section>
 <footer><span data-i="warning">Recorded depth is an AI estimate. Relative depth is not metres; no safety or accuracy certification.</span></footer>
-</main><script src="/static/viewer.js"></script><script src="/static/tracking-overlay.js"></script><script src="/static/sessions.js"></script></body></html>
+</main><script src="/static/viewer.js"></script><script src="/static/tracking-overlay.js"></script><script src="/static/replay-playback.js"></script><script src="/static/sessions.js"></script></body></html>

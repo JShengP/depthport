@@ -24,3 +24,5 @@ footer{margin:24px 0;color:#acb9c9}@media(max-width:800px){.panels{grid-template
 @media(max-width:800px){.panels{grid-template-columns:1fr}}
 
 .overlay-controls{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+
+#playback-status{min-height:24px;color:#cce5f8;margin:6px 0}.rgb-panel>p{font-size:13px}

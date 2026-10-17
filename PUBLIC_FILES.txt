@@ -161,3 +161,7 @@ docs/validation/v0.3-botsort-worker.json
 # Exact-frame tracking overlays
 static/tracking-overlay.js
 tests/test_tracking_overlay.cjs
+
+# Saved-frame playback controller
+static/replay-playback.js
+tests/test_replay_playback.cjs
