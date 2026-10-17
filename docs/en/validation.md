@@ -3,7 +3,7 @@
 
 ## v0.2 local GPU validation — 2026-10-17
 
-This development-branch check supersedes the earlier environment limitations for the items below. The historical v0.1 record is preserved further down. [Machine-readable v0.2 summary](../validation/v0.2-summary.json) · [real-inference screenshot and attribution](../assets/README.md).
+These v0.2 alpha checks supersede the earlier environment limitations for the items below. The historical v0.1 record is preserved further down. [Machine-readable v0.2 summary](../validation/v0.2-summary.json) · [real-inference screenshot and attribution](../assets/README.md).
 
 - **Environment:** fresh isolated Python 3.12.3 on Ubuntu 24.04; RTX 4090, driver 580.178.04, torch 2.10.0+cu128 / CUDA 12.8; NumPy 1.26.4 and OpenCV 4.11.0.86. The Ubuntu installation wrapper completed, with all four adapter imports passing.
 - **Application tests:** 117 passed, 4 optional real-model cases skipped in the default suite. Those **same four real-model cases were then run separately: 4 passed, 0 skipped** using cached genuine checkpoints and a public image. These counts describe separate runs.
@@ -13,7 +13,7 @@ This development-branch check supersedes the earlier environment limitations for
 - **Regression fixed:** comparison viewers fitted a detached zero-size canvas, shrinking clouds to a few pixels. Attaching cards before camera fitting fixes it; the browser regression failed before and passed after the change.
 - **Other checks:** bilingual keys 170 / 82, release manifest/links, real HTTP smoke, static demo and source build passed. DA3's deliberately omitted `pre-commit` and `xformers` remain reported by `pip check`; required inference imports and actual calls passed.
 
-The public input is an upstream example, not a physical IPCam frame. Model load/download times and one-image wall times are **not** an FPS benchmark. Windows, physical camera codec/authentication/reconnection, measured camera intrinsics, ground-truth distance accuracy, sustained VRAM/endurance and NVIDIA WebGL rendering remain unverified. No private runtime logs, credentials, model weights, calibration files or raw export bundles are published.
+The public input is an upstream example, not a physical IPCam frame. Model load/download times and one-image wall times are **not** an FPS benchmark. Full Windows model installation, physical camera codec/authentication/reconnection, measured camera intrinsics, ground-truth distance accuracy, sustained VRAM/endurance and NVIDIA WebGL rendering remain unverified. No private runtime logs, credentials, model weights, calibration files or raw export bundles are published.
 
 ## Historical v0.1 validation — 2026-10-16
 

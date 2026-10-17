@@ -237,4 +237,3 @@ def test_plane_endpoint_returns_candidate_not_guarantee(client):
 def test_calibration_tool_rejects_insufficient_samples(tmp_path):
     from tools.calibrate_camera import calibrate
     with pytest.raises(ValueError):calibrate([],9,6,25)
-

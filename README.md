@@ -138,7 +138,7 @@ node tests/test_i18n.cjs
 python tools/check_release.py
 ```
 
-The CI workflow runs deterministic, fake-backed application tests without downloading pretrained weights. A passing CI badge is **not** a four-model hardware benchmark. No remote CI result is asserted by this repository snapshot.
+The CI workflow runs deterministic, fake-backed application tests without downloading pretrained weights. Passing application CI is **not** a four-model hardware benchmark. Check [GitHub Actions](https://github.com/JShengP/depthport/actions/workflows/ci.yml) for the current branch and commit results.
 
 [Contributing](CONTRIBUTING.md) · [Roadmap](ROADMAP.md) · [Changelog](CHANGELOG.md) · [Release checklist](docs/en/publishing.md)
 
