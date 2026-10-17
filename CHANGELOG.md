@@ -1,5 +1,8 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 
+- Added **Shift+A / Shift+B** to pause and jump to valid configured A/B endpoints, including with looping off, while plain A/B still set bounds. Bilingual help, review-state retention and input/IME/modal protections are included.
+- 新增 **Shift＋A／Shift＋B** 暫停並跳至有效 A／B 端點，循環關閉也適用，單按 A／B 仍設定區間；更新雙語說明並保留檢查內容與輸入／組字／面板防護。
+
 - Added **Page Up / Page Down** to pause and jump back/forward 10 saved positions from the shown frame, clamped to Session boundaries. Bilingual help is updated; drafts, speed, A/B and existing input/IME/modal guards are retained.
 - 新增 **Page Up／Page Down** 暫停並從顯示影格往前／往後跳 10 個保存位置，超出範圍停在 Session 邊界；更新雙語說明，保留草稿、速度、A／B 與既有輸入／組字／面板防護。
 
