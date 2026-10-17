@@ -47,7 +47,6 @@ docs/en/benchmarking.md
 docs/en/installation.md
 docs/en/models-and-geometry.md
 docs/en/publishing.md
-docs/en/public-private-boundary.md
 docs/en/usage.md
 docs/en/validation.md
 docs/releases/0.1.0-alpha.1.md
@@ -58,7 +57,6 @@ docs/zh-TW/benchmarking.md
 docs/zh-TW/installation.md
 docs/zh-TW/models-and-geometry.md
 docs/zh-TW/publishing.md
-docs/zh-TW/public-private-boundary.md
 docs/zh-TW/usage.md
 docs/zh-TW/validation.md
 install.py
@@ -87,7 +85,6 @@ tests/test_depth_engine.py
 tests/test_four_models.py
 tests/test_i18n.cjs
 tests/test_public_release.py
-tests/test_public_boundary.py
 tests/test_real_inference.py
 tests/test_v2.py
 tools/README.md

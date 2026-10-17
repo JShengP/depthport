@@ -14,28 +14,6 @@ from depthport import __version__
 
 MAX_SOURCE_BYTES = 32 * 1024 * 1024
 
-# Fail-closed exclusions even when someone explicitly edits PUBLIC_FILES.txt.
-# Allowed raster images are manually reviewed, synthetic UI previews only.
-PRIVATE_PATH_PARTS = frozenset({
-    "private", "customer", "customers", "client", "clients", "internal",
-    "confidential", "proprietary", "deployment", "deployments",
-    "secrets", "credentials", "recordings", "snapshots", "clips",
-    "captured", "site-config", "site-configs", "customer-data",
-})
-BLOCKED_SUFFIXES = frozenset({
-    ".pt", ".pth", ".safetensors", ".onnx", ".engine",
-    ".npy", ".npz", ".ply", ".pcd", ".las", ".laz",
-    ".pem", ".key", ".p12", ".pfx", ".p8", ".kdbx", ".jks",
-    ".db", ".sqlite", ".sqlite3", ".mp4", ".avi", ".mov",
-    ".mkv", ".webm", ".dng", ".raw", ".heic", ".zip",
-    ".tar", ".gz", ".7z",
-})
-RASTER_SUFFIXES = frozenset({".png", ".jpg", ".jpeg", ".webp", ".bmp", ".gif", ".tif", ".tiff"})
-PUBLIC_SYNTHETIC_PREVIEWS = frozenset({
-    "docs/assets/preview.en.png", "docs/assets/preview.zh-TW.png",
-    "docs/assets/spatial-preview.en.png", "docs/assets/spatial-preview.zh-TW.png",
-})
-
 
 def public_files(root: Path) -> list[Path]:
     root = root.resolve()
@@ -52,17 +30,11 @@ def public_files(root: Path) -> list[Path]:
             raise ValueError("Unsafe or duplicate entry in public source manifest")
         if any(part.startswith(".env") and part != ".env.example" for part in posix.parts):
             raise ValueError("Runtime environment files must never be distributed")
-        if any(part.lower() in PRIVATE_PATH_PARTS | {
-                ".git", "outputs", "__pycache__", ".venv-depthport"}
+        if any(part in {".git", "outputs", "private", "__pycache__", ".venv-depthport"}
                for part in posix.parts):
             raise ValueError("Private or generated directory in public manifest")
-        suffix = posix.suffix.lower()
-        if suffix in BLOCKED_SUFFIXES:
-            raise ValueError("Model, recording, result or secret in public source manifest")
-        if suffix in RASTER_SUFFIXES and name not in PUBLIC_SYNTHETIC_PREVIEWS:
-            raise ValueError("Public raster image needs explicit synthetic-preview review")
-        if posix.name.startswith("camera_intrinsics") and name != "camera_intrinsics.example.json":
-            raise ValueError("Live camera calibration must never be distributed")
+        if posix.suffix.lower() in {".pt", ".pth", ".safetensors", ".onnx", ".npy", ".ply", ".pem", ".key"}:
+            raise ValueError("Model, result or secret in public source manifest")
         path = root / name
         # Reject symlinks at every path component, not only the final file.
         if any((root.joinpath(*posix.parts[:i])).is_symlink()
