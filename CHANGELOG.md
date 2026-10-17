@@ -1,5 +1,8 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 
+- Added **0** to reset replay speed to **1×** while retaining playback state, pending frame presentation and local review state. Updated bilingual shortcut help; existing shortcut opt-out and typing/IME/modal guards apply.
+- 新增 **0** 將回放速度恢復為 **1×**，保留播放狀態、待顯示影格及本機檢查內容；更新雙語說明面板，沿用快捷鍵開關與輸入／組字／面板防護。
+
 - Added **+ / -** replay speed shortcuts across 0.25×–2×, matching the speed selector without wrapping or changing playback state. The help panel lists them; editor/IME/modal guards and the shared shortcut switch apply.
 - 新增 **＋／－** 回放速度快捷鍵，依 0.25×–2× 選單逐級調整、上下限不循環並保留播放狀態；更新說明面板，沿用輸入／組字／面板防護與快捷鍵開關。
 
