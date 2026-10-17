@@ -2,28 +2,63 @@
 (() => {'use strict';
 const by=id=>document.getElementById(id);
 const tr={
-  en:{title:'Session / Replay',language:'Language',subtitle:'Manually save completed AI result frames to local storage. No automatic camera recording; replay does not rerun inference.',sessions:'Sessions',label:'Label (optional)',create:'Create session',refresh:'Refresh',capture:'Save latest frame',scope:'Storage is opt-in (ENABLE_SESSION_STORAGE=1), localhost-only and limited to 20 sessions × 120 frames.',frames:'Saved frames',replay:'Replay selected frame',download:'Download exact snapshot ZIP',view:'Recorded RGB, depth & point cloud',rgb:'Aligned RGB',depth:'Depth preview',trend:'Temporal metadata trends',trendNote:'Frame-level depth median only: not tracked pixels, metric drift or motion-compensated geometry.',warning:'Recorded depth is an AI estimate. Relative depth is not metres; no safety or accuracy certification.',disabled:'Enable local storage with ENABLE_SESSION_STORAGE=1 then restart the app.',saved:'Frame saved',created:'Session created',failed:'Request failed'},
-  'zh-TW':{title:'工作階段／回放',language:'語言',subtitle:'只在手動操作時將已完成的 AI 影格保存到本機；不會自動錄製相機，也不會在回放時重新推論。',sessions:'工作階段',label:'名稱（可不填）',create:'建立工作階段',refresh:'重新整理',capture:'儲存最新影格',scope:'需主動設定 ENABLE_SESSION_STORAGE=1；僅允許本機，最多 20 個工作階段 × 每個 120 影格。',frames:'已儲存影格',replay:'回放選取影格',download:'下載原始快照 ZIP',view:'已保存的 RGB、深度與 3D 點雲',rgb:'對齊 RGB',depth:'深度預覽',trend:'時間序列摘要',trendNote:'只比較影格層級深度中位數；不表示像素追蹤、物理尺度漂移或姿態補償。',warning:'深度是 AI 估計；相對深度不是公尺，亦無安全／精度認證。',disabled:'請設定 ENABLE_SESSION_STORAGE=1 後重啟應用。',saved:'影格已保存',created:'工作階段已建立',failed:'操作失敗'}
+  en:{title:'Session / Replay',language:'Language',subtitle:'Manually save completed AI result frames to local storage. No automatic camera recording; replay does not rerun inference.',sessions:'Sessions',label:'Label (optional)',create:'Create session',refresh:'Refresh',capture:'Save latest frame',scope:'Storage is opt-in (ENABLE_SESSION_STORAGE=1), localhost-only and limited to 20 sessions × 120 frames.',frames:'Saved frames',replay:'Replay selected frame',download:'Download exact snapshot ZIP',view:'Recorded RGB, depth & point cloud',rgb:'Aligned RGB',depth:'Depth preview',trend:'Temporal metadata trends',trendNote:'Frame-level depth median only: not tracked pixels, metric drift or motion-compensated geometry.',consistency:'Temporal depth consistency',consistencyNote:'Same-grid pixel comparison only. No motion compensation, calibrated distance accuracy or continuous video recording.',pair:'Saved pair',nativeMae:'Native MAE',normalizedMae:'Shape MAE',overlap:'Valid overlap',downloadReport:'Export temporal JSON',noPairs:'Save two compatible frames to compare.',skip:'Skipped incompatible pairs',warning:'Recorded depth is an AI estimate. Relative depth is not metres; no safety or accuracy certification.',disabled:'Enable local storage with ENABLE_SESSION_STORAGE=1 then restart the app.',saved:'Frame saved',created:'Session created',failed:'Request failed'},
+  'zh-TW':{title:'工作階段／回放',language:'語言',subtitle:'只在手動操作時將已完成的 AI 影格保存到本機；不會自動錄製相機，也不會在回放時重新推論。',sessions:'工作階段',label:'名稱（可不填）',create:'建立工作階段',refresh:'重新整理',capture:'儲存最新影格',scope:'需主動設定 ENABLE_SESSION_STORAGE=1；僅允許本機，最多 20 個工作階段 × 每個 120 影格。',frames:'已儲存影格',replay:'回放選取影格',download:'下載原始快照 ZIP',view:'已保存的 RGB、深度與 3D 點雲',rgb:'對齊 RGB',depth:'深度預覽',trend:'時間序列摘要',trendNote:'只比較影格層級深度中位數；不表示像素追蹤、物理尺度漂移或姿態補償。',consistency:'時間深度一致性',consistencyNote:'只比較相同影像格點的深度；不含運動補償、測距精度驗證或連續錄影。',pair:'保存影格對',nativeMae:'原始單位 MAE',normalizedMae:'形狀 MAE',overlap:'有效重疊比例',downloadReport:'匯出時間分析 JSON',noPairs:'至少保存兩個相容的影格才能比較。',skip:'不相容而略過的影格對',warning:'深度是 AI 估計；相對深度不是公尺，亦無安全／精度認證。',disabled:'請設定 ENABLE_SESSION_STORAGE=1 後重啟應用。',saved:'影格已保存',created:'工作階段已建立',failed:'操作失敗'}
 };
 let lang=new URLSearchParams(location.search).get('lang');
 if(!tr[lang])try{lang=localStorage.getItem('depthport-language')}catch(e){}
 if(!tr[lang])lang='en';
 function apply(){document.documentElement.lang=lang;by('lang').value=lang;
   document.querySelectorAll('[data-i]').forEach(e=>e.textContent=tr[lang][e.dataset.i]||e.textContent);}
-by('lang').onchange=()=>{lang=by('lang').value;try{localStorage.setItem('depthport-language',lang)}catch(e){}apply()};apply();
+by('lang').onchange=()=>{lang=by('lang').value;try{localStorage.setItem('depthport-language',lang)}catch(e){}apply();if(lastConsistency)renderConsistency(lastConsistency)};apply();
 async function req(url,opt){const r=await fetch(url,{cache:'no-store',...opt});
  let o;try{o=await r.json()}catch(e){o={detail:'Non-JSON response'}}
  if(!r.ok)throw Error(o.detail||('HTTP '+r.status));return o;}
 function message(s){by('status').textContent=s}
-let viewer=null;
+let viewer=null, lastConsistency=null;
+function metric(v){return typeof v==='number' && Number.isFinite(v) ? v.toFixed(4) : '—'}
+function renderConsistency(data){
+ lastConsistency=data;
+ const box=by('consistency-table');box.replaceChildren();
+ const canvas=by('consistency-chart'), ctx=canvas.getContext('2d');
+ if(ctx){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#cce5f8';ctx.font='14px system-ui';
+   const points=data.pairs.filter(p=>Number.isFinite(p.normalized_mae));
+   const left=54,top=20,width=canvas.width-85,height=canvas.height-58;
+   ctx.strokeStyle='#52667e';ctx.beginPath();ctx.moveTo(left,top);ctx.lineTo(left,top+height);ctx.lineTo(left+width,top+height);ctx.stroke();
+   if(points.length){
+     const vmax=Math.max(.01,...points.map(p=>p.normalized_mae));
+     ctx.fillText('0',left-14,top+height+17);ctx.fillText(vmax.toFixed(3),4,top+10);
+     ctx.strokeStyle='#63d9eb';ctx.lineWidth=2;ctx.beginPath();
+     points.forEach((p,i)=>{const x=left+width*(points.length===1?.5:i/(points.length-1));
+       const y=top+height*(1-p.normalized_mae/vmax);if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y)});ctx.stroke();
+     points.forEach((p,i)=>{const x=left+width*(points.length===1?.5:i/(points.length-1));
+       const y=top+height*(1-p.normalized_mae/vmax);ctx.beginPath();ctx.arc(x,y,3,0,2*Math.PI);ctx.fillStyle='#63d9eb';ctx.fill()});
+   }
+ }
+ if(!data.pairs.length){box.textContent=tr[lang].noPairs;return}
+ const table=document.createElement('table'),head=document.createElement('thead'),hr=document.createElement('tr');
+ for(const label of [tr[lang].pair,'Model',tr[lang].overlap,tr[lang].normalizedMae,tr[lang].nativeMae]){
+   const th=document.createElement('th');th.textContent=label;hr.appendChild(th)}head.appendChild(hr);table.appendChild(head);
+ const body=document.createElement('tbody');
+ for(const p of data.pairs){const row=document.createElement('tr');
+   const cells=['#'+p.from_index+' → #'+p.to_index,p.engine+' ('+p.units+')',metric(p.overlap_fraction),metric(p.normalized_mae),metric(p.native_mae)];
+   for(const v of cells){const cell=document.createElement('td');cell.textContent=v;row.appendChild(cell)}body.appendChild(row)}
+ table.appendChild(body);box.appendChild(table);
+ by('consistency-skips').textContent=data.skipped_pairs.length ? tr[lang].skip+': '+data.skipped_pairs.length : '';
+}
+
 async function sessions(){const data=await req('/api/sessions');const sel=by('sessions-list'),old=sel.value;
  sel.replaceChildren();for(const s of data.sessions){const opt=document.createElement('option');opt.value=s.session_id;opt.textContent=(s.label||s.session_id.slice(0,8))+' ('+s.frame_count+')';sel.append(opt)}
  if(data.sessions.some(s=>s.session_id===old))sel.value=old;
  await frames();}
 async function frames(){const sid=by('sessions-list').value;const sel=by('frames-list');sel.replaceChildren();
- if(!sid)return;const data=await req('/api/sessions/'+sid+'/frames');
+ if(!sid){lastConsistency=null;by('temporal').textContent='';by('consistency-table').textContent='';by('consistency-download').hidden=true;return}const data=await req('/api/sessions/'+sid+'/frames');
  for(const r of data.frames){const o=document.createElement('option');o.value=r.index;o.textContent='#'+r.index+' · '+r.engine+' · '+r.units+' · '+new Date(r.captured_at*1000).toLocaleString();sel.append(o)}
- const t=await req('/api/sessions/'+sid+'/temporal');by('temporal').textContent=JSON.stringify(t.groups,null,2)}
+ const t=await req('/api/sessions/'+sid+'/temporal');by('temporal').textContent=JSON.stringify(t.groups,null,2);
+ const report=await req('/api/sessions/'+sid+'/consistency');
+ renderConsistency(report);
+ by('consistency-download').href='/api/sessions/'+sid+'/consistency/report.json';
+ by('consistency-download').hidden=false;}
 async function act(fn){try{message('');await fn()}catch(e){message(tr[lang].failed+': '+e.message)}}
 by('refresh').onclick=()=>act(sessions);
 by('sessions-list').onchange=()=>act(frames);

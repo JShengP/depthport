@@ -30,8 +30,18 @@
 | GET | `/api/sessions/{sid}/frames/{index}/replay` | Read-only RGB/depth/compact 3D viewer payload |
 | GET | `/api/sessions/{sid}/frames/{index}/bundle.zip` | Exact original same-frame ZIP |
 | GET | `/api/sessions/{sid}/temporal` | Per-model depth-summary trend only |
+| GET | `/api/sessions/{sid}/consistency` | Same-grid offline pair metrics and skips |
+| GET | `/api/sessions/{sid}/consistency/report.json` | Download offline JSON report |
 
 Storage and API access are refused for non-loopback peers. No multiuser authentication, automatic retention deletion, live video recorder or write-ahead DB is implemented. Treat local archives as potentially sensitive images and manage storage and backups accordingly.
+
+## Temporal depth consistency (offline, v0.3 extension)
+
+Capture **two or more manual snapshots** with the same depth engine, model ID, units, camera intrinsics and source type. The Sessions page calculates a read-only report from saved numeric `depth_*.npy` values: full-grid valid-depth percentage; paired valid-pixel overlap; signed / absolute / RMS / P95 **native-depth** changes for `estimated_m` models; and per-pair normalized **shape** MAE. `relative` engines show only the latter, never nominal metres.
+
+`GET /api/sessions/{sid}/consistency` returns detailed grouped frames and up to **32** sampled, compatible frame pairs. `GET /api/sessions/{sid}/consistency/report.json` downloads the same JSON. SHA-256 is rechecked for every stored bundle before analysis. Incompatible dimensions, intrinsic parameters or source modes are **skipped with reasons**. At most 8192 overlapping pixels per compatible pair are sampled to bound calculation; coverage proportions use the full grid.
+
+**Interpretation:** Same pixel index is not the same physical surface if the camera or object moves. This is neither optical-flow tracking nor camera-motion compensation, physical-scale drift, stereo reconstruction, per-frame FPS, or field measurement accuracy. Manually saved frames can have irregular time gaps. For a controlled static-camera stability test, record scene/camera motion and illumination conditions externally and compare samples from the same calibrated stream profile. Actual video collection is still **not** automatic.
 
 ## Validation
 

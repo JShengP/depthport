@@ -8,3 +8,6 @@ button{cursor:pointer}button:disabled{opacity:.4;cursor:not-allowed}#status{min-
 .panels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}figure{margin:0}img,canvas{display:block;width:100%;object-fit:contain;max-height:360px;background:#080c11}
 .cloud{min-height:260px}canvas{height:320px}pre{white-space:pre-wrap;overflow-wrap:anywhere;overflow:auto;font-size:12px}
 footer{margin:24px 0;color:#acb9c9}@media(max-width:800px){.panels{grid-template-columns:1fr}header{display:block}}
+
+#consistency-chart{width:100%;height:auto;max-height:240px;background:#101a27;border-radius:8px}
+#consistency-table{overflow-x:auto}#consistency-table table{width:100%;border-collapse:collapse;font-size:13px}#consistency-table th,#consistency-table td{padding:9px;border-bottom:1px solid var(--edge);text-align:left;white-space:nowrap}#consistency-skips{color:#b8c9db}

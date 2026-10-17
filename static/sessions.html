@@ -20,6 +20,11 @@
 <figure><img id="depth" alt="Saved depth preview"><figcaption data-i="depth">Depth preview</figcaption></figure>
 <div class="cloud"><canvas id="cloud" aria-label="Stored 3D points"></canvas></div></div>
 <p id="model"></p><pre id="details"></pre></section>
+<section><h2 data-i="consistency">Temporal depth consistency</h2>
+<p data-i="consistencyNote">Same-grid pixel comparison only. No motion compensation, calibrated distance accuracy or continuous video recording.</p>
+<canvas id="consistency-chart" width="900" height="190" role="img" aria-label="Normalized depth-shape MAE across compatible saved frame pairs"></canvas>
+<div id="consistency-table" aria-live="polite"></div><p id="consistency-skips"></p>
+<a id="consistency-download" href="#" hidden data-i="downloadReport">Export temporal JSON</a></section>
 <section><h2 data-i="trend">Temporal metadata trends</h2><p data-i="trendNote">Frame-level depth median only: not tracked pixels, metric drift or motion-compensated geometry.</p><pre id="temporal"></pre></section>
 <footer><span data-i="warning">Recorded depth is an AI estimate. Relative depth is not metres; no safety or accuracy certification.</span></footer>
 </main><script src="/static/viewer.js"></script><script src="/static/sessions.js"></script></body></html>

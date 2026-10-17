@@ -113,10 +113,12 @@ tests/test_release_version.py
 
 # v0.3 local manual Session / Replay
 depthport/sessions.py
+depthport/temporal.py
 static/sessions.html
 static/sessions.css
 static/sessions.js
 tests/test_sessions.py
+tests/test_temporal.py
 tests/test_sessions_i18n.cjs
 docs/en/sessions.md
 docs/zh-TW/sessions.md

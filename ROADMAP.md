@@ -10,7 +10,7 @@ These are priorities, not delivered features or promised deadlines.
 | P0 | Camera + GPU + WebGL / 相機與 GPU | Actual device tests, no mock substitution / 實體測試 |
 | P1 | Reproducible comparison / 可重現比較 | Fixed inputs, timing boundaries, calibrated truth where needed / 明列條件 |
 | P1 | Opt-in manual local Sessions / 可選本地手動 Session | Indexed same-frame snapshots, hash-checked replay, no auto video recording / 同影格原檔、完整性驗證、不自動錄影 |
-| P1 | Temporal stability / 時間穩定性 | Scale/shape drift metrics and failure cases / 漂移與失效案例 |
+| P1 | Temporal stability / 時間穩定性 | Offline same-grid depth-change diagnostics implemented in v0.3; real stability and movement-controlled tests pending / v0.3 已有離線同像素差異，仍需真實穩定性與運動控制驗證 |
 | P2 | Efficient transport / 高效率傳輸 | End-to-end latency and multi-client load results / 實測延遲與負載 |
 | P2 | Safe multi-user deployment / 安全多人部署 | Authentication, egress controls, resource and session isolation / 權限與隔離 |
 

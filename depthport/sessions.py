@@ -245,6 +245,11 @@ class SessionStore:
                 'color_range':f.get('color_range',[0.1,20]),
                 'note':'Recorded AI estimate; no inference rerun and no validated metre accuracy.'}
 
+    def temporal_consistency(self, sid: str, max_pairs: int = 32) -> dict:
+        """Read-only, same-grid offline depth-change report over manual snapshots."""
+        from depthport.temporal import analyze_session
+        return analyze_session(self, sid, max_pairs=max_pairs)
+
     def temporal_summary(self,sid:str)->dict:
         rows=self.frames(sid)['frames']
         # Medians from existing metadata, grouped by engine and units. No pixel

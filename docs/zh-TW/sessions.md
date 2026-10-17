@@ -30,6 +30,8 @@
 | GET | `/api/sessions/{sid}/frames/{index}/replay` | 讀回 RGB、深度和點雲供瀏覽 |
 | GET | `/api/sessions/{sid}/frames/{index}/bundle.zip` | 原始完整 ZIP |
 | GET | `/api/sessions/{sid}/temporal` | 各模型深度摘要曲線資料 |
+| GET | `/api/sessions/{sid}/consistency` | 離線相容影格的像素差分析 |
+| GET | `/api/sessions/{sid}/consistency/report.json` | 下載時間深度分析 JSON |
 
 API 限制本機 loopback 存取；目前沒有多租戶登入、自動保留期刪除、影片錄製器或完整資料庫交易機制。
 

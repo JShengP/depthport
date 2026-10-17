@@ -29,3 +29,5 @@ First independently named **DepthPort** source-release candidate, derived from a
 - 新增合成靜態示範、可重現原始碼封裝、CI 與發布檢查。
 
 **Not claimed / 不宣稱：** real pretrained inference, clean target installation, GPU/physical RTSP validation, GitHub-hosted CI success, public deployment or metric accuracy. See the bilingual validation records.
+
+- v0.3 development: opt-in saved-session offline same-grid temporal depth consistency, normalized relative-depth shape diagnostics, JSON export and bilingual Session UI. These are **not** motion-corrected 3D drift or physical distance validation.

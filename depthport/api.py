@@ -981,6 +981,29 @@ def sessions_replay(request: Request,sid:str,index:int):
         raise session_failure(SessionIntegrity('Saved frame cannot be safely replayed')) from exc
 
 
+@app.get('/api/sessions/{sid}/consistency')
+def sessions_consistency(request: Request, sid: str, max_pairs: int = 32):
+    store = local_session_store(request)
+    try:
+        return store.temporal_consistency(sid, max_pairs=max_pairs)
+    except SessionError as exc:
+        raise session_failure(exc) from exc
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from exc
+
+
+@app.get('/api/sessions/{sid}/consistency/report.json')
+def sessions_consistency_export(request: Request, sid: str):
+    store = local_session_store(request)
+    try:
+        report = store.temporal_consistency(sid)
+    except SessionError as exc:
+        raise session_failure(exc) from exc
+    raw = (json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False) + '\n').encode('utf-8')
+    return Response(raw, media_type='application/json', headers={
+        'Content-Disposition': f'attachment; filename="depthport-temporal-{sid}.json"'})
+
+
 @app.get('/api/sessions/{sid}/temporal')
 def sessions_temporal(request: Request,sid:str):
     store=local_session_store(request)
