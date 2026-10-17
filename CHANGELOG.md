@@ -38,6 +38,9 @@
 - Added Space to play/pause and Left/Right Arrow to step one saved frame from the last fully displayed frame across the whole Session, using the existing keyboard-shortcuts checkbox. Typing/IME and native interactive Space actions are protected; pending manual work is serialized, and stepping pauses autoplay while preserving A/B settings, drafts and exact-frame overlays. Playback shortcuts only read local frames.
 - 新增空白鍵播放／暫停、左右方向鍵從最後完整顯示影格逐格瀏覽整個 Session，沿用原有快捷鍵核取方塊；輸入／組字及互動控制項原生空白鍵操作不受影響。手動載入期間避免重疊操作，逐格移動先暫停自動播放，保留 A／B、草稿與同影格疊圖；只讀取本機影格。
 
+- Added A / B to mark interval endpoints from the last fully displayed saved frame and L to toggle A/B looping, using the shared shortcut checkbox and typing/IME/modifier guards. Actions pause playback and cancel pending presentation without fetching a frame; invalid endpoint order remains visible, and image/IDs and drafts stay intact. Added bilingual hints beside the interval controls.
+- 新增 A／B 以最後完整顯示影格設定區間端點、L 切換 A／B 循環，沿用共用快捷鍵開關與輸入／組字／修飾鍵防護。操作會暫停並取消待顯示結果，不另載入影格；端點順序無效時保留提示，影像／ID 與草稿不變，區間旁提供雙語按鍵提示。
+
 # Changelog / 版本紀錄
 
 ## 0.2.0-alpha.1 — 2026-10-17 (experimental Alpha pre-release)

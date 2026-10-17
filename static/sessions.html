@@ -34,7 +34,7 @@
 <button id="bookmark-prev" data-i="bookmarkPrevious" disabled aria-describedby="bookmark-nav-status">Previous bookmark</button>
 <button id="bookmark-next" data-i="bookmarkNext" disabled aria-describedby="bookmark-nav-status">Next bookmark</button>
 <output id="bookmark-nav-status" aria-live="off"></output>
-<p class="bookmark-shortcut-help" data-i="bookmarkShortcutHelp">Shortcuts: Space play/pause · ←/→ previous/next frame · [/] filtered bookmarks. Inactive in input fields or during IME composition.</p></div>
+<p class="bookmark-shortcut-help" data-i="bookmarkShortcutHelp">Shortcuts: Space play/pause · ←/→ previous/next frame · [/] filtered bookmarks · A/B set loop bounds · L toggle loop. Inactive in input fields or during IME composition.</p></div>
 <fieldset class="replay-loop-control"><legend data-i="loopTitle">A/B loop</legend>
 <label class="overlay-toggle"><input id="loop-enabled" type="checkbox" disabled aria-describedby="loop-status"><span data-i="loopEnable">Loop A–B</span></label>
 <div class="loop-endpoints"><label for="loop-start" data-i="loopStart">A · Start frame</label>
@@ -43,7 +43,8 @@
 <label for="loop-end" data-i="loopEnd">B · End frame</label>
 <input id="loop-end" type="number" min="1" max="1" step="1" value="1" disabled aria-describedby="loop-status">
 <button id="loop-set-end" data-i="loopSetEnd" disabled>Set B to shown frame</button></div>
-<p id="loop-status" role="status"></p></fieldset>
+<p id="loop-status" role="status"></p>
+<p id="loop-shortcut-help" class="bookmark-shortcut-help" data-i="loopShortcutHelp">A/B: set start/end to the shown frame · L: toggle loop. These actions pause playback.</p></fieldset>
 <div class="rgb-stage"><img id="rgb" alt="Saved aligned RGB"><svg id="tracking-overlay" role="img" aria-label="Tracking boxes and Object IDs"></svg></div>
 <p id="overlay-status" role="status"></p></figure>
 <figure><img id="depth" alt="Saved depth preview"><figcaption data-i="depth">Depth preview</figcaption></figure>
@@ -65,7 +66,7 @@
 <button id="bookmark-list-prev" data-i="bookmarkPrevious" disabled aria-describedby="bookmark-list-nav-status">Previous bookmark</button>
 <button id="bookmark-list-next" data-i="bookmarkNext" disabled aria-describedby="bookmark-list-nav-status">Next bookmark</button>
 <output id="bookmark-list-nav-status" aria-live="off"></output>
-<p class="bookmark-shortcut-help" data-i="bookmarkShortcutHelp">Shortcuts: Space play/pause · ←/→ previous/next frame · [/] filtered bookmarks. Inactive in input fields or during IME composition.</p></div>
+<p class="bookmark-shortcut-help" data-i="bookmarkShortcutHelp">Shortcuts: Space play/pause · ←/→ previous/next frame · [/] filtered bookmarks · A/B set loop bounds · L toggle loop. Inactive in input fields or during IME composition.</p></div>
 <p id="bookmarks-status" role="status"></p><ul id="bookmarks-list"></ul>
 <fieldset class="bookmark-transfer"><legend data-i="bookmarkBackup">JSON backup / restore</legend>
 <p data-i="bookmarkBackupNote">Export saved bookmarks only; save drafts first. This JSON contains notes, not images. Restore requires the original Session and frames.</p>
