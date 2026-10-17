@@ -110,3 +110,6 @@ docs/zh-TW/spatial-analysis.md
 tools/spatial_browser_smoke.py
 docs/validation/v0.2-summary.json
 tests/test_release_version.py
+docs/assets/README.md
+docs/assets/spatial-preview.en.png
+docs/assets/spatial-preview.zh-TW.png

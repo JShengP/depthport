@@ -2,6 +2,8 @@
 
 [English](../en/spatial-analysis.md) · [首頁](../../README.zh-TW.md)
 
+**2026-10-17 更新：** 已在單台 Ubuntu／RTX 4090 完成四套真深度模型 CUDA 推論、YOLO 偵測／分割及真正瀏覽器 HTTP smoke test。FakeEngine 確定性測試仍是另一層證據；實體 RTSP、Windows 與真值測距精度尚待驗證。見[驗證紀錄](validation.md)。
+
 **狀態：實驗性 `v0.2.0-alpha.1` 開發分支，非正式測距系統。** 自動測試採明示 FakeEngine，不等於已驗證真實預訓練模型、CUDA、IP Camera 或深度精度。
 
 啟動 DepthPort 後進入 `/spatial`。此頁與原本的 `/` 共用單一來源與模型，不會取代四模型、RTSP、英文／繁體中文或原本的資料匯出。

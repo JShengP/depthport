@@ -1,6 +1,24 @@
 # 驗證紀錄
 [English](../en/validation.md)・[首頁](../../README.zh-TW.md)
 
+## v0.2 本機 GPU 驗證 — 2026-10-17
+
+以下是本次開發分支的實測；較下方保留歷史 v0.1 紀錄，不應把舊環境限制當成目前 v0.2 結果。[v0.2 機器可讀摘要](../validation/v0.2-summary.json) · [真推論截圖及來源](../assets/README.md)。
+
+- **環境：** Ubuntu 24.04 的全新 Python 3.12.3 獨立環境；RTX 4090、驅動 580.178.04、torch 2.10.0+cu128／CUDA 12.8、NumPy 1.26.4、OpenCV 4.11.0.86。Ubuntu 安裝腳本及四套 adapter 匯入皆通過。
+- **應用測試：** 預設測試 117 通過、4 個選配真模型案例跳過；之後以快取的真權重與公開圖片，**另跑同四個真模型案例：4 通過、0 跳過**。這是兩次不同的執行。
+- **真深度推論：** YOLO26 Depth、DA V2 Small、DA3 Small、DA3Metric Large 皆在 CUDA 完成；驗證相同輸入 SHA-256、原生單位、有效深度、原始輸出保留，以及比較 ZIP 中的 PLY／NPY。
+- **語意融合：** 真 YOLO26n Detect／Segment 在範例各產生五個物件；檢查遮罩對齊、有效深度點集合及同影格匯出，沒有使用模型替身。
+- **真正瀏覽器 HTTP：** Chrome 透過 loopback HTTP 連到 Uvicorn，完成像素 XYZ、過期／非法像素回應、比較結果、ZIP 下載、語意顯示與雙語操作。已測 JavaScript 錯誤 0，390px 水平溢出 0。WebGL 採 **SwiftShader 軟體繪圖**，未驗證 NVIDIA 顯示 GPU 繪圖。
+- **已修正回歸：** 比較卡片尚未加入頁面便以零寬高計算視角，導致點雲縮成幾個像素；改為先加入卡片再 fit。新增瀏覽器檢查在修正前失敗、修正後通過。
+- **其他：** 170／82 組雙語 key、公開清單／連結、真 HTTP smoke、靜態示範及原始碼封裝通過。`pip check` 仍回報 DA3 配方刻意省略的 `pre-commit`／`xformers`；必要匯入與實際推論成功。
+
+輸入是上游公開範例，並非實體 IPCam；模型載入／下載及單圖耗時不是 FPS benchmark。Windows、實體相機 codec／認證／重連、實測相機內參、真值距離精度、長時 VRAM／穩定性及 NVIDIA WebGL 繪圖仍未驗證。公開資料不包含私人 runtime log、帳密、權重、標定檔或原始匯出包。
+
+## 歷史 v0.1 驗證 — 2026-10-16
+
+以下是初版原始碼與先前環境的歷史紀錄，不代表目前 v0.2 硬體驗證狀態。
+
 檢查日期 **2026-10-16**，DepthPort **0.1.0-alpha.1**。此紀錄是應用整合檢查，不是模型精度或正式產品驗收。[機器可讀摘要](../validation/summary.json)
 
 ## 本次實際執行

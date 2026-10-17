@@ -30,3 +30,9 @@ V2 虛擬映射是本程式的展示策略，不是上游的公尺幾何保證�
 The application's AGPL license does not remove third-party obligations, guarantee employer/IP clearance or grant model trademarks. Obtain permissions for your source contributions and images before publication. For binary/container/hosted distribution, inventory the actual installed versions, bundled libraries and their corresponding-source obligations. A source-download endpoint and this table are helpful mechanisms, not an automatic legal determination. No blanket “commercial use forbidden” claim is made about AGPL; consult the actual terms and the selected upstream licensing route.
 
 AGPL 不會消除第三方義務，也不代表已取得雇主／智慧財產權核准或模型商標授權。發布前確認程式與圖片的權利。散布容器、二進位或提供服務時，需依實際套件與函式庫版本檢查 notices 與 corresponding-source 義務；原始碼下載入口與本表不會自動完成法律判斷。AGPL 不等於禁止商用，仍應閱讀實際條款與所選上游授權路線。
+
+## Documentation image attribution / 文件圖像來源
+
+Spatial Analysis screenshots use the public Ultralytics Assets bus example and real pretrained predictions. Source, image hash, upstream license and the synthetic/real distinction are recorded in [documentation screenshot provenance](docs/assets/README.md).
+
+空間分析截圖使用上游公開範例及真模型輸出；來源、雜湊、授權與合成／真推論區別見上述紀錄。

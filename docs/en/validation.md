@@ -1,6 +1,24 @@
 # Validation record
 [繁體中文](../zh-TW/validation.md) · [Home](../../README.md)
 
+## v0.2 local GPU validation — 2026-10-17
+
+This development-branch check supersedes the earlier environment limitations for the items below. The historical v0.1 record is preserved further down. [Machine-readable v0.2 summary](../validation/v0.2-summary.json) · [real-inference screenshot and attribution](../assets/README.md).
+
+- **Environment:** fresh isolated Python 3.12.3 on Ubuntu 24.04; RTX 4090, driver 580.178.04, torch 2.10.0+cu128 / CUDA 12.8; NumPy 1.26.4 and OpenCV 4.11.0.86. The Ubuntu installation wrapper completed, with all four adapter imports passing.
+- **Application tests:** 117 passed, 4 optional real-model cases skipped in the default suite. Those **same four real-model cases were then run separately: 4 passed, 0 skipped** using cached genuine checkpoints and a public image. These counts describe separate runs.
+- **Real depth inference:** YOLO26 Depth, DA V2 Small, DA3 Small and DA3Metric Large all completed on CUDA. Same-input SHA-256, native units, finite depth arrays, retained raw depth and comparison PLY/NPY ZIP contents were checked.
+- **Semantic fusion:** genuine YOLO26n Detect and Segment each returned five objects on the public sample; mask grids, positive-depth subsets and source-frame exports were checked. No model doubles were used in these calls.
+- **Real browser / HTTP:** Chrome connected to Uvicorn over loopback HTTP, exercised pixel XYZ inspection, stale/invalid pixel responses, comparison results, ZIP download, semantic display and English/Traditional Chinese. Tested page errors: 0; 390px horizontal overflow: 0. WebGL used **SwiftShader software rendering**, not the NVIDIA display GPU.
+- **Regression fixed:** comparison viewers fitted a detached zero-size canvas, shrinking clouds to a few pixels. Attaching cards before camera fitting fixes it; the browser regression failed before and passed after the change.
+- **Other checks:** bilingual keys 170 / 82, release manifest/links, real HTTP smoke, static demo and source build passed. DA3's deliberately omitted `pre-commit` and `xformers` remain reported by `pip check`; required inference imports and actual calls passed.
+
+The public input is an upstream example, not a physical IPCam frame. Model load/download times and one-image wall times are **not** an FPS benchmark. Windows, physical camera codec/authentication/reconnection, measured camera intrinsics, ground-truth distance accuracy, sustained VRAM/endurance and NVIDIA WebGL rendering remain unverified. No private runtime logs, credentials, model weights, calibration files or raw export bundles are published.
+
+## Historical v0.1 validation — 2026-10-16
+
+The following describes the original v0.1 source snapshot and its earlier test environment; it is not the current v0.2 hardware status.
+
 Checked **2026-10-16**, DepthPort **0.1.0-alpha.1**. This record describes application integration, not model accuracy or production readiness. [Machine-readable summary](../validation/summary.json)
 
 ## Executed here

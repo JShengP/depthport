@@ -96,12 +96,27 @@ with TestClient(backend.app) as client:
         page.locator('#measureBtn').click()
         page.wait_for_function("document.getElementById('measurementResult').textContent.includes('unverified_model_estimate')",timeout=5000)
         results['point_inspector_and_measurement']='PASS (fake depth, unverified estimate)'
+        # Fit the camera against a visible canvas, otherwise comparison clouds
+        # collapse to a few pixels even though the API and card count pass.
+        page.evaluate('''() => {
+            window.__comparisonFitSizes=[];
+            const OriginalViewer=window.CloudViewer;
+            window.CloudViewer=class extends OriginalViewer {
+                setPacked(data,count,fit,...rest) {
+                    if(fit)window.__comparisonFitSizes.push([this.canvas.clientWidth,this.canvas.clientHeight]);
+                    return super.setPacked(data,count,fit,...rest);
+                }
+            };
+        }''')
         page.locator('#compareBtn').click()
         page.wait_for_function("document.getElementById('compareStatus').textContent.includes('completed 4/4')",timeout=15000)
         page.wait_for_function("document.querySelectorAll('#compareCards article.card').length===4",timeout=5000)
         assert page.locator('#compareCards .cloudmini').count()==4
+        fit_sizes=page.evaluate('window.__comparisonFitSizes')
+        assert len(fit_sizes)>=4 and all(w>0 and h>0 for w,h in fit_sizes),fit_sizes
         assert page.locator('#compareDownload').is_enabled()
         results['four_model_comparison']='PASS (sequential fake backends; no weights)'
+        results['comparison_clouds_fit_visible_canvases']='PASS'
         page.locator('#semanticBtn').click()
         page.wait_for_function("document.getElementById('semanticStatus').textContent.includes('completed')",timeout=12000)
         page.wait_for_function("document.querySelectorAll('#semanticObjects button').length===1",timeout=5000)
