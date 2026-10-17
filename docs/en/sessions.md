@@ -75,4 +75,7 @@ The analysis is optional. If `ultralytics` or the selected YOLO weights are abse
 
 ### Tracking acceptance evidence
 
+Use the [offline tracking acceptance evaluator](tracking-evaluation.md) to compare `tracking.json` against manually annotated visible objects, including occlusion, crossings, misses and ID switches. This adds a reproducible model-free benchmark diagnostic; no automatic video capture is added.
+
+
 Use a shareable video-derived sequence with object entries/exits, occlusion and crossing. Compare track-ID switches, lost tracks and per-class association counts against manually reviewed labels; separately verify median camera-frame XYZ against the saved depth and intrinsics. Only a real YOLO Detect/Segment run with actual weights qualifies as model validation; synthetic fixtures and CI establish software behavior only.

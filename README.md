@@ -135,7 +135,7 @@ python tools/check_release.py
 
 The CI workflow runs deterministic, fake-backed application tests without downloading pretrained weights. A passing CI badge is **not** a four-model hardware benchmark. No remote CI result is asserted by this repository snapshot.
 
-[Contributing](CONTRIBUTING.md) · [Roadmap](ROADMAP.md) · [Changelog](CHANGELOG.md) · [Release checklist](docs/en/publishing.md)
+[Tracking Acceptance & Evaluation](docs/en/tracking-evaluation.md) · [Contributing](CONTRIBUTING.md) · [Roadmap](ROADMAP.md) · [Changelog](CHANGELOG.md) · [Release checklist](docs/en/publishing.md)
 
 ## License and acknowledgments
 

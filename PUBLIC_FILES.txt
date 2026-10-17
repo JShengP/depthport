@@ -124,3 +124,12 @@ tests/test_tracking.py
 tests/test_sessions_i18n.cjs
 docs/en/sessions.md
 docs/zh-TW/sessions.md
+
+# v0.3 Tracking Acceptance — offline annotated-object matching
+depthport/tracking_eval.py
+tools/evaluate_tracking.py
+tests/test_tracking_eval.py
+docs/en/tracking-evaluation.md
+docs/zh-TW/tracking-evaluation.md
+examples/tracking/tracking.synthetic.json
+examples/tracking/ground_truth.synthetic.json

@@ -64,3 +64,7 @@ python tools/check_release.py
 | GET | `/api/sessions/{sid}/tracking/report.json` | 讀取已存報告，`?download=true` 下載 JSON |
 
 這項功能不強迫安裝新套件，但需要已有的 Ultralytics 套件及額外 YOLO Detect／Segment 權重。缺模型時會明確報錯，不使用假偵測作為成功結果。自動測試使用**明確的假偵測器**，不等於已在實際相機驗證跨影格追蹤。
+
+### Tracking 驗收／Benchmark
+
+用[離線 Tracking 驗收工具](tracking-evaluation.md)將本地 `tracking.json` 與人工 Ground Truth 配對，依遮擋、交會、漏檢等情境統計 Object ID Switch、TP／FP／FN 與 Fragmentation。合成 CI 結果不代表真實影片測試；本功能不會錄影、上傳或重新執行模型。
