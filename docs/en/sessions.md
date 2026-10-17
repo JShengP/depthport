@@ -148,9 +148,13 @@ The position readout shows the displayed bookmark's place in the filtered result
 
 Both sets of buttons are disabled while a bookmark jump loads. Selecting another bookmark directly, changing filters or Sessions, or navigating manually cancels that jump so its old result cannot replace the new selection. These controls only read local saved frames; they do not change bookmarks, notes or JSON export contents.
 
-With **Keyboard shortcuts** enabled, press **`[`** for the previous filtered bookmark or **`]`** for the next. The checkbox beside the bookmark filters is on by default; clear it to disable these keys, or check it again to re-enable them. Reloading restores the default. Shortcuts use the same nearest-result, no-wrap navigation and loading guards as the buttons, preserving A/B settings and unsaved drafts.
+### Keyboard shortcuts
 
-The keys do nothing while focus is in a note, search field, input, select, editable content or another editing control. They also ignore IME composition, held-key repeats, modifier combinations, keys already handled by another control and hidden pages, so typing does not jump frames. The shortcut preference stays in page memory and does not change saved bookmarks or JSON backups.
+With **Keyboard shortcuts** enabled, press **Space** to play/pause, **Left Arrow / Right Arrow** to show the previous/next single saved frame, or **`[` / `]`** for the previous/next filtered bookmark. The checkbox beside the bookmark filters controls all these keys and is on by default; clear it to disable them. Reloading restores the default. The preference stays in page memory.
+
+Arrow keys pause playback and step from the last fully displayed frame in the full Session's saved-frame order, regardless of bookmark filters or the A/B interval. They stop at the ends and are ignored during a manual frame load, seek, bookmark jump or bookmark write. They can cancel a pending autoplay frame before stepping. Space uses the Play/Pause button's starting, restart-at-end and A/B rules; it can pause a pending autoplay frame, but cannot start playback while a manual load or bookmark write is pending. Exact-frame presentation, A/B settings and unsaved drafts are preserved.
+
+The keys do nothing while focus is in a note, search field, input, select, editable content or another editing control, including ARIA editing widgets. They also ignore IME composition, held-key repeats, modifier combinations, keys already handled by another control and hidden pages. Space on a button, link, disclosure summary or other interactive control keeps its native action, avoiding a second playback action. The shortcuts only replay local saved frames; they do not save notes, run inference, change JSON backups or upload data. The bracket keys retain the filtered bookmark buttons' nearest-result, no-wrap navigation and loading guards.
 
 ### Back up and restore bookmark JSON
 

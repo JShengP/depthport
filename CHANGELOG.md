@@ -35,6 +35,9 @@
 - Added `[` / `]` keyboard shortcuts for previous/next filtered bookmarks with a visible, default-on disable checkbox. Editing controls, IME composition, held-key repeats, modifier combinations, handled keys and hidden pages are ignored. Shortcuts retain the buttons' boundary/loading guards, A/B settings and drafts; the preference stays in page memory.
 - 新增 `[`／`]` 快捷鍵跳到上一個／下一個篩選書籤，提供預設開啟的核取方塊供停用；編輯控制項、輸入法組字、長按重複、修飾鍵組合、已處理按鍵及背景頁面不觸發。沿用按鈕的邊界與載入防護，保留 A／B 與草稿，偏好只留在本頁記憶體。
 
+- Added Space to play/pause and Left/Right Arrow to step one saved frame from the last fully displayed frame across the whole Session, using the existing keyboard-shortcuts checkbox. Typing/IME and native interactive Space actions are protected; pending manual work is serialized, and stepping pauses autoplay while preserving A/B settings, drafts and exact-frame overlays. Playback shortcuts only read local frames.
+- 新增空白鍵播放／暫停、左右方向鍵從最後完整顯示影格逐格瀏覽整個 Session，沿用原有快捷鍵核取方塊；輸入／組字及互動控制項原生空白鍵操作不受影響。手動載入期間避免重疊操作，逐格移動先暫停自動播放，保留 A／B、草稿與同影格疊圖；只讀取本機影格。
+
 # Changelog / 版本紀錄
 
 ## 0.2.0-alpha.1 — 2026-10-17 (experimental Alpha pre-release)

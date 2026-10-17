@@ -40,6 +40,7 @@ class Element {
  closest(selector){
   const matches=node=>selector.split(',').some(part=>{
    if(/^[a-z]+$/i.test(part))return node.tagName.toLowerCase()===part.toLowerCase();
+   if(part==='a[href]')return node.tagName.toLowerCase()==='a'&&node.getAttribute('href')!==null;
    if(part==='[contenteditable]:not([contenteditable="false"])')return node.getAttribute('contenteditable')!==null&&node.getAttribute('contenteditable')!=='false';
    const role=part.match(/^\[role="([^"]+)"\]$/);return role&&node.getAttribute('role')===role[1];
   });
@@ -1601,7 +1602,7 @@ test('bookmark shortcuts ignore modified, repeated, composing, prevented and unr
   const event=pressBookmarkKey(ui,']',properties);assert.equal(event.defaultPrevented,false,JSON.stringify(properties));
  }
  const prevented=pressBookmarkKey(ui,']',{defaultPrevented:true});assert.equal(prevented.defaultPrevented,true);
- for(const key of ['ArrowLeft','ArrowRight','j','k','{','}','Escape','Process','Dead',''])assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false,key);
+ for(const key of ['j','k','{','}','Escape','Process','Dead',''])assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false,key);
  await flush();assert.equal(replayRequests(ui).length,calls);assertProgress(ui,1,3);
  await completeBookmarkKey(ui,']',3);
 });
@@ -1664,4 +1665,184 @@ test('Session changes invalidate a keyboard bookmark jump and leave shortcuts un
  assert.equal(e.result.hidden,true);assertBookmarkNav(ui,null,2);
  assert.equal(pressBookmarkKey(ui,']').defaultPrevented,true);await flush();await completeReplay(ui,2,{sid:'session-b'});await flush();assertProgress(ui,2,3);
  assert.equal(e.rgb.src,'data:image/png;base64,session-b-2');assert.equal(pressBookmarkKey(ui,']').defaultPrevented,false);
+});
+
+const playbackShortcutKeys=[' ','ArrowLeft','ArrowRight'];
+async function completeFrameKey(ui,key,index,options={}){
+ const event=pressBookmarkKey(ui,key,options.event);assert.equal(event.defaultPrevented,true,'an available frame shortcut is consumed');
+ await flush();await completeReplay(ui,index,options);await flush();return event;
+}
+function assertShownFrame(ui,index){
+ const e=ui.elements;assert.equal(e.rgb.src,'data:image/png;base64,session-a-'+index);
+ assert.equal(e.depth.src,'data:image/jpeg;base64,session-a-depth-'+index);assert.equal(e['frames-list'].value,String(index));
+ assert.equal(ui.cloudUpdates.at(-1)[0],'points-session-a-'+index);assertProgress(ui,index,3);
+}
+
+test('Space plays, pauses, resumes and restarts after the final saved frame with synchronized Object IDs',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);
+ assert.equal(pressBookmarkKey(ui,' ').defaultPrevented,true);await ui.tick(0);await completeReplay(ui,2);
+ assertShownFrame(ui,2);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0002');
+ assert.equal(pressBookmarkKey(ui,' ').defaultPrevented,true);await ui.tick(1000);
+ assert.match(e['playback-status'].textContent,/Paused/);assert.equal(replayRequests(ui).length,2);
+ assert.equal(pressBookmarkKey(ui,' ').defaultPrevented,true);await ui.tick(0);await completeReplay(ui,3);await ui.tick(200);
+ assertShownFrame(ui,3);assert.match(e['playback-status'].textContent,/End of saved frames/);
+ assert.equal(pressBookmarkKey(ui,' ').defaultPrevented,true);await ui.tick(0);await completeReplay(ui,1);
+ assertShownFrame(ui,1);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');
+ assert.equal(pressBookmarkKey(ui,' ').defaultPrevented,true);
+});
+
+test('Space cancels an in-flight autoplay frame without committing partially decoded images or IDs',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);
+ pressBookmarkKey(ui,' ');await ui.tick(0);ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();
+ ui.decode('data:image/png;base64,session-a-2');await flush();const image=e.rgb,depth=e.depth;
+ assert.equal(pressBookmarkKey(ui,' ').defaultPrevented,true);ui.decode('data:image/jpeg;base64,session-a-depth-2');await ui.tick(1000);
+ assert.equal(e.rgb,image);assert.equal(e.depth,depth);assertShownFrame(ui,1);assert.equal(ui.cloudUpdates.length,1);
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');assert.match(e['playback-status'].textContent,/Paused/);
+});
+
+test('Space preserves A/B playback while arrow steps can inspect frames outside the loop and bookmark filters',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence(),bookmarks:[bookmarkRecord(3,{tags:['crossing'],note:'synthetic match'})]}),e=ui.elements;
+ await showFirst(ui);configureLoop(ui,2,3);filterBookmarkTag(ui,'crossing');searchBookmarkNotes(ui,'synthetic match');
+ assert.equal(pressBookmarkKey(ui,' ').defaultPrevented,true);await ui.tick(0);await completeReplay(ui,2);
+ await ui.tick(200);await completeReplay(ui,3);await ui.tick(200);await completeReplay(ui,2);
+ assert.equal(pressBookmarkKey(ui,' ').defaultPrevented,true);await completeFrameKey(ui,'ArrowLeft',1);assertShownFrame(ui,1);
+ assert.equal(e['loop-enabled'].checked,true);assert.equal(e['loop-start'].value,'2');assert.equal(e['loop-end'].value,'3');
+ assert.equal(e['bookmark-filter-tag'].value,'crossing');assert.equal(e['bookmark-search'].value,'synthetic match');assert.equal(bookmarkWrites(ui).length,0);
+ assert.equal(pressBookmarkKey(ui,' ').defaultPrevented,true);await ui.tick(0);await completeReplay(ui,2);pressBookmarkKey(ui,' ');
+});
+
+test('arrow shortcuts commit one complete saved frame at a time and serialize repeated manual requests',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);const image=e.rgb,depth=e.depth;
+ assert.equal(pressBookmarkKey(ui,'ArrowRight').defaultPrevented,true);await flush();
+ ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();ui.decode('data:image/png;base64,session-a-2');await flush();
+ assert.equal(e.rgb,image);assert.equal(e.depth,depth);assert.equal(e.result.hidden,false);assertShownFrame(ui,1);
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');
+ for(const key of playbackShortcutKeys)assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false,key);
+ assert.equal(replayRequests(ui).length,2);ui.decode('data:image/jpeg;base64,session-a-depth-2');await flush();
+ assertShownFrame(ui,2);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0002');assert.match(e['playback-status'].textContent,/Paused/);
+ await completeFrameKey(ui,'ArrowLeft',1);assertShownFrame(ui,1);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');
+});
+
+test('arrow targets use the displayed saved order rather than numeric IDs or an uncommitted selector value',async()=>{
+ const ui=await startUI({frameIndices:[12,4,9],bookmarks:[bookmarkRecord(12),bookmarkRecord(9)]}),e=ui.elements;
+ assert.equal(pressBookmarkKey(ui,'ArrowLeft').defaultPrevented,false);
+ await completeFrameKey(ui,'ArrowRight',12);assertProgress(ui,1,3);assert.equal(e['frames-list'].value,'12');
+ e['frames-list'].value='9';await completeFrameKey(ui,'ArrowRight',4);assertProgress(ui,2,3);assert.equal(e['frames-list'].value,'4');
+ await completeFrameKey(ui,'ArrowRight',9);assertProgress(ui,3,3);assert.equal(e['frames-list'].value,'9');
+ const calls=replayRequests(ui).length;assert.equal(pressBookmarkKey(ui,'ArrowRight').defaultPrevented,false);await flush();assert.equal(replayRequests(ui).length,calls);
+ await completeFrameKey(ui,'ArrowLeft',4);await completeFrameKey(ui,'ArrowLeft',12);
+ assert.equal(pressBookmarkKey(ui,'ArrowLeft').defaultPrevented,false);assert.equal(bookmarkWrites(ui).length,0);
+});
+
+test('an arrow pauses autoplay and cancels its pending next frame using the last displayed frame as the anchor',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showSaved(ui,2);
+ pressBookmarkKey(ui,' ');await ui.tick(0);ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await flush();
+ ui.decode('data:image/png;base64,session-a-3');await flush();
+ await completeFrameKey(ui,'ArrowLeft',1);ui.decode('data:image/jpeg;base64,session-a-depth-3');await ui.tick(1000);
+ assertShownFrame(ui,1);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');
+ assert.equal(ui.cloudUpdates.length,2);assert.match(e['playback-status'].textContent,/Paused/);assert.equal(replayRequests(ui).length,3);
+});
+
+test('playback shortcuts leave progress previews, manual seeks, bookmark jumps and annotation writes undisturbed',async()=>{
+ const ui=await startUI({bookmarks:[bookmarkRecord(1),bookmarkRecord(3)]}),e=ui.elements;await showFirst(ui);
+ e['replay-progress'].value='2';e['replay-progress'].oninput();const beforePreview=replayRequests(ui).length;
+ for(const key of playbackShortcutKeys)assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false,key);
+ assert.equal(replayRequests(ui).length,beforePreview);const seeking=e['replay-progress'].onchange();await flush();
+ for(const key of playbackShortcutKeys)assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false,key);
+ await completeReplay(ui,2);await seeking;
+ const jumping=e['bookmark-next'].onclick();await flush();for(const key of playbackShortcutKeys)assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false,key);
+ await completeReplay(ui,3);await jumping;editBookmark(ui,'synthetic pending write',['crossing']);const saving=e['bookmark-save'].onclick();await flush();
+ const calls=replayRequests(ui).length;for(const key of playbackShortcutKeys)assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false,key);
+ assert.equal(replayRequests(ui).length,calls);ui.respond('/api/sessions/session-a/frames/3/bookmark',bookmarkResponse('session-a',[bookmarkRecord(1),bookmarkRecord(3,{note:'synthetic pending write',tags:['crossing']})]));await saving;
+ await completeFrameKey(ui,'ArrowLeft',2);assertShownFrame(ui,2);
+});
+
+test('Space follows Play availability and frame shortcuts work without saved bookmarks being loaded',async()=>{
+ const empty=await startUI({frameIndices:[]});for(const key of playbackShortcutKeys)assert.equal(pressBookmarkKey(empty,key).defaultPrevented,false,key);
+ assert.equal(replayRequests(empty).length,0);
+ const ui=await startUI({delayBookmarks:true});await showFirst(ui);configureLoop(ui,3,1);
+ assert.equal(pressBookmarkKey(ui,' ').defaultPrevented,false);await completeFrameKey(ui,'ArrowRight',2);assertShownFrame(ui,2);
+ configureLoop(ui,1,3,false);assert.equal(pressBookmarkKey(ui,' ').defaultPrevented,true);await ui.tick(0);await completeReplay(ui,3);pressBookmarkKey(ui,' ');
+});
+
+test('all playback shortcuts respect typing focus, editable descendants and shadow paths',async()=>{
+ const ui=await startUI(),e=ui.elements;await showSaved(ui,2);const calls=replayRequests(ui).length;
+ const guards=[e['bookmark-note'],e['bookmark-search'],e['bookmark-filter-tag'],e['replay-progress'],e['playback-speed'],e['bookmark-shortcuts-enabled']];
+ for(const value of ['', 'true', 'plaintext-only']){const node=new Element('div');node.setAttribute('contenteditable',value);guards.push(node)}
+ for(const role of ['textbox','searchbox','combobox','spinbutton','slider','listbox','radiogroup','menu','tablist','tree','grid']){const node=new Element('div');node.setAttribute('role',role);guards.push(node)}
+ for(const target of guards)for(const key of playbackShortcutKeys){
+  const child=new Element('span');target.append(child);
+  assert.equal(pressBookmarkKey(ui,key,{target}).defaultPrevented,false,key+' target');
+  assert.equal(pressBookmarkKey(ui,key,{target:child}).defaultPrevented,false,key+' descendant');
+  assert.equal(pressBookmarkKey(ui,key,{composedPath:()=>[new Element('span'),child,target]}).defaultPrevented,false,key+' path');
+  ui.document.activeElement=child;assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false,key+' focus');ui.document.activeElement=null;
+ }
+ await flush();assert.equal(replayRequests(ui).length,calls);assertShownFrame(ui,2);assert.equal(bookmarkWrites(ui).length,0);
+});
+
+test('Space preserves native and accessible action activation while arrows remain usable on ordinary buttons',async()=>{
+ const ui=await startUI();await showFirst(ui);const guarded=[];
+ for(const tag of ['button','summary','audio','video'])guarded.push(new Element(tag));
+ const link=new Element('a');link.setAttribute('href','#synthetic');guarded.push(link);
+ for(const role of ['button','link','tab','menuitem','menuitemcheckbox','menuitemradio','checkbox','radio','switch','option','treeitem']){const node=new Element('div');node.setAttribute('role',role);guarded.push(node)}
+ for(const target of guarded){
+  const child=new Element('span');target.append(child);
+  assert.equal(pressBookmarkKey(ui,' ',{target}).defaultPrevented,false,target.tagName+' '+target.getAttribute('role'));
+  assert.equal(pressBookmarkKey(ui,' ',{target:child}).defaultPrevented,false,'descendant');
+  assert.equal(pressBookmarkKey(ui,' ',{composedPath:()=>[new Element('span'),child,target]}).defaultPrevented,false,'shadow path');
+  ui.document.activeElement=child;assert.equal(pressBookmarkKey(ui,' ').defaultPrevented,false,'active focus');ui.document.activeElement=null;
+ }
+ await flush();assert.equal(replayRequests(ui).length,1);await completeFrameKey(ui,'ArrowRight',2,{event:{target:new Element('button')}});assertShownFrame(ui,2);
+});
+
+test('playback shortcuts ignore modifiers, held keys, IME, prior consumption and hidden pages',async()=>{
+ const ui=await startUI();await showSaved(ui,2);const calls=replayRequests(ui).length;
+ for(const key of playbackShortcutKeys){
+  for(const properties of [{ctrlKey:true},{altKey:true},{metaKey:true},{shiftKey:true},{repeat:true},{isComposing:true},{keyCode:229}])assert.equal(pressBookmarkKey(ui,key,properties).defaultPrevented,false,key+' '+JSON.stringify(properties));
+  assert.equal(pressBookmarkKey(ui,key,{defaultPrevented:true}).defaultPrevented,true);
+ }
+ ui.dispatch('compositionstart');for(const key of playbackShortcutKeys)assert.equal(pressBookmarkKey(ui,key,{isComposing:false}).defaultPrevented,false);ui.dispatch('compositionend');
+ ui.hide();for(const key of playbackShortcutKeys)assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false);
+ await flush();assert.equal(replayRequests(ui).length,calls);assertShownFrame(ui,2);ui.document.hidden=false;await completeFrameKey(ui,'ArrowLeft',1);
+});
+
+test('the shared shortcut switch clears all metadata and disables playback keys without changing button behavior',async()=>{
+ const ui=await startUI(),e=ui.elements;await showFirst(ui);
+ const metadata=[['playback-play','Space'],['playback-pause','Space'],['frame-prev','ArrowLeft'],['frame-next','ArrowRight']];
+ for(const [id,key] of metadata)assert.equal(e[id].getAttribute('aria-keyshortcuts'),key);
+ e['bookmark-shortcuts-enabled'].checked=false;e['bookmark-shortcuts-enabled'].onchange();
+ for(const [id] of metadata)assert.equal(e[id].getAttribute('aria-keyshortcuts')||'','');
+ for(const key of playbackShortcutKeys)assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false);await flush();assert.equal(replayRequests(ui).length,1);
+ const stepping=e['frame-next'].onclick();await flush();await completeReplay(ui,2);await stepping;assertShownFrame(ui,2);
+ e['bookmark-shortcuts-enabled'].checked=true;e['bookmark-shortcuts-enabled'].onchange();await completeFrameKey(ui,'ArrowLeft',1);
+ const fresh=await startUI();assert.equal(fresh.elements['bookmark-shortcuts-enabled'].checked,true);
+});
+
+test('failed keyboard frame loads preserve the complete displayed image, position and IDs and can be retried',async()=>{
+ for(const failure of ['fetch','decode']){
+  const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);const image=e.rgb,depth=e.depth;
+  assert.equal(pressBookmarkKey(ui,'ArrowRight').defaultPrevented,true);await flush();
+  if(failure==='fetch')ui.respond('/api/sessions/session-a/frames/2/replay',{detail:'synthetic unavailable'},false,404);
+  else {ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();ui.decode('data:image/png;base64,session-a-2',Error('synthetic decode failure'));ui.decode('data:image/jpeg;base64,session-a-depth-2')}
+  await flush();assert.equal(e.rgb,image);assert.equal(e.depth,depth);assertShownFrame(ui,1);assert.equal(e.result.hidden,false);
+  assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');assert.match(e.status.textContent,/Request failed/);
+  await completeFrameKey(ui,'ArrowRight',2);assertShownFrame(ui,2);
+ }
+});
+
+test('Session changes invalidate an arrow load before old images and IDs can commit',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);
+ pressBookmarkKey(ui,'ArrowRight');await flush();ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();
+ e['sessions-list'].value='session-b';const switched=e['sessions-list'].onchange();await flush();
+ for(const key of playbackShortcutKeys)assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false,key);
+ await finishFrames(ui,'session-b');await switched;await ui.decodeFrame('session-a',2);await flush();
+ assert.equal(e.result.hidden,true);assert.equal(ui.cloudUpdates.length,1);assert.equal(e['sessions-list'].value,'session-b');
+ await completeFrameKey(ui,'ArrowRight',1,{sid:'session-b'});assert.equal(e.rgb.src,'data:image/png;base64,session-b-1');assertProgress(ui,1,3);
+});
+
+test('keyboard stepping preserves per-frame unsaved notes, tags and A/B settings without writing them',async()=>{
+ const ui=await startUI({bookmarks:[bookmarkRecord(1,{note:'synthetic saved note'})]}),e=ui.elements;await showFirst(ui);
+ editBookmark(ui,'synthetic unsaved note',['occlusion']);configureLoop(ui,1,2);await completeFrameKey(ui,'ArrowRight',2);await completeFrameKey(ui,'ArrowRight',3);await completeFrameKey(ui,'ArrowLeft',2);await completeFrameKey(ui,'ArrowLeft',1);
+ assert.equal(e['bookmark-note'].value,'synthetic unsaved note');assert.equal(e['bookmark-tag-occlusion'].checked,true);
+ assert.equal(e['loop-enabled'].checked,true);assert.equal(e['loop-start'].value,'1');assert.equal(e['loop-end'].value,'2');assert.equal(bookmarkWrites(ui).length,0);assertShownFrame(ui,1);
 });
