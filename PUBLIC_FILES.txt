@@ -109,3 +109,4 @@ docs/en/spatial-analysis.md
 docs/zh-TW/spatial-analysis.md
 tools/spatial_browser_smoke.py
 docs/validation/v0.2-summary.json
+tests/test_release_version.py

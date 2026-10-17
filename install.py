@@ -5,6 +5,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+from depthport import __version__
 import subprocess
 import sys
 ROOT = Path(__file__).resolve().parent
@@ -45,7 +46,7 @@ def main():
             fingerprints = {n: hashlib.sha256((ROOT/n).read_bytes()).hexdigest()
                             for n in ('requirements.txt', 'requirements-base.txt', 'requirements-v2.txt',
                                       'requirements-da3.txt', 'install.py')}
-            marker.write_text(json.dumps({'python': sys.executable, 'version': '0.1.0-alpha.1',
+            marker.write_text(json.dumps({'python': sys.executable, 'version': __version__,
                 'engines': ['yolo26', 'da2-small', 'da3-small', 'da3-metric'],
                 'da3_source': DA3_SOURCE, 'requirements': fingerprints,
                 'real_inference_tested': False}, indent=2), encoding='utf-8')
