@@ -24,13 +24,14 @@
 <div><dt><kbd>L</kbd></dt><dd data-i="shortcutHelpLoop">Toggle A/B looping and pause; press Play to resume.</dd></div></dl></div>
 <div class="shortcut-help-group"><h3 data-i="shortcutHelpBookmarksTitle">Bookmarks</h3><dl>
 <div><dt><kbd>F</kbd></dt><dd data-i="shortcutHelpSearch">Focus and scroll to bookmark search, keeping its text and playback state.</dd></div>
+<div><dt><kbd>Esc</kbd></dt><dd data-i="shortcutHelpSearchEscape">Leave bookmark search for the displayed replay, keeping query and tag filters; pause replay.</dd></div>
 <div><dt><kbd>[</kbd> / <kbd>]</kbd></dt><dd data-i="shortcutHelpBookmarks">Previous / next matching bookmark using the current filters.</dd></div>
 <div><dt><kbd>M</kbd></dt><dd data-i="shortcutHelpMark">Pause and focus the shown frame’s bookmark note.</dd></div></dl></div>
 <div class="shortcut-help-group"><h3 data-i="shortcutHelpNotes">Notes</h3><dl>
 <div><dt><kbd>Ctrl</kbd> + <kbd>Enter</kbd></dt><dd data-i="shortcutHelpSave">Save this frame’s tags and note, only from the note field.</dd></div>
 <div><dt><kbd>Esc</kbd></dt><dd data-i="shortcutHelpEscape">Leave the note for replay, keeping unsaved edits.</dd></div>
 <div><dt><kbd>Enter</kbd></dt><dd data-i="shortcutHelpEnter">Insert a new line in the note.</dd></div></dl></div>
-<p class="shortcut-help-scope" data-i="shortcutHelpScope">? toggles this panel outside input fields; Esc also closes the panel. Note and search typing never opens help. IME composition does not trigger shortcuts. Ctrl+Enter and note Esc only work in the note field.</p>
+<p class="shortcut-help-scope" data-i="shortcutHelpScope">? toggles this panel outside input fields; Esc also closes the panel. Note and search typing never opens help. IME composition does not trigger shortcuts. Ctrl+Enter saves only from the note; Esc returns from the note or bookmark search.</p>
 </div></dialog>
 <section><h2 data-i="sessions">Sessions</h2>
 <label data-i="label">Label (optional)</label> <input id="label" maxlength="80" placeholder="Test scene">
@@ -82,8 +83,9 @@
 <label for="bookmark-filter-tag" data-i="bookmarkFilterTag">Tag</label>
 <select id="bookmark-filter-tag" disabled><option value="all" data-i="bookmarkFilterAll">All tags</option><option value="id-switch" data-i="bookmarkIdSwitch">Suspected ID switch</option><option value="occlusion" data-i="bookmarkOcclusion">Occlusion</option><option value="crossing" data-i="bookmarkCrossing">Object crossing</option><option value="general" data-i="bookmarkGeneral">General bookmark</option></select>
 <label for="bookmark-search" data-i="bookmarkSearch">Search saved notes</label>
-<input id="bookmark-search" type="search" maxlength="1000" disabled aria-describedby="bookmark-filter-help bookmark-filter-status" autocomplete="off" spellcheck="false">
+<input id="bookmark-search" type="search" maxlength="1000" disabled aria-describedby="bookmark-filter-help bookmark-filter-status bookmark-search-shortcut-help" autocomplete="off" spellcheck="false">
 <button id="bookmark-filter-clear" data-i="bookmarkFilterClear" disabled>Clear filters</button>
+<p id="bookmark-search-shortcut-help" class="bookmark-shortcut-help" data-i="bookmarkSearchShortcutHelp">With Keyboard shortcuts enabled: Esc returns to the displayed replay, keeping query and tag filters. Ignored during IME composition.</p>
 <p id="bookmark-filter-help" data-i="bookmarkFilterHelp">Tag and note keyword must both match. Search is literal and ignores English case.</p>
 <output id="bookmark-filter-status" aria-live="polite"></output>
 <label class="bookmark-shortcut-toggle"><input id="bookmark-shortcuts-enabled" type="checkbox" checked><span data-i="bookmarkShortcuts">Keyboard shortcuts</span></label></fieldset>

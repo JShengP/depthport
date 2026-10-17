@@ -1,5 +1,8 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 
+- Added search-field **Esc** to pause and return to the displayed replay while retaining query/tag filters and review state. Prevents native query clearing, guards IME, and updates bilingual inline/panel help and shortcut metadata.
+- 新增搜尋欄 **Esc** 暫停並回到已顯示的回放，保留搜尋／標籤與檢查內容，避免原生清空文字並防護中文組字；更新雙語欄位提示、說明面板與快捷鍵資訊。
+
 - Added **F** to focus and scroll to bookmark search without clearing the query or changing playback/review state. Bilingual help and shortcut metadata are updated; input/IME/modal/opt-out guards apply and Ctrl+F stays native.
 - 新增 **F** 移入並捲動至書籤搜尋欄，保留搜尋文字與播放／檢查狀態；更新雙語說明與快捷鍵提示，沿用輸入／組字／面板／停用防護，Ctrl＋F 保留原生行為。
 
