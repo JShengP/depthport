@@ -43,3 +43,5 @@ Set GT `session_id` to `video-` plus the **first 24 hex characters** of `video_s
 - **Reproduce:** keep separate versions of OpenCV, NumPy, PyTorch, Ultralytics, `trackers`, `supervision`, OS and CPU/GPU. Results depend on scene, confidence and tracker hyperparameters; choose after measurement, not on a claimed universal winner.
 
 **CI tests use synthetic video and an explicit fake Roboflow API adapter. No real Roboflow package, YOLO weight, camera or tracking accuracy is demonstrated by CI.**
+
+For the integrated isolated process, see [BoT-SORT worker setup](tracking-worker.md). Run the benchmark in the existing NumPy 1 application environment with `--methods baseline botsort-worker` and `TRACKING_WORKER_PYTHON` set. The worker supports up to 4096-pixel sides / 4 Mi pixels; it receives the cache FPS (Session analysis uses a fixed 30). Worker step latency includes PNG encoding, IPC, decoding and association; startup and detector inference are excluded. Direct `botsort` remains a separate-environment reference.

@@ -1,4 +1,4 @@
-**v0.3 離線語意追蹤新增：** 手動分析已存 Session 影格的 YOLO Detect／Segment，使用 2D 匹配建立 Object ID 與候選相機 XYZ／深度歷史；不做身份辨識、不代表世界座標軌跡，也不會自動錄影。詳見 [Session 文件](docs/zh-TW/sessions.md)。
+**v0.3 離線語意追蹤新增：** 手動分析已存 Session 影格的 YOLO Detect／Segment，可選預設簡易關聯或獨立 NumPy 2 環境的 [Roboflow BoT-SORT worker](docs/zh-TW/tracking-worker.md)，建立 Object ID 與候選相機 XYZ／深度歷史；不做身份辨識、不代表世界座標軌跡，也不會自動錄影。詳見 [Session 文件](docs/zh-TW/sessions.md)。
 
 ## v0.3 開發預覽 — Session 與離線回放
 

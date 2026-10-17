@@ -2,7 +2,7 @@
 """Explicit offline semantic tracking over manually saved Session frames.
 
 Frame-local camera XYZ is *not* a world trajectory. Association is a
-class-gated, deterministic 2D IoU/centroid heuristic and is NOT ReID.
+class-gated 2D association (baseline or isolated BoT-SORT), never ReID.
 No video is recorded and no depth inference is repeated.
 """
 from __future__ import annotations
@@ -18,6 +18,7 @@ import numpy as np
 from depthport.semantic import allowed_model, extract_instances
 from depthport.sessions import SessionError, SessionIntegrity
 from depthport.temporal import _read_depth, _grid_signature
+from depthport.tracking_worker import TrackingWorker
 
 MAX_TRACK_FRAMES = 24
 MAX_INSTANCES = 20
@@ -91,7 +92,9 @@ def _geometry(det: dict, depth: np.ndarray, k: dict) -> dict:
 
 
 def analyse_session(store, sid: str, *, mode: str='segment', confidence: float=.25,
-                    max_frames:int=12, detector=None, device:str='cpu') -> dict:
+                    max_frames:int=12, detector=None, device:str='cpu', backend:str='baseline') -> dict:
+    if backend not in ('baseline', 'roboflow-botsort'):
+        raise ValueError('Unsupported tracking backend')
     if mode not in ('detect','segment') or not .05<=confidence<=.95:
         raise ValueError('Tracking mode or confidence out of range')
     if not 2<=max_frames<=MAX_TRACK_FRAMES:
@@ -110,7 +113,10 @@ def analyse_session(store, sid: str, *, mode: str='segment', confidence: float=.
                   conf=confidence,verbose=False,retina_masks=True)[0], bgr.shape[:2],mode,
                   confidence,max_instances=MAX_INSTANCES)
     all_frames=[];tracks={};active={};next_id=1;prior_group=None
+    worker=None;unassociated=0
     try:
+        if backend == 'roboflow-botsort':
+            worker=TrackingWorker()
         for step,row in enumerate(rows):
             payload=store.bundle(sid,row['index'])  # validates SHA-256
             depth,meta=_read_depth(payload,row)
@@ -120,7 +126,8 @@ def analyse_session(store, sid: str, *, mode: str='segment', confidence: float=.
             if bgr is None or bgr.shape[:2]!=depth.shape:
                 raise SessionIntegrity('Saved image and depth grids do not align')
             group=(row['engine'],row['model'],row['units'],_grid_signature(meta,depth.shape))
-            if group!=prior_group:
+            reset=group!=prior_group
+            if reset:
                 # Never carry an Object ID across different cameras, model
                 # identity, spatial rays, coordinate units or source kind.
                 active={}
@@ -138,7 +145,12 @@ def analyse_session(store, sid: str, *, mode: str='segment', confidence: float=.
                 row_obj={k:v for k,v in item.items() if k!='mask'}
                 row_obj.update(_geometry(item,depth,meta['intrinsics']))
                 objects.append(row_obj)
-            objects,active,next_id=associate(objects,active,image_shape=depth.shape,step=step,next_id=next_id)
+            detection_count=len(objects)
+            if worker is not None:
+                objects,dropped=worker.step(bgr,objects,reset=reset)
+                unassociated+=dropped
+            else:
+                objects,active,next_id=associate(objects,active,image_shape=depth.shape,step=step,next_id=next_id)
             for ob in objects:
                 tid=ob['object_id']
                 if tid not in tracks:
@@ -154,7 +166,7 @@ def analyse_session(store, sid: str, *, mode: str='segment', confidence: float=.
             all_frames.append({'index':row['index'],'source_sha256':row.get('source_sha256'),
                                'snapshot_sha256':row['sha256'],'frame_id':row['frame_id'],
                                'engine':row['engine'],'model':row['model'],'units':row['units'],
-                               'timestamp':row['frame_timestamp'],'objects':objects})
+                               'timestamp':row['frame_timestamp'],'detection_count':detection_count,'objects':objects})
         for track in tracks.values():
             obs=track['observations']
             first,last=obs[0],obs[-1]
@@ -167,12 +179,19 @@ def analyse_session(store, sid: str, *, mode: str='segment', confidence: float=.
         return {'format':'depthport.semantic-tracking.v1','session_id':sid,
                 'total_session_frames':len(store.frames(sid)['frames']),'mode':mode,
                 'model':model_name,'device':'cpu' if model is not None else 'test_double',
+                'association_backend':backend,
+                'association':{'runtime':worker.runtime if worker else None,
+                               'frame_rate':30 if worker else None,
+                               'unassociated_detections':unassociated,
+                               'sampling':'One fixed time step per saved frame; elapsed snapshot gaps are not modelled.'},
                 'confidence':confidence,'source':'manually_saved_snapshots_only',
                 'frames_considered':len(rows),'frames':all_frames,
                 'tracks':list(tracks.values()),'track_count':len(tracks),
-                'note':'Heuristic 2D ID association, not person identity/ReID; occlusion, crossing and camera motion can break IDs. '
+                'note':'2D ID association, not person identity/ReID; occlusion, crossing and camera motion can break IDs. '
                        'Depth is unverified AI output, camera XYZ is NOT world XYZ. Relative/virtual depth is not metres. '
                        'Box ROI includes background. No automatic RTSP capture.'}
     finally:
+        if worker is not None:
+            worker.close()
         if model is not None:
             del model

@@ -5,6 +5,9 @@
 - Genuine CUDA depth and CPU YOLO Detect/Segment passed a 24-frame public-video Session pilot; a separate frozen-detection comparison evaluated eight tracking methods on 179 consecutive public frames. See [the bilingual tracking evidence](docs/en/tracking-evaluation.md).
 - No ReID, world-coordinate trajectory, continuous RTSP recording or measurement guarantee; physical-camera and broader scene acceptance remains pending.
 
+- Added opt-in Roboflow BoT-SORT for v0.3 Session analysis via a disposable NumPy 2 worker; original detection geometry is retained. [Setup and public-sequence validation](docs/en/tracking-worker.md).
+- v0.3 Session 新增選配 BoT-SORT，獨立 NumPy 2 worker 保留原始量測；預設仍為簡易關聯，v0.3 尚未發布。
+
 # Changelog / 版本紀錄
 
 ## 0.2.0-alpha.1 — 2026-10-17 (experimental Alpha pre-release)

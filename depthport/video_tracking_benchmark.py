@@ -23,7 +23,7 @@ CACHE_FORMAT = 'depthport.video-detections.v1'
 MAX_VIDEO_FRAMES = 1800
 MAX_OBJECTS = 64
 MAX_CACHE_BYTES = 32 * 1024 * 1024
-TRACKER_OPTIONS = ('baseline', 'bytetrack', 'botsort')
+TRACKER_OPTIONS = ('baseline', 'bytetrack', 'botsort', 'botsort-worker')
 
 
 class VideoBenchmarkError(ValueError):
@@ -81,6 +81,9 @@ def read_cache(path: Path) -> dict:
 def make_tracker(method: str, *, fps: float):
     if method == 'baseline':
         return None
+    if method == 'botsort-worker':
+        from depthport.tracking_worker import TrackingWorker
+        return TrackingWorker(frame_rate=fps)
     if method not in TRACKER_OPTIONS:
         raise VideoBenchmarkError('Unsupported tracker')
     try:
@@ -108,6 +111,10 @@ def _one_step(method: str, tracker, active: dict, next_id: int, detections: list
         items, active, next_id = associate(clean, active, image_shape=frame.shape[:2], step=index, next_id=next_id)
         return items, active, next_id, 0
 
+    if method == 'botsort-worker':
+        items, dropped = tracker.step(frame, detections)
+        return items, active, next_id, dropped
+
     import supervision as sv
     xyxy = np.array([d['bbox'] for d in detections], dtype=np.float32).reshape(-1,4)
     scores = np.array([d['confidence'] for d in detections], dtype=np.float32)
@@ -134,11 +141,12 @@ def run_video_tracker(video: Path, data: dict, method: str) -> tuple[dict,dict]:
     if sha256_file(video) != data['video_sha256']:
         raise VideoBenchmarkError('Video SHA-256 differs from cached detector input')
     fps=data['fps']; tracker=make_tracker(method,fps=fps)
-    cap=cv2.VideoCapture(str(video))
-    if not cap.isOpened():
-        raise VideoBenchmarkError('Could not open offline video')
+    cap=None
     active={};next_id=1;frames=[];timings=[];decode=[];unconfirmed=0
     try:
+        cap=cv2.VideoCapture(str(video))
+        if not cap.isOpened():
+            raise VideoBenchmarkError('Could not open offline video')
         for item in data['frames']:
             t0=time.perf_counter()
             ok, img=cap.read()
@@ -154,7 +162,10 @@ def run_video_tracker(video: Path, data: dict, method: str) -> tuple[dict,dict]:
         if ok:
             raise VideoBenchmarkError('Detection cache does not cover the entire video; truncated comparison rejected')
     finally:
-        cap.release()
+        if cap is not None:
+            cap.release()
+        if method == 'botsort-worker':
+            tracker.close()
     def percentiles(xs):
         return {'mean_ms':round(statistics.mean(xs),4),
                 'p50_ms':round(float(np.percentile(xs,50)),4),
@@ -166,12 +177,15 @@ def run_video_tracker(video: Path, data: dict, method: str) -> tuple[dict,dict]:
     meta={'method':method,'frames':len(frames),'fps_metadata':fps,
           'tracker_update':percentiles(timings), 'decode':percentiles(decode),
           'unconfirmed_detections':unconfirmed,
-          'latency_scope':'tracker.update only; detector inference/decoding excluded from tracker_update',
+          'unassociated_detections':unconfirmed if method == 'botsort-worker' else None,
+          'latency_scope':'association step including PNG/IPC for worker; detector/video decoding and worker startup excluded',
           'note':'No ReID or metric XYZ; BoT-SORT receives full BGR frames for camera motion compensation.'}
+    if method == 'botsort-worker':
+        meta['runtime']=tracker.runtime
     return report,meta
 
 
-def benchmark(video: Path, cache: dict, *, methods=TRACKER_OPTIONS, gt=None, iou=.5) -> dict:
+def benchmark(video: Path, cache: dict, *, methods=('baseline', 'bytetrack', 'botsort'), gt=None, iou=.5) -> dict:
     if len(set(methods)) != len(methods) or not methods or any(m not in TRACKER_OPTIONS for m in methods):
         raise VideoBenchmarkError('Unique supported methods required')
     result={'format':'depthport.video-tracker-benchmark.v1',

@@ -147,3 +147,13 @@ tests/test_video_tracking_benchmark.py
 docs/en/offline-video-tracking.md
 docs/zh-TW/offline-video-tracking.md
 requirements-tracking-benchmark.txt
+
+# Optional isolated BoT-SORT worker
+depthport/tracking_protocol.py
+depthport/tracking_worker.py
+tools/tracking_worker.py
+requirements-tracking-worker.txt
+tests/test_tracking_worker.py
+docs/en/tracking-worker.md
+docs/zh-TW/tracking-worker.md
+docs/validation/v0.3-botsort-worker.json

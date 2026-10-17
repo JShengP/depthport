@@ -5,6 +5,9 @@
 
 **2026-10-17 初步驗證：** 公開影片的 24 影格 Session 流程已通過真 CUDA 深度、CPU YOLO 偵測／分割、完整性與回放；另完成含 Roboflow Trackers 的 179 影格比較。見[條件、結果與限制](tracking-evaluation.md)。這些不代表實體相機或公尺精度驗收。
 
+
+**2026-10-18：** Session 已支援選配 [Roboflow BoT-SORT worker](tracking-worker.md)，以獨立 NumPy 2 環境執行；預設仍為簡易關聯。
+
 ## 啟用方式
 
 1. 使用 v0.3 開發分支，依原安裝文件準備 DepthPort 環境。

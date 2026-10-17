@@ -5,6 +5,9 @@
 
 **2026-10-17 pilot:** genuine CUDA depth and CPU YOLO Detect/Segment passed the 24-frame saved-session path on a public video, including integrity and replay. A separate 179-frame tracking comparison includes Roboflow Trackers. See [conditions, results and limitations](tracking-evaluation.md#real-video-pilot--2026-10-17); these are not physical-camera or metric-accuracy acceptance.
 
+
+**2026-10-18:** Optional [Roboflow BoT-SORT worker](tracking-worker.md) now supports Session analysis in a separate NumPy 2 environment; the default remains Simple association.
+
 ## Enable (local machine only)
 
 1. Clone/check out the v0.3 development branch and install as documented. This feature does not require installing a new ML package beyond the existing application environment.

@@ -47,3 +47,5 @@ GT 中的 `session_id` 必須為 `video-` 加上 `detections.json` 的 `video_sh
 - 目前不支援 ReID、完整遮擋恢復保證、視覺里程計或世界座標的移動速度估計。
 
 **CI 只有合成影片與假 Roboflow API 的契約測試。實際 Roboflow 套件與模型、GPU、真實影片追蹤精度仍須另外驗證。**
+
+整合的獨立程序請見 [BoT-SORT worker 安裝](tracking-worker.md)。設定 `TRACKING_WORKER_PYTHON` 後，可在現有 NumPy 1 應用環境以 `--methods baseline botsort-worker` 跑比較。worker 限邊長 4096、4 Mi 像素，採 cache 的 FPS（Session 固定 30）。worker 單步延遲包含 PNG、IPC、解碼與關聯，不含啟動與偵測推論。直接 `botsort` 仍保留為另一環境的參考呼叫。

@@ -36,3 +36,9 @@ AGPL 不會消除第三方義務，也不代表已取得雇主／智慧財產權
 Spatial Analysis screenshots use the public Ultralytics Assets bus example and real pretrained predictions. Source, image hash, upstream license and the synthetic/real distinction are recorded in [documentation screenshot provenance](docs/assets/README.md).
 
 空間分析截圖使用上游公開範例及真模型輸出；來源、雜湊、授權與合成／真推論區別見上述紀錄。
+
+## Optional tracking worker / 選配追蹤 worker
+
+[Roboflow Trackers](https://github.com/roboflow/trackers) 2.6.1 and [Supervision](https://github.com/roboflow/supervision) 0.27.0 are installed separately under their Apache-2.0 terms, using public APIs without vendoring their code. NumPy 2.2.6 and OpenCV 4.11 follow the notices above. No package, model weight, video or annotation is included in the source archive. The public-sequence pilot and dataset conditions are recorded in [worker validation](docs/en/tracking-worker.md).
+
+追蹤套件獨立安裝並保留各自 Apache-2.0 聲明；原始碼封裝不含套件、權重、影片或標註。公開序列來源、條件與驗證範圍見上述文件。

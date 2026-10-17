@@ -40,6 +40,7 @@ from depthport.comparison import compact_card, status_card
 from depthport.semantic import run_ultralytics_semantic
 from depthport.sessions import SessionStore, SessionError, SessionIntegrity, SessionNotFound, SessionLimit
 from depthport.tracking import analyse_session, MAX_TRACK_FRAMES
+from depthport.tracking_worker import worker_configured, close_tracking_workers
 
 MAX_UPLOAD = 12 * 1024 * 1024
 
@@ -498,7 +499,9 @@ async def lifespan(app):
         try: service.set_source(source)
         except ValueError as exc: service.source_error = safe_error(exc)
     try: yield
-    finally: service.shutdown()
+    finally:
+        close_tracking_workers()
+        service.shutdown()
 
 
 app = FastAPI(title='DepthPort', version=__version__, lifespan=lifespan)
@@ -926,7 +929,8 @@ def sessions_status(request: Request):
     store=local_session_store(request)
     return {'enabled':True,'manual_capture_only':True,
             'max_frames_per_session':120,'max_sessions':20,
-            'model_inference_during_replay':False}
+            'model_inference_during_replay':False,
+            'tracking_worker_configured':worker_configured()}
 
 
 @app.get('/api/sessions')
@@ -1008,20 +1012,22 @@ def sessions_consistency_export(request: Request, sid: str):
 
 
 class TrackingRequest(BaseModel):
+    model_config = {'extra': 'forbid'}
+    backend: Literal['baseline','roboflow-botsort']='baseline'
     mode: Literal['segment','detect']='segment'
     confidence: float = Field(default=.25, ge=.05, le=.95)
     max_frames: int = Field(default=12, ge=2, le=MAX_TRACK_FRAMES)
 
 
-def _tracking_work(app: FastAPI, sid: str, job_id: str, mode: str, confidence: float, max_frames: int):
+def _tracking_work(app: FastAPI, sid: str, job_id: str, mode: str, confidence: float, max_frames: int, backend: str):
     try:
         # Isolated CPU-only offline job; does not call the live depth worker.
         store = app.state.session_store
         report = analyse_session(store,sid,mode=mode,confidence=confidence,
-                                 max_frames=max_frames,device='cpu')
+                                 max_frames=max_frames,device='cpu',backend=backend)
         store.save_tracking_report(sid,report)
         result={'state':'completed','id':job_id,'session_id':sid,
-                'track_count':report['track_count'],'frames_considered':report['frames_considered']}
+                'backend':backend,'track_count':report['track_count'],'frames_considered':report['frames_considered']}
     except Exception as exc:
         result={'state':'error','id':job_id,'session_id':sid,'error':safe_error(exc)}
     with app.state.tracking_lock:
@@ -1041,12 +1047,12 @@ def sessions_track(request: Request, sid: str, body: TrackingRequest):
             raise HTTPException(409,'One tracking job is already running')
         job_id=uuid.uuid4().hex
         request.app.state.tracking_job={'state':'running','id':job_id,'session_id':sid,
-                                         'mode':body.mode}
+                                         'mode':body.mode,'backend':body.backend}
         thread=threading.Thread(target=_tracking_work,
-              args=(request.app,sid,job_id,body.mode,body.confidence,body.max_frames),
+              args=(request.app,sid,job_id,body.mode,body.confidence,body.max_frames,body.backend),
               name='depthport-offline-tracking',daemon=True)
         thread.start()
-    return {'accepted':True,'id':job_id,'state':'running',
+    return {'accepted':True,'id':job_id,'state':'running','backend':body.backend,
             'note':'Manual saved-frame analysis; CPU-only inference; no auto recording.'}
 
 
