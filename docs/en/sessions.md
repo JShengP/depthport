@@ -136,9 +136,17 @@ The bookmark API uses the same storage opt-in and loopback restrictions as repla
 
 Use the bookmark filter to show **All**, **Suspected ID switch**, **Occlusion**, **Crossing**, or **General** (no tags). Enter a keyword to search saved note text; when both controls are set, a bookmark must match both. Search ignores surrounding spaces and English letter case, and matches equivalent full-width characters. The entire query is a literal phrase, including punctuation; it is not split into words or interpreted as a regular expression. The list shows the matching/total count and a message when nothing matches. **Clear filters** restores All and an empty search.
 
-Filtering only changes the list. It preserves the displayed frame, playback and A/B settings, editor contents and unsaved drafts. Choose a matching bookmark to jump back through the usual exact-frame replay. Search uses **saved notes only**; saving or applying a JSON import updates the results. **Export JSON always includes all saved bookmarks**, even while the list is filtered.
+Filtering only changes the list and bookmark navigation choices. It preserves the displayed frame, playback and A/B settings, editor contents and unsaved drafts. Choose a matching bookmark to jump back through the usual exact-frame replay. Search uses **saved notes only**; saving or applying a JSON import updates the results. **Export JSON always includes all saved bookmarks**, even while the list is filtered.
 
 Changing Sessions or refreshing resets the filters. Search keywords stay in page memory; they are not sent in requests, placed in the URL or saved in browser storage. Filtering does not save notes, run tracking or upload data.
+
+### Step through filtered bookmarks
+
+Use **Previous bookmark / Next bookmark** above the replay image or beside the bookmark list. Both controls follow the current tag and keyword filters in saved-frame order. They choose the nearest matching bookmark before or after the last fully displayed frame, even when that frame is not a result. With no frame displayed yet, Next opens the first result. Buttons are disabled when no result exists in that direction; navigation does not wrap around.
+
+The position readout shows the displayed bookmark's place in the filtered results and their total, or says that the displayed frame is outside the results. Jumping pauses playback, keeps the A/B interval and unsaved drafts, and presents the target RGB/depth, matching boxes/IDs and point cloud together. A failed read or decode leaves the last complete frame visible.
+
+Both sets of buttons are disabled while a bookmark jump loads. Selecting another bookmark directly, changing filters or Sessions, or navigating manually cancels that jump so its old result cannot replace the new selection. These controls only read local saved frames; they do not change bookmarks, notes or JSON export contents.
 
 ### Back up and restore bookmark JSON
 

@@ -29,6 +29,11 @@
 <div class="replay-progress-control"><label for="replay-progress" data-i="replayPosition">Playback progress</label>
 <input id="replay-progress" type="range" min="1" max="1" step="1" value="1" disabled aria-describedby="replay-progress-text">
 <output id="replay-progress-text" for="replay-progress" aria-live="off">0 / 0</output></div>
+<div id="bookmark-replay-nav" class="bookmark-navigation" role="group" aria-labelledby="bookmark-replay-nav-label">
+<span id="bookmark-replay-nav-label" data-i="bookmarkReplayNav">Replay bookmark navigation</span>
+<button id="bookmark-prev" data-i="bookmarkPrevious" disabled aria-describedby="bookmark-nav-status">Previous bookmark</button>
+<button id="bookmark-next" data-i="bookmarkNext" disabled aria-describedby="bookmark-nav-status">Next bookmark</button>
+<output id="bookmark-nav-status" aria-live="off"></output></div>
 <fieldset class="replay-loop-control"><legend data-i="loopTitle">A/B loop</legend>
 <label class="overlay-toggle"><input id="loop-enabled" type="checkbox" disabled aria-describedby="loop-status"><span data-i="loopEnable">Loop A–B</span></label>
 <div class="loop-endpoints"><label for="loop-start" data-i="loopStart">A · Start frame</label>
@@ -53,6 +58,11 @@
 <button id="bookmark-filter-clear" data-i="bookmarkFilterClear" disabled>Clear filters</button>
 <p id="bookmark-filter-help" data-i="bookmarkFilterHelp">Tag and note keyword must both match. Search is literal and ignores English case.</p>
 <output id="bookmark-filter-status" aria-live="polite"></output></fieldset>
+<div id="bookmark-list-nav" class="bookmark-navigation" role="group" aria-labelledby="bookmark-list-nav-label">
+<span id="bookmark-list-nav-label" data-i="bookmarkListNav">Filtered bookmark navigation</span>
+<button id="bookmark-list-prev" data-i="bookmarkPrevious" disabled aria-describedby="bookmark-list-nav-status">Previous bookmark</button>
+<button id="bookmark-list-next" data-i="bookmarkNext" disabled aria-describedby="bookmark-list-nav-status">Next bookmark</button>
+<output id="bookmark-list-nav-status" aria-live="off"></output></div>
 <p id="bookmarks-status" role="status"></p><ul id="bookmarks-list"></ul>
 <fieldset class="bookmark-transfer"><legend data-i="bookmarkBackup">JSON backup / restore</legend>
 <p data-i="bookmarkBackupNote">Export saved bookmarks only; save drafts first. This JSON contains notes, not images. Restore requires the original Session and frames.</p>

@@ -29,6 +29,9 @@
 - Added bookmark tag filters and literal saved-note search with matching/total counts, a no-match message and Clear filters. Tag and keyword conditions combine; search supports case-insensitive and equivalent full-width text. Filtering preserves replay and unsaved edits; JSON export still includes every saved bookmark. Search keywords remain in page memory.
 - 新增書籤分類篩選與已保存備註文字搜尋，可組合分類／關鍵字，顯示符合／總筆數、無結果提示並一鍵清除；支援忽略英文大小寫及對應全形字元。篩選保留回放與未保存編輯，JSON 仍匯出全部已保存書籤；關鍵字只留在本頁記憶體。
 
+- Added Previous/Next bookmark controls above replay and beside the list, following the current tag/keyword results in saved-frame order from the last displayed frame. Position counts and disabled boundaries make each review step clear; jumps pause playback, preserve A/B and drafts, and retain exact-frame RGB/depth/ID presentation. Superseded or failed loads cannot replace the last complete frame. Notes and exports remain unchanged and local.
+- 回放上方與書籤列表旁新增「上一個／下一個書籤」，從目前已顯示影格依分類／關鍵字結果與保存順序逐筆檢查，顯示序位並在邊界停用。跳轉暫停並保留 A／B 與草稿，影像／深度／ID 同步更新；過期或失敗載入不取代上一份完整影格，備註及匯出內容維持本機且不變。
+
 # Changelog / 版本紀錄
 
 ## 0.2.0-alpha.1 — 2026-10-17 (experimental Alpha pre-release)

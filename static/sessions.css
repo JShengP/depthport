@@ -59,3 +59,7 @@ footer{margin:24px 0;color:#acb9c9}@media(max-width:800px){.panels{grid-template
 #bookmark-filter-help,#bookmark-filter-status{grid-column:1/-1;margin:0;font-size:13px;color:#cce5f8}
 #bookmark-filter-status{min-height:20px;font-variant-numeric:tabular-nums}
 @media(max-width:520px){.bookmark-filters{grid-template-columns:minmax(0,1fr)}.bookmark-filters select{grid-column:auto}}
+
+.bookmark-navigation{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin:10px 0}
+.bookmark-navigation button{margin:0}.bookmark-navigation output{font-size:13px;color:#cce5f8;font-variant-numeric:tabular-nums}
+@media(max-width:520px){.bookmark-navigation output{flex-basis:100%}}

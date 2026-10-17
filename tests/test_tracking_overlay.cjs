@@ -1307,3 +1307,211 @@ test('import preview preserves active filter results and apply updates them with
  assert.equal(e['bookmark-export'].href,'/api/sessions/session-a/bookmarks/export');assert.equal(bookmarkWrites(ui).length,0);assert.equal(bookmarkImports(ui).length,2);
  e['bookmark-filter-clear'].onclick();assert.deepEqual(visibleBookmarkIndices(ui),[1,3]);assertBookmarkCount(ui,2,2);
 });
+
+const bookmarkNavPairs=[['bookmark-prev','bookmark-next'],['bookmark-list-prev','bookmark-list-next']];
+function assertBookmarkNav(ui,previous,next,{busy=false}={}){
+ for(const [prevId,nextId] of bookmarkNavPairs){
+  for(const [id,target] of [[prevId,previous],[nextId,next]]){
+   const button=ui.elements[id];assert.ok(button,id+' exists');
+   assert.equal(button.disabled,busy||target===null,id+' availability');
+   if(target!==null)assert.equal(button.getAttribute('data-index'),String(target),id+' target saved index');
+  }
+ }
+ assert.equal(ui.elements['bookmark-nav-status'].textContent,ui.elements['bookmark-list-nav-status'].textContent,'both toolbars describe the same position');
+}
+function assertBookmarkNavPosition(ui,position,total){
+ const text=ui.elements['bookmark-nav-status'].textContent;
+ assert.match(text,new RegExp('\\b'+position+'\\s*(?:/|of)\\s*'+total+'\\b'));
+ assert.equal(text,ui.elements['bookmark-list-nav-status'].textContent);
+}
+async function jumpBookmarkNav(ui,direction,index,{list=false,...options}={}){
+ const id='bookmark-'+(list?'list-':'')+direction,jumping=ui.elements[id].onclick();await flush();
+ await completeReplay(ui,index,options);await jumping;return jumping;
+}
+
+test('both bookmark toolbars disable unavailable lists and start from the first filtered bookmark before any replay',async()=>{
+ for(const delayBookmarks of [false,true]){
+  const ui=await startUI({delayBookmarks}),e=ui.elements;
+  assertBookmarkNav(ui,null,null);assert.equal(replayRequests(ui).length,0);
+  if(delayBookmarks){
+   ui.respond('/api/sessions/session-a/bookmarks',{detail:'Unavailable'},false,500);await flush();
+   assertBookmarkNav(ui,null,null);assert.equal(replayRequests(ui).length,0);
+  }else{
+   assert.equal(e['bookmark-nav-status'].textContent.length>0,true);
+  }
+ }
+ const ui=await startUI({bookmarks:[bookmarkRecord(3),bookmarkRecord(1)]});
+ assertBookmarkNav(ui,null,1);await jumpBookmarkNav(ui,'next',1,{list:true});
+ assertBookmarkNav(ui,null,3);assertBookmarkNavPosition(ui,1,2);assertProgress(ui,1,3);
+});
+
+test('bookmark navigation uses strict nearest filtered neighbors and never wraps at either end',async()=>{
+ const bookmarks=[bookmarkRecord(1,{tags:['crossing']}),bookmarkRecord(2,{tags:['occlusion']}),bookmarkRecord(3,{tags:['crossing']})];
+ const ui=await startUI({trackingReport:trackedSequence(),bookmarks}),e=ui.elements;filterBookmarkTag(ui,'crossing');
+ await showSaved(ui,2);assertBookmarkNav(ui,1,3);
+ await jumpBookmarkNav(ui,'next',3);assertBookmarkNav(ui,1,null);assertBookmarkNavPosition(ui,2,2);
+ const count=replayRequests(ui).length;await e['bookmark-list-next'].onclick();await flush();assert.equal(replayRequests(ui).length,count);
+ await jumpBookmarkNav(ui,'prev',1,{list:true});assertBookmarkNav(ui,null,3);assertBookmarkNavPosition(ui,1,2);
+ await e['bookmark-prev'].onclick();await flush();assert.equal(replayRequests(ui).length,count+1);
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');
+});
+
+test('one matched bookmark is reachable from either side while zero matches disable both controls',async()=>{
+ const ui=await startUI({bookmarks:[bookmarkRecord(2,{note:'recheck crossing',tags:['crossing']})]});
+ assertBookmarkNav(ui,null,2);await showSaved(ui,1);assertBookmarkNav(ui,null,2);
+ await jumpBookmarkNav(ui,'next',2);assertBookmarkNav(ui,null,null);assertBookmarkNavPosition(ui,1,1);
+ await showSaved(ui,3);assertBookmarkNav(ui,2,null);
+ searchBookmarkNotes(ui,'missing');assertBookmarkNav(ui,null,null);assertBookmarkCount(ui,0,1);
+ searchBookmarkNotes(ui,'RECHECK');assertBookmarkNav(ui,2,null);
+});
+
+test('bookmark targets follow saved option positions rather than source frame IDs or contiguous arithmetic',async()=>{
+ const indices=[12,4,9],bookmarks=indices.map(index=>bookmarkRecord(index));
+ const ui=await startUI({frameIndices:indices,bookmarks});
+ assertBookmarkNav(ui,null,12);await jumpBookmarkNav(ui,'next',12);assertProgress(ui,1,3);
+ assertBookmarkNav(ui,null,4);assertBookmarkNavPosition(ui,1,3);
+ await jumpBookmarkNav(ui,'next',4,{list:true});assertProgress(ui,2,3);assertBookmarkNav(ui,12,9);assertBookmarkNavPosition(ui,2,3);
+ await jumpBookmarkNav(ui,'next',9);assertProgress(ui,3,3);assertBookmarkNav(ui,4,null);assertBookmarkNavPosition(ui,3,3);
+});
+
+test('navigation and list filtering share the combined saved tag and normalized note keyword',async()=>{
+ const bookmarks=[bookmarkRecord(1,{tags:['occlusion'],note:'recheck A'}),bookmarkRecord(2,{tags:['crossing'],note:'recheck B'}),bookmarkRecord(3,{tags:['occlusion'],note:'ＲＥＣＨＥＣＫ C'})];
+ const ui=await startUI({bookmarks});await showSaved(ui,2);filterBookmarkTag(ui,'occlusion');searchBookmarkNotes(ui,' reCHECK ');
+ assert.deepEqual(visibleBookmarkIndices(ui),[1,3]);assertBookmarkNav(ui,1,3);
+ searchBookmarkNotes(ui,'C');assert.deepEqual(visibleBookmarkIndices(ui),[1,3]);assertBookmarkNav(ui,1,3);
+ searchBookmarkNotes(ui,'recheck C');assert.deepEqual(visibleBookmarkIndices(ui),[3]);assertBookmarkNav(ui,null,3);
+ ui.elements['bookmark-filter-clear'].onclick();assertBookmarkNav(ui,1,3);
+});
+
+test('a pending progress target and changed dropdown cannot replace the committed bookmark navigation anchor',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence(),bookmarks:[bookmarkRecord(1),bookmarkRecord(3)]}),e=ui.elements;await showSaved(ui,1);
+ e['frames-list'].value='3';e['replay-progress'].value='2';e['replay-progress'].oninput();await flush();
+ assertBookmarkNav(ui,null,3);const jumping=e['bookmark-list-next'].onclick();await flush();
+ await completeReplay(ui,3);await jumping;assertProgress(ui,3,3);assertBookmarkNav(ui,1,null);
+ assert.equal(replayRequests(ui).length,2,'a thumb preview does not load or become the anchor');
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0003');
+});
+
+test('a bookmark neighbor jump cancels pending autoplay and keeps both toolbars serialized until commit',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence(),bookmarks:[bookmarkRecord(1),bookmarkRecord(3)]}),e=ui.elements;await showFirst(ui);
+ configureLoop(ui,1,2);e['playback-play'].onclick();await ui.tick(0);
+ ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();assertBookmarkNav(ui,null,3);
+ const jumping=e['bookmark-next'].onclick();await flush();assertBookmarkNav(ui,null,3,{busy:true});
+ const calls=replayRequests(ui).length;await e['bookmark-list-next'].onclick();await e['bookmark-prev'].onclick();await flush();assert.equal(replayRequests(ui).length,calls);
+ ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await flush();ui.decode('data:image/png;base64,session-a-3');await flush();
+ assertBookmarkNav(ui,null,3,{busy:true});assertProgress(ui,1,3);assert.equal(e['frames-list'].value,'1');
+ ui.decode('data:image/jpeg;base64,session-a-depth-3');await jumping;await ui.decodeFrame('session-a',2);await ui.tick(1000);
+ assertProgress(ui,3,3);assertBookmarkNav(ui,1,null);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0003');
+ assert.match(e['playback-status'].textContent,/Paused/);assert.equal(e['loop-enabled'].checked,true);assert.equal(e['loop-end'].value,'2');
+});
+
+test('filter, search and clear changes cancel only a pending bookmark jump and reject its late decoding',async()=>{
+ for(const change of ['tag','search','clear']){
+  const bookmarks=[bookmarkRecord(1,{tags:['crossing'],note:'first'}),bookmarkRecord(3,{tags:['crossing'],note:'third'})];
+  const ui=await startUI({trackingReport:trackedSequence(),bookmarks}),e=ui.elements;await showFirst(ui);
+  if(change==='clear')filterBookmarkTag(ui,'crossing');
+  const image=e.rgb,jumping=e['bookmark-list-next'].onclick();await flush();
+  ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await flush();
+  if(change==='tag')filterBookmarkTag(ui,'occlusion');else if(change==='search')searchBookmarkNotes(ui,'first');else e['bookmark-filter-clear'].onclick();
+  await ui.decodeFrame('session-a',3);await jumping;
+  assert.equal(e.rgb,image);assertProgress(ui,1,3);assert.equal(ui.cloudUpdates.length,1);
+  assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');
+  assertBookmarkNav(ui,null,change==='clear'?3:null);
+ }
+});
+
+test('a direct list jump can supersede a pending neighbor jump without the old completion re-enabling stale targets',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence(),bookmarks:[bookmarkRecord(2),bookmarkRecord(3)]}),e=ui.elements;await showFirst(ui);
+ const first=e['bookmark-next'].onclick();await flush();ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();
+ const second=bookmarkJumpButtons(ui).find(b=>b.getAttribute('data-index')==='3').onclick();await flush();
+ ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await flush();
+ await ui.decodeFrame('session-a',2);await first;assertBookmarkNav(ui,null,2,{busy:true});assertProgress(ui,1,3);
+ await ui.decodeFrame('session-a',3);await second;assertBookmarkNav(ui,2,null);assertBookmarkNavPosition(ui,2,2);assertProgress(ui,3,3);
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0003');
+});
+
+test('failed fetch, snapshot validation and image decode restore both bookmark toolbars to the last complete frame',async()=>{
+ for(const failure of ['fetch','snapshot','decode']){
+  const ui=await startUI({trackingReport:trackedSequence(),bookmarks:[bookmarkRecord(1),bookmarkRecord(3)]}),e=ui.elements;await showFirst(ui);
+  const image=e.rgb,depth=e.depth,jumping=e['bookmark-list-next'].onclick();await flush();assertBookmarkNav(ui,null,3,{busy:true});
+  if(failure==='fetch')ui.respond('/api/sessions/session-a/frames/3/replay',{detail:'Unavailable'},false,404);
+  else{
+   ui.respond('/api/sessions/session-a/frames/3/replay',{...replayResponse('session-a',3),...(failure==='snapshot'?{snapshot_sha256:otherHash}:{})});await flush();
+   if(failure==='decode'){ui.decode('data:image/png;base64,session-a-3',Error('Decode failed'));ui.decode('data:image/jpeg;base64,session-a-depth-3')}
+  }
+  await jumping;assertBookmarkNav(ui,null,3);assertBookmarkNavPosition(ui,1,2);assertProgress(ui,1,3);
+  assert.equal(e.rgb,image);assert.equal(e.depth,depth);assert.equal(e['frames-list'].value,'1');assert.equal(ui.cloudUpdates.length,1);
+  assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');assert.match(e.status.textContent,/Request failed/);
+ }
+});
+
+test('manual frame seeking and page exit cancel a pending bookmark target without leaving navigation busy',async()=>{
+ for(const cancel of ['seek','mark','edit','pagehide']){
+  const ui=await startUI({trackingReport:trackedSequence(),bookmarks:[bookmarkRecord(1),bookmarkRecord(3)]}),e=ui.elements;await showFirst(ui);
+  const jumping=e['bookmark-next'].onclick();await flush();ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await flush();
+  let seeking;
+  if(cancel==='seek'){e['frames-list'].value='2';seeking=e['frames-list'].onchange();await flush()}
+  else if(cancel==='mark')e['bookmark-mark'].onclick();else if(cancel==='edit')e['bookmark-note'].focus();else ui.pagehide();
+  await ui.decodeFrame('session-a',3);await jumping;
+  if(seeking){await completeReplay(ui,2);await seeking;assertProgress(ui,2,3);assertBookmarkNav(ui,1,3)}
+  else{assertProgress(ui,1,3);assertBookmarkNav(ui,null,3)}
+  assert.equal(e.rgb.src,'data:image/png;base64,session-a-'+(cancel==='seek'?2:1));
+ }
+});
+
+test('switching Sessions cancels a pending bookmark neighbor and loads targets for the new saved list',async()=>{
+ const ui=await startUI({bookmarks:[bookmarkRecord(1),bookmarkRecord(3)]}),e=ui.elements;await showFirst(ui);
+ const jumping=e['bookmark-next'].onclick();await flush();ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await flush();
+ e['sessions-list'].value='session-b';const switched=e['sessions-list'].onchange();await flush();assertBookmarkNav(ui,null,null);
+ await finishFrames(ui,'session-b',true,null,[1,2,3],[bookmarkRecord(2)]);await switched;await ui.decodeFrame('session-a',3);await jumping;
+ assert.equal(e.result.hidden,true);assertBookmarkNav(ui,null,2);assert.equal(ui.cloudUpdates.length,1);
+ await jumpBookmarkNav(ui,'next',2,{list:true,sid:'session-b'});assertBookmarkNav(ui,null,null);assertBookmarkNavPosition(ui,1,1);assertProgress(ui,2,3);
+});
+
+test('neighbor jumps retain per-frame drafts and A/B settings across revisiting bookmarks',async()=>{
+ const ui=await startUI({bookmarks:[bookmarkRecord(1,{note:'saved first'}),bookmarkRecord(3,{note:'saved third'})]}),e=ui.elements;await showFirst(ui);
+ editBookmark(ui,'unsaved review',['id-switch']);configureLoop(ui,1,2);await jumpBookmarkNav(ui,'next',3);
+ assert.equal(e['bookmark-note'].value,'saved third');await jumpBookmarkNav(ui,'prev',1,{list:true});
+ assert.equal(e['bookmark-note'].value,'unsaved review');assert.equal(e['bookmark-tag-id-switch'].checked,true);assert.equal(bookmarkWrites(ui).length,0);
+ assert.equal(e['loop-enabled'].checked,true);assert.equal(e['loop-start'].value,'1');assert.equal(e['loop-end'].value,'2');assertBookmarkNav(ui,null,3);
+});
+
+test('save and delete disable both bookmark toolbars during writes and recompute the active filtered targets',async()=>{
+ const first=bookmarkRecord(1,{note:'first',tags:['occlusion']}),third=bookmarkRecord(3,{note:'third',tags:['crossing']});
+ const ui=await startUI({bookmarks:[first,third]}),e=ui.elements;await showFirst(ui);filterBookmarkTag(ui,'crossing');assertBookmarkNav(ui,null,3);
+ editBookmark(ui,'first crossing',['crossing']);const saving=e['bookmark-save'].onclick();await flush();assertBookmarkNav(ui,null,3,{busy:true});
+ const requests=replayRequests(ui).length;await e['bookmark-next'].onclick();await flush();assert.equal(replayRequests(ui).length,requests);
+ const updated=bookmarkRecord(1,{note:'first crossing',tags:['crossing']});ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',[updated,third]));await saving;
+ assertBookmarkNav(ui,null,3);assertBookmarkNavPosition(ui,1,2);
+ const deleting=e['bookmark-delete'].onclick();await flush();assertBookmarkNav(ui,null,3,{busy:true});ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',[third]));await deleting;
+ assertBookmarkNav(ui,null,3);assertBookmarkCount(ui,1,1);
+});
+
+test('import preview and apply serialize bookmark navigation and refresh targets only after saved changes',async()=>{
+ const first=bookmarkRecord(1,{tags:['crossing'],note:'first'}),third=bookmarkRecord(3,{tags:['crossing'],note:'third'});
+ const ui=await startUI({bookmarks:[first]}),e=ui.elements;await showSaved(ui,2);filterBookmarkTag(ui,'crossing');assertBookmarkNav(ui,1,null);
+ await chooseImport(ui,fakeBookmarkFile(bookmarkResponse('session-a',[third])));
+ const previewing=e['bookmark-import-preview'].onclick();await flush();assertBookmarkNav(ui,1,null,{busy:true});
+ ui.respond(importUrl(),bookmarkImportResponse('session-a',[first,third]));await previewing;assertBookmarkNav(ui,1,null);
+ const applying=e['bookmark-import-apply'].onclick();await flush();assertBookmarkNav(ui,1,null,{busy:true});
+ ui.respond(importUrl('session-a','keep',false),bookmarkImportResponse('session-a',[first,third],{dryRun:false}));await applying;assertBookmarkNav(ui,1,3);
+ await jumpBookmarkNav(ui,'next',3,{list:true});assertBookmarkNav(ui,1,null);assertBookmarkNavPosition(ui,2,2);
+});
+
+test('a bookmark neighbor jump supersedes an already loading progress seek using the displayed frame as its anchor',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence(),bookmarks:[bookmarkRecord(1),bookmarkRecord(3)]}),e=ui.elements;await showFirst(ui);
+ const seeking=scrub(ui,2);await flush();ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();
+ assertBookmarkNav(ui,null,3);const jumping=e['bookmark-next'].onclick();await flush();assertBookmarkNav(ui,null,3,{busy:true});
+ await completeReplay(ui,3);await jumping;await ui.decodeFrame('session-a',2);await seeking;
+ assertProgress(ui,3,3);assertBookmarkNav(ui,1,null);assertBookmarkNavPosition(ui,2,2);
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0003');assert.equal(ui.cloudUpdates.length,2);
+});
+
+test('a completed autoplay frame refreshes both bookmark neighbors while ordinary filtering keeps playback running',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence(),bookmarks:[bookmarkRecord(1,{tags:['crossing']}),bookmarkRecord(2,{tags:['occlusion']}),bookmarkRecord(3,{tags:['crossing']})]}),e=ui.elements;
+ await showFirst(ui);assertBookmarkNav(ui,null,2);assertBookmarkNavPosition(ui,1,3);
+ e['playback-play'].onclick();await ui.tick(0);filterBookmarkTag(ui,'crossing');assertBookmarkNav(ui,null,3);
+ await completeReplay(ui,2);assertProgress(ui,2,3);assertBookmarkNav(ui,1,3);assert.match(e['playback-status'].textContent,/Playing/);
+ e['bookmark-filter-clear'].onclick();assertBookmarkNav(ui,1,3);assertBookmarkNavPosition(ui,2,3);assert.equal(e['playback-pause'].disabled,false);
+ e['playback-pause'].onclick();
+});
