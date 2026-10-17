@@ -2645,23 +2645,23 @@ test('End cancels pending autoplay fetch and ignores duplicate jumps during a ma
  for(const key of ['Home','End'])assert.equal(pressBookmarkKey(ui,key,{target:e.result}).defaultPrevented,false);await completeReplay(ui,3);ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await ui.tick(1000);assertShownFrame(ui,3);assert.equal(replayRequests(ui).length,calls);assert.match(e['playback-status'].textContent,/Paused/);
 });
 
-test('endpoint keys preserve editor/native behavior and ignore IME, modifiers, hidden/repeated/handled events, opt-out and modal focus',async()=>{
+test('endpoint/page keys preserve editor/native behavior and ignore IME, modifiers, hidden/repeated/handled events, opt-out and modal focus',async()=>{
  const ui=await startUI(),e=ui.elements;await showSaved(ui,2);e.result.focus();const calls=ui.pending.length;
  const editors=[e['bookmark-note'],e['bookmark-search'],e['playback-speed'],e['loop-start'],e['frames-list'],e['replay-progress'],e.label];for(const role of ['textbox','searchbox','combobox','slider','spinbutton','listbox','grid','tablist']){const editor=new Element('div');editor.setAttribute('role',role);editors.push(editor)}const editable=new Element('div');editable.setAttribute('contenteditable','true');editors.push(editable);
- for(const key of ['Home','End']){
+ for(const key of ['Home','End','PageUp','PageDown']){
   for(const target of editors){assert.equal(pressBookmarkKey(ui,key,{target}).defaultPrevented,false);const child=new Element('span');child.parentElement=target;assert.equal(pressBookmarkKey(ui,key,{composedPath:()=>[child,target]}).defaultPrevented,false)}
   e['bookmark-note'].focus();assert.equal(pressBookmarkKey(ui,key,{target:e.result}).defaultPrevented,false);e['bookmark-search'].focus();assert.equal(pressBookmarkKey(ui,key,{target:e.result}).defaultPrevented,false);e.result.focus();
   for(const props of [{ctrlKey:true},{altKey:true},{metaKey:true},{shiftKey:true},{repeat:true},{isComposing:true},{keyCode:229}])assert.equal(pressBookmarkKey(ui,key,props).defaultPrevented,false);assert.equal(pressBookmarkKey(ui,key,{defaultPrevented:true}).defaultPrevented,true);
   ui.dispatch('compositionstart');assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false);ui.dispatch('compositionend');ui.hide();assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false);ui.document.hidden=false;
  }
- e['bookmark-shortcuts-enabled'].checked=false;e['bookmark-shortcuts-enabled'].onchange();assert.equal(e.result.getAttribute('aria-keyshortcuts'),'');for(const key of ['Home','End'])assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false);e['bookmark-shortcuts-enabled'].checked=true;e['bookmark-shortcuts-enabled'].onchange();assert.equal(e.result.getAttribute('aria-keyshortcuts'),'Home End');e['shortcut-help-open'].onclick();for(const key of ['Home','End'])assert.equal(pressBookmarkKey(ui,key,{target:e['shortcut-help-close']}).defaultPrevented,false);e['shortcut-help-close'].onclick();assertShownFrame(ui,2);assert.equal(ui.pending.length,calls);assert.equal(bookmarkWrites(ui).length,0);
+ e['bookmark-shortcuts-enabled'].checked=false;e['bookmark-shortcuts-enabled'].onchange();assert.equal(e.result.getAttribute('aria-keyshortcuts'),'');for(const key of ['Home','End','PageUp','PageDown'])assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false);e['bookmark-shortcuts-enabled'].checked=true;e['bookmark-shortcuts-enabled'].onchange();assert.equal(e.result.getAttribute('aria-keyshortcuts'),'Home End PageUp PageDown');e['shortcut-help-open'].onclick();for(const key of ['Home','End','PageUp','PageDown'])assert.equal(pressBookmarkKey(ui,key,{target:e['shortcut-help-close']}).defaultPrevented,false);e['shortcut-help-close'].onclick();assertShownFrame(ui,2);assert.equal(ui.pending.length,calls);assert.equal(bookmarkWrites(ui).length,0);
 });
 
-test('endpoint keys cannot replace an in-flight seek, bookmark jump or explicit bookmark write',async()=>{
+test('endpoint/page keys cannot replace an in-flight seek, bookmark jump or explicit bookmark write',async()=>{
  for(const mode of ['seek','bookmark','write']){
   const ui=await startUI({bookmarks:[bookmarkRecord(3)]}),e=ui.elements;await showFirst(ui);e.result.focus();
   let pending;if(mode==='seek')pending=scrub(ui,2);else if(mode==='bookmark')pending=e['bookmark-next'].onclick();else{editBookmark(ui,'synthetic pending annotation');pending=e['bookmark-save'].onclick()}await flush();const calls=ui.pending.length;
-  for(const key of ['Home','End'])assert.equal(pressBookmarkKey(ui,key,{target:e.result}).defaultPrevented,false);assert.equal(ui.pending.length,calls);
+  for(const key of ['Home','End','PageUp','PageDown'])assert.equal(pressBookmarkKey(ui,key,{target:e.result}).defaultPrevented,false);assert.equal(ui.pending.length,calls);
   if(mode==='write')ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',[bookmarkRecord(1,{note:'synthetic pending annotation'})]));else await completeReplay(ui,mode==='seek'?2:3);await pending;
  }
 });
@@ -2672,4 +2672,46 @@ test('failed endpoint loads retain exact images and IDs and can be retried; bili
   if(failure==='fetch')ui.respond('/api/sessions/session-a/frames/3/replay',{detail:'synthetic failure'},false,404);else{ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await flush();ui.decode('data:image/png;base64,session-a-3',Error('synthetic decode failure'));ui.decode('data:image/jpeg;base64,session-a-depth-3')}await flush();assertShownFrame(ui,2);assert.equal(e.rgb,image);assert.equal(e.depth,depth);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0002');assert.match(e.status.textContent,/Request failed/);await completeFrameKey(ui,'End',3);assertShownFrame(ui,3);
  }
  const html=fs.readFileSync(path.join(root,'static/sessions.html'),'utf8');assert.match(html,/<kbd>Home<\/kbd> \/ <kbd>End<\/kbd><\/dt><dd data-i="shortcutHelpEdges">/);assert.match(sessionsSource,/shortcutHelpEdges:"Pause and jump/);assert.match(sessionsSource,/shortcutHelpEdges:"暫停並跳到/);
+});
+
+function pageKeySequence(indices){return report({total_session_frames:indices.length,frames:indices.map(index=>({...report().frames[0],index,objects:[observation({object_id:'obj-'+String(index).padStart(4,'0')})]}))})}
+async function completePageKey(ui,key,index,total=24){await completeFrameKey(ui,key,index,{total});assert.equal(ui.elements['frames-list'].value,String(index));assert.equal(ui.elements.rgb.src,'data:image/png;base64,session-a-'+index);assert.equal(ui.elements.depth.src,'data:image/jpeg;base64,session-a-depth-'+index);assert.equal(ui.cloudUpdates.at(-1)[0],'points-session-a-'+index)}
+
+test('Page Up/Down jump ten saved positions and clamp without wrapping, preserving drafts, speed, filters and A/B',async()=>{
+ const indices=Array.from({length:24},(_,i)=>i+1),ui=await startUI({frameIndices:indices,trackingReport:pageKeySequence(indices),bookmarks:[bookmarkRecord(12,{note:'saved review',tags:['crossing']})]}),e=ui.elements;await showSaved(ui,12,{total:24});configureLoop(ui,10,15);filterBookmarkTag(ui,'crossing');searchBookmarkNotes(ui,'saved review');editBookmark(ui,'synthetic ten-frame draft',['occlusion']);e['playback-speed'].value='.5';e['playback-speed'].onchange();e.result.focus();
+ await completePageKey(ui,'PageUp',2);assertProgress(ui,2,24);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0002');await completePageKey(ui,'PageDown',12);assert.equal(e['bookmark-note'].value,'synthetic ten-frame draft');assert.equal(e['bookmark-tag-occlusion'].checked,true);
+ for(const [key,index] of [['PageDown',22],['PageDown',24],['PageUp',14],['PageUp',4],['PageUp',1]]){await completePageKey(ui,key,index);assertProgress(ui,index,24);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-'+String(index).padStart(4,'0'))}
+ let calls=replayRequests(ui).length;assert.equal(pressBookmarkKey(ui,'PageUp',{target:e.result}).defaultPrevented,true);await flush();assert.equal(replayRequests(ui).length,calls);
+ for(const index of [11,21,24])await completePageKey(ui,'PageDown',index);calls=replayRequests(ui).length;assert.equal(pressBookmarkKey(ui,'PageDown',{target:e.result}).defaultPrevented,true);await flush();assert.equal(replayRequests(ui).length,calls);
+ assert.match(e['playback-status'].textContent,/Paused.*0\.5×/);assertLoopValues(ui,10,15,true);assert.equal(e['bookmark-filter-tag'].value,'crossing');assert.equal(e['bookmark-search'].value,'saved review');assert.equal(bookmarkWrites(ui).length,0);
+});
+
+test('page jumps count sparse saved order, require a displayed snapshot and handle empty/single-frame Sessions',async()=>{
+ const indices=Array.from({length:24},(_,i)=>4+i*3),ui=await startUI({frameIndices:indices}),e=ui.elements;const calls=replayRequests(ui).length;
+ for(const key of ['PageUp','PageDown'])assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false);assert.equal(replayRequests(ui).length,calls);await showSaved(ui,indices[11],{total:24});
+ await completePageKey(ui,'PageDown',indices[21]);assertProgress(ui,22,24);await completePageKey(ui,'PageUp',indices[11]);assertProgress(ui,12,24);
+ const empty=await startUI({frameIndices:[]});for(const key of ['PageUp','PageDown'])assert.equal(pressBookmarkKey(empty,key).defaultPrevented,false);
+ const single=await startUI({frameIndices:[7]});await showSaved(single,7,{total:1});const singleCalls=replayRequests(single).length;for(const key of ['PageUp','PageDown'])assert.equal(pressBookmarkKey(single,key).defaultPrevented,true);await flush();assert.equal(replayRequests(single).length,singleCalls);assertProgress(single,1,1);
+});
+
+test('page jumps cancel pending autoplay fetch/decode, use the shown frame and serialize manual page loads',async()=>{
+ for(const mode of ['fetch','decode','boundary']){
+  const indices=Array.from({length:24},(_,i)=>i+1),ui=await startUI({frameIndices:indices,trackingReport:pageKeySequence(indices)}),e=ui.elements;await showSaved(ui,1,{total:24});e.result.focus();e['playback-play'].onclick();await ui.tick(0);
+  if(mode!=='fetch'){ui.respond('/api/sessions/session-a/frames/2/replay',{...replayResponse('session-a',2),total_session_frames:24});await flush();ui.decode('data:image/png;base64,session-a-2');await flush()}
+  // A pending dropdown selection must not become the jump origin.
+  e['frames-list'].value='20';if(mode==='boundary'){const calls=replayRequests(ui).length;assert.equal(pressBookmarkKey(ui,'PageUp',{target:e.result}).defaultPrevented,true);await flush();assert.equal(replayRequests(ui).length,calls);assert.equal(e['frames-list'].value,'1');assert.equal(e['playback-play'].disabled,false)}
+  assert.equal(pressBookmarkKey(ui,'PageDown',{target:e.result}).defaultPrevented,true);await flush();for(const key of ['PageUp','PageDown'])assert.equal(pressBookmarkKey(ui,key,{target:e.result}).defaultPrevented,false);await completeReplay(ui,11,{total:24});
+  if(mode==='fetch')ui.respond('/api/sessions/session-a/frames/2/replay',{...replayResponse('session-a',2),total_session_frames:24});else ui.decode('data:image/jpeg;base64,session-a-depth-2');await ui.tick(1000);
+  assert.equal(e['frames-list'].value,'11');assertProgress(ui,11,24);assert.equal(e.rgb.src,'data:image/png;base64,session-a-11');assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0011');assert.equal(ui.cloudUpdates.length,2);assert.match(e['playback-status'].textContent,/Paused/);
+ }
+});
+
+test('page jump failures retain the complete snapshot and retry; Session changes invalidate pending jumps and help is bilingual',async()=>{
+ const indices=Array.from({length:24},(_,i)=>i+1);
+ for(const failure of ['fetch','decode']){
+  const ui=await startUI({frameIndices:indices,trackingReport:pageKeySequence(indices)}),e=ui.elements;await showSaved(ui,12,{total:24});const image=e.rgb,depth=e.depth;assert.equal(pressBookmarkKey(ui,'PageDown').defaultPrevented,true);await flush();
+  if(failure==='fetch')ui.respond('/api/sessions/session-a/frames/22/replay',{detail:'synthetic unavailable'},false,404);else{ui.respond('/api/sessions/session-a/frames/22/replay',{...replayResponse('session-a',22),total_session_frames:24});await flush();ui.decode('data:image/png;base64,session-a-22',Error('synthetic decode failure'));ui.decode('data:image/jpeg;base64,session-a-depth-22')}await flush();assert.equal(e.rgb,image);assert.equal(e.depth,depth);assertProgress(ui,12,24);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0012');assert.match(e.status.textContent,/Request failed/);await completePageKey(ui,'PageDown',22);
+ }
+ const ui=await startUI({frameIndices:indices}),e=ui.elements;await showSaved(ui,12,{total:24});pressBookmarkKey(ui,'PageDown');await flush();ui.respond('/api/sessions/session-a/frames/22/replay',{...replayResponse('session-a',22),total_session_frames:24});await flush();e['sessions-list'].value='session-b';const switched=e['sessions-list'].onchange();await flush();for(const key of ['PageUp','PageDown'])assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false);await finishFrames(ui,'session-b');await switched;await ui.decodeFrame('session-a',22);assert.equal(e.result.hidden,true);assert.equal(ui.cloudUpdates.length,1);
+ const html=fs.readFileSync(path.join(root,'static/sessions.html'),'utf8');assert.match(html,/<kbd>Page Up<\/kbd> \/ <kbd>Page Down<\/kbd><\/dt><dd data-i="shortcutHelpPages">/);assert.match(sessionsSource,/shortcutHelpPages:"Pause and jump back \/ forward 10/);assert.match(sessionsSource,/shortcutHelpPages:"暫停並從目前顯示影格/);
 });

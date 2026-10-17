@@ -1,5 +1,8 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 
+- Added **Page Up / Page Down** to pause and jump back/forward 10 saved positions from the shown frame, clamped to Session boundaries. Bilingual help is updated; drafts, speed, A/B and existing input/IME/modal guards are retained.
+- 新增 **Page Up／Page Down** 暫停並從顯示影格往前／往後跳 10 個保存位置，超出範圍停在 Session 邊界；更新雙語說明，保留草稿、速度、A／B 與既有輸入／組字／面板防護。
+
 - Added **Home / End** to pause and jump to the first/last saved frame of the full Session, with exact-snapshot overlays, retained drafts/speed/A-B and input/IME/modal guards. Bilingual shortcut help is updated.
 - 新增 **Home／End** 暫停並跳到整個 Session 的第一格／最後一格，保留快照疊圖、草稿、速度與 A／B，沿用輸入／組字／面板防護並更新雙語說明。
 
