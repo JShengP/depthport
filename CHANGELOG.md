@@ -1,5 +1,8 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 
+- Added **Shift+1 / Shift+2 / Shift+3** to quick-save the shown frame with ID-switch/occlusion/crossing tags, atomically preserving saved notes/other tags and unsaved drafts; updated bilingual help and input/IME guard coverage.
+- 新增 **Shift＋1／2／3** 快速保存目前影格為疑似換 ID／遮擋／物件交會書籤，原子合併標籤並保留備註、其他標籤與草稿，更新雙語說明及輸入／組字防護。
+
 - Added **Shift+M** to pause and create a general bookmark for the shown snapshot, atomically preserving existing saved notes/tags and keeping drafts separate. Updated bilingual help and input/IME guards.
 - 新增 **Shift＋M** 暫停並將目前快照建立為一般書籤，以原子操作保留已有備註／標籤及未保存草稿，更新雙語說明與輸入／組字防護。
 

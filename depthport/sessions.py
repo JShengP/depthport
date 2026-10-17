@@ -406,16 +406,22 @@ class SessionStore:
             tmp.unlink(missing_ok=True)
 
     def save_bookmark(self, sid: str, index: int, snapshot_sha256: str,
-                      tags: list | None = None, note: str = '', *, create_only: bool = False) -> dict:
+                      tags: list | None = None, note: str = '', *, create_only: bool = False, add_tag: str | None = None) -> dict:
         if type(create_only) is not bool:
             raise SessionError('create_only must be a boolean')
         tags = [] if tags is None else tags
         self._bookmark_values(snapshot_sha256, tags, note)
+        if add_tag is not None and (add_tag not in BOOKMARK_TAGS or create_only or tags or note):
+            raise SessionError('add_tag requires a supported tag and empty note/tags without create_only')
         with self.lock:
             self._bookmark_anchor(sid, index, snapshot_sha256)
             data = self._read_bookmarks(sid)
-            if create_only and any(r['index'] == index for r in data['bookmarks']):
+            existing = next((r for r in data['bookmarks'] if r['index'] == index), None)
+            if existing and (create_only or (add_tag is not None and add_tag in existing['tags'])):
                 return data
+            if add_tag is not None:
+                tags = (existing['tags'].copy() if existing else []) + [add_tag]
+                note = existing['note'] if existing else ''
             records = [r for r in data['bookmarks'] if r['index'] != index]
             records.append({'index': index, 'snapshot_sha256': snapshot_sha256,
                             'tags': tags.copy(), 'note': note, 'updated_at': time.time()})

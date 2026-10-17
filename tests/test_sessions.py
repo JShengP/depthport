@@ -680,3 +680,50 @@ def test_create_only_bookmark_api_strict_flag_and_preserved_external_update(clie
         assert c.put(url, json={**body, 'create_only': flag}).status_code == 422
     normal = c.put(url, json={**body, 'create_only': False, 'note': 'Explicit edit'})
     assert normal.status_code == 200 and normal.json()['bookmarks'][0]['note'] == 'Explicit edit'
+
+
+def test_add_bookmark_tags_preserves_notes_other_tags_and_duplicate_bytes(tmp_path):
+    store, sid, row, path = bookmark_fixture(tmp_path)
+    created = store.save_bookmark(sid, 1, row['sha256'], add_tag='id-switch')
+    assert created['bookmarks'][0]['note'] == '' and created['bookmarks'][0]['tags'] == ['id-switch']
+    store.save_bookmark(sid, 1, row['sha256'], ['occlusion'], 'Synthetic saved note')
+    updated = store.save_bookmark(sid, 1, row['sha256'], add_tag='crossing')
+    assert updated['bookmarks'][0]['note'] == 'Synthetic saved note'
+    assert updated['bookmarks'][0]['tags'] == ['occlusion', 'crossing']
+    before = path.read_bytes();mtime = path.stat().st_mtime_ns
+    assert store.save_bookmark(sid, 1, row['sha256'], add_tag='crossing') == updated
+    assert path.read_bytes() == before and path.stat().st_mtime_ns == mtime
+    for options in [{'add_tag': 'unsupported'}, {'add_tag': 'crossing', 'create_only': True},
+                    {'add_tag': 'crossing', 'note': 'ambiguous'}, {'add_tag': 'crossing', 'tags': ['id-switch']}]:
+        with pytest.raises(SessionError):
+            store.save_bookmark(sid, 1, row['sha256'], **options)
+    with pytest.raises(SessionIntegrity):
+        store.save_bookmark(sid, 1, '0' * 64, add_tag='occlusion')
+    assert path.read_bytes() == before
+
+
+def test_concurrent_add_tags_do_not_lose_other_tags_or_saved_note(tmp_path):
+    from concurrent.futures import ThreadPoolExecutor
+    store, sid, row, path = bookmark_fixture(tmp_path)
+    store.save_bookmark(sid, 1, row['sha256'], [], 'Synthetic shared note')
+    with ThreadPoolExecutor(max_workers=3) as pool:
+        list(pool.map(lambda tag: store.save_bookmark(sid, 1, row['sha256'], add_tag=tag),
+                      ['id-switch', 'occlusion', 'crossing']))
+    saved = store.bookmarks(sid)['bookmarks'][0]
+    assert saved['note'] == 'Synthetic shared note'
+    assert set(saved['tags']) == {'id-switch', 'occlusion', 'crossing'}
+
+
+def test_add_tag_api_strict_mode_and_external_updates(client_enabled):
+    c = client_enabled;store = api.app.state.session_store
+    sid = store.create()['session_id'];frame, bundle = sample_frame();row = store.capture(sid, bundle, frame)
+    url = f'/api/sessions/{sid}/frames/1/bookmark'
+    body = {'snapshot_sha256': row['sha256'], 'tags': [], 'note': '', 'add_tag': 'id-switch'}
+    response = c.put(url, json=body)
+    assert response.status_code == 200 and response.json()['bookmarks'][0]['tags'] == ['id-switch']
+    store.save_bookmark(sid, 1, row['sha256'], ['crossing'], 'Synthetic external note')
+    saved = c.put(url, json={**body, 'add_tag': 'occlusion'}).json()['bookmarks'][0]
+    assert saved['note'] == 'Synthetic external note' and saved['tags'] == ['crossing', 'occlusion']
+    for invalid in [{'add_tag': True}, {'add_tag': []}, {'add_tag': 'unsupported'},
+                    {'create_only': True}, {'note': 'ambiguous'}, {'tags': ['crossing']}]:
+        assert c.put(url, json={**body, **invalid}).status_code == 422
