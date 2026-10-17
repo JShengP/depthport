@@ -1,0 +1,330 @@
+{
+  "project": "DepthPort",
+  "development_version": "0.3.0-alpha.0",
+  "checked_on": "2026-10-17",
+  "validated_branch_commit": "68cd4a28be0670748065afe9c338595deb63cf30",
+  "application_checks": {
+    "pytest_passed": 166,
+    "opt_in_real_model_tests_skipped": 4,
+    "http_smoke": "PASS",
+    "bilingual_keys": {
+      "main": 170,
+      "spatial": 82,
+      "sessions": 47
+    }
+  },
+  "source": {
+    "dataset": "MOT15 train / TUD-Stadtmitte",
+    "dataset_page": "https://motchallenge.net/data/MOT15/",
+    "video_url": "https://motchallenge.net/sequenceVideos/TUD-Stadtmitte-raw.mp4",
+    "video_sha256": "057efff329eb73f3434649f9b21b37d0d3ca7de8f194524140161e2d13a6ae33",
+    "labels_url": "https://motchallenge.net/data/MOT15Labels.zip",
+    "labels_archive_sha256": "b48ee31a720a3dae558df4303b82924bd862067138bc5376e1c86aadb82f782a",
+    "sequence_gt_sha256": "009b3ef8df68c963fd8104350083fd6bc9798b6b435858b99dbd1385cfbde873",
+    "license": "CC-BY-NC-SA-3.0; see dataset page and original-source conditions",
+    "use": "Local non-commercial research pilot; media and annotations not redistributed.",
+    "frames": 179,
+    "fps": 25,
+    "resolution": [
+      640,
+      480
+    ],
+    "ground_truth_instances": 1156,
+    "skipped_frames": 0,
+    "source_encoding": "Official compressed raw MP4, not original benchmark JPEGs"
+  },
+  "frozen_detector": {
+    "video_sha256": "057efff329eb73f3434649f9b21b37d0d3ca7de8f194524140161e2d13a6ae33",
+    "weight_sha256": "9b09cc8bf347f0fc8a5f7657480587f25db09b34bf33b0652110fb03a8ad4fef",
+    "model": "yolo26n.pt",
+    "ultralytics": "8.4.115",
+    "device": "cpu",
+    "imgsz": 640,
+    "confidence": 0.1,
+    "nms_iou": 0.7,
+    "classes": [
+      0
+    ],
+    "max_det": 20,
+    "frames": 179
+  },
+  "dense_evaluation": {
+    "library": "TrackEval",
+    "repository": "https://github.com/JonathonLuiten/TrackEval",
+    "commit": "12c8791b303e0a0b50f753af204249e622d0281a",
+    "protocol": "MOT15, pedestrian, CLEAR IoU=0.5, Identity and HOTA; one training sequence only, no leaderboard submission",
+    "numpy_compatibility_aliases": [
+      "int",
+      "float",
+      "bool"
+    ],
+    "coordinates": "Prediction x/y shifted from zero-based detector pixels to one-based MOT pixels.",
+    "implementations": {
+      "depthport_iou": "depthport.tracking.associate at validated_branch_commit",
+      "ultralytics": "8.4.115",
+      "roboflow_trackers": {
+        "trackers": "2.6.1",
+        "supervision": "0.27.0",
+        "numpy": "2.2.6"
+      }
+    },
+    "ultralytics_configurations": {
+      "bytetrack": {
+        "tracker_type": "bytetrack",
+        "track_high_thresh": 0.25,
+        "track_low_thresh": 0.1,
+        "new_track_thresh": 0.25,
+        "track_buffer": 30,
+        "match_thresh": 0.8,
+        "fuse_score": true
+      },
+      "botsort_no_reid": {
+        "tracker_type": "botsort",
+        "track_high_thresh": 0.25,
+        "track_low_thresh": 0.1,
+        "new_track_thresh": 0.25,
+        "track_buffer": 30,
+        "match_thresh": 0.8,
+        "fuse_score": true,
+        "gmc_method": "sparseOptFlow",
+        "proximity_thresh": 0.5,
+        "appearance_thresh": 0.8,
+        "with_reid": false,
+        "model": "auto"
+      }
+    },
+    "roboflow_configurations": {
+      "roboflow_SORTTracker": {
+        "lost_track_buffer": 30,
+        "frame_rate": 25,
+        "track_activation_threshold": 0.25,
+        "minimum_consecutive_frames": 3,
+        "minimum_iou_threshold": 0.3,
+        "state_estimator_class": "<class 'trackers.utils.state_representations.XYXYStateEstimator'>",
+        "iou": null
+      },
+      "roboflow_ByteTrackTracker": {
+        "lost_track_buffer": 30,
+        "frame_rate": 25,
+        "track_activation_threshold": 0.7,
+        "minimum_consecutive_frames": 2,
+        "minimum_iou_threshold": 0.1,
+        "high_conf_det_threshold": 0.6,
+        "state_estimator_class": "<class 'trackers.utils.state_representations.XYXYStateEstimator'>",
+        "iou": null
+      },
+      "roboflow_OCSORTTracker": {
+        "lost_track_buffer": 30,
+        "frame_rate": 25,
+        "minimum_consecutive_frames": 3,
+        "minimum_iou_threshold": 0.3,
+        "direction_consistency_weight": 0.2,
+        "high_conf_det_threshold": 0.6,
+        "delta_t": 3,
+        "state_estimator_class": "<class 'trackers.utils.state_representations.XCYCSRStateEstimator'>",
+        "iou": null
+      },
+      "roboflow_BoTSORTTracker": {
+        "lost_track_buffer": 30,
+        "frame_rate": 25,
+        "track_activation_threshold": 0.7,
+        "minimum_consecutive_frames": 2,
+        "minimum_iou_threshold_first_assoc": 0.2,
+        "minimum_iou_threshold_second_assoc": 0.5,
+        "minimum_iou_threshold_unconfirmed_assoc": 0.3,
+        "high_conf_det_threshold": 0.6,
+        "enable_cmc": true,
+        "cmc_method": "sparseOptFlow",
+        "cmc_downscale": 2,
+        "instant_first_frame_activation": true,
+        "state_estimator_class": "<class 'trackers.utils.state_representations.XCYCWHStateEstimator'>",
+        "iou": null
+      },
+      "roboflow_CBIoUTracker": {
+        "lost_track_buffer": 30,
+        "frame_rate": 25,
+        "track_activation_threshold": 0.7,
+        "minimum_consecutive_frames": 2,
+        "minimum_iou_threshold_first_assoc": 0.2,
+        "minimum_iou_threshold_second_assoc": 0.5,
+        "minimum_iou_threshold_unconfirmed_assoc": 0.3,
+        "high_conf_det_threshold": 0.6,
+        "instant_first_frame_activation": true,
+        "state_estimator_class": "<class 'trackers.utils.state_representations.XCYCWHStateEstimator'>",
+        "buffer_ratio_first": 0.3,
+        "buffer_ratio_second": 0.5
+      }
+    },
+    "scores": {
+      "depthport_iou": {
+        "CLR_TP": 998,
+        "CLR_FP": 426,
+        "CLR_FN": 158,
+        "IDSW": 34,
+        "Frag": 16,
+        "MOTA": 0.46539792387543255,
+        "CLR_Re": 0.8633217993079585,
+        "CLR_Pr": 0.7008426966292135,
+        "IDF1": 0.5015503875968992,
+        "HOTA": 0.4357288609921075
+      },
+      "bytetrack": {
+        "CLR_TP": 966,
+        "CLR_FP": 111,
+        "CLR_FN": 190,
+        "IDSW": 21,
+        "Frag": 16,
+        "MOTA": 0.7214532871972318,
+        "CLR_Re": 0.8356401384083045,
+        "CLR_Pr": 0.8969359331476323,
+        "IDF1": 0.6824899238692342,
+        "HOTA": 0.5221872053118041
+      },
+      "botsort_no_reid": {
+        "CLR_TP": 973,
+        "CLR_FP": 100,
+        "CLR_FN": 183,
+        "IDSW": 13,
+        "Frag": 15,
+        "MOTA": 0.7439446366782007,
+        "CLR_Re": 0.8416955017301038,
+        "CLR_Pr": 0.9068033550792172,
+        "IDF1": 0.6917900403768507,
+        "HOTA": 0.5266683636822548
+      },
+      "roboflow_SORTTracker": {
+        "CLR_TP": 953,
+        "CLR_FP": 197,
+        "CLR_FN": 203,
+        "IDSW": 34,
+        "Frag": 16,
+        "MOTA": 0.6245674740484429,
+        "CLR_Re": 0.8243944636678201,
+        "CLR_Pr": 0.828695652173913,
+        "IDF1": 0.5802254986990459,
+        "HOTA": 0.47512926824193924
+      },
+      "roboflow_ByteTrackTracker": {
+        "CLR_TP": 941,
+        "CLR_FP": 71,
+        "CLR_FN": 215,
+        "IDSW": 23,
+        "Frag": 16,
+        "MOTA": 0.7326989619377162,
+        "CLR_Re": 0.8140138408304498,
+        "CLR_Pr": 0.9298418972332015,
+        "IDF1": 0.6918819188191881,
+        "HOTA": 0.5287072065606498
+      },
+      "roboflow_OCSORTTracker": {
+        "CLR_TP": 858,
+        "CLR_FP": 10,
+        "CLR_FN": 298,
+        "IDSW": 9,
+        "Frag": 21,
+        "MOTA": 0.7257785467128027,
+        "CLR_Re": 0.7422145328719724,
+        "CLR_Pr": 0.988479262672811,
+        "IDF1": 0.6679841897233202,
+        "HOTA": 0.5131930729562628
+      },
+      "roboflow_BoTSORTTracker": {
+        "CLR_TP": 943,
+        "CLR_FP": 39,
+        "CLR_FN": 213,
+        "IDSW": 7,
+        "Frag": 10,
+        "MOTA": 0.7759515570934256,
+        "CLR_Re": 0.8157439446366782,
+        "CLR_Pr": 0.960285132382892,
+        "IDF1": 0.8101028999064547,
+        "HOTA": 0.5810671350214236
+      },
+      "roboflow_CBIoUTracker": {
+        "CLR_TP": 943,
+        "CLR_FP": 39,
+        "CLR_FN": 213,
+        "IDSW": 8,
+        "Frag": 11,
+        "MOTA": 0.7750865051903114,
+        "CLR_Re": 0.8157439446366782,
+        "CLR_Pr": 0.960285132382892,
+        "IDF1": 0.7343311506080449,
+        "HOTA": 0.552855520704072
+      }
+    },
+    "interpretation": "Roboflow BoT-SORT is a promising next candidate on this clip, with fewer switches and higher IDF1 but lower recall than the simple association. Defaults/activation thresholds differ; this is not a controlled implementation ranking or a general winner."
+  },
+  "real_session_pipeline": {
+    "video_frames": [
+      78,
+      101
+    ],
+    "frames": 24,
+    "depth_engine": "DA V2 Small",
+    "depth_device": "CUDA / RTX 4090",
+    "intrinsics": "Uncalibrated 60-degree horizontal-FOV estimate",
+    "native_units": "relative / virtual display depth, not meters",
+    "semantic_models": {
+      "detect": "yolo26n.pt",
+      "segment": "yolo26n-seg.pt"
+    },
+    "confidence": 0.25,
+    "semantic_device": "CPU",
+    "checks": [
+      "Genuine pretrained depth inference",
+      "Exact-bundle SHA-256 verification",
+      "Saved RGB/depth/point-cloud replay",
+      "Offline temporal consistency report",
+      "Genuine CPU Detect and Segment tracking",
+      "Finite mask/ROI camera XYZ in native units",
+      "Local report save/read"
+    ],
+    "tracking": {
+      "detect": {
+        "frames": 24,
+        "objects": 172,
+        "tracks": 19,
+        "summary": {
+          "tp": 131,
+          "fp": 41,
+          "fn": 25,
+          "id_switches": 14,
+          "fragmentations": 2,
+          "precision": 0.761628,
+          "recall": 0.839744,
+          "f1": 0.798781
+        }
+      },
+      "segment": {
+        "frames": 24,
+        "objects": 159,
+        "tracks": 16,
+        "summary": {
+          "tp": 123,
+          "fp": 36,
+          "fn": 33,
+          "id_switches": 11,
+          "fragmentations": 2,
+          "precision": 0.773585,
+          "recall": 0.788462,
+          "f1": 0.780953
+        }
+      }
+    },
+    "metric_scope": "Session results use the separate experimental 24-frame diagnostic evaluator, not TrackEval. Official GT was converted by frame index; no manual visible-only/scenario annotation audit was performed."
+  },
+  "environment_separation": {
+    "depthport_numpy": "1.26.4",
+    "roboflow_numpy": "2.2.6",
+    "reason": "trackers 2.6.1 requires numpy>=2.0.2; the current DA3 recipe requires numpy<2. Roboflow was evaluated in an isolated environment and was not added as an application dependency."
+  },
+  "limitations": [
+    "Only one short public training clip; compressed encoding differs from original benchmark frames.",
+    "No held-out multi-scene evaluation or per-occlusion/crossing visibility audit; MOT15 may annotate occluded boxes.",
+    "Frozen person detections at confidence 0.1, max 20; tracker defaults differ, no hyperparameter search.",
+    "No ReID, McByte mask model or tracking-backend integration into the application.",
+    "No physical RTSP, Windows full-model workflow, endurance, latency/FPS benchmark or calibrated metric 3D accuracy."
+  ],
+  "public_scope": "Aggregate evidence and source/configuration identifiers only; media, annotations, per-frame IDs/boxes, sessions, weights, logs, local paths and runtime settings remain ignored locally."
+}

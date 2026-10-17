@@ -4,6 +4,24 @@
 
 **狀態：v0.3 實驗性離線評估工具。不是正式 MOT Benchmark，也不是實體相機即時速度或 3D 測距驗證。** 本工具將 Session 產生的 `tracking.json` 與人工標註 `ground_truth.json` 比較。執行時**不會重新推論 AI、錄影、上傳或改動原 Session**。內附範例是合成資料，不是真實 YOLO 結果。
 
+## 真實影片初步驗證 — 2026-10-17
+
+本機研究使用官方壓縮版 [MOT15 TUD-Stadtmitte](https://motchallenge.net/data/MOT15/) 的 **179 個連續影格**與 1,156 個 GT 框。先在 CPU 執行一次真 YOLO26n 人員偵測（confidence 0.1、NMS IoU 0.7、每影格最多 20 個），所有候選都使用同一份偵測快取與影格順序。[彙總結果、雜湊、完整配置與八組方法分數](../validation/v0.3-tracking-pilot.json)。
+
+以固定版本 [TrackEval](https://github.com/JonathonLuiten/TrackEval/tree/12c8791b303e0a0b50f753af204249e622d0281a) 評估現有方法、Ultralytics ByteTrack／BoT-SORT，以及五種輕量 [Roboflow Trackers](https://github.com/roboflow/trackers) 實作。部分觀察如下：
+
+- DepthPort 現有匹配：**34 次 ID Switch**、IDF1 **50.16%**、Recall **86.33%**。
+- Roboflow ByteTrack：**23 次 ID Switch**、IDF1 **69.19%**、Recall **81.40%**。
+- Roboflow BoT-SORT：**7 次 ID Switch**、IDF1 **81.01%**、Recall **81.57%**。
+
+這支持將 Roboflow BoT-SORT 列為下一個優先候選，但不能只看 ID Switch：Recall 同時降低。各實作使用各自預設閾值，Roboflow 僅將 frame rate 設為 25；沒有調參或 ReID。單一短訓練片段與 MP4 壓縮影格**不是完整 MOT Benchmark，也不能推出普遍最佳方法**。原 GT 可能包含遮擋框，本次未另做逐情境或僅可見物件的人工標註審核。
+
+另外以 **24 個連續影格（78–101）**完成實際 Session 流程：真 DA V2 Small CUDA 深度、封存完整性、RGB／深度／點雲回放、時間一致性，以及 CPU YOLO26n 偵測／分割追蹤。Detect 共 172 筆觀測、19 個 ID；Segment 共 159 筆、16 個 ID。深度保留相對／虛擬單位，相機 XYZ 為有效有限值；使用估計內參，沒有公尺真值。JSON 裡的 Session 診斷分數使用原本實驗性評估器，不能與 179 影格的 TrackEval 分數混用。
+
+Roboflow `trackers==2.6.1` 使用 `supervision.Detections` 接口，程式碼採 Apache-2.0。它要求 NumPy >=2.0.2，而目前 DA3 配方要求 NumPy <2，因此本次以**獨立 NumPy 2.2.6／supervision 0.27.0 環境**比較，四模型環境保留 NumPy 1.26.4。整合需先驗證依賴遷移或獨立 worker；本次未安裝或測試 McByte 的選配遮罩模型。
+
+MOT15 僅供本機非商業研究，遵循[官方 CC-BY-NC-SA-3.0 與原始來源條件](https://motchallenge.net/data/MOT15/)。此 Repo 不包含影片、GT、逐影格框／ID、Session 包或執行日誌。v0.3 PR 維持開發 Draft，繼續補充更多場景與實體相機驗收。
+
 ## 應測情境
 
 - **進出畫面：** 人員或物體進入及離開鏡頭範圍。

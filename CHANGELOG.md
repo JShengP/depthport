@@ -2,7 +2,8 @@
 
 - Optional CPU-only manual YOLO Detect/Segment analysis on 2–24 manually archived Session frames, with class-gated short-term 2D Object IDs and candidate camera XYZ/depth history.
 - Local SHA-256-checked tracking report with async status, bilingual Sessions UI, bounded limits and fake-backed regression tests.
-- No ReID, world-coordinate trajectory, continuous RTSP recording, real pretrained YOLO validation, or measurement guarantee.
+- Genuine CUDA depth and CPU YOLO Detect/Segment passed a 24-frame public-video Session pilot; a separate frozen-detection comparison evaluated eight tracking methods on 179 consecutive public frames. See [the bilingual tracking evidence](docs/en/tracking-evaluation.md).
+- No ReID, world-coordinate trajectory, continuous RTSP recording or measurement guarantee; physical-camera and broader scene acceptance remains pending.
 
 # Changelog / 版本紀錄
 

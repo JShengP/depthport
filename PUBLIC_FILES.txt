@@ -137,3 +137,4 @@ examples/tracking/ground_truth.synthetic.json
 docs/assets/README.md
 docs/assets/spatial-preview.en.png
 docs/assets/spatial-preview.zh-TW.png
+docs/validation/v0.3-tracking-pilot.json
