@@ -4,6 +4,10 @@ Contributions in **English or Traditional Chinese** are welcome. Keep user-facin
 
 歡迎以英文或繁體中文貢獻；操作文件與 UI 字典需同步，模型識別、API 欄位及數據不隨語言改變。
 
+Before opening a PR, review the [public/private boundary](docs/en/public-private-boundary.md) / [公開／私人資料界線](docs/zh-TW/public-private-boundary.md). **Public branches, PR descriptions, Actions artifacts, and git history are public**, even if a branch is later deleted. Submit only sanitized, authorized test images and measurements.
+
+提交 PR 前請先確認公開／私人資料界線。**公開分支、PR 文字、Actions 產物與 Git 歷史也可能被公開**；即使刪除分支亦然。只提交具發布授權且已去識別化的測試資料。
+
 ## Before submitting / 提交前
 
 Use a new Python environment. Install base/test dependencies and a compatible torch for adapter-contract tests. Run `python -m pytest -q`, `node tests/test_i18n.cjs`, `python tools/http_smoke.py` and `python tools/check_release.py`. Optional browser tests are in [tools/README.md](tools/README.md). Do not report fake-backed tests as pretrained-model performance.

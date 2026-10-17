@@ -21,7 +21,8 @@ def problems(root: Path) -> list[str]:
     names = {p.relative_to(root).as_posix() for p in selected}
     required = {'README.md', 'README.zh-TW.md', 'LICENSE', 'NOTICE', 'THIRD_PARTY_NOTICES.md',
                 'SECURITY.md', 'CONTRIBUTING.md', 'PUBLIC_FILES.txt', 'static/i18n.js',
-                '.github/workflows/ci.yml', 'docs/en/publishing.md', 'docs/zh-TW/publishing.md'}
+                '.github/workflows/ci.yml', 'docs/en/publishing.md', 'docs/zh-TW/publishing.md',
+                'docs/en/public-private-boundary.md', 'docs/zh-TW/public-private-boundary.md'}
     errors += [f'Missing required file: {name}' for name in sorted(required - names)]
     blocked = re.compile(r'(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,}|'
                          r'AKIA[A-Z0-9]{16}|-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----)')
