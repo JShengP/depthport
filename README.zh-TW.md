@@ -19,7 +19,7 @@ DepthPort 整合既有預訓練模型，**不是新的深度網路或研究模�
 
 *截圖來自實際 UI 的合成測試資料；不是由相機或 AI 模型產生的點雲。*
 
-> **狀態：** 實驗性原始碼 Alpha。2026-10-17 已在全新 Ubuntu 24.04／Python 3.12 環境完成四套真深度模型 CUDA smoke test、YOLO 偵測／分割融合及真正瀏覽器 HTTP 操作，輸入為同一張公開範例。這只證明鏈路可執行，不代表測距精度、實體相機運作或正式硬體 benchmark。Windows、實體 RTSP、長時間穩定性與 NVIDIA WebGL 繪圖仍未驗證。詳見[驗證紀錄](docs/zh-TW/validation.md)。
+> **狀態：** 實驗性原始碼 Alpha。2026-10-17 已在全新 Ubuntu 24.04／Python 3.12 環境完成四套真深度模型 CUDA smoke test、YOLO 偵測／分割融合及真正瀏覽器 HTTP 操作，輸入為同一張公開範例。這只證明鏈路可執行，不代表測距精度、實體相機運作或正式硬體 benchmark。Windows 完整模型安裝、實體 RTSP、長時間穩定性與 NVIDIA WebGL 繪圖仍未驗證。詳見[驗證紀錄](docs/zh-TW/validation.md)。
 
 ## v0.2 新功能 — 空間分析工作台
 
@@ -27,9 +27,14 @@ DepthPort 整合既有預訓練模型，**不是新的深度網路或研究模�
 
 [English implementation & acceptance](docs/en/spatial-analysis.md) · [繁體中文實作與驗收](docs/zh-TW/spatial-analysis.md)
 
+<details>
+<summary>展開 v0.2 完整截圖（真模型推論）</summary>
+
 ![空間分析工作台：真模型深度比較與 YOLO 分割](docs/assets/spatial-preview.zh-TW.png)
 
 *公開 [Ultralytics 公車範例](https://github.com/ultralytics/assets/blob/53d4e2a8fd15f473c29a148c317a8477be559327/im/bus.jpg)的真模型推論，非實體 IPCam 或測距精度驗證。[截圖來源](docs/assets/README.md)。*
+
+</details>
 
 ## 可以探索什麼？
 

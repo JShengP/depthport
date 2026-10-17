@@ -19,7 +19,7 @@ DepthPort integrates existing pretrained models; it does **not** introduce a new
 
 *Screenshot: the actual UI showing synthetic test data. No camera or AI model produced this point cloud.*
 
-> **Status:** experimental source alpha. On 2026-10-17, a fresh Ubuntu 24.04 / Python 3.12 environment passed all four real pretrained depth-model CUDA smoke tests, YOLO Detect/Segment fusion and browser-to-HTTP checks on one public sample image. This demonstrates execution, not measured distance accuracy, field camera operation or a hardware benchmark. Windows, physical RTSP, endurance and NVIDIA WebGL rendering remain unverified. Read the [validation record](docs/en/validation.md).
+> **Status:** experimental source alpha. On 2026-10-17, a fresh Ubuntu 24.04 / Python 3.12 environment passed all four real pretrained depth-model CUDA smoke tests, YOLO Detect/Segment fusion and browser-to-HTTP checks on one public sample image. This demonstrates execution, not measured distance accuracy, field camera operation or a hardware benchmark. Full Windows model installation, physical RTSP, endurance and NVIDIA WebGL rendering remain unverified. Read the [validation record](docs/en/validation.md).
 
 ## New in v0.2 — Spatial Analysis Lab
 
@@ -27,9 +27,14 @@ Open **Spatial Analysis** (`/spatial`) on a running local server (`http://127.0.
 
 [English implementation & acceptance](docs/en/spatial-analysis.md) · [繁體中文實作與驗收](docs/zh-TW/spatial-analysis.md)
 
+<details>
+<summary>View full v0.2 screenshot (real pretrained inference)</summary>
+
 ![Spatial Analysis with real pretrained depth comparison and YOLO segmentation](docs/assets/spatial-preview.en.png)
 
 *Real pretrained inference on the public [Ultralytics bus example](https://github.com/ultralytics/assets/blob/53d4e2a8fd15f473c29a148c317a8477be559327/im/bus.jpg); not an IP-camera capture or accuracy benchmark. [Screenshot provenance](docs/assets/README.md).*
+
+</details>
 
 ## What you can explore
 
