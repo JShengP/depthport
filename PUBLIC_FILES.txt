@@ -50,6 +50,7 @@ docs/en/publishing.md
 docs/en/usage.md
 docs/en/validation.md
 docs/releases/0.1.0-alpha.1.md
+docs/releases/0.2.0-alpha.1.md
 docs/templates/benchmark.csv
 docs/validation/summary.json
 docs/zh-TW/architecture.md
