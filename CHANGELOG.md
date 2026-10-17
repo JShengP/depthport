@@ -1,5 +1,8 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 
+- Added **4** to filter general (untagged) bookmarks, retaining search, focus and playback, with shared input/IME protection and updated bilingual shortcut help.
+- 新增 **4** 篩選一般（無標籤）書籤，保留搜尋、焦點與播放，沿用輸入／組字防護並更新雙語快捷鍵說明。
+
 - Added **1 / 2 / 3** bookmark tag-filter shortcuts for suspected ID switch, occlusion and object crossing, retaining the query, focus and playback. Updated bilingual help and shortcut metadata with shared input/IME guards.
 - 新增 **1／2／3** 快速篩選疑似換 ID、遮擋與物件交會書籤，保留搜尋、焦點及播放；更新雙語說明與快捷鍵資訊，沿用輸入／組字防護。
 
