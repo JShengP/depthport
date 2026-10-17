@@ -202,10 +202,11 @@ test('displaced labels have a leader line without changing their detection boxes
 // text or the names of the generation counters.
 function makeUI(){
  const ids=[...fs.readFileSync(path.join(root,'static/sessions.html'),'utf8').matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
- const elements=Object.fromEntries(ids.map(id=>[id,new Element(['lang','sessions-list','frames-list','tracking-mode','tracking-backend','playback-speed'].includes(id)?'select':'div')]));
+ const elements=Object.fromEntries(ids.map(id=>[id,new Element(['lang','sessions-list','frames-list','tracking-mode','tracking-backend','playback-speed','bookmark-import-policy'].includes(id)?'select':'div')]));
  function mount(id,node){node.id=id;node._replace=replacement=>mount(id,replacement);elements[id]=node}
  for(const id of ids)mount(id,elements[id]);
- for(const [id,values] of Object.entries({lang:['en','zh-TW'],'tracking-mode':['segment','detect'],'tracking-backend':['baseline','roboflow-botsort'],'playback-speed':['.25','.5','1','2']})){
+ for(const [id,values] of Object.entries({lang:['en','zh-TW'],'tracking-mode':['segment','detect'],'tracking-backend':['baseline','roboflow-botsort'],'playback-speed':['.25','.5','1','2'],'bookmark-import-policy':['keep','overwrite']})){
+  if(!elements[id])continue;
   for(const value of values){const option=new Element('option');option.value=value;elements[id].append(option)}
  }
  elements['playback-speed'].value='1';
@@ -947,4 +948,212 @@ test('a save completing after navigation updates its list without overwriting an
  assert.ok(e['bookmarks-list'].textContent.includes('save first frame'));assert.equal(bookmarkWrites(ui).length,1);
  const back=scrub(ui,1);await flush();await completeReplay(ui,1);await back;
  assert.equal(e['bookmark-note'].value,'save first frame');assert.equal(e['bookmark-tag-id-switch'].checked,true);
+});
+
+const bookmarkRevision='c'.repeat(64);
+function bookmarkImportResponse(sid,bookmarks,{dryRun=true,policy='keep',revision=bookmarkRevision,counts={incoming:1,added:1,updated:0,unchanged:0,conflicts:0}}={}){
+ return {format:'depthport.bookmark-import.v1',session_id:sid,dry_run:dryRun,conflict_policy:policy,revision,counts,
+  document:bookmarkResponse(sid,bookmarks)};
+}
+function importUrl(sid='session-a',policy='keep',dryRun=true){return '/api/sessions/'+sid+'/bookmarks/import?conflict='+policy+'&dry_run='+dryRun}
+function bookmarkImports(ui){return ui.pending.filter(p=>p.url.includes('/bookmarks/import?'))}
+function fakeBookmarkFile(document,{size,deferred=false,error=null,bytes}={}){
+ const payload=bytes??Buffer.from(JSON.stringify(document),'utf8');
+ const buffer=Uint8Array.from(payload).buffer;
+ let resolve,reject,reads=0;
+ const waiting=deferred?new Promise((yes,no)=>{resolve=yes;reject=no}):null;
+ const file={name:'bookmark-backup.json',type:'application/json',size:size??payload.length,
+  arrayBuffer:()=>{reads++;return waiting??(error?Promise.reject(error):Promise.resolve(buffer))}};
+ return {file,bytes:payload,get reads(){return reads},resolve:()=>resolve(buffer),reject:error=>reject(error)};
+}
+async function chooseImport(ui,backup){
+ const input=ui.elements['bookmark-import-file'];input.files=[backup.file];
+ await input.onchange();await flush();
+}
+async function previewImport(ui,bookmarks,options={}){
+ const previewing=ui.elements['bookmark-import-preview'].onclick();await flush();
+ ui.respond(importUrl(options.sid,options.policy),bookmarkImportResponse(options.sid||'session-a',bookmarks,options));
+ await previewing;await flush();
+}
+
+test('bookmark export is a Session-bound native download of saved notes and freezes playback without saving drafts',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence(),bookmarks:[bookmarkRecord(1,{note:'saved review'})]}),e=ui.elements;
+ await showFirst(ui);editBookmark(ui,'unsaved private draft',['occlusion']);
+ assert.equal(e['bookmark-export'].href,'/api/sessions/session-a/bookmarks/export');
+ e['playback-play'].onclick();await ui.tick(0);
+ ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();
+ const fetches=ui.pending.length;e['bookmark-export'].onclick();await ui.decodeFrame('session-a',2);await ui.tick(1000);
+ assert.equal(ui.pending.length,fetches,'native download needs no JavaScript fetch or annotation save');
+ assert.equal(bookmarkWrites(ui).length,0);assertProgress(ui,1,3);
+ assert.equal(e['bookmark-note'].value,'unsaved private draft');assert.match(e['playback-status'].textContent,/Paused/);
+ assert.ok(e['bookmarks-list'].textContent.includes('saved review'));
+ assert.equal(e['bookmarks-list'].textContent.includes('unsaved private draft'),false);
+ e['sessions-list'].value='session-b';const switched=e['sessions-list'].onchange();await flush();
+ await finishFrames(ui,'session-b');await switched;
+ assert.equal(e['bookmark-export'].href,'/api/sessions/session-b/bookmarks/export');
+});
+
+test('selecting JSON reads bytes locally; preview makes no bookmark changes and apply uses the reviewed revision',async()=>{
+ const saved=bookmarkRecord(1,{note:'saved first'}),incoming=bookmarkRecord(3,{note:'incoming third 😀',tags:['crossing']});
+ const ui=await startUI({bookmarks:[saved]}),e=ui.elements;await showFirst(ui);editBookmark(ui,'keep local draft',['occlusion']);
+ const backup=fakeBookmarkFile(bookmarkResponse('session-a',[incoming]));
+ const fetches=ui.pending.length;await chooseImport(ui,backup);
+ assert.equal(backup.reads,1);assert.equal(ui.pending.length,fetches,'choosing a local file must not upload or import it');
+ assert.equal(e['bookmark-import-policy'].value,'keep');assert.equal(e['bookmark-import-preview'].disabled,false);assert.equal(e['bookmark-import-apply'].disabled,true);
+ const previewing=e['bookmark-import-preview'].onclick();await flush();const preview=bookmarkImports(ui).at(-1);
+ assert.equal(preview.url,importUrl());assert.equal(preview.opt.method,'POST');
+ assert.equal(preview.opt.headers['Content-Type'],'application/json');assert.equal(preview.opt.headers['If-Match'],undefined);
+ assert.deepEqual(Buffer.from(preview.opt.body),backup.bytes,'the original bounded UTF-8 bytes are sent unchanged');
+ ui.respond(preview.url,bookmarkImportResponse('session-a',[incoming,saved]));await previewing;
+ assert.equal(bookmarkJumpButtons(ui).length,1);assert.equal(e['bookmarks-list'].textContent.includes('incoming third'),false,'dry run must not replace actual bookmarks');
+ assert.match(e['bookmark-import-status'].textContent,/incoming.*1/i);assert.match(e['bookmark-import-status'].textContent,/add(?:ed)?.*1/i);
+ assert.equal(e['bookmark-import-apply'].disabled,false);
+ const applying=e['bookmark-import-apply'].onclick();await flush();const apply=bookmarkImports(ui).at(-1);
+ assert.equal(apply.url,importUrl('session-a','keep',false));assert.equal(apply.opt.headers['If-Match'],'"'+bookmarkRevision+'"');
+ assert.deepEqual(Buffer.from(apply.opt.body),backup.bytes);
+ ui.respond(apply.url,bookmarkImportResponse('session-a',[incoming,saved],{dryRun:false}));await applying;
+ const buttons=bookmarkJumpButtons(ui);assert.equal(buttons.length,2);
+ assert.match(buttons[0].textContent,/1/);assert.match(buttons[1].textContent,/3/);
+ assert.ok(e['bookmarks-list'].textContent.includes('incoming third 😀'));
+ assert.equal(e['bookmark-note'].value,'keep local draft');assert.equal(e['bookmark-tag-occlusion'].checked,true);
+ assert.equal(bookmarkWrites(ui).length,0,'import must never auto-save an existing editor draft');
+});
+
+test('keep is the default conflict policy and explicitly choosing overwrite requires a new preview',async()=>{
+ const saved=bookmarkRecord(1,{note:'local saved note'}),incoming=bookmarkRecord(1,{note:'backup version'});
+ const ui=await startUI({bookmarks:[saved]}),e=ui.elements;await showFirst(ui);
+ await chooseImport(ui,fakeBookmarkFile(bookmarkResponse('session-a',[incoming])));
+ await previewImport(ui,[saved],{counts:{incoming:1,added:0,updated:0,unchanged:0,conflicts:1}});
+ assert.equal(e['bookmark-import-apply'].disabled,false);assert.ok(e['bookmarks-list'].textContent.includes('local saved note'));
+ e['bookmark-import-policy'].value='overwrite';e['bookmark-import-policy'].onchange();await flush();
+ assert.equal(e['bookmark-import-apply'].disabled,true);const prior=bookmarkImports(ui).length;
+ e['bookmark-import-apply'].onclick();await flush();assert.equal(bookmarkImports(ui).length,prior,'an old keep preview cannot authorize overwrite');
+ await previewImport(ui,[incoming],{policy:'overwrite',counts:{incoming:1,added:0,updated:1,unchanged:0,conflicts:1}});
+ assert.ok(e['bookmarks-list'].textContent.includes('local saved note'));assert.equal(e['bookmark-note'].value,'local saved note');
+ const applying=e['bookmark-import-apply'].onclick();await flush();
+ ui.respond(importUrl('session-a','overwrite',false),bookmarkImportResponse('session-a',[incoming],{dryRun:false,policy:'overwrite',counts:{incoming:1,added:0,updated:1,unchanged:0,conflicts:1}}));await applying;
+ assert.equal(e['bookmark-note'].value,'backup version');assert.ok(e['bookmarks-list'].textContent.includes('backup version'));
+ assert.equal(e['bookmarks-list'].textContent.includes('local saved note'),false);
+});
+
+test('preview and apply block parallel annotation mutations, and failed apply preserves saved notes and drafts',async()=>{
+ const saved=bookmarkRecord(1,{note:'saved note'}),merged=[saved,bookmarkRecord(2,{note:'new backup note'})];
+ const ui=await startUI({bookmarks:[saved]}),e=ui.elements;await showFirst(ui);editBookmark(ui,'unsaved investigation',['id-switch']);
+ await chooseImport(ui,fakeBookmarkFile(bookmarkResponse('session-a',[merged[1]])));
+ const previewing=e['bookmark-import-preview'].onclick();await flush();
+ assert.equal(e['bookmark-import-file'].disabled,true);assert.equal(e['bookmark-import-policy'].disabled,true);
+ assert.equal(e['bookmark-save'].disabled,true);assert.equal(e['bookmark-delete'].disabled,true);
+ e['bookmark-import-preview'].onclick();e['bookmark-import-apply'].onclick();e['bookmark-save'].onclick();e['bookmark-delete'].onclick();await flush();
+ assert.equal(bookmarkImports(ui).length,1);assert.equal(bookmarkWrites(ui).length,0);
+ ui.respond(importUrl(),bookmarkImportResponse('session-a',merged));await previewing;
+ const applying=e['bookmark-import-apply'].onclick();await flush();
+ e['bookmark-import-apply'].onclick();e['bookmark-import-preview'].onclick();e['bookmark-save'].onclick();e['bookmark-delete'].onclick();await flush();
+ assert.equal(bookmarkImports(ui).length,2);assert.equal(bookmarkWrites(ui).length,0);
+ ui.respond(importUrl('session-a','keep',false),{detail:'Bookmark revision changed; preview again'},false,409);await applying;
+ assert.equal(bookmarkJumpButtons(ui).length,1);assert.ok(e['bookmarks-list'].textContent.includes('saved note'));
+ assert.equal(e['bookmarks-list'].textContent.includes('new backup note'),false);
+ assert.equal(e['bookmark-note'].value,'unsaved investigation');assert.equal(e['bookmark-tag-id-switch'].checked,true);
+ assert.equal(e['bookmark-save'].disabled,false);assert.equal(e['bookmark-import-file'].disabled,false);
+ assert.equal(e['bookmark-import-preview'].disabled,false);assert.equal(e['bookmark-import-apply'].disabled,true,'a failed apply requires a fresh preview');
+ assert.match(e['bookmark-import-status'].textContent,/revision|fail|error|did not complete/i);
+});
+
+test('file size and read failures cannot reach import endpoints or enable apply',async()=>{
+ const ui=await startUI(),e=ui.elements;
+ for(const options of [{size:0},{size:1048577},{size:1,bytes:Buffer.alloc(0)},{size:1,bytes:Buffer.alloc(1048577)},{error:Error('Local file unavailable')}]){
+  const backup=fakeBookmarkFile(bookmarkResponse('session-a'),options);await chooseImport(ui,backup);
+  assert.equal(e['bookmark-import-preview'].disabled,true);assert.equal(e['bookmark-import-apply'].disabled,true);
+  e['bookmark-import-preview'].onclick();e['bookmark-import-apply'].onclick();await flush();
+  assert.equal(bookmarkImports(ui).length,0);
+  if(options.size===0||options.size>1048576)assert.equal(backup.reads,0,'reject the declared size before reading bytes');
+ }
+});
+
+test('a late file read cannot revive a replaced file or cross a Session boundary',async()=>{
+ const ui=await startUI(),e=ui.elements;
+ const stale=fakeBookmarkFile(bookmarkResponse('session-a',[bookmarkRecord(1,{note:'old file'})]),{deferred:true});
+ e['bookmark-import-file'].files=[stale.file];const reading=e['bookmark-import-file'].onchange();await flush();
+ const current=fakeBookmarkFile(bookmarkResponse('session-a',[bookmarkRecord(2,{note:'new file'})]));await chooseImport(ui,current);
+ stale.resolve();await reading;const previewing=e['bookmark-import-preview'].onclick();await flush();
+ assert.deepEqual(Buffer.from(bookmarkImports(ui).at(-1).opt.body),current.bytes);
+ ui.respond(importUrl(),bookmarkImportResponse('session-a',[bookmarkRecord(2,{note:'new file'})]));await previewing;
+ const other=fakeBookmarkFile(bookmarkResponse('session-a',[bookmarkRecord(3)]),{deferred:true});
+ e['bookmark-import-file'].files=[other.file];const oldReading=e['bookmark-import-file'].onchange();await flush();
+ e['sessions-list'].value='session-b';const switched=e['sessions-list'].onchange();await flush();await finishFrames(ui,'session-b');await switched;
+ other.resolve();await oldReading;await flush();
+ assert.equal(e['bookmark-import-preview'].disabled,true);assert.equal(e['bookmark-import-apply'].disabled,true);
+ const calls=bookmarkImports(ui).length;e['bookmark-import-preview'].onclick();await flush();assert.equal(bookmarkImports(ui).length,calls);
+ assert.equal(e['bookmark-export'].href,'/api/sessions/session-b/bookmarks/export');
+});
+
+test('a late preview response cannot change a newly selected Session or its draft',async()=>{
+ const ui=await startUI(),e=ui.elements;await chooseImport(ui,fakeBookmarkFile(bookmarkResponse('session-a',[bookmarkRecord(1,{note:'old backup'})])));
+ const previewing=e['bookmark-import-preview'].onclick();await flush();
+ e['sessions-list'].value='session-b';const switched=e['sessions-list'].onchange();await flush();
+ await finishFrames(ui,'session-b',true,null,[1,2,3],[bookmarkRecord(1,{note:'B saved note'})]);await switched;
+ await showSaved(ui,1,{sid:'session-b'});editBookmark(ui,'B editor draft',['crossing']);
+ ui.respond(importUrl(),bookmarkImportResponse('session-a',[bookmarkRecord(1,{note:'old backup'})]));await previewing;
+ assert.equal(e['bookmark-import-apply'].disabled,true);assert.equal(e['bookmark-note'].value,'B editor draft');
+ assert.ok(e['bookmarks-list'].textContent.includes('B saved note'));assert.equal(e['bookmarks-list'].textContent.includes('old backup'),false);
+});
+
+test('a late apply response cannot replace another Session list or editor draft',async()=>{
+ const ui=await startUI(),e=ui.elements;const imported=bookmarkRecord(1,{note:'A imported note'});
+ await chooseImport(ui,fakeBookmarkFile(bookmarkResponse('session-a',[imported])));await previewImport(ui,[imported]);
+ const applying=e['bookmark-import-apply'].onclick();await flush();
+ e['sessions-list'].value='session-b';const switched=e['sessions-list'].onchange();await flush();
+ await finishFrames(ui,'session-b',true,null,[1,2,3],[bookmarkRecord(2,{note:'B saved note'})]);await switched;
+ await showSaved(ui,1,{sid:'session-b'});editBookmark(ui,'B unsaved draft',['occlusion']);
+ ui.respond(importUrl('session-a','keep',false),bookmarkImportResponse('session-a',[imported],{dryRun:false}));await applying;
+ assert.equal(e['bookmark-note'].value,'B unsaved draft');assert.equal(e['bookmark-tag-occlusion'].checked,true);
+ assert.ok(e['bookmarks-list'].textContent.includes('B saved note'));assert.equal(e['bookmarks-list'].textContent.includes('A imported note'),false);
+ assert.equal(e['bookmark-import-apply'].disabled,true);assert.equal(e['bookmark-save'].disabled,false);
+});
+
+test('changing the selected file invalidates a valid preview and requires reviewing the replacement bytes',async()=>{
+ const ui=await startUI(),e=ui.elements,old=bookmarkRecord(1,{note:'first backup'}),next=bookmarkRecord(2,{note:'second backup'});
+ await chooseImport(ui,fakeBookmarkFile(bookmarkResponse('session-a',[old])));await previewImport(ui,[old]);
+ assert.equal(e['bookmark-import-apply'].disabled,false);
+ await chooseImport(ui,fakeBookmarkFile(bookmarkResponse('session-a',[next])));
+ assert.equal(e['bookmark-import-apply'].disabled,true);
+ const before=bookmarkImports(ui).length;e['bookmark-import-apply'].onclick();await flush();assert.equal(bookmarkImports(ui).length,before);
+ const previewing=e['bookmark-import-preview'].onclick();await flush();
+ ui.respond(importUrl(),bookmarkImportResponse('session-a',[next]));await previewing;
+ assert.equal(e['bookmark-import-apply'].disabled,false);assert.equal(bookmarkJumpButtons(ui).length,0);
+ assert.equal(bookmarkWrites(ui).length,0);
+});
+
+test('preview rejects imported snapshot mismatches and an invalid revision without touching saved bookmarks',async()=>{
+ for(const response of [
+  bookmarkImportResponse('session-a',[bookmarkRecord(2,{snapshot_sha256:otherHash,note:'wrong snapshot'})]),
+  bookmarkImportResponse('session-a',[bookmarkRecord(2)],{revision:'not-a-revision'}),
+ ]){
+  const saved=bookmarkRecord(1,{note:'saved review'}),ui=await startUI({bookmarks:[saved]}),e=ui.elements;
+  await chooseImport(ui,fakeBookmarkFile(bookmarkResponse('session-a',[bookmarkRecord(2)])));
+  const previewing=e['bookmark-import-preview'].onclick();await flush();ui.respond(importUrl(),response);await previewing;
+  assert.equal(e['bookmark-import-apply'].disabled,true);assert.equal(bookmarkJumpButtons(ui).length,1);
+  assert.ok(e['bookmarks-list'].textContent.includes('saved review'));assert.equal(e['bookmarks-list'].textContent.includes('wrong snapshot'),false);
+ }
+});
+
+test('saving or deleting bookmarks invalidates a reviewed backup before another import can apply',async()=>{
+ for(const remove of [false,true]){
+  const saved=bookmarkRecord(1,{note:'saved'}),ui=await startUI({bookmarks:[saved]}),e=ui.elements;await showFirst(ui);
+  await chooseImport(ui,fakeBookmarkFile(bookmarkResponse('session-a',[bookmarkRecord(3)])));await previewImport(ui,[saved,bookmarkRecord(3)]);
+  assert.equal(e['bookmark-import-apply'].disabled,false);
+  if(!remove)editBookmark(ui,'new saved note');
+  const writing=e[remove?'bookmark-delete':'bookmark-save'].onclick();await flush();assert.equal(e['bookmark-import-apply'].disabled,true);
+  ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',remove?[]:[bookmarkRecord(1,{note:'new saved note'})]));await writing;
+  assert.equal(e['bookmark-import-apply'].disabled,true);const before=bookmarkImports(ui).length;e['bookmark-import-apply'].onclick();await flush();
+  assert.equal(bookmarkImports(ui).length,before);
+ }
+});
+
+test('refreshing the current Session clears any selected backup and preview permission',async()=>{
+ const ui=await startUI(),e=ui.elements;await chooseImport(ui,fakeBookmarkFile(bookmarkResponse('session-a',[bookmarkRecord(2)])));
+ await previewImport(ui,[bookmarkRecord(2)]);assert.equal(e['bookmark-import-apply'].disabled,false);
+ const refreshed=e.refresh.onclick();await flush();ui.respond('/api/sessions/status',{tracking_worker_configured:true});await flush();
+ ui.respond('/api/sessions',{sessions:[{session_id:'session-a',label:'A',frame_count:3}]});await flush();await finishFrames(ui,'session-a');await refreshed;
+ assert.equal(e['bookmark-import-preview'].disabled,true);assert.equal(e['bookmark-import-apply'].disabled,true);
+ assert.equal(bookmarkJumpButtons(ui).length,0);assert.equal(bookmarkWrites(ui).length,0);
 });

@@ -25,6 +25,7 @@ import numpy as np
 
 FORMAT = 'depthport.session.v1'
 BOOKMARK_FORMAT = 'depthport.session-bookmarks.v1'
+BOOKMARK_IMPORT_FORMAT = 'depthport.bookmark-import.v1'
 BOOKMARK_TAGS = ('id-switch', 'occlusion', 'crossing')
 MAX_BOOKMARK_BYTES = 1024 * 1024
 MAX_SESSIONS = 20
@@ -287,37 +288,106 @@ class SessionStore:
                 raw = source.read(MAX_BOOKMARK_BYTES + 1)
             if len(raw) > MAX_BOOKMARK_BYTES:
                 raise SessionIntegrity('Local bookmarks exceed the 1 MiB limit')
-            def unique_object(pairs):
-                obj = {}
-                for key, value in pairs:
-                    if key in obj:
-                        raise ValueError('Duplicate JSON key')
-                    obj[key] = value
-                return obj
-            data = json.loads(raw.decode('utf-8'), object_pairs_hook=unique_object)
-            if (not isinstance(data, dict) or set(data) != {'format', 'session_id', 'bookmarks'} or
-                    data['format'] != BOOKMARK_FORMAT or data['session_id'] != sid or
-                    not isinstance(data['bookmarks'], list) or len(data['bookmarks']) > MAX_FRAMES):
-                raise ValueError('Invalid bookmark document')
-            seen = set()
-            for item in data['bookmarks']:
-                if not isinstance(item, dict) or set(item) != {'index', 'snapshot_sha256', 'tags', 'note', 'updated_at'}:
-                    raise ValueError('Invalid bookmark record')
-                index = item['index']
-                if type(index) is not int or index in seen:
-                    raise ValueError('Invalid bookmark index')
-                seen.add(index)
-                self._bookmark_values(item['snapshot_sha256'], item['tags'], item['note'])
-                updated = item['updated_at']
-                if type(updated) not in (int, float) or not math.isfinite(updated) or updated <= 0:
-                    raise ValueError('Invalid bookmark timestamp')
-                self._bookmark_anchor(sid, index, item['snapshot_sha256'])
-            data['bookmarks'].sort(key=lambda item: item['index'])
-            return data
-        except (OSError, ValueError, TypeError, KeyError, OverflowError) as exc:
+            return self._parse_bookmarks(sid, raw)
+        except (OSError, ValueError, TypeError, KeyError, OverflowError, RecursionError) as exc:
             # Includes anchor failures: unrelated or damaged bookmarks must not
             # be silently overwritten by a later edit or deletion.
             raise SessionIntegrity('Local bookmarks are invalid or do not match saved frames') from exc
+
+    def _parse_bookmarks(self, sid: str, raw: bytes) -> dict:
+        """Strict shared validator; callers hold the lock through validation/write."""
+        if not isinstance(raw, bytes) or len(raw) > MAX_BOOKMARK_BYTES:
+            raise SessionLimit('Bookmark JSON exceeds the 1 MiB limit')
+        def unique_object(pairs):
+            obj = {}
+            for key, value in pairs:
+                if key in obj:
+                    raise ValueError('Duplicate JSON key')
+                obj[key] = value
+            return obj
+        def reject_constant(_value):
+            raise ValueError('Non-finite JSON constant')
+        data = json.loads(raw.decode('utf-8'), object_pairs_hook=unique_object,
+                          parse_constant=reject_constant)
+        if (not isinstance(data, dict) or set(data) != {'format', 'session_id', 'bookmarks'} or
+                data['format'] != BOOKMARK_FORMAT or data['session_id'] != sid or
+                not isinstance(data['bookmarks'], list) or len(data['bookmarks']) > MAX_FRAMES):
+            raise ValueError('Invalid bookmark document')
+        seen = set()
+        for item in data['bookmarks']:
+            if not isinstance(item, dict) or set(item) != {'index', 'snapshot_sha256', 'tags', 'note', 'updated_at'}:
+                raise ValueError('Invalid bookmark record')
+            index = item['index']
+            if type(index) is not int or index in seen:
+                raise ValueError('Invalid bookmark index')
+            seen.add(index)
+            self._bookmark_values(item['snapshot_sha256'], item['tags'], item['note'])
+            updated = item['updated_at']
+            if type(updated) not in (int, float) or not math.isfinite(updated) or updated <= 0:
+                raise ValueError('Invalid bookmark timestamp')
+            self._bookmark_anchor(sid, index, item['snapshot_sha256'])
+        data['bookmarks'].sort(key=lambda item: item['index'])
+        return data
+
+    @staticmethod
+    def _canonical_bookmarks(data: dict) -> bytes:
+        return (json.dumps(data, ensure_ascii=False, sort_keys=True, allow_nan=False,
+                           separators=(',', ':')) + '\n').encode('utf-8')
+
+    def export_bookmarks(self, sid: str) -> bytes:
+        """Export only saved local annotations; no media, paths or tracking data."""
+        with self.lock:
+            return self._canonical_bookmarks(self._read_bookmarks(sid))
+
+    def import_bookmarks(self, sid: str, raw: bytes, conflict: str = 'keep',
+                         dry_run: bool = True, if_match: str | None = None) -> dict:
+        """Preview a merge, then apply only against that exact local revision."""
+        if conflict not in ('keep', 'overwrite') or type(dry_run) is not bool:
+            raise SessionError('Invalid bookmark import options')
+        with self.lock:
+            current = self._read_bookmarks(sid)
+            revision = hashlib.sha256(self._canonical_bookmarks(current)).hexdigest()
+            if not dry_run:
+                token = if_match
+                if isinstance(token, str) and len(token) == 66 and token.startswith('"') and token.endswith('"'):
+                    token = token[1:-1]
+                if not isinstance(token, str) or not _SHA256.fullmatch(token):
+                    raise SessionError('Bookmark import requires a preview revision in If-Match')
+                if token != revision:
+                    raise SessionIntegrity('Local bookmarks changed; preview the import again')
+            try:
+                incoming = self._parse_bookmarks(sid, raw)
+            except SessionLimit:
+                raise
+            except (ValueError, TypeError, KeyError, OverflowError, RecursionError) as exc:
+                raise SessionError('Bookmark import is invalid or does not match saved frames') from exc
+            records = {item['index']: item for item in current['bookmarks']}
+            counts = {'incoming': len(incoming['bookmarks']), 'added': 0, 'updated': 0,
+                      'unchanged': 0, 'conflicts': 0}
+            for item in incoming['bookmarks']:
+                local = records.get(item['index'])
+                if local is None:
+                    records[item['index']] = item
+                    counts['added'] += 1
+                elif local['note'] == item['note'] and set(local['tags']) == set(item['tags']):
+                    # Timestamp/order differences alone must not overwrite notes.
+                    counts['unchanged'] += 1
+                else:
+                    counts['conflicts'] += 1
+                    if conflict == 'overwrite':
+                        records[item['index']] = item
+                        counts['updated'] += 1
+            merged = {'format': BOOKMARK_FORMAT, 'session_id': sid,
+                      'bookmarks': sorted(records.values(), key=lambda item: item['index'])}
+            canonical = self._canonical_bookmarks(merged)
+            if len(canonical) > MAX_BOOKMARK_BYTES:
+                raise SessionLimit('Local bookmarks exceed the 1 MiB limit')
+            if not dry_run and (counts['added'] or counts['updated']):
+                self._save_bookmarks(sid, merged)
+                revision = hashlib.sha256(canonical).hexdigest()
+            return {'format': BOOKMARK_IMPORT_FORMAT, 'session_id': sid,
+                    'dry_run': dry_run, 'conflict_policy': conflict, 'revision': revision,
+                    'counts': counts, 'document': merged}
 
     def bookmarks(self, sid: str) -> dict:
         with self.lock:

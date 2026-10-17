@@ -45,6 +45,16 @@
 <p id="model"></p><pre id="details"></pre></section>
 <section id="bookmarks-panel"><h2 data-i="bookmarksTitle">Frame bookmarks &amp; notes</h2>
 <p data-i="bookmarksNote">Mark a shown frame to pause playback, add tags and a note, then Save. Saved bookmarks stay in this local Session.</p>
+<fieldset class="bookmark-transfer"><legend data-i="bookmarkBackup">JSON backup / restore</legend>
+<p data-i="bookmarkBackupNote">Export saved bookmarks only; save drafts first. This JSON contains notes, not images. Restore requires the original Session and frames.</p>
+<a id="bookmark-export" href="#" download aria-disabled="true" data-i="bookmarkExport">Export JSON</a>
+<label for="bookmark-import-file" data-i="bookmarkImportFile">Local bookmark JSON (up to 1 MiB)</label>
+<input id="bookmark-import-file" type="file" accept=".json,application/json" disabled>
+<label for="bookmark-import-policy" data-i="bookmarkImportPolicy">Same-frame conflicts</label>
+<select id="bookmark-import-policy" disabled><option value="keep" data-i="bookmarkImportKeep">Keep local content</option><option value="overwrite" data-i="bookmarkImportOverwrite">Use imported content</option></select>
+<button id="bookmark-import-preview" data-i="bookmarkImportPreview" disabled>Preview import</button>
+<button id="bookmark-import-apply" data-i="bookmarkImportApply" disabled>Apply import</button>
+<p id="bookmark-import-status" role="status"></p></fieldset>
 <p id="bookmark-editor-status" role="status"></p>
 <fieldset id="bookmark-tags"><legend data-i="bookmarkTags">Review tags (optional)</legend>
 <label><input id="bookmark-tag-id-switch" type="checkbox" disabled><span data-i="bookmarkIdSwitch">Suspected ID switch</span></label>

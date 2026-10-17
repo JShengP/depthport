@@ -47,3 +47,9 @@ footer{margin:24px 0;color:#acb9c9}@media(max-width:800px){.panels{grid-template
 #bookmarks-list li{border-top:1px solid var(--edge);padding:8px 0}
 #bookmarks-list p{white-space:pre-wrap;overflow-wrap:anywhere;margin:6px 8px;font-size:14px}
 #bookmark-editor-status,#bookmarks-status{min-height:20px;color:#cce5f8;font-size:13px}
+
+.bookmark-transfer{border:1px solid var(--edge);border-radius:8px;margin:12px 0;padding:10px 12px}
+.bookmark-transfer p{font-size:13px;margin:4px 0 10px;color:#cce5f8}
+.bookmark-transfer label{display:block;margin-top:10px}.bookmark-transfer input[type="file"]{display:block;max-width:100%;margin:5px 0}
+#bookmark-export{display:inline-block;margin:4px 0}#bookmark-export[aria-disabled="true"]{opacity:.4;cursor:not-allowed}
+#bookmark-import-status{min-height:20px;margin:8px 0 0;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}

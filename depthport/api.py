@@ -38,7 +38,8 @@ from depthport.capture import CaptureWorker
 from depthport.spatial import pixel_inspection, depth_distribution, distance_between, fit_plane, empirical_validation
 from depthport.comparison import compact_card, status_card
 from depthport.semantic import run_ultralytics_semantic
-from depthport.sessions import SessionStore, SessionError, SessionIntegrity, SessionNotFound, SessionLimit
+from depthport.sessions import (SessionStore, SessionError, SessionIntegrity, SessionNotFound,
+                                SessionLimit, MAX_BOOKMARK_BYTES)
 from depthport.tracking import analyse_session, MAX_TRACK_FRAMES
 from depthport.tracking_worker import worker_configured, close_tracking_workers
 
@@ -968,6 +969,44 @@ def sessions_bookmarks(request: Request, sid: str):
     store = local_session_store(request)
     try:return store.bookmarks(sid)
     except SessionError as exc:raise session_failure(exc) from exc
+
+
+@app.get('/api/sessions/{sid}/bookmarks/export')
+def sessions_bookmark_export(request: Request, sid: str):
+    store = local_session_store(request)
+    try:data = store.export_bookmarks(sid)
+    except SessionError as exc:raise session_failure(exc) from exc
+    return Response(content=data, media_type='application/json', headers={
+        'Content-Disposition': f'attachment; filename="depthport-bookmarks-{sid}.json"',
+        'Cache-Control': 'no-store'})
+
+
+@app.post('/api/sessions/{sid}/bookmarks/import')
+async def sessions_bookmark_import(request: Request, sid: str):
+    # Gate before reading potentially private annotations, including malformed input.
+    store = local_session_store(request)
+    conflict = request.query_params.get('conflict', 'keep')
+    dry_run = request.query_params.get('dry_run', 'true')
+    if conflict not in ('keep', 'overwrite') or dry_run not in ('true', 'false'):
+        raise HTTPException(422, 'Invalid bookmark import options')
+    length = request.headers.get('content-length')
+    if length is not None:
+        try:declared = int(length)
+        except ValueError:raise HTTPException(422, 'Invalid bookmark JSON request length') from None
+        if declared < 0:
+            raise HTTPException(422, 'Invalid bookmark JSON request length')
+        if declared > MAX_BOOKMARK_BYTES:
+            raise HTTPException(413, 'Bookmark JSON exceeds the 1 MiB limit')
+    raw = bytearray()
+    async for chunk in request.stream():
+        if len(raw) + len(chunk) > MAX_BOOKMARK_BYTES:
+            raise HTTPException(413, 'Bookmark JSON exceeds the 1 MiB limit')
+        raw.extend(chunk)
+    try:
+        result = await run_in_threadpool(store.import_bookmarks, sid, bytes(raw), conflict,
+                                        dry_run == 'true', request.headers.get('if-match'))
+    except SessionError as exc:raise session_failure(exc) from exc
+    return JSONResponse(result, headers={'Cache-Control': 'no-store'})
 
 
 @app.put('/api/sessions/{sid}/frames/{index}/bookmark')

@@ -35,6 +35,8 @@
 | GET | `/api/sessions/{sid}/frames/{index}/replay` | Read-only RGB/depth/compact 3D viewer payload |
 | GET | `/api/sessions/{sid}/frames/{index}/bundle.zip` | Exact original same-frame ZIP |
 | GET | `/api/sessions/{sid}/bookmarks` | List locally saved frame bookmarks and notes |
+| GET | `/api/sessions/{sid}/bookmarks/export` | Download saved bookmarks as a local JSON backup |
+| POST | `/api/sessions/{sid}/bookmarks/import?conflict=keep&dry_run=true` | Validate/preview a JSON backup; `dry_run=false` applies with `If-Match` revision |
 | PUT | `/api/sessions/{sid}/frames/{index}/bookmark` | Save/update one bookmark: `{ "snapshot_sha256": "…", "tags": [], "note": "" }` |
 | DELETE | `/api/sessions/{sid}/frames/{index}/bookmark` | Remove one bookmark: `{ "snapshot_sha256": "…" }` |
 | GET | `/api/sessions/{sid}/temporal` | Per-model depth-summary trend only |
@@ -129,3 +131,13 @@ Choose a bookmark in the list to jump back to its exact saved frame. This pauses
 Unsent edits are kept in page memory per exact frame while navigating. Only **Save/update** writes them to disk; reloading the browser retains saved notes and discards unsaved drafts. Saved records live in **`outputs/sessions/<UUID4>/bookmarks.json`**, separate from `session.json`, original frame ZIPs and `tracking.json`. They remain local, are excluded from the public source archive, and are not added to downloaded original bundles or tracking reports. Bookmarking does not capture frames, run analysis/inference or upload anything.
 
 The bookmark API uses the same storage opt-in and loopback restrictions as replay. GET and both mutations return the full `depthport.session-bookmarks.v1` document, containing `session_id` and a `bookmarks` list. PUT accepts unique tags from `id-switch`, `occlusion` and `crossing`; an empty list is allowed. PUT and DELETE require the exact frame's `snapshot_sha256`. Invalid or mismatched snapshots are rejected without changing saved records.
+
+### Back up and restore bookmark JSON
+
+Use **Export JSON** to download saved bookmarks to this machine. Save any edited notes first: unsaved drafts are excluded. The UTF-8 JSON contains the format version, Session UUID, saved-frame indices, snapshot SHA-256 digests, tags, notes and `updated_at` values. It contains no images, frame bundles or tracking results. Keep the backup locally; the app does not send it to cloud storage or GitHub.
+
+To restore, select the **same original Session** with its exact saved frames still available, choose a local JSON file of at most **1 MiB**, then **Preview import**. Review the counts before **Apply import**. The default conflict policy keeps local notes; choose overwrite to replace differing notes/tags for incoming frames. Both policies retain existing bookmarks absent from the backup, and identical notes/tags require no change. This backs up notes only: it cannot recreate a Session or missing media.
+
+The entire file is checked before any write, including format, Session, snapshot hashes, unique frame indices, tags, note limits and valid UTF-8/JSON. An invalid entry rejects the whole import. If saved notes change after preview, preview again before applying. Unsaved editor drafts remain separate; switching Sessions or refreshing clears the chosen file and preview. Applying writes the merged bookmarks atomically to the local private bookmark file.
+
+For API clients, POST the raw `depthport.session-bookmarks.v1` document with `conflict=keep|overwrite`. `dry_run=true` returns a revision, merge counts and the merged document without writing; `dry_run=false` requires that revision in `If-Match`. Export and import use the existing storage opt-in, loopback and cross-origin protections. Actual backups, notes and media remain outside the public source archive.

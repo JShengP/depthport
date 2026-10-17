@@ -35,6 +35,8 @@
 | GET | `/api/sessions/{sid}/frames/{index}/replay` | 讀回 RGB、深度和點雲供瀏覽 |
 | GET | `/api/sessions/{sid}/frames/{index}/bundle.zip` | 原始完整 ZIP |
 | GET | `/api/sessions/{sid}/bookmarks` | 列出本機保存的影格書籤與備註 |
+| GET | `/api/sessions/{sid}/bookmarks/export` | 下載已保存書籤的本機 JSON 備份 |
+| POST | `/api/sessions/{sid}/bookmarks/import?conflict=keep&dry_run=true` | 驗證／預覽 JSON 備份；`dry_run=false` 搭配 `If-Match` 版本套用 |
 | PUT | `/api/sessions/{sid}/frames/{index}/bookmark` | 保存／更新一筆書籤：`{ "snapshot_sha256": "…", "tags": [], "note": "" }` |
 | DELETE | `/api/sessions/{sid}/frames/{index}/bookmark` | 移除一筆書籤：`{ "snapshot_sha256": "…" }` |
 | GET | `/api/sessions/{sid}/temporal` | 各模型深度摘要曲線資料 |
@@ -118,3 +120,13 @@ A／B 依保存順序計算，不是來源 frame ID 或實際經過時間。每�
 未送出的編輯會依確切影格暫存在本頁記憶體，換格後回來仍可繼續編輯。只有按「保存／更新」才寫入磁碟；重新載入網頁會保留已保存備註、捨棄未保存草稿。資料只存於本機 **`outputs/sessions/<UUID4>/bookmarks.json`**，獨立於 `session.json`、原始影格 ZIP 及 `tracking.json`；不加入公開原始碼封裝，也不加入下載的原始影格包或追蹤報告。書籤操作不保存新影格、不執行分析／推論，也不上傳資料。
 
 書籤 API 與回放共用儲存功能啟用及 loopback 限制。GET 與兩種修改操作均回傳完整的 `depthport.session-bookmarks.v1` 文件，內含 `session_id` 與 `bookmarks` 列表。PUT 的 `tags` 可複選且不得重複，值為 `id-switch`、`occlusion`、`crossing`，也可為空列表。PUT 與 DELETE 都須提供同影格的 `snapshot_sha256`；快照無效或不符時拒絕操作，不改動已保存紀錄。
+
+### 書籤 JSON 備份與還原
+
+按「**匯出 JSON**」可將已保存書籤下載到本機。請先保存編輯中的備註，未保存草稿不會匯出。UTF-8 JSON 包含格式版本、Session UUID、保存影格序號、快照 SHA-256、分類、備註及 `updated_at`；不含影像、影格包或追蹤結果。備份留在本機，程式不會自動傳到雲端或 GitHub。
+
+還原時，先選取**原本同一個 Session**，且原有的確切影格須仍存在，再選擇不超過 **1 MiB** 的本機 JSON，按「**預覽匯入**」。確認筆數後才「**套用匯入**」。衝突預設保留本機備註；可明確選擇覆寫，取代匯入影格中不同的備註／分類。兩種方式都保留備份未提及的既有書籤，相同備註／分類不需更新。這只備份備註，不能重建 Session 或缺少的影像。
+
+寫入前會驗證整份檔案，包括格式、Session、快照雜湊、影格序號不重複、分類、備註長度及有效 UTF-8／JSON；任一筆無效即整份拒絕。預覽後若已保存備註改變，須重新預覽才能套用。未保存的編輯草稿仍分開保留；切換 Session 或重新整理會清除所選檔案與預覽。套用時會以原子寫入更新本機私人書籤檔。
+
+API 請直接 POST `depthport.session-bookmarks.v1` JSON，使用 `conflict=keep|overwrite`。`dry_run=true` 回傳版本、合併筆數及合併後文件，不寫入；`dry_run=false` 須在 `If-Match` 提供該版本。匯出／匯入沿用儲存啟用、loopback 與跨來源限制；實際備份、備註及影像不加入公開原始碼封裝。

@@ -13,7 +13,8 @@ import numpy as np
 import pytest
 from fastapi.testclient import TestClient
 from depthport.sessions import (SessionStore, SessionError, SessionLimit, SessionNotFound,
-                               SessionIntegrity, MAX_FRAMES, BOOKMARK_FORMAT, _parse_ply)
+                               SessionIntegrity, MAX_FRAMES, BOOKMARK_FORMAT,
+                               BOOKMARK_IMPORT_FORMAT, MAX_BOOKMARK_BYTES, _parse_ply)
 from depthport.api import bundle_bytes, prepare_cloud
 from depthport.engines import DepthResult
 from tests.helpers import FakeEngine, fixture_image, wait_for
@@ -402,3 +403,250 @@ def test_bookmark_routes_are_opt_in_and_loopback_only(monkeypatch, tmp_path):
         assert c.get(f'/api/sessions/{sid}/bookmarks').status_code == 403
         assert c.put(url, json=body).status_code == 403
         assert c.request('DELETE', url, json=body).status_code == 403
+
+
+def bookmark_document(sid, rows, *, note='Synthetic review', tags=None):
+    return {'format': BOOKMARK_FORMAT, 'session_id': sid, 'bookmarks': [
+        {'index': row['index'], 'snapshot_sha256': row['sha256'],
+         'tags': ['occlusion'] if tags is None else tags.copy(), 'note': note,
+         'updated_at': 123.5} for row in rows]}
+
+
+def bookmark_json(document):
+    return json.dumps(document, ensure_ascii=False).encode('utf-8')
+
+
+def test_bookmark_export_import_roundtrip_is_local_private_and_persistent(tmp_path):
+    store, sid, row, path = bookmark_fixture(tmp_path)
+    manifest = (path.parent / 'session.json').read_bytes()
+    bundle = store.bundle(sid, 1)
+    note = '遮擋 😀 <script>plain text</script>\n檢查\tID'
+    saved = store.save_bookmark(sid, 1, row['sha256'], ['occlusion', 'crossing'], note)
+    exported = store.export_bookmarks(sid)
+    assert json.loads(exported) == saved and note.split('\n')[0].encode() in exported
+    assert set(json.loads(exported)) == {'format', 'session_id', 'bookmarks'}
+    store.delete_bookmark(sid, 1, row['sha256'])
+    path.unlink()
+    preview = store.import_bookmarks(sid, exported)
+    assert preview['format'] == BOOKMARK_IMPORT_FORMAT and preview['dry_run'] is True
+    assert preview['conflict_policy'] == 'keep' and not path.exists()
+    assert re.fullmatch('[0-9a-f]{64}', preview['revision'])
+    assert preview['counts'] == {'incoming': 1, 'added': 1, 'updated': 0, 'unchanged': 0, 'conflicts': 0}
+    assert preview['document'] == saved
+    applied = store.import_bookmarks(sid, exported, dry_run=False, if_match='"' + preview['revision'] + '"')
+    assert applied['dry_run'] is False and applied['revision'] != preview['revision']
+    assert SessionStore(path.parent.parent).bookmarks(sid) == saved
+    assert applied['revision'] == hashlib.sha256(store.export_bookmarks(sid)).hexdigest()
+    assert store.bundle(sid, 1) == bundle and (path.parent / 'session.json').read_bytes() == manifest
+    assert sorted(p.name for p in path.parent.iterdir()) == ['bookmarks.json', 'frame-00001.zip', 'session.json']
+    if os.name == 'posix':assert stat.S_IMODE(path.stat().st_mode) == 0o600
+
+
+def test_bookmark_import_merge_policy_preserves_unmentioned_frames_and_import_timestamp(tmp_path):
+    store, sid, row, path = bookmark_fixture(tmp_path)
+    frame2, bundle2 = sample_frame(frame_id=91, units='relative')
+    row2 = store.capture(sid, bundle2, frame2)
+    frame3, bundle3 = sample_frame(frame_id=92)
+    row3 = store.capture(sid, bundle3, frame3)
+    local = store.save_bookmark(sid, 1, row['sha256'], ['crossing'], 'Local note')['bookmarks'][0]
+    unmentioned = store.save_bookmark(sid, 2, row2['sha256'], [], 'Unmentioned')['bookmarks'][1]
+    imported = bookmark_document(sid, [row3, row], note='Imported note')
+    raw = bookmark_json(imported)
+    original = path.read_bytes()
+    keep = store.import_bookmarks(sid, raw)
+    assert keep['counts'] == {'incoming': 2, 'added': 1, 'updated': 0, 'unchanged': 0, 'conflicts': 1}
+    assert path.read_bytes() == original
+    assert keep['document']['bookmarks'][:2] == [local, unmentioned]
+    overwrite = store.import_bookmarks(sid, raw, 'overwrite')
+    assert overwrite['counts'] == {'incoming': 2, 'added': 1, 'updated': 1, 'unchanged': 0, 'conflicts': 1}
+    assert path.read_bytes() == original and overwrite['revision'] == keep['revision']
+    applied = store.import_bookmarks(sid, raw, 'overwrite', False, overwrite['revision'])
+    assert applied['document']['bookmarks'][1] == unmentioned
+    assert [item['index'] for item in applied['document']['bookmarks']] == [1, 2, 3]
+    assert applied['document']['bookmarks'][0]['updated_at'] == 123.5
+    assert applied['document']['bookmarks'][2]['updated_at'] == 123.5
+    # Applying keep against an actual conflict preserves the local record byte for byte.
+    other = bookmark_document(sid, [row], note='Another conflicting note')
+    before = path.read_bytes();preview = store.import_bookmarks(sid, bookmark_json(other))
+    result = store.import_bookmarks(sid, bookmark_json(other), dry_run=False, if_match=preview['revision'])
+    assert result['counts']['conflicts'] == 1 and result['counts']['updated'] == 0
+    assert path.read_bytes() == before
+
+
+def test_bookmark_import_unchanged_tag_order_timestamps_empty_and_repeat_do_not_write(tmp_path, monkeypatch):
+    store, sid, row, path = bookmark_fixture(tmp_path)
+    saved = store.save_bookmark(sid, 1, row['sha256'], ['occlusion', 'crossing'], 'Same')
+    imported = bookmark_document(sid, [row], note='Same', tags=['crossing', 'occlusion'])
+    before = path.read_bytes()
+    def unexpected_write(*_args):raise AssertionError('No-op import must not write')
+    monkeypatch.setattr(store, '_save_bookmarks', unexpected_write)
+    for data, count in ((imported, 1), (bookmark_document(sid, []), 0), (saved, 1)):
+        raw = bookmark_json(data)
+        for policy in ('keep', 'overwrite'):
+            preview = store.import_bookmarks(sid, raw, policy)
+            result = store.import_bookmarks(sid, raw, policy, False, preview['revision'])
+            assert result['counts'] == {'incoming': count, 'added': 0, 'updated': 0,
+                                        'unchanged': count, 'conflicts': 0}
+            assert result['document'] == saved and result['revision'] == preview['revision']
+            assert path.read_bytes() == before
+
+
+def test_bookmark_import_apply_requires_current_preview_revision(tmp_path):
+    store, sid, row, path = bookmark_fixture(tmp_path)
+    raw = bookmark_json(bookmark_document(sid, [row]))
+    preview = store.import_bookmarks(sid, raw)
+    for token in (None, '', '*', 'W/"' + preview['revision'] + '"', 'private', 'A' * 64):
+        with pytest.raises(SessionError) as error:
+            store.import_bookmarks(sid, raw, dry_run=False, if_match=token)
+        assert 'private' not in str(error.value) and not path.exists()
+    store.save_bookmark(sid, 1, row['sha256'], [], 'An intervening edit')
+    before = path.read_bytes()
+    with pytest.raises(SessionIntegrity, match='changed'):
+        store.import_bookmarks(sid, raw, 'overwrite', False, preview['revision'])
+    assert path.read_bytes() == before
+
+
+@pytest.mark.parametrize('mutation', [
+    'wrong-session', 'unknown-top', 'unknown-record', 'duplicate-index', 'bool-index',
+    'float-index', 'missing-frame', 'wrong-sha', 'bad-tag', 'duplicate-tag', 'bad-note',
+    'long-note', 'surrogate-note', 'zero-time', 'negative-time', 'bool-time', 'infinite-time',
+    'nan-time', 'format', 'missing-key', 'non-list',
+])
+def test_bookmark_import_rejects_entire_invalid_document_before_writing(tmp_path, mutation):
+    store, sid, row, path = bookmark_fixture(tmp_path)
+    store.save_bookmark(sid, 1, row['sha256'], [], 'Preserved')
+    frame, bundle = sample_frame(frame_id=92);row2 = store.capture(sid, bundle, frame)
+    document = bookmark_document(sid, [row2, row])
+    record = document['bookmarks'][-1]
+    if mutation == 'wrong-session':document['session_id'] = '0' * 32
+    elif mutation == 'unknown-top':document['private'] = 'private'
+    elif mutation == 'unknown-record':record['private'] = 'private'
+    elif mutation == 'duplicate-index':document['bookmarks'].append(dict(record))
+    elif mutation == 'bool-index':record['index'] = True
+    elif mutation == 'float-index':record['index'] = 1.0
+    elif mutation == 'missing-frame':record['index'] = 3
+    elif mutation == 'wrong-sha':record['snapshot_sha256'] = '0' * 64
+    elif mutation == 'bad-tag':record['tags'] = ['private']
+    elif mutation == 'duplicate-tag':record['tags'] = ['occlusion', 'occlusion']
+    elif mutation == 'bad-note':record['note'] = 'private\x00note'
+    elif mutation == 'long-note':record['note'] = 'private' * 200
+    elif mutation == 'surrogate-note':record['note'] = 'private\ud800note'
+    elif mutation == 'zero-time':record['updated_at'] = 0
+    elif mutation == 'negative-time':record['updated_at'] = -1
+    elif mutation == 'bool-time':record['updated_at'] = True
+    elif mutation == 'infinite-time':record['updated_at'] = float('inf')
+    elif mutation == 'nan-time':record['updated_at'] = float('nan')
+    elif mutation == 'format':document['format'] = 'private'
+    elif mutation == 'missing-key':del record['tags']
+    elif mutation == 'non-list':document['bookmarks'] = 'private'
+    raw = json.dumps(document).encode('utf-8')
+    before = path.read_bytes();preview = store.import_bookmarks(sid, bookmark_json(bookmark_document(sid, [])))
+    for dry_run in (True, False):
+        with pytest.raises(SessionError) as error:
+            store.import_bookmarks(sid, raw, 'overwrite', dry_run, preview['revision'])
+        assert 'private' not in str(error.value) and path.read_bytes() == before
+        assert not list(path.parent.glob('bookmarks.*.tmp'))
+
+
+@pytest.mark.parametrize('raw', [b'\xffprivate', b'\xef\xbb\xbf{}', b'{private', b'[]', b'null',
+                                b'{"private":0,"private":1}', b'{"bookmarks":[NaN]}',
+                                b'{"bookmarks":[Infinity]}', b'[' * 1100 + b']' * 1100])
+def test_bookmark_import_strict_json_without_private_error_echo(tmp_path, raw):
+    store, sid, row, path = bookmark_fixture(tmp_path)
+    with pytest.raises(SessionError) as error:store.import_bookmarks(sid, raw)
+    assert 'private' not in str(error.value) and not path.exists()
+
+
+def test_bookmark_import_limits_duplicate_nested_keys_and_damaged_bundle(tmp_path):
+    store, sid, row, path = bookmark_fixture(tmp_path)
+    doc = bookmark_document(sid, [row]);raw = bookmark_json(doc)
+    duplicate = raw.replace(b'"index": 1', b'"index": 1, "index": 1')
+    with pytest.raises(SessionError):store.import_bookmarks(sid, duplicate)
+    with pytest.raises(SessionLimit):store.import_bookmarks(sid, b' ' * (MAX_BOOKMARK_BYTES + 1))
+    assert not path.exists()
+    bundle_path = path.parent / 'frame-00001.zip'
+    bundle_path.write_bytes(b'not original')
+    with pytest.raises(SessionError):store.import_bookmarks(sid, raw)
+    assert not path.exists()
+
+
+@pytest.mark.parametrize('corruption', ['invalid', 'symlink', 'directory'])
+def test_bookmark_transfer_refuses_corrupt_existing_storage(tmp_path, corruption):
+    store, sid, row, path = bookmark_fixture(tmp_path)
+    target = tmp_path / 'outside.json';target.write_text('private outside')
+    if corruption == 'invalid':path.write_bytes(b'{private invalid')
+    elif corruption == 'symlink':path.symlink_to(target)
+    else:path.mkdir()
+    raw = bookmark_json(bookmark_document(sid, [row]))
+    for action in (lambda:store.export_bookmarks(sid), lambda:store.import_bookmarks(sid, raw)):
+        with pytest.raises(SessionIntegrity) as error:action()
+        assert 'private' not in str(error.value)
+    assert target.read_text() == 'private outside'
+
+
+def test_bookmark_import_atomic_replace_failure_preserves_original(tmp_path, monkeypatch):
+    store, sid, row, path = bookmark_fixture(tmp_path)
+    store.save_bookmark(sid, 1, row['sha256'], [], 'Original')
+    raw = bookmark_json(bookmark_document(sid, [row], note='Replacement'))
+    preview = store.import_bookmarks(sid, raw, 'overwrite');before = path.read_bytes()
+    def fail_replace(_self, _target):raise OSError('Synthetic replacement failure')
+    monkeypatch.setattr(Path, 'replace', fail_replace)
+    with pytest.raises(OSError):store.import_bookmarks(sid, raw, 'overwrite', False, preview['revision'])
+    assert path.read_bytes() == before and not list(path.parent.glob('bookmarks.*.tmp'))
+
+
+def test_bookmark_transfer_http_download_preview_apply_and_stale_revision(client_enabled):
+    c = client_enabled;store = api.app.state.session_store
+    sid = store.create()['session_id'];frame, bundle = sample_frame();row = store.capture(sid, bundle, frame)
+    prefix = f'/api/sessions/{sid}/bookmarks'
+    exported = c.get(prefix + '/export')
+    assert exported.status_code == 200 and exported.headers['content-type'] == 'application/json'
+    assert exported.headers['content-disposition'] == f'attachment; filename="depthport-bookmarks-{sid}.json"'
+    assert exported.headers['cache-control'] == 'no-store'
+    assert exported.json() == bookmark_document(sid, [])
+    raw = bookmark_json(bookmark_document(sid, [row], note='遮擋測試'))
+    preview = c.post(prefix + '/import', content=raw)
+    assert preview.status_code == 200 and preview.json()['dry_run'] is True
+    assert store.bookmarks(sid)['bookmarks'] == []
+    assert c.post(prefix + '/import?dry_run=false', content=raw).status_code == 422
+    applied = c.post(prefix + '/import?dry_run=false', content=raw,
+                     headers={'If-Match': '"' + preview.json()['revision'] + '"'})
+    assert applied.status_code == 200 and applied.json()['counts']['added'] == 1
+    assert c.get(prefix + '/export').json() == applied.json()['document']
+    stale = c.post(prefix + '/import?dry_run=false&conflict=overwrite', content=raw,
+                   headers={'If-Match': preview.json()['revision']})
+    assert stale.status_code == 409
+    for query in ('?conflict=private', '?dry_run=private'):
+        bad = c.post(prefix + '/import' + query, content=raw)
+        assert bad.status_code == 422 and 'private' not in bad.text
+    invalid = c.post(prefix + '/import', content=b'{private')
+    assert invalid.status_code == 422 and 'private' not in invalid.text
+    assert c.post(prefix + '/import', content=raw, headers={'Origin': 'https://example.invalid'}).status_code == 403
+    assert c.post(prefix + '/import', content=raw, headers={'Sec-Fetch-Site': 'cross-site'}).status_code == 403
+
+
+def test_bookmark_import_api_rejects_declared_and_streamed_oversize(client_enabled):
+    c = client_enabled;store = api.app.state.session_store;sid = store.create()['session_id']
+    url = f'/api/sessions/{sid}/bookmarks/import'
+    assert c.post(url, content=b'{}', headers={'Content-Length': str(MAX_BOOKMARK_BYTES + 1)}).status_code == 413
+    assert c.post(url, content=b'{}', headers={'Content-Length': '-1'}).status_code == 422
+    assert c.post(url, content=b'{}', headers={'Content-Length': 'private'}).status_code == 422
+    def chunks():
+        yield b' ' * (MAX_BOOKMARK_BYTES // 2)
+        yield b' ' * (MAX_BOOKMARK_BYTES // 2 + 1)
+    assert c.post(url, content=chunks()).status_code == 413
+    assert store.bookmarks(sid)['bookmarks'] == []
+
+
+def test_bookmark_transfer_api_gates_before_reading_body(monkeypatch, tmp_path):
+    monkeypatch.delenv('ENABLE_SESSION_STORAGE', raising=False)
+    monkeypatch.setattr(api, 'make_engine', lambda key: FakeEngine(key))
+    sid = 'a' * 32;prefix = f'/api/sessions/{sid}/bookmarks'
+    with TestClient(api.app, client=('127.0.0.1', 42)) as c:
+        assert c.get(prefix + '/export').status_code == 404
+        assert c.post(prefix + '/import?dry_run=private', content=b'private').status_code == 404
+    monkeypatch.setenv('ENABLE_SESSION_STORAGE', '1')
+    monkeypatch.setattr(api, 'SessionStore', lambda _root: SessionStore(tmp_path / 'local'))
+    with TestClient(api.app, client=('192.0.2.11', 42)) as c:
+        assert c.get(prefix + '/export').status_code == 403
+        assert c.post(prefix + '/import?dry_run=private', content=b'private').status_code == 403

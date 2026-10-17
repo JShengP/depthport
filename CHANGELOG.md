@@ -23,6 +23,9 @@
 - Added local per-frame bookmarks with suspected ID-switch, occlusion and crossing tags, plain-text notes, explicit Save/update and removal, and exact-snapshot jumps that preserve A/B settings. Unsaved drafts remain in page memory; saved notes use a separate local `bookmarks.json` and never modify original bundles or tracking reports.
 - 新增本機影格書籤，可標記疑似換 ID／遮擋／物件交會、填寫備註並明確保存／更新或移除；點選書籤會跳回同快照並保留 A／B 設定。草稿暫存本頁，已保存備註獨立於原始影格與追蹤報告，不加入公開封裝或自動上傳。
 
+- Added local bookmark JSON export/import with whole-file validation, preview counts, explicit apply, keep-local/overwrite conflict policies and revision checks. Backups contain saved notes/tags and exact-frame anchors only; restoring requires the original Session and frames. Media, drafts and tracking results are excluded.
+- 新增書籤 JSON 本機匯出／匯入，整份驗證後預覽筆數、明確套用，可保留本機或覆寫衝突並檢查版本。備份只含已保存備註／分類及同影格定位，還原須保留原 Session 與影格；不含影像、草稿或追蹤結果，不自動上傳。
+
 # Changelog / 版本紀錄
 
 ## 0.2.0-alpha.1 — 2026-10-17 (experimental Alpha pre-release)
