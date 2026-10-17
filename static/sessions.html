@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DepthPort — Session Replay</title><link rel="stylesheet" href="/static/sessions.css"></head>
+<body><main><header><h1>DepthPort <span data-i="title">Session / Replay</span></h1>
+<nav><a href="/">DepthPort</a> · <a href="/spatial">Spatial Analysis</a> ·
+<label><span data-i="language">Language</span> <select id="lang"><option value="en">English</option><option value="zh-TW">繁體中文</option></select></label></nav></header>
+<p id="subtitle" data-i="subtitle">Manually save completed AI result frames to local storage. No automatic camera recording; replay does not rerun inference.</p>
+<div id="status" role="status"></div>
+<section><h2 data-i="sessions">Sessions</h2>
+<label data-i="label">Label (optional)</label> <input id="label" maxlength="80" placeholder="Test scene">
+<button id="create" data-i="create">Create session</button> <button id="refresh" data-i="refresh">Refresh</button>
+<select id="sessions-list" aria-label="Saved sessions"><option value="">--</option></select>
+<button id="capture" data-i="capture">Save latest frame</button>
+<p data-i="scope">Storage is opt-in (ENABLE_SESSION_STORAGE=1), localhost-only and limited to 20 sessions × 120 frames.</p></section>
+<section><h2 data-i="frames">Saved frames</h2><select id="frames-list" aria-label="Saved frames"></select>
+<button id="replay" data-i="replay">Replay selected frame</button>
+<a id="download" href="#" hidden data-i="download">Download exact snapshot ZIP</a></section>
+<section id="result" hidden><h2 data-i="view">Recorded RGB, depth &amp; point cloud</h2>
+<div class="panels"><figure><img id="rgb" alt="Saved aligned RGB"><figcaption data-i="rgb">Aligned RGB</figcaption></figure>
+<figure><img id="depth" alt="Saved depth preview"><figcaption data-i="depth">Depth preview</figcaption></figure>
+<div class="cloud"><canvas id="cloud" aria-label="Stored 3D points"></canvas></div></div>
+<p id="model"></p><pre id="details"></pre></section>
+<section><h2 data-i="trend">Temporal metadata trends</h2><p data-i="trendNote">Frame-level depth median only: not tracked pixels, metric drift or motion-compensated geometry.</p><pre id="temporal"></pre></section>
+<footer><span data-i="warning">Recorded depth is an AI estimate. Relative depth is not metres; no safety or accuracy certification.</span></footer>
+</main><script src="/static/viewer.js"></script><script src="/static/sessions.js"></script></body></html>

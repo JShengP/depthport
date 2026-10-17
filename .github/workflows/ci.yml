@@ -1,7 +1,7 @@
 name: Application contracts
 on:
   push:
-    branches: [main]
+    branches: [main, "feature/**"]
   pull_request:
   workflow_dispatch:
 permissions:
@@ -47,6 +47,10 @@ jobs:
           node --check static/i18n.js
           node --check static/main.js
           node --check static/viewer.js
+          node --check static/spatial.js
+          node --check static/sessions.js
+          node tests/test_sessions_i18n.cjs
+          node tests/test_spatial_i18n.cjs
           node tests/test_i18n.cjs
           bash -n RUN_UBUNTU.sh INSTALL_ALL_UBUNTU.sh
       - name: Upload test report (not a model benchmark)

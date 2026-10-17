@@ -40,6 +40,7 @@ with log_path.open('w') as log:
         content,_=read('/api/about'); assert json.loads(content)['license']=='AGPL-3.0-only'
         content,_=read('/api/license'); assert b'GNU AFFERO' in content
         content,headers=read('/'); assert b'DepthPort' in content
+        content,_=read('/sessions'); assert b'Session / Replay' in content
         for name in ('main.js','viewer.js','style.css','i18n.js','favicon.svg'):
             content,_=read('/static/'+name)
             assert content==(ROOT/'static'/name).read_bytes()

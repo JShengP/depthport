@@ -8,6 +8,7 @@ from __future__ import annotations
 import base64
 import hashlib
 import io
+import ipaddress
 import json
 import os
 import re
@@ -37,6 +38,7 @@ from depthport.capture import CaptureWorker
 from depthport.spatial import pixel_inspection, depth_distribution, distance_between, fit_plane, empirical_validation
 from depthport.comparison import compact_card, status_card
 from depthport.semantic import run_ultralytics_semantic
+from depthport.sessions import SessionStore, SessionError, SessionIntegrity, SessionNotFound, SessionLimit
 
 MAX_UPLOAD = 12 * 1024 * 1024
 
@@ -485,6 +487,9 @@ class Service:
 @asynccontextmanager
 async def lifespan(app):
     service = Service(); app.state.service = service
+    # Explicit opt-in. No silent RTSP archival, default storage is disabled.
+    app.state.session_store = (SessionStore(ROOT / 'outputs' / 'sessions')
+                               if os.getenv('ENABLE_SESSION_STORAGE', '0') == '1' else None)
     source = os.getenv('RTSP_URL', '').strip()
     if source:
         try: service.set_source(source)
@@ -529,6 +534,8 @@ async def request_validation_error(request: Request, exc: RequestValidationError
 def index(): return FileResponse(ROOT/'static/index.html')
 @app.get('/spatial')
 def spatial_index(): return FileResponse(ROOT/'static/spatial.html')
+@app.get('/sessions')
+def session_index(): return FileResponse(ROOT/'static/sessions.html')
 @app.get('/api/source-code.zip')
 def download_source():
     try:
@@ -881,6 +888,104 @@ def download_bundle():
     f, records, result = app.state.service.snapshot()
     analysis = spatial_report_for_frame(app.state.service, f)
     return attachment(bundle_bytes(f, records, result, analysis), f'depthport_{f["engine"]}_frame_{f["frame_id"]}.zip', f['frame_id'], 'application/zip')
+
+
+# v0.3 opt-in local Session/Replay. Every write is manual; no background recorder.
+# Session IDs and frame indexes are validated by the storage implementation.
+def local_session_store(request: Request) -> SessionStore:
+    peer = request.client.host if request.client else ''
+    try:
+        permitted = ipaddress.ip_address(peer).is_loopback
+    except ValueError:
+        permitted = False
+    if not permitted:
+        raise HTTPException(403, 'Session archive is only available from localhost')
+    store = getattr(request.app.state, 'session_store', None)
+    if store is None:
+        raise HTTPException(404, 'Local session storage is disabled; set ENABLE_SESSION_STORAGE=1')
+    return store
+
+
+class NewSession(BaseModel):
+    label: str = Field(default='', max_length=80)
+
+
+def session_failure(exc: SessionError):
+    if isinstance(exc, SessionNotFound): code=404
+    elif isinstance(exc, SessionLimit): code=413
+    elif isinstance(exc, SessionIntegrity): code=409
+    else: code=422
+    return HTTPException(code,str(exc))
+
+
+@app.get('/api/sessions/status')
+def sessions_status(request: Request):
+    store=local_session_store(request)
+    return {'enabled':True,'manual_capture_only':True,
+            'max_frames_per_session':120,'max_sessions':20,
+            'model_inference_during_replay':False}
+
+
+@app.get('/api/sessions')
+def sessions_list(request: Request):
+    store=local_session_store(request)
+    return {'sessions':store.list_sessions()}
+
+
+@app.post('/api/sessions',status_code=201)
+def sessions_create(request: Request, body: NewSession):
+    store=local_session_store(request)
+    try:return store.create(body.label)
+    except SessionError as exc:raise session_failure(exc) from exc
+
+
+@app.get('/api/sessions/{sid}/frames')
+def sessions_frames(request: Request,sid:str):
+    store=local_session_store(request)
+    try:return store.frames(sid)
+    except SessionError as exc:raise session_failure(exc) from exc
+
+
+@app.post('/api/sessions/{sid}/capture', status_code=201)
+def sessions_capture(request: Request,sid:str):
+    store=local_session_store(request)
+    service=app.state.service
+    # Check the user-requested session before preparing a large archive.
+    try:store.frames(sid)
+    except SessionError as exc:raise session_failure(exc) from exc
+    with service.lock:
+        if service.latest is None:
+            raise HTTPException(409,'No completed inference frame to capture')
+        f,records,result=service.latest,service.records,service.result
+        # Serialization under the lock prevents mixing results on active RTSP.
+        data=bundle_bytes(f,records,result,spatial_report_for_frame(service,f))
+        frame=dict(f)
+    try:return store.capture(sid,data,frame)
+    except SessionError as exc:raise session_failure(exc) from exc
+
+
+@app.get('/api/sessions/{sid}/frames/{index}/bundle.zip')
+def sessions_bundle(request: Request,sid:str,index:int):
+    store=local_session_store(request)
+    try:data=store.bundle(sid,index)
+    except SessionError as exc:raise session_failure(exc) from exc
+    return Response(content=data,media_type='application/zip',headers={
+        'Content-Disposition': f'attachment; filename="depthport-session-{sid}-{index:05d}.zip"'})
+
+
+@app.get('/api/sessions/{sid}/frames/{index}/replay')
+def sessions_replay(request: Request,sid:str,index:int):
+    store=local_session_store(request)
+    try:return store.replay(sid,index)
+    except (SessionError,KeyError,ValueError,zipfile.BadZipFile) as exc:
+        raise session_failure(SessionIntegrity('Saved frame cannot be safely replayed')) from exc
+
+
+@app.get('/api/sessions/{sid}/temporal')
+def sessions_temporal(request: Request,sid:str):
+    store=local_session_store(request)
+    try:return store.temporal_summary(sid)
+    except SessionError as exc:raise session_failure(exc) from exc
 
 
 if __name__ == '__main__':
