@@ -1,5 +1,8 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 
+- Added **Home / End** to pause and jump to the first/last saved frame of the full Session, with exact-snapshot overlays, retained drafts/speed/A-B and input/IME/modal guards. Bilingual shortcut help is updated.
+- 新增 **Home／End** 暫停並跳到整個 Session 的第一格／最後一格，保留快照疊圖、草稿、速度與 A／B，沿用輸入／組字／面板防護並更新雙語說明。
+
 - Added **0** to reset replay speed to **1×** while retaining playback state, pending frame presentation and local review state. Updated bilingual shortcut help; existing shortcut opt-out and typing/IME/modal guards apply.
 - 新增 **0** 將回放速度恢復為 **1×**，保留播放狀態、待顯示影格及本機檢查內容；更新雙語說明面板，沿用快捷鍵開關與輸入／組字／面板防護。
 

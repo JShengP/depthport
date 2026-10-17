@@ -2619,3 +2619,57 @@ test('zero preselects normal speed without a replay and updates bilingual help a
  assert.equal(pressBookmarkKey(ui,'0').defaultPrevented,true);assert.equal(e['playback-speed'].value,'1');assert.match(e['playback-status'].textContent,/Paused.*1×/);e.lang.value='zh-TW';e.lang.onchange();assert.match(e['playback-status'].textContent,/已暫停.*1×/);assert.equal(ui.pending.length,calls);assert.equal(bookmarkWrites(ui).length,0);
  const html=fs.readFileSync(path.join(root,'static/sessions.html'),'utf8');assert.match(html,/<kbd>0<\/kbd><\/dt><dd data-i="shortcutHelpSpeedReset">/);assert.match(sessionsSource,/shortcutHelpSpeedReset:"Reset speed to 1×/);assert.match(sessionsSource,/shortcutHelpSpeedReset:"速度恢復為 1×/);
 });
+
+test('Home/End jump across the full Session outside filters and A/B, preserving per-frame drafts and speed',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence(),bookmarks:[bookmarkRecord(2,{note:'saved middle',tags:['crossing']})]}),e=ui.elements;await showSaved(ui,2);configureLoop(ui,2,3);filterBookmarkTag(ui,'crossing');searchBookmarkNotes(ui,'saved middle');editBookmark(ui,'synthetic middle draft',['occlusion']);e['playback-speed'].value='.5';e['playback-speed'].onchange();e.result.focus();
+ await completeFrameKey(ui,'Home',1);assertShownFrame(ui,1);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');editBookmark(ui,'synthetic first draft',['id-switch']);e.result.focus();
+ await completeFrameKey(ui,'End',3);assertShownFrame(ui,3);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0003');assert.match(e['playback-status'].textContent,/Paused.*0\.5×/);assertLoopValues(ui,2,3,true);assert.equal(e['bookmark-filter-tag'].value,'crossing');assert.equal(e['bookmark-search'].value,'saved middle');
+ await completeFrameKey(ui,'Home',1);assert.equal(e['bookmark-note'].value,'synthetic first draft');assert.equal(e['bookmark-tag-id-switch'].checked,true);await completeFrameKey(ui,'ArrowRight',2);assert.equal(e['bookmark-note'].value,'synthetic middle draft');assert.equal(e['bookmark-tag-occlusion'].checked,true);assert.equal(bookmarkWrites(ui).length,0);
+});
+
+test('endpoint keys use saved ordering with sparse indices, work before replay and do not reload an already shown endpoint',async()=>{
+ const ui=await startUI({frameIndices:[4,9,20]}),e=ui.elements;assert.equal(e.result.hidden,true);await completeFrameKey(ui,'End',20);assert.equal(e['frames-list'].value,'20');assertProgress(ui,3,3);await completeFrameKey(ui,'Home',4);assert.equal(e['frames-list'].value,'4');assertProgress(ui,1,3);
+ const calls=replayRequests(ui).length;assert.equal(pressBookmarkKey(ui,'Home').defaultPrevented,true);await flush();assert.equal(replayRequests(ui).length,calls);assert.match(e['playback-status'].textContent,/Paused/);
+ const single=await startUI({frameIndices:[7]});await completeFrameKey(single,'Home',7,{total:1});const oneCalls=replayRequests(single).length;assert.equal(pressBookmarkKey(single,'End').defaultPrevented,true);await flush();assert.equal(replayRequests(single).length,oneCalls);
+ const empty=await startUI({frameIndices:[]});for(const key of ['Home','End'])assert.equal(pressBookmarkKey(empty,key).defaultPrevented,false);
+});
+
+test('Home cancels a pending autoplay decode at the already displayed endpoint and permits a new End jump immediately',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);e.result.focus();e['playback-play'].onclick();await ui.tick(0);ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();ui.decode('data:image/png;base64,session-a-2');await flush();
+ const calls=replayRequests(ui).length;assert.equal(pressBookmarkKey(ui,'Home',{target:e.result}).defaultPrevented,true);await flush();assert.equal(replayRequests(ui).length,calls);assertShownFrame(ui,1);assert.match(e['playback-status'].textContent,/Paused/);assert.equal(e['playback-play'].disabled,false);
+ assert.equal(pressBookmarkKey(ui,'End',{target:e.result}).defaultPrevented,true);await flush();await completeReplay(ui,3);ui.decode('data:image/jpeg;base64,session-a-depth-2');await ui.tick(1000);assertShownFrame(ui,3);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0003');assert.equal(ui.cloudUpdates.length,2);
+});
+
+test('End cancels pending autoplay fetch and ignores duplicate jumps during a manual endpoint load',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);e.result.focus();e['playback-play'].onclick();await ui.tick(0);assert.equal(pressBookmarkKey(ui,'End',{target:e.result}).defaultPrevented,true);await flush();const calls=replayRequests(ui).length;
+ for(const key of ['Home','End'])assert.equal(pressBookmarkKey(ui,key,{target:e.result}).defaultPrevented,false);await completeReplay(ui,3);ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await ui.tick(1000);assertShownFrame(ui,3);assert.equal(replayRequests(ui).length,calls);assert.match(e['playback-status'].textContent,/Paused/);
+});
+
+test('endpoint keys preserve editor/native behavior and ignore IME, modifiers, hidden/repeated/handled events, opt-out and modal focus',async()=>{
+ const ui=await startUI(),e=ui.elements;await showSaved(ui,2);e.result.focus();const calls=ui.pending.length;
+ const editors=[e['bookmark-note'],e['bookmark-search'],e['playback-speed'],e['loop-start'],e['frames-list'],e['replay-progress'],e.label];for(const role of ['textbox','searchbox','combobox','slider','spinbutton','listbox','grid','tablist']){const editor=new Element('div');editor.setAttribute('role',role);editors.push(editor)}const editable=new Element('div');editable.setAttribute('contenteditable','true');editors.push(editable);
+ for(const key of ['Home','End']){
+  for(const target of editors){assert.equal(pressBookmarkKey(ui,key,{target}).defaultPrevented,false);const child=new Element('span');child.parentElement=target;assert.equal(pressBookmarkKey(ui,key,{composedPath:()=>[child,target]}).defaultPrevented,false)}
+  e['bookmark-note'].focus();assert.equal(pressBookmarkKey(ui,key,{target:e.result}).defaultPrevented,false);e['bookmark-search'].focus();assert.equal(pressBookmarkKey(ui,key,{target:e.result}).defaultPrevented,false);e.result.focus();
+  for(const props of [{ctrlKey:true},{altKey:true},{metaKey:true},{shiftKey:true},{repeat:true},{isComposing:true},{keyCode:229}])assert.equal(pressBookmarkKey(ui,key,props).defaultPrevented,false);assert.equal(pressBookmarkKey(ui,key,{defaultPrevented:true}).defaultPrevented,true);
+  ui.dispatch('compositionstart');assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false);ui.dispatch('compositionend');ui.hide();assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false);ui.document.hidden=false;
+ }
+ e['bookmark-shortcuts-enabled'].checked=false;e['bookmark-shortcuts-enabled'].onchange();assert.equal(e.result.getAttribute('aria-keyshortcuts'),'');for(const key of ['Home','End'])assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false);e['bookmark-shortcuts-enabled'].checked=true;e['bookmark-shortcuts-enabled'].onchange();assert.equal(e.result.getAttribute('aria-keyshortcuts'),'Home End');e['shortcut-help-open'].onclick();for(const key of ['Home','End'])assert.equal(pressBookmarkKey(ui,key,{target:e['shortcut-help-close']}).defaultPrevented,false);e['shortcut-help-close'].onclick();assertShownFrame(ui,2);assert.equal(ui.pending.length,calls);assert.equal(bookmarkWrites(ui).length,0);
+});
+
+test('endpoint keys cannot replace an in-flight seek, bookmark jump or explicit bookmark write',async()=>{
+ for(const mode of ['seek','bookmark','write']){
+  const ui=await startUI({bookmarks:[bookmarkRecord(3)]}),e=ui.elements;await showFirst(ui);e.result.focus();
+  let pending;if(mode==='seek')pending=scrub(ui,2);else if(mode==='bookmark')pending=e['bookmark-next'].onclick();else{editBookmark(ui,'synthetic pending annotation');pending=e['bookmark-save'].onclick()}await flush();const calls=ui.pending.length;
+  for(const key of ['Home','End'])assert.equal(pressBookmarkKey(ui,key,{target:e.result}).defaultPrevented,false);assert.equal(ui.pending.length,calls);
+  if(mode==='write')ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',[bookmarkRecord(1,{note:'synthetic pending annotation'})]));else await completeReplay(ui,mode==='seek'?2:3);await pending;
+ }
+});
+
+test('failed endpoint loads retain exact images and IDs and can be retried; bilingual help lists Home/End',async()=>{
+ for(const failure of ['fetch','decode']){
+  const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showSaved(ui,2);e.result.focus();const image=e.rgb,depth=e.depth;assert.equal(pressBookmarkKey(ui,'End').defaultPrevented,true);await flush();
+  if(failure==='fetch')ui.respond('/api/sessions/session-a/frames/3/replay',{detail:'synthetic failure'},false,404);else{ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await flush();ui.decode('data:image/png;base64,session-a-3',Error('synthetic decode failure'));ui.decode('data:image/jpeg;base64,session-a-depth-3')}await flush();assertShownFrame(ui,2);assert.equal(e.rgb,image);assert.equal(e.depth,depth);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0002');assert.match(e.status.textContent,/Request failed/);await completeFrameKey(ui,'End',3);assertShownFrame(ui,3);
+ }
+ const html=fs.readFileSync(path.join(root,'static/sessions.html'),'utf8');assert.match(html,/<kbd>Home<\/kbd> \/ <kbd>End<\/kbd><\/dt><dd data-i="shortcutHelpEdges">/);assert.match(sessionsSource,/shortcutHelpEdges:"Pause and jump/);assert.match(sessionsSource,/shortcutHelpEdges:"暫停並跳到/);
+});
