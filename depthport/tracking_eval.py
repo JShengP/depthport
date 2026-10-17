@@ -133,13 +133,16 @@ def _counter():
     return {'tp': 0, 'fp': 0, 'fn': 0, 'id_switches': 0, 'fragmentations': 0}
 
 
-def evaluate(tracking_report: dict, ground_truth: dict, *, iou_threshold: float = 0.5) -> dict:
+def evaluate(tracking_report: dict, ground_truth: dict, *, iou_threshold: float = 0.5,
+             max_frames: int = MAX_FRAMES) -> dict:
     """Evaluate indexed saved frames with visible, manually annotated objects.
 
     GT with evaluated=false is explicitly excluded (uncertain/full occlusion);
     a GT ID which reappears is linked to its last matched predicted ID.
     GT absent in an *evaluated* frame is NOT automatically an ignored object.
     """
+    if type(max_frames) is not int or not 1 <= max_frames <= 1800:
+        raise TrackingEvaluationError('Invalid evaluation max_frames cap')
     if (not isinstance(iou_threshold, (int, float)) or type(iou_threshold) is bool or
         not math.isfinite(iou_threshold) or not 0 < iou_threshold <= 1):
         raise TrackingEvaluationError('IoU threshold must be finite and in (0,1]')
@@ -152,10 +155,10 @@ def evaluate(tracking_report: dict, ground_truth: dict, *, iou_threshold: float 
         raise TrackingEvaluationError('Ground truth session ID must match tracking report')
     raw_predictions = tracking_report.get('frames')
     raw_gt = ground_truth.get('frames')
-    if not isinstance(raw_predictions, list) or not 1 <= len(raw_predictions) <= MAX_FRAMES:
-        raise TrackingEvaluationError('Tracking report needs 1..24 frames')
-    if not isinstance(raw_gt, list) or not 1 <= len(raw_gt) <= MAX_FRAMES:
-        raise TrackingEvaluationError('Ground truth needs 1..24 indexed frames')
+    if not isinstance(raw_predictions, list) or not 1 <= len(raw_predictions) <= max_frames:
+        raise TrackingEvaluationError(f'Tracking report needs 1..{max_frames} frames')
+    if not isinstance(raw_gt, list) or not 1 <= len(raw_gt) <= max_frames:
+        raise TrackingEvaluationError(f'Ground truth needs 1..{max_frames} indexed frames')
     sampling = ground_truth.get('sampling', 'unspecified')
     if sampling not in ('unspecified', 'manual_sparse', 'dense_video',
                         'synthetic_example_not_real_video'):

@@ -138,3 +138,12 @@ docs/assets/README.md
 docs/assets/spatial-preview.en.png
 docs/assets/spatial-preview.zh-TW.png
 docs/validation/v0.3-tracking-pilot.json
+
+# Optional isolated offline continuous-video tracking comparison
+depthport/video_tracking_benchmark.py
+tools/cache_video_detections.py
+tools/benchmark_video_tracking.py
+tests/test_video_tracking_benchmark.py
+docs/en/offline-video-tracking.md
+docs/zh-TW/offline-video-tracking.md
+requirements-tracking-benchmark.txt
