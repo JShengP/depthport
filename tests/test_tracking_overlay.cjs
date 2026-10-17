@@ -2519,3 +2519,63 @@ test('opening help does not cancel an explicit in-flight bookmark save',async()=
  ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',[bookmarkRecord(1,{note:'synthetic review',tags:['crossing']})]));await saving.completion;
  assert.equal(e['shortcut-help-dialog'].open,true);assert.equal(ui.document.activeElement,e['shortcut-help-close']);assert.equal(e['bookmark-note'].value,'synthetic review');assert.match(e['bookmark-editor-status'].textContent,/Bookmark saved/);e['shortcut-help-close'].onclick();assert.equal(ui.document.activeElement,e['shortcut-help-open']);
 });
+
+test('plus/minus speed keys step through selector options, clamp at both ends and keep paused replay/drafts intact',async()=>{
+ const ui=await startUI({bookmarks:[bookmarkRecord(1,{note:'saved',tags:['crossing']})],trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);
+ configureLoop(ui,1,3);filterBookmarkTag(ui,'crossing');searchBookmarkNotes(ui,'saved');editBookmark(ui,'synthetic speed draft',['occlusion']);e.result.focus();const calls=ui.pending.length;
+ for(const [key,expected] of [['-',.5],['-',.25],['-',.25],['+',.5],['+',1],['+',2],['+',2],['－',1],['＋',2]]){
+  assert.equal(pressBookmarkKey(ui,key,{target:e.result,shiftKey:key==='+'}).defaultPrevented,true,key);
+  assert.equal(Number(e['playback-speed'].value),expected);assert.match(e['playback-status'].textContent,new RegExp('Paused.*'+String(expected).replace('.','\\.')+'×'));
+  assertShownFrame(ui,1);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');
+ }
+ assert.equal(pressBookmarkKey(ui,'-',{target:e.result,code:'NumpadSubtract',location:3}).defaultPrevented,true);assert.equal(Number(e['playback-speed'].value),1);
+ assert.equal(pressBookmarkKey(ui,'+',{target:e.result,code:'NumpadAdd',location:3}).defaultPrevented,true);assert.equal(Number(e['playback-speed'].value),2);
+ assertLoopValues(ui,1,3,true);assert.equal(e['bookmark-note'].value,'synthetic speed draft');assert.equal(e['bookmark-tag-occlusion'].checked,true);assert.equal(e['bookmark-filter-tag'].value,'crossing');assert.equal(e['bookmark-search'].value,'saved');assert.equal(ui.pending.length,calls);assert.equal(bookmarkWrites(ui).length,0);
+});
+
+test('speed keys retain a pending autoplay decode and apply the new cadence without duplicate frame requests',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);e.result.focus();e['playback-play'].onclick();await ui.tick(0);
+ ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();ui.decode('data:image/png;base64,session-a-2');await flush();const calls=replayRequests(ui).length;
+ assert.equal(pressBookmarkKey(ui,'+',{shiftKey:true,target:e.result}).defaultPrevented,true);assert.match(e['playback-status'].textContent,/Playing.*2×/);assertShownFrame(ui,1);assert.equal(replayRequests(ui).length,calls);
+ ui.decode('data:image/jpeg;base64,session-a-depth-2');await flush();assertShownFrame(ui,2);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0002');
+ await ui.tick(99);assert.equal(replayRequests(ui).length,calls);await ui.tick(1);assert.equal(replayRequests(ui).length,calls+1);await completeReplay(ui,3);assertShownFrame(ui,3);e['playback-pause'].onclick();
+});
+
+test('speed shortcuts use the same rescheduling as the selector while a timer is waiting',async()=>{
+ const ui=await startUI(),e=ui.elements;await showFirst(ui);e.result.focus();e['playback-play'].onclick();await ui.tick(0);await completeReplay(ui,2);await ui.tick(50);
+ assert.equal(pressBookmarkKey(ui,'-',{target:e.result}).defaultPrevented,true);assert.match(e['playback-status'].textContent,/Playing.*0\.5×/);
+ await ui.tick(349);assert.equal(replayRequests(ui).length,2);await ui.tick(1);assert.equal(replayRequests(ui).length,3);await completeReplay(ui,3);e['playback-pause'].onclick();
+});
+
+test('speed shortcuts leave note/search/native/custom editors and composed-path focus unconsumed',async()=>{
+ const ui=await startUI(),e=ui.elements;await showFirst(ui);
+ const editors=[e['bookmark-note'],e['bookmark-search'],e['playback-speed'],e['loop-start'],e['frames-list'],e['replay-progress'],e.label];
+ for(const role of ['textbox','searchbox','combobox','slider','spinbutton','listbox']){const editor=new Element('div');editor.setAttribute('role',role);editors.push(editor)}
+ const editable=new Element('div');editable.setAttribute('contenteditable','true');editors.push(editable);
+ for(const key of ['+','-','＋','－'])for(const target of editors){
+  assert.equal(pressBookmarkKey(ui,key,{target,shiftKey:key==='+'}).defaultPrevented,false);
+  const child=new Element('span');target.append(child);assert.equal(pressBookmarkKey(ui,key,{target:e.result,composedPath:()=>[child,target]}).defaultPrevented,false);
+ }
+ e['bookmark-note'].focus();assert.equal(pressBookmarkKey(ui,'+',{target:e.result,shiftKey:true}).defaultPrevented,false);e['bookmark-search'].focus();assert.equal(pressBookmarkKey(ui,'-',{target:e.result}).defaultPrevented,false);
+ assert.equal(Number(e['playback-speed'].value),1);assert.equal(bookmarkWrites(ui).length,0);
+});
+
+test('speed shortcut opt-out, IME, modifiers, repeated/handled/hidden events and an open modal are guarded',async()=>{
+ const ui=await startUI(),e=ui.elements;await showFirst(ui);e.result.focus();
+ for(const key of ['+','-','＋','－'])for(const props of [{ctrlKey:true},{altKey:true},{metaKey:true},{repeat:true},{isComposing:true},{keyCode:229}])assert.equal(pressBookmarkKey(ui,key,{target:e.result,...props}).defaultPrevented,false);
+ assert.equal(pressBookmarkKey(ui,'+',{defaultPrevented:true}).defaultPrevented,true);for(const key of ['=','_','Add','Subtract'])assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false);
+ ui.dispatch('compositionstart');assert.equal(pressBookmarkKey(ui,'+').defaultPrevented,false);ui.dispatch('compositionend');ui.hide();assert.equal(pressBookmarkKey(ui,'-').defaultPrevented,false);ui.document.hidden=false;
+ e['bookmark-shortcuts-enabled'].checked=false;e['bookmark-shortcuts-enabled'].onchange();assert.equal(e['playback-speed'].getAttribute('aria-keyshortcuts'),'');assert.equal(pressBookmarkKey(ui,'+').defaultPrevented,false);
+ e['bookmark-shortcuts-enabled'].checked=true;e['bookmark-shortcuts-enabled'].onchange();assert.equal(e['playback-speed'].getAttribute('aria-keyshortcuts'),'Plus Shift+= -');e['shortcut-help-open'].onclick();
+ for(const key of ['+','-','＋','－'])assert.equal(pressBookmarkKey(ui,key,{target:e['shortcut-help-close']}).defaultPrevented,false);e['shortcut-help-close'].onclick();
+ e['playback-speed'].disabled=true;assert.equal(pressBookmarkKey(ui,'+',{target:e.result}).defaultPrevented,false);e['playback-speed'].disabled=false;e['playback-speed'].selectedIndex=-1;assert.equal(pressBookmarkKey(ui,'+',{target:e.result}).defaultPrevented,false);
+ e['playback-speed'].value='1';assert.match(e['playback-status'].textContent,/Paused.*1×/);assert.equal(bookmarkWrites(ui).length,0);
+});
+
+test('speed may be preselected without a displayed frame and is reflected in both language statuses and help',async()=>{
+ const ui=await startUI(),e=ui.elements;assert.equal(e.result.hidden,true);const calls=ui.pending.length;
+ assert.equal(pressBookmarkKey(ui,'-').defaultPrevented,true);assert.equal(Number(e['playback-speed'].value),.5);assert.match(e['playback-status'].textContent,/Paused.*0\.5×/);
+ e.lang.value='zh-TW';e.lang.onchange();assert.match(e['playback-status'].textContent,/已暫停.*0\.5×/);assert.equal(ui.pending.length,calls);assert.equal(bookmarkWrites(ui).length,0);
+ const html=fs.readFileSync(path.join(root,'static/sessions.html'),'utf8');assert.match(html,/<kbd>\+<\/kbd> \/ <kbd>-<\/kbd><\/dt><dd data-i="shortcutHelpSpeed">/);
+ assert.match(sessionsSource,/shortcutHelpSpeed:"Increase \/ decrease speed/);assert.match(sessionsSource,/shortcutHelpSpeed:"加速／減速/);
+});

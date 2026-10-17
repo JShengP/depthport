@@ -1,5 +1,8 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 
+- Added **+ / -** replay speed shortcuts across 0.25×–2×, matching the speed selector without wrapping or changing playback state. The help panel lists them; editor/IME/modal guards and the shared shortcut switch apply.
+- 新增 **＋／－** 回放速度快捷鍵，依 0.25×–2× 選單逐級調整、上下限不循環並保留播放狀態；更新說明面板，沿用輸入／組字／面板防護與快捷鍵開關。
+
 - Added a bilingual **?** shortcut reference modal for playback/A-B, bookmarks and note editing, with a persistent help button, native focus containment/Esc and focus restoration. Typing/IME guards and opt-out apply; opening pauses/cancels pending replay while retaining drafts and settings, and the modal prevents background shortcut actions. Help adds no writes or uploads.
 - 新增 **?** 快捷鍵說明面板，集中列出播放／A-B、書籤與備註操作，提供常設說明按鈕、原生焦點限制／Esc 關閉與焦點返回。輸入及組字時不誤觸，沿用停用開關；開啟暫停並取消待顯示回放，保留草稿與設定，避免面板內操作觸發背景快捷鍵，不新增寫入或上傳。
 
