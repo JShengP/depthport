@@ -1,5 +1,8 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 
+- Added **5** to return to All tags while retaining the search query, focus and playback; updated bilingual shortcut help and shared input/IME guard coverage.
+- 新增 **5** 切回全部標籤並保留搜尋文字、焦點與播放，更新雙語快捷鍵說明與輸入／組字防護驗證。
+
 - Added **4** to filter general (untagged) bookmarks, retaining search, focus and playback, with shared input/IME protection and updated bilingual shortcut help.
 - 新增 **4** 篩選一般（無標籤）書籤，保留搜尋、焦點與播放，沿用輸入／組字防護並更新雙語快捷鍵說明。
 
