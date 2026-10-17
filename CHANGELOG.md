@@ -1,5 +1,8 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 
+- Added **F** to focus and scroll to bookmark search without clearing the query or changing playback/review state. Bilingual help and shortcut metadata are updated; input/IME/modal/opt-out guards apply and Ctrl+F stays native.
+- 新增 **F** 移入並捲動至書籤搜尋欄，保留搜尋文字與播放／檢查狀態；更新雙語說明與快捷鍵提示，沿用輸入／組字／面板／停用防護，Ctrl＋F 保留原生行為。
+
 - Added **O** to toggle tracking boxes/Object IDs through the existing overlay checkbox without changing playback or pending loads. Updated bilingual help and shortcut metadata; input/IME/modal guards and exact-snapshot matching remain in effect.
 - 新增 **O** 切換追蹤框／Object ID 疊圖，沿用既有核取方塊，不改變播放或待載入影格；更新雙語說明與快捷鍵提示，保留輸入／組字／面板防護及精確快照驗證。
 

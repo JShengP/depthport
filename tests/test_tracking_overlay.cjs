@@ -2808,3 +2808,49 @@ test('O can preselect overlays before replay, uses native checkbox behavior and 
  e.lang.value='zh-TW';e.lang.onchange();assert.match(e['overlay-status'].textContent,/已隱藏/);e['overlay-enabled'].checked=true;e['overlay-enabled'].onchange();assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');assert.equal(pressBookmarkKey(ui,'o',{target:e['overlay-enabled']}).defaultPrevented,false);assert.equal(e['overlay-enabled'].checked,true);assert.equal(bookmarkWrites(ui).length,0);
  const html=fs.readFileSync(path.join(root,'static/sessions.html'),'utf8');assert.match(html,/<kbd>O<\/kbd><\/dt><dd data-i="shortcutHelpOverlay">/);assert.match(sessionsSource,/shortcutHelpOverlay:"Toggle tracking boxes and Object IDs/);assert.match(sessionsSource,/shortcutHelpOverlay:"切換追蹤框與 Object ID/);
 });
+
+test('F focuses and scrolls bookmark search while retaining the query and paused review state without requests or writes',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence(),bookmarks:[bookmarkRecord(2,{note:'saved review',tags:['crossing']})]}),e=ui.elements;await showSaved(ui,2);configureLoop(ui,1,3);filterBookmarkTag(ui,'crossing');searchBookmarkNotes(ui,'saved review');editBookmark(ui,'synthetic focus draft',['occlusion']);e['playback-speed'].value='.5';e['playback-speed'].onchange();e.result.focus();const image=e.rgb,depth=e.depth,calls=ui.pending.length,clouds=ui.cloudUpdates.length,filterStatus=e['bookmark-filter-status'].textContent;
+ assert.equal(e['bookmark-search'].getAttribute('aria-keyshortcuts'),'f');assert.equal(pressBookmarkKey(ui,'f',{target:e.result}).defaultPrevented,true);assert.equal(ui.document.activeElement,e['bookmark-search']);assert.equal(e['bookmark-search'].focusCalls.at(-1).preventScroll,true);assert.equal(e['bookmark-search'].scrollCalls.at(-1).block,'center');assert.equal(e['bookmark-search'].scrollCalls.at(-1).behavior,'auto');
+ assert.equal(e['bookmark-search'].value,'saved review');assert.equal(e['bookmark-filter-tag'].value,'crossing');assert.equal(e['bookmark-filter-status'].textContent,filterStatus);assert.equal(e['bookmark-note'].value,'synthetic focus draft');assert.equal(e['bookmark-tag-occlusion'].checked,true);assertLoopValues(ui,1,3,true);assertShownFrame(ui,2);assert.equal(e.rgb,image);assert.equal(e.depth,depth);assert.equal(ui.cloudUpdates.length,clouds);assert.equal(e['overlay-enabled'].checked,true);assert.match(e['playback-status'].textContent,/Paused.*0\.5×/);assert.equal(ui.pending.length,calls);assert.equal(bookmarkWrites(ui).length,0);
+ e.result.focus();assert.equal(pressBookmarkKey(ui,'F',{target:e.result}).defaultPrevented,true);assert.equal(ui.document.activeElement,e['bookmark-search']);
+});
+
+test('F during autoplay or manual decode preserves loading and playback with focus staying in search',async()=>{
+ for(const mode of ['autoplay','manual']){
+  const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);e.result.focus();let pending;if(mode==='autoplay'){e['playback-play'].onclick();await ui.tick(0)}else{e['frames-list'].value='2';pending=e.replay.onclick();await flush()}
+  ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();ui.decode('data:image/png;base64,session-a-2');await flush();const calls=replayRequests(ui).length;
+  assert.equal(pressBookmarkKey(ui,'f',{target:e.result}).defaultPrevented,true);assert.equal(ui.document.activeElement,e['bookmark-search']);assert.match(e['playback-status'].textContent,mode==='autoplay'?/Playing/:/Paused/);assert.equal(replayRequests(ui).length,calls);ui.decode('data:image/jpeg;base64,session-a-depth-2');await flush();if(pending)await pending;
+  assertShownFrame(ui,2);assert.equal(ui.document.activeElement,e['bookmark-search']);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0002');assert.equal(replayRequests(ui).length,calls);
+  if(mode==='autoplay'){await ui.tick(199);assert.equal(replayRequests(ui).length,calls);await ui.tick(1);await completeReplay(ui,3);assertShownFrame(ui,3);assert.equal(ui.document.activeElement,e['bookmark-search']);e['playback-pause'].onclick()}
+ }
+});
+
+test('F ignores editors, IME, browser Find/modifiers, repeated/handled/hidden events, opt-out and modal focus',async()=>{
+ const ui=await startUI(),e=ui.elements;await showSaved(ui,2);e.result.focus();const calls=ui.pending.length,search=e['bookmark-search'];
+ const editors=[e['bookmark-note'],search,e['playback-speed'],e['loop-start'],e['frames-list'],e['replay-progress'],e.label];for(const role of ['textbox','searchbox','combobox','slider','spinbutton','listbox','grid','tablist']){const editor=new Element('div');editor.setAttribute('role',role);editors.push(editor)}const editable=new Element('div');editable.setAttribute('contenteditable','true');editors.push(editable);
+ for(const key of ['f','F']){
+  for(const target of editors){assert.equal(pressBookmarkKey(ui,key,{target}).defaultPrevented,false);const child=new Element('span');child.parentElement=target;assert.equal(pressBookmarkKey(ui,key,{composedPath:()=>[child,target]}).defaultPrevented,false)}
+  e['bookmark-note'].focus();assert.equal(pressBookmarkKey(ui,key,{target:e.result}).defaultPrevented,false);search.focus();const focused=search.focusCalls.length;assert.equal(pressBookmarkKey(ui,key,{target:e.result}).defaultPrevented,false);assert.equal(search.focusCalls.length,focused);e.result.focus();
+  for(const props of [{ctrlKey:true},{altKey:true},{metaKey:true},{shiftKey:true},{repeat:true},{isComposing:true},{keyCode:229}])assert.equal(pressBookmarkKey(ui,key,props).defaultPrevented,false);assert.equal(pressBookmarkKey(ui,key,{defaultPrevented:true}).defaultPrevented,true);
+  ui.dispatch('compositionstart');assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false);ui.dispatch('compositionend');ui.hide();assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false);ui.document.hidden=false;
+ }
+ e['bookmark-shortcuts-enabled'].checked=false;e['bookmark-shortcuts-enabled'].onchange();assert.equal(search.getAttribute('aria-keyshortcuts'),'');assert.equal(pressBookmarkKey(ui,'f').defaultPrevented,false);e['bookmark-shortcuts-enabled'].checked=true;e['bookmark-shortcuts-enabled'].onchange();assert.equal(search.getAttribute('aria-keyshortcuts'),'f');e['shortcut-help-open'].onclick();assert.equal(pressBookmarkKey(ui,'f',{target:e['shortcut-help-close']}).defaultPrevented,false);assert.equal(ui.document.activeElement,e['shortcut-help-close']);e['shortcut-help-close'].onclick();assert.equal(ui.pending.length,calls);assert.equal(bookmarkWrites(ui).length,0);
+});
+
+test('F waits for enabled bookmark search, works without a replay, and is documented in both languages',async()=>{
+ const waiting=await startUI({delayBookmarks:true}),w=waiting.elements;assert.equal(w['bookmark-search'].disabled,true);const calls=waiting.pending.length;assert.equal(pressBookmarkKey(waiting,'f').defaultPrevented,false);assert.equal(w['bookmark-search'].focusCalls,undefined);assert.equal(waiting.pending.length,calls);
+ waiting.respond('/api/sessions/session-a/bookmarks',{detail:'synthetic unavailable'},false,404);await flush();assert.equal(w['bookmark-search'].disabled,true);assert.equal(pressBookmarkKey(waiting,'F').defaultPrevented,false);
+ const ui=await startUI(),e=ui.elements;assert.equal(e.result.hidden,true);const readyCalls=ui.pending.length;assert.equal(pressBookmarkKey(ui,'F').defaultPrevented,true);assert.equal(ui.document.activeElement,e['bookmark-search']);assert.equal(e['bookmark-search'].value,'');assert.equal(e.result.hidden,true);assert.equal(ui.pending.length,readyCalls);assert.equal(bookmarkWrites(ui).length,0);
+ const html=fs.readFileSync(path.join(root,'static/sessions.html'),'utf8');assert.match(html,/<kbd>F<\/kbd><\/dt><dd data-i="shortcutHelpSearch">/);assert.match(sessionsSource,/shortcutHelpSearch:"Focus and scroll to bookmark search/);assert.match(sessionsSource,/shortcutHelpSearch:"將焦點移到書籤搜尋欄/);
+});
+
+test('focusing bookmark search leaves pending seek, bookmark jump and explicit save intact',async()=>{
+ for(const mode of ['seek','bookmark','write']){
+  const ui=await startUI({bookmarks:[bookmarkRecord(3)]}),e=ui.elements;await showFirst(ui);e.result.focus();let pending;
+  if(mode==='seek')pending=scrub(ui,2);else if(mode==='bookmark')pending=e['bookmark-next'].onclick();else{editBookmark(ui,'synthetic pending search-focus save');pending=e['bookmark-save'].onclick()}await flush();e.result.focus();const calls=ui.pending.length;
+  assert.equal(pressBookmarkKey(ui,'f',{target:e.result}).defaultPrevented,true);assert.equal(ui.document.activeElement,e['bookmark-search']);assert.equal(ui.pending.length,calls);
+  if(mode==='write'){ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',[bookmarkRecord(1,{note:'synthetic pending search-focus save'})]));await pending;assert.equal(bookmarkWrites(ui).length,1);assert.match(e['bookmark-editor-status'].textContent,/Bookmark saved/)}else{await completeReplay(ui,mode==='seek'?2:3);await pending;assertShownFrame(ui,mode==='seek'?2:3)}
+  assert.equal(ui.document.activeElement,e['bookmark-search']);assert.equal(e['bookmark-search'].value,'');
+ }
+});
