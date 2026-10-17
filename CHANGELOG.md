@@ -17,6 +17,9 @@
 - Added a bilingual replay progress slider with current/total saved-frame positions, drag-to-preview and release-to-seek, native keyboard controls, and exact-frame overlay commits. Dragging pauses playback; stale seeks are discarded and failed seeks retain the last complete frame.
 - 回放新增可拖曳進度條，顯示目前／總格數；拖曳暫停、放開跳轉，快速跳轉只採最後目標，影像與追蹤框／ID 一起更新。
 
+- Added opt-in A/B saved-frame looping with editable start/end positions, buttons to use the displayed frame, inclusive endpoints and the existing playback speeds. Endpoint changes pause and cancel pending presentation; exact-frame RGB/depth/ID commits and failed-read handling also apply across loop boundaries.
+- 回放新增 A／B 區間循環，可輸入起始／結束影格或帶入目前影格，包含兩端並沿用播放速度；修改區間會暫停並取消待顯示結果，循環跳轉仍維持影像／深度／ID 同步與讀取失敗處理。
+
 # Changelog / 版本紀錄
 
 ## 0.2.0-alpha.1 — 2026-10-17 (experimental Alpha pre-release)

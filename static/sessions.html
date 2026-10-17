@@ -27,6 +27,15 @@
 <div class="replay-progress-control"><label for="replay-progress" data-i="replayPosition">Playback progress</label>
 <input id="replay-progress" type="range" min="1" max="1" step="1" value="1" disabled aria-describedby="replay-progress-text">
 <output id="replay-progress-text" for="replay-progress" aria-live="off">0 / 0</output></div>
+<fieldset class="replay-loop-control"><legend data-i="loopTitle">A/B loop</legend>
+<label class="overlay-toggle"><input id="loop-enabled" type="checkbox" disabled aria-describedby="loop-status"><span data-i="loopEnable">Loop A–B</span></label>
+<div class="loop-endpoints"><label for="loop-start" data-i="loopStart">A · Start frame</label>
+<input id="loop-start" type="number" min="1" max="1" step="1" value="1" disabled aria-describedby="loop-status">
+<button id="loop-set-start" data-i="loopSetStart" disabled>Set A to shown frame</button>
+<label for="loop-end" data-i="loopEnd">B · End frame</label>
+<input id="loop-end" type="number" min="1" max="1" step="1" value="1" disabled aria-describedby="loop-status">
+<button id="loop-set-end" data-i="loopSetEnd" disabled>Set B to shown frame</button></div>
+<p id="loop-status" role="status"></p></fieldset>
 <div class="rgb-stage"><img id="rgb" alt="Saved aligned RGB"><svg id="tracking-overlay" role="img" aria-label="Tracking boxes and Object IDs"></svg></div>
 <p id="overlay-status" role="status"></p></figure>
 <figure><img id="depth" alt="Saved depth preview"><figcaption data-i="depth">Depth preview</figcaption></figure>

@@ -583,3 +583,173 @@ test('failed seek fetch or image decoding restores coherent displayed progress a
   assert.match(e.status.textContent,/Request failed/);
  }
 });
+
+function configureLoop(ui,start,end,enabled=true){
+ const e=ui.elements;
+ e['loop-start'].value=String(start);e['loop-start'].oninput();
+ e['loop-end'].value=String(end);e['loop-end'].onchange();
+ e['loop-enabled'].checked=enabled;e['loop-enabled'].onchange();
+}
+async function completeReplay(ui,index,{sid='session-a',total=3}={}){
+ ui.respond('/api/sessions/'+sid+'/frames/'+index+'/replay',{...replayResponse(sid,index),total_session_frames:total});await flush();
+ await ui.decodeFrame(sid,index);
+}
+async function showSaved(ui,index,options){
+ const e=ui.elements;e['frames-list'].value=String(index);const showing=e.replay.onclick();await flush();
+ await completeReplay(ui,index,options);await showing;
+}
+
+test('A/B loop controls default to the entire saved order and disable short Sessions',async()=>{
+ for(const indices of [[],[1],[1,2,3]]){
+  const ui=await startUI({frameIndices:indices}),e=ui.elements;
+  assert.equal(e['loop-enabled'].checked,false);
+  assert.equal(e['loop-start'].value,'1');assert.equal(e['loop-end'].value,String(Math.max(1,indices.length)));
+  for(const id of ['loop-start','loop-end']){
+   assert.equal(e[id].min,'1');assert.equal(e[id].max,String(Math.max(1,indices.length)));assert.equal(e[id].step,'1');
+   assert.equal(e[id].disabled,indices.length<2,id);
+  }
+  assert.equal(e['loop-enabled'].disabled,indices.length<2);
+  if(indices.length<2)for(const id of ['loop-set-start','loop-set-end'])assert.equal(e[id].disabled,true,id);
+  assert.equal(replayRequests(ui).length,0);
+ }
+});
+
+test('A/B playback uses saved ordinals, includes B and repeatedly wraps to A',async()=>{
+ const indices=[4,9,12],r=trackedSequence();r.total_session_frames=12;
+ r.frames.forEach((frame,i)=>{frame.index=indices[i]});
+ const ui=await startUI({trackingReport:r,frameIndices:indices}),e=ui.elements;
+ await showSaved(ui,4,{total:12});configureLoop(ui,2,3);
+ e['playback-play'].onclick();await ui.tick(0);
+ for(const [index,position,id] of [[9,2,'obj-0002'],[12,3,'obj-0003'],[9,2,'obj-0002'],[12,3,'obj-0003']]){
+  const request=replayRequests(ui).filter(p=>!p.done);assert.equal(request.length,1);
+  assert.equal(request[0].url,'/api/sessions/session-a/frames/'+index+'/replay');
+  await completeReplay(ui,index,{total:12});assertProgress(ui,position,3);
+  assert.equal(e['frames-list'].value,String(index));assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),id);
+  assert.match(e['playback-status'].textContent,/Playing/);await ui.tick(200);
+ }
+ e['playback-pause'].onclick();
+ assert.equal(replayRequests(ui).slice(1).some(p=>p.url.includes('/frames/4/')),false,'loop must never request outside A/B');
+});
+
+test('a slow B-to-A wrap presents RGB, depth, Object IDs and cloud together',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showSaved(ui,2);configureLoop(ui,1,2);
+ const image=e.rgb,depth=e.depth;e['playback-play'].onclick();await ui.tick(0);
+ ui.respond('/api/sessions/session-a/frames/1/replay',replayResponse('session-a',1));await flush();
+ ui.decode('data:image/png;base64,session-a-1');await ui.tick(1000);
+ assert.equal(e.rgb,image);assert.equal(e.depth,depth);assertProgress(ui,2,3);
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0002');assert.equal(ui.cloudUpdates.length,1);
+ assert.equal(replayRequests(ui).filter(p=>!p.done).length,0,'loading one loop frame must not queue more requests');
+ ui.decode('data:image/jpeg;base64,session-a-depth-1');await flush();
+ assert.equal(e.rgb.src,'data:image/png;base64,session-a-1');assert.equal(e.depth.src,'data:image/jpeg;base64,session-a-depth-1');
+ assertProgress(ui,1,3);assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');
+ assert.equal(ui.cloudUpdates.length,2);assert.equal(ui.cloudUpdates[1][0],'points-session-a-1');
+ e['playback-pause'].onclick();
+});
+
+test('editing A/B or disabling the loop pauses and invalidates an automatic pending presentation',async()=>{
+ for(const change of ['start','end','disable']){
+  const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);configureLoop(ui,1,3);
+  const image=e.rgb,depth=e.depth;e['playback-play'].onclick();await ui.tick(0);
+  ui.respond('/api/sessions/session-a/frames/2/replay',replayResponse('session-a',2));await flush();
+  const fetches=ui.pending.length;
+  if(change==='disable'){e['loop-enabled'].checked=false;e['loop-enabled'].onchange()}
+  else{e['loop-'+change].value=String(2);e['loop-'+change][change==='start'?'oninput':'onchange']()}
+  assert.equal(ui.pending.length,fetches,'editing loop controls must not request a frame');
+  await ui.decodeFrame('session-a',2);await ui.tick(1000);
+  assert.equal(e.rgb,image);assert.equal(e.depth,depth);assertProgress(ui,1,3);assert.equal(e['frames-list'].value,'1');
+  assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');assert.equal(ui.cloudUpdates.length,1);
+  assert.match(e['playback-status'].textContent,/Paused/);assert.equal(ui.pending.length,fetches);
+ }
+});
+
+test('editing the A/B interval cancels a progress seek without replacing the displayed frame',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);configureLoop(ui,1,3);
+ const image=e.rgb,depth=e.depth,seek=scrub(ui,3);await flush();
+ ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await flush();
+ e['loop-end'].value='2';e['loop-end'].oninput();await ui.decodeFrame('session-a',3);await seek;
+ assert.equal(e.rgb,image);assert.equal(e.depth,depth);assertProgress(ui,1,3);assert.equal(e['frames-list'].value,'1');
+ assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0001');assert.equal(ui.cloudUpdates.length,1);
+ assert.equal(e['playback-play'].disabled,false,'cancelled seek must not keep Play disabled');
+});
+
+test('invalid enabled A/B intervals block Play and cannot request out-of-range frames',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);
+ const fetches=ui.pending.length,image=e.rgb;
+ for(const [start,end] of [[1,1],[2,1],[0,2],[1,4],[1.5,3],['',3],[1,''],['NaN',3],[1,'Infinity']]){
+  configureLoop(ui,start,end);assert.equal(e['playback-play'].disabled,true,JSON.stringify([start,end]));
+  assert.match(e['loop-status'].textContent,/A|B|start|end|range/i);
+  e['playback-play'].onclick();await ui.tick(1000);
+  assert.equal(ui.pending.length,fetches,'invalid interval '+JSON.stringify([start,end]));assert.equal(e.rgb,image);assertProgress(ui,1,3);
+ }
+ configureLoop(ui,1,3);assert.equal(e['playback-play'].disabled,false);
+ configureLoop(ui,3,1,false);assert.equal(e['playback-play'].disabled,false,'unchecked invalid interval must not block ordinary playback');
+});
+
+test('A/B current-frame markers capture the displayed ordinal rather than a pending selection or drag',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showSaved(ui,2);
+ const fetches=ui.pending.length;e['frames-list'].value='3';e['loop-set-start'].onclick();await flush();
+ assert.equal(e['loop-start'].value,'2','the dropdown may target a frame that has not been displayed');
+ e['replay-progress'].value='3';e['replay-progress'].oninput();e['loop-set-end'].onclick();await flush();
+ assert.equal(e['loop-end'].value,'2','the drag preview is not the displayed frame');
+ assert.equal(e.rgb.src,'data:image/png;base64,session-a-2');assertProgress(ui,2,3);
+ assert.equal(ui.pending.length,fetches,'markers must not run inference or request replay');
+});
+
+test('manual seek and step can leave A/B, and Play returns to A with the selected speed',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);configureLoop(ui,1,2);
+ e['playback-speed'].value='.5';e['playback-speed'].onchange();
+ const seek=scrub(ui,3);await flush();await completeReplay(ui,3);await seek;
+ assert.equal(e['loop-enabled'].checked,true);assert.equal(e['loop-start'].value,'1');assert.equal(e['loop-end'].value,'2');assertProgress(ui,3,3);
+ assert.match(e['playback-status'].textContent,/Paused.*0\.5/);
+ e['playback-play'].onclick();await ui.tick(0);await completeReplay(ui,1);assertProgress(ui,1,3);
+ e['playback-pause'].onclick();
+ const previous=e['frame-prev'].onclick();await flush();await previous;
+ assertProgress(ui,1,3);
+ const next=e['frame-next'].onclick();await flush();await completeReplay(ui,2);await next;
+ const outside=e['frame-next'].onclick();await flush();await completeReplay(ui,3);await outside;
+ assertProgress(ui,3,3);assert.equal(e['loop-enabled'].checked,true);assert.match(e['playback-status'].textContent,/Paused.*0\.5/);
+});
+
+test('switching Sessions resets A/B and invalidates an in-flight wrap',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showSaved(ui,2);configureLoop(ui,1,2);
+ e['playback-speed'].value='2';e['playback-speed'].onchange();e['playback-play'].onclick();await ui.tick(0);
+ ui.respond('/api/sessions/session-a/frames/1/replay',replayResponse('session-a',1));await flush();
+ e['sessions-list'].value='session-b';const switched=e['sessions-list'].onchange();await flush();
+ await ui.decodeFrame('session-a',1);await finishFrames(ui,'session-b',true,report({session_id:'session-b'}),[1,2]);await switched;
+ assert.equal(e['loop-enabled'].checked,false);assert.equal(e['loop-start'].value,'1');assert.equal(e['loop-end'].value,'2');
+ assert.equal(e['loop-start'].disabled,false);assert.equal(e['loop-end'].disabled,false);assert.equal(e.result.hidden,true);
+ assert.equal(ui.cloudUpdates.length,1,'old Session wrap must not present');assert.equal(e['playback-speed'].value,'2');
+ assert.match(e['playback-status'].textContent,/Paused.*2/);await ui.tick(1000);
+ assert.equal(replayRequests(ui).filter(p=>!p.done).length,0);
+});
+
+test('refreshing the same Session resets A/B to its new saved-frame count',async()=>{
+ const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showFirst(ui);configureLoop(ui,2,3);
+ const seek=scrub(ui,3);await flush();
+ ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await flush();
+ const refreshed=e.refresh.onclick();await flush();
+ ui.respond('/api/sessions/status',{tracking_worker_configured:true});await flush();
+ ui.respond('/api/sessions',{sessions:[{session_id:'session-a',label:'A',frame_count:4}]});await flush();
+ await ui.decodeFrame('session-a',3);await seek;
+ await finishFrames(ui,'session-a',true,trackedSequence(),[1,2,3,4]);await refreshed;
+ assert.equal(e['sessions-list'].value,'session-a');assert.equal(e['loop-enabled'].checked,false);
+ assert.equal(e['loop-start'].value,'1');assert.equal(e['loop-end'].value,'4');
+ assert.equal(e['loop-start'].max,'4');assert.equal(e['loop-end'].max,'4');assert.equal(e.result.hidden,true);
+ assert.equal(ui.cloudUpdates.length,1,'a pre-refresh seek cannot reappear in the refreshed Session');
+});
+
+test('a failed A/B wrap preserves the last complete frame and stops with an error',async()=>{
+ for(const failure of ['fetch','decode']){
+  const ui=await startUI({trackingReport:trackedSequence()}),e=ui.elements;await showSaved(ui,2);configureLoop(ui,1,2);
+  const image=e.rgb,depth=e.depth;e['playback-play'].onclick();await ui.tick(0);
+  if(failure==='fetch')ui.respond('/api/sessions/session-a/frames/1/replay',{detail:'Saved frame unavailable'},false,404);
+  else{
+   ui.respond('/api/sessions/session-a/frames/1/replay',replayResponse('session-a',1));await flush();
+   ui.decode('data:image/png;base64,session-a-1',Error('Saved image decode failed'));ui.decode('data:image/jpeg;base64,session-a-depth-1');
+  }
+  await ui.tick(1000);assert.equal(e.rgb,image);assert.equal(e.depth,depth);assertProgress(ui,2,3);assert.equal(e['frames-list'].value,'2');
+  assert.equal(e['tracking-overlay'].children[0].getAttribute('data-object-id'),'obj-0002');assert.equal(ui.cloudUpdates.length,1);
+  assert.match(e['playback-status'].textContent,/error/);assert.match(e.status.textContent,/Playback stopped after an error/);
+  assert.equal(replayRequests(ui).length,2);
+ }
+});
