@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added **Return before this target jump** for independent Undo/Redo clear target visits, preserving drafts/settings/all existing history with separate origin and availability/failure guards; updated bilingual help.
+- 新增「**返回本次目標跳轉前影格**」，可從獨立復原／重做清除目標返回，另存起點並防護不可用／失敗情況，保留草稿、設定與全部既有歷史，更新雙語說明。
+
 - Target-jump return **Undo clear / Redo clear** target numbers are now accessible pause-and-jump buttons, preserving per-frame drafts and all independent/original clear history with missing/busy/stale/failure guards; updated bilingual help.
 - 目標跳轉返回位置「**復原清除／重做清除**」目標編號可點擊暫停跳轉，保留各格草稿及全部獨立／原有清除歷史，防護無目標、操作中、過期與失敗情況，更新雙語說明。
 
