@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added **K** to undo clearing this clear-target visit return position, sharing the restored notice and preserving frame/drafts/playback/existing history with editor/search/IME guards; updated bilingual help and shortcut metadata.
+- 新增 **K**「復原清除」這次目標跳轉返回位置，沿用恢復提示，保留影格、草稿、播放與既有歷史，防止輸入／搜尋／中文組字誤觸，更新雙語說明及快捷鍵資訊。
+
 - Successful **Undo clear** now shows **This clear-target visit return position restored** with its target, preserving frame/drafts/playback/existing history; updated bilingual help.
 - 「**復原清除**」成功後顯示「**已恢復這次目標跳轉返回位置**」與目標，保留影格、草稿、播放與既有歷史，更新雙語說明。
 
