@@ -1,5 +1,8 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 
+- Added **Shift+D** as an alternative to Shift+Delete, using the same bookmark-removal confirmation, Cancel/Esc behavior and input/IME guards; updated bilingual shortcut help and metadata.
+- 新增 **Shift＋D** 作為 Shift＋Delete 的替代鍵，沿用書籤移除確認、取消／Esc 與輸入／組字防護，更新雙語說明及快捷鍵資訊。
+
 - Added **Shift+Delete** to pause and confirm removal of the shown snapshot’s saved bookmark, preserving separate drafts and review settings; updated bilingual confirmation/help and input/IME protection.
 - 新增 **Shift＋Delete** 暫停並確認後移除目前快照的已保存書籤，保留獨立草稿與檢查設定，更新雙語確認／說明及輸入／組字防護。
 
