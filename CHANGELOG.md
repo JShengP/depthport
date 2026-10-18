@@ -1,4 +1,6 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added a **Clear return position** button sharing Shift+R behavior; automatically disabled without a position or while busy, usable with shortcuts off, preserving shown frames and unsaved notes. Updated bilingual help.
+- 新增「**清除返回位置**」按鈕，與 Shift＋R 共用動作；無位置或忙碌時自動停用，關閉快捷鍵仍可使用，保留目前影格及未儲存備註，並更新雙語說明。
 
 - Added **Shift+R** to clear the return position and disable its button, preserving the current frame, unsaved drafts, playback and review settings with input/IME guards; updated bilingual shortcut help.
 - 新增 **Shift＋R** 清除返回位置並停用返回按鈕，保留目前影格、未儲存草稿、播放與檢查設定，沿用輸入／組字防護並更新雙語說明。

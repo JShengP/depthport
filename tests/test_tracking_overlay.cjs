@@ -3433,7 +3433,7 @@ test('Shift '+key+' clears only the return position, keeping image/drafts/settin
 
 test('Shift R clearing respects note/search focus, composed editors, IME, modifiers, opt-out and modal guards',async()=>{
  const ui=await returnKeyFixture(),e=ui.elements,calls=ui.pending.length;const editors=[e['bookmark-note'],e['bookmark-search'],e['bookmark-filter-tag'],e['replay-progress']];for(const role of ['textbox','searchbox','combobox','grid']){const el=new Element('div');el.setAttribute('role',role);editors.push(el)}const editable=new Element('div');editable.setAttribute('contenteditable','true');editors.push(editable);
- for(const target of editors){assert.equal(pressBookmarkKey(ui,'R',{shiftKey:true,target}).defaultPrevented,false);const child=new Element('span');child.parentElement=target;assert.equal(pressBookmarkKey(ui,'R',{shiftKey:true,composedPath:()=>[child,target]}).defaultPrevented,false)}for(const target of [e['bookmark-note'],e['bookmark-search']]){target.focus();assert.equal(pressBookmarkKey(ui,'R',{shiftKey:true,target:e.result}).defaultPrevented,false)}e.result.focus();for(const props of [{ctrlKey:true},{altKey:true},{metaKey:true},{repeat:true},{isComposing:true},{keyCode:229}])assert.equal(pressBookmarkKey(ui,'R',{shiftKey:true,...props}).defaultPrevented,false);assert.equal(pressBookmarkKey(ui,'R',{shiftKey:true,defaultPrevented:true}).defaultPrevented,true);ui.dispatch('compositionstart');assert.equal(pressBookmarkKey(ui,'R',{shiftKey:true}).defaultPrevented,false);ui.dispatch('compositionend');ui.hide();assert.equal(pressBookmarkKey(ui,'R',{shiftKey:true}).defaultPrevented,false);ui.document.hidden=false;ui.dispatch('visibilitychange');e['shortcut-help-open'].onclick();assert.equal(pressBookmarkKey(ui,'R',{shiftKey:true}).defaultPrevented,false);e['shortcut-help-close'].onclick();e['bookmark-shortcuts-enabled'].checked=false;e['bookmark-shortcuts-enabled'].onchange();assert.equal(e['bookmark-history-return-target'].getAttribute('aria-keyshortcuts'),'');assert.equal(pressBookmarkKey(ui,'R',{shiftKey:true}).defaultPrevented,false);e['bookmark-shortcuts-enabled'].checked=true;e['bookmark-shortcuts-enabled'].onchange();assert.equal(e['bookmark-history-return-target'].getAttribute('aria-keyshortcuts'),'Shift+r');assert.equal(e['bookmark-history-return'].disabled,false);assert.equal(ui.pending.length,calls);
+ for(const target of editors){assert.equal(pressBookmarkKey(ui,'R',{shiftKey:true,target}).defaultPrevented,false);const child=new Element('span');child.parentElement=target;assert.equal(pressBookmarkKey(ui,'R',{shiftKey:true,composedPath:()=>[child,target]}).defaultPrevented,false)}for(const target of [e['bookmark-note'],e['bookmark-search']]){target.focus();assert.equal(pressBookmarkKey(ui,'R',{shiftKey:true,target:e.result}).defaultPrevented,false)}e.result.focus();for(const props of [{ctrlKey:true},{altKey:true},{metaKey:true},{repeat:true},{isComposing:true},{keyCode:229}])assert.equal(pressBookmarkKey(ui,'R',{shiftKey:true,...props}).defaultPrevented,false);assert.equal(pressBookmarkKey(ui,'R',{shiftKey:true,defaultPrevented:true}).defaultPrevented,true);ui.dispatch('compositionstart');assert.equal(pressBookmarkKey(ui,'R',{shiftKey:true}).defaultPrevented,false);ui.dispatch('compositionend');ui.hide();assert.equal(pressBookmarkKey(ui,'R',{shiftKey:true}).defaultPrevented,false);ui.document.hidden=false;ui.dispatch('visibilitychange');e['shortcut-help-open'].onclick();assert.equal(pressBookmarkKey(ui,'R',{shiftKey:true}).defaultPrevented,false);e['shortcut-help-close'].onclick();e['bookmark-shortcuts-enabled'].checked=false;e['bookmark-shortcuts-enabled'].onchange();assert.equal(e['bookmark-history-clear-return'].getAttribute('aria-keyshortcuts'),'');assert.equal(pressBookmarkKey(ui,'R',{shiftKey:true}).defaultPrevented,false);e['bookmark-shortcuts-enabled'].checked=true;e['bookmark-shortcuts-enabled'].onchange();assert.equal(e['bookmark-history-clear-return'].getAttribute('aria-keyshortcuts'),'Shift+r');assert.equal(e['bookmark-history-return'].disabled,false);assert.equal(ui.pending.length,calls);
 });
 
 test('Shift R does nothing for missing or busy return state, but clears after writes finish',async()=>{
@@ -3442,4 +3442,39 @@ test('Shift R does nothing for missing or busy return state, but clears after wr
 
 test('clearing return keeps per-frame drafts and allows a later target jump to create a new position',async()=>{
  const ui=await returnKeyFixture(),e=ui.elements;pressBookmarkKey(ui,'R',{shiftKey:true});assert.equal(e['bookmark-history-return'].disabled,true);await showSaved(ui,3);assert.equal(e['bookmark-note'].value,'origin draft');const jump=e['bookmark-undo-delete-jump'].onclick();await flush();await completeReplay(ui,1);await jump;assert.equal(e['bookmark-note'].value,'target draft');assert.equal(e['bookmark-history-return'].disabled,false);assert.match(e['bookmark-history-return-target'].textContent,/#3$/);const returning=e['bookmark-history-return'].onclick();await flush();await completeReplay(ui,3);await returning;assert.equal(e['bookmark-note'].value,'origin draft');assert.equal(e['bookmark-history-return'].disabled,true);
+});
+
+test('clear-return button works with shortcuts off and preserves replay, drafts, settings and history',async()=>{
+ for(const enabled of [false,true])for(const playing of [false,true]){
+  const ui=await returnKeyFixture(),e=ui.elements;
+  e['bookmark-shortcuts-enabled'].checked=enabled;e['bookmark-shortcuts-enabled'].onchange();
+  configureLoop(ui,2,3);filterBookmarkTag(ui,'general');searchBookmarkNotes(ui,'kept query');
+  e['playback-speed'].value='2';e['playback-speed'].onchange();if(playing)e['playback-play'].onclick();
+  const calls=ui.pending.length,clouds=ui.cloudUpdates.length,status=e['playback-status'].textContent,image=e.rgb.src,note=e['bookmark-note'].value;
+  assert.equal(e['bookmark-history-clear-return'].disabled,false);
+  e['bookmark-history-clear-return'].onclick();await flush();
+  assertShownFrame(ui,1);assert.equal(e.rgb.src,image);assert.equal(e['bookmark-note'].value,note);assert.equal(e['bookmark-tag-occlusion'].checked,true);
+  assert.equal(e['bookmark-search'].value,'kept query');assert.equal(e['bookmark-filter-tag'].value,'general');assertLoopValues(ui,2,3,true);assert.equal(e['playback-speed'].value,'2');assert.equal(e['playback-status'].textContent,status);
+  assert.equal(ui.pending.length,calls);assert.equal(ui.cloudUpdates.length,clouds);assert.equal(e['bookmark-history-return'].disabled,true);assert.equal(e['bookmark-history-clear-return'].disabled,true);assert.equal(e['bookmark-history-return-target'].textContent,'No available target');assert.equal(e['bookmark-undo-delete'].disabled,false);
+  e['bookmark-history-clear-return'].onclick();assert.equal(ui.pending.length,calls);
+  e['playback-pause'].onclick();await showSaved(ui,3);assert.equal(e['bookmark-note'].value,'origin draft');
+  const jump=e['bookmark-undo-delete-jump'].onclick();await flush();await completeReplay(ui,1);await jump;
+  assert.equal(e['bookmark-history-clear-return'].disabled,false);assert.equal(e['bookmark-note'].value,note);
+ }
+});
+
+test('clear-return button disables without a position, during blocked operations and after Session reset',async()=>{
+ const empty=await startUI();assert.equal(empty.elements['bookmark-history-clear-return'].disabled,true);
+ const ui=await returnKeyFixture(),e=ui.elements;
+ for(const block of ['help','hidden','seek']){
+  if(block==='help')e['shortcut-help-open'].onclick();else if(block==='hidden')ui.hide();else{e['replay-progress'].value='2';e['replay-progress'].oninput()}
+  assert.equal(e['bookmark-history-clear-return'].disabled,true);e['bookmark-history-clear-return'].onclick();
+  if(block==='help')e['shortcut-help-close'].onclick();else if(block==='hidden'){ui.document.hidden=false;ui.dispatch('visibilitychange')}else e['playback-pause'].onclick();
+  assert.equal(e['bookmark-history-clear-return'].disabled,false);assert.equal(e['bookmark-history-return'].disabled,false);
+ }
+ e['bookmark-undo-delete'].onclick();await flush();assert.equal(e['bookmark-history-clear-return'].disabled,true);e['bookmark-history-clear-return'].onclick();
+ ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',[bookmarkRecord(1,{tags:['crossing']})]));await flush();assert.equal(e['bookmark-history-clear-return'].disabled,false);
+ ui.setConfirm(()=>null);e['bookmark-redo-delete'].onclick();await flush();assert.equal(e['bookmark-history-clear-return'].disabled,true);e['bookmark-history-clear-return'].onclick();e['bookmark-delete-cancel'].onclick();await flush();assert.equal(e['bookmark-history-clear-return'].disabled,false);
+ const jump=e['bookmark-redo-delete-jump'].onclick();await flush();assert.equal(e['bookmark-history-clear-return'].disabled,true);e['bookmark-history-clear-return'].onclick();await completeReplay(ui,1);await jump;assert.equal(e['bookmark-history-clear-return'].disabled,false);
+ e['sessions-list'].value='session-b';const changed=e['sessions-list'].onchange();await flush();await finishFrames(ui,'session-b',true,null,[1,2,3],[]);await changed;assert.equal(e['bookmark-history-clear-return'].disabled,true);assert.equal(e['bookmark-history-return'].disabled,true);
 });
