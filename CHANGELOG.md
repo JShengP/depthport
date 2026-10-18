@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added **Y** to undo clearing the independent target-jump return position, sharing the existing restored notice/button action with editor/search/IME guards; updated bilingual help and accessible shortcut metadata.
+- 新增 **Y** 復原清除目標跳轉返回位置快捷鍵，沿用按鈕與成功提示，防止輸入／搜尋／中文組字誤觸，更新雙語說明及快捷鍵資訊。
+
 - Successful target-return **Undo clear** now shows **Target-jump return position restored** with its target, preserving frames/drafts/original history; updated bilingual help.
 - 目標跳轉返回位置「**復原清除**」成功後顯示「**已恢復目標跳轉返回位置**」及目標，保留影格、草稿與原有歷史，更新雙語說明。
 
