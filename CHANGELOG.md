@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Successful button or **Shift+J** clearing now shows **This clear-target visit return position cleared**, preserving frames/drafts/playback/all existing history; updated bilingual help.
+- 按鈕或 **Shift＋J** 成功清除後顯示「**已清除這次目標跳轉返回位置**」，保留影格、草稿、播放與全部既有歷史，更新雙語說明。
+
 - Added a **Clear this clear-target visit return position** button beside Return before this clear-target visit, sharing Shift+J with availability guards and preserving frames/drafts/playback/all existing history; updated bilingual help.
 - 新增「**清除這次目標跳轉返回位置**」按鈕，沿用 Shift＋J 動作，無有效位置或操作中停用，保留影格、草稿、播放與全部既有歷史，更新雙語說明。
 
