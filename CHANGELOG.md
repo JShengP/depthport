@@ -1,5 +1,8 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 
+- Added **Return to previous frame** after Undo/Redo target jumps, preserving per-frame drafts and review settings with exact-snapshot checks, retry on failure and automatic availability; updated bilingual help.
+- 復原／重做目標跳轉後新增「**返回跳轉前影格**」，保留各影格草稿與檢查設定，核對精確快照、失敗可重試並依返回位置自動停用，更新雙語說明。
+
 - Made Undo/Redo deletion target frame numbers clickable: pause and replay the exact saved target while preserving drafts, filters and review settings; disable unavailable/busy targets and update bilingual help.
 - 復原／重做刪除的目標影格編號可點擊，暫停並回放精確目標快照，保留草稿、篩選與檢查設定；無目標或忙碌時停用，更新雙語說明。
 
