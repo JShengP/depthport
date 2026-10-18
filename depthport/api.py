@@ -922,6 +922,10 @@ class BookmarkIdentity(BaseModel):
     snapshot_sha256: str = Field(min_length=64, max_length=64, pattern=r'^[0-9a-f]{64}$')
 
 
+class BookmarkDeleteRequest(BookmarkIdentity):
+    expected_updated_at: float | None = Field(default=None, ge=0, allow_inf_nan=False)
+
+
 class BookmarkRequest(BookmarkIdentity):
     create_only: bool = False
     clear_tags: bool = False
@@ -1020,9 +1024,9 @@ def sessions_bookmark_save(request: Request, sid: str, index: int, body: Bookmar
 
 
 @app.delete('/api/sessions/{sid}/frames/{index}/bookmark')
-def sessions_bookmark_delete(request: Request, sid: str, index: int, body: BookmarkIdentity):
+def sessions_bookmark_delete(request: Request, sid: str, index: int, body: BookmarkDeleteRequest):
     store = local_session_store(request)
-    try:return store.delete_bookmark(sid, index, body.snapshot_sha256)
+    try:return store.delete_bookmark(sid, index, body.snapshot_sha256, expected_updated_at=body.expected_updated_at)
     except SessionError as exc:raise session_failure(exc) from exc
 
 

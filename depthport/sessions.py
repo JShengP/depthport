@@ -437,11 +437,17 @@ class SessionStore:
             self._save_bookmarks(sid, data)
             return data
 
-    def delete_bookmark(self, sid: str, index: int, snapshot_sha256: str) -> dict:
+    def delete_bookmark(self, sid: str, index: int, snapshot_sha256: str, *, expected_updated_at: float | None = None) -> dict:
         self._bookmark_values(snapshot_sha256, [], '')
+        if expected_updated_at is not None and (type(expected_updated_at) not in (int, float) or not math.isfinite(expected_updated_at) or expected_updated_at < 0):
+            raise SessionError('expected_updated_at must be a finite nonnegative number')
         with self.lock:
             self._bookmark_anchor(sid, index, snapshot_sha256)
             data = self._read_bookmarks(sid)
+            if expected_updated_at is not None:
+                existing = next((r for r in data['bookmarks'] if r['index'] == index), None)
+                if existing is None or existing['updated_at'] != expected_updated_at:
+                    raise SessionIntegrity('Saved bookmark changed; reload before redoing deletion')
             records = [r for r in data['bookmarks'] if r['index'] != index]
             if len(records) != len(data['bookmarks']):
                 data['bookmarks'] = records

@@ -771,3 +771,37 @@ def test_clear_tags_api_strict_mode_preserves_note_and_other_operations(client_e
         assert c.put(url, json={**body, **invalid}).status_code == 422
     normal = c.put(url, json={**body, 'clear_tags': False, 'note': 'Explicit edit', 'tags': ['crossing']})
     assert normal.status_code == 200 and normal.json()['bookmarks'][0]['tags'] == ['crossing']
+
+
+def test_conditional_bookmark_delete_protects_newer_content_and_missing_records(tmp_path):
+    store, sid, row, path = bookmark_fixture(tmp_path)
+    old = store.save_bookmark(sid, 1, row['sha256'], ['occlusion'], 'Synthetic old')['bookmarks'][0]
+    # Deterministic revision change avoids relying on clock resolution.
+    from unittest.mock import patch
+    with patch('depthport.sessions.time.time', return_value=old['updated_at'] + 1):
+        newer = store.save_bookmark(sid, 1, row['sha256'], ['crossing'], 'Synthetic newer')
+    before = path.read_bytes()
+    with pytest.raises(SessionIntegrity):
+        store.delete_bookmark(sid, 1, row['sha256'], expected_updated_at=old['updated_at'])
+    assert path.read_bytes() == before
+    current = newer['bookmarks'][0]['updated_at']
+    assert store.delete_bookmark(sid, 1, row['sha256'], expected_updated_at=current)['bookmarks'] == []
+    with pytest.raises(SessionIntegrity):
+        store.delete_bookmark(sid, 1, row['sha256'], expected_updated_at=current)
+    for invalid in [True, '1', -1, float('inf'), float('nan')]:
+        with pytest.raises(SessionError):
+            store.delete_bookmark(sid, 1, row['sha256'], expected_updated_at=invalid)
+
+
+def test_conditional_bookmark_delete_api_preserves_newer_notes(client_enabled):
+    c = client_enabled; store = api.app.state.session_store
+    sid = store.create()['session_id']; frame, bundle = sample_frame(); row = store.capture(sid, bundle, frame)
+    url = f'/api/sessions/{sid}/frames/1/bookmark'
+    saved = store.save_bookmark(sid, 1, row['sha256'], ['crossing'], 'Synthetic API restore')['bookmarks'][0]
+    body = {'snapshot_sha256': row['sha256'], 'expected_updated_at': saved['updated_at']}
+    for invalid in [True, '1', -1, {'bad': 1}]:
+        assert c.request('DELETE', url, json={**body, 'expected_updated_at': invalid}).status_code == 422
+    assert c.request('DELETE', url, json={**body, 'expected_updated_at': saved['updated_at'] + 1}).status_code == 409
+    assert store.bookmarks(sid)['bookmarks'][0]['note'] == 'Synthetic API restore'
+    assert c.request('DELETE', url, json=body).status_code == 200
+    assert store.bookmarks(sid)['bookmarks'] == []
