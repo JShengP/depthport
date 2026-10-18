@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added **Shift+U** to redo clearing the just-restored return position, sharing the cleared notice and preserving frames/drafts/playback with editor/search/IME guards; updated bilingual help and shortcut metadata.
+- 新增 **Shift＋U** 重做清除剛復原的返回位置，沿用已清除提示並保留影格／草稿／播放，防止輸入／搜尋／組字誤觸，更新雙語說明及快捷鍵資訊。
+
 - Added **U** for Undo clear with the existing restored-return notice and draft/playback preservation; respects editor/search/IME and modifier/busy guards, with bilingual help and accessible shortcut metadata.
 - 新增 **U**「復原清除」快捷鍵，沿用已恢復提示並保留草稿與播放，防止輸入／搜尋／組字及修飾鍵／忙碌狀態誤觸，更新雙語說明與快捷鍵資訊。
 
