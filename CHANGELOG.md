@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added **Clear this target-jump return position** beside its return button, sharing Shift+G with automatic availability and frame/draft/playback/history preservation; updated bilingual help.
+- 新增「**清除本次目標跳轉返回位置**」按鈕，沿用 Shift＋G，無有效位置或操作中自動停用，保留影格、草稿、播放與既有歷史，更新雙語說明。
+
 - Added **Shift+G** to clear only the current target-visit return position and disable its button, preserving frames/drafts/playback/all existing history with editor/search/IME guards; updated bilingual help.
 - 新增 **Shift＋G** 只清除本次目標跳轉返回位置並停用按鈕，保留影格、草稿、播放與全部既有歷史，防止輸入／搜尋／中文組字誤觸，更新雙語說明。
 
