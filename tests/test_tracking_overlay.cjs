@@ -3865,3 +3865,32 @@ test('unavailable clear actions do not create success notices and Session reset 
  const ui=await clearReturnKeyFixture(),e=ui.elements,summary=e['bookmark-clear-target-return-target'];e['shortcut-help-open'].onclick();const blocked=summary.textContent;e['bookmark-clear-target-position'].onclick();assert.equal(pressBookmarkKey(ui,'T',{shiftKey:true}).defaultPrevented,false);assert.equal(summary.textContent,blocked);e['shortcut-help-close'].onclick();e['bookmark-clear-target-position'].onclick();assert.equal(summary.textContent,'Target-jump return position cleared');
  e['bookmark-clear-target-position'].onclick();assert.equal(summary.textContent,'Target-jump return position cleared');e['sessions-list'].value='session-b';const changed=e['sessions-list'].onchange();await flush();await finishFrames(ui,'session-b',true,null,[1,2,3],[]);await changed;assert.equal(summary.textContent,'No available target');
 });
+
+test('Undo target-return clear restores the exact position after button or Shift T clearing without changing drafts/playback/original history',async()=>{
+ for(const kind of ['undo','redo'])for(const action of ['button','key'])for(const playing of [false,true]){
+  const ui=await clearReturnKeyFixture(kind),e=ui.elements,undo=e['bookmark-undo-clear-target-position'],summary=e['bookmark-clear-target-return-target'];const target=summary.textContent;
+  configureLoop(ui,1,2);filterBookmarkTag(ui,'general');searchBookmarkNotes(ui,'kept query');e['playback-speed'].value='2';e['playback-speed'].onchange();if(playing)e['playback-play'].onclick();
+  const history=()=>['bookmark-history-return-target','bookmark-history-undo-clear-target','bookmark-history-redo-clear-target'].map(id=>e[id].textContent),before=history(),calls=ui.pending.length,clouds=ui.cloudUpdates.length,image=e.rgb.src,status=e['playback-status'].textContent;assert.equal(undo.hidden,true);assert.equal(undo.disabled,true);
+  if(action==='button')e['bookmark-clear-target-position'].onclick();else assert.equal(pressBookmarkKey(ui,'T',{shiftKey:true}).defaultPrevented,true);assert.equal(undo.hidden,false);assert.equal(undo.disabled,false);e['bookmark-shortcuts-enabled'].checked=false;e['bookmark-shortcuts-enabled'].onchange();e['bookmark-clear-target-position'].onclick();undo.onclick();await flush();
+  assert.equal(summary.textContent,target);assert.equal(undo.hidden,true);assert.equal(undo.disabled,true);assert.equal(e['bookmark-clear-target-return'].disabled,false);assert.equal(e['bookmark-clear-target-position'].disabled,false);assertShownFrame(ui,3);assert.equal(e.rgb.src,image);assert.equal(e['bookmark-note'].value,'origin draft');assert.equal(e['bookmark-tag-id-switch'].checked,true);assert.equal(e['bookmark-search'].value,'kept query');assert.equal(e['bookmark-filter-tag'].value,'general');assertLoopValues(ui,1,2,true);assert.equal(e['playback-speed'].value,'2');assert.equal(e['playback-status'].textContent,status);assert.equal(ui.pending.length,calls);assert.equal(ui.cloudUpdates.length,clouds);assert.deepEqual(history(),before);undo.onclick();assert.equal(ui.pending.length,calls);
+  const returning=e['bookmark-clear-target-return'].onclick();await flush();await completeReplay(ui,1);await returning;assert.equal(e['bookmark-note'].value,'target draft');assert.equal(e['bookmark-tag-occlusion'].checked,true);assert.deepEqual(history(),before);
+ }
+});
+
+test('Undo target-return clear rejects missing, hidden, modal, seeking and writing states without consuming its backup',async()=>{
+ const empty=await startUI();const none=empty.elements['bookmark-undo-clear-target-position'];assert.equal(none.hidden,true);assert.equal(none.disabled,true);none.onclick();assert.equal(replayRequests(empty).length,0);
+ const ui=await clearReturnKeyFixture(),e=ui.elements,undo=e['bookmark-undo-clear-target-position'];e['bookmark-clear-target-position'].onclick();
+ for(const block of ['help','hidden','seek']){
+  if(block==='help')e['shortcut-help-open'].onclick();else if(block==='hidden')ui.hide();else{e['replay-progress'].value='2';e['replay-progress'].oninput()}
+  assert.equal(undo.disabled,true);undo.onclick();assert.equal(e['bookmark-clear-target-return'].disabled,true);
+  if(block==='help')e['shortcut-help-close'].onclick();else if(block==='hidden'){ui.document.hidden=false;ui.dispatch('visibilitychange')}else e['playback-pause'].onclick();assert.equal(undo.disabled,false);
+ }
+ e['bookmark-undo-delete'].onclick();await flush();assert.equal(undo.disabled,true);undo.onclick();ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',[bookmarkRecord(1,{tags:['crossing']})]));await flush();assert.equal(undo.disabled,false);undo.onclick();assert.equal(e['bookmark-clear-target-return'].disabled,false);assert.match(e['bookmark-clear-target-return-target'].textContent,/#1$/);
+});
+
+test('Undo target-return backup is replaced by a new target, reset across Sessions, and can be cleared/restored repeatedly',async()=>{
+ const ui=await clearReturnKeyFixture('redo'),e=ui.elements,undo=e['bookmark-undo-clear-target-position'];e['bookmark-clear-target-position'].onclick();await showSaved(ui,2);assert.equal(undo.disabled,false);const jump=e['bookmark-history-redo-clear-jump'].onclick();await flush();await completeReplay(ui,3);await jump;assert.equal(undo.hidden,true);assert.equal(undo.disabled,true);undo.onclick();assert.match(e['bookmark-clear-target-return-target'].textContent,/#2$/);
+ for(let i=0;i<2;i++){e['bookmark-clear-target-position'].onclick();assert.equal(undo.disabled,false);undo.onclick();assert.match(e['bookmark-clear-target-return-target'].textContent,/#2$/)}
+ e['bookmark-clear-target-position'].onclick();e.lang.value='zh-TW';e.lang.onchange();assert.equal(e['bookmark-clear-target-return-target'].textContent,'已清除目標跳轉返回位置');assert.equal(undo.disabled,false);
+ e['sessions-list'].value='session-b';const changed=e['sessions-list'].onchange();await flush();await finishFrames(ui,'session-b',true,null,[1,2,3],[]);await changed;assert.equal(undo.hidden,true);assert.equal(undo.disabled,true);undo.onclick();assert.equal(e['bookmark-clear-target-return-target'].textContent,'目前無可操作目標');assert.equal(e['bookmark-clear-target-return'].disabled,true);
+});
