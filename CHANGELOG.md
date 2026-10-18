@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added this return-target visit **Redo clear** button, sharing Shift+P and its cleared notice; unavailable/busy actions disable automatically, work with shortcuts off and preserve frames/drafts/playback/all history. Updated bilingual help.
+- 新增此次目標跳轉返回位置的「**重做清除**」按鈕，沿用 Shift＋P 與清除成功提示，無有效位置或操作中停用，關閉快捷鍵仍可使用，保留影格、草稿、播放與全部歷史，更新雙語說明。
+
 - Stabilized the spatial comparison overlap test by explicitly holding its worker while asserting rejection, avoiding a fast-worker timing race without changing application behavior.
 - 空間比較重複請求測試改用明確控制背景工作的同步機制，避免執行過快造成偶發失敗，不修改應用程式行為。
 
