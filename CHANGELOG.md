@@ -1,5 +1,8 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 
+- Added **R** to return to the frame before a history-target jump using the existing draft-preserving return action, with editor/IME and busy-state guards; updated bilingual shortcut help and metadata.
+- 新增 **R** 返回目標跳轉前影格，沿用保留草稿的返回流程及輸入／組字、忙碌狀態防護，更新雙語快捷鍵說明與資訊。
+
 - Added **Return to previous frame** after Undo/Redo target jumps, preserving per-frame drafts and review settings with exact-snapshot checks, retry on failure and automatic availability; updated bilingual help.
 - 復原／重做目標跳轉後新增「**返回跳轉前影格**」，保留各影格草稿與檢查設定，核對精確快照、失敗可重試並依返回位置自動停用，更新雙語說明。
 
