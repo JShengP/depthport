@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added **Return before this clear-target visit** after target-visit return Undo/Redo clear target visits, preserving drafts/settings/all history with a separate origin and availability/failure guards; updated bilingual help.
+- 新增「**返回這次目標跳轉前影格**」，可從本次目標跳轉返回位置的復原／重做清除目標返回，另存起點並防護不可用／失敗情況，保留草稿、設定與全部歷史，更新雙語說明。
+
 - Target-visit return **Undo clear / Redo clear** target numbers are accessible pause-and-jump buttons, preserving per-frame drafts/settings and all clear history with missing/busy/stale/failure guards; updated bilingual help.
 - 本次目標跳轉返回位置「**復原清除／重做清除**」目標編號可點擊暫停跳轉，保留各格草稿／設定與全部清除歷史，防護無目標、操作中、過期與失敗情況，更新雙語說明。
 
