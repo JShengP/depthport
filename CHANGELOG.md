@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added **U** for Undo clear with the existing restored-return notice and draft/playback preservation; respects editor/search/IME and modifier/busy guards, with bilingual help and accessible shortcut metadata.
+- 新增 **U**「復原清除」快捷鍵，沿用已恢復提示並保留草稿與播放，防止輸入／搜尋／組字及修飾鍵／忙碌狀態誤觸，更新雙語說明與快捷鍵資訊。
+
 - Successful **Undo clear** now shows **Return position restored** beside the target summary, preserving the displayed frame and unsaved drafts; updated bilingual help.
 - 「復原清除」成功後，在目標摘要旁顯示「**已恢復返回位置**」，保留目前影格與未儲存草稿，並更新雙語說明。
 
