@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added **Undo clear** beside the cleared-return notice to restore the last valid return position without navigation, playback or draft changes; guarded against stale/busy state and documented in both languages.
+- 在清除返回提示旁新增「**復原清除**」，恢復最近有效返回位置，不跳格、不更改播放或草稿；阻擋過期／忙碌狀態並更新雙語說明。
+
 - Added an accessible **Return position cleared** notice beside return controls after successful button or Shift+R clearing, preserving shown frames and unsaved drafts; updated bilingual help.
 - 按鈕或 Shift＋R 清除成功後，在返回控制旁顯示可供輔助閱讀的「**已清除返回位置**」提示，保留目前影格與未儲存草稿，並更新雙語說明。
 
