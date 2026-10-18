@@ -84,3 +84,8 @@ footer{margin:24px 0;color:#acb9c9}@media(max-width:800px){.panels{grid-template
 #bookmark-delete-dialog::backdrop{background:rgb(4 9 16 / .72)}
 #bookmark-delete-dialog h2{margin-top:0;font-size:21px}
 .bookmark-delete-actions{display:flex;justify-content:flex-end;gap:12px;flex-wrap:wrap}
+
+.bookmark-history-actions{display:grid;gap:8px;margin-top:12px}
+.bookmark-history-action{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px}
+.bookmark-history-action button{margin:0;flex-shrink:0}
+.bookmark-history-target{font-size:13px;color:#cce5f8;overflow-wrap:anywhere}

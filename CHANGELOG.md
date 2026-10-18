@@ -1,5 +1,8 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 
+- Added live target frame numbers and saved tags beside **Undo deletion / Redo deletion** buttons, with general/empty/busy states and accessible bilingual guidance; notes remain hidden from these summaries.
+- 在「**復原刪除／重做刪除**」按鈕旁新增即時目標影格編號與已存標籤，包含一般書籤、無目標及忙碌狀態，更新雙語說明與輔助閱讀資訊；摘要不顯示備註。
+
 - Added **Undo deletion / Redo deletion** buttons with automatic history/busy-state disabling, shared confirmed redo, draft preservation and keyboard-independent operation; updated bilingual shortcut help.
 - 新增「**復原刪除／重做刪除**」按鈕，依紀錄及忙碌狀態自動停用，沿用重做確認並保留草稿；關閉鍵盤快捷鍵時仍可使用，更新雙語說明。
 
