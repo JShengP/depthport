@@ -2656,7 +2656,7 @@ test('endpoint/page keys preserve editor/native behavior and ignore IME, modifie
   for(const props of [{ctrlKey:true},{altKey:true},{metaKey:true},{shiftKey:true},{repeat:true},{isComposing:true},{keyCode:229}])assert.equal(pressBookmarkKey(ui,key,props).defaultPrevented,false);assert.equal(pressBookmarkKey(ui,key,{defaultPrevented:true}).defaultPrevented,true);
   ui.dispatch('compositionstart');assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false);ui.dispatch('compositionend');ui.hide();assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false);ui.document.hidden=false;
  }
- e['bookmark-shortcuts-enabled'].checked=false;e['bookmark-shortcuts-enabled'].onchange();assert.equal(e.result.getAttribute('aria-keyshortcuts'),'');for(const key of ['Home','End','PageUp','PageDown'])assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false);e['bookmark-shortcuts-enabled'].checked=true;e['bookmark-shortcuts-enabled'].onchange();assert.equal(e.result.getAttribute('aria-keyshortcuts'),'Home End PageUp PageDown Shift+A Shift+B Shift+[ Shift+]');e['shortcut-help-open'].onclick();for(const key of ['Home','End','PageUp','PageDown'])assert.equal(pressBookmarkKey(ui,key,{target:e['shortcut-help-close']}).defaultPrevented,false);e['shortcut-help-close'].onclick();assertShownFrame(ui,2);assert.equal(ui.pending.length,calls);assert.equal(bookmarkWrites(ui).length,0);
+ e['bookmark-shortcuts-enabled'].checked=false;e['bookmark-shortcuts-enabled'].onchange();assert.equal(e.result.getAttribute('aria-keyshortcuts'),'');for(const key of ['Home','End','PageUp','PageDown'])assert.equal(pressBookmarkKey(ui,key).defaultPrevented,false);e['bookmark-shortcuts-enabled'].checked=true;e['bookmark-shortcuts-enabled'].onchange();assert.equal(e.result.getAttribute('aria-keyshortcuts'),'Home End PageUp PageDown Shift+A Shift+B Shift+[ Shift+] Control+z');e['shortcut-help-open'].onclick();for(const key of ['Home','End','PageUp','PageDown'])assert.equal(pressBookmarkKey(ui,key,{target:e['shortcut-help-close']}).defaultPrevented,false);e['shortcut-help-close'].onclick();assertShownFrame(ui,2);assert.equal(ui.pending.length,calls);assert.equal(bookmarkWrites(ui).length,0);
 });
 
 test('endpoint/page keys cannot replace an in-flight seek, bookmark jump or explicit bookmark write',async()=>{
@@ -2743,7 +2743,7 @@ test('Shift+A/B ignore note/search/native/custom/composed-path editors, IME, oth
   for(const props of [{ctrlKey:true},{altKey:true},{metaKey:true},{repeat:true},{isComposing:true},{keyCode:229}])assert.equal(pressBookmarkKey(ui,key,{shiftKey:true,...props}).defaultPrevented,false);assert.equal(pressBookmarkKey(ui,key,{shiftKey:true,defaultPrevented:true}).defaultPrevented,true);
   ui.dispatch('compositionstart');assert.equal(pressBookmarkKey(ui,key,{shiftKey:true}).defaultPrevented,false);ui.dispatch('compositionend');ui.hide();assert.equal(pressBookmarkKey(ui,key,{shiftKey:true}).defaultPrevented,false);ui.document.hidden=false;
  }
- e['bookmark-shortcuts-enabled'].checked=false;e['bookmark-shortcuts-enabled'].onchange();assert.equal(e.result.getAttribute('aria-keyshortcuts'),'');for(const key of ['a','b'])assert.equal(pressBookmarkKey(ui,key,{shiftKey:true}).defaultPrevented,false);e['bookmark-shortcuts-enabled'].checked=true;e['bookmark-shortcuts-enabled'].onchange();assert.equal(e.result.getAttribute('aria-keyshortcuts'),'Home End PageUp PageDown Shift+A Shift+B Shift+[ Shift+]');e['shortcut-help-open'].onclick();for(const key of ['A','B'])assert.equal(pressBookmarkKey(ui,key,{shiftKey:true,target:e['shortcut-help-close']}).defaultPrevented,false);e['shortcut-help-close'].onclick();assertShownFrame(ui,2);assertLoopValues(ui,1,3,true);assert.equal(ui.pending.length,calls);assert.equal(bookmarkWrites(ui).length,0);
+ e['bookmark-shortcuts-enabled'].checked=false;e['bookmark-shortcuts-enabled'].onchange();assert.equal(e.result.getAttribute('aria-keyshortcuts'),'');for(const key of ['a','b'])assert.equal(pressBookmarkKey(ui,key,{shiftKey:true}).defaultPrevented,false);e['bookmark-shortcuts-enabled'].checked=true;e['bookmark-shortcuts-enabled'].onchange();assert.equal(e.result.getAttribute('aria-keyshortcuts'),'Home End PageUp PageDown Shift+A Shift+B Shift+[ Shift+] Control+z');e['shortcut-help-open'].onclick();for(const key of ['A','B'])assert.equal(pressBookmarkKey(ui,key,{shiftKey:true,target:e['shortcut-help-close']}).defaultPrevented,false);e['shortcut-help-close'].onclick();assertShownFrame(ui,2);assertLoopValues(ui,1,3,true);assert.equal(ui.pending.length,calls);assert.equal(bookmarkWrites(ui).length,0);
 });
 
 test('interval jumps pause and cancel pending autoplay fetch/decode, avoid boundary reloads and serialize manual requests',async()=>{
@@ -3201,3 +3201,52 @@ test(deleteKey+' — '+ "delete dialog focuses Cancel, blocks background keys an
 });
 
 }
+
+async function deleteForUndo(ui,index,remaining=[]){
+ ui.elements.result.focus();ui.setConfirm(()=>true);pressBookmarkKey(ui,'D',{shiftKey:true});await flush();await finishShortcutDelete(ui,index,remaining);
+}
+function pressUndo(ui,properties={}){return pressBookmarkKey(ui,'z',{ctrlKey:true,...properties})}
+
+test('Ctrl Z restores the last deleted saved fields once, retaining drafts, filters and displayed frame',async()=>{
+ const original=bookmarkRecord(2,{note:'synthetic original note',tags:['id-switch','occlusion','crossing']}),ui=await startUI({bookmarks:[original]}),e=ui.elements;
+ await showSaved(ui,2);editBookmark(ui,'x'.repeat(1001),['crossing']);await deleteForUndo(ui,2);
+ filterBookmarkTag(ui,'occlusion');searchBookmarkNotes(ui,'original');e.result.focus();
+ assert.equal(pressUndo(ui).defaultPrevented,true);await flush();const write=bookmarkWrites(ui).at(-1);
+ assert.equal(write.opt.method,'PUT');assert.deepEqual(JSON.parse(write.opt.body),{snapshot_sha256:hash,note:original.note,tags:original.tags,create_only:true});
+ assert.equal(pressUndo(ui).defaultPrevented,false);ui.respond(write.url,bookmarkResponse('session-a',[original]));await flush();
+ assert.deepEqual(visibleBookmarkIndices(ui),[2]);assert.equal(e['bookmark-note'].value,'x'.repeat(1001));assert.equal(e['bookmark-tag-crossing'].checked,true);
+ assert.equal(e['bookmark-search'].value,'original');assert.equal(e['bookmark-filter-tag'].value,'occlusion');assertShownFrame(ui,2);assert.match(e['playback-status'].textContent,/Paused/);assert.match(e['bookmarks-status'].textContent,/restored/i);assert.equal(pressUndo(ui).defaultPrevented,false);
+});
+
+test('Ctrl Z restores the deleted frame even after navigating, and newer deletion replaces the single undo slot',async()=>{
+ const first=bookmarkRecord(1,{note:'first',tags:['occlusion']}),second=bookmarkRecord(2,{note:'second',tags:['crossing']}),ui=await startUI({bookmarks:[first,second]}),e=ui.elements;
+ await showSaved(ui,1);await deleteForUndo(ui,1,[second]);await showSaved(ui,2);await deleteForUndo(ui,2);await showSaved(ui,3);e.result.focus();
+ assert.equal(pressBookmarkKey(ui,'Z',{ctrlKey:true}).defaultPrevented,true);await flush();const write=bookmarkWrites(ui).at(-1);assert.match(write.url,/frames\/2\/bookmark$/);assert.equal(JSON.parse(write.opt.body).note,'second');ui.respond(write.url,bookmarkResponse('session-a',[second]));await flush();assertShownFrame(ui,3);assert.equal(e['bookmark-note'].value,'');assert.equal(pressUndo(ui).defaultPrevented,false);
+});
+
+test('Ctrl Z preserves native text undo, IME and shortcut guards',async()=>{
+ const ui=await startUI({bookmarks:[bookmarkRecord(1)]}),e=ui.elements;await showFirst(ui);await deleteForUndo(ui,1);
+ const editors=[e['bookmark-note'],e['bookmark-search'],e['bookmark-filter-tag'],e['replay-progress']];for(const role of ['textbox','searchbox','grid']){const n=new Element('div');n.setAttribute('role',role);editors.push(n)}
+ const editable=new Element('div');editable.setAttribute('contenteditable','true');editors.push(editable);
+ for(const target of editors){e.result.focus();assert.equal(pressUndo(ui,{target}).defaultPrevented,false);const child=new Element('span');child.parentElement=target;assert.equal(pressUndo(ui,{composedPath:()=>[child,target]}).defaultPrevented,false)}
+ for(const target of [e['bookmark-note'],e['bookmark-search']]){target.focus();assert.equal(pressUndo(ui,{target:e.result}).defaultPrevented,false)}e.result.focus();
+ for(const props of [{ctrlKey:false},{shiftKey:true},{altKey:true},{metaKey:true},{repeat:true},{isComposing:true},{keyCode:229}])assert.equal(pressUndo(ui,props).defaultPrevented,false);
+ assert.equal(pressUndo(ui,{defaultPrevented:true}).defaultPrevented,true);ui.dispatch('compositionstart');assert.equal(pressUndo(ui).defaultPrevented,false);ui.dispatch('compositionend');ui.hide();assert.equal(pressUndo(ui).defaultPrevented,false);ui.document.hidden=false;
+ e['bookmark-shortcuts-enabled'].checked=false;e['bookmark-shortcuts-enabled'].onchange();assert.equal(pressUndo(ui).defaultPrevented,false);assert.equal(e.result.getAttribute('aria-keyshortcuts'),'');e['bookmark-shortcuts-enabled'].checked=true;e['bookmark-shortcuts-enabled'].onchange();assert.match(e.result.getAttribute('aria-keyshortcuts'),/Control\+z/);
+ e['shortcut-help-open'].onclick();assert.equal(pressUndo(ui).defaultPrevented,false);e['shortcut-help-close'].onclick();assert.equal(bookmarkWrites(ui).length,1);
+ const empty=await startUI();assert.equal(pressUndo(empty).defaultPrevented,false);
+});
+
+test('Ctrl Z failure retains undo for retry and a concurrent newer bookmark is kept',async()=>{
+ const old=bookmarkRecord(1,{note:'deleted',tags:['occlusion']}),newer=bookmarkRecord(1,{note:'newer',tags:['crossing']}),ui=await startUI({bookmarks:[old]}),e=ui.elements;
+ await showFirst(ui);await deleteForUndo(ui,1);pressUndo(ui);await flush();ui.respond('/api/sessions/session-a/frames/1/bookmark',{detail:'synthetic unavailable'},false,409);await flush();assert.match(e['bookmarks-status'].textContent,/failed/i);assert.equal(pressUndo(ui).defaultPrevented,true);await flush();ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',[newer]));await flush();assert.equal(e['bookmark-note'].value,'newer');assert.equal(e['bookmark-tag-crossing'].checked,true);assert.match(e['bookmarks-status'].textContent,/Existing bookmark kept/);assert.equal(pressUndo(ui).defaultPrevented,false);
+});
+
+test('cancelled and failed deletions do not replace a prior successful undo',async()=>{
+ const first=bookmarkRecord(1,{note:'first'}),second=bookmarkRecord(2,{note:'second'}),ui=await startUI({bookmarks:[first,second]});await showFirst(ui);await deleteForUndo(ui,1,[second]);await showSaved(ui,2);ui.elements.result.focus();ui.setConfirm(()=>false);pressBookmarkKey(ui,'D',{shiftKey:true});await flush();ui.setConfirm(()=>true);pressBookmarkKey(ui,'D',{shiftKey:true});await flush();ui.respond('/api/sessions/session-a/frames/2/bookmark',{detail:'synthetic unavailable'},false,409);await flush();assert.equal(pressUndo(ui).defaultPrevented,true);await flush();assert.match(bookmarkWrites(ui).at(-1).url,/frames\/1\/bookmark$/);
+});
+
+test('saving a new same-frame bookmark invalidates undo and stale restore replies cannot affect another Session',async()=>{
+ const ui=await startUI({bookmarks:[bookmarkRecord(1)]}),e=ui.elements;await showFirst(ui);await deleteForUndo(ui,1);editBookmark(ui,'new saved content',['crossing']);e['bookmark-save'].onclick();await flush();ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',[bookmarkRecord(1,{note:'new saved content',tags:['crossing']})]));await flush();e.result.focus();assert.equal(pressUndo(ui).defaultPrevented,false);
+ await deleteForUndo(ui,1);assert.equal(pressUndo(ui).defaultPrevented,true);await flush();e['sessions-list'].value='session-b';const switched=e['sessions-list'].onchange();await flush();await finishFrames(ui,'session-b',true,null,[1,2,3],[bookmarkRecord(1,{note:'other Session'})]);await switched;ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',[bookmarkRecord(1)]));await flush();await showSaved(ui,1,{sid:'session-b'});assert.equal(e['bookmark-note'].value,'other Session');e.result.focus();assert.equal(pressUndo(ui).defaultPrevented,false);
+});

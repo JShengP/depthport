@@ -1,5 +1,8 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 
+- Added **Ctrl+Z** outside editors to restore the latest successfully deleted bookmark’s saved note and tags, with single-page Session scope, draft preservation, safe retry and create-only conflict protection; updated bilingual shortcut help.
+- 新增 **Ctrl＋Z** 在非編輯欄位復原最近一次成功刪除書籤的備註與標籤，限本頁目前 Session 一筆，保留草稿、支援失敗重試並保護重新建立的書籤，更新雙語說明。
+
 - Added **Shift+D** as an alternative to Shift+Delete, using the same bookmark-removal confirmation, Cancel/Esc behavior and input/IME guards; updated bilingual shortcut help and metadata.
 - 新增 **Shift＋D** 作為 Shift＋Delete 的替代鍵，沿用書籤移除確認、取消／Esc 與輸入／組字防護，更新雙語說明及快捷鍵資訊。
 
