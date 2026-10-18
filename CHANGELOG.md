@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Successful button or **Shift+T** clearing now shows **Target-jump return position cleared**, preserving frames/drafts/original history; updated bilingual help.
+- 按鈕或 **Shift＋T** 清除成功後顯示「**已清除目標跳轉返回位置**」，保留影格、草稿與原有歷史，更新雙語說明。
+
 - Added a **Clear target-jump return position** button sharing Shift+T, with automatic availability and draft/frame/history preservation; updated bilingual help.
 - 新增清除目標跳轉返回位置按鈕，沿用 Shift＋T，自動停用不可用狀態並保留影格、草稿與歷史，更新雙語說明。
 
