@@ -89,3 +89,7 @@ footer{margin:24px 0;color:#acb9c9}@media(max-width:800px){.panels{grid-template
 .bookmark-history-action{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px}
 .bookmark-history-action button{margin:0;flex-shrink:0}
 .bookmark-history-target{font-size:13px;color:#cce5f8;overflow-wrap:anywhere}
+
+.bookmark-history-target .bookmark-history-jump{font:inherit;margin:0;padding:2px 5px;background:transparent;border-color:transparent;text-decoration:underline;text-underline-offset:3px}
+.bookmark-history-target .bookmark-history-jump:focus-visible{outline:2px solid #63d9eb;outline-offset:2px}
+.bookmark-history-target .bookmark-history-jump:disabled{text-decoration:none}

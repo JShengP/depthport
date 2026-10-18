@@ -1,5 +1,8 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 
+- Made Undo/Redo deletion target frame numbers clickable: pause and replay the exact saved target while preserving drafts, filters and review settings; disable unavailable/busy targets and update bilingual help.
+- 復原／重做刪除的目標影格編號可點擊，暫停並回放精確目標快照，保留草稿、篩選與檢查設定；無目標或忙碌時停用，更新雙語說明。
+
 - Added live target frame numbers and saved tags beside **Undo deletion / Redo deletion** buttons, with general/empty/busy states and accessible bilingual guidance; notes remain hidden from these summaries.
 - 在「**復原刪除／重做刪除**」按鈕旁新增即時目標影格編號與已存標籤，包含一般書籤、無目標及忙碌狀態，更新雙語說明與輔助閱讀資訊；摘要不顯示備註。
 
