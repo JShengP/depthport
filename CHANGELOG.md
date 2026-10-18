@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- This clear-target visit return **Undo clear / Redo clear** now show their own target frame position / total and saved #index beside each button, preserving frames/drafts/playback/all history with unavailable-state summaries; updated bilingual help.
+- 這次目標跳轉返回位置「**復原清除／重做清除**」旁各自顯示目標影格位置／總數與保存 #索引，標示不可用狀態，保留影格、草稿、播放與全部歷史，更新雙語說明。
+
 - Added a clear-target visit return **Redo clear** button sharing Shift+K, disabled without an eligible restored position or while busy; preserves frames/drafts/playback/all history and updates bilingual help.
 - 新增這次目標跳轉返回位置的「**重做清除**」按鈕，沿用 Shift＋K，無可重做位置或操作中停用，保留影格、草稿、播放與全部歷史，更新雙語說明。
 
