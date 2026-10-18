@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added **Clear this return-target visit position** beside the return button, sharing Shift+N with availability guards and preserving frames/drafts/playback/all existing history; updated bilingual help.
+- 新增「**清除此次目標跳轉返回位置**」按鈕，沿用 Shift＋N，無有效位置或操作中停用，保留影格、草稿、播放與全部既有歷史，更新雙語說明。
+
 - Added **Shift+N** to clear only the Return before this return-target visit position, preserving frames/drafts/playback/all history with editor/search/IME guards; updated bilingual help and shortcut metadata.
 - 新增 **Shift＋N** 只清除「返回此次目標跳轉前影格」的位置並停用按鈕，保留影格、草稿、播放與全部歷史，防止輸入／搜尋／中文組字誤觸，更新雙語說明及快捷鍵資訊。
 
