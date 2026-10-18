@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- This return-target visit **Undo clear / Redo clear** now each show their own target frame position / total and saved #index, with unavailable-state summaries and no changes to frames/drafts/playback/history. Updated bilingual help.
+- 此次目標跳轉返回位置「**復原清除／重做清除**」旁各自顯示目標影格位置／總格數與保存 #索引，標示不可用狀態，保留影格、草稿、播放與既有歷史，更新雙語說明。
+
 - Added this return-target visit **Redo clear** button, sharing Shift+P and its cleared notice; unavailable/busy actions disable automatically, work with shortcuts off and preserve frames/drafts/playback/all history. Updated bilingual help.
 - 新增此次目標跳轉返回位置的「**重做清除**」按鈕，沿用 Shift＋P 與清除成功提示，無有效位置或操作中停用，關閉快捷鍵仍可使用，保留影格、草稿、播放與全部歷史，更新雙語說明。
 
