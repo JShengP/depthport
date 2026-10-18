@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added a clear-target visit return **Redo clear** button sharing Shift+K, disabled without an eligible restored position or while busy; preserves frames/drafts/playback/all history and updates bilingual help.
+- 新增這次目標跳轉返回位置的「**重做清除**」按鈕，沿用 Shift＋K，無可重做位置或操作中停用，保留影格、草稿、播放與全部歷史，更新雙語說明。
+
 - Added **Shift+K** to redo clearing only the just-restored clear-target visit return position, sharing the cleared notice and preserving frame/drafts/playback/existing history with editor/search/IME guards; updated bilingual help.
 - 新增 **Shift＋K**「重做清除」剛復原的這次目標跳轉返回位置，沿用清除提示，保留影格、草稿、播放與既有歷史，防止輸入／搜尋／中文組字誤觸，更新雙語說明。
 
