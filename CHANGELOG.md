@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added **H** to undo clearing the current target-visit return position, sharing the restored notice/button action with editor/search/IME and availability guards; updated bilingual help and accessible shortcut metadata.
+- 新增 **H** 復原清除本次目標跳轉返回位置快捷鍵，沿用成功提示與按鈕動作，防止輸入／搜尋／中文組字及不可用狀態誤觸，更新雙語說明與快捷鍵資訊。
+
 - Successful target-visit return **Undo clear** now shows **This target-jump return position restored** with its target, preserving frames/drafts/playback and all existing history; updated bilingual help.
 - 本次目標跳轉返回位置「**復原清除**」成功後顯示「**已恢復本次目標跳轉返回位置**」及目標，保留影格、草稿、播放與全部既有歷史，更新雙語說明。
 
