@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Successful button or **Shift+V** clearing now shows **Clear-history target visit return position cleared**, preserving frames/drafts/playback/all existing history; updated bilingual help.
+- 按鈕或 **Shift＋V** 成功清除後顯示「**已清除這回目標跳轉返回位置**」，保留影格、草稿、播放與全部既有歷史，更新雙語說明。
+
 - Added **Clear this clear-history target visit position** beside return, sharing Shift+V and missing/busy guards; works with shortcuts off and preserves frames/drafts/playback/all existing history. Updated bilingual help.
 - 新增「**清除這回目標跳轉返回位置**」按鈕，沿用 Shift＋V 與無位置／操作中防護，關閉快捷鍵仍可使用，保留影格、草稿、播放與全部既有歷史，更新雙語說明。
 
