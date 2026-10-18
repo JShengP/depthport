@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Successful button or **Shift+G** clearing now shows **This target-jump return position cleared**, preserving frames/drafts/playback and all existing history; updated bilingual help.
+- 按鈕或 **Shift＋G** 清除成功後顯示「**已清除本次目標跳轉返回位置**」，保留影格、草稿、播放與全部既有歷史，更新雙語說明。
+
 - Added **Clear this target-jump return position** beside its return button, sharing Shift+G with automatic availability and frame/draft/playback/history preservation; updated bilingual help.
 - 新增「**清除本次目標跳轉返回位置**」按鈕，沿用 Shift＋G，無有效位置或操作中自動停用，保留影格、草稿、播放與既有歷史，更新雙語說明。
 
