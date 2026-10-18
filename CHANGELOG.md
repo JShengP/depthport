@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added **G** for Return before this target jump, sharing the draft/history-preserving button action with native editor/search/IME and availability guards; updated bilingual help and accessible shortcut metadata.
+- 新增 **G**「返回本次目標跳轉前影格」快捷鍵，沿用保留草稿／歷史的按鈕動作，防止輸入／搜尋／中文組字及不可用狀態誤觸，更新雙語說明及快捷鍵資訊。
+
 - Added **Return before this target jump** for independent Undo/Redo clear target visits, preserving drafts/settings/all existing history with separate origin and availability/failure guards; updated bilingual help.
 - 新增「**返回本次目標跳轉前影格**」，可從獨立復原／重做清除目標返回，另存起點並防護不可用／失敗情況，保留草稿、設定與全部既有歷史，更新雙語說明。
 
