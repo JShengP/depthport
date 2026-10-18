@@ -3502,7 +3502,7 @@ test('Undo clear restores either clear action without replay, preserving drafts,
   if(action==='button')e['bookmark-history-clear-return'].onclick();else pressBookmarkKey(ui,'R',{shiftKey:true});
   assert.equal(e['bookmark-history-undo-clear'].hidden,false);assert.equal(e['bookmark-history-undo-clear'].disabled,false);e['bookmark-shortcuts-enabled'].checked=false;e['bookmark-shortcuts-enabled'].onchange();
   const calls=ui.pending.length,clouds=ui.cloudUpdates.length,note=e['bookmark-note'].value,status=e['playback-status'].textContent,image=e.rgb.src;
-  e['bookmark-history-undo-clear'].onclick();await flush();assert.equal(e['bookmark-history-return-target'].textContent,target);assert.equal(e['bookmark-history-return'].disabled,false);assert.equal(e['bookmark-history-clear-return'].disabled,false);assert.equal(e['bookmark-history-undo-clear'].hidden,true);assert.equal(e['bookmark-history-undo-clear'].disabled,true);
+  e['bookmark-history-undo-clear'].onclick();await flush();assert.equal(e['bookmark-history-return-target'].textContent,'Return position restored · '+target);assert.equal(e['bookmark-history-return'].disabled,false);assert.equal(e['bookmark-history-clear-return'].disabled,false);assert.equal(e['bookmark-history-undo-clear'].hidden,true);assert.equal(e['bookmark-history-undo-clear'].disabled,true);
   assertShownFrame(ui,1);assert.equal(e.rgb.src,image);assert.equal(e['bookmark-note'].value,note);assert.equal(e['bookmark-tag-occlusion'].checked,true);assert.equal(e['bookmark-search'].value,'query retained');assert.equal(e['bookmark-filter-tag'].value,'general');assertLoopValues(ui,2,3,true);assert.equal(e['playback-speed'].value,'2');assert.equal(e['playback-status'].textContent,status);assert.equal(ui.pending.length,calls);assert.equal(ui.cloudUpdates.length,clouds);assert.equal(e['bookmark-undo-delete'].disabled,false);
   e['bookmark-history-undo-clear'].onclick();assert.equal(ui.pending.length,calls);
   e['bookmark-history-clear-return'].onclick();assert.equal(e['bookmark-history-undo-clear'].disabled,false);e['bookmark-history-undo-clear'].onclick();
@@ -3531,4 +3531,28 @@ test('Undo clear keeps ordinary navigation and failed jumps but cannot override 
  const jump=e['bookmark-undo-delete-jump'].onclick();await flush();await completeReplay(ui,1);await jump;assert.match(e['bookmark-history-return-target'].textContent,/#2$/);assert.equal(e['bookmark-history-undo-clear'].disabled,true);assert.equal(e['bookmark-history-undo-clear'].hidden,true);e['bookmark-history-undo-clear'].onclick();assert.match(e['bookmark-history-return-target'].textContent,/#2$/);
  e['bookmark-history-clear-return'].onclick();assert.equal(e['bookmark-history-undo-clear'].disabled,false);e.lang.value='zh-TW';e.lang.onchange();assert.equal(e['bookmark-history-undo-clear'].disabled,false);assert.equal(e['bookmark-history-return-target'].textContent,'已清除返回位置');
  e['sessions-list'].value='session-b';const changed=e['sessions-list'].onchange();await flush();await finishFrames(ui,'session-b',true,null,[1,2,3],[]);await changed;assert.equal(e['bookmark-history-undo-clear'].disabled,true);assert.equal(e['bookmark-history-undo-clear'].hidden,true);e['bookmark-history-undo-clear'].onclick();assert.equal(e['bookmark-history-return'].disabled,true);
+});
+
+test('restored-return notice keeps the target, language, drafts and navigation, clearing on new state',async()=>{
+ const ui=await returnKeyFixture(),e=ui.elements,summary=()=>e['bookmark-history-return-target'].textContent;
+ e['bookmark-history-clear-return'].onclick();e['bookmark-history-undo-clear'].onclick();const calls=ui.pending.length,note=e['bookmark-note'].value;
+ assert.match(summary(),/^Return position restored · Target: Frame 3 \/ 3 · #3$/);assertShownFrame(ui,1);assert.equal(e['bookmark-note'].value,note);assert.equal(ui.pending.length,calls);
+ e.lang.value='zh-TW';e.lang.onchange();assert.match(summary(),/^已恢復返回位置 · 目標: 影格 3 \/ 3 · #3$/);assert.equal(e['bookmark-note'].value,note);
+ await showSaved(ui,2);assert.match(summary(),/^已恢復返回位置/);
+ const failed=e['bookmark-history-return'].onclick();await flush();ui.respond('/api/sessions/session-a/frames/3/replay',{detail:'synthetic unavailable'},false,404);await failed;assert.match(summary(),/^已恢復返回位置/);assertShownFrame(ui,2);
+ const returning=e['bookmark-history-return'].onclick();await flush();await completeReplay(ui,3);await returning;assert.equal(summary(),'目前無可操作目標');assert.equal(e['bookmark-note'].value,'origin draft');
+ const jump=e['bookmark-undo-delete-jump'].onclick();await flush();await completeReplay(ui,1);await jump;assert.match(summary(),/#3$/);assert.equal(summary().includes('已恢復返回位置'),false);
+ e['bookmark-history-clear-return'].onclick();e['bookmark-history-undo-clear'].onclick();assert.match(summary(),/^已恢復返回位置/);await showSaved(ui,2);
+ const newer=e['bookmark-undo-delete-jump'].onclick();await flush();await completeReplay(ui,1);await newer;assert.match(summary(),/#2$/);assert.equal(summary().includes('已恢復返回位置'),false);
+ e['bookmark-history-clear-return'].onclick();assert.equal(summary(),'已清除返回位置');e['bookmark-history-undo-clear'].onclick();assert.match(summary(),/^已恢復返回位置/);
+ e['sessions-list'].value='session-b';const changed=e['sessions-list'].onchange();await flush();await finishFrames(ui,'session-b',true,null,[1,2,3],[]);await changed;assert.equal(summary(),'目前無可操作目標');assert.equal(e['bookmark-history-return'].disabled,true);
+});
+
+test('missing, blocked and busy Undo clear never show a restored success notice',async()=>{
+ const empty=await startUI();empty.elements['bookmark-history-undo-clear'].onclick();assert.equal(empty.elements['bookmark-history-return-target'].textContent,'No available target');
+ const ui=await returnKeyFixture(),e=ui.elements,summary=()=>e['bookmark-history-return-target'].textContent;
+ e['bookmark-history-undo-clear'].onclick();assert.equal(summary().includes('Return position restored'),false);e['bookmark-history-clear-return'].onclick();
+ e['shortcut-help-open'].onclick();e['bookmark-history-undo-clear'].onclick();assert.equal(summary(),'Return position cleared');e['shortcut-help-close'].onclick();
+ e['bookmark-undo-delete'].onclick();await flush();e['bookmark-history-undo-clear'].onclick();assert.equal(summary(),'Return position cleared');ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',[bookmarkRecord(1,{tags:['crossing']})]));await flush();assert.equal(summary(),'Return position cleared');
+ e['bookmark-history-undo-clear'].onclick();assert.match(summary(),/^Return position restored/);e['bookmark-history-clear-return'].onclick();assert.equal(summary(),'Return position cleared');
 });
