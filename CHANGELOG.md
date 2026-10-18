@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added **Shift+T** to clear only the separate clear-target return position and disable its button, preserving shown frames, drafts, playback and original history with editor/search/IME guards; updated bilingual help.
+- 新增 **Shift＋T** 只清除獨立的清除目標返回位置並停用按鈕，保留目前影格、草稿、播放與原有歷史，防止輸入／搜尋／組字誤觸並更新雙語說明。
+
 - Added **T** to return before clear-target jumps, sharing the draft/history-preserving button action with editor/search/IME, modifier and availability guards; updated bilingual help and accessible shortcut metadata.
 - 新增 **T**「返回清除目標跳轉前影格」快捷鍵，沿用保留草稿／歷史的按鈕動作，防止輸入／搜尋／組字、修飾鍵及不可用狀態誤觸，更新雙語說明及快捷鍵資訊。
 
