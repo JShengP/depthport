@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added **Shift+W** to redo clearing only the just-restored clear-history target visit return position, preserving frames/drafts/playback/all existing history with editor/search/IME guards; updated bilingual help and shortcut metadata.
+- 新增 **Shift＋W** 只重做剛復原的這回目標跳轉返回位置清除，保留影格、草稿、播放及全部既有歷史，防止備註／搜尋／中文組字誤觸，更新雙語說明與快捷鍵資訊。
+
 - Added **W** to undo clearing this clear-history target visit return position, sharing the guarded Undo clear action and restored notice while preserving frames/drafts/playback/all existing history. Updated bilingual help and shortcut metadata.
 - 新增 **W**「這回目標跳轉返回位置復原清除」快捷鍵，沿用復原與成功提示，保留影格、草稿、播放及全部既有歷史，防止備註／搜尋／中文組字誤觸，更新雙語說明與快捷鍵資訊。
 
