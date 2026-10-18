@@ -4317,3 +4317,43 @@ test('visit-return clear summaries retain known blocked targets while modal, hid
  }
  e['bookmark-undo-delete'].onclick();await flush();assert.equal(e['bookmark-redo-clear-target-jump-position-target'].textContent,'Target: Frame 3 / 3 · #3 · Temporarily unavailable');ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',[bookmarkRecord(1,{tags:['crossing']})]));await flush();assert.equal(e['bookmark-redo-clear-target-jump-position-target'].textContent,'Target: Frame 3 / 3 · #3');
 });
+
+async function visitClearJumpFixture(kind='undo'){
+ const ui=await targetJumpBackFixture();ui.elements['bookmark-clear-target-jump-position'].onclick();if(kind==='redo')ui.elements['bookmark-undo-clear-target-jump-position'].onclick();return ui;
+}
+for(const kind of ['undo','redo'])test(kind+' visit-return clear target jump pauses with both drafts/settings and all existing histories intact',async()=>{
+ for(const playing of [false,true]){
+  const ui=await visitClearJumpFixture(kind),e=ui.elements,id='bookmark-'+kind+'-clear-target-jump-position';e['bookmark-shortcuts-enabled'].checked=false;e['bookmark-shortcuts-enabled'].onchange();configureLoop(ui,1,2);filterBookmarkTag(ui,'general');searchBookmarkNotes(ui,'no match');e['playback-speed'].value='2';e['playback-speed'].onchange();editBookmark(ui,'edited displayed draft',['crossing']);
+  const history=()=>['bookmark-history-return-target','bookmark-history-undo-clear-target','bookmark-history-redo-clear-target','bookmark-clear-target-return-target','bookmark-undo-clear-target-position-target','bookmark-redo-clear-target-position-target','bookmark-target-clear-jump-return-target','bookmark-undo-clear-target-jump-position-target','bookmark-redo-clear-target-jump-position-target'].map(id=>e[id].textContent),before=history(),writes=bookmarkWrites(ui).length,confirmations=ui.confirmations.length;if(playing)e['playback-play'].onclick();const calls=replayRequests(ui).length;assert.equal(e[id+'-jump'].disabled,false);assert.match(e[id+'-jump'].getAttribute('aria-label'),/#3/);
+  const jumping=e[id+'-jump'].onclick();await flush();assert.match(e['playback-status'].textContent,/Paused/);assert.equal(e[id+'-jump'].disabled,true);e[id+'-jump'].onclick();assert.equal(replayRequests(ui).length,calls+1);await completeReplay(ui,3);await jumping;
+  assertShownFrame(ui,3);assert.equal(e['bookmark-note'].value,'origin draft');assert.equal(e['bookmark-tag-id-switch'].checked,true);assert.deepEqual(history(),before);assert.equal(e[id].disabled,false);assert.equal(e[id+'-jump'].disabled,false);assert.equal(e['bookmark-search'].value,'no match');assert.equal(e['bookmark-filter-tag'].value,'general');assertLoopValues(ui,1,2,true);assert.equal(e['playback-speed'].value,'2');assert.equal(ui.document.activeElement,e.result);assert.equal(bookmarkWrites(ui).length,writes);assert.equal(ui.confirmations.length,confirmations);await showSaved(ui,1);assert.equal(e['bookmark-note'].value,'edited displayed draft');assert.equal(e['bookmark-tag-crossing'].checked,true);assert.deepEqual(history(),before);
+ }
+});
+
+test('visit-return clear target HTTP/hash/decode failures keep the shown frame/editor and allow exact retry',async()=>{
+ for(const kind of ['undo','redo'])for(const failure of ['http','snapshot','decode']){
+  const ui=await visitClearJumpFixture(kind),e=ui.elements,id='bookmark-'+kind+'-clear-target-jump-position',summary=e[id+'-target'].textContent,visit=e['bookmark-target-clear-jump-return-target'].textContent,image=e.rgb.src;const jumping=e[id+'-jump'].onclick();await flush();
+  if(failure==='http')ui.respond('/api/sessions/session-a/frames/3/replay',{detail:'synthetic unavailable'},false,404);else if(failure==='snapshot')ui.respond('/api/sessions/session-a/frames/3/replay',{...replayResponse('session-a',3),snapshot_sha256:otherHash});else{ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await flush();ui.decode('data:image/png;base64,session-a-3',Error('synthetic decode failure'));ui.decode('data:image/jpeg;base64,session-a-depth-3')}
+  await jumping;assertShownFrame(ui,1);assert.equal(e.rgb.src,image);assert.equal(e['bookmark-note'].value,'target draft');assert.equal(e[id+'-target'].textContent,summary);assert.equal(e['bookmark-target-clear-jump-return-target'].textContent,visit);assert.equal(e[id+'-jump'].disabled,false);assert.equal(e[id].disabled,false);const retry=e[id+'-jump'].onclick();await flush();await completeReplay(ui,3);await retry;assert.equal(e['bookmark-note'].value,'origin draft');assert.equal(e[id+'-target'].textContent,summary);assert.equal(e['bookmark-target-clear-jump-return-target'].textContent,visit);
+ }
+});
+
+test('visit-return clear target jumps disable absent/modal/hidden/seek/write states without changing history',async()=>{
+ const empty=await startUI();for(const kind of ['undo','redo']){const jump=empty.elements['bookmark-'+kind+'-clear-target-jump-position-jump'];assert.equal(jump.disabled,true);jump.onclick()}assert.equal(replayRequests(empty).length,0);
+ for(const kind of ['undo','redo']){
+  const ui=await visitClearJumpFixture(kind),e=ui.elements,id='bookmark-'+kind+'-clear-target-jump-position',calls=replayRequests(ui).length;
+  for(const block of ['help','hidden','seek']){
+   if(block==='help')e['shortcut-help-open'].onclick();else if(block==='hidden')ui.hide();else{e['replay-progress'].value='2';e['replay-progress'].oninput()}
+   assert.equal(e[id+'-jump'].disabled,true);e[id+'-jump'].onclick();assert.equal(replayRequests(ui).length,calls);
+   if(block==='help')e['shortcut-help-close'].onclick();else if(block==='hidden'){ui.document.hidden=false;ui.dispatch('visibilitychange')}else e['playback-pause'].onclick();assert.equal(e[id+'-jump'].disabled,false);
+  }
+  e['bookmark-undo-delete'].onclick();await flush();assert.equal(e[id+'-jump'].disabled,true);e[id+'-jump'].onclick();ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',[bookmarkRecord(1,{tags:['crossing']})]));await flush();assert.equal(e[id+'-jump'].disabled,false);assert.equal(replayRequests(ui).length,calls);
+ }
+ const html=fs.readFileSync(path.join(root,'static/sessions.html'),'utf8');for(const kind of ['undo','redo'])assert.ok(html.includes('id="bookmark-'+kind+'-clear-target-jump-position-jump" class="bookmark-history-jump" type="button" disabled'));
+});
+
+test('late visit-return clear target replies cannot show old Session frames or restore cleared history',async()=>{
+ for(const kind of ['undo','redo']){
+  const ui=await visitClearJumpFixture(kind),e=ui.elements,id='bookmark-'+kind+'-clear-target-jump-position';const jumping=e[id+'-jump'].onclick();await flush();e['sessions-list'].value='session-b';const changed=e['sessions-list'].onchange();await flush();await finishFrames(ui,'session-b',true,null,[1,2,3],[bookmarkRecord(2,{note:'other Session'})]);await changed;ui.respond('/api/sessions/session-a/frames/3/replay',replayResponse('session-a',3));await jumping;assert.equal(e.result.hidden,true);assert.equal(e[id+'-jump'].disabled,true);assert.equal(e[id+'-target'].textContent,'No available target');assert.equal(e['bookmark-target-clear-jump-return-target'].textContent,'No available target');await showSaved(ui,2,{sid:'session-b'});assert.equal(e['bookmark-note'].value,'other Session');
+ }
+});
