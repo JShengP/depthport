@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added a **Clear target-jump return position** button sharing Shift+T, with automatic availability and draft/frame/history preservation; updated bilingual help.
+- 新增清除目標跳轉返回位置按鈕，沿用 Shift＋T，自動停用不可用狀態並保留影格、草稿與歷史，更新雙語說明。
+
 - Added **Shift+T** to clear only the separate clear-target return position and disable its button, preserving shown frames, drafts, playback and original history with editor/search/IME guards; updated bilingual help.
 - 新增 **Shift＋T** 只清除獨立的清除目標返回位置並停用按鈕，保留目前影格、草稿、播放與原有歷史，防止輸入／搜尋／組字誤觸並更新雙語說明。
 

@@ -3818,3 +3818,32 @@ test('Shift T keeps both drafts and allows later clear-target jumps to establish
  const ui=await clearReturnKeyFixture('redo'),e=ui.elements;assert.equal(pressBookmarkKey(ui,'T',{shiftKey:true}).defaultPrevented,true);await showSaved(ui,1);assert.equal(e['bookmark-note'].value,'target draft');const jump=e['bookmark-history-redo-clear-jump'].onclick();await flush();await completeReplay(ui,3);await jump;assert.equal(e['bookmark-note'].value,'origin draft');assert.equal(e['bookmark-clear-target-return'].disabled,false);assert.match(e['bookmark-clear-target-return-target'].textContent,/#1$/);assert.equal(pressBookmarkKey(ui,'T',{shiftKey:true}).defaultPrevented,true);assert.equal(e['bookmark-history-redo-clear'].disabled,false);assert.match(e['bookmark-history-return-target'].textContent,/^Return position restored.*#3$/);
  e['sessions-list'].value='session-b';const changed=e['sessions-list'].onchange();await flush();await finishFrames(ui,'session-b',true,null,[1,2,3],[]);await changed;assert.equal(pressBookmarkKey(ui,'T',{shiftKey:true}).defaultPrevented,false);assert.equal(e['bookmark-clear-target-return'].disabled,true);
 });
+
+test('clear target-jump return button works with shortcuts off and preserves both drafts, playback and original history',async()=>{
+ for(const kind of ['undo','redo'])for(const playing of [false,true]){
+  const ui=await clearReturnKeyFixture(kind),e=ui.elements,button=e['bookmark-clear-target-position'];
+  e['bookmark-shortcuts-enabled'].checked=false;e['bookmark-shortcuts-enabled'].onchange();configureLoop(ui,1,2);filterBookmarkTag(ui,'general');searchBookmarkNotes(ui,'kept query');e['playback-speed'].value='2';e['playback-speed'].onchange();if(playing)e['playback-play'].onclick();
+  const history=()=>['bookmark-history-return-target','bookmark-history-undo-clear-target','bookmark-history-redo-clear-target'].map(id=>e[id].textContent),before=history(),calls=ui.pending.length,clouds=ui.cloudUpdates.length,image=e.rgb.src,status=e['playback-status'].textContent;
+  assert.equal(button.disabled,false);button.focus();button.onclick();await flush();assertShownFrame(ui,3);assert.equal(e.rgb.src,image);assert.equal(e['bookmark-note'].value,'origin draft');assert.equal(e['bookmark-tag-id-switch'].checked,true);assert.equal(e['bookmark-search'].value,'kept query');assert.equal(e['bookmark-filter-tag'].value,'general');assertLoopValues(ui,1,2,true);assert.equal(e['playback-speed'].value,'2');assert.equal(e['playback-status'].textContent,status);assert.equal(ui.pending.length,calls);assert.equal(ui.cloudUpdates.length,clouds);assert.deepEqual(history(),before);assert.equal(button.disabled,true);assert.equal(e['bookmark-clear-target-return'].disabled,true);assert.equal(e['bookmark-clear-target-return-target'].textContent,'No available target');button.onclick();assert.equal(ui.pending.length,calls);
+  await showSaved(ui,1);assert.equal(e['bookmark-note'].value,'target draft');assert.equal(e['bookmark-tag-occlusion'].checked,true);const jump=e['bookmark-history-'+kind+'-clear-jump'].onclick();await flush();await completeReplay(ui,3);await jump;assert.equal(button.disabled,false);assert.equal(e['bookmark-note'].value,'origin draft');assert.deepEqual(history(),before);
+ }
+});
+
+test('clear target-jump return button is disabled for absent, blocked and stale positions',async()=>{
+ const empty=await startUI();assert.equal(empty.elements['bookmark-clear-target-position'].disabled,true);empty.elements['bookmark-clear-target-position'].onclick();assert.equal(replayRequests(empty).length,0);
+ const ui=await clearReturnKeyFixture(),e=ui.elements,button=e['bookmark-clear-target-position'];
+ for(const block of ['help','hidden','seek']){
+  if(block==='help')e['shortcut-help-open'].onclick();else if(block==='hidden')ui.hide();else{e['replay-progress'].value='2';e['replay-progress'].oninput()}
+  assert.equal(button.disabled,true);button.onclick();
+  if(block==='help')e['shortcut-help-close'].onclick();else if(block==='hidden'){ui.document.hidden=false;ui.dispatch('visibilitychange')}else e['playback-pause'].onclick();assert.equal(button.disabled,false);
+ }
+ e['bookmark-undo-delete'].onclick();await flush();assert.equal(button.disabled,true);button.onclick();ui.respond('/api/sessions/session-a/frames/1/bookmark',bookmarkResponse('session-a',[bookmarkRecord(1,{tags:['crossing']})]));await flush();assert.equal(button.disabled,false);
+ const jump=e['bookmark-history-undo-clear-jump'].onclick();await flush();assert.equal(button.disabled,true);button.onclick();await completeReplay(ui,3);await jump;assert.equal(button.disabled,false);
+ const returning=e['bookmark-clear-target-return'].onclick();await flush();assert.equal(button.disabled,true);button.onclick();await completeReplay(ui,1);await returning;assert.equal(button.disabled,true);
+ e['sessions-list'].value='session-b';const changed=e['sessions-list'].onchange();await flush();await finishFrames(ui,'session-b',true,null,[1,2,3],[]);await changed;button.onclick();assert.equal(button.disabled,true);
+});
+
+test('Shift T and the clear target-jump button share availability and accessible shortcut metadata',async()=>{
+ const ui=await clearReturnKeyFixture(),e=ui.elements,button=e['bookmark-clear-target-position'];assert.equal(button.getAttribute('aria-keyshortcuts'),'Shift+t');assert.equal(button.disabled,false);assert.equal(pressBookmarkKey(ui,'T',{shiftKey:true}).defaultPrevented,true);assert.equal(button.disabled,true);assert.equal(e['bookmark-clear-target-return'].disabled,true);
+ e['bookmark-shortcuts-enabled'].checked=false;e['bookmark-shortcuts-enabled'].onchange();assert.equal(button.getAttribute('aria-keyshortcuts'),'');e['bookmark-shortcuts-enabled'].checked=true;e['bookmark-shortcuts-enabled'].onchange();assert.equal(button.getAttribute('aria-keyshortcuts'),'Shift+t');
+});
