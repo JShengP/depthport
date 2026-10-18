@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added **Shift+Y** to redo clearing only the just-restored target-jump return position, preserving frames/drafts/playback/original history with editor/search/IME guards and bilingual help.
+- 新增 **Shift＋Y** 重做清除剛復原的目標跳轉返回位置，保留影格、草稿、播放與原有歷史，防止輸入／搜尋／中文組字誤觸並更新雙語說明。
+
 - Added **Y** to undo clearing the independent target-jump return position, sharing the existing restored notice/button action with editor/search/IME guards; updated bilingual help and accessible shortcut metadata.
 - 新增 **Y** 復原清除目標跳轉返回位置快捷鍵，沿用按鈕與成功提示，防止輸入／搜尋／中文組字誤觸，更新雙語說明及快捷鍵資訊。
 
