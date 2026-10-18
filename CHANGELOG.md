@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added an accessible **Return position cleared** notice beside return controls after successful button or Shift+R clearing, preserving shown frames and unsaved drafts; updated bilingual help.
+- 按鈕或 Shift＋R 清除成功後，在返回控制旁顯示可供輔助閱讀的「**已清除返回位置**」提示，保留目前影格與未儲存草稿，並更新雙語說明。
+
 - Added a **Clear return position** button sharing Shift+R behavior; automatically disabled without a position or while busy, usable with shortcuts off, preserving shown frames and unsaved notes. Updated bilingual help.
 - 新增「**清除返回位置**」按鈕，與 Shift＋R 共用動作；無位置或忙碌時自動停用，關閉快捷鍵仍可使用，保留目前影格及未儲存備註，並更新雙語說明。
 
