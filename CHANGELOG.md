@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added the target-visit return **Redo clear** button sharing Shift+H, with automatic availability, the cleared notice and frame/draft/playback/history preservation; updated bilingual help.
+- 新增本次目標跳轉返回位置「**重做清除**」按鈕，沿用 Shift＋H，無可重做位置或操作中自動停用，保留成功提示、影格、草稿、播放與既有歷史，更新雙語說明。
+
 - Added **Shift+H** to redo clearing only the just-restored target-visit return position, sharing the clear notice/action with frame/draft/playback/history preservation, editor/search/IME guards and bilingual help.
 - 新增 **Shift＋H** 重做清除剛復原的本次目標跳轉返回位置，沿用成功提示與清除動作，保留影格、草稿、播放與既有歷史，防止輸入／搜尋／中文組字誤觸並更新雙語說明。
 
