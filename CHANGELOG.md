@@ -1,5 +1,8 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 
+- Added **Shift+R** to clear the return position and disable its button, preserving the current frame, unsaved drafts, playback and review settings with input/IME guards; updated bilingual shortcut help.
+- 新增 **Shift＋R** 清除返回位置並停用返回按鈕，保留目前影格、未儲存草稿、播放與檢查設定，沿用輸入／組字防護並更新雙語說明。
+
 - Added **R** to return to the frame before a history-target jump using the existing draft-preserving return action, with editor/IME and busy-state guards; updated bilingual shortcut help and metadata.
 - 新增 **R** 返回目標跳轉前影格，沿用保留草稿的返回流程及輸入／組字、忙碌狀態防護，更新雙語快捷鍵說明與資訊。
 
