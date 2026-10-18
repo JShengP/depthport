@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added **Shift+J** to clear only the current clear-target-visit return position and disable its button, preserving frames/drafts/playback/all existing history with editor/search/IME guards; updated bilingual help.
+- 新增 **Shift＋J** 只清除這次目標跳轉返回位置並停用按鈕，保留影格、草稿、播放與全部既有歷史，防止輸入／搜尋／中文組字誤觸，更新雙語說明。
+
 - Added **J** for Return before this clear-target visit, sharing the draft/history-preserving button action with editor/search/IME and availability guards; updated bilingual help and accessible shortcut metadata.
 - 新增 **J**「返回這次目標跳轉前影格」快捷鍵，沿用保留草稿／歷史的按鈕動作，防止輸入／搜尋／中文組字及不可用狀態誤觸，更新雙語說明與快捷鍵資訊。
 
