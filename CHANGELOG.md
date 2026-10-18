@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added **T** to return before clear-target jumps, sharing the draft/history-preserving button action with editor/search/IME, modifier and availability guards; updated bilingual help and accessible shortcut metadata.
+- 新增 **T**「返回清除目標跳轉前影格」快捷鍵，沿用保留草稿／歷史的按鈕動作，防止輸入／搜尋／組字、修飾鍵及不可用狀態誤觸，更新雙語說明及快捷鍵資訊。
+
 - Added **Return before clear-target jump** with a separate single origin position, exact-snapshot validation, retry and automatic availability; preserves per-frame drafts/settings and original clear/return/deletion history. Updated bilingual help.
 - 新增「**返回清除目標跳轉前影格**」，另存單一原位置並驗證精確快照、失敗可重試及自動停用，保留各影格草稿／設定與原有清除／返回／刪除歷史，更新雙語說明。
 
