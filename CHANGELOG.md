@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added **V** for Return before this clear-history target visit, sharing the guarded return button while preserving drafts/settings/all existing clear history; updated bilingual help and shortcut metadata with editor/search/IME guards.
+- 新增 **V**「返回這回目標跳轉前影格」快捷鍵，沿用保留草稿、設定與全部清除歷史的返回按鈕，防止備註／搜尋／中文組字及不可用狀態誤觸，更新雙語說明與快捷鍵資訊。
+
 - Added **Return before this clear-history target visit**, with a separate origin for this return-target visit Undo/Redo target inspection, guarded pause-and-return and preservation of drafts/settings/all existing clear history. Updated bilingual help.
 - 新增「**返回這回目標跳轉前影格**」，另存此次目標跳轉返回位置復原／重做目標查看前的位置，暫停返回並保留草稿、設定與全部既有清除歷史，更新雙語說明。
 
