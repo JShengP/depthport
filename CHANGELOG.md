@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added **Return before clear-target jump** with a separate single origin position, exact-snapshot validation, retry and automatic availability; preserves per-frame drafts/settings and original clear/return/deletion history. Updated bilingual help.
+- 新增「**返回清除目標跳轉前影格**」，另存單一原位置並驗證精確快照、失敗可重試及自動停用，保留各影格草稿／設定與原有清除／返回／刪除歷史，更新雙語說明。
+
 - Made **Undo clear / Redo clear** target frame numbers clickable: pause and replay the exact snapshot with per-frame drafts/settings/history preserved, unavailable targets disabled, stale/error guards and bilingual help.
 - 「**復原清除／重做清除**」目標影格編號可點擊，暫停並回放精確快照，保留各影格草稿／設定／歷史，無目標時停用，拒絕過期結果並更新雙語說明。
 
