@@ -1,5 +1,8 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 
+- Added **Ctrl+Y** as an alternative to Ctrl+Shift+Z for confirmed bookmark-deletion redo, sharing Cancel/Esc, saved-version and input/IME guards; updated bilingual shortcut help and metadata.
+- 新增 **Ctrl＋Y** 作為 Ctrl＋Shift＋Z 重做書籤刪除的替代鍵，沿用確認／取消／Esc、書籤版本及輸入／組字防護，更新雙語說明及快捷鍵資訊。
+
 - Added **Ctrl+Shift+Z** to confirm redoing the latest restored bookmark deletion, preserving drafts and Cancel/Esc behavior; stale bookmark versions cannot be deleted. Updated bilingual shortcut help.
 - 新增 **Ctrl＋Shift＋Z** 確認後重做剛復原的書籤刪除，保留草稿與取消／Esc 行為，避免刪除已被修改的書籤，更新雙語快捷鍵說明。
 
