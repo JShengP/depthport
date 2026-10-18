@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added **Shift+V** to clear only the Return before this clear-history target visit position, disabling return while preserving frames/drafts/playback/all history with editor/search/IME guards. Updated bilingual help and shortcut metadata.
+- 新增 **Shift＋V** 只清除「返回這回目標跳轉前影格」的位置並停用返回，保留影格、草稿、播放與全部歷史，防止備註／搜尋／中文組字及不可用狀態誤觸，更新雙語說明與快捷鍵資訊。
+
 - Added **V** for Return before this clear-history target visit, sharing the guarded return button while preserving drafts/settings/all existing clear history; updated bilingual help and shortcut metadata with editor/search/IME guards.
 - 新增 **V**「返回這回目標跳轉前影格」快捷鍵，沿用保留草稿、設定與全部清除歷史的返回按鈕，防止備註／搜尋／中文組字及不可用狀態誤觸，更新雙語說明與快捷鍵資訊。
 
