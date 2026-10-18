@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added **Shift+P** to redo clearing only the just-restored return-target visit position, preserving frames/drafts/playback/all history with editor/search/IME and eligibility guards; updated bilingual help and shortcut metadata.
+- 新增 **Shift＋P** 只重做清除剛復原的此次目標跳轉返回位置，保留影格、草稿、播放與全部歷史，防止備註／搜尋／中文組字及不可用狀態誤觸，更新雙語說明與快捷鍵資訊。
+
 - Added **P** for this return-target visit position **Undo clear**, sharing the draft/history-preserving button and restored notice with editor/search/IME and availability guards; updated bilingual help and shortcut metadata.
 - 新增 **P** 快捷鍵復原清除此次目標跳轉返回位置，沿用保留草稿／歷史的按鈕與「已恢復此次目標跳轉返回位置」提示，防止備註／搜尋／中文組字及不可用狀態誤觸，更新雙語說明與快捷鍵資訊。
 
