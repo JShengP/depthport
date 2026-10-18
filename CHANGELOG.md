@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Successful target-return **Undo clear** now shows **Target-jump return position restored** with its target, preserving frames/drafts/original history; updated bilingual help.
+- 目標跳轉返回位置「**復原清除**」成功後顯示「**已恢復目標跳轉返回位置**」及目標，保留影格、草稿與原有歷史，更新雙語說明。
+
 - Added **Undo clear** beside the target-jump return cleared notice, restoring only the last cleared independent position while preserving frames/drafts/playback/original history; updated bilingual help.
 - 新增目標跳轉返回位置清除提示旁的「**復原清除**」，只恢復最近清除的獨立位置，保留影格、草稿、播放與原有歷史，更新雙語說明。
 
