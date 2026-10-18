@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- This clear-target visit return **Undo clear / Redo clear** target numbers are accessible pause-and-jump buttons with missing/busy/stale/failure guards, preserving per-frame drafts/settings/all history; updated bilingual help.
+- 這次目標跳轉返回位置「**復原清除／重做清除**」目標編號可點擊暫停跳轉，防護無目標、操作中、過期與失敗情況，保留各格草稿、設定與全部歷史，更新雙語說明。
+
 - This clear-target visit return **Undo clear / Redo clear** now show their own target frame position / total and saved #index beside each button, preserving frames/drafts/playback/all history with unavailable-state summaries; updated bilingual help.
 - 這次目標跳轉返回位置「**復原清除／重做清除**」旁各自顯示目標影格位置／總數與保存 #索引，標示不可用狀態，保留影格、草稿、播放與全部歷史，更新雙語說明。
 
