@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added separate live target-frame summaries beside **Undo clear / Redo clear**, showing saved position/total and #index with empty/busy states, independent of displayed frames and drafts; updated bilingual help.
+- 在「**復原清除／重做清除**」旁新增各自目標影格摘要，顯示第幾格／總格數及保存索引，含無目標／暫時受阻狀態，不影響目前影格與草稿，並更新雙語說明。
+
 - Added a **Redo clear** button sharing Shift+U behavior; disables without valid restored history or while busy, works with shortcuts off, and preserves frames/drafts/playback with the cleared notice. Updated bilingual help.
 - 新增「**重做清除**」按鈕，與 Shift＋U 共用動作；無有效復原紀錄或忙碌時停用，關閉快捷鍵仍可使用，保留影格／草稿／播放並顯示已清除提示，更新雙語說明。
 

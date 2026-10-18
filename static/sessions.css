@@ -87,6 +87,7 @@ footer{margin:24px 0;color:#acb9c9}@media(max-width:800px){.panels{grid-template
 
 .bookmark-history-actions{display:grid;gap:8px;margin-top:12px}
 .bookmark-history-action{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px}
+.bookmark-history-action[hidden]{display:none}
 .bookmark-history-action button{margin:0;flex-shrink:0}
 .bookmark-history-target{font-size:13px;color:#cce5f8;overflow-wrap:anywhere}
 
