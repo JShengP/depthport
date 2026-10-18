@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Stabilized the spatial comparison overlap test by explicitly holding its worker while asserting rejection, avoiding a fast-worker timing race without changing application behavior.
+- 空間比較重複請求測試改用明確控制背景工作的同步機制，避免執行過快造成偶發失敗，不修改應用程式行為。
+
 - Added **Shift+P** to redo clearing only the just-restored return-target visit position, preserving frames/drafts/playback/all history with editor/search/IME and eligibility guards; updated bilingual help and shortcut metadata.
 - 新增 **Shift＋P** 只重做清除剛復原的此次目標跳轉返回位置，保留影格、草稿、播放與全部歷史，防止備註／搜尋／中文組字及不可用狀態誤觸，更新雙語說明與快捷鍵資訊。
 
