@@ -15,9 +15,16 @@ updates:
         patterns: ['pytest', 'httpx']
       web-runtime:
         patterns: ['Pillow', 'pillow', 'fastapi', 'uvicorn', 'python-multipart', 'python-dotenv']
-      model-runtime-review:
-        patterns: ['*']
-        exclude-patterns: ['pytest', 'httpx', 'Pillow', 'pillow', 'fastapi', 'uvicorn', 'python-multipart', 'python-dotenv']
+      torch-runtime:
+        patterns: ['torch', 'torchvision']
+      shared-model-apis:
+        patterns: ['transformers', 'huggingface-hub', 'safetensors', 'einops']
+      da3-geometry:
+        patterns: ['numpy', 'opencv-python', 'scipy', 'e3nn', 'trimesh', 'open3d', 'pycolmap', 'plyfile']
+      da3-media:
+        patterns: ['pillow-heif', 'imageio', 'imageio-ffmpeg', 'moviepy', 'matplotlib']
+      da3-utilities:
+        patterns: ['addict', 'omegaconf', 'evo', 'requests', 'typer', 'tqdm']
     ignore:
       # DA3 still uses NumPy 1.x; OpenCV 4.12+ wheels require NumPy 2.
       - dependency-name: numpy
