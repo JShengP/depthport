@@ -1,5 +1,7 @@
 # v0.3 optional Roboflow BoT-SORT worker
 
+The separate direct-library [parameter sensitivity study](tracking-parameter-acceptance.md) leaves worker and application defaults unchanged; its timings exclude IPC.
+
 
 **Expanded evidence, 2026-10-19:** [Three-scene MOT17 comparison](tracking-expanded-acceptance.md) evaluates direct Baseline/ByteTrack/BoT-SORT calls separately from this worker pilot. It does not certify extended worker/RTSP or long-occlusion recovery.
 [繁體中文](../zh-TW/tracking-worker.md) · [Sessions](sessions.md) · [Offline benchmark](offline-video-tracking.md)

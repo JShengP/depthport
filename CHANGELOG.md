@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added bounded direct-backend parameter overrides, five fixed activation/split/buffer profiles, effective-parameter checks and paired event gains/losses. New MOT17-09/10 study: 1,179 frames / 60 runs; modest activation-only coverage gains trade off ID switches, aggressive lower gates hurt identity quality, and longer retention adds only one ByteTrack long-event recovery. Defaults unchanged; aggregates only.
+- 新增有界的直接後端參數、五組啟用／分流／保留比較、實際生效核對及事件改善／退步配對。另一組 MOT17-09／10 共 1,179 格、60 次執行；只降啟用的覆蓋改善伴隨較多換 ID，同步降雙門檻損及 ID 品質，延長保留僅新增 ByteTrack 1 個長事件恢復，維持原預設並僅公開彙總。
+
 - Expanded fixed-detection acceptance to 2,700 MOT17 frames / three scenes / 27 runs; added reproducible pinned TrackEval/scenario tools, explicit detector cache settings and verified preview-to-GT scaling. Published aggregates only. Lower IDSW trades off Recall; long-occlusion recovery remains unaccepted.
 - 擴大至三場景 2,700 格 MOT17、27 次固定偵測比較，新增 TrackEval／情境驗收工具、明確偵測設定及預覽與 GT 座標還原；僅公開彙總，較少換 ID 伴隨較低 Recall，長遮擋恢復尚未通過。
 

@@ -26,3 +26,5 @@ The tool uses Playwright's installed Chromium unless `CHROMIUM_PATH` names a loc
 `check_env.py --all --image camera.jpg` is the separate **real** inference path. Its success requires actual model calls; no fake fallback exists.
 
 `tools/cache_video_detections.py` now freezes class/device/NMS/cap/weight/runtime metadata; `tools/validate_mot_tracking.py` runs offline repeated MOT17 comparisons against a clean pinned TrackEval checkout, with visibility/order-exchange diagnostics. Use the separate NumPy 2 environment; [expanded acceptance and reproduction](../docs/en/tracking-expanded-acceptance.md). Raw work files stay local.
+
+`tools/validate_mot_tracking.py --parameter-sweep` runs five fixed activation/high-confidence-split/lost-buffer profiles for both direct backends on a new sequence group, verifies effective thresholds/time budgets and reports paired scenario gains/losses. [Method, protocol and results](../docs/en/tracking-parameter-acceptance.md). This is separate from worker configuration; no app default is changed.

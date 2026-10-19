@@ -1,3 +1,5 @@
+**Tracking parameter study (2026-10-19):** [Five profiles on 1,179 new MOT17 frames](docs/en/tracking-parameter-acceptance.md), 60 completed runs. Lower activation modestly improves Recall/IDF1/HOTA with more ID switches; aggressive lower gates hurt identity quality, and longer retention recovers only one ByteTrack long event. App defaults stay unchanged; v0.3 stays Draft.
+
 **Expanded tracking acceptance (2026-10-19):** [2,700 MOT17 frames across three scenes](docs/en/tracking-expanded-acceptance.md), fixed detections and three repeated runs per method. Lower ID switches came with lower Recall; long-occlusion recovery remains unaccepted. v0.3 remains Draft.
 
 ## v0.3 development preview — Manual Sessions & Replay

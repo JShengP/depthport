@@ -1,3 +1,5 @@
+**2026-10-19 追蹤參數驗收：** [另一組 1,179 格 MOT17、五組參數比較](docs/zh-TW/tracking-parameter-acceptance.md)，完成 60 次執行。只降啟用可小幅改善 Recall／IDF1／HOTA，但換 ID 增加；同步降雙門檻損及 ID 品質，延長保留僅多恢復 ByteTrack 1 個長事件。維持原預設，v0.3 仍為 Draft。
+
 **2026-10-19 擴大追蹤驗收：** [三場景、2,700 格 MOT17 比較](docs/zh-TW/tracking-expanded-acceptance.md)，固定偵測、每方法三次重複；較少換 ID 伴隨較低 Recall，長遮擋恢復仍未通過，v0.3 維持 Draft。
 
 **v0.3 離線語意追蹤新增：** 手動分析已存 Session 影格的 YOLO Detect／Segment，可選預設簡易關聯或獨立 NumPy 2 環境的 [Roboflow BoT-SORT worker](docs/zh-TW/tracking-worker.md)，建立 Object ID 與候選相機 XYZ／深度歷史；不做身份辨識、不代表世界座標軌跡，也不會自動錄影。詳見 [Session 文件](docs/zh-TW/sessions.md)。

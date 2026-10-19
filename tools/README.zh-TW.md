@@ -26,3 +26,5 @@ python tools/browser_offline_smoke.py
 真推論入口是 `check_env.py --all --image camera.jpg`；成功須真正呼叫模型，不會回退假深度。
 
 `tools/cache_video_detections.py` 會記錄類別、裝置、NMS、上限、權重及版本；`tools/validate_mot_tracking.py` 在獨立 NumPy 2 環境使用固定 TrackEval 做 MOT17 重複比較與可見度／換位診斷。[擴大驗收與重跑說明](../docs/zh-TW/tracking-expanded-acceptance.md)，原始工作資料只留本機。
+
+`tools/validate_mot_tracking.py --parameter-sweep` 對另一組序列執行兩個直接後端的五組啟用／高信心分流／保留參數，核對實際門檻及時間預算，並輸出相同事件的改善／退步。[方式、計畫與結果](../docs/zh-TW/tracking-parameter-acceptance.md)；與 worker 設定分開，未變更應用程式預設值。

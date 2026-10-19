@@ -78,7 +78,28 @@ def read_cache(path: Path) -> dict:
     return d
 
 
-def make_tracker(method: str, *, fps: float):
+def validate_tracker_parameters(method: str, parameters: dict | None) -> dict:
+    """Only bounded, explicit direct-library overrides; worker defaults stay separate."""
+    if parameters is None:
+        return {}
+    if method not in ('bytetrack', 'botsort') or not isinstance(parameters, dict):
+        raise VideoBenchmarkError('Parameters require a direct ByteTrack/BoT-SORT backend')
+    allowed = {'track_activation_threshold', 'high_conf_det_threshold', 'lost_track_buffer'}
+    if set(parameters) - allowed:
+        raise VideoBenchmarkError('Unsupported tracker parameter')
+    for name, value in parameters.items():
+        if name == 'lost_track_buffer':
+            if type(value) is not int or not 0 <= value <= 300:
+                raise VideoBenchmarkError('Lost track buffer must be 0..300 frames at 30 FPS')
+        elif type(value) not in (int, float) or not math.isfinite(value) or not 0 <= value <= 1:
+            raise VideoBenchmarkError('Tracker confidence thresholds must be finite in 0..1')
+        elif name == 'high_conf_det_threshold' and value <= .1:
+            raise VideoBenchmarkError('High confidence split must exceed the backend low-confidence floor .1')
+    return dict(parameters)
+
+
+def make_tracker(method: str, *, fps: float, parameters: dict | None = None):
+    overrides = validate_tracker_parameters(method, parameters)
     if method == 'baseline':
         return None
     if method == 'botsort-worker':
@@ -100,7 +121,7 @@ def make_tracker(method: str, *, fps: float):
     # Fail loudly on other API generations until adapter contract is validated.
     if version != '2.6.1':
         raise VideoBenchmarkError(f'Expected Roboflow trackers 2.6.1, installed {version}')
-    tracker = cls(frame_rate=fps)
+    tracker = cls(frame_rate=fps, **overrides)
     return tracker
 
 
@@ -133,14 +154,14 @@ def _one_step(method: str, tracker, active: dict, next_id: int, detections: list
     return items, active, next_id, unconfirmed
 
 
-def run_video_tracker(video: Path, data: dict, method: str) -> tuple[dict,dict]:
+def run_video_tracker(video: Path, data: dict, method: str, *, parameters: dict | None = None) -> tuple[dict,dict]:
     if method not in TRACKER_OPTIONS:
         raise VideoBenchmarkError('Unsupported tracker')
     if not video.is_file() or video.is_symlink():
         raise VideoBenchmarkError('Video must be a local regular file')
     if sha256_file(video) != data['video_sha256']:
         raise VideoBenchmarkError('Video SHA-256 differs from cached detector input')
-    fps=data['fps']; tracker=make_tracker(method,fps=fps)
+    fps=data['fps']; tracker=make_tracker(method,fps=fps,parameters=parameters)
     cap=None
     active={};next_id=1;frames=[];timings=[];decode=[];unconfirmed=0
     try:
@@ -182,6 +203,12 @@ def run_video_tracker(video: Path, data: dict, method: str) -> tuple[dict,dict]:
           'note':'No ReID or metric XYZ; BoT-SORT receives full BGR frames for camera motion compensation.'}
     if method == 'botsort-worker':
         meta['runtime']=tracker.runtime
+    if parameters is not None:
+        meta['parameter_overrides']=dict(parameters)
+    if method in ('bytetrack','botsort'):
+        fields=('track_activation_threshold','high_conf_det_threshold','maximum_frames_without_update',
+                'maximum_time_without_update','minimum_consecutive_frames','enable_cmc','cmc_method')
+        meta['effective_tracker_parameters']={key:getattr(tracker,key) for key in fields if hasattr(tracker,key)}
     return report,meta
 
 

@@ -1,5 +1,7 @@
 # v0.3 選配 Roboflow BoT-SORT worker
 
+另有直接函式庫的[參數比較](tracking-parameter-acceptance.md)，worker／應用程式預設維持原值，該比較延遲不含 IPC。
+
 
 **2026-10-19 擴大證據：** [三場景 MOT17 比較](tracking-expanded-acceptance.md) 另測直接呼叫 Baseline／ByteTrack／BoT-SORT，與本 worker 初測分開；不代表已通過擴大 worker／RTSP 或長遮擋恢復驗收。
 [English](../en/tracking-worker.md) · [工作階段](sessions.md) · [離線比較](offline-video-tracking.md)

@@ -1,5 +1,7 @@
 # Expanded MOT17 tracking acceptance — 2026-10-19
 
+Follow-up: [fixed activation/split/buffer sensitivity on two new scenes](tracking-parameter-acceptance.md). Results from the two groups are kept separate.
+
 [繁體中文](../zh-TW/tracking-expanded-acceptance.md) · [Tracking evaluation](tracking-evaluation.md)
 
 **Status: expanded research evidence, not a passed long-occlusion or release gate.** This adds three scenes to the earlier MOT15 pilot. Different sources and conditions mean their scores must not be pooled with that pilot.

@@ -123,3 +123,27 @@ def score_events(events: list[dict], matches: dict, rows: list[dict], fps: float
             'event_gt_observations':len(observations),'event_matched_observations':detected,
             'event_instance_recall':detected/len(observations) if observations else None,
             'duration_seconds_total':sum((e['end']-e['start']+1)/fps for e in events)}
+
+
+def endpoint_states(events: list[dict], matches: dict) -> list[str]:
+    """One state per fixed event/subject, without comparing ID numbers across runs."""
+    states=[]
+    for event in events:
+        for ident in event['ids']:
+            pre=next((matches[f][ident] for f in reversed(event['before']) if ident in matches.get(f,{})),None)
+            post=next((matches[f][ident] for f in event['after'] if ident in matches.get(f,{})),None)
+            states.append('missing_endpoint' if pre is None or post is None else 'same_id' if pre==post else 'changed_id')
+    return states
+
+
+def compare_event_recovery(events: list[dict], reference: dict, candidate: dict) -> dict:
+    """Paired aggregate changes on the same GT-only event cohort; no raw IDs escape."""
+    pairs=list(zip(endpoint_states(events,reference),endpoint_states(events,candidate)))
+    return {'subjects':len(pairs),
+            'same_id_in_both':sum(a==b=='same_id' for a,b in pairs),
+            'gained_same_id_from_changed':sum(a=='changed_id' and b=='same_id' for a,b in pairs),
+            'gained_same_id_from_missing':sum(a=='missing_endpoint' and b=='same_id' for a,b in pairs),
+            'lost_same_id_to_changed':sum(a=='same_id' and b=='changed_id' for a,b in pairs),
+            'lost_same_id_to_missing':sum(a=='same_id' and b=='missing_endpoint' for a,b in pairs),
+            'gained_matched_endpoints':sum(a=='missing_endpoint' and b!='missing_endpoint' for a,b in pairs),
+            'lost_matched_endpoints':sum(a!='missing_endpoint' and b=='missing_endpoint' for a,b in pairs)}

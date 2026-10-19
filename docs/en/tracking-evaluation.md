@@ -1,5 +1,7 @@
 # Semantic Tracking Acceptance — Offline ID Switch / Occlusion Evaluation
 
+New-group [parameter acceptance](tracking-parameter-acceptance.md) compares activation gates and lost-track lifetime with paired event gains/losses.
+
 
 **2026-10-19 update:** [Expanded MOT17 acceptance](tracking-expanded-acceptance.md) adds 2,700 frames across three scenes, visibility/order-exchange cohorts and repeated Baseline/ByteTrack/BoT-SORT comparison. Lower IDSW comes with lower Recall; long-occlusion recovery is not accepted.
 [繁體中文](../zh-TW/tracking-evaluation.md) · [Sessions](sessions.md) · [Home](../../README.md)

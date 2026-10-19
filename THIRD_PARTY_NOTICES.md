@@ -48,3 +48,7 @@ Spatial Analysis screenshots use the public Ultralytics Assets bus example and r
 Attribution: MOTChallenge contributors, [MOT17/MOT16 annotations](https://motchallenge.net/data/MOT17/), [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/) and applicable original-source conditions. The 04, 11 and 13 training-sequence compressed videos and GT are used for local non-commercial research, not redistributed. Only aggregate evaluation records and a chart of those aggregates are published. No image, per-frame box/ID, event window, weight or upstream package is bundled. [Method and limitations](docs/en/tracking-expanded-acceptance.md).
 
 來源為 MOTChallenge MOT17／MOT16 標註；依條款本機非商用研究，未散布影片、GT、逐格結果或抽查影像，程式授權不會取代資料集條款。
+
+The new-group parameter study additionally uses MOT17-09/10 under the same MOTChallenge CC BY-NC-SA 3.0 / original-source terms for local non-commercial research. Attribution and [method](docs/en/tracking-parameter-acceptance.md) are retained; only aggregate records and an aggregate chart are published, with no dataset media, GT or per-frame results.
+
+另一組參數驗證使用 MOT17-09／10，同樣依上述條款本機非商用研究並保留來源，不散布資料集影像、GT 或逐格結果。

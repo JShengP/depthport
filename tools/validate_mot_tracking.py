@@ -23,11 +23,25 @@ import zipfile
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from depthport.video_tracking_benchmark import read_cache,run_video_tracker,sha256_file
-from depthport.mot_scenarios import read_mot_gt,scenario_events,score_events
+from depthport.mot_scenarios import read_mot_gt,scenario_events,score_events,compare_event_recovery
 
 TRACKEVAL_COMMIT='12c8791b303e0a0b50f753af204249e622d0281a'
 METHODS=('baseline','bytetrack','botsort')
 DETECTOR_KEYS=('model','weight_sha256','confidence','imgsz','source','device','classes','max_det','nms_iou','ultralytics')
+PARAMETER_PROFILES={
+    'default':{'track_activation_threshold':.7,'high_conf_det_threshold':.6,'lost_track_buffer':30},
+    'activation_only':{'track_activation_threshold':.3,'high_conf_det_threshold':.6,'lost_track_buffer':30},
+    'lower_gates':{'track_activation_threshold':.3,'high_conf_det_threshold':.3,'lost_track_buffer':30},
+    'longer_buffer':{'track_activation_threshold':.7,'high_conf_det_threshold':.6,'lost_track_buffer':90},
+    'lower_gates_longer_buffer':{'track_activation_threshold':.3,'high_conf_det_threshold':.3,'lost_track_buffer':90},
+}
+
+
+def run_configurations(parameter_sweep=False):
+    if not parameter_sweep:
+        return {m:{'backend':m,'parameters':None} for m in METHODS}
+    return {m+'__'+name:{'backend':m,'profile':name,'parameters':dict(params)}
+            for name,params in PARAMETER_PROFILES.items() for m in ('bytetrack','botsort')}
 
 
 def load_manifest(path):
@@ -99,10 +113,10 @@ def metric_summary(results):
             'IDF1':float(ident['IDF1']),'HOTA':float(hota['HOTA'].mean())}
 
 
-def combine_scenario_scores(sequences):
+def combine_scenario_scores(sequences, methods=METHODS):
     """Sum disjoint-sequence counts; never average rates with unequal cohorts."""
     result={}
-    for method in METHODS:
+    for method in methods:
         result[method]={}
         for scenario in ('long_low_visibility','overlap_order_exchange'):
             records=[s['methods'][method]['scenarios'][scenario] for s in sequences]
@@ -124,10 +138,15 @@ def main(argv=None):
     p.add_argument('--work-dir',type=Path,required=True)
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--repeats',type=int,default=3)
+    p.add_argument('--parameter-sweep',action='store_true',help='Five fixed activation/split/buffer profiles per direct backend')
     a=p.parse_args(argv)
     if not 1<=a.repeats<=5 or a.output.is_symlink() or a.work_dir.is_symlink():
         p.error('Invalid repeats or symlink output/work directory')
     manifest=load_manifest(a.manifest)
+    configurations=run_configurations(a.parameter_sweep)
+    methods=tuple(configurations)
+    if a.parameter_sweep and any(s['name'].split('-')[1] in {'04','11','13'} for s in manifest['sequences']):
+        p.error('Parameter validation must exclude the earlier 04/11/13 acceptance scenes')
     evaluator=a.trackeval_root.resolve()
     commit=subprocess.check_output(['git','-C',str(evaluator),'rev-parse','HEAD'],text=True).strip()
     if commit!=TRACKEVAL_COMMIT or subprocess.run(['git','-C',str(evaluator),'diff','--quiet','HEAD']).returncode:
@@ -164,7 +183,12 @@ def main(argv=None):
               'Default tracker parameters except source FPS; no tuning or ReID. Cross-scene comparisons are not a causal CMC ablation.',
               'No real-camera, calibrated 3D, Windows, endurance or end-to-end throughput acceptance.'],
             'public_scope':'Aggregates, source/configuration identifiers and hashes only. Media, GT, event identities/windows, per-frame predictions, weights and paths stay local.'}
-    all_scores={m:{} for m in METHODS};moving_scores={m:{} for m in METHODS};frozen=None
+    if a.parameter_sweep:
+        report['format']='depthport.mot17-parameter-acceptance.v1'
+        report['evaluation']['configurations']=configurations
+        report['evaluation']['buffer_units']='lost_track_buffer is 30-FPS reference frames: 30=1s, 90=3s; backend scales to source FPS'
+        report['limitations'][2]='Fixed five-profile sensitivity study; no ReID or CMC ablation, exploratory validation rather than a held-out leaderboard or default-selection gate.'
+    all_scores={m:{} for m in methods};moving_scores={m:{} for m in methods};frozen=None
     for seq in manifest['sequences']:
         name=seq['name'];video=Path(seq['video']);cache_path=Path(seq['detections']);gt=Path(seq['gt']);ini=Path(seq['seqinfo'])
         cache=read_cache(cache_path);n=len(cache['frames']);fps=cache['fps']
@@ -186,12 +210,19 @@ def main(argv=None):
         rows=read_mot_gt(gt,n);events=scenario_events(rows,fps)
         local=a.work_dir/name;local.mkdir(parents=True,exist_ok=True)
         (local/'events.local.json').write_text(json.dumps(events))
-        outputs={m:[] for m in METHODS};canonical={};first={}
+        outputs={m:[] for m in methods};canonical={};first={}
         for trial in range(a.repeats):
-            order=METHODS[trial%3:]+METHODS[:trial%3]
+            offset=trial%len(methods)
+            order=methods[offset:]+methods[:offset]
             for method in order:
                 cv2.setRNGSeed(0)
-                pred,timing=run_video_tracker(video,cache,method)
+                spec=configurations[method]
+                pred,timing=run_video_tracker(video,cache,spec['backend'],parameters=spec['parameters'])
+                if spec['parameters'] is not None:
+                    effective=timing['effective_tracker_parameters'];params=spec['parameters']
+                    if (any(effective[k]!=params[k] for k in ('track_activation_threshold','high_conf_det_threshold'))
+                        or effective['maximum_time_without_update']!=params['lost_track_buffer']/30):
+                        raise ValueError('Backend effective parameters differ from requested profile')
                 identity=canonical_predictions(pred)
                 if method in canonical and identity!=canonical[method]:raise ValueError('Repeated run changed canonical IDs/boxes')
                 canonical[method]=identity;outputs[method].append(timing)
@@ -200,9 +231,9 @@ def main(argv=None):
                     (local/(method+'-predictions.local.json')).write_text(json.dumps(pred))
                 print(f'{name} {method} trial {trial+1}/{a.repeats}: P50 {timing["tracker_update"]["p50_ms"]:.3f}ms',flush=True)
         gt_dest=a.work_dir/'mot-gt'/name/'gt/gt.txt';gt_dest.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(gt,gt_dest)
-        for method in METHODS:write_mot_predictions(first[method],a.work_dir/'mot-trackers'/method/'data'/(name+'.txt'),scale)
+        for method in methods:write_mot_predictions(first[method],a.work_dir/'mot-trackers'/method/'data'/(name+'.txt'),scale)
         dataset=trackeval.datasets.MotChallenge2DBox({'GT_FOLDER':str(a.work_dir/'mot-gt'),'TRACKERS_FOLDER':str(a.work_dir/'mot-trackers'),
-          'SKIP_SPLIT_FOL':True,'BENCHMARK':'MOT17','SPLIT_TO_EVAL':'train','SEQ_INFO':{name:n},'TRACKERS_TO_EVAL':list(METHODS),'PRINT_CONFIG':False})
+          'SKIP_SPLIT_FOL':True,'BENCHMARK':'MOT17','SPLIT_TO_EVAL':'train','SEQ_INFO':{name:n},'TRACKERS_TO_EVAL':list(methods),'PRINT_CONFIG':False})
         result={'name':name,'frames':n,'fps':fps,'resolution':[cache['width'],cache['height']],
                 'original_gt_resolution':[int(meta['imWidth']),int(meta['imHeight'])],'video_to_gt_scale':scale,
                 'camera_motion':seq['camera_motion'],'source_description':seq['description'],'video_url':seq['video_url'],
@@ -211,14 +242,18 @@ def main(argv=None):
                 'cached_detections':sum(len(f['detections']) for f in cache['frames']),
                 'gt_pedestrian_observations':len(rows),'scenario_event_counts':{k:len(v) for k,v in events.items()},'methods':{}}
         ids=sorted({r['id'] for r in rows})
-        for method in METHODS:
+        scenario_matches={}
+        for method in methods:
             raw=dataset.get_raw_seq_data(method,name);data=dataset.get_preprocessed_seq_data(raw,'pedestrian')
             if data['num_gt_ids']!=len(ids) or data['num_gt_dets']!=len(rows):raise ValueError('GT mapping differs from TrackEval preprocessing')
             scores={m.get_name():m.eval_sequence(data) for m in metrics};all_scores[method][name]=scores
             if seq['camera_motion']:moving_scores[method][name]=scores
             matches=frame_matches(data,ids)
+            scenario_matches[method]=matches
             (local/(method+'-matches.local.json')).write_text(json.dumps(matches))
             result['methods'][method]={'metrics':metric_summary(scores),
+              'configuration':configurations[method],
+              'effective_tracker_parameters':outputs[method][0].get('effective_tracker_parameters'),
               'retained_observations_before_mot_preprocessing':sum(len(f['objects']) for f in first[method]['frames']),
               'scenarios':{key:score_events(value,matches,rows,fps) for key,value in events.items()},
               'update_timing_trials':[t['tracker_update'] for t in outputs[method]],
@@ -226,15 +261,24 @@ def main(argv=None):
               'median_trial_p95_ms':statistics.median(t['tracker_update']['p95_ms'] for t in outputs[method]),
               'repeated_canonical_predictions_equal':True,
               'canonical_predictions_sha256':hashlib.sha256(canonical[method].encode()).hexdigest()}
+        if a.parameter_sweep:
+            result['paired_changes_vs_default']={method:{key:compare_event_recovery(value,
+                scenario_matches[configurations[method]['backend']+'__default'],scenario_matches[method])
+                for key,value in events.items()} for method in methods if configurations[method]['profile']!='default'}
         report['sequences'].append(result)
     report['combined']={}
     for group,source in [('all_sequences',all_scores),('moving_camera_sequences',moving_scores)]:
         report['combined'][group]={}
-        for method in METHODS:
+        for method in methods:
             if source[method]:
                 combined={m.get_name():m.combine_sequences({name:s[m.get_name()] for name,s in source[method].items()}) for m in metrics}
                 report['combined'][group][method]=metric_summary(combined)
-    report['combined_scenarios']=combine_scenario_scores(report['sequences'])
+    report['combined_scenarios']=combine_scenario_scores(report['sequences'],methods)
+    if a.parameter_sweep:
+        first=report['sequences'][0]['paired_changes_vs_default']
+        report['combined_paired_changes_vs_default']={method:{scenario:{field:sum(s['paired_changes_vs_default'][method][scenario][field]
+            for s in report['sequences']) for field in counts} for scenario,counts in scenarios.items()}
+            for method,scenarios in first.items()}
     a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(report,ensure_ascii=False,indent=2,allow_nan=False)+'\n')
     print('Aggregate acceptance report written; raw evaluation files remain in local work directory.',flush=True)
     return 0

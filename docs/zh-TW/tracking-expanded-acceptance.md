@@ -1,5 +1,7 @@
 # MOT17 擴大追蹤驗收 — 2026-10-19
 
+後續：[另一組兩場景的啟用／分流／保留參數比較](tracking-parameter-acceptance.md)，兩輪成績分開呈現。
+
 [English](../en/tracking-expanded-acceptance.md) · [追蹤評估](tracking-evaluation.md)
 
 **狀態：擴大研究實測，長遮擋恢復尚不能算驗收通過。** 本次新增三個場景；條件不同，不能與先前 MOT15 初測直接合併分數。v0.3 維持 Draft，未改變預設追蹤器。

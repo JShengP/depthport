@@ -1,5 +1,7 @@
 # Semantic Tracking 實機驗收 — ID Switch／遮擋評估
 
+新增另一組序列的[參數驗收](tracking-parameter-acceptance.md)，比較啟用門檻與遺失追蹤保留時間，逐一記錄事件改善及退步。
+
 
 **2026-10-19 更新：** [MOT17 擴大驗收](tracking-expanded-acceptance.md) 新增三場景 2,700 格、可見度／換位情境及三次重複比較；較少換 ID 同時伴隨較低 Recall，長遮擋恢復尚未通過。
 [English](../en/tracking-evaluation.md) · [Sessions](sessions.md) · [首頁](../../README.zh-TW.md)

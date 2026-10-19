@@ -174,3 +174,11 @@ docs/en/tracking-expanded-acceptance.md
 docs/zh-TW/tracking-expanded-acceptance.md
 docs/validation/v0.3-mot17-expanded.json
 docs/assets/tracking-v03-mot17.png
+
+# New-group tracker parameter sensitivity study (aggregates only)
+tests/test_tracking_parameters.py
+docs/en/tracking-parameter-acceptance.md
+docs/zh-TW/tracking-parameter-acceptance.md
+docs/validation/v0.3-tracking-tuning-protocol.json
+docs/validation/v0.3-mot17-parameters.json
+docs/assets/tracking-v03-parameters.png
