@@ -23,7 +23,10 @@
     const toggle = q('[data-lang-switch]');
     if (toggle) toggle.textContent = chinese() ? 'English' : '繁體中文';
     try { localStorage.setItem('depthport.showcase.lang', lang); } catch (_) { /* disabled storage */ }
-    document.querySelectorAll('a[href^="./v0.1/"]').forEach(a => a.href = './v0.1/?lang=' + lang);
+    document.querySelectorAll('a[href^="./v0.1/"], a[href^="../v0.1/"]').forEach(a => {
+      const path = a.getAttribute('href').split('?')[0];
+      a.setAttribute('href', path + '?lang=' + lang);
+    });
     refreshPage();
   }
   q('[data-lang-switch]')?.addEventListener('click', () => setLanguage(chinese() ? 'en' : 'zh-TW'));
