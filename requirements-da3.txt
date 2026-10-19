@@ -6,7 +6,7 @@ opencv-python==4.11.0.86
 addict>=2.4,<3
 omegaconf>=2.4.0,<3
 einops>=0.8.2,<1
-huggingface_hub>=0.34,<1
+huggingface_hub>=0.36.2,<1
 safetensors>=0.8.0,<1
 scipy>=1.11,<2
 e3nn>=0.5,<0.6
