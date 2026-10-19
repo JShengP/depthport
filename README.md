@@ -1,95 +1,150 @@
 <div align="center">
 
 # DepthPort
-### Monocular depth & point cloud workbench
 
-**One camera. Four depth engines. A new perspective.**
+**Monocular depth & point cloud workbench**<br>
+One camera · Four depth engines · Local-first
 
-English · [繁體中文](README.zh-TW.md)
-
-**v0.3 Alpha** · **Experimental development preview** · **Local-first** · **English / 繁體中文** · **AGPL-3.0-only**
+English · [繁體中文](README.zh-TW.md) · Experimental Alpha · AGPL-3.0-only
 
 </div>
 
-**Download v0.3.0-alpha.2:** [Release notes & downloads](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.2) · [Source ZIP](https://github.com/JShengP/depthport/releases/download/v0.3.0-alpha.2/depthport-0.3.0-alpha.2-source.zip) · [SHA-256 checksums](https://github.com/JShengP/depthport/releases/download/v0.3.0-alpha.2/SHA256SUMS.txt)
+Turn RGB images and RTSP frames into interactive **single-view point clouds**. Compare depth engines, inspect visible-surface geometry, and review saved frames with Object IDs in one local web interface. DepthPort integrates existing pretrained models; its focus is the application workflow, aligned data and inspectable exports.
 
-Previous v0.3 package: [v0.3.0-alpha.1](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.1). Earlier generation: [v0.2 Alpha — Spatial Analysis](https://github.com/JShengP/depthport/releases/tag/v0.2.0-alpha.1). See the [Changelog](CHANGELOG.md) and [remaining acceptance roadmap](ROADMAP.md).
+**Download v0.3.0-alpha.2:** [Release notes](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.2) · [Source ZIP](https://github.com/JShengP/depthport/releases/download/v0.3.0-alpha.2/depthport-0.3.0-alpha.2-source.zip) · [SHA-256](https://github.com/JShengP/depthport/releases/download/v0.3.0-alpha.2/SHA256SUMS.txt)
 
-The download contains public source only; Python dependencies and pretrained model weights must be installed separately.
+[Quick start](#quick-start) · [Versions](#versions) · [Features](#features) · [Validation & limits](#validation-and-limits) · [Documentation](#documentation)
 
-Alpha.2 includes the reviewed Pages/FastAPI/Hub/DA3 compatibility updates and version workflow illustrations. It adds no new inference or hardware acceptance; published packages stay fixed at their version tags and release checksums.
+> [!IMPORTANT]
+> **Experimental development preview.** Session storage is off by default. Long-occlusion recovery, physical RTSP, Windows pretrained inference/worker integration, endurance and calibrated distance accuracy remain open. [Validation record](docs/en/validation.md)
 
-## Version guide / 版本導覽
+## Real replay example
 
-![v0.1, v0.2 and v0.3 capabilities using generated schematic data](docs/assets/versions-overview.svg)
+<p align="center">
+  <img src="docs/assets/tracking-replay-crossing.zh-TW.jpg" width="960" alt="Actual v0.3 Session replay: Object IDs during pedestrian crossing and partial occlusion">
+</p>
 
-*Illustrative workflows, not UI screenshots, inference results or benchmark evidence. Version READMEs below describe exact contents, architecture and validation boundaries.*
+*Actual Session UI with real YOLO26n + isolated BoT-SORT output; Traditional Chinese interface. Footage: [Lukas Kosc via Pexels](https://www.pexels.com/video/urban-street-scene-with-people-crossing-34597902/), used in edited documentation under the [Pexels terms](https://www.pexels.com/terms-of-service/).*
 
-Each generation retains the previous foundation. Read the version-specific README for its changes, architecture, contents and validation limits:
+[View all three frames, source attribution & exact conditions →](docs/en/tracking-replay-example.md)
 
-- **[v0.1 — Viewer](docs/versions/v0.1/README.md):** image/RTSP → four depth engines → single-view point cloud and exports.
-- **[v0.2 — Spatial Analysis](docs/versions/v0.2/README.md):** adds pixel XYZ, engine comparison, semantic fusion and calibration/error tools.
-- **[v0.3 — Sessions & Tracking](docs/versions/v0.3/README.md):** adds manual local archives, replay, Object IDs, isolated BoT-SORT and bookmark review; experimental Alpha.
-
-Historical v0.1/v0.2 source and original READMEs remain fixed at their tags. These maintained guides explain the differences without changing old releases.
-
-Turn RGB images and RTSP camera frames into interactive, **single-view point clouds**. Switch depth engines, inspect visible-surface geometry, and export the data behind the visualization—all in one local web interface.
-
-DepthPort integrates existing pretrained models; it does **not** introduce a new depth network. Its contribution is the model lifecycle, stream handling, explicit depth semantics, aligned geometry, browser interaction and inspectable exports.
-
-![DepthPort English interface with explicitly synthetic viewer data; not an AI inference result](docs/assets/preview.en.png)
-
-*Screenshot: the actual UI showing synthetic test data. No camera or AI model produced this point cloud.*
-
-> **Status:** `v0.3.0-alpha.2` is an **Alpha pre-release / experimental development preview**. Session storage defaults off and requires explicit local enablement. Application/model API installation CI is not pretrained inference or hardware acceptance. Long-occlusion recovery, physical RTSP, Windows pretrained inference/worker integration, endurance and calibrated distance accuracy remain open. Read the [validation record](docs/en/validation.md) and [release notes](docs/releases/0.3.0-alpha.2.md).
-
-## v0.3 — Sessions, Replay & Offline Tracking
-
-- **Manual local Sessions:** preserve same-frame RGB/depth/PLY/raw NPY and integrity-check replay with SHA-256. No automatic recording or model inference on replay.
-- **Tracking review:** boxes/Object IDs, playback and speed, timeline seeking, A/B loops, bookmark notes, search/filtering, JSON backup and keyboard help. Notes and exports remain local.
-- **Optional Roboflow BoT-SORT:** a separate NumPy 2 worker preserves the NumPy 1 application environment. Simple association remains the default. Object IDs are not identities or world trajectories.
-
-Follow the [Session guide](docs/en/sessions.md): set `ENABLE_SESSION_STORAGE=1` locally, restart, and open `/sessions`. [Worker setup](docs/en/tracking-worker.md) · [Tracking acceptance & evaluation](docs/en/tracking-evaluation.md)
-
-### Real tracking replay example
-
-![Actual v0.3 replay during pedestrian crossing and partial occlusion](docs/assets/tracking-replay-crossing.zh-TW.jpg)
-
-*Real YOLO26n + isolated BoT-SORT output in the actual Session UI (Traditional Chinese), not synthetic data. Source: [Lukas Kosc via Pexels](https://www.pexels.com/video/urban-street-scene-with-people-crossing-34597902/), used in edited documentation under the [Pexels terms](https://www.pexels.com/terms-of-service/). Session #12 = source frame 43, 1.752 s.*
-
-[Three-frame walkthrough, source/license and exact conditions](docs/en/tracking-replay-example.md). The 24-frame window illustrates local IDs, crossing, partial occlusion and missing/new observations; no identity ground truth or long-occlusion success is claimed. Source 23.976 fps, worker fixed 30-Hz steps, UI 1× targets 5 saved frames/s. Added to main after Alpha.2; published release downloads remain unchanged.
-
-### Tracking evidence and next work
-
-Completed studies cover [2,700 frames / 27 runs across three scenes](docs/en/tracking-expanded-acceptance.md), [1,179 new frames / 60 parameter runs](docs/en/tracking-parameter-acceptance.md), and [added ID-switch/false-positive diagnosis](docs/en/tracking-error-diagnosis.md). Lower activation trades coverage for more ID switches/FP; long-occlusion recovery remains unaccepted. Next tests separate new-track confirmation/competition, detector localisation and recovery. **Defaults stay unchanged.**
-
-Results apply to the named public sequences, fixed detection caches and recorded versions; they do not establish performance with newer dependencies or other scenes. Only aggregates are published, without raw frames, GT, per-frame tracks or user bookmarks.
-
-## Retained from v0.2 — Spatial Analysis Lab
-
-Open **Spatial Analysis** (`/spatial`) on a running local server (`http://127.0.0.1:8000/spatial`): clickable camera-space XYZ / raw depth inspector, sequential four-engine still-image comparison with native-unit histograms and 3D previews, optional YOLO26 Detect/Segment instance-to-point fusion, and pinhole checkerboard calibration / candidate plane fitting / independent metric-error checks. The original viewer, four depth engines, image/RTSP input, exports and bilingual UI remain available. Analysis is a single-worker experimental feature. Real single-image CUDA inference is verified on the recorded Ubuntu host; physical RTSP and distance accuracy remain unverified.
-
-[English implementation & acceptance](docs/en/spatial-analysis.md) · [繁體中文實作與驗收](docs/zh-TW/spatial-analysis.md)
+This 24-frame example shows local Object IDs, crossing, partial occlusion and missing/new observations. It has no identity ground truth and does not establish long-occlusion recovery.
 
 <details>
-<summary>View full v0.2 screenshot (real pretrained inference)</summary>
+<summary>Frame timing and evidence boundaries</summary>
 
-![Spatial Analysis with real pretrained depth comparison and YOLO segmentation](docs/assets/spatial-preview.en.png)
-
-*Real pretrained inference on the public [Ultralytics bus example](https://github.com/ultralytics/assets/blob/53d4e2a8fd15f473c29a148c317a8477be559327/im/bus.jpg); not an IP-camera capture or accuracy benchmark. [Screenshot provenance](docs/assets/README.md).*
+The image shows Session #12 = source frame 43 at 1.752 s. Source video is 23.976 fps; the worker advances fixed 30-Hz steps and UI 1× targets 5 saved frames/s. The example reused a documented CUDA environment, not a fresh installation of the complete current dependency recipe. These documentation additions are in main after Alpha.2; published release tags/downloads remain fixed. Raw video, full Session archives, notes and weights are not distributed.
 
 </details>
 
-## What you can explore
+## Quick start
 
-- **Four selectable engines:** YOLO26 Depth, Depth Anything V2 Small, DA3-Small and DA3Metric-Large. One loaded engine at a time; no backend restart to switch.
-- **Images and RTSP:** retain an uploaded image for sequential comparisons, or process the latest camera frame without a growing application queue.
-- **Interactive 3D:** orbit, zoom, pan, recolor, adjust point size, and change display-only depth stretch. WebGL with a Canvas2D fallback.
-- **Traceable data:** PLY, float32 NPY, raw model output, aligned RGB, model identifiers and unit metadata in a same-frame ZIP.
+Use a **fresh Python 3.11 or 3.12 environment**. The source download excludes Python dependencies and model weights. For NVIDIA GPUs, install a compatible CUDA PyTorch/torchvision pair in the app environment before the remaining dependencies. [Full installation guide](docs/en/installation.md)
 
-English and Traditional Chinese are available in the top-right language menu. The choice persists in the browser; `?lang=en` or `?lang=zh-TW` explicitly selects a language. It does not affect model state, numeric output or API field names. Upstream diagnostic messages remain in their original language.
+**Windows** — run from the extracted or cloned repository:
 
-## Depth is not one interchangeable unit
+```bat
+RUN_WINDOWS.bat
+```
+
+**Ubuntu:**
+
+```bash
+bash RUN_UBUNTU.sh
+```
+
+Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/). First setup creates `.venv-depthport`; first use of a model may download its weights. The installer also accepts Python 3.10, but optional-package availability needs separate verification.
+
+- **Viewer** `/`: upload an image → wait for a result → select another engine → **Apply / retry model**. The retained image is reprocessed. The Python host must be able to reach an RTSP source.
+- **Spatial Analysis** `/spatial`: inspect depth/XYZ, compare engines and explore semantic fusion.
+- **Sessions** `/sessions`: explicitly set `ENABLE_SESSION_STORAGE=1` locally and restart to enable manual saved-frame review. [Session guide](docs/en/sessions.md) · [Optional worker setup](docs/en/tracking-worker.md)
+
+<details>
+<summary>Try the synthetic viewer without installing AI dependencies</summary>
+
+[Open the public synthetic demo](https://jshengp.github.io/depthport/), or build it locally with Python's standard library:
+
+```bash
+python tools/build_site.py
+python -m http.server 8765 --directory _site --bind 127.0.0.1
+```
+
+Open [http://127.0.0.1:8765/](http://127.0.0.1:8765/). This static demo uses synthetic data; it does not run depth models, accept images or connect to RTSP. The included manual Pages workflow deploys the same synthetic-only viewer.
+
+</details>
+
+## Versions
+
+Each generation retains the earlier foundation. The separate guides explain **changes, architecture, contents and validation boundaries**.
+
+- **[v0.1 · Viewer](docs/versions/v0.1/README.md)** — images/RTSP, four depth engines, interactive point clouds and same-frame exports.
+- **[v0.2 · Spatial Analysis](docs/versions/v0.2/README.md)** — pixel XYZ, engine comparison, semantic fusion and calibration/error tools.
+- **[v0.3 · Sessions & Tracking](docs/versions/v0.3/README.md)** — manual local archives, replay, Object IDs, isolated BoT-SORT and bookmark review. Experimental Alpha.
+
+<details>
+<summary>Compare version workflows — generated schematic</summary>
+
+![v0.1, v0.2 and v0.3 capabilities using generated schematic data](docs/assets/versions-overview.svg)
+
+*Illustrative workflows, not UI screenshots, inference results or benchmark evidence.*
+
+</details>
+
+<details>
+<summary>Release history and main documentation</summary>
+
+Alpha.2 packages reviewed Pages/FastAPI/Hub/DA3 compatibility updates and version workflow illustrations; publishing it added no inference or hardware acceptance. Main may include newer documentation. Tags, original version READMEs and published packages remain fixed at their release snapshots and checksums.
+
+Previous packages: [v0.3.0-alpha.1](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.1) · [v0.2 Alpha](https://github.com/JShengP/depthport/releases/tag/v0.2.0-alpha.1) · [Changelog](CHANGELOG.md)
+
+</details>
+
+## Features
+
+### Viewer & data
+
+- **Four depth engines:** YOLO26 Depth, Depth Anything V2 Small, DA3-Small and DA3Metric-Large; one loaded model at a time, with no backend restart to switch.
+- **Images, RTSP & interactive 3D:** latest-frame processing, orbit/zoom/pan, colouring, point size and display-only stretch. WebGL has a Canvas2D fallback.
+- **Traceable exports:** same-frame PLY, float32 NPY, original model output, aligned RGB and model/unit metadata. English/Traditional Chinese UI, with browser language persistence or `?lang=en` / `?lang=zh-TW`; language does not change data/API fields. Upstream diagnostics retain their original language.
+
+<details>
+<summary>Original viewer screenshot — synthetic data</summary>
+
+![DepthPort English interface with synthetic viewer data](docs/assets/preview.en.png)
+
+*Actual UI with explicitly synthetic data; no camera or AI model produced this point cloud.*
+
+</details>
+
+### Spatial Analysis
+
+Inspect raw depth/camera-space XYZ, compare four engines sequentially on one image, fuse optional YOLO Detect/Segment instances with aligned points, and use checkerboard calibration, candidate-plane fitting and independent metric-error tools. Depth/model operations stay serialized in one worker.
+
+[Spatial Analysis guide](docs/en/spatial-analysis.md) · [Models & geometry](docs/en/models-and-geometry.md)
+
+<details>
+<summary>Spatial Analysis screenshot — real single-image CUDA inference</summary>
+
+![Real pretrained depth comparison and YOLO segmentation](docs/assets/spatial-preview.en.png)
+
+*Real pretrained inference on the public [Ultralytics bus example](https://github.com/ultralytics/assets/blob/53d4e2a8fd15f473c29a148c317a8477be559327/im/bus.jpg). This is not a physical IP-camera capture or distance-accuracy benchmark. [Screenshot provenance](docs/assets/README.md)*
+
+</details>
+
+### Sessions & tracking review
+
+- **Opt-in manual capture:** same-frame RGB/depth/PLY/raw NPY, SHA-256 integrity checks and offline replay; no automatic recording or inference during replay.
+- **Review controls:** Object ID overlays, playback/speed/timeline, A/B loops, searchable bookmark notes/tags, JSON backup and guarded keyboard help. Notes and exports stay local.
+- **Optional isolated BoT-SORT:** NumPy 2 worker separate from the NumPy 1 application. **Simple association stays default.** IDs are local associations, not identities or world trajectories.
+
+[Session guide](docs/en/sessions.md) · [Worker setup](docs/en/tracking-worker.md) · [Tracking evaluation](docs/en/tracking-evaluation.md)
+
+### Depth units
+
+Estimated metres, relative depth and V2's virtual 1–5 display geometry remain distinct. Raw model output is retained separately. V2's per-frame mapping can change shape/scale; its XYZ must not be compared numerically with metric-model output.
+
+<details>
+<summary>Engine keys, checkpoints and geometry semantics</summary>
 
 | Engine key | Default checkpoint | Geometry in this app |
 |---|---|---|
@@ -98,42 +153,27 @@ English and Traditional Chinese are available in the top-right language menu. Th
 | `da3-small` | `depth-anything/DA3-SMALL` | Raw positive relative depth; not meters |
 | `da3-metric` | `depth-anything/DA3METRIC-LARGE` | Estimated meters using processed focal length / 300 |
 
-The app preserves model raw output separately. V2's display mapping is **not physical inversion** and may alter shape/scale between frames. Do not compare its XYZ numerically with metric-model output. [Model and geometry guide](docs/en/models-and-geometry.md) · [Upstream sources and licenses](THIRD_PARTY_NOTICES.md)
+[Model and geometry guide](docs/en/models-and-geometry.md) · [Upstream sources and licenses](THIRD_PARTY_NOTICES.md)
 
-## Start locally
+</details>
 
-Use a **fresh Python 3.11 or 3.12 environment**. Python 3.10 is accepted by the installer, but availability of all optional dependencies must be checked. Do not reuse another project's virtual environment. Weights and Python packages are **not** included in this source repository.
+## Validation and limits
 
-**Windows** — from the extracted/cloned repository:
+- **CI:** Ubuntu/Windows × Python 3.11/3.12 application contracts and real model API installation/import checks. CI uses no pretrained weights or inference and does not establish hardware or accuracy acceptance.
+- **Real examples:** dated v0.2 single-image CUDA evidence and the short v0.3 replay example have separate source/runtime records. [Validation history](docs/en/validation.md) · [Replay conditions](docs/en/tracking-replay-example.md)
+- **Still open:** generalised long-occlusion/crossing/camera-motion reliability, physical RTSP, Windows pretrained inference/real worker integration, endurance/VRAM, NVIDIA hardware WebGL and independently calibrated distance accuracy. [Acceptance roadmap](ROADMAP.md)
 
-```bat
-RUN_WINDOWS.bat
-```
+<details>
+<summary>Tracking studies and next experiments</summary>
 
-**Ubuntu**:
+Completed studies cover [2,700 frames / 27 runs](docs/en/tracking-expanded-acceptance.md), [1,179 new frames / 60 parameter runs](docs/en/tracking-parameter-acceptance.md), and [ID-switch/false-positive diagnosis](docs/en/tracking-error-diagnosis.md). Lower activation can increase coverage and ID switches/FP; long-occlusion recovery remains unaccepted. Next experiments separate confirmation/competition, detector localisation and recovery. **Defaults stay unchanged.**
 
-```bash
-bash RUN_UBUNTU.sh
-```
+These results apply to the named public sequences, fixed caches and recorded versions, not newer detector profiles or other scenes. Only aggregates are distributed for these studies, without raw frames, GT, per-frame tracks or user bookmarks.
 
-Open **http://127.0.0.1:8000/**. First setup creates `.venv-depthport`; first use of each model may download its weights. GPU users should install a compatible CUDA PyTorch/torchvision pair in that environment **before** installing the remaining dependencies.
+</details>
 
-Upload an image → wait for a real result → choose another engine → **Apply / retry model**. The retained image is automatically reprocessed. For RTSP, enter the camera's actual stream URL; the **Python host**, not the browser, must reach that camera.
-
-[Installation, GPU, partial setup and offline mode](docs/en/installation.md) · [Usage and troubleshooting](docs/en/usage.md)
-
-### Try the viewer without any AI dependency
-
-Only Python's standard library is needed to build and serve the **synthetic static demo**:
-
-```bash
-python tools/build_site.py
-python -m http.server 8765 --directory _site --bind 127.0.0.1
-```
-
-Open **http://127.0.0.1:8765/**. Image inference and RTSP controls are intentionally disabled. The same files can be published to GitHub Pages using the included, manually triggered workflow. This is not a hosted AI service.
-
-## Verify real inference separately
+<details>
+<summary>Run a separate real-inference check</summary>
 
 After installation, stop the running app and use your own shareable image:
 
@@ -149,7 +189,20 @@ After installation, stop the running app and use your own shareable image:
 
 Only a real successful model call prints `REAL_INFERENCE: PASS`. Failure is an error, never synthetic replacement data. PASS means the pipeline ran—not that its distance estimates are accurate. Use `--engine da2-small` to check just V2. Without `--image`, this command checks API imports only.
 
-## Architecture
+</details>
+
+The app estimates visible-surface **2.5D**, not hidden surfaces, 360° reconstruction, SLAM, temporal fusion or certified safety distances. Fixed-camera frames do not add a new viewpoint; no tested FPS, VRAM budget or distance accuracy is claimed. [Benchmarking method](docs/en/benchmarking.md)
+
+The backend has **one shared source/model**, defaults to localhost and has no login or tenant isolation. Keep it local; never commit private camera images, exports, credentials, weights or calibration. [Security policy](SECURITY.md)
+
+## Documentation
+
+- **Use:** [Installation / GPU / offline mode](docs/en/installation.md) · [Usage & troubleshooting](docs/en/usage.md) · [Sessions](docs/en/sessions.md)
+- **Understand:** [Models & geometry](docs/en/models-and-geometry.md) · [Architecture & API](docs/en/architecture.md) · [Tracking evaluation](docs/en/tracking-evaluation.md)
+- **Follow progress:** [Roadmap](ROADMAP.md) · [Changelog](CHANGELOG.md) · [Release notes](docs/releases/0.3.0-alpha.2.md)
+
+<details>
+<summary>Application architecture overview</summary>
 
 ```mermaid
 flowchart LR
@@ -166,13 +219,10 @@ flowchart LR
 
 [Architecture and API contract](docs/en/architecture.md)
 
-## Scope and limitations
+</details>
 
-This is visible-surface **2.5D**, not 360° scanning, hidden-surface reconstruction, SLAM, temporal fusion or a safety-distance sensor. Fixed-camera frames do not provide a new geometric viewpoint. No tested FPS, VRAM budget or distance accuracy is claimed. [How to record a fair benchmark](docs/en/benchmarking.md)
-
-The app has **one shared source and model**, not per-browser sessions. Default binding is localhost; there is no login, tenant isolation or production security boundary. Do not expose this backend to the Internet. Do not commit credentials, camera images, exports, weights or private calibration. [Security policy](SECURITY.md)
-
-## Develop and contribute
+<details>
+<summary>Develop, test and contribute</summary>
 
 ```bash
 python -m pip install -r requirements-base.txt -r requirements-test.txt
@@ -186,7 +236,9 @@ python tools/check_release.py
 
 [Tracking Acceptance & Evaluation](docs/en/tracking-evaluation.md) · [Contributing](CONTRIBUTING.md) · [Roadmap](ROADMAP.md) · [Changelog](CHANGELOG.md) · [Release checklist](docs/en/publishing.md)
 
-## License and acknowledgments
+</details>
+
+## License & acknowledgments
 
 DepthPort application code is provided under **AGPL-3.0-only**; see [LICENSE](LICENSE) and [NOTICE](NOTICE). External code and weights retain their own licenses; this project cannot relicense them. Ultralytics offers AGPL and a separate Enterprise route. The selected V2 Small / DA3 Small / DA3Metric checkpoints have Apache-2.0 model cards; other sizes may differ.
 
