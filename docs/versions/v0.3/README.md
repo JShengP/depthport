@@ -106,7 +106,8 @@ Private snapshots, bookmarks, notes and JSON backups stay local and are excluded
 - **Recovery control / 恢復控制:** [Frozen new MOT20-01 experiment](../../en/tracking-recovery-acceptance.md) / [繁中](../../zh-TW/tracking-recovery-acceptance.md): 429 frames / six runs, FP −3/FN −102/IDSW −8; passes the research screen with ordinary weak continuation preserved. Recall 13.98%, fragmentation increases and 0/9 long-event endpoint pairs are complete. 研究達標仍有新增失敗，更多場景／移動相機與長遮擋驗收待補，維持離線選用及原預設。
 - **Moving replication / 移動重驗:** [Unchanged 11/13 control and added-error audit](../../en/tracking-recovery-moving.md) / [繁中](../../zh-TW/tracking-recovery-moving.md): 1,650 frames / 12 runs, FP −8 with zero added FN/IDSW; scene-13 HOTA slightly decreases, so the group fails its screen. No long-event recovery gain. 未調參、未升預設，補析前輪直接延後與後續關聯失敗，原始診斷留本機。
 - **History evidence / 歷史證據:** [Frozen-output diagnosis](../../en/tracking-recovery-history.md) / [繁中](../../zh-TW/tracking-recovery-history.md) separates retained-state gating, CLEAR ownership and low-threshold HOTA losses. All ten flagged competitors already have other assignments; costs do not support a new cutoff. 不重跑追蹤或調參，下一控制點為有效排他競爭，弱延續與預設保留。
-- **Exclusive controls / 排他控制:** [Frozen new-scene comparison](../../en/tracking-exclusive-competition.md) / [繁中](../../zh-TW/tracking-exclusive-competition.md), 1,050 frames / 12 runs. Availability and equivalent assignment tested separately, both zero vetoes and exactly reference; legacy adds six misses with unchanged FP. 完成實作／比較，尚缺有效曝光，不升預設；弱偵測延續保留。
+- **Exclusive controls / 排他控制:** [Frozen fresh-cache comparison](../../en/tracking-exclusive-competition.md) / [繁中](../../zh-TW/tracking-exclusive-competition.md), 1,050 frames / 12 runs. Availability and equivalent assignment tested separately, both zero vetoes and exactly reference; legacy adds six misses with unchanged FP. 完成實作／比較，尚缺有效曝光，不升預設；弱偵測延續保留。
+- **GT-free exposure / GT-free 曝光:** [Complete frozen discovery/confirmation](../../en/tracking-exposure-selection.md) / [繁中](../../zh-TW/tracking-exposure-selection.md), 16 sources / 17,984 frames / 144 runs. Availability vetoes eight times in six discovery sources, none in reserved confirmation; equivalent assignment never triggers. 無獨立曝光重現或品質驗收，不調參，完整陰性紀錄保留。
 
 [Validation history](../../en/validation.md) · [繁中紀錄](../../zh-TW/validation.md) · [Alpha.2 release notes / 發布說明](../../releases/0.3.0-alpha.2.md)
 
@@ -120,6 +121,7 @@ Private snapshots, bookmarks, notes and JSON backups stay local and are excluded
 - [Promotion/recovery cost diagnosis](../../en/tracking-association-diagnosis.md) / [升格／恢復成本診斷](../../zh-TW/tracking-association-diagnosis.md)
 - [Competing-recovery deferral experiment](../../en/tracking-recovery-acceptance.md) / [競爭時延後接回實驗](../../zh-TW/tracking-recovery-acceptance.md)
 - [Moving-camera replication and error audit](../../en/tracking-recovery-moving.md) / [移動相機重驗與失敗補析](../../zh-TW/tracking-recovery-moving.md)
+- [GT-free exposure selection and reserved confirmation](../../en/tracking-exposure-selection.md) / [GT-free 曝光選取與保留確認](../../zh-TW/tracking-exposure-selection.md)
 - [Exclusive competition controls](../../en/tracking-exclusive-competition.md) / [排他競爭控制](../../zh-TW/tracking-exclusive-competition.md)
 - [State/association-history diagnosis](../../en/tracking-recovery-history.md) / [狀態與關聯歷史診斷](../../zh-TW/tracking-recovery-history.md)
 - [Alpha.2 dependency record / 依賴驗證](../../validation/v0.3-dependency-followup.json)

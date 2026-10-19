@@ -2,8 +2,13 @@
 
 ## Unreleased — research and documentation after v0.3.0-alpha.2 / Alpha.2 後的研究與文件
 
-- Add separate offline availability-only and equivalent-one-to-one ByteTrack recovery controls, frozen protocol, new MOT17-04 comparison and numeric figure. Twelve repeat runs preserve weak continuation: new controls equal reference with zero exposure; legacy adds six misses with unchanged FP despite identity-score gains. No accepted fix, retuning/default/release change; raw diagnostics stay local.
-- 完成競爭者占用／一對一替代獨立控制、新序列比較與雙語驗證／ROADMAP；如實記錄零觸發與漏追取捨，不發布影像、GT 或原始案例。
+- Add GT-free frozen exposure selection, continuous bounded-cache shards and complete discovery/reserved-confirmation ledgers for 16 full sources / 17,984 frames / 144 runs. Availability triggers eight times in discovery only; equivalent assignment remains unexposed, neither replicates in reserved sources. Keep weak continuation and original controls/settings; raw observations/diagnoses local. Add post-selection objective-reason audit and correct the earlier MOT17-04 new-scene provenance claim without rewriting frozen records.
+- 完成不靠 GT 分數的完整曝光搜尋與分離確認，公開所有序列與零值彙總；未找到兩個可獨立重現曝光的控制，不調參或升預設。來源文字／舊圖更正為先前場景的新快取，歷史數值不改。
+
+[GT-free exposure / GT-free 曝光](docs/en/tracking-exposure-selection.md) · [繁體中文](docs/zh-TW/tracking-exposure-selection.md)
+
+- Add separate offline availability-only and equivalent-one-to-one ByteTrack recovery controls, frozen protocol, fresh-cache MOT17-04 comparison and numeric figure. Twelve repeat runs preserve weak continuation: new controls equal reference with zero exposure; legacy adds six misses with unchanged FP despite identity-score gains. No accepted fix, retuning/default/release change; raw diagnostics stay local.
+- 完成競爭者占用／一對一替代獨立控制、新快取比較與雙語驗證／ROADMAP；如實記錄零觸發與漏追取捨，不發布影像、GT 或原始案例。
 
 [Exclusive competition / 排他競爭控制](docs/en/tracking-exclusive-competition.md) · [繁體中文](docs/zh-TW/tracking-exclusive-competition.md)
 

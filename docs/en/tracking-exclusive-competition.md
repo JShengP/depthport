@@ -2,7 +2,7 @@
 
 [繁體中文](../zh-TW/tracking-exclusive-competition.md) · [ROADMAP](../../ROADMAP.md) · [Prior history diagnosis](tracking-recovery-history.md) · [Frozen protocol](../validation/v0.3-exclusive-competition-protocol.json) · [Aggregate](../validation/v0.3-exclusive-competition.json)
 
-**Separate controls and a new-sequence comparison are complete; no treatment passes the research screen.** Legacy deferral adds six misses, removes one switch and leaves FP unchanged. Both new controls have zero actual vetoes and exactly reproduce the reference. Excluding this occupied competitor does not establish an effective new control. Weak continuation, application/worker/defaults and releases remain unchanged.
+**Separate controls and a fresh-cache comparison are complete; no treatment passes the research screen.** Legacy deferral adds six misses, removes one switch and leaves FP unchanged. Both new controls have zero actual vetoes and exactly reproduce the reference. Excluding this occupied competitor does not establish an effective new control. Weak continuation, application/worker/defaults and releases remain unchanged.
 
 ![Four-arm error changes, HOTA and actual interventions](../assets/tracking-v03-exclusive-competition.png)
 
@@ -23,9 +23,9 @@ Common activation `.3`, high confidence `.6`, buffer `30`, confirmation `2`, fix
 
 The alternative retains upstream **assignment before gating**. The tolerance is numerical roundoff, not a new fitted tracking threshold. Only the fixed solver-returned alternative is tested; equally optimal alternatives are not exhaustively enumerated. Alternative matching is evidence only: **never install it or rematch residual edges**. Decide all vetoes against the unchanged original assignment; remove only eligible missed-row pairs. This does not prove the competitor is the correct owner.
 
-## New scene, provenance and terms
+## Scene, provenance and terms
 
-Use full **MOT17-04-DPM**, **1,050 frames / 30 fps**, from the [official MOT17 train page](https://motchallenge.net/data/MOT17/): night pedestrian street, elevated stationary camera. GT is 1920×1080; official compressed preview is 960×540, scaled exactly 2× for evaluation. There are 47,557 valid pedestrian GT observations. This scene was not used in earlier project tracking studies, but remains public training data, not an official hidden test set.
+Use full **MOT17-04-DPM**, **1,050 frames / 30 fps**, from the [official MOT17 train page](https://motchallenge.net/data/MOT17/): night pedestrian street, elevated stationary camera. GT is 1920×1080; official compressed preview is 960×540, scaled exactly 2× for evaluation. There are 47,557 valid pedestrian GT observations. Correction after the provenance audit: this scene already appeared in the [earlier general comparison](tracking-expanded-acceptance.md). This experiment uses a fresh 8.4.176 cache; it is not an unseen scene or an official hidden test set. The original frozen protocol retains its inaccurate new-scene wording as historical evidence; the measurements and hashes are unchanged.
 
 Attribution: MOTChallenge; Milan, Leal-Taixe, Reid, Roth and Schindler, [MOT16 benchmark](https://arxiv.org/abs/1603.00831). The official page specifies [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/); local non-commercial research only, no source-media/GT/raw-diagnostic redistribution. The selected table row has no additional third-party source link; retrieved terms and official labels ZIP hashes are recorded. Other third-party scenes were excluded when original terms could not be verified. MOT20-02 preview was downloaded but excluded before tracking because its full length exceeds the unchanged 1,800-frame limit; no result-driven replacement or clipping.
 
@@ -50,7 +50,7 @@ The two long-low-visibility subject events have **zero complete endpoint pairs /
 
 ## Decision and next gate
 
-**No default promotion, numerical retuning or fix acceptance.** Separate implementation, freeze and new-scene comparison are complete; effectiveness when an available competitor or equivalent alternative genuinely triggers remains unverified. Next freeze an exposure-oriented cohort/selection procedure, select only on GT-free competition exposure and disclose every examined scene, separating discovery from independent confirmation. Do not select clips using FP/HOTA outcomes, append favourable scenes here or relax equivalence to manufacture triggers.
+**No default promotion, numerical retuning or fix acceptance.** Separate implementation, freeze and fresh-cache comparison are complete; effectiveness when an available competitor or equivalent alternative genuinely triggers remains unverified. Next freeze an exposure-oriented cohort/selection procedure, select only on GT-free competition exposure and disclose every examined scene, separating discovery from independent confirmation. Do not select clips using FP/HOTA outcomes, append favourable scenes here or relax equivalence to manufacture triggers.
 
 Low recall/localisation needs a separate detector-resolution control, not joint competition/confirmation/buffer tuning. The earlier bus HOTA failure remains. Moving-camera generalisation, long occlusion, physical RTSP, Windows pretrained inference/worker, 3D and throughput remain unverified.
 
@@ -66,3 +66,5 @@ python tools/validate_tracking_exclusive.py \
 ```
 
 Supply lawfully held local inputs. The tool verifies frozen code/input/package/upstream-class hashes and a clean evaluator; mismatches fail closed. Public scope is code, protocol, fixed-label aggregate counts, numeric figures and provenance hashes. Media, GT, frame/ID locations, full matrices/assignments and cases stay local; no private paths/data are published. Existing release/tag snapshots remain unchanged.
+
+Follow-up: [complete GT-free exposure discovery and reserved confirmation](tracking-exposure-selection.md). Availability triggers in discovery only; equivalent assignment remains unexposed, and neither replicates in the two reserved sources.

@@ -43,8 +43,8 @@ def main():
     ax.set_xlabel('Zero new-control exposure is inconclusive')
     for ax in axes:
         ax.spines[['top','right']].set_visible(False)
-    fig.suptitle('Exclusive competition: one new static scene, no accepted fix',x=.025,ha='left',fontsize=15,weight='bold')
-    fig.text(.025,.89,'MOT17-04-DPM · 1,050 dense frames · frozen 4-arm / 3-repeat experiment · weak detections preserved',fontsize=10)
+    fig.suptitle('Exclusive competition: fresh cache, no accepted fix',x=.025,ha='left',fontsize=15,weight='bold')
+    fig.text(.025,.89,'Previously studied MOT17-04-DPM · fresh 8.4.176 cache · 1,050 frames · 4 arms / 3 repeats',fontsize=10)
     fig.text(.025,.10,'Legacy: FP unchanged, +6 misses, −1 switch; HOTA rises. New controls exactly equal reference with zero vetoes.',fontsize=10)
     fig.text(.025,.045,'Source: MOTChallenge / MOT16 · CC BY-NC-SA 3.0 · numeric aggregates only; raw diagnostics stay local. Defaults unchanged.',fontsize=9)
     fig.subplots_adjust(left=.065,right=.98,top=.77,bottom=.26,wspace=.75)

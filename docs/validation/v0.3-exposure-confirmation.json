@@ -1,0 +1,154 @@
+{
+  "format": "depthport.exposure-selection.v1",
+  "phase": "confirmation",
+  "checked_on": "2026-10-19",
+  "protocol_sha256": "279e5d8d81fceb2409a0259a84d78ceee1a48ca4d04d81e2e1be91364ad4f36c",
+  "input_lock_sha256": "bd360bad00df843ce297ecda8cdf0450240f7eb71e73755706038fd09db91653",
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv-python": "4.11.0.86",
+    "trackers": "2.6.1",
+    "supervision": "0.27.0",
+    "scipy": "1.18.1"
+  },
+  "gt_read": false,
+  "accuracy_scoring": false,
+  "repeats": 3,
+  "ledger": [
+    {
+      "name": "MOT20-03",
+      "phase": "confirmation",
+      "prior_use": "No prior project tracking or score; reserved before exposure search",
+      "frames": 2405,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "b2cb94d9bfb5b80be4c9d392dc5fec46820810c9533e35f0572fb065ab7459a3",
+          "trace_sha256": "f21816d2805e32f9eb2acfd64677a1ea13e080b3d6ab60c21cd32d02b12c33f9",
+          "counts": {
+            "legacy_eligible_edges": 5,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 5,
+            "occupied_alternatives": 5,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_available_competitor": {
+          "prediction_sha256": "b2cb94d9bfb5b80be4c9d392dc5fec46820810c9533e35f0572fb065ab7459a3",
+          "trace_sha256": "f21816d2805e32f9eb2acfd64677a1ea13e080b3d6ab60c21cd32d02b12c33f9",
+          "counts": {
+            "legacy_eligible_edges": 5,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 5,
+            "occupied_alternatives": 5,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_equivalent_assignment": {
+          "prediction_sha256": "b2cb94d9bfb5b80be4c9d392dc5fec46820810c9533e35f0572fb065ab7459a3",
+          "trace_sha256": "f21816d2805e32f9eb2acfd64677a1ea13e080b3d6ab60c21cd32d02b12c33f9",
+          "counts": {
+            "legacy_eligible_edges": 5,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 5,
+            "occupied_alternatives": 5,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 76712,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT20-05",
+      "phase": "confirmation",
+      "prior_use": "No prior project tracking or score; reserved before exposure search",
+      "frames": 3315,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "b12bf072ec8dd4068dc02cb316268c7e166f26af4b3fb8e4a6f02e289be37b17",
+          "trace_sha256": "b1758471dbe0cf9e053dbe14503c623e1eb10db9409b9fcaada6c98e0085b1e0",
+          "counts": {
+            "legacy_eligible_edges": 0,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 0,
+            "occupied_alternatives": 0,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_available_competitor": {
+          "prediction_sha256": "b12bf072ec8dd4068dc02cb316268c7e166f26af4b3fb8e4a6f02e289be37b17",
+          "trace_sha256": "b1758471dbe0cf9e053dbe14503c623e1eb10db9409b9fcaada6c98e0085b1e0",
+          "counts": {
+            "legacy_eligible_edges": 0,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 0,
+            "occupied_alternatives": 0,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_equivalent_assignment": {
+          "prediction_sha256": "b12bf072ec8dd4068dc02cb316268c7e166f26af4b3fb8e4a6f02e289be37b17",
+          "trace_sha256": "b1758471dbe0cf9e053dbe14503c623e1eb10db9409b9fcaada6c98e0085b1e0",
+          "counts": {
+            "legacy_eligible_edges": 0,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 0,
+            "occupied_alternatives": 0,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 89810,
+      "capped_frames": 0
+    }
+  ],
+  "discovery_sha256": "fe8b549aab7da1ab9a4434c6475418bebde75bedb4528e36159bb18163563ac5",
+  "discovery_selection": {
+    "defer_available_competitor": "MOT17-10-DPM",
+    "defer_equivalent_assignment": null
+  },
+  "confirmation": {
+    "defer_available_competitor": {
+      "discovery_found": true,
+      "exposed_scenes": [],
+      "replicated_in_both_reserved_scenes": false
+    },
+    "defer_equivalent_assignment": {
+      "discovery_found": false,
+      "exposed_scenes": [],
+      "replicated_in_both_reserved_scenes": false
+    }
+  }
+}

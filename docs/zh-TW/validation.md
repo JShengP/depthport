@@ -1,9 +1,13 @@
 # 驗證紀錄
 [English](../en/validation.md)・[首頁](../../README.zh-TW.md)
 
+## GT-free 曝光選取與保留確認 — 2026-10-19
+
+[凍結規則、結果與全序列](tracking-exposure-selection.md) · [協議](../validation/v0.3-exposure-selection-protocol.json) · [發現](../validation/v0.3-exposure-discovery.json) · [確認](../validation/v0.3-exposure-confirmation.json)。固定完整 14 段發現／2 段保留、17,984 格／144 次。未配對控制在發現 6 段共觸發 8 次，依序選 MOT17-10；兩段保留皆零觸發。等價控制在全組都未觸發；選取不靠 GT／品質分數，兩者皆未獨立重現曝光或通過可靠性。完整揭露零值與失敗、弱偵測／配置保留、原始資料留本機。事後摘要的 197 個參考替代全有正目標成本。另更正 MOT17-04 早已出現在一般比較，前輪新增的是快取；原凍結紀錄保留。
+
 ## 競爭者占用／一對一替代獨立控制 — 2026-10-19
 
-[方法與結果](tracking-exclusive-competition.md) · [凍結配置](../validation/v0.3-exclusive-competition-protocol.json) · [彙總](../validation/v0.3-exclusive-competition.json)。新固定相機 MOT17-04，完整 1,050 格／四組各三次，重複雜湊一致。原對照／未配對競爭者／等價替代：FN 38,587、FP 703、IDSW 7、HOTA 29.7320%；舊控制 FN +6、FP 不變、IDSW −1、HOTA 30.3467%。新控制都零觸發、輸出精確等同對照，是有效曝光不足，不是接受的修復；舊組未通過漏追／FP 篩選。凍結值與弱偵測延續保留，原矩陣／ID／案例留本機；下一步凍結 GT-free 曝光選取與獨立確認，前輪公車及實機／長遮擋未驗收仍保留。
+[方法與結果](tracking-exclusive-competition.md) · [凍結配置](../validation/v0.3-exclusive-competition-protocol.json) · [彙總](../validation/v0.3-exclusive-competition.json)。先前研究過的固定相機 MOT17-04 換新快取，完整 1,050 格／四組各三次，重複雜湊一致。原對照／未配對競爭者／等價替代：FN 38,587、FP 703、IDSW 7、HOTA 29.7320%；舊控制 FN +6、FP 不變、IDSW −1、HOTA 30.3467%。新控制都零觸發、輸出精確等同對照，是有效曝光不足，不是接受的修復；舊組未通過漏追／FP 篩選。凍結值與弱偵測延續保留，原矩陣／ID／案例留本機；下一步凍結 GT-free 曝光選取與獨立確認，前輪公車及實機／長遮擋未驗收仍保留。
 
 ## 延後接回的狀態／關聯歷史診斷 — 2026-10-19
 
