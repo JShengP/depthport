@@ -1,0 +1,121 @@
+{
+  "project": "DepthPort",
+  "version": "0.2.0-alpha.1",
+  "checked_on": "2026-10-17",
+  "validated_base_commit": "86ddb2e7d691c599e280327e27895bc954d86fd3",
+  "validated_fix": "Attach comparison cards to DOM before fitting point clouds; browser regression reproduced before fix and passed after.",
+  "environment": {
+    "os": "Ubuntu 24.04 LTS",
+    "python": "3.12.3",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "driver": "580.178.04",
+    "torch": "2.10.0+cu128",
+    "cuda_runtime": "12.8",
+    "numpy": "1.26.4",
+    "opencv_python": "4.11.0.86",
+    "ultralytics": "8.4.115",
+    "transformers": "4.57.6",
+    "da3_source": "3d835ec"
+  },
+  "default_pytest": {
+    "passed": 117,
+    "skipped_opt_in_real_models": 4,
+    "failed": 0
+  },
+  "separate_real_pretrained_pytest": {
+    "passed": 4,
+    "skipped": 0,
+    "failed": 0,
+    "engines": [
+      "yolo26",
+      "da2-small",
+      "da3-small",
+      "da3-metric"
+    ],
+    "device": "cuda:0",
+    "offline_cached_weights": true
+  },
+  "real_http_checks": {
+    "startup_and_real_da2_cuda": "PASS",
+    "real_pixel_inspection_and_measurement_guards": "PASS",
+    "four_real_models_comparison_and_export": "PASS",
+    "real_yolo_detection_fusion": "PASS",
+    "real_yolo_segmentation_fusion": "PASS",
+    "same_frame_export": "PASS",
+    "browser_http": "PASS"
+  },
+  "real_semantic": {
+    "detect": {
+      "model": "yolo26n.pt",
+      "objects": 5
+    },
+    "segment": {
+      "model": "yolo26n-seg.pt",
+      "objects": 5
+    },
+    "depth_engine": "da2-small",
+    "depth_units": "relative"
+  },
+  "browser": {
+    "transport": "Real Chrome -> loopback HTTP -> Uvicorn; no TestClient bridge",
+    "javascript_errors": 0,
+    "mobile_390px_horizontal_overflow": 0,
+    "renderer": "SwiftShader software WebGL; NVIDIA hardware rendering not validated",
+    "languages": [
+      "en",
+      "zh-TW"
+    ]
+  },
+  "i18n": {
+    "main_bilingual_keys": 170,
+    "spatial_bilingual_keys": 82
+  },
+  "input": {
+    "source_url": "https://github.com/ultralytics/assets/blob/53d4e2a8fd15f473c29a148c317a8477be559327/im/bus.jpg",
+    "sha256": "c02019c4979c191eb739ddd944445ef408dad5679acab6fd520ef9d434bfbc63",
+    "physical_camera_capture": false
+  },
+  "weights": [
+    {
+      "model": "depth-anything/DA3-SMALL",
+      "bytes": 137248940,
+      "sha256": "364492e38a3a06d221ac75da7f6621ada3f2361cd24fde11ba79091e9f40efcf"
+    },
+    {
+      "model": "depth-anything/DA3METRIC-LARGE",
+      "bytes": 1336734448,
+      "sha256": "bbea5b0b3ee389849cffa7ddae89de064a90abd2b055fc5aa99aac68db324776"
+    },
+    {
+      "model": "depth-anything/Depth-Anything-V2-Small-hf",
+      "bytes": 99173660,
+      "sha256": "3152477ce0d8d6978d76b995120de97cb5b928701fd0f817769f59e249a16b70"
+    },
+    {
+      "model": "yolo26n-depth.pt",
+      "bytes": 12998295,
+      "sha256": "befed1b8561d8b2eaa66274b070cdfc9c44853bda6d6d62a04759f9383af74e9"
+    },
+    {
+      "model": "yolo26n-seg.pt",
+      "bytes": 6719965,
+      "sha256": "361fbfabab285c3237700b6bb91d7ecfa602cd945fffda8dbe1242829b71e73f"
+    },
+    {
+      "model": "yolo26n.pt",
+      "bytes": 5544453,
+      "sha256": "9b09cc8bf347f0fc8a5f7657480587f25db09b34bf33b0652110fb03a8ad4fef"
+    }
+  ],
+  "ubuntu_fresh_virtual_environment_installation": "PASS",
+  "pip_check_known_optional_missing": [
+    "DA3 pre-commit",
+    "DA3 xformers"
+  ],
+  "limitations": [
+    "One public still image; execution only, not a depth-accuracy or FPS benchmark.",
+    "Windows and physical RTSP/authentication/reconnection not tested.",
+    "Measured camera calibration, field distance ground truth, sustained VRAM/endurance and NVIDIA WebGL rendering not tested."
+  ],
+  "published_evidence": "Curated aggregate results and attributed UI screenshots only; runtime logs, local paths, credentials, raw exports and weights excluded."
+}

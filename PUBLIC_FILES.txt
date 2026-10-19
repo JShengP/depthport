@@ -50,6 +50,7 @@ docs/en/publishing.md
 docs/en/usage.md
 docs/en/validation.md
 docs/releases/0.1.0-alpha.1.md
+docs/releases/0.2.0-alpha.1.md
 docs/templates/benchmark.csv
 docs/validation/summary.json
 docs/zh-TW/architecture.md
@@ -95,3 +96,21 @@ tools/build_site.py
 tools/check_release.py
 tools/http_smoke.py
 tools/stage_public.py
+# v0.2 Spatial Analysis extension
+depthport/spatial.py
+depthport/semantic.py
+depthport/comparison.py
+static/spatial.html
+static/spatial.css
+static/spatial.js
+tests/test_spatial.py
+tests/test_spatial_i18n.cjs
+tools/calibrate_camera.py
+docs/en/spatial-analysis.md
+docs/zh-TW/spatial-analysis.md
+tools/spatial_browser_smoke.py
+docs/validation/v0.2-summary.json
+tests/test_release_version.py
+docs/assets/README.md
+docs/assets/spatial-preview.en.png
+docs/assets/spatial-preview.zh-TW.png
