@@ -8,6 +8,8 @@
 
 ![升格、恢復及競爭假設的彙總證據](../assets/tracking-v03-association.png)
 
+> 後續已另完成[新 MOT20-01 延後接回控制](tracking-recovery-acceptance.md)。本篇保留當時純觀察結果；後續研究篩選通過不代表一般可靠性驗收。
+
 ## 輸入與實際重跑範圍
 
 沿用[前次實驗](tracking-admission-acceptance.md)完全相同的 **YOLO26n CPU／Ultralytics 8.4.176** 偵測快取、官方 GT 與有授權的 MOT17-09／10 壓縮預覽，共 **1,179 格連續影格**，涵蓋固定視角與移動相機。這是已研究訓練場景，不是新的獨立驗收組；偵測設定／權重、關聯門檻、確認值及來源 FPS 均不變。

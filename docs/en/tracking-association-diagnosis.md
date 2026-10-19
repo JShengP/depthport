@@ -8,6 +8,8 @@
 
 ![Aggregate promotion, recovery and competing-hypothesis evidence](../assets/tracking-v03-association.png)
 
+> Subsequent frozen intervention: [new MOT20-01 recovery experiment](tracking-recovery-acceptance.md). This dated observational record remains unchanged; the later screen is not general acceptance.
+
 ## Inputs and what was actually rerun
 
 Reuse the exact **YOLO26n CPU / Ultralytics 8.4.176** detector caches, official GT and licensed MOT17-09/10 compressed previews from the [admission experiment](tracking-admission-acceptance.md): **1,179 continuous frames**, one fixed-view and one moving-camera scene. These are previously studied training scenes, not an independent validation group. Detector settings/weights, association gates, confirmation values and source FPS are unchanged.

@@ -1,6 +1,10 @@
 # 驗證紀錄
 [English](../en/validation.md)・[首頁](../../README.zh-TW.md)
 
+## 競爭時延後接回控制實驗 — 2026-10-19
+
+[方法與結果](tracking-recovery-acceptance.md) · [凍結配置](../validation/v0.3-recovery-deferral-protocol.json) · [彙總](../validation/v0.3-recovery-deferral.json)。新 MOT20-01 共 429 格，兩組各重跑三次、完整診斷與輸出一致，另核對未加探針的對照。延後 4 筆：FP 55→52、FN 17,194→17,092、換 ID 21→13、IDF1／HOTA 改善，通過凍結研究篩選；但碎裂 46→48、新增 22 筆 FN／1 次換 ID、召回僅 13.98%、長事件無完整端點，仍未驗收／不升預設。保留一般弱偵測延續，原始診斷留本機；下一步換更多授權場景／移動相機重現，框品質另做控制。
+
 ## 未確認升格／恢復關聯成本診斷 — 2026-10-19
 
 [方法與結果](tracking-association-diagnosis.md) · [凍結擷取配置](../validation/v0.3-association-diagnosis-protocol.json) · [彙總紀錄](../validation/v0.3-association-diagnosis.json)。同一組 1,179 格／8.4.176 快取的 16 次觀察重跑，精確重現原預測、完整重複診斷雜湊與官方 CLEAR／Identity／HOTA。升格成本重疊；下一個控制點為 ByteTrack 漏格假設弱階段與活躍假設的低差距競爭（24 FP、5 筆不同先前 GT 的 TP、5 筆同 GT 的 TP）。此為診斷子群組，不是安全閘門或分數改善；保留弱延續與原預設，矩陣／ID／原始案例留本機。獨立控制、長遮擋及實機驗收仍未完成。

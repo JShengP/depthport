@@ -1,0 +1,97 @@
+{
+  "format": "depthport.recovery-deferral-protocol.v1",
+  "recorded_at_utc": "2026-10-19T11:05:04.614144+00:00",
+  "checked_on": "2026-10-19",
+  "base_commit": "56c694ffdb72c5de1ece2115b2062e1c0bb25fcf",
+  "status": "Frozen locally after common detection cache and synthetic tests, before any new-sequence tracker output or GT evaluation. Not independent preregistration.",
+  "source_terms": {
+    "dataset": "MOT20 train / MOT20-01",
+    "page": "https://motchallenge.net/data/MOT20/",
+    "license": "CC BY-NC-SA 3.0; original-source conditions may also apply",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+    "terms_page_retrieved_sha256": "d096d5fad93fcfe3c2c8e796e28488bbc8fe01d3d581272c2e00b7b58bf20576",
+    "source_column": "No additional third-party source link for MOT20-01 in official table",
+    "scope": "Local non-commercial research; media, GT and raw traces not redistributed",
+    "attribution": "MOTChallenge / Dendorfer, Rezatofighi, Milan, Shi, Cremers, Reid, Roth, Schindler and Leal-Taixe; MOT20 (arXiv:2003.09003)",
+    "labels_url": "https://motchallenge.net/data/MOT20Labels.zip",
+    "labels_archive_sha256": "95decf629c332f80ace18024bf876996e6be89908ec593f05cda000270d6d9ad"
+  },
+  "sequence": {
+    "name": "MOT20-01",
+    "frames": 429,
+    "fps": 25,
+    "camera_motion": false,
+    "video_url": "https://motchallenge.net/sequenceVideos/MOT20-01-raw.mp4",
+    "video_sha256": "0105c42857c50f73c6ec50d3456f9bb8a04cbe45944bf7bbc3c77dc755feeae8",
+    "detections_sha256": "6db33759b20eabd0680c95da9c3808f284869ff919138965db8f3af043c6cea0",
+    "gt_sha256": "89fd0196d67a5eb6011a470dc2a49b02255403b49e8848031cdf99add8a36d9c",
+    "seqinfo_sha256": "5850098d845d1a92c4b8649ee7ab4e2b7ef2b0a2104eb855cdef9a8e93da0a5e"
+  },
+  "selection": "Entire previously unused 429-frame compressed training preview, crowded indoor station. Excludes all prior MOT17 scenes. One static camera, not a multi-scene held-out benchmark or moving-camera test.",
+  "detector": {
+    "model": "yolo26n.pt",
+    "confidence": 0.1,
+    "imgsz": 640,
+    "source": "ultralytics",
+    "device": "cpu",
+    "classes": [
+      0
+    ],
+    "max_det": 64,
+    "nms_iou": 0.7,
+    "ultralytics": "8.4.176",
+    "weight_sha256": "9b09cc8bf347f0fc8a5f7657480587f25db09b34bf33b0652110fb03a8ad4fef",
+    "frames_at_detection_cap": 0
+  },
+  "parameters": {
+    "track_activation_threshold": 0.3,
+    "high_conf_det_threshold": 0.6,
+    "lost_track_buffer": 30,
+    "minimum_consecutive_frames": 2
+  },
+  "arms": [
+    "activation_control",
+    "defer_competing_recovery"
+  ],
+  "margin": 0.05,
+  "repeats": 3,
+  "order": "Rotate two arms each repeat; fresh tracker, OpenCV seed 0 and one OpenCV thread. Compare canonical predictions and full trace hashes.",
+  "intervention": {
+    "scope": "Only selected second-stage (weak) pairs; confirmed row ID >=0 with predicted age >=2 (at least one fully missed previous frame).",
+    "competition": "Another remaining confirmed row with predicted age exactly 1; same weak column similarity >= upstream gate .1 and selected minus competitor similarity <=.05, including negative margins. Alternative may be assigned elsewhere; no proof it owns this detection.",
+    "action": "Remove only that selected pair after original assignment. Do not rerun/rematch. Return detection unmatched (ID -1), leave missed state predicted/retained within unchanged buffer. Re-evaluate each next frame; no fixed one-frame promise, lifetime extension or permanent ban.",
+    "unchanged": "High stage, births/confirmation, active weak updates, uncontested weak recovery, all original weak input detections, upstream lifecycle/boxes/scores, fixed source-FPS steps, no ReID/GT/CMC/app/worker change."
+  },
+  "evaluation": {
+    "official": "Clean TrackEval 12c8791b303e0a0b50f753af204249e622d0281a; MOT20 pedestrian preprocessing, CLEAR IoU .5, Identity, HOTA. Whole sequence.",
+    "paired_errors": "Exact official CLEAR reconciliation; FP at immutable (frame, cache detection), FN/IDSW at (frame, GT). No cross-run native-ID comparison.",
+    "scenarios": "Existing frozen GT-only long-low-visibility and overlap/order-exchange proxies, separate IoU .5 endpoint matching. Report missing endpoints plus paired same-ID gains/losses; not official scenario metrics or physical occlusion proof.",
+    "screen": "Research only: actual intervention >0; FP strictly lower; FN/IDSW no increase; IDF1/HOTA no decrease; zero paired same-ID recovery losses. All conditions must hold. No post-result tuning or default promotion from this one scene.",
+    "timing": "No timing or end-to-end throughput claim."
+  },
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv-python": "4.11.0.86",
+    "trackers": "2.6.1",
+    "supervision": "0.27.0",
+    "scipy": "1.18.1"
+  },
+  "python": "3.12.3",
+  "upstream_bytetrack_class_sha256": "7ea61408b4908da327ba992f09450865bb16019ab95bed23a512e5c03bef8fda",
+  "implementation_sha256": {
+    "depthport/tracking_recovery_control.py": "123ed43132d33326a0ec0ca1c7deaa23d20f1fa07f35b2df3ee4735efbe4a7b6",
+    "depthport/tracking_association_probe.py": "585f2d87b3246644a6df0d96b62fd88998b12dd9bdc86233107e521f4061926e",
+    "depthport/video_tracking_benchmark.py": "42fd7739080b4523f64c8425979e0125b8bfbfee7abfc5f22ed5e41668bbca0c",
+    "tools/validate_tracking_recovery.py": "fbaca84154570f686f4dfc4463e798d8cfc8191db3635fbe3d4ff7a1138badde",
+    "depthport/mot_scenarios.py": "00e7dfd32856ee5cac4da9ad3142ce64428a006405d326889f02c87b80ce5bce",
+    "depthport/tracking_admission.py": "d327ade6c1a7a72d97e2dcd13a8f2bd6c583bde48b46aca15a3edfc7915d3a89",
+    "depthport/tracking_diagnostics.py": "09838945d8d72da9c28bdb8dad432a335d7ae4be4ff08f62059c70fd05d2ba67"
+  },
+  "limitations": [
+    "Independent of earlier selected scenes, but one compressed static-camera training sequence is not general reliability acceptance. No camera-motion, new-scene replication, physical occlusion audit or held-out leaderboard claim.",
+    "YOLO26n CPU 640/conf .1/NMS .7/cap64 reused application environment with 8.4.176 overlay; not fresh complete Alpha.2 installation. Detection limits/localisation can dominate FN.",
+    "Competition may delay a valid same-person recovery and change later assignments. No counterfactual benefit inferred from old flagged events.",
+    "ByteTrack direct offline research only; not BoT-SORT, isolated worker or Session default. No RTSP, Windows true inference/worker, 3D, endurance or throughput acceptance."
+  ],
+  "public_scope": "Reviewed aggregate counts/distributions, configuration/source hashes and attributed numeric plots only. Media, GT, exact event windows, per-frame IDs, raw matrices/diagnostics, notes and local paths stay local."
+}

@@ -1,6 +1,10 @@
 # Validation record
 [繁體中文](../zh-TW/validation.md) · [Home](../../README.md)
 
+## Competition-aware recovery control — 2026-10-19
+
+[Method/results](tracking-recovery-acceptance.md) · [Frozen protocol](../validation/v0.3-recovery-deferral-protocol.json) · [Aggregate](../validation/v0.3-recovery-deferral.json). New MOT20-01, 429 continuous frames, two arms × three identical repeats; separate unhooked reference agrees. Four deferrals: FP 55→52, FN 17,194→17,092, IDSW 21→13, IDF1/HOTA improve. Frozen research screen passes, but fragmentation 46→48, 22 added FN/one added IDSW, recall 13.98% and zero complete long-event endpoints prevent acceptance/default promotion. Preserve active weak continuation; raw diagnostics stay local. More licensed scenes/camera motion and separate localisation study remain next.
+
 ## Promotion/recovery association-cost diagnosis — 2026-10-19
 
 [Method/results](tracking-association-diagnosis.md) · [Frozen capture protocol](../validation/v0.3-association-diagnosis-protocol.json) · [Aggregate record](../validation/v0.3-association-diagnosis.json). Sixteen observed reruns on the same 1,179-frame 8.4.176 caches reproduce exact original predictions, full repeated probe traces and official CLEAR/Identity/HOTA. Promotion costs overlap; the next research target is ByteTrack missed-hypothesis weak-stage low-margin active competition (24 FP, 5 different-prior-GT TP, 5 same-GT TP). This is a diagnostic cohort, not a safe veto or score gain. Preserve weak continuation/defaults; raw matrices/IDs/events remain local. Independent control, long-occlusion and hardware acceptance remain open.

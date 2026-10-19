@@ -2,6 +2,11 @@
 
 ## Unreleased — research and documentation after v0.3.0-alpha.2 / Alpha.2 後的研究與文件
 
+- Add opt-in instance-local ByteTrack weak-stage competing-recovery deferral and a frozen MOT20-01 two-arm runner. Six identical-repeat runs pass the research screen (FP −3/FN −102/IDSW −8), with explicit new errors, fragmentation increase, poor recall and missing long-event endpoints. Publish reviewed aggregates only; defaults/releases unchanged.
+- 新增獨立延後接回實驗、機制測試及圖表，保留一般弱偵測延續；研究達標不等於可靠性驗收，更新雙語驗證／ROADMAP，原始診斷留本機。
+
+[Recovery study / 延後接回研究](docs/en/tracking-recovery-acceptance.md) · [繁體中文](docs/zh-TW/tracking-recovery-acceptance.md)
+
 - Add an instance-local observational association probe, deterministic stage summary and aggregate plot. Sixteen fixed-cache reruns reproduce all original predictions/official metrics and repeated raw-trace hashes; full matrices/IDs stay local. Identify ByteTrack missed-hypothesis weak-stage competition as a future control point, with explicit same-GT recovery risk; no intervention, weak-input filtering, default or release change.
 - 新增升格／恢復成本與競爭探針、階段彙總及圖表，原始診斷留本機；找出下一個有風險需獨立測試的控制點，不宣稱已修復或通過追蹤驗收。
 

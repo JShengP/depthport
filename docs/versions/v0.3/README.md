@@ -102,7 +102,8 @@ Private snapshots, bookmarks, notes and JSON backups stay local and are excluded
 - **Replay example / 回放範例:** the recorded short public clip exercises genuine depth, CPU detection, the isolated worker and the actual browser replay. It has no identity ground truth. 已記錄真深度／偵測／worker／瀏覽器操作，沒有身分真值。
 - **Research / 研究證據:** public-sequence studies keep their fixed detection caches and recorded versions. New dependencies do not inherit those accuracy results; lower activation can add coverage and ID switches/FP together. 舊快取與舊分數不能當新版精度，原預設不變，長遮擋恢復未通過。
 - **Admission controls / 新 ID 控制:** [1,179 frames / 72 runs](../../en/tracking-admission-acceptance.md) / [繁中](../../zh-TW/tracking-admission-acceptance.md) separately test confirmation and birth competition using fresh 8.4.176 detections on previously studied scenes. Fewer FP trade off more FN/lower combined IDF1/HOTA; birth veto never triggers. No candidate passes the research screen; defaults and independent acceptance gates remain unchanged. 完成本輪控制實驗，不等於獨立序列或可靠性驗收通過。
-- **Association diagnosis / 關聯診斷:** [16 observed reruns](../../en/tracking-association-diagnosis.md) / [繁中](../../zh-TW/tracking-association-diagnosis.md) reproduce exact outputs/scores, recording promotion/recovery costs and competition locally. Next target is ByteTrack missed-hypothesis weak-stage competition; its flagged cohort includes valid same-GT recoveries, so no control/default is promoted. 成本／競爭診斷已記錄，原始矩陣／ID 留本機，尚未修復或通過獨立驗收。
+- **Association diagnosis / 關聯診斷:** [16 observed reruns](../../en/tracking-association-diagnosis.md) / [繁中](../../zh-TW/tracking-association-diagnosis.md) reproduce exact outputs/scores, recording promotion/recovery costs and competition locally. The diagnosis motivated the subsequent ByteTrack missed-hypothesis weak-stage control; its flagged cohort includes valid same-GT recoveries, so no control/default is promoted. 成本／競爭診斷已記錄，原始矩陣／ID 留本機，尚未修復或通過獨立驗收。
+- **Recovery control / 恢復控制:** [Frozen new MOT20-01 experiment](../../en/tracking-recovery-acceptance.md) / [繁中](../../zh-TW/tracking-recovery-acceptance.md): 429 frames / six runs, FP −3/FN −102/IDSW −8; passes the research screen with ordinary weak continuation preserved. Recall 13.98%, fragmentation increases and 0/9 long-event endpoint pairs are complete. 研究達標仍有新增失敗，更多場景／移動相機與長遮擋驗收待補，維持離線選用及原預設。
 
 [Validation history](../../en/validation.md) · [繁中紀錄](../../zh-TW/validation.md) · [Alpha.2 release notes / 發布說明](../../releases/0.3.0-alpha.2.md)
 
@@ -114,6 +115,7 @@ Private snapshots, bookmarks, notes and JSON backups stay local and are excluded
 - [Error diagnosis](../../en/tracking-error-diagnosis.md) / [錯誤診斷](../../zh-TW/tracking-error-diagnosis.md)
 - [Confirmation/competition ablation](../../en/tracking-admission-acceptance.md) / [確認／競爭控制實驗](../../zh-TW/tracking-admission-acceptance.md)
 - [Promotion/recovery cost diagnosis](../../en/tracking-association-diagnosis.md) / [升格／恢復成本診斷](../../zh-TW/tracking-association-diagnosis.md)
+- [Competing-recovery deferral experiment](../../en/tracking-recovery-acceptance.md) / [競爭時延後接回實驗](../../zh-TW/tracking-recovery-acceptance.md)
 - [Alpha.2 dependency record / 依賴驗證](../../validation/v0.3-dependency-followup.json)
 
 Alpha.2 packages reviewed dependency compatibility updates and workflow illustrations. [Alpha.1](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.1) remains available; publication does not close acceptance gates. Alpha.2 封裝相容性更新與流程圖，發布不等於驗收完成。

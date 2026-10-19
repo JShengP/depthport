@@ -1,0 +1,458 @@
+{
+  "format": "depthport.recovery-deferral-acceptance.v1",
+  "checked_on": "2026-10-19",
+  "protocol_sha256": "521bbcbb888622b3b3cbe7f5221d13045be9fc71fb1074fda53908282ae6938b",
+  "source_terms": {
+    "dataset": "MOT20 train / MOT20-01",
+    "page": "https://motchallenge.net/data/MOT20/",
+    "license": "CC BY-NC-SA 3.0; original-source conditions may also apply",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+    "terms_page_retrieved_sha256": "d096d5fad93fcfe3c2c8e796e28488bbc8fe01d3d581272c2e00b7b58bf20576",
+    "source_column": "No additional third-party source link for MOT20-01 in official table",
+    "scope": "Local non-commercial research; media, GT and raw traces not redistributed",
+    "attribution": "MOTChallenge / Dendorfer, Rezatofighi, Milan, Shi, Cremers, Reid, Roth, Schindler and Leal-Taixe; MOT20 (arXiv:2003.09003)",
+    "labels_url": "https://motchallenge.net/data/MOT20Labels.zip",
+    "labels_archive_sha256": "95decf629c332f80ace18024bf876996e6be89908ec593f05cda000270d6d9ad"
+  },
+  "sequence": {
+    "name": "MOT20-01",
+    "frames": 429,
+    "fps": 25,
+    "camera_motion": false,
+    "video_url": "https://motchallenge.net/sequenceVideos/MOT20-01-raw.mp4",
+    "video_sha256": "0105c42857c50f73c6ec50d3456f9bb8a04cbe45944bf7bbc3c77dc755feeae8",
+    "detections_sha256": "6db33759b20eabd0680c95da9c3808f284869ff919138965db8f3af043c6cea0",
+    "gt_sha256": "89fd0196d67a5eb6011a470dc2a49b02255403b49e8848031cdf99add8a36d9c",
+    "seqinfo_sha256": "5850098d845d1a92c4b8649ee7ab4e2b7ef2b0a2104eb855cdef9a8e93da0a5e",
+    "resolution": [
+      960,
+      540
+    ],
+    "video_to_gt_scale": 2.0,
+    "cached_detections": 7529,
+    "gt_pedestrian_observations": 19870,
+    "scenario_event_counts": {
+      "long_low_visibility": 9,
+      "overlap_order_exchange": 36
+    }
+  },
+  "detector": {
+    "model": "yolo26n.pt",
+    "confidence": 0.1,
+    "imgsz": 640,
+    "source": "ultralytics",
+    "device": "cpu",
+    "classes": [
+      0
+    ],
+    "max_det": 64,
+    "nms_iou": 0.7,
+    "ultralytics": "8.4.176",
+    "weight_sha256": "9b09cc8bf347f0fc8a5f7657480587f25db09b34bf33b0652110fb03a8ad4fef",
+    "frames_at_detection_cap": 0
+  },
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv-python": "4.11.0.86",
+    "trackers": "2.6.1",
+    "supervision": "0.27.0",
+    "scipy": "1.18.1"
+  },
+  "repeats": 3,
+  "evaluator_commit": "12c8791b303e0a0b50f753af204249e622d0281a",
+  "methods": {
+    "activation_control": {
+      "metrics": {
+        "CLR_TP": 2676,
+        "CLR_FP": 55,
+        "CLR_FN": 17194,
+        "IDSW": 21,
+        "Frag": 46,
+        "CLR_Re": 0.134675390035229,
+        "CLR_Pr": 0.9798608568290004,
+        "MOTA": 0.13085052843482636,
+        "IDF1": 0.2003451174726782,
+        "HOTA": 0.20503146097039698
+      },
+      "diagnosis": {
+        "counts": {
+          "opportunity_current_low_visibility": 116,
+          "opportunity_gt_not_annotated": 109,
+          "opportunity_no_raw_geometric_support": 156,
+          "opportunity_strong_support_admissible_not_selected": 3,
+          "opportunity_strong_support_below_high_stage_gate": 1,
+          "opportunity_weak_only_geometric_support": 91,
+          "promotion_ambiguous_tp": 0,
+          "promotion_column_competition_tp": 0,
+          "promotion_total": 19,
+          "promotion_tp": 19,
+          "recovery_ambiguous_fp": 3,
+          "recovery_ambiguous_tp_different_previous_gt": 3,
+          "recovery_ambiguous_tp_same_previous_gt": 2,
+          "recovery_column_competition_fp": 3,
+          "recovery_column_competition_tp_different_previous_gt": 3,
+          "recovery_column_competition_tp_same_previous_gt": 9,
+          "recovery_current_low_visibility_tp_different_previous_gt": 3,
+          "recovery_current_low_visibility_tp_same_previous_gt": 6,
+          "recovery_fp": 8,
+          "recovery_opportunities": 360,
+          "recovery_total": 31,
+          "recovery_tp_different_previous_gt": 4,
+          "recovery_tp_same_previous_gt": 19
+        },
+        "stages": {
+          "high_all": {
+            "admissible_edges": 952,
+            "calls": 429,
+            "chosen_pairs": 914,
+            "competing_columns": 38,
+            "residual_valid_edges_after_assignment_filter": 0,
+            "residual_valid_rows_after_assignment_filter": 0
+          },
+          "weak_remaining": {
+            "admissible_edges": 2507,
+            "calls": 429,
+            "chosen_pairs": 1818,
+            "competing_columns": 319,
+            "residual_valid_edges_after_assignment_filter": 0,
+            "residual_valid_rows_after_assignment_filter": 0
+          }
+        },
+        "distributions": {
+          "promotion_tp_selected_cost": {
+            "n": 19,
+            "min": 0.011990845203399658,
+            "p50": 0.07211917638778687,
+            "p95": 0.14946622848510707,
+            "max": 0.29545629024505615
+          },
+          "recovery_fp_alternative_margin": {
+            "n": 5,
+            "min": -0.6680912971496582,
+            "p50": 0.009050138294696808,
+            "p95": 0.16740535497665404,
+            "max": 0.18577483296394348
+          },
+          "recovery_fp_missed_frames": {
+            "n": 8,
+            "min": 1,
+            "p50": 2.0,
+            "p95": 4.6499999999999995,
+            "max": 5
+          },
+          "recovery_fp_selected_cost": {
+            "n": 8,
+            "min": 0.334463894367218,
+            "p50": 0.5594352185726166,
+            "p95": 0.8841556895524263,
+            "max": 0.8863250091671944
+          },
+          "recovery_tp_different_previous_gt_alternative_margin": {
+            "n": 4,
+            "min": -0.5393953323364258,
+            "p50": 0.026960767805576324,
+            "p95": 0.0927269712090492,
+            "max": 0.10335862636566162
+          },
+          "recovery_tp_different_previous_gt_missed_frames": {
+            "n": 4,
+            "min": 1,
+            "p50": 1.5,
+            "p95": 2.8499999999999996,
+            "max": 3
+          },
+          "recovery_tp_different_previous_gt_selected_cost": {
+            "n": 4,
+            "min": 0.08733314275741577,
+            "p50": 0.7160689383745193,
+            "p95": 0.8379635132849216,
+            "max": 0.8490840345621109
+          },
+          "recovery_tp_same_previous_gt_alternative_margin": {
+            "n": 10,
+            "min": -0.24977129697799683,
+            "p50": 0.267439603805542,
+            "p95": 0.7491651784628629,
+            "max": 0.7896066978573799
+          },
+          "recovery_tp_same_previous_gt_missed_frames": {
+            "n": 19,
+            "min": 1,
+            "p50": 1.0,
+            "p95": 6.199999999999974,
+            "max": 17
+          },
+          "recovery_tp_same_previous_gt_selected_cost": {
+            "n": 19,
+            "min": 0.06681406497955322,
+            "p50": 0.24850428104400635,
+            "p95": 0.753915199637413,
+            "max": 0.7570644617080688
+          }
+        }
+      },
+      "scenarios": {
+        "long_low_visibility": {
+          "events": 9,
+          "subjects": 9,
+          "matched_at_both_anchors": 0,
+          "same_id": 0,
+          "changed_id": 0,
+          "missing_before": 8,
+          "missing_after": 9,
+          "same_id_rate_among_both_matched": null,
+          "event_gt_observations": 340,
+          "event_matched_observations": 16,
+          "event_instance_recall": 0.047058823529411764,
+          "duration_seconds_total": 13.6
+        },
+        "overlap_order_exchange": {
+          "events": 36,
+          "subjects": 72,
+          "matched_at_both_anchors": 16,
+          "same_id": 13,
+          "changed_id": 3,
+          "missing_before": 53,
+          "missing_after": 52,
+          "same_id_rate_among_both_matched": 0.8125,
+          "event_gt_observations": 1342,
+          "event_matched_observations": 235,
+          "event_instance_recall": 0.1751117734724292,
+          "duration_seconds_total": 31.84
+        }
+      },
+      "deferred_edges": 0,
+      "frames_with_deferral": 0,
+      "canonical_predictions_sha256": "97e6ed42766c5387c311a35fb991e9674be8deae7a3adcd162f0a1c97b2135c7",
+      "local_trace_sha256": "6bfde92f94aecee746f3e5a34cb86c34c5d3cf195541cc1e69be7da09dc84587",
+      "repeated_predictions_and_full_trace_equal": true
+    },
+    "defer_competing_recovery": {
+      "metrics": {
+        "CLR_TP": 2778,
+        "CLR_FP": 52,
+        "CLR_FN": 17092,
+        "IDSW": 13,
+        "Frag": 48,
+        "CLR_Re": 0.13980875691997988,
+        "CLR_Pr": 0.9816254416961131,
+        "MOTA": 0.1365374937091092,
+        "IDF1": 0.20837004405286344,
+        "HOTA": 0.21389935626574802
+      },
+      "diagnosis": {
+        "counts": {
+          "opportunity_current_low_visibility": 171,
+          "opportunity_gt_not_annotated": 110,
+          "opportunity_no_raw_geometric_support": 202,
+          "opportunity_strong_support_admissible_not_selected": 3,
+          "opportunity_strong_support_below_high_stage_gate": 1,
+          "opportunity_weak_only_geometric_support": 80,
+          "promotion_ambiguous_tp": 0,
+          "promotion_column_competition_tp": 0,
+          "promotion_total": 19,
+          "promotion_tp": 19,
+          "recovery_ambiguous_fp": 1,
+          "recovery_ambiguous_tp_different_previous_gt": 3,
+          "recovery_ambiguous_tp_same_previous_gt": 0,
+          "recovery_column_competition_fp": 1,
+          "recovery_column_competition_tp_different_previous_gt": 2,
+          "recovery_column_competition_tp_same_previous_gt": 7,
+          "recovery_current_low_visibility_tp_different_previous_gt": 1,
+          "recovery_current_low_visibility_tp_same_previous_gt": 7,
+          "recovery_fp": 6,
+          "recovery_opportunities": 396,
+          "recovery_total": 30,
+          "recovery_tp_different_previous_gt": 3,
+          "recovery_tp_same_previous_gt": 21
+        },
+        "stages": {
+          "high_all": {
+            "admissible_edges": 952,
+            "calls": 429,
+            "chosen_pairs": 914,
+            "competing_columns": 38,
+            "residual_valid_edges_after_assignment_filter": 0,
+            "residual_valid_rows_after_assignment_filter": 0
+          },
+          "weak_remaining": {
+            "admissible_edges": 2626,
+            "calls": 429,
+            "chosen_pairs": 1917,
+            "competing_columns": 322,
+            "residual_valid_edges_after_assignment_filter": 7,
+            "residual_valid_rows_after_assignment_filter": 6
+          }
+        },
+        "distributions": {
+          "promotion_tp_selected_cost": {
+            "n": 19,
+            "min": 0.011990845203399658,
+            "p50": 0.07211917638778687,
+            "p95": 0.14946622848510707,
+            "max": 0.29545629024505615
+          },
+          "recovery_fp_alternative_margin": {
+            "n": 3,
+            "min": 0.009050138294696808,
+            "p50": 0.09392744302749634,
+            "p95": 0.17659009397029876,
+            "max": 0.18577483296394348
+          },
+          "recovery_fp_missed_frames": {
+            "n": 6,
+            "min": 1,
+            "p50": 2.0,
+            "p95": 3.75,
+            "max": 4
+          },
+          "recovery_fp_selected_cost": {
+            "n": 6,
+            "min": 0.334463894367218,
+            "p50": 0.5472961962223053,
+            "p95": 0.8241547029465437,
+            "max": 0.8863250091671944
+          },
+          "recovery_tp_different_previous_gt_alternative_margin": {
+            "n": 3,
+            "min": -0.002358376979827881,
+            "p50": 0.02144061028957367,
+            "p95": 0.031376893818378444,
+            "max": 0.03248092532157898
+          },
+          "recovery_tp_different_previous_gt_missed_frames": {
+            "n": 3,
+            "min": 1,
+            "p50": 3.0,
+            "p95": 3.9,
+            "max": 4
+          },
+          "recovery_tp_different_previous_gt_selected_cost": {
+            "n": 3,
+            "min": 0.6571906507015228,
+            "p50": 0.8452685922384262,
+            "p95": 0.8487024903297424,
+            "max": 0.8490840345621109
+          },
+          "recovery_tp_same_previous_gt_alternative_margin": {
+            "n": 8,
+            "min": 0.09098896384239197,
+            "p50": 0.48765425384044647,
+            "p95": 0.7581521827727555,
+            "max": 0.7896066978573799
+          },
+          "recovery_tp_same_previous_gt_missed_frames": {
+            "n": 21,
+            "min": 1,
+            "p50": 1.0,
+            "p95": 10.0,
+            "max": 17
+          },
+          "recovery_tp_same_previous_gt_selected_cost": {
+            "n": 21,
+            "min": 0.06681406497955322,
+            "p50": 0.24850428104400635,
+            "p95": 0.7535652816295624,
+            "max": 0.7570644617080688
+          }
+        }
+      },
+      "scenarios": {
+        "long_low_visibility": {
+          "events": 9,
+          "subjects": 9,
+          "matched_at_both_anchors": 0,
+          "same_id": 0,
+          "changed_id": 0,
+          "missing_before": 8,
+          "missing_after": 9,
+          "same_id_rate_among_both_matched": null,
+          "event_gt_observations": 340,
+          "event_matched_observations": 16,
+          "event_instance_recall": 0.047058823529411764,
+          "duration_seconds_total": 13.6
+        },
+        "overlap_order_exchange": {
+          "events": 36,
+          "subjects": 72,
+          "matched_at_both_anchors": 17,
+          "same_id": 15,
+          "changed_id": 2,
+          "missing_before": 52,
+          "missing_after": 51,
+          "same_id_rate_among_both_matched": 0.8823529411764706,
+          "event_gt_observations": 1342,
+          "event_matched_observations": 252,
+          "event_instance_recall": 0.18777943368107303,
+          "duration_seconds_total": 31.84
+        }
+      },
+      "deferred_edges": 4,
+      "frames_with_deferral": 4,
+      "canonical_predictions_sha256": "cdca291a93a7c3a133752e74949c54589ef81e730910cf1166fa2fbd82c42ebb",
+      "local_trace_sha256": "a318d16b8bb61ecdb095fb6c01615e55c2853b3cd7b090562f0cc93bd00a42e3",
+      "repeated_predictions_and_full_trace_equal": true
+    }
+  },
+  "paired_errors": {
+    "FP": {
+      "added": 0,
+      "removed": 3,
+      "shared": 52,
+      "net_change": -3
+    },
+    "FN": {
+      "added": 22,
+      "removed": 124,
+      "shared": 17070,
+      "net_change": -102
+    },
+    "IDSW": {
+      "added": 1,
+      "removed": 9,
+      "shared": 12,
+      "net_change": -8
+    }
+  },
+  "paired_scenarios": {
+    "long_low_visibility": {
+      "subjects": 9,
+      "same_id_in_both": 0,
+      "gained_same_id_from_changed": 0,
+      "gained_same_id_from_missing": 0,
+      "lost_same_id_to_changed": 0,
+      "lost_same_id_to_missing": 0,
+      "gained_matched_endpoints": 0,
+      "lost_matched_endpoints": 0
+    },
+    "overlap_order_exchange": {
+      "subjects": 72,
+      "same_id_in_both": 13,
+      "gained_same_id_from_changed": 1,
+      "gained_same_id_from_missing": 1,
+      "lost_same_id_to_changed": 0,
+      "lost_same_id_to_missing": 0,
+      "gained_matched_endpoints": 1,
+      "lost_matched_endpoints": 0
+    }
+  },
+  "screen": {
+    "conditions": {
+      "triggered": true,
+      "fp_strictly_lower": true,
+      "fn_no_increase": true,
+      "idsw_no_increase": true,
+      "idf1_no_decrease": true,
+      "hota_no_decrease": true,
+      "no_paired_recovery_loss": true
+    },
+    "passes": true
+  },
+  "limitations": [
+    "Independent of earlier selected scenes, but one compressed static-camera training sequence is not general reliability acceptance. No camera-motion, new-scene replication, physical occlusion audit or held-out leaderboard claim.",
+    "YOLO26n CPU 640/conf .1/NMS .7/cap64 reused application environment with 8.4.176 overlay; not fresh complete Alpha.2 installation. Detection limits/localisation can dominate FN.",
+    "Competition may delay a valid same-person recovery and change later assignments. No counterfactual benefit inferred from old flagged events.",
+    "ByteTrack direct offline research only; not BoT-SORT, isolated worker or Session default. No RTSP, Windows true inference/worker, 3D, endurance or throughput acceptance."
+  ],
+  "public_scope": "Reviewed aggregate counts/distributions, configuration/source hashes and attributed numeric plots only. Media, GT, exact event windows, per-frame IDs, raw matrices/diagnostics, notes and local paths stay local."
+}
