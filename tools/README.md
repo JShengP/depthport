@@ -33,6 +33,8 @@ The tool uses Playwright's installed Chromium unless `CHROMIUM_PATH` names a loc
 
 `tools/validate_mot_tracking.py --admission-study` separately tests bounded confirmation and a birth-only competition veto while preserving upstream weak association; writes only aggregate comparisons publicly and keeps error locations local. `tools/plot_tracking_admission.py` renders FN/FP/IDSW from the aggregate JSON with Matplotlib in the isolated tracker environment. [Frozen protocol, results and limits](../docs/en/tracking-admission-acceptance.md).
 
+`tools/diagnose_tracking_association.py` observes actual stage costs/assignments on a pinned reference, verifies unchanged predictions/official metrics and keeps full matrices/IDs local. `tools/summarize_association_stages.py` derives fixed-label stage/competitor counts from those local files; `tools/plot_association_diagnosis.py` reads the curated aggregate only. [Protocol, reproduction and next-control risk](../docs/en/tracking-association-diagnosis.md). These tools require the isolated tracker/TrackEval environment; base CI does not require SciPy or datasets.
+
 
 ## Version workflow schematics
 

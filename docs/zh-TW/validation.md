@@ -1,6 +1,10 @@
 # 驗證紀錄
 [English](../en/validation.md)・[首頁](../../README.zh-TW.md)
 
+## 未確認升格／恢復關聯成本診斷 — 2026-10-19
+
+[方法與結果](tracking-association-diagnosis.md) · [凍結擷取配置](../validation/v0.3-association-diagnosis-protocol.json) · [彙總紀錄](../validation/v0.3-association-diagnosis.json)。同一組 1,179 格／8.4.176 快取的 16 次觀察重跑，精確重現原預測、完整重複診斷雜湊與官方 CLEAR／Identity／HOTA。升格成本重疊；下一個控制點為 ByteTrack 漏格假設弱階段與活躍假設的低差距競爭（24 FP、5 筆不同先前 GT 的 TP、5 筆同 GT 的 TP）。此為診斷子群組，不是安全閘門或分數改善；保留弱延續與原預設，矩陣／ID／原始案例留本機。獨立控制、長遮擋及實機驗收仍未完成。
+
 ## 新 ID 確認／競爭控制實驗 — 2026-10-19
 
 [方法與結果](tracking-admission-acceptance.md) · [凍結配置](../validation/v0.3-tracking-admission-protocol.json) · [彙總紀錄](../validation/v0.3-mot17-admission.json)。已研究的 MOT17-09／10 場景以 YOLO26n CPU 8.4.176 重建共同快取：1,179 格、18,164 筆行人觀測，兩後端各六配置、三次重複，共 72 次。確認 3／5 減少 FP 卻增加 FN、降低整體 IDF1／HOTA；出生時 IoU .5 競爭閘門阻擋零次，標準化預測完全相同。重複輸出一致，24 份場景／配置診斷與官方 CLEAR 精確核對。沒有候選通過事前研究篩選，不改預設，不宣稱獨立序列／長遮擋通過；來源條款與環境限制保留，原始輸入／案例留本機，歷史紀錄及發布包不變。

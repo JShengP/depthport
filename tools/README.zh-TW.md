@@ -33,6 +33,8 @@ python tools/browser_offline_smoke.py
 
 `tools/validate_mot_tracking.py --admission-study` 分開測確認與出生時競爭閘門，保留上游弱偵測關聯；錯誤位置留本機，只公開配對彙總。`tools/plot_tracking_admission.py` 在獨立追蹤環境以 Matplotlib 從彙總 JSON 畫 FN／FP／IDSW，不讀影片。[凍結配置、結果與限制](../docs/zh-TW/tracking-admission-acceptance.md)。
 
+`tools/diagnose_tracking_association.py` 觀察原階段成本／指派，核對原預測及官方分數不變，完整矩陣／ID 留本機；`tools/summarize_association_stages.py` 從本機原始檔導出固定標籤的階段／競爭計數，`tools/plot_association_diagnosis.py` 只讀整理後彙總。[配置、重跑與下一控制點風險](../docs/zh-TW/tracking-association-diagnosis.md)。需獨立追蹤／TrackEval 環境；基本 CI 不需要 SciPy 或資料集。
+
 
 ## 版本功能示意圖
 

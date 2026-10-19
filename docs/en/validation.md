@@ -1,6 +1,10 @@
 # Validation record
 [繁體中文](../zh-TW/validation.md) · [Home](../../README.md)
 
+## Promotion/recovery association-cost diagnosis — 2026-10-19
+
+[Method/results](tracking-association-diagnosis.md) · [Frozen capture protocol](../validation/v0.3-association-diagnosis-protocol.json) · [Aggregate record](../validation/v0.3-association-diagnosis.json). Sixteen observed reruns on the same 1,179-frame 8.4.176 caches reproduce exact original predictions, full repeated probe traces and official CLEAR/Identity/HOTA. Promotion costs overlap; the next research target is ByteTrack missed-hypothesis weak-stage low-margin active competition (24 FP, 5 different-prior-GT TP, 5 same-GT TP). This is a diagnostic cohort, not a safe veto or score gain. Preserve weak continuation/defaults; raw matrices/IDs/events remain local. Independent control, long-occlusion and hardware acceptance remain open.
+
 ## Controlled new-ID admission study — 2026-10-19
 
 [Method/results](tracking-admission-acceptance.md) · [Frozen protocol](../validation/v0.3-tracking-admission-protocol.json) · [Aggregate record](../validation/v0.3-mot17-admission.json). Rebuilt shared YOLO26n CPU 8.4.176 caches on the previously studied MOT17-09/10 scenes: 1,179 frames, 18,164 pedestrian observations, six profiles per backend, three repeats, 72 runs. Confirmation 3/5 trades fewer FP for more FN and lower combined IDF1/HOTA. Birth-only IoU .5 competition vetoes zero candidates and yields identical canonical predictions. All repeated predictions agree and all 24 sequence/profile traces reconcile official CLEAR counts. No candidate passes the frozen research screen; no default change or independent/long-occlusion acceptance. Source terms and runtime limits are recorded; raw inputs/cases stay local, historical records/releases remain unchanged.

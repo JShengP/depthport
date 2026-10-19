@@ -2,6 +2,11 @@
 
 ## Unreleased — research and documentation after v0.3.0-alpha.2 / Alpha.2 後的研究與文件
 
+- Add an instance-local observational association probe, deterministic stage summary and aggregate plot. Sixteen fixed-cache reruns reproduce all original predictions/official metrics and repeated raw-trace hashes; full matrices/IDs stay local. Identify ByteTrack missed-hypothesis weak-stage competition as a future control point, with explicit same-GT recovery risk; no intervention, weak-input filtering, default or release change.
+- 新增升格／恢復成本與競爭探針、階段彙總及圖表，原始診斷留本機；找出下一個有風險需獨立測試的控制點，不宣稱已修復或通過追蹤驗收。
+
+[Association diagnosis / 關聯成本診斷](docs/en/tracking-association-diagnosis.md) · [繁體中文](docs/zh-TW/tracking-association-diagnosis.md)
+
 - Add opt-in benchmark confirmation/birth-competition controls, immutable-location FP/FN/IDSW pairing, real-library continuation/input/registry contracts and an aggregate plot builder. Frozen 72-run MOT17-09/10 ablation with fresh 8.4.176 CPU detections: longer confirmation trades FP for FN/lower identity scores; birth veto never triggers. No candidate passes the research screen; application/worker defaults and published releases remain unchanged.
 - 新增選用研究控制、固定位置錯誤配對、真套件弱偵測延續契約與彙總繪圖；同場景 72 次實驗未找到無退步候選，維持原預設，更新驗證紀錄／ROADMAP，不發布原始影片／GT／逐格軌跡。
 

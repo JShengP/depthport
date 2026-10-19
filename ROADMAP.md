@@ -69,6 +69,7 @@ Close the shared [P0 hardware/installation gates](#p0--physical-camera-and-insta
 - **Review / 檢查：** boxes/IDs, playback/speed/timeline/A-B loops, bookmark notes/tags/search/JSON backup and keyboard/IME guards are implemented. **ByteTrack is an offline benchmark backend, not another Session UI selector.** 疊圖、回放及本機書籤檢查已實作；ByteTrack 僅屬研究後端。
 - **Research / 研究：** Baseline/ByteTrack/BoT-SORT comparisons, parameter profiles and ID-switch/false-positive diagnosis are recorded. Lower activation can add coverage and ID switches/FP together; no candidate has been promoted to a new default. 公開序列比較、參數研究與錯誤診斷已記錄，不代表長遮擋驗收通過。
 - **Admission ablation / 新 ID 控制：** [1,179 frames / 72 runs](docs/en/tracking-admission-acceptance.md) / [繁中](docs/zh-TW/tracking-admission-acceptance.md), using fresh 8.4.176 caches on previously studied 09/10 scenes. Longer confirmation reduces FP but increases FN and lowers combined IDF1/HOTA; the birth-only IoU .5 veto never triggers. No candidate passes the frozen research screen. 本輪控制實驗已完成，沒有候選達標，不是獨立序列或可靠性驗收通過。
+- **Association telemetry / 關聯診斷：** [16 observed reruns](docs/en/tracking-association-diagnosis.md) / [繁中](docs/zh-TW/tracking-association-diagnosis.md) reproduce exact predictions/official scores with repeated full-trace hashes. Promotion costs overlap; ByteTrack weak-stage missed-hypothesis recovery with an active competitor is the next research target. The flagged cohort includes 24 FP, 5 different-prior-GT TP and 5 same-GT TP, so it is not an accepted veto. 已完成成本／競爭記錄，不代表修復；原矩陣／ID／案例留本機。
 - **Real example / 真實範例：** 24 consecutive public Pexels frames exercise genuine depth, YOLO26n CPU detection, the isolated worker and browser replay. It has no identity ground truth and spans only **0.959 s** from first to last frame. The reused CUDA environment is not a fresh installation of the complete Alpha.2 recipe; screenshots/docs were added after its frozen release. 真實短片回放，不是長遮擋、精度或完整配方新安裝驗收；後補文件不改 Tag／下載包。
 - **Current CI / 目前檢查：** Ubuntu/Windows × Python 3.11/3.12 application contracts and model API installation/import checks; no pretrained weights or inference in CI. 跨平台契約與實際 API 匯入，不等於 Windows 真推論或實機通過。
 
@@ -82,8 +83,8 @@ Close the shared [P0 hardware/installation gates](#p0--physical-camera-and-insta
 
 ### Next / 下一步
 
-Use the recorded admission ablation to guide [P0 tracking experiments](#p0--tracking-reliability--追蹤可靠性): instrument unconfirmed promotion/recovery competition before another control, isolate localisation, then validate an independent licensed sequence group. Run shared hardware/installation gates separately; keep defaults unchanged.
-依本輪結果先記錄未確認升格／恢復時的競爭，再選控制方式；分離框品質、用新的授權序列組重驗，另做實機驗收，維持原預設。
+Use the recorded admission ablation and association telemetry to guide [P0 tracking experiments](#p0--tracking-reliability--追蹤可靠性): separately freeze/test ByteTrack competition-aware missed-hypothesis weak-stage reattachment on an independent licensed group, preserving active-track weak continuation. Isolate localisation/expiry and run hardware gates separately; keep defaults unchanged.
+依診斷另凍結 ByteTrack 漏格假設弱階段競爭的延後接回實驗，用獨立授權序列驗證，保留一般弱延續；框品質／到期與實機另測，維持原預設。
 
 ## Next acceptance gates / 下一步驗收
 
@@ -92,8 +93,8 @@ These gates apply to current `main`; the version sections above identify which r
 
 ### P0 — Tracking reliability / 追蹤可靠性
 
-1. **Confirmation & competition / 確認與競爭：** [First controlled study recorded](docs/en/tracking-admission-acceptance.md), not accepted: confirmation 3/5 adds FN and lowers combined identity scores; birth-only competition has zero vetoes/exactly equal predictions. Next instrument competition at unconfirmed promotion/recovery, then test a separately frozen control while retaining weak continuation. Pair added/removed FP/FN/IDSW; do not promote one-metric gains. [本輪實驗](docs/zh-TW/tracking-admission-acceptance.md)已完成但未達標；先記錄升格／恢復的競爭，再凍結新控制，不刪弱偵測或只挑單一指標。
-2. **Localisation & recovery / 框品質與恢復：** isolate detector localisation/resolution controls from association recovery. Instrument ambiguous costs and visibility loss before gate changes or ReID. 固定一邊測另一邊，先記錄模糊關聯成本及可見性，不直接把所有問題歸因關聯。
+1. **Confirmation & competition / 確認與競爭：** [Admission study](docs/en/tracking-admission-acceptance.md) and [cost/competition diagnosis](docs/en/tracking-association-diagnosis.md) are recorded, not accepted. Next freeze a ByteTrack missed-hypothesis weak-stage deferred-reattachment control, keep ordinary active-track weak updates/raw weak inputs, and compare FP/FN/IDSW/IDF1/HOTA plus paired recovery gains/losses on independent sequences. The 34-event diagnostic cohort includes five same-GT recoveries at risk; do not claim gains by deleting recorded events or apply the flag to BoT-SORT. [繁中診斷](docs/zh-TW/tracking-association-diagnosis.md)：診斷已完成，控制尚未實作／驗收，不刪全部弱偵測、不改預設。
+2. **Localisation & recovery / 框品質與恢復：** isolate detector localisation/resolution from association recovery and hypothesis expiry. Observed geometric support can be absent, below the state/gate or assigned elsewhere; it is not proof a detector/gate fix is available. Full costs/ages/visibility contexts are now captured locally; separate interventions before ReID. 已記錄成本與競爭，下一步仍需分離框品質、假設到期及恢復，不直接歸因關聯或盲目加 ReID／buffer。
 3. **Independent sequence group / 獨立序列組：** use licensed continuous sequences with long occlusion, crossing and camera motion. Fix detector/versions/sampling, repeat runs and report IDF1/HOTA/CLEAR, event recovery and failures separately. Include worker IPC in end-to-end latency; do not mix it with direct-library timing. 固定條件、重複執行，同報整體分數與事件失敗，端到端耗時包含 worker IPC。
 4. **Current dependencies / 目前依賴：** the admission study regenerates shared 8.4.176 CPU caches for 09/10; this reused runtime is not a fresh full Alpha.2 installation or independent acceptance. Earlier studies keep 8.4.115 caches/scores; do not transfer or pool them. 本輪補目前偵測版本的限定場景證據，仍需獨立序列／完整配方驗收；歷史快取與分數保持分開。
 

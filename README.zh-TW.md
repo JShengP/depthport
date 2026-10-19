@@ -166,7 +166,7 @@ Alpha.2 封裝已驗證的 Pages／FastAPI／Hub／DA3 相容性更新與各版�
 <details>
 <summary>追蹤研究與下一步實驗</summary>
 
-已完成 [2,700 格／27 次比較](docs/zh-TW/tracking-expanded-acceptance.md)、[另一組 1,179 格／60 次參數驗證](docs/zh-TW/tracking-parameter-acceptance.md)、[換 ID／誤追診斷](docs/zh-TW/tracking-error-diagnosis.md)，以及[同一組 09／10 場景重建 8.4.176 快取的 72 次確認／競爭控制實驗](docs/zh-TW/tracking-admission-acceptance.md)。延長確認少 FP、卻增加 FN 並降低整體 IDF1／HOTA，新軌跡出生閘門則未觸發。下一步記錄升格／恢復競爭、分離框品質並驗獨立序列；長遮擋尚未通過，**原預設不變**。
+已完成 [2,700 格／27 次比較](docs/zh-TW/tracking-expanded-acceptance.md)、[另一組 1,179 格／60 次參數驗證](docs/zh-TW/tracking-parameter-acceptance.md)、[換 ID／誤追診斷](docs/zh-TW/tracking-error-diagnosis.md)、[8.4.176 快取的 72 次確認／競爭實驗](docs/zh-TW/tracking-admission-acceptance.md)，以及[同一組 09／10 場景的 16 次原輸出不變成本診斷](docs/zh-TW/tracking-association-diagnosis.md)。延長確認的 FP／FN 取捨與出生閘門未觸發保留；下一個控制點是 ByteTrack 漏格假設的弱階段競爭，已觀察到同 GT 恢復風險，仍須獨立控制實驗。長遮擋尚未通過，**原預設不變**。
 
 研究結果限指定公開序列、固定快取與已記錄版本，不能外推為新版偵測器或其他場景的表現。這些研究只散布彙總，不發布原始影像、GT、逐格追蹤或使用者書籤。
 
