@@ -1,0 +1,3 @@
+# OPTIONAL, SEPARATE Python venv only. Do NOT merge with Depth Anything 3's NumPy 1.26.4 environment.
+# Roboflow Trackers uses NumPy >=2 and supervision.Detections; no detector is installed here.
+trackers==2.6.1

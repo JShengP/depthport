@@ -1,0 +1,88 @@
+{
+  "format": "depthport.tracking-parameter-protocol.v1",
+  "frozen_at_utc": "2026-10-19T02:21:40.041539+00:00",
+  "source_base_commit": "f0b68ce37f6b8413eda0f51471f589a68dcad76a",
+  "data_terms": {
+    "page": "https://motchallenge.net/data/MOT17/",
+    "license": "CC BY-NC-SA 3.0; original-source conditions may also apply",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+    "use": "Local non-commercial research; no raw media, GT or per-frame artifacts redistributed"
+  },
+  "sequences": [
+    {
+      "name": "MOT17-09-DPM",
+      "video_url": "https://motchallenge.net/sequenceVideos/MOT17-09-DPM-raw.mp4",
+      "video_sha256": "44472faa5643b173fa9b0d4837d3018cd1f5c4a3f13ab4bc9f865cf552022f9d",
+      "gt_sha256": "592f0d5b519c03b35bb1578c33d726460f63abb91ea0c515f87e8d6d76be001d",
+      "detection_cache_sha256": "450b69fbec4701cdeb4cd2501fff80f208b81eeb21fe4b231a5cb1c3ea76bacb"
+    },
+    {
+      "name": "MOT17-10-DPM",
+      "video_url": "https://motchallenge.net/sequenceVideos/MOT17-10-DPM-raw.mp4",
+      "video_sha256": "0780ec0d648cfbca71a92cf0e45811e591b0f014307e3291a5f970112d855d01",
+      "gt_sha256": "f8cca05d98fa36d8b6f2b807e03d32407d00d40299d679e4da320e42862677c0",
+      "detection_cache_sha256": "ab9294f64e697dccd8bd6b0ce61aa1bcaec09e4a062816bcd4291511808af8c6"
+    }
+  ],
+  "excluded_previous_scenes": [
+    "MOT17-04",
+    "MOT17-11",
+    "MOT17-13"
+  ],
+  "detector": {
+    "model": "yolo26n.pt",
+    "confidence": 0.1,
+    "imgsz": 640,
+    "source": "ultralytics",
+    "device": "cpu",
+    "classes": [
+      0
+    ],
+    "max_det": 64,
+    "nms_iou": 0.7,
+    "ultralytics": "8.4.115",
+    "weight_sha256": "9b09cc8bf347f0fc8a5f7657480587f25db09b34bf33b0652110fb03a8ad4fef",
+    "frames_at_detection_cap": 0
+  },
+  "backends": [
+    "bytetrack",
+    "botsort"
+  ],
+  "profiles": {
+    "default": {
+      "track_activation_threshold": 0.7,
+      "high_conf_det_threshold": 0.6,
+      "lost_track_buffer": 30
+    },
+    "activation_only": {
+      "track_activation_threshold": 0.3,
+      "high_conf_det_threshold": 0.6,
+      "lost_track_buffer": 30
+    },
+    "lower_gates": {
+      "track_activation_threshold": 0.3,
+      "high_conf_det_threshold": 0.3,
+      "lost_track_buffer": 30
+    },
+    "longer_buffer": {
+      "track_activation_threshold": 0.7,
+      "high_conf_det_threshold": 0.6,
+      "lost_track_buffer": 90
+    },
+    "lower_gates_longer_buffer": {
+      "track_activation_threshold": 0.3,
+      "high_conf_det_threshold": 0.3,
+      "lost_track_buffer": 90
+    }
+  },
+  "buffer_units": "30-FPS reference frames, scaled by backend FPS: 30=1s; 90=3s",
+  "repeats": 3,
+  "runs_expected": 60,
+  "design": "Fixed five-profile sensitivity study; profiles frozen before any tracker run on this group. Activation-only control preserves .6 high-confidence split; coupled lower-gates profile lowers both to .3. One-factor buffer and combined profile separate effects. No adaptive search on results.",
+  "evaluation": "Same frozen detections and GT-only visibility/order rules as expanded acceptance; whole-sequence TrackEval CLEAR/Identity/HOTA and paired event recovery counts. Report Recall together with Precision/FP/IDSW/IDF1/HOTA, missing endpoints and gains/losses on all qualifying event subjects.",
+  "limitations": [
+    "New sequence group for this project, but MOT17 training previews are not a held-out benchmark test set.",
+    "No ReID, detector tuning, CMC ablation, worker IPC or application-default change in this experiment.",
+    "Protocol is a locally timestamped record, not an independently registered study."
+  ]
+}

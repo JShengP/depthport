@@ -1,0 +1,5 @@
+# OPTIONAL isolated Python 3.11/3.12 worker only. Never install in the depth-model venv.
+trackers==2.6.1
+supervision==0.27.0
+numpy==2.2.6
+opencv-python==4.11.0.86

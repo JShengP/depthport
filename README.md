@@ -7,13 +7,25 @@
 
 English · [繁體中文](README.zh-TW.md)
 
-**v0.2 Alpha released** · **Local-first** · **English / 繁體中文** · **AGPL-3.0-only**
+**v0.3 Alpha** · **Experimental development preview** · **Local-first** · **English / 繁體中文** · **AGPL-3.0-only**
 
 </div>
 
-**Download v0.2.0-alpha.1:** [Release notes & downloads](https://github.com/JShengP/depthport/releases/tag/v0.2.0-alpha.1) · [Source ZIP](https://github.com/JShengP/depthport/releases/download/v0.2.0-alpha.1/depthport-0.2.0-alpha.1-source.zip) · [SHA-256 checksums](https://github.com/JShengP/depthport/releases/download/v0.2.0-alpha.1/SHA256SUMS.txt)
+**Download v0.3.0-alpha.1:** [Release notes & downloads](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.1) · [Source ZIP](https://github.com/JShengP/depthport/releases/download/v0.3.0-alpha.1/depthport-0.3.0-alpha.1-source.zip) · [SHA-256 checksums](https://github.com/JShengP/depthport/releases/download/v0.3.0-alpha.1/SHA256SUMS.txt)
+
+Previous release: [v0.2 Alpha — Spatial Analysis](https://github.com/JShengP/depthport/releases/tag/v0.2.0-alpha.1). See the [Changelog](CHANGELOG.md) and [remaining acceptance roadmap](ROADMAP.md).
 
 The download contains public source only; Python dependencies and pretrained model weights must be installed separately.
+
+## Version guide / 版本導覽
+
+Each generation retains the previous foundation. Read the version-specific README for its changes, architecture, contents and validation limits:
+
+- **[v0.1 — Viewer](docs/versions/v0.1/README.md):** image/RTSP → four depth engines → single-view point cloud and exports.
+- **[v0.2 — Spatial Analysis](docs/versions/v0.2/README.md):** adds pixel XYZ, engine comparison, semantic fusion and calibration/error tools.
+- **[v0.3 — Sessions & Tracking](docs/versions/v0.3/README.md):** adds manual local archives, replay, Object IDs, isolated BoT-SORT and bookmark review; experimental Alpha.
+
+Historical v0.1/v0.2 source and original READMEs remain fixed at their tags. These maintained guides explain the differences without changing old releases.
 
 Turn RGB images and RTSP camera frames into interactive, **single-view point clouds**. Switch depth engines, inspect visible-surface geometry, and export the data behind the visualization—all in one local web interface.
 
@@ -23,9 +35,23 @@ DepthPort integrates existing pretrained models; it does **not** introduce a new
 
 *Screenshot: the actual UI showing synthetic test data. No camera or AI model produced this point cloud.*
 
-> **Status:** `v0.2.0-alpha.1` is published as an **experimental pre-release**. On 2026-10-17, a fresh Ubuntu 24.04 / Python 3.12 environment passed all four real pretrained depth-model CUDA smoke tests, YOLO Detect/Segment fusion and browser-to-HTTP checks on one public sample image. This demonstrates execution, not measured distance accuracy, field camera operation or a hardware benchmark. Full Windows model installation, physical RTSP, endurance and NVIDIA WebGL rendering remain unverified. Read the [validation record](docs/en/validation.md).
+> **Status:** `v0.3.0-alpha.1` is an **Alpha pre-release / experimental development preview**. Session storage defaults off and requires explicit local enablement. Application/model API installation CI is not pretrained inference or hardware acceptance. Long-occlusion recovery, physical RTSP, Windows pretrained inference/worker integration, endurance and calibrated distance accuracy remain open. Read the [validation record](docs/en/validation.md) and [release notes](docs/releases/0.3.0-alpha.1.md).
 
-## New in v0.2 — Spatial Analysis Lab
+## v0.3 — Sessions, Replay & Offline Tracking
+
+- **Manual local Sessions:** preserve same-frame RGB/depth/PLY/raw NPY and integrity-check replay with SHA-256. No automatic recording or model inference on replay.
+- **Tracking review:** boxes/Object IDs, playback and speed, timeline seeking, A/B loops, bookmark notes, search/filtering, JSON backup and keyboard help. Notes and exports remain local.
+- **Optional Roboflow BoT-SORT:** a separate NumPy 2 worker preserves the NumPy 1 application environment. Simple association remains the default. Object IDs are not identities or world trajectories.
+
+Follow the [Session guide](docs/en/sessions.md): set `ENABLE_SESSION_STORAGE=1` locally, restart, and open `/sessions`. [Worker setup](docs/en/tracking-worker.md) · [Tracking acceptance & evaluation](docs/en/tracking-evaluation.md)
+
+### Tracking evidence and next work
+
+Completed studies cover [2,700 frames / 27 runs across three scenes](docs/en/tracking-expanded-acceptance.md), [1,179 new frames / 60 parameter runs](docs/en/tracking-parameter-acceptance.md), and [added ID-switch/false-positive diagnosis](docs/en/tracking-error-diagnosis.md). Lower activation trades coverage for more ID switches/FP; long-occlusion recovery remains unaccepted. Next tests separate new-track confirmation/competition, detector localisation and recovery. **Defaults stay unchanged.**
+
+Results apply to the named public sequences, fixed detection caches and recorded versions; they do not establish performance with newer dependencies or other scenes. Only aggregates are published, without raw frames, GT, per-frame tracks or user bookmarks.
+
+## Retained from v0.2 — Spatial Analysis Lab
 
 Open **Spatial Analysis** (`/spatial`) on a running local server (`http://127.0.0.1:8000/spatial`): clickable camera-space XYZ / raw depth inspector, sequential four-engine still-image comparison with native-unit histograms and 3D previews, optional YOLO26 Detect/Segment instance-to-point fusion, and pinhole checkerboard calibration / candidate plane fitting / independent metric-error checks. The original viewer, four depth engines, image/RTSP input, exports and bilingual UI remain available. Analysis is a single-worker experimental feature. Real single-image CUDA inference is verified on the recorded Ubuntu host; physical RTSP and distance accuracy remain unverified.
 
@@ -142,9 +168,9 @@ node tests/test_i18n.cjs
 python tools/check_release.py
 ```
 
-The CI workflow runs deterministic, fake-backed application tests without downloading pretrained weights. Passing application CI is **not** a four-model hardware benchmark. Check [GitHub Actions](https://github.com/JShengP/depthport/actions/workflows/ci.yml) for the current branch and commit results.
+[Application CI](https://github.com/JShengP/depthport/actions/workflows/ci.yml) runs deterministic model-double/CPU tensor contracts. [Model compatibility CI](https://github.com/JShengP/depthport/actions/workflows/model-compatibility.yml) installs the explicit dependency recipe and imports all four actual APIs. Neither downloads pretrained weights nor runs inference; passing CI is **not hardware or accuracy acceptance**.
 
-[Contributing](CONTRIBUTING.md) · [Roadmap](ROADMAP.md) · [Changelog](CHANGELOG.md) · [Release checklist](docs/en/publishing.md)
+[Tracking Acceptance & Evaluation](docs/en/tracking-evaluation.md) · [Contributing](CONTRIBUTING.md) · [Roadmap](ROADMAP.md) · [Changelog](CHANGELOG.md) · [Release checklist](docs/en/publishing.md)
 
 ## License and acknowledgments
 

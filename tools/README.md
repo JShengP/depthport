@@ -24,3 +24,9 @@ python tools/browser_offline_smoke.py
 The tool uses Playwright's installed Chromium unless `CHROMIUM_PATH` names a local executable. It creates local reports and captures only the explicitly labeled synthetic viewer for documentation screenshots. Read the reported renderer: Canvas fallback is not a WebGL GPU test. UI tests cover both languages, no inference triggered by language changes, all four mock-backed model switches, same-source exports, synthetic interaction and narrow layout.
 
 `check_env.py --all --image camera.jpg` is the separate **real** inference path. Its success requires actual model calls; no fake fallback exists.
+
+`tools/cache_video_detections.py` now freezes class/device/NMS/cap/weight/runtime metadata; `tools/validate_mot_tracking.py` runs offline repeated MOT17 comparisons against a clean pinned TrackEval checkout, with visibility/order-exchange diagnostics. Use the separate NumPy 2 environment; [expanded acceptance and reproduction](../docs/en/tracking-expanded-acceptance.md). Raw work files stay local.
+
+`tools/validate_mot_tracking.py --parameter-sweep` runs five fixed activation/high-confidence-split/lost-buffer profiles for both direct backends on a new sequence group, verifies effective thresholds/time budgets and reports paired scenario gains/losses. [Method, protocol and results](../docs/en/tracking-parameter-acceptance.md). This is separate from worker configuration; no app default is changed.
+
+`tools/diagnose_tracking_errors.py` reanalyses saved default/activation-only results with exact official CLEAR reconciliation, pairs FP by immutable cache detection and writes raw cases/ID maps only to the local work directory. It publishes aggregate context counts, not causal labels. [Method, privacy boundary and decisions](../docs/en/tracking-error-diagnosis.md).

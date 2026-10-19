@@ -111,8 +111,94 @@ docs/zh-TW/spatial-analysis.md
 tools/spatial_browser_smoke.py
 docs/validation/v0.2-summary.json
 tests/test_release_version.py
+
+# v0.3 local manual Session / Replay
+depthport/sessions.py
+depthport/temporal.py
+depthport/tracking.py
+static/sessions.html
+static/sessions.css
+static/sessions.js
+tests/test_sessions.py
+tests/test_temporal.py
+tests/test_tracking.py
+tests/test_sessions_i18n.cjs
+docs/en/sessions.md
+docs/zh-TW/sessions.md
+
+# v0.3 Tracking Acceptance — offline annotated-object matching
+depthport/tracking_eval.py
+tools/evaluate_tracking.py
+tests/test_tracking_eval.py
+docs/en/tracking-evaluation.md
+docs/zh-TW/tracking-evaluation.md
+examples/tracking/tracking.synthetic.json
+examples/tracking/ground_truth.synthetic.json
 docs/assets/README.md
 docs/assets/spatial-preview.en.png
 docs/assets/spatial-preview.zh-TW.png
+docs/validation/v0.3-tracking-pilot.json
 
+# Optional isolated offline continuous-video tracking comparison
+depthport/video_tracking_benchmark.py
+tools/cache_video_detections.py
+tools/benchmark_video_tracking.py
+tests/test_video_tracking_benchmark.py
+docs/en/offline-video-tracking.md
+docs/zh-TW/offline-video-tracking.md
+requirements-tracking-benchmark.txt
+
+# Optional isolated BoT-SORT worker
+depthport/tracking_protocol.py
+depthport/tracking_worker.py
+tools/tracking_worker.py
+requirements-tracking-worker.txt
+tests/test_tracking_worker.py
+docs/en/tracking-worker.md
+docs/zh-TW/tracking-worker.md
+docs/validation/v0.3-botsort-worker.json
+
+# Exact-frame tracking overlays
+static/tracking-overlay.js
+tests/test_tracking_overlay.cjs
+
+# Saved-frame playback controller
+static/replay-playback.js
+tests/test_replay_playback.cjs
+
+# Expanded MOT17 fixed-detection acceptance (aggregates only)
+depthport/mot_scenarios.py
+tools/validate_mot_tracking.py
+tests/test_mot_scenarios.py
+docs/en/tracking-expanded-acceptance.md
+docs/zh-TW/tracking-expanded-acceptance.md
+docs/validation/v0.3-mot17-expanded.json
+docs/assets/tracking-v03-mot17.png
+
+# New-group tracker parameter sensitivity study (aggregates only)
+tests/test_tracking_parameters.py
+docs/en/tracking-parameter-acceptance.md
+docs/zh-TW/tracking-parameter-acceptance.md
+docs/validation/v0.3-tracking-tuning-protocol.json
+docs/validation/v0.3-mot17-parameters.json
+docs/assets/tracking-v03-parameters.png
+
+# Activation error diagnosis (aggregates only; local traces/images excluded)
+depthport/tracking_diagnostics.py
+tools/diagnose_tracking_errors.py
+tests/test_tracking_diagnostics.py
+docs/en/tracking-error-diagnosis.md
+docs/zh-TW/tracking-error-diagnosis.md
+docs/validation/v0.3-tracking-error-diagnosis.json
+docs/assets/tracking-v03-errors.png
+
+# Shared model dependency compatibility CI
 .github/workflows/model-compatibility.yml
+
+# v0.3 Alpha release notes (public source only)
+docs/releases/0.3.0-alpha.1.md
+
+# Maintained version READMEs; immutable release snapshots stay at tags
+docs/versions/v0.1/README.md
+docs/versions/v0.2/README.md
+docs/versions/v0.3/README.md

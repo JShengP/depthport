@@ -1,0 +1,989 @@
+{
+  "format": "depthport.mot17-scenario-acceptance.v1",
+  "checked_on": "2026-10-19",
+  "source_terms": {
+    "dataset": "MOT17 train",
+    "page": "https://motchallenge.net/data/MOT17/",
+    "license": "CC-BY-NC-SA-3.0; original-source conditions may also apply",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+    "use": "Local non-commercial research; inputs and per-frame results not redistributed",
+    "labels_url": "https://motchallenge.net/data/MOT17Labels.zip",
+    "labels_archive_sha256": "0aa79322e91583369f42f17c4d79a0b145380d8732487bba59272048dc82b2b9"
+  },
+  "evaluation": {
+    "repository": "https://github.com/JonathonLuiten/TrackEval",
+    "commit": "12c8791b303e0a0b50f753af204249e622d0281a",
+    "numpy_aliases": [
+      "int",
+      "float"
+    ],
+    "benchmark": "MOT17 pedestrian with distractor/zero-mark preprocessing, CLEAR IoU .5, Identity and HOTA",
+    "coordinates": "uniform integer video-to-original-GT scale verified per sequence, then x/y shifted +1 for one-based MOT output",
+    "scenario_diagnostics": "Separate full-frame Hungarian IoU .5 endpoint/instance diagnostics; not official scenario MOT metrics",
+    "scenario_rules": {
+      "long_low_visibility": "visibility <=.3 for >=1s, >=.6 visibility anchors within 1s before and after",
+      "overlap_order_exchange": "GT box IoU >=.1, overlap index gaps merged <=ceil(.5*fps) frame steps, horizontal center order flips across >=.6 visibility anchors within 1s",
+      "endpoints": "last matched pre / first matched post eligible anchor; denominator reports missing endpoints separately"
+    },
+    "repeats": 3,
+    "timing": "Three fresh tracker runs by default; rotated method order, first update included, no warmup exclusion. Detector/decode/startup excluded from update latency. Descriptive single-host timing, not real-time acceptance."
+  },
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv-python": "4.11.0.86",
+    "trackers": "2.6.1",
+    "supervision": "0.27.0",
+    "scipy": "1.18.1",
+    "python": "3.12.3",
+    "platform": "Linux x86_64",
+    "opencv_threads": 1
+  },
+  "sequences": [
+    {
+      "name": "MOT17-04-DPM",
+      "frames": 1050,
+      "fps": 30.0,
+      "resolution": [
+        960,
+        540
+      ],
+      "original_gt_resolution": [
+        1920,
+        1080
+      ],
+      "video_to_gt_scale": 2.0,
+      "camera_motion": false,
+      "source_description": "Elevated fixed night pedestrian view; fixed-view classification visually checked",
+      "video_url": "https://motchallenge.net/sequenceVideos/MOT17-04-DPM-raw.mp4",
+      "video_sha256": "ab0d2fc03bce5e112abe9a173de7a2d70b39875c0af3eca49d6160c6e317e495",
+      "gt_sha256": "f8cfbe36ef38a2e1857d7ebfe7d754b2355a3ffb9e1f9cedea435e86e4fbc948",
+      "detection_cache_sha256": "4ce218847eef73b6b2106acd9093db51c0091d22cfb170cea73910696f11d0c1",
+      "frames_at_detection_cap": 0,
+      "gt_pedestrian_observations": 47557,
+      "scenario_event_counts": {
+        "long_low_visibility": 2,
+        "overlap_order_exchange": 43
+      },
+      "methods": {
+        "baseline": {
+          "metrics": {
+            "CLR_TP": 16258,
+            "CLR_FP": 4005,
+            "CLR_FN": 31299,
+            "IDSW": 780,
+            "Frag": 708,
+            "CLR_Re": 0.3418634480728389,
+            "CLR_Pr": 0.8023491092138381,
+            "MOTA": 0.24124734529091407,
+            "IDF1": 0.16759068121498083,
+            "HOTA": 0.19106473472422358
+          },
+          "scenarios": {
+            "long_low_visibility": {
+              "events": 2,
+              "subjects": 2,
+              "matched_at_both_anchors": 1,
+              "same_id": 0,
+              "changed_id": 1,
+              "missing_before": 0,
+              "missing_after": 1,
+              "same_id_rate_among_both_matched": 0.0,
+              "event_gt_observations": 113,
+              "event_matched_observations": 0,
+              "event_instance_recall": 0.0,
+              "duration_seconds_total": 3.7666666666666666
+            },
+            "overlap_order_exchange": {
+              "events": 43,
+              "subjects": 86,
+              "matched_at_both_anchors": 54,
+              "same_id": 6,
+              "changed_id": 48,
+              "missing_before": 21,
+              "missing_after": 23,
+              "same_id_rate_among_both_matched": 0.1111111111111111,
+              "event_gt_observations": 3120,
+              "event_matched_observations": 1251,
+              "event_instance_recall": 0.4009615384615385,
+              "duration_seconds_total": 55.7
+            }
+          },
+          "update_timing_trials": [
+            {
+              "mean_ms": 0.5894,
+              "p50_ms": 0.5506,
+              "p95_ms": 0.9649,
+              "total_ms": 618.8811
+            },
+            {
+              "mean_ms": 0.4976,
+              "p50_ms": 0.4833,
+              "p95_ms": 0.7411,
+              "total_ms": 522.5139
+            },
+            {
+              "mean_ms": 0.5677,
+              "p50_ms": 0.4962,
+              "p95_ms": 0.789,
+              "total_ms": 596.0982
+            }
+          ],
+          "median_trial_p50_ms": 0.4962,
+          "median_trial_p95_ms": 0.789,
+          "repeated_canonical_predictions_equal": true,
+          "canonical_predictions_sha256": "aba5400a90df01c9357c7e07eb90b8974e9a75c355c5182499cc8801e22e4ab1",
+          "retained_observations_before_mot_preprocessing": 20373
+        },
+        "bytetrack": {
+          "metrics": {
+            "CLR_TP": 8479,
+            "CLR_FP": 639,
+            "CLR_FN": 39078,
+            "IDSW": 18,
+            "Frag": 129,
+            "CLR_Re": 0.17829131358159683,
+            "CLR_Pr": 0.9299188418512832,
+            "MOTA": 0.16447631263536389,
+            "IDF1": 0.2602558447287164,
+            "HOTA": 0.2781597433384248
+          },
+          "scenarios": {
+            "long_low_visibility": {
+              "events": 2,
+              "subjects": 2,
+              "matched_at_both_anchors": 0,
+              "same_id": 0,
+              "changed_id": 0,
+              "missing_before": 2,
+              "missing_after": 2,
+              "same_id_rate_among_both_matched": null,
+              "event_gt_observations": 113,
+              "event_matched_observations": 0,
+              "event_instance_recall": 0.0,
+              "duration_seconds_total": 3.7666666666666666
+            },
+            "overlap_order_exchange": {
+              "events": 43,
+              "subjects": 86,
+              "matched_at_both_anchors": 15,
+              "same_id": 9,
+              "changed_id": 6,
+              "missing_before": 69,
+              "missing_after": 68,
+              "same_id_rate_among_both_matched": 0.6,
+              "event_gt_observations": 3120,
+              "event_matched_observations": 410,
+              "event_instance_recall": 0.13141025641025642,
+              "duration_seconds_total": 55.7
+            }
+          },
+          "update_timing_trials": [
+            {
+              "mean_ms": 0.3674,
+              "p50_ms": 0.3301,
+              "p95_ms": 0.3954,
+              "total_ms": 385.7758
+            },
+            {
+              "mean_ms": 0.3282,
+              "p50_ms": 0.3355,
+              "p95_ms": 0.3993,
+              "total_ms": 344.6123
+            },
+            {
+              "mean_ms": 0.3461,
+              "p50_ms": 0.332,
+              "p95_ms": 0.5226,
+              "total_ms": 363.4355
+            }
+          ],
+          "median_trial_p50_ms": 0.332,
+          "median_trial_p95_ms": 0.3993,
+          "repeated_canonical_predictions_equal": true,
+          "canonical_predictions_sha256": "6a8a58001706d2b73841aa211b04bc70be72df906a37615fd875f215d0606b27",
+          "retained_observations_before_mot_preprocessing": 9118
+        },
+        "botsort": {
+          "metrics": {
+            "CLR_TP": 7503,
+            "CLR_FP": 530,
+            "CLR_FN": 40054,
+            "IDSW": 8,
+            "Frag": 59,
+            "CLR_Re": 0.15776857244990222,
+            "CLR_Pr": 0.9340221585957924,
+            "MOTA": 0.14645583194902959,
+            "IDF1": 0.24007915092642562,
+            "HOTA": 0.2539293187478101
+          },
+          "scenarios": {
+            "long_low_visibility": {
+              "events": 2,
+              "subjects": 2,
+              "matched_at_both_anchors": 0,
+              "same_id": 0,
+              "changed_id": 0,
+              "missing_before": 2,
+              "missing_after": 2,
+              "same_id_rate_among_both_matched": null,
+              "event_gt_observations": 113,
+              "event_matched_observations": 0,
+              "event_instance_recall": 0.0,
+              "duration_seconds_total": 3.7666666666666666
+            },
+            "overlap_order_exchange": {
+              "events": 43,
+              "subjects": 86,
+              "matched_at_both_anchors": 11,
+              "same_id": 10,
+              "changed_id": 1,
+              "missing_before": 73,
+              "missing_after": 72,
+              "same_id_rate_among_both_matched": 0.9090909090909091,
+              "event_gt_observations": 3120,
+              "event_matched_observations": 360,
+              "event_instance_recall": 0.11538461538461539,
+              "duration_seconds_total": 55.7
+            }
+          },
+          "update_timing_trials": [
+            {
+              "mean_ms": 7.7115,
+              "p50_ms": 7.614,
+              "p95_ms": 8.545,
+              "total_ms": 8097.127
+            },
+            {
+              "mean_ms": 7.8496,
+              "p50_ms": 7.7143,
+              "p95_ms": 8.6415,
+              "total_ms": 8242.1233
+            },
+            {
+              "mean_ms": 7.7546,
+              "p50_ms": 7.7175,
+              "p95_ms": 8.5913,
+              "total_ms": 8142.3705
+            }
+          ],
+          "median_trial_p50_ms": 7.7143,
+          "median_trial_p95_ms": 8.5913,
+          "repeated_canonical_predictions_equal": true,
+          "canonical_predictions_sha256": "20bba7a7ef4e330a0db269d3ad130c7577af3d0182c268859ea81db7b704c9ae",
+          "retained_observations_before_mot_preprocessing": 8033
+        }
+      },
+      "cached_detections": 20373
+    },
+    {
+      "name": "MOT17-11-DPM",
+      "frames": 900,
+      "fps": 30.0,
+      "resolution": [
+        960,
+        540
+      ],
+      "original_gt_resolution": [
+        1920,
+        1080
+      ],
+      "video_to_gt_scale": 2.0,
+      "camera_motion": true,
+      "source_description": "Forward moving camera in a busy shopping mall (official source description)",
+      "video_url": "https://motchallenge.net/sequenceVideos/MOT17-11-DPM-raw.mp4",
+      "video_sha256": "315f28aedefb503d4b7405a36475481eefd7d3072ab9c27286716ed224736ec5",
+      "gt_sha256": "4952d6e4efc705c90688e434fd138a55ada2c0d5f576ba3847ee102fc18aff93",
+      "detection_cache_sha256": "616dc9fe301158d46922926dfca7dbd99b9abf97eebb265bf2647a2c57729bb4",
+      "frames_at_detection_cap": 0,
+      "gt_pedestrian_observations": 9436,
+      "scenario_event_counts": {
+        "long_low_visibility": 6,
+        "overlap_order_exchange": 8
+      },
+      "methods": {
+        "baseline": {
+          "metrics": {
+            "CLR_TP": 5909,
+            "CLR_FP": 2210,
+            "CLR_FN": 3527,
+            "IDSW": 260,
+            "Frag": 114,
+            "CLR_Re": 0.6262187367528613,
+            "CLR_Pr": 0.7277989900234019,
+            "MOTA": 0.36445527766002545,
+            "IDF1": 0.27012247223013386,
+            "HOTA": 0.29879334703255805
+          },
+          "scenarios": {
+            "long_low_visibility": {
+              "events": 6,
+              "subjects": 6,
+              "matched_at_both_anchors": 5,
+              "same_id": 0,
+              "changed_id": 5,
+              "missing_before": 0,
+              "missing_after": 1,
+              "same_id_rate_among_both_matched": 0.0,
+              "event_gt_observations": 369,
+              "event_matched_observations": 22,
+              "event_instance_recall": 0.05962059620596206,
+              "duration_seconds_total": 12.3
+            },
+            "overlap_order_exchange": {
+              "events": 8,
+              "subjects": 16,
+              "matched_at_both_anchors": 14,
+              "same_id": 5,
+              "changed_id": 9,
+              "missing_before": 2,
+              "missing_after": 2,
+              "same_id_rate_among_both_matched": 0.35714285714285715,
+              "event_gt_observations": 95,
+              "event_matched_observations": 68,
+              "event_instance_recall": 0.7157894736842105,
+              "duration_seconds_total": 1.6
+            }
+          },
+          "update_timing_trials": [
+            {
+              "mean_ms": 0.1251,
+              "p50_ms": 0.117,
+              "p95_ms": 0.2061,
+              "total_ms": 112.6081
+            },
+            {
+              "mean_ms": 0.1302,
+              "p50_ms": 0.1217,
+              "p95_ms": 0.2086,
+              "total_ms": 117.1857
+            },
+            {
+              "mean_ms": 0.1302,
+              "p50_ms": 0.1214,
+              "p95_ms": 0.2145,
+              "total_ms": 117.1643
+            }
+          ],
+          "median_trial_p50_ms": 0.1214,
+          "median_trial_p95_ms": 0.2086,
+          "repeated_canonical_predictions_equal": true,
+          "canonical_predictions_sha256": "e3556ea4f59d8abde8a3928757fb0318775d3b45ca9d6a17d7c66073ff51afe8",
+          "retained_observations_before_mot_preprocessing": 8209
+        },
+        "bytetrack": {
+          "metrics": {
+            "CLR_TP": 5207,
+            "CLR_FP": 422,
+            "CLR_FN": 4229,
+            "IDSW": 45,
+            "Frag": 40,
+            "CLR_Re": 0.5518228062738448,
+            "CLR_Pr": 0.9250310890033754,
+            "MOTA": 0.5023314963967783,
+            "IDF1": 0.48111516760703615,
+            "HOTA": 0.4394801917237651
+          },
+          "scenarios": {
+            "long_low_visibility": {
+              "events": 6,
+              "subjects": 6,
+              "matched_at_both_anchors": 3,
+              "same_id": 0,
+              "changed_id": 3,
+              "missing_before": 2,
+              "missing_after": 1,
+              "same_id_rate_among_both_matched": 0.0,
+              "event_gt_observations": 369,
+              "event_matched_observations": 15,
+              "event_instance_recall": 0.04065040650406504,
+              "duration_seconds_total": 12.3
+            },
+            "overlap_order_exchange": {
+              "events": 8,
+              "subjects": 16,
+              "matched_at_both_anchors": 14,
+              "same_id": 9,
+              "changed_id": 5,
+              "missing_before": 2,
+              "missing_after": 2,
+              "same_id_rate_among_both_matched": 0.6428571428571429,
+              "event_gt_observations": 95,
+              "event_matched_observations": 67,
+              "event_instance_recall": 0.7052631578947368,
+              "duration_seconds_total": 1.6
+            }
+          },
+          "update_timing_trials": [
+            {
+              "mean_ms": 0.2844,
+              "p50_ms": 0.2835,
+              "p95_ms": 0.3404,
+              "total_ms": 255.934
+            },
+            {
+              "mean_ms": 0.3016,
+              "p50_ms": 0.3011,
+              "p95_ms": 0.361,
+              "total_ms": 271.4658
+            },
+            {
+              "mean_ms": 0.2981,
+              "p50_ms": 0.291,
+              "p95_ms": 0.3623,
+              "total_ms": 268.26
+            }
+          ],
+          "median_trial_p50_ms": 0.291,
+          "median_trial_p95_ms": 0.361,
+          "repeated_canonical_predictions_equal": true,
+          "canonical_predictions_sha256": "197d04c70d20fccc76976bf3918933a2287bbeeb7868885f93357682e51b2bba",
+          "retained_observations_before_mot_preprocessing": 5629
+        },
+        "botsort": {
+          "metrics": {
+            "CLR_TP": 5159,
+            "CLR_FP": 321,
+            "CLR_FN": 4277,
+            "IDSW": 18,
+            "Frag": 27,
+            "CLR_Re": 0.5467359050445104,
+            "CLR_Pr": 0.9414233576642336,
+            "MOTA": 0.5108096651123357,
+            "IDF1": 0.5245374094931617,
+            "HOTA": 0.46340854148986105
+          },
+          "scenarios": {
+            "long_low_visibility": {
+              "events": 6,
+              "subjects": 6,
+              "matched_at_both_anchors": 3,
+              "same_id": 0,
+              "changed_id": 3,
+              "missing_before": 2,
+              "missing_after": 1,
+              "same_id_rate_among_both_matched": 0.0,
+              "event_gt_observations": 369,
+              "event_matched_observations": 13,
+              "event_instance_recall": 0.03523035230352303,
+              "duration_seconds_total": 12.3
+            },
+            "overlap_order_exchange": {
+              "events": 8,
+              "subjects": 16,
+              "matched_at_both_anchors": 14,
+              "same_id": 7,
+              "changed_id": 7,
+              "missing_before": 2,
+              "missing_after": 2,
+              "same_id_rate_among_both_matched": 0.5,
+              "event_gt_observations": 95,
+              "event_matched_observations": 66,
+              "event_instance_recall": 0.6947368421052632,
+              "duration_seconds_total": 1.6
+            }
+          },
+          "update_timing_trials": [
+            {
+              "mean_ms": 9.8172,
+              "p50_ms": 9.1627,
+              "p95_ms": 15.6228,
+              "total_ms": 8835.4351
+            },
+            {
+              "mean_ms": 8.795,
+              "p50_ms": 8.8351,
+              "p95_ms": 9.8795,
+              "total_ms": 7915.5365
+            },
+            {
+              "mean_ms": 9.1164,
+              "p50_ms": 8.76,
+              "p95_ms": 10.8195,
+              "total_ms": 8204.7225
+            }
+          ],
+          "median_trial_p50_ms": 8.8351,
+          "median_trial_p95_ms": 10.8195,
+          "repeated_canonical_predictions_equal": true,
+          "canonical_predictions_sha256": "4b9e741b6cad6d4cb6d4b2fd92f2e272852d421004437ab299888713a16d93ec",
+          "retained_observations_before_mot_preprocessing": 5480
+        }
+      },
+      "cached_detections": 8209
+    },
+    {
+      "name": "MOT17-13-DPM",
+      "frames": 750,
+      "fps": 25.0,
+      "resolution": [
+        960,
+        540
+      ],
+      "original_gt_resolution": [
+        1920,
+        1080
+      ],
+      "video_to_gt_scale": 2.0,
+      "camera_motion": true,
+      "source_description": "Filmed from a bus on a busy intersection (official source description)",
+      "video_url": "https://motchallenge.net/sequenceVideos/MOT17-13-DPM-raw.mp4",
+      "video_sha256": "3c643abd4f37f1c67815c5faaebac6bea98fe536e45d97aa82e9682991e47fae",
+      "gt_sha256": "4827603ef87bbd61123cb4c5f194b3bf23531bd78ed9cd916084e53dca998013",
+      "detection_cache_sha256": "9c20972a7e4642f0aba5bd454d8ac2cdf92f7523dcdc7754e008d1677e8eb1ec",
+      "frames_at_detection_cap": 0,
+      "gt_pedestrian_observations": 11642,
+      "scenario_event_counts": {
+        "long_low_visibility": 3,
+        "overlap_order_exchange": 11
+      },
+      "methods": {
+        "baseline": {
+          "metrics": {
+            "CLR_TP": 4474,
+            "CLR_FP": 2152,
+            "CLR_FN": 7168,
+            "IDSW": 870,
+            "Frag": 529,
+            "CLR_Re": 0.38429823054457996,
+            "CLR_Pr": 0.6752188348928464,
+            "MOTA": 0.12472083834392717,
+            "IDF1": 0.16323626012699802,
+            "HOTA": 0.16421048364096366
+          },
+          "scenarios": {
+            "long_low_visibility": {
+              "events": 3,
+              "subjects": 3,
+              "matched_at_both_anchors": 0,
+              "same_id": 0,
+              "changed_id": 0,
+              "missing_before": 3,
+              "missing_after": 3,
+              "same_id_rate_among_both_matched": null,
+              "event_gt_observations": 126,
+              "event_matched_observations": 9,
+              "event_instance_recall": 0.07142857142857142,
+              "duration_seconds_total": 5.04
+            },
+            "overlap_order_exchange": {
+              "events": 11,
+              "subjects": 22,
+              "matched_at_both_anchors": 8,
+              "same_id": 1,
+              "changed_id": 7,
+              "missing_before": 14,
+              "missing_after": 10,
+              "same_id_rate_among_both_matched": 0.125,
+              "event_gt_observations": 268,
+              "event_matched_observations": 55,
+              "event_instance_recall": 0.20522388059701493,
+              "duration_seconds_total": 5.3999999999999995
+            }
+          },
+          "update_timing_trials": [
+            {
+              "mean_ms": 0.1478,
+              "p50_ms": 0.1268,
+              "p95_ms": 0.3507,
+              "total_ms": 110.8457
+            },
+            {
+              "mean_ms": 0.1907,
+              "p50_ms": 0.1501,
+              "p95_ms": 0.5049,
+              "total_ms": 143.0371
+            },
+            {
+              "mean_ms": 0.1536,
+              "p50_ms": 0.1279,
+              "p95_ms": 0.3651,
+              "total_ms": 115.2015
+            }
+          ],
+          "median_trial_p50_ms": 0.1279,
+          "median_trial_p95_ms": 0.3651,
+          "repeated_canonical_predictions_equal": true,
+          "canonical_predictions_sha256": "3f47a19d3919a32ecd42ae833d77d1bc29a1b757e403537f2dbb34c082ba6ff5",
+          "retained_observations_before_mot_preprocessing": 6687
+        },
+        "bytetrack": {
+          "metrics": {
+            "CLR_TP": 1894,
+            "CLR_FP": 165,
+            "CLR_FN": 9748,
+            "IDSW": 6,
+            "Frag": 51,
+            "CLR_Re": 0.16268682356983336,
+            "CLR_Pr": 0.9198640116561437,
+            "MOTA": 0.1479986256656932,
+            "IDF1": 0.25005474052988835,
+            "HOTA": 0.2327241894040452
+          },
+          "scenarios": {
+            "long_low_visibility": {
+              "events": 3,
+              "subjects": 3,
+              "matched_at_both_anchors": 0,
+              "same_id": 0,
+              "changed_id": 0,
+              "missing_before": 3,
+              "missing_after": 3,
+              "same_id_rate_among_both_matched": null,
+              "event_gt_observations": 126,
+              "event_matched_observations": 0,
+              "event_instance_recall": 0.0,
+              "duration_seconds_total": 5.04
+            },
+            "overlap_order_exchange": {
+              "events": 11,
+              "subjects": 22,
+              "matched_at_both_anchors": 3,
+              "same_id": 3,
+              "changed_id": 0,
+              "missing_before": 19,
+              "missing_after": 17,
+              "same_id_rate_among_both_matched": 1.0,
+              "event_gt_observations": 268,
+              "event_matched_observations": 14,
+              "event_instance_recall": 0.05223880597014925,
+              "duration_seconds_total": 5.3999999999999995
+            }
+          },
+          "update_timing_trials": [
+            {
+              "mean_ms": 0.2015,
+              "p50_ms": 0.1941,
+              "p95_ms": 0.2827,
+              "total_ms": 151.1112
+            },
+            {
+              "mean_ms": 0.2096,
+              "p50_ms": 0.1987,
+              "p95_ms": 0.2964,
+              "total_ms": 157.2334
+            },
+            {
+              "mean_ms": 0.2053,
+              "p50_ms": 0.1976,
+              "p95_ms": 0.2859,
+              "total_ms": 153.9383
+            }
+          ],
+          "median_trial_p50_ms": 0.1976,
+          "median_trial_p95_ms": 0.2859,
+          "repeated_canonical_predictions_equal": true,
+          "canonical_predictions_sha256": "300bf92cb47910cf93d9e1a30ec39817efeed3816a071c35430f40ebfcf52827",
+          "retained_observations_before_mot_preprocessing": 2059
+        },
+        "botsort": {
+          "metrics": {
+            "CLR_TP": 1602,
+            "CLR_FP": 88,
+            "CLR_FN": 10040,
+            "IDSW": 3,
+            "Frag": 14,
+            "CLR_Re": 0.1376052224703659,
+            "CLR_Pr": 0.9479289940828403,
+            "MOTA": 0.1297886961003264,
+            "IDF1": 0.22337233723372338,
+            "HOTA": 0.22013255004094634
+          },
+          "scenarios": {
+            "long_low_visibility": {
+              "events": 3,
+              "subjects": 3,
+              "matched_at_both_anchors": 0,
+              "same_id": 0,
+              "changed_id": 0,
+              "missing_before": 3,
+              "missing_after": 3,
+              "same_id_rate_among_both_matched": null,
+              "event_gt_observations": 126,
+              "event_matched_observations": 0,
+              "event_instance_recall": 0.0,
+              "duration_seconds_total": 5.04
+            },
+            "overlap_order_exchange": {
+              "events": 11,
+              "subjects": 22,
+              "matched_at_both_anchors": 2,
+              "same_id": 2,
+              "changed_id": 0,
+              "missing_before": 20,
+              "missing_after": 18,
+              "same_id_rate_among_both_matched": 1.0,
+              "event_gt_observations": 268,
+              "event_matched_observations": 12,
+              "event_instance_recall": 0.04477611940298507,
+              "duration_seconds_total": 5.3999999999999995
+            }
+          },
+          "update_timing_trials": [
+            {
+              "mean_ms": 9.0902,
+              "p50_ms": 8.9981,
+              "p95_ms": 10.2674,
+              "total_ms": 6817.6747
+            },
+            {
+              "mean_ms": 9.2343,
+              "p50_ms": 9.1173,
+              "p95_ms": 10.4335,
+              "total_ms": 6925.725
+            },
+            {
+              "mean_ms": 9.1837,
+              "p50_ms": 9.1923,
+              "p95_ms": 10.0678,
+              "total_ms": 6887.7496
+            }
+          ],
+          "median_trial_p50_ms": 9.1173,
+          "median_trial_p95_ms": 10.2674,
+          "repeated_canonical_predictions_equal": true,
+          "canonical_predictions_sha256": "6debd11eea062bfc67e8eaedeafe95aa9cf5bc9c014280f226be0bd93dce6da7",
+          "retained_observations_before_mot_preprocessing": 1690
+        }
+      },
+      "cached_detections": 6687
+    }
+  ],
+  "limitations": [
+    "Selected compressed training clips, not original benchmark JPEGs or a held-out leaderboard result.",
+    "Visibility/order proxies do not establish physical occlusion or true 3D crossing; audit examples separately.",
+    "Default tracker parameters except source FPS; no tuning or ReID. Cross-scene comparisons are not a causal CMC ablation.",
+    "No real-camera, calibrated 3D, Windows, endurance or end-to-end throughput acceptance.",
+    "Visual spot-check covers 6 of 73 proxy events; the remaining events are rule-selected proxies, not manually certified scenarios."
+  ],
+  "public_scope": "Aggregates, source/configuration identifiers and hashes only. Media, GT, event identities/windows, per-frame predictions, weights and paths stay local.",
+  "frozen_detector": {
+    "model": "yolo26n.pt",
+    "weight_sha256": "9b09cc8bf347f0fc8a5f7657480587f25db09b34bf33b0652110fb03a8ad4fef",
+    "confidence": 0.1,
+    "imgsz": 640,
+    "source": "ultralytics",
+    "device": "cpu",
+    "classes": [
+      0
+    ],
+    "max_det": 64,
+    "nms_iou": 0.7,
+    "ultralytics": "8.4.115"
+  },
+  "combined": {
+    "all_sequences": {
+      "baseline": {
+        "CLR_TP": 26641,
+        "CLR_FP": 8367,
+        "CLR_FN": 41994,
+        "IDSW": 1910,
+        "Frag": 1351,
+        "CLR_Re": 0.388154731550958,
+        "CLR_Pr": 0.7609974862888482,
+        "MOTA": 0.23842063087346108,
+        "IDF1": 0.1841899597657343,
+        "HOTA": 0.20695053012365092
+      },
+      "bytetrack": {
+        "CLR_TP": 15580,
+        "CLR_FP": 1226,
+        "CLR_FN": 53055,
+        "IDSW": 69,
+        "Frag": 220,
+        "CLR_Re": 0.22699788737524587,
+        "CLR_Pr": 0.9270498631441152,
+        "MOTA": 0.208129962846944,
+        "IDF1": 0.2975620603691436,
+        "HOTA": 0.30023750926310006
+      },
+      "botsort": {
+        "CLR_TP": 14264,
+        "CLR_FP": 939,
+        "CLR_FN": 54371,
+        "IDSW": 29,
+        "Frag": 100,
+        "CLR_Re": 0.2078239965032418,
+        "CLR_Pr": 0.9382358744984542,
+        "MOTA": 0.19372040504115975,
+        "IDF1": 0.2880316801450416,
+        "HOTA": 0.28855320480033153
+      }
+    },
+    "moving_camera_sequences": {
+      "baseline": {
+        "CLR_TP": 10383,
+        "CLR_FP": 4362,
+        "CLR_FN": 10695,
+        "IDSW": 1130,
+        "Frag": 643,
+        "CLR_Re": 0.4925989183034443,
+        "CLR_Pr": 0.7041709053916582,
+        "MOTA": 0.23204288831957492,
+        "IDF1": 0.21561566591296094,
+        "HOTA": 0.23576689332029233
+      },
+      "bytetrack": {
+        "CLR_TP": 7101,
+        "CLR_FP": 587,
+        "CLR_FN": 13977,
+        "IDSW": 51,
+        "Frag": 91,
+        "CLR_Re": 0.3368915456874466,
+        "CLR_Pr": 0.9236472424557752,
+        "MOTA": 0.30662301926178953,
+        "IDF1": 0.37106306055760274,
+        "HOTA": 0.343928871584469
+      },
+      "botsort": {
+        "CLR_TP": 6761,
+        "CLR_FP": 409,
+        "CLR_FN": 14317,
+        "IDSW": 21,
+        "Frag": 41,
+        "CLR_Re": 0.32076098301546635,
+        "CLR_Pr": 0.9429567642956764,
+        "MOTA": 0.30036056551855017,
+        "IDF1": 0.382398753894081,
+        "HOTA": 0.35343876609146047
+      }
+    }
+  },
+  "combined_scenarios": {
+    "baseline": {
+      "long_low_visibility": {
+        "events": 11,
+        "subjects": 11,
+        "matched_at_both_anchors": 6,
+        "same_id": 0,
+        "changed_id": 6,
+        "missing_before": 3,
+        "missing_after": 5,
+        "event_gt_observations": 608,
+        "event_matched_observations": 31,
+        "duration_seconds_total": 21.10666666666667,
+        "same_id_rate_among_both_matched": 0.0,
+        "same_id_subject_coverage": 0.0,
+        "event_instance_recall": 0.05098684210526316
+      },
+      "overlap_order_exchange": {
+        "events": 62,
+        "subjects": 124,
+        "matched_at_both_anchors": 76,
+        "same_id": 12,
+        "changed_id": 64,
+        "missing_before": 37,
+        "missing_after": 35,
+        "event_gt_observations": 3483,
+        "event_matched_observations": 1374,
+        "duration_seconds_total": 62.7,
+        "same_id_rate_among_both_matched": 0.15789473684210525,
+        "same_id_subject_coverage": 0.0967741935483871,
+        "event_instance_recall": 0.3944875107665805
+      }
+    },
+    "bytetrack": {
+      "long_low_visibility": {
+        "events": 11,
+        "subjects": 11,
+        "matched_at_both_anchors": 3,
+        "same_id": 0,
+        "changed_id": 3,
+        "missing_before": 7,
+        "missing_after": 6,
+        "event_gt_observations": 608,
+        "event_matched_observations": 15,
+        "duration_seconds_total": 21.10666666666667,
+        "same_id_rate_among_both_matched": 0.0,
+        "same_id_subject_coverage": 0.0,
+        "event_instance_recall": 0.024671052631578948
+      },
+      "overlap_order_exchange": {
+        "events": 62,
+        "subjects": 124,
+        "matched_at_both_anchors": 32,
+        "same_id": 21,
+        "changed_id": 11,
+        "missing_before": 90,
+        "missing_after": 87,
+        "event_gt_observations": 3483,
+        "event_matched_observations": 491,
+        "duration_seconds_total": 62.7,
+        "same_id_rate_among_both_matched": 0.65625,
+        "same_id_subject_coverage": 0.1693548387096774,
+        "event_instance_recall": 0.14097042779213323
+      }
+    },
+    "botsort": {
+      "long_low_visibility": {
+        "events": 11,
+        "subjects": 11,
+        "matched_at_both_anchors": 3,
+        "same_id": 0,
+        "changed_id": 3,
+        "missing_before": 7,
+        "missing_after": 6,
+        "event_gt_observations": 608,
+        "event_matched_observations": 13,
+        "duration_seconds_total": 21.10666666666667,
+        "same_id_rate_among_both_matched": 0.0,
+        "same_id_subject_coverage": 0.0,
+        "event_instance_recall": 0.02138157894736842
+      },
+      "overlap_order_exchange": {
+        "events": 62,
+        "subjects": 124,
+        "matched_at_both_anchors": 27,
+        "same_id": 19,
+        "changed_id": 8,
+        "missing_before": 95,
+        "missing_after": 92,
+        "event_gt_observations": 3483,
+        "event_matched_observations": 438,
+        "duration_seconds_total": 62.7,
+        "same_id_rate_among_both_matched": 0.7037037037037037,
+        "same_id_subject_coverage": 0.1532258064516129,
+        "event_instance_recall": 0.12575366063738158
+      }
+    }
+  },
+  "detector_runtime": {
+    "python": "3.12.3",
+    "numpy": "1.26.4",
+    "torch": "2.10.0+cu128",
+    "ultralytics": "8.4.115",
+    "device": "cpu",
+    "OMP_NUM_THREADS": 4,
+    "MKL_NUM_THREADS": 4
+  },
+  "tracking_source_base": "6578b6a49966ade029b9915441c1b87821f99f93",
+  "tracking_implementation_sha256": {
+    "depthport/tracking.py": "2860d9b4f2ac7fad19eb416ba2287fb0b9067b32327853791ceecfce0d659d73",
+    "depthport/video_tracking_benchmark.py": "2cafd9e1695025b4631d3e43fca63121b6a41c82159cea1ed205f952a48d8c24"
+  },
+  "visual_spot_check": {
+    "selection": "Per sequence: longest eligible low-visibility event and first GT-ID-sorted order-exchange event, chosen without consulting tracker outputs",
+    "events_reviewed": 6,
+    "frames_reviewed": 18,
+    "scope": "Assisted visual inspection of before/event/after frames; not exhaustive independent human annotation",
+    "observations": [
+      "04: fixed background, sustained partial occlusion, projected order exchange visible",
+      "11: moving viewpoint, fully hidden interval visible in sampled target, order exchange visible",
+      "13: moving bus viewpoint, small/distant partly hidden target and projected order exchange; not proof of physical 3D crossing"
+    ],
+    "materials": "Audit frames/boxes/GT identities and event intervals stay local"
+  },
+  "software_validation": {
+    "python_pytest": {
+      "passed": 283,
+      "skipped": 4,
+      "scope": "Application and release contracts; not real-model accuracy evidence"
+    },
+    "targeted_benchmark_contracts_passed": 16,
+    "public_manifest_files": 160,
+    "local_markdown_links": "PASS",
+    "obvious_secret_pattern_check": "PASS; limited pattern check, not a full security audit",
+    "loopback_http_smoke": "PASS; no model inference",
+    "original_local_private_files_sha256_unchanged": 27,
+    "privacy": "No input media, GT, per-frame predictions, event identities/windows, weights, audit images or local runtime paths included"
+  }
+}
