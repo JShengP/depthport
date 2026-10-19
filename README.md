@@ -17,6 +17,16 @@ Previous release: [v0.2 Alpha — Spatial Analysis](https://github.com/JShengP/d
 
 The download contains public source only; Python dependencies and pretrained model weights must be installed separately.
 
+## Version guide / 版本導覽
+
+Each generation retains the previous foundation. Read the version-specific README for its changes, architecture, contents and validation limits:
+
+- **[v0.1 — Viewer](docs/versions/v0.1/README.md):** image/RTSP → four depth engines → single-view point cloud and exports.
+- **[v0.2 — Spatial Analysis](docs/versions/v0.2/README.md):** adds pixel XYZ, engine comparison, semantic fusion and calibration/error tools.
+- **[v0.3 — Sessions & Tracking](docs/versions/v0.3/README.md):** adds manual local archives, replay, Object IDs, isolated BoT-SORT and bookmark review; experimental Alpha.
+
+Historical v0.1/v0.2 source and original READMEs remain fixed at their tags. These maintained guides explain the differences without changing old releases.
+
 Turn RGB images and RTSP camera frames into interactive, **single-view point clouds**. Switch depth engines, inspect visible-surface geometry, and export the data behind the visualization—all in one local web interface.
 
 DepthPort integrates existing pretrained models; it does **not** introduce a new depth network. Its contribution is the model lifecycle, stream handling, explicit depth semantics, aligned geometry, browser interaction and inspectable exports.

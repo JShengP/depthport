@@ -197,3 +197,8 @@ docs/assets/tracking-v03-errors.png
 
 # v0.3 Alpha release notes (public source only)
 docs/releases/0.3.0-alpha.1.md
+
+# Maintained version READMEs; immutable release snapshots stay at tags
+docs/versions/v0.1/README.md
+docs/versions/v0.2/README.md
+docs/versions/v0.3/README.md

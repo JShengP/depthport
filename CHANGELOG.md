@@ -6,7 +6,7 @@
 - Added optional isolated NumPy 2 Roboflow BoT-SORT, replay boxes/Object IDs, playback/timeline/A-B controls, searchable local bookmarks, JSON backup and guarded keyboard operations.
 - Added reproducible public-sequence Baseline/ByteTrack/BoT-SORT studies, parameter comparisons and ID-switch/FP diagnosis. Publish aggregate evidence only; keep defaults and mark long-occlusion recovery unaccepted.
 - Synchronized Python 3.11/3.12 application/model API compatibility checks on Ubuntu/Windows. No new pretrained-inference or hardware acceptance claim.
-- Consolidated bilingual README downloads, release notes, validation navigation and roadmap; retain the development log below.
+- Consolidated bilingual README downloads, release notes, validation navigation and roadmap; retain the development log below. Added separate v0.1/v0.2/v0.3 READMEs with feature differences, architecture and evidence boundaries, linked from both root READMEs.
 - 本版將 PR #7 的選用本機 Session、完整性回放、獨立 BoT-SORT worker、追蹤疊圖及書籤操作整合到 main，保留 v0.2 功能與原預設；公開序列研究僅發布彙總。長遮擋、實體 RTSP、Windows 真權重／worker、長時穩定性與標定精度仍待驗證。
 
 [Release notes / 版本說明](docs/releases/0.3.0-alpha.1.md)

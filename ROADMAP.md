@@ -5,6 +5,8 @@ Updated / 更新：2026-10-19 · [v0.3 Alpha notes / 版本說明](docs/releases
 Priorities are acceptance gates, not promised deadlines. v0.3 Alpha remains an **experimental development preview**; publishing source is not product or hardware acceptance.
 以下為驗收優先順序，不承諾期限。v0.3 Alpha 維持**實驗性開發預覽**，發布程式不等於產品或實機驗收。
 
+[v0.1 README](docs/versions/v0.1/README.md) · [v0.2 README](docs/versions/v0.2/README.md) · [v0.3 README](docs/versions/v0.3/README.md) explain each generation’s architecture and contents / 分別說明各版架構與內容。
+
 ## Available in main / 已整合到 main
 
 - **v0.2 Spatial Analysis:** four-engine comparison, same-frame inspection, optional semantic fusion and calibration/error tools. Real single-image CUDA execution was recorded on one Ubuntu GPU host; measured-distance acceptance remains open.
