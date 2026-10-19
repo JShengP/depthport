@@ -1,3 +1,5 @@
+**Expanded tracking acceptance (2026-10-19):** [2,700 MOT17 frames across three scenes](docs/en/tracking-expanded-acceptance.md), fixed detections and three repeated runs per method. Lower ID switches came with lower Recall; long-occlusion recovery remains unaccepted. v0.3 remains Draft.
+
 ## v0.3 development preview — Manual Sessions & Replay
 
 The next research branch adds **opt-in, local-only, manually captured frame sessions** (RGB/depth/PLY/raw NPY metadata), integrity-checked offline replay, and grouped depth-summary trends. A manual CPU-only **Offline Semantic Object Tracking** analysis links saved-frame 2D detections to Object IDs and camera-space depth/XYZ histories. Choose simple association (default) or an optional [Roboflow BoT-SORT worker](docs/en/tracking-worker.md) in a separate NumPy 2 environment; neither provides identity or world trajectories. **No automatic camera recording or model inference on replay.** The v0.2 features remain available. See [Session & Replay documentation](docs/en/sessions.md); this development preview is not a tagged release.

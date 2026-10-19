@@ -165,3 +165,12 @@ tests/test_tracking_overlay.cjs
 # Saved-frame playback controller
 static/replay-playback.js
 tests/test_replay_playback.cjs
+
+# Expanded MOT17 fixed-detection acceptance (aggregates only)
+depthport/mot_scenarios.py
+tools/validate_mot_tracking.py
+tests/test_mot_scenarios.py
+docs/en/tracking-expanded-acceptance.md
+docs/zh-TW/tracking-expanded-acceptance.md
+docs/validation/v0.3-mot17-expanded.json
+docs/assets/tracking-v03-mot17.png

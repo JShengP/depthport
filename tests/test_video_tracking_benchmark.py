@@ -111,3 +111,32 @@ def test_dependency_version_rejected(monkeypatch):
     monkeypatch.setitem(sys.modules,'supervision',types.SimpleNamespace())
     monkeypatch.setattr('importlib.metadata.version', lambda name:'9.9.9')
     with pytest.raises(VideoBenchmarkError,match='2.6.1'):make_tracker('bytetrack',fps=30.)
+
+
+def test_cache_cli_freezes_detector_contract_caps_results_and_omits_local_weight_path(monkeypatch,tmp_path):
+    from tools.cache_video_detections import main
+    import hashlib
+    video,_,_=fixture_video(tmp_path);weight=tmp_path/'weights.pt';weight.write_bytes(b'synthetic checkpoint')
+    class Tensor:
+        def __init__(self,x):self.x=np.array(x)
+        def cpu(self):return self
+        def numpy(self):return self.x
+    class Boxes:
+        xyxy=Tensor([[1,1,10,20],[20,20,30,40],[40,40,50,60]])
+        conf=Tensor([.9,.8,.7]);cls=Tensor([0,0,0])
+        def __len__(self):return 3
+    calls=[]
+    class Model:
+        def __init__(self,path):self.ckpt_path=path
+        def predict(self,frame,**kwargs):calls.append(kwargs);return [types.SimpleNamespace(boxes=Boxes())]
+    monkeypatch.setitem(sys.modules,'ultralytics',types.SimpleNamespace(YOLO=Model))
+    monkeypatch.setattr('importlib.metadata.version',lambda name:'synthetic-test')
+    output=tmp_path/'cache.json'
+    assert main(['--video',str(video),'--model',str(weight),'--output',str(output),'--classes','0','--max-detections','2','--device','cpu','--nms-iou','.7'])==0
+    d=read_cache(output);meta=d['detector']
+    assert meta['model']=='weights.pt' and str(tmp_path) not in json.dumps(meta)
+    assert meta['weight_sha256']==hashlib.sha256(weight.read_bytes()).hexdigest()
+    assert meta['frames_at_detection_cap']==4 and all(len(x['detections'])==2 for x in d['frames'])
+    assert all(c['classes']==[0] and c['max_det']==2 and c['device']=='cpu' and c['iou']==.7 for c in calls)
+    for extra in [['--max-detections','65'],['--nms-iou','nan'],['--classes','-1']]:
+        with pytest.raises(SystemExit):main(['--video',str(video),'--model',str(weight),'--output',str(output),*extra])

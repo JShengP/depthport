@@ -1,5 +1,7 @@
 # v0.3 選配 Roboflow BoT-SORT worker
 
+
+**2026-10-19 擴大證據：** [三場景 MOT17 比較](tracking-expanded-acceptance.md) 另測直接呼叫 Baseline／ByteTrack／BoT-SORT，與本 worker 初測分開；不代表已通過擴大 worker／RTSP 或長遮擋恢復驗收。
 [English](../en/tracking-worker.md) · [工作階段](sessions.md) · [離線比較](offline-video-tracking.md)
 
 目前只在開發分支，v0.3 尚未發布。工作階段預設仍使用「簡易關聯」；可改選 **Roboflow BoT-SORT**，手動離線分析已保存影格中的真實 YOLO Detect／Segment 偵測。兩種後端都不會自動錄影。

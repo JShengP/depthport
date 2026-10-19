@@ -42,3 +42,9 @@ Spatial Analysis screenshots use the public Ultralytics Assets bus example and r
 [Roboflow Trackers](https://github.com/roboflow/trackers) 2.6.1 and [Supervision](https://github.com/roboflow/supervision) 0.27.0 are installed separately under their Apache-2.0 terms, using public APIs without vendoring their code. NumPy 2.2.6 and OpenCV 4.11 follow the notices above. No package, model weight, video or annotation is included in the source archive. The public-sequence pilot and dataset conditions are recorded in [worker validation](docs/en/tracking-worker.md).
 
 追蹤套件獨立安裝並保留各自 Apache-2.0 聲明；原始碼封裝不含套件、權重、影片或標註。公開序列來源、條件與驗證範圍見上述文件。
+
+## Expanded MOT17 research evidence / MOT17 擴大研究證據
+
+Attribution: MOTChallenge contributors, [MOT17/MOT16 annotations](https://motchallenge.net/data/MOT17/), [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/) and applicable original-source conditions. The 04, 11 and 13 training-sequence compressed videos and GT are used for local non-commercial research, not redistributed. Only aggregate evaluation records and a chart of those aggregates are published. No image, per-frame box/ID, event window, weight or upstream package is bundled. [Method and limitations](docs/en/tracking-expanded-acceptance.md).
+
+來源為 MOTChallenge MOT17／MOT16 標註；依條款本機非商用研究，未散布影片、GT、逐格結果或抽查影像，程式授權不會取代資料集條款。

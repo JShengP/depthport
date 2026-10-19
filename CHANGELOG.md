@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Expanded fixed-detection acceptance to 2,700 MOT17 frames / three scenes / 27 runs; added reproducible pinned TrackEval/scenario tools, explicit detector cache settings and verified preview-to-GT scaling. Published aggregates only. Lower IDSW trades off Recall; long-occlusion recovery remains unaccepted.
+- 擴大至三場景 2,700 格 MOT17、27 次固定偵測比較，新增 TrackEval／情境驗收工具、明確偵測設定及預覽與 GT 座標還原；僅公開彙總，較少換 ID 伴隨較低 Recall，長遮擋恢復尚未通過。
+
 - Made this clear-history target visit **Undo clear / Redo clear target frame numbers** clickable to pause and replay the exact saved snapshot, preserving drafts/settings/all clear history and guarding missing/busy/stale/failed targets; updated bilingual help.
 - 這回目標跳轉返回位置的「**復原清除／重做清除目標影格編號**」可點擊，暫停並跳到精確快照，保留草稿、設定與全部清除歷史，防護無目標／操作中／過期／失敗狀態，更新雙語說明。
 

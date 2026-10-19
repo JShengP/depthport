@@ -1,5 +1,7 @@
 # Semantic Tracking 實機驗收 — ID Switch／遮擋評估
 
+
+**2026-10-19 更新：** [MOT17 擴大驗收](tracking-expanded-acceptance.md) 新增三場景 2,700 格、可見度／換位情境及三次重複比較；較少換 ID 同時伴隨較低 Recall，長遮擋恢復尚未通過。
 [English](../en/tracking-evaluation.md) · [Sessions](sessions.md) · [首頁](../../README.zh-TW.md)
 
 **狀態：v0.3 實驗性離線評估工具。不是正式 MOT Benchmark，也不是實體相機即時速度或 3D 測距驗證。** 本工具將 Session 產生的 `tracking.json` 與人工標註 `ground_truth.json` 比較。執行時**不會重新推論 AI、錄影、上傳或改動原 Session**。內附範例是合成資料，不是真實 YOLO 結果。

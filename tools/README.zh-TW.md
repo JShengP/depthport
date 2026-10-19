@@ -24,3 +24,5 @@ python tools/browser_offline_smoke.py
 預設使用 Playwright 已安裝的 Chromium；也可用 `CHROMIUM_PATH` 指定本地程式。工具產生本地報告，文件截圖只擷取明示的合成示範。請看報告中的 renderer，Canvas 不等於 WebGL GPU 驗證。涵蓋兩種語言、不因語言變動而推論、四模型替身切換、同來源匯出、合成操作與窄螢幕版面。
 
 真推論入口是 `check_env.py --all --image camera.jpg`；成功須真正呼叫模型，不會回退假深度。
+
+`tools/cache_video_detections.py` 會記錄類別、裝置、NMS、上限、權重及版本；`tools/validate_mot_tracking.py` 在獨立 NumPy 2 環境使用固定 TrackEval 做 MOT17 重複比較與可見度／換位診斷。[擴大驗收與重跑說明](../docs/zh-TW/tracking-expanded-acceptance.md)，原始工作資料只留本機。
