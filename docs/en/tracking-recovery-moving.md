@@ -8,6 +8,8 @@
 
 ![Errors on the two moving-camera views](../assets/tracking-v03-recovery-moving.png)
 
+> Later [state/association-history diagnosis](tracking-recovery-history.md) reproduces these frozen scores and explains retained-state gating, continuity ownership and low-threshold HOTA losses. No control/default change.
+
 ## Sources and evidence boundaries
 
 Entire **MOT17-11-DPM, 900 frames / 30 fps** (forward-moving shopping-mall camera), and **MOT17-13-DPM, 750 frames / 25 fps** (intersection filmed from a bus): **1,650 consecutive frames**. Separate from static MOT20-01 and policy-discovery MOT17-09/10. Both scenes appeared in earlier general benchmarks, but **not this control**; they are not never-seen or blind test scenes. Select full sequences before replication results, without outcome-based clipping/substitution.

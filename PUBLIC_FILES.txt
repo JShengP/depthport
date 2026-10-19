@@ -263,3 +263,11 @@ docs/validation/v0.3-recovery-moving.json
 docs/validation/v0.3-recovery-moving-errors.json
 docs/validation/v0.3-recovery-static-errors.json
 docs/assets/tracking-v03-recovery-moving.png
+depthport/tracking_history_diagnostics.py
+tests/test_tracking_history_diagnostics.py
+tools/diagnose_tracking_recovery_history.py
+tools/plot_tracking_recovery_history.py
+docs/en/tracking-recovery-history.md
+docs/zh-TW/tracking-recovery-history.md
+docs/validation/v0.3-recovery-history.json
+docs/assets/tracking-v03-recovery-history.png

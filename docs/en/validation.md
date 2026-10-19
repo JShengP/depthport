@@ -1,6 +1,10 @@
 # Validation record
 [繁體中文](../zh-TW/validation.md) · [Home](../../README.md)
 
+## Frozen recovery state/association-history diagnosis — 2026-10-19
+
+[Method and findings](tracking-recovery-history.md) · [Aggregate](../validation/v0.3-recovery-history.json). No tracking/inference/retuning: all original scores reproduce and observed HOTA solver returns exact fields; repeated full diagnostic hashes agree. Twelve unemitted misses retain below-gate hypotheses; eight retained detections receive other CLEAR owners; one added IDSW location shifts a prefix-equivalent transition by one frame. Bus losses are five low-localisation GT-frame observations at .05–.35. All ten competitors are already assigned elsewhere; forced-alternative costs overlap across TP/FP. Next define effective exclusive competition and find genuine exposure, without a new cutoff, default or acceptance claim. Raw matrices/bridges/cases stay local.
+
 ## Unchanged moving-camera recovery replication — 2026-10-19
 
 [Method/results and error audit](tracking-recovery-moving.md) · [Frozen protocol/amendment](../validation/v0.3-recovery-moving-protocol.json) · [Aggregate](../validation/v0.3-recovery-moving.json). MOT17-11/13, 1,650 frames / 12 repeat runs with unchanged control/runtime and fresh shared detections; all repeat/unhooked-reference checks pass. FP 543→535, FN 13,695 and IDSW 21 unchanged; zero added FN/IDSW. Bus-view HOTA 24.9588→24.9473% fails the per-scene screen despite slight combined improvement; no long-event recovery gain. Post-hoc prior MOT20 errors: 22 added misses split 2 direct/12 unmatched/8 still emitted; added switch uses the same input with no same-frame deferral. Reporting-only missing import was repaired with original freeze retained; no tuning/default/release change. Raw cases stay local.
