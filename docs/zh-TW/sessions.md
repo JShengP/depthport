@@ -1,7 +1,7 @@
 # v0.3 研究版 — 手動 Session 儲存與離線回放
 [English](../en/sessions.md) · [首頁](../../README.zh-TW.md)
 
-**狀態：實驗性開發分支，尚未合併／發布，實體相機驗收仍待完成。** v0.2 Spatial Analysis 保留不變；v0.3 新增**手動、選擇啟用、僅本機**的影格封存與回放工具。它**不會**自動錄製 RTSP 影片或進行位姿補償的像素／3D 追蹤。單純回放不會重新執行深度估計；只有使用者另外按下離線追蹤分析時，才會對已保存的 RGB 影格執行 YOLO Detect／Segment。
+**狀態：實驗性開發預覽，尚未發布帶標籤的 Release，實體相機驗收仍待完成。** v0.2 Spatial Analysis 保留不變；v0.3 新增**手動、選擇啟用、僅本機**的影格封存與回放工具。它**不會**自動錄製 RTSP 影片或進行位姿補償的像素／3D 追蹤。單純回放不會重新執行深度估計；只有使用者另外按下離線追蹤分析時，才會對已保存的 RGB 影格執行 YOLO Detect／Segment。
 
 **2026-10-17 初步驗證：** 公開影片的 24 影格 Session 流程已通過真 CUDA 深度、CPU YOLO 偵測／分割、完整性與回放；另完成含 Roboflow Trackers 的 179 影格比較。見[條件、結果與限制](tracking-evaluation.md)。這些不代表實體相機或公尺精度驗收。
 
@@ -10,7 +10,7 @@
 
 ## 啟用方式
 
-1. 使用 v0.3 開發分支，依原安裝文件準備 DepthPort 環境。
+1. 使用 main 上的 v0.3 實驗性開發預覽，依原安裝文件準備 DepthPort 環境。
 2. 在**本機** `.env` 設定 `ENABLE_SESSION_STORAGE=1`，再重啟伺服器。預設 `0`（關閉）；不可在無登入的公開服務上啟用。
 3. 執行 `bash RUN_UBUNTU.sh` 或 `RUN_WINDOWS.bat`，開啟 `http://127.0.0.1:8000/sessions`。建立 Session，並在主頁真模型產生影格後，手動點選 **儲存最新影格**。
 4. 選取影格並點選**回放**，即讀回 RGB、深度預覽和抽樣的 XYZRGB 點雲，**不呼叫模型**。下載原本同影格 ZIP，仍可取得 `model_raw_depth.npy`、最終深度 NPY、PLY、相機內參、單位與選配分析報告。
