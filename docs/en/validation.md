@@ -1,6 +1,10 @@
 # Validation record
 [繁體中文](../zh-TW/validation.md) · [Home](../../README.md)
 
+## Frozen update-risk groups and temporal support — 2026-10-19
+
+[Definitions, full ledger and decision](tracking-temporal-support.md) · [Pre-extraction protocol](../validation/v0.3-temporal-support-protocol.json) · [Aggregate](../validation/v0.3-temporal-support.json). Complete 197-alternative / 17,984-frame reference cohort, all eight occupancy/update-effect groups, 197 nonempty recorded history anchors and 120,360 age/consecutive-counter checks. No tracking, GT or tuning; births were not indexed. Next-frame 114 gate / 19 signed-gap supports, 69 selected-no-update unknowns. Only one signed-gap prefix reaches two frames; none goes further. No new temporal veto or fitted N; next freeze past-only accepted-observation qualification with active/retained roles and update protection before intervention/GT harm scoring. All source zeros/unknowns and original phases retained; raw histories local, two byte-identical extractions.
+
 ## Frozen alternative cost and competition structure — 2026-10-19
 
 [Method, all-source ledger and decision](tracking-competition-structure.md) · [Aggregate](../validation/v0.3-competition-structure.json). Analyze all 197 frozen reference alternatives (192 discovery / 5 original reserved confirmation), without tracking, GT or tuning; two byte-identical diagnostic traversals. All full costs are positive, but 188 competitors already support accepted updates and 165 have better same-column scores. Target components: 183 cycles / 14 paths; 56 alternatives stop updating the selected missed row, including 12 equal-count row replacements; 39 costs include below-gate contributions. Exact objective ties are not validated identity ambiguity. Next freeze effective-update displacement groups and temporal stability definitions, without fitting tolerance or changing weak continuation/defaults. Raw traces/IDs stay local. Application tests 363 passed / 20 optional skipped; pinned NumPy 2 contracts 46 passed.

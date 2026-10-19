@@ -170,6 +170,8 @@ Completed studies cover [2,700 frames / 27 runs](docs/en/tracking-expanded-accep
 
 [Frozen analysis of all 197 reference alternatives](docs/en/tracking-competition-structure.md) separates local gaps, global opportunity costs and accepted-update displacement. Exact optimizer ties are not validated identity ambiguity; next examine component-level temporal stability without fitting a new tolerance. Weak continuation and defaults remain unchanged.
 
+[Frozen risk groups and temporal support](docs/en/tracking-temporal-support.md) retain all eight structural groups and all unknown states: next-frame support is 114 gate / 19 signed-gap / 69 selected-no-update. No temporal veto or fitted duration is introduced; the next candidate uses past accepted observations with explicit active/retained roles and update protection.
+
 These results apply to the named public sequences, fixed caches and recorded versions, not newer detector profiles or other scenes. Only aggregates are distributed for these studies, without raw frames, GT, per-frame tracks or user bookmarks.
 
 </details>

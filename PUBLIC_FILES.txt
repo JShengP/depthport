@@ -308,3 +308,13 @@ docs/en/tracking-competition-structure.md
 docs/zh-TW/tracking-competition-structure.md
 docs/validation/v0.3-competition-structure.json
 docs/assets/tracking-v03-competition-structure.png
+
+# Frozen effective-update risk groups and temporal observation-history support
+tools/diagnose_tracking_temporal_support.py
+tools/plot_tracking_temporal_support.py
+tests/test_tracking_temporal_support.py
+docs/validation/v0.3-temporal-support-protocol.json
+docs/validation/v0.3-temporal-support.json
+docs/en/tracking-temporal-support.md
+docs/zh-TW/tracking-temporal-support.md
+docs/assets/tracking-v03-temporal-support.png

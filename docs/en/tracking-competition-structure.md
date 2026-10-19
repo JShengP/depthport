@@ -4,6 +4,8 @@
 
 **Exact objective equality is an optimizer-tie test, not a validated proxy for the identity ambiguity we want to control.** All 197 recorded reference alternatives have positive full-assignment opportunity cost. Most competitors already support another accepted update; accepting the same number of pairs can still displace the missed hypothesis. The next control point is **effective update displacement inside the target exchange component, followed by temporal stability**, with no new veto, threshold or default change in this study.
 
+**Follow-up:** [Frozen risk groups and temporal support](tracking-temporal-support.md) now analyzes recorded observation-history extensions without retuning or GT. Gate support, signed-gap support and missing observations differ; no temporal veto is added. The structure results below are unchanged.
+
 ![Cost decomposition, exchange components and accepted-update consequences](../assets/tracking-v03-competition-structure.png)
 
 ## Scope and reconciliation
