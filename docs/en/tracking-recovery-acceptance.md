@@ -8,6 +8,8 @@
 
 ![Whole-sequence errors, identity scores and fragmentation](../assets/tracking-v03-recovery.png)
 
+> Later unchanged [moving-camera replication and prior-error audit](tracking-recovery-moving.md): the new group fails the per-scene HOTA screen. This original static result remains dated evidence, not broad acceptance.
+
 ## New input and source terms
 
 The entire **MOT20-01 training preview: 429 consecutive frames, 25 fps**, a crowded indoor station with a static camera. It is separate from all previously studied MOT17-04/09/10/11/13 scenes. This is one independently selected scene, not a multi-scene held-out test, original-JPEG benchmark result or moving-camera acceptance.

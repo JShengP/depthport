@@ -1,6 +1,10 @@
 # Validation record
 [繁體中文](../zh-TW/validation.md) · [Home](../../README.md)
 
+## Unchanged moving-camera recovery replication — 2026-10-19
+
+[Method/results and error audit](tracking-recovery-moving.md) · [Frozen protocol/amendment](../validation/v0.3-recovery-moving-protocol.json) · [Aggregate](../validation/v0.3-recovery-moving.json). MOT17-11/13, 1,650 frames / 12 repeat runs with unchanged control/runtime and fresh shared detections; all repeat/unhooked-reference checks pass. FP 543→535, FN 13,695 and IDSW 21 unchanged; zero added FN/IDSW. Bus-view HOTA 24.9588→24.9473% fails the per-scene screen despite slight combined improvement; no long-event recovery gain. Post-hoc prior MOT20 errors: 22 added misses split 2 direct/12 unmatched/8 still emitted; added switch uses the same input with no same-frame deferral. Reporting-only missing import was repaired with original freeze retained; no tuning/default/release change. Raw cases stay local.
+
 ## Competition-aware recovery control — 2026-10-19
 
 [Method/results](tracking-recovery-acceptance.md) · [Frozen protocol](../validation/v0.3-recovery-deferral-protocol.json) · [Aggregate](../validation/v0.3-recovery-deferral.json). New MOT20-01, 429 continuous frames, two arms × three identical repeats; separate unhooked reference agrees. Four deferrals: FP 55→52, FN 17,194→17,092, IDSW 21→13, IDF1/HOTA improve. Frozen research screen passes, but fragmentation 46→48, 22 added FN/one added IDSW, recall 13.98% and zero complete long-event endpoints prevent acceptance/default promotion. Preserve active weak continuation; raw diagnostics stay local. More licensed scenes/camera motion and separate localisation study remain next.

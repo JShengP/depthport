@@ -1,0 +1,157 @@
+{
+  "format": "depthport.recovery-error-audit.v1",
+  "checked_on": "2026-10-19",
+  "input_record_sha256": "3852dbe67b8b6c010b4bf683b140a582928ec1fbdd58425d260dd0884ef34c6c",
+  "source_terms": {
+    "dataset": "MOT20 train / MOT20-01",
+    "page": "https://motchallenge.net/data/MOT20/",
+    "license": "CC BY-NC-SA 3.0; original-source conditions may also apply",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+    "terms_page_retrieved_sha256": "d096d5fad93fcfe3c2c8e796e28488bbc8fe01d3d581272c2e00b7b58bf20576",
+    "source_column": "No additional third-party source link for MOT20-01 in official table",
+    "scope": "Local non-commercial research; media, GT and raw traces not redistributed",
+    "attribution": "MOTChallenge / Dendorfer, Rezatofighi, Milan, Shi, Cremers, Reid, Roth, Schindler and Leal-Taixe; MOT20 (arXiv:2003.09003)",
+    "labels_url": "https://motchallenge.net/data/MOT20Labels.zip",
+    "labels_archive_sha256": "95decf629c332f80ace18024bf876996e6be89908ec593f05cda000270d6d9ad"
+  },
+  "analysis_source_sha256": {
+    "tools/audit_tracking_recovery_errors.py": "9df47459bf60c5a4a049379879354930bd530b15f92913f5650fba84e897bd6e",
+    "depthport/tracking_recovery_diagnostics.py": "3d8cb3fa2be4ee89e5b8bc51a738a82f86d9baadc7cad66b52be27219381d90a"
+  },
+  "scope": "Post-hoc deterministic diagnosis only, after frozen experiment results. No tracking, parameter search or altered inputs.",
+  "sequences": [
+    {
+      "name": "MOT20-01",
+      "official_scores_reproduced": true,
+      "added_error_diagnosis": {
+        "added_fn": {
+          "total": 22,
+          "categories": {
+            "direct_current_deferral": 2,
+            "reference_detection_not_emitted_without_current_deferral": 12,
+            "reference_detection_still_emitted": 8
+          },
+          "signals": {
+            "low_visibility": 11,
+            "current_gt_overlap": 22,
+            "near_crossing_event": 1,
+            "supporting_deferral_within_1s": 10
+          },
+          "raw_support": {
+            "weak_only": 22
+          }
+        },
+        "added_idsw": {
+          "total": 1,
+          "categories": {
+            "gap_with_raw_detection_support": 1
+          },
+          "signals": {
+            "low_visibility": 0,
+            "current_gt_overlap": 1,
+            "near_crossing_event": 1,
+            "supporting_deferral_within_1s": 1,
+            "reference_unmatched_at_switch": 0,
+            "same_input_detection_as_reference": 1,
+            "same_frame_has_any_deferral": 0,
+            "gap_has_no_raw_overlap": 0,
+            "gap_has_partial_raw_overlap": 0,
+            "visible_gap_missing_raw_box": 0,
+            "low_visibility_gap_missing_raw_box": 0
+          },
+          "raw_support": {
+            "weak_only": 1
+          }
+        },
+        "added_fn_episodes": {
+          "count": 5,
+          "max_frames": 9
+        },
+        "added_fn_candidate_weak_stage": {
+          "deferred": 2,
+          "matched_confirmed": 8,
+          "unmatched_weak": 12
+        }
+      },
+      "hota_components_mean_over_thresholds": {
+        "activation_control": {
+          "HOTA": 0.20503146097039698,
+          "DetA": 0.10656309467002453,
+          "AssA": 0.3964745990605684,
+          "DetPr": 0.785002601707491,
+          "DetRe": 0.10789341244404418,
+          "AssPr": 0.6906299580006706,
+          "AssRe": 0.44609105348872163
+        },
+        "defer_competing_recovery": {
+          "HOTA": 0.21389935626574802,
+          "DetA": 0.11108069748608677,
+          "AssA": 0.4136374876045892,
+          "DetPr": 0.789417891017296,
+          "DetRe": 0.11243344899743068,
+          "AssPr": 0.7003519531659009,
+          "AssRe": 0.46387018398601165
+        }
+      },
+      "added_fp": {
+        "total": 0,
+        "categories": {},
+        "reference_emitted_after_preprocessing": 0,
+        "overlaps_excluded_annotation": 0
+      }
+    }
+  ],
+  "public_scope": "Reviewed aggregate counts/distributions, configuration/source hashes and attributed numeric plots only. Media, GT, exact event windows, per-frame IDs, raw matrices/diagnostics, notes and local paths stay local.",
+  "combined_added_errors": {
+    "added_fn": {
+      "categories": {
+        "direct_current_deferral": 2,
+        "reference_detection_not_emitted_without_current_deferral": 12,
+        "reference_detection_still_emitted": 8
+      },
+      "raw_support": {
+        "weak_only": 22
+      },
+      "signals": {
+        "current_gt_overlap": 22,
+        "low_visibility": 11,
+        "near_crossing_event": 1,
+        "supporting_deferral_within_1s": 10
+      },
+      "total": 22
+    },
+    "added_fn_candidate_weak_stage": {
+      "deferred": 2,
+      "matched_confirmed": 8,
+      "unmatched_weak": 12
+    },
+    "added_fp": {
+      "categories": {},
+      "overlaps_excluded_annotation": 0,
+      "reference_emitted_after_preprocessing": 0,
+      "total": 0
+    },
+    "added_idsw": {
+      "categories": {
+        "gap_with_raw_detection_support": 1
+      },
+      "raw_support": {
+        "weak_only": 1
+      },
+      "signals": {
+        "current_gt_overlap": 1,
+        "gap_has_no_raw_overlap": 0,
+        "gap_has_partial_raw_overlap": 0,
+        "low_visibility": 0,
+        "low_visibility_gap_missing_raw_box": 0,
+        "near_crossing_event": 1,
+        "reference_unmatched_at_switch": 0,
+        "same_frame_has_any_deferral": 0,
+        "same_input_detection_as_reference": 1,
+        "supporting_deferral_within_1s": 1,
+        "visible_gap_missing_raw_box": 0
+      },
+      "total": 1
+    }
+  }
+}
