@@ -250,3 +250,13 @@ docs/zh-TW/tracking-recovery-acceptance.md
 docs/validation/v0.3-recovery-deferral-protocol.json
 docs/validation/v0.3-recovery-deferral.json
 docs/assets/tracking-v03-recovery.png
+
+# Three-version static-only GitHub Pages showcase (no AI/RTSP/Session payloads)
+website/index.html
+website/v0.2/index.html
+website/v0.3/index.html
+website/showcase.css
+website/showcase.js
+tests/test_pages_showcase.py
+docs/en/pages-showcase.md
+docs/zh-TW/pages-showcase.md
