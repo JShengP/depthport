@@ -56,7 +56,7 @@ def source_bytes(root: Path) -> bytes:
     with zipfile.ZipFile(buf, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
         for path in public_files(root):
             name = f"depthport-{__version__}/{path.relative_to(root).as_posix()}"
-            info = zipfile.ZipInfo(name, date_time=(2026, 10, 16, 0, 0, 0))
+            info = zipfile.ZipInfo(name, date_time=(2026, 10, 17, 0, 0, 0))
             info.create_system = 3
             info.external_attr = (0o100755 if path.suffix == ".sh" else 0o100644) << 16
             info.compress_type = zipfile.ZIP_DEFLATED

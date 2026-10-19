@@ -7,9 +7,13 @@
 
 English · [繁體中文](README.zh-TW.md)
 
-**Experimental alpha** · **Local-first** · **English / 繁體中文** · **AGPL-3.0-only**
+**v0.2 Alpha released** · **Local-first** · **English / 繁體中文** · **AGPL-3.0-only**
 
 </div>
+
+**Download v0.2.0-alpha.1:** [Release notes & downloads](https://github.com/JShengP/depthport/releases/tag/v0.2.0-alpha.1) · [Source ZIP](https://github.com/JShengP/depthport/releases/download/v0.2.0-alpha.1/depthport-0.2.0-alpha.1-source.zip) · [SHA-256 checksums](https://github.com/JShengP/depthport/releases/download/v0.2.0-alpha.1/SHA256SUMS.txt)
+
+The download contains public source only; Python dependencies and pretrained model weights must be installed separately.
 
 Turn RGB images and RTSP camera frames into interactive, **single-view point clouds**. Switch depth engines, inspect visible-surface geometry, and export the data behind the visualization—all in one local web interface.
 
@@ -19,7 +23,22 @@ DepthPort integrates existing pretrained models; it does **not** introduce a new
 
 *Screenshot: the actual UI showing synthetic test data. No camera or AI model produced this point cloud.*
 
-> **Status:** source-release alpha, not a production or metrology system. Automated tests validate application contracts, geometry and UI behavior; they do not prove pretrained-model inference. Real-model runs, fresh installation on target systems, CUDA, physical cameras and depth accuracy are not yet validated. Read the [validation record](docs/en/validation.md).
+> **Status:** `v0.2.0-alpha.1` is published as an **experimental pre-release**. On 2026-10-17, a fresh Ubuntu 24.04 / Python 3.12 environment passed all four real pretrained depth-model CUDA smoke tests, YOLO Detect/Segment fusion and browser-to-HTTP checks on one public sample image. This demonstrates execution, not measured distance accuracy, field camera operation or a hardware benchmark. Full Windows model installation, physical RTSP, endurance and NVIDIA WebGL rendering remain unverified. Read the [validation record](docs/en/validation.md).
+
+## New in v0.2 — Spatial Analysis Lab
+
+Open **Spatial Analysis** (`/spatial`) on a running local server (`http://127.0.0.1:8000/spatial`): clickable camera-space XYZ / raw depth inspector, sequential four-engine still-image comparison with native-unit histograms and 3D previews, optional YOLO26 Detect/Segment instance-to-point fusion, and pinhole checkerboard calibration / candidate plane fitting / independent metric-error checks. The original viewer, four depth engines, image/RTSP input, exports and bilingual UI remain available. Analysis is a single-worker experimental feature. Real single-image CUDA inference is verified on the recorded Ubuntu host; physical RTSP and distance accuracy remain unverified.
+
+[English implementation & acceptance](docs/en/spatial-analysis.md) · [繁體中文實作與驗收](docs/zh-TW/spatial-analysis.md)
+
+<details>
+<summary>View full v0.2 screenshot (real pretrained inference)</summary>
+
+![Spatial Analysis with real pretrained depth comparison and YOLO segmentation](docs/assets/spatial-preview.en.png)
+
+*Real pretrained inference on the public [Ultralytics bus example](https://github.com/ultralytics/assets/blob/53d4e2a8fd15f473c29a148c317a8477be559327/im/bus.jpg); not an IP-camera capture or accuracy benchmark. [Screenshot provenance](docs/assets/README.md).*
+
+</details>
 
 ## What you can explore
 
@@ -123,7 +142,7 @@ node tests/test_i18n.cjs
 python tools/check_release.py
 ```
 
-The CI workflow runs deterministic, fake-backed application tests without downloading pretrained weights. A passing CI badge is **not** a four-model hardware benchmark. No remote CI result is asserted by this repository snapshot.
+The CI workflow runs deterministic, fake-backed application tests without downloading pretrained weights. Passing application CI is **not** a four-model hardware benchmark. Check [GitHub Actions](https://github.com/JShengP/depthport/actions/workflows/ci.yml) for the current branch and commit results.
 
 [Contributing](CONTRIBUTING.md) · [Roadmap](ROADMAP.md) · [Changelog](CHANGELOG.md) · [Release checklist](docs/en/publishing.md)
 
