@@ -2,6 +2,8 @@
 
 [English](../en/tracking-past-support.md) · [ROADMAP](../../ROADMAP.md) · [前輪跨格診斷](tracking-temporal-support.md) · [Protocol](../validation/v0.3-past-support-protocol.json) · [Input lock](../validation/v0.3-past-support-inputs.json) · [Aggregate](../validation/v0.3-past-support.json) · [Reporting amendment](../validation/v0.3-past-support-report-amendment.json)
 
+後續：[同規則GT-free發現與保留確認](tracking-past-exposure.md)在已見MOT發現組找到三控制實際觸發，但兩段新保留KITTI均零觸發，獨立曝光未驗證。本篇歷史評分、原協定與修補附註保留。
+
 **獨立資料組已跑完，但沒有有效曝光，介入效益仍未驗證。** 四段 KITTI 完整序列都沒有符合原活躍競爭條件的候選，三個新控制均零 veto，預測／官方分數與參考相同。逐場景傷害條件通過、沒有新增漏追或換 ID，但每個控制均未通過凍結的曝光／品質門檻。不放寬資格、不換片、不升預設。
 
 ![KITTI 控制次數、資格與分數變化，零值完整保留](../assets/tracking-v03-past-support.png)

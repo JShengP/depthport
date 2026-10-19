@@ -1,0 +1,207 @@
+{
+  "format": "depthport.past-exposure.v1",
+  "phase": "confirmation",
+  "protocol_sha256": "573b76a8019ce5bb069a6140d2070c26ca7c4071dace026dcef3ea8eba255082",
+  "input_lock_sha256": "bda4cfdb16883431c38eccf6696d11d6610a26ee6cec16a2ad7fdb05b1ab21b1",
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv-python": "4.11.0.86",
+    "trackers": "2.6.1",
+    "supervision": "0.27.0",
+    "scipy": "1.18.1"
+  },
+  "repeats": 3,
+  "gt_read": false,
+  "accuracy_scoring": false,
+  "retuned": false,
+  "all_scheduled_completed": true,
+  "ledger": [
+    {
+      "name": "KITTI-0004",
+      "phase": "confirmation",
+      "prior_use": "No prior project tracking/inference/GT-member read; reserved before new output.",
+      "frames": 314,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "d8994eab2788da8a4b1c0634eb6a70348cbec77b34bb5db380527a004b9758a9",
+          "trace_sha256": "24cf9901a15fbc4e16db69f640e596bd42decd5e184d251dab49ee40b10877b7",
+          "counts": {
+            "frames": 314,
+            "candidate_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 0,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_only": {
+          "prediction_sha256": "d8994eab2788da8a4b1c0634eb6a70348cbec77b34bb5db380527a004b9758a9",
+          "trace_sha256": "24cf9901a15fbc4e16db69f640e596bd42decd5e184d251dab49ee40b10877b7",
+          "counts": {
+            "frames": 314,
+            "candidate_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 0,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "update_protection_only": {
+          "prediction_sha256": "d8994eab2788da8a4b1c0634eb6a70348cbec77b34bb5db380527a004b9758a9",
+          "trace_sha256": "24cf9901a15fbc4e16db69f640e596bd42decd5e184d251dab49ee40b10877b7",
+          "counts": {
+            "frames": 314,
+            "candidate_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 0,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_and_protection": {
+          "prediction_sha256": "d8994eab2788da8a4b1c0634eb6a70348cbec77b34bb5db380527a004b9758a9",
+          "trace_sha256": "24cf9901a15fbc4e16db69f640e596bd42decd5e184d251dab49ee40b10877b7",
+          "counts": {
+            "frames": 314,
+            "candidate_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 0,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 191,
+      "capped_frames": 0,
+      "cache_shards": 1,
+      "unhooked_reference_equal": true,
+      "historical_reference_equal": false
+    },
+    {
+      "name": "KITTI-0005",
+      "phase": "confirmation",
+      "prior_use": "No prior project tracking/inference/GT-member read; reserved before new output.",
+      "frames": 297,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "341a4f52e8b356a3f1aa69b950e534618495e5e4dce95eb4eaff662c5223642e",
+          "trace_sha256": "bc2909cbc5a263d095cf474e4263ac7252e3b39622caa01dc3f3ba960121109b",
+          "counts": {
+            "frames": 297,
+            "candidate_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 0,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_only": {
+          "prediction_sha256": "341a4f52e8b356a3f1aa69b950e534618495e5e4dce95eb4eaff662c5223642e",
+          "trace_sha256": "bc2909cbc5a263d095cf474e4263ac7252e3b39622caa01dc3f3ba960121109b",
+          "counts": {
+            "frames": 297,
+            "candidate_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 0,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "update_protection_only": {
+          "prediction_sha256": "341a4f52e8b356a3f1aa69b950e534618495e5e4dce95eb4eaff662c5223642e",
+          "trace_sha256": "bc2909cbc5a263d095cf474e4263ac7252e3b39622caa01dc3f3ba960121109b",
+          "counts": {
+            "frames": 297,
+            "candidate_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 0,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_and_protection": {
+          "prediction_sha256": "341a4f52e8b356a3f1aa69b950e534618495e5e4dce95eb4eaff662c5223642e",
+          "trace_sha256": "bc2909cbc5a263d095cf474e4263ac7252e3b39622caa01dc3f3ba960121109b",
+          "counts": {
+            "frames": 297,
+            "candidate_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 0,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 46,
+      "capped_frames": 0,
+      "cache_shards": 1,
+      "unhooked_reference_equal": true,
+      "historical_reference_equal": false
+    }
+  ],
+  "discovery_sha256": "4c6492500093bfaac36edeeaa3af0c486485b5f23fc8b01f4bcb8d39d1a2cd24",
+  "discovery_selection": {
+    "past_support_only": "MOT17-09-DPM",
+    "update_protection_only": "MOT17-10-DPM",
+    "past_support_and_protection": "MOT20-06"
+  },
+  "confirmation": {
+    "past_support_only": {
+      "discovery_found": true,
+      "exposed_reserved_sources": [],
+      "exposure_replicated_in_both_reserved": false
+    },
+    "update_protection_only": {
+      "discovery_found": true,
+      "exposed_reserved_sources": [],
+      "exposure_replicated_in_both_reserved": false
+    },
+    "past_support_and_protection": {
+      "discovery_found": true,
+      "exposed_reserved_sources": [],
+      "exposure_replicated_in_both_reserved": false
+    }
+  }
+}

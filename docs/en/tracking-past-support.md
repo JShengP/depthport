@@ -2,6 +2,8 @@
 
 [繁體中文](../zh-TW/tracking-past-support.md) · [ROADMAP](../../ROADMAP.md) · [Prior temporal diagnosis](tracking-temporal-support.md) · [Protocol](../validation/v0.3-past-support-protocol.json) · [Input lock](../validation/v0.3-past-support-inputs.json) · [Aggregate](../validation/v0.3-past-support.json) · [Reporting amendment](../validation/v0.3-past-support-report-amendment.json)
 
+Follow-up: [same-rule GT-free discovery and reserved confirmation](tracking-past-exposure.md) finds actual triggers in all three treatments on seen MOT discovery, but neither new reserved KITTI source triggers; independent exposure remains unverified. This historical scored study and its original freeze/amendment are preserved.
+
 **Independent group completed; no effective exposure, so usefulness is still unverified.** All four complete KITTI sources have zero qualifying active competitors and zero vetoes in each treatment. Predictions and official scores equal the reference. Per-scene harm conditions pass with no added FN/IDSW, but every treatment fails the frozen exposure/quality gate. Do not loosen eligibility, replace sources or promote defaults from this result.
 
 ![Frozen KITTI intervention counts, qualification and score changes](../assets/tracking-v03-past-support.png)

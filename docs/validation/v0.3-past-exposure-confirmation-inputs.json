@@ -1,0 +1,41 @@
+{
+  "format": "depthport.past-exposure-lock.v1",
+  "protocol_sha256": "573b76a8019ce5bb069a6140d2070c26ca7c4071dace026dcef3ea8eba255082",
+  "phase": "confirmation",
+  "discovery_sha256": "4c6492500093bfaac36edeeaa3af0c486485b5f23fc8b01f4bcb8d39d1a2cd24",
+  "preparation_seal_sha256": "50f51770804e7d27197a3e5beb72e9f40360100eac8883500ed5d6eb5f264aa1",
+  "sequences": [
+    {
+      "name": "KITTI-0004",
+      "video_sha256": "673ed7ef252c1e9e1c8bcf55c140404f628015f040a51647cde8afa44f0c1702",
+      "cache_sha256": [
+        "a58da9bd2a8b7eaffce017e156890145a5a119113f36ede49e165857ea09589b"
+      ],
+      "frames": 314,
+      "fps": 10,
+      "resolution": [
+        1242,
+        375
+      ],
+      "cache_shards": 1,
+      "cached_detections": 191,
+      "capped_frames": 0
+    },
+    {
+      "name": "KITTI-0005",
+      "video_sha256": "860e56b5dbb670d877aeb4fba5921a284b09e86619f0cbdf15e36abd6f025260",
+      "cache_sha256": [
+        "083e71126bc87368db4b294b1f8c602ddbf5be24497a1da525b9d5a547be6520"
+      ],
+      "frames": 297,
+      "fps": 10,
+      "resolution": [
+        1242,
+        375
+      ],
+      "cache_shards": 1,
+      "cached_detections": 46,
+      "capped_frames": 0
+    }
+  ]
+}

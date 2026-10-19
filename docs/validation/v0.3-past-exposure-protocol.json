@@ -1,0 +1,285 @@
+{
+  "format": "depthport.past-exposure-protocol.v1",
+  "frozen_at_utc": "2026-10-19T14:48:52.951961+00:00",
+  "base_commit": "1b42c51e76b31340899d9da149cf364c75d1db84",
+  "status": "Local prospective freeze after synthetic/pinned contracts and fixed source directory metadata, before new inference or tracking; source-only downloads may still be ongoing. Prior diagnostic outcomes known; not external preregistration.",
+  "same_causal_protocol_sha256": "ff4a9720a0cf039e39255b49054dd68d5d3e8e092e970f4020fc1b5d6362c395",
+  "same_causal_rules": {
+    "base": "Confirmed selected weak row age>=2; same-column competitor score >= original weak gate and selected-minus-competitor <= unchanged .05. Active=confirmed and pre-update age1; retained/unconfirmed rows logged but cannot qualify.",
+    "past_support": "Both hypotheses have nonempty recorded accepted-observation histories before this decision. On selected hypothesis last accepted observation strictly before decision, competitor must be in same stage, active confirmed, AND have its own distinct accepted observation; competitor score >= that stage original gate and signed gap <=.05. Check immutable keys. Missing comparison/observation is unknown, never filled or treated as proof of either identity. Birth keys unavailable; do not invent them. No native-ID joins, GT, future +1..+30 or fitted duration.",
+    "protection": "Competitor currently has no other accepted weak update. Force it onto selected column and solve remaining unfiltered one-to-one assignment with original gate afterwards: every OTHER original accepted row/detection pair must remain and accepted count must not decrease. Selected missed-row update deliberately excluded; its deferral is tested as a harm. No opportunity-cost cutoff/equality requirement; solver-returned alternative only.",
+    "action": "Four factorial arms: no veto, past support alone, protection alone, conjunction on SAME competitor. Any qualifying competitor vetoes the selected edge once. Decisions simultaneous from unmodified original matching. Only remove selected edge, return its row/column unmatched; never install alternative or rematch. Weak input unchanged and deferred detection remains upstream output ID -1.",
+    "history": "Each arm owns its causal accepted-edge history; after decisions record only actually accepted high/weak observations (frame, original detection index). Strong object references prevent ownership reuse. No reference-history transfer after divergence.",
+    "unchanged": "Weak detections/continuation, births, lifecycle, activation .3/high .6/buffer30/confirmation2, YOLO26n 8.4.176 CPU confidence .1/imgsz640/person0/max_det64/NMS.7/weight hash, source FPS10, app/worker/defaults. Buffer30 is 3 s at source10Hz, not previous 30Hz timing."
+  },
+  "previous_exposure_protocol_sha256": "279e5d8d81fceb2409a0259a84d78ceee1a48ca4d04d81e2e1be91364ad4f36c",
+  "source_intent_sha256": "610fb95368a3bcf5c7232bb2b3a39638dce508241ae2bf683f3a0cf322b556f5",
+  "sequences": [
+    {
+      "name": "MOT17-09-DPM",
+      "frames": 525,
+      "fps": 30,
+      "phase": "discovery",
+      "source_family": "mot17-streets",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "video_url": "https://motchallenge.net/sequenceVideos/MOT17-09-DPM-raw.mp4",
+      "historical_reference_sha256": "9e9361ce0ec717cc2ec65befaf11f65f176f455b4e92fae4c6e475294dbd1777"
+    },
+    {
+      "name": "MOT17-10-DPM",
+      "frames": 654,
+      "fps": 30,
+      "phase": "discovery",
+      "source_family": "mot17-streets",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "video_url": "https://motchallenge.net/sequenceVideos/MOT17-10-DPM-raw.mp4",
+      "historical_reference_sha256": "0a2fc2beaa6d8c0c9b1e7158a94973ff7b63acb6830a96994de87e26c6294cbe"
+    },
+    {
+      "name": "MOT17-11-DPM",
+      "frames": 900,
+      "fps": 30,
+      "phase": "discovery",
+      "source_family": "mot17-mall",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "video_url": "https://motchallenge.net/sequenceVideos/MOT17-11-DPM-raw.mp4",
+      "historical_reference_sha256": "5ddcbe1b16f210ec635ce21978baddc857309e2576df387b816aa4196ff4e34b"
+    },
+    {
+      "name": "MOT17-13-DPM",
+      "frames": 750,
+      "fps": 25,
+      "phase": "discovery",
+      "source_family": "mot17-bus",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "video_url": "https://motchallenge.net/sequenceVideos/MOT17-13-DPM-raw.mp4",
+      "historical_reference_sha256": "b9f2817194b648c92081d71779d182ce7c5f901665baf9b4e4d312ecc7c17fef"
+    },
+    {
+      "name": "MOT17-04-DPM",
+      "frames": 1050,
+      "fps": 30,
+      "phase": "discovery",
+      "source_family": "mot17-elevated-street",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "video_url": "https://motchallenge.net/sequenceVideos/MOT17-04-DPM-raw.mp4",
+      "historical_reference_sha256": "3e68bb626c3511755ca9e081716739097715842b1eb8785fbd7426da55be3f0e"
+    },
+    {
+      "name": "MOT20-01",
+      "frames": 429,
+      "fps": 25,
+      "phase": "discovery",
+      "source_family": "mot20-station",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "video_url": "https://motchallenge.net/sequenceVideos/MOT20-01-raw.mp4",
+      "historical_reference_sha256": "97e6ed42766c5387c311a35fb991e9674be8deae7a3adcd162f0a1c97b2135c7"
+    },
+    {
+      "name": "MOT20-02",
+      "frames": 2782,
+      "fps": 25,
+      "phase": "discovery",
+      "source_family": "mot20-station",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "video_url": "https://motchallenge.net/sequenceVideos/MOT20-02-raw.mp4",
+      "historical_reference_sha256": "6035203c20049177cb676151bb5c27660bf98ca3f0ff6f5f8fc8d2017f8056b6"
+    },
+    {
+      "name": "MOT20-06",
+      "frames": 1008,
+      "fps": 25,
+      "phase": "discovery",
+      "source_family": "mot20-pedestrian-street",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "video_url": "https://motchallenge.net/sequenceVideos/MOT20-06-raw.mp4",
+      "historical_reference_sha256": "56bf6eba46da59f44ef4566179b1ed3c7d3ca4280e805677553f65ab2d2dccef"
+    },
+    {
+      "name": "MOT20-07",
+      "frames": 585,
+      "fps": 25,
+      "phase": "discovery",
+      "source_family": "mot20-station",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "video_url": "https://motchallenge.net/sequenceVideos/MOT20-07-raw.mp4",
+      "historical_reference_sha256": "c99b2be521424bbcf10e3a5007f31304801070734a1ef20e9f5b2d4621cc6400"
+    },
+    {
+      "name": "MOT20-08",
+      "frames": 806,
+      "fps": 25,
+      "phase": "discovery",
+      "source_family": "mot20-pedestrian-street",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "video_url": "https://motchallenge.net/sequenceVideos/MOT20-08-raw.mp4",
+      "historical_reference_sha256": "fa41146682a963272d486c435d0e377a2404dfc04434f304f55c1a692e499741"
+    },
+    {
+      "name": "MOT17-07-DPM",
+      "frames": 500,
+      "fps": 30,
+      "phase": "discovery",
+      "source_family": "mot17-streets",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "video_url": "https://motchallenge.net/sequenceVideos/MOT17-07-DPM-raw.mp4",
+      "historical_reference_sha256": "1d3531f018b7d7dad894feb490cce49b237a3caa5b79de2aa3b76ae4f602a415"
+    },
+    {
+      "name": "MOT17-08-DPM",
+      "frames": 625,
+      "fps": 30,
+      "phase": "discovery",
+      "source_family": "mot17-streets",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "video_url": "https://motchallenge.net/sequenceVideos/MOT17-08-DPM-raw.mp4",
+      "historical_reference_sha256": "9e812b72af5d80219c52f6d773daed865338922e8b09a4ff1296f27d8a8abeb3"
+    },
+    {
+      "name": "MOT17-12-DPM",
+      "frames": 900,
+      "fps": 30,
+      "phase": "discovery",
+      "source_family": "mot17-mall",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "video_url": "https://motchallenge.net/sequenceVideos/MOT17-12-DPM-raw.mp4",
+      "historical_reference_sha256": "457818c0425cad74c9bfdc0b658bcdef9b67be88a6d26ee84e9992657f0a9d4e"
+    },
+    {
+      "name": "MOT17-14-DPM",
+      "frames": 750,
+      "fps": 25,
+      "phase": "discovery",
+      "source_family": "mot17-bus",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "video_url": "https://motchallenge.net/sequenceVideos/MOT17-14-DPM-raw.mp4",
+      "historical_reference_sha256": "27da04e4db1f59f397d158d7bfc72dc520cc54f6c26924fb5ac55588ed9680d8"
+    },
+    {
+      "name": "MOT20-03",
+      "frames": 2405,
+      "fps": 25,
+      "phase": "discovery",
+      "source_family": "mot20-stadium",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "video_url": "https://motchallenge.net/sequenceVideos/MOT20-03-raw.mp4",
+      "historical_reference_sha256": "b2cb94d9bfb5b80be4c9d392dc5fec46820810c9533e35f0572fb065ab7459a3"
+    },
+    {
+      "name": "MOT20-05",
+      "frames": 3315,
+      "fps": 25,
+      "phase": "discovery",
+      "source_family": "mot20-square",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "video_url": "https://motchallenge.net/sequenceVideos/MOT20-05-raw.mp4",
+      "historical_reference_sha256": "b12bf072ec8dd4068dc02cb316268c7e166f26af4b3fb8e4a6f02e289be37b17"
+    },
+    {
+      "name": "KITTI-0004",
+      "frames": 314,
+      "fps": 10,
+      "source_member_prefix": "training/image_02/0004/",
+      "source_url": "https://s3.eu-central-1.amazonaws.com/avg-kitti/data_tracking_image_2.zip",
+      "phase": "confirmation",
+      "source_family": "kitti-driving",
+      "prior_use": "No prior project tracking/inference/GT-member read; reserved before new output."
+    },
+    {
+      "name": "KITTI-0005",
+      "frames": 297,
+      "fps": 10,
+      "source_member_prefix": "training/image_02/0005/",
+      "source_url": "https://s3.eu-central-1.amazonaws.com/avg-kitti/data_tracking_image_2.zip",
+      "phase": "confirmation",
+      "source_family": "kitti-driving",
+      "prior_use": "No prior project tracking/inference/GT-member read; reserved before new output."
+    }
+  ],
+  "arms": [
+    "activation_control",
+    "past_support_only",
+    "update_protection_only",
+    "past_support_and_protection"
+  ],
+  "repeats": 3,
+  "source_processes": 4,
+  "parameters": {
+    "track_activation_threshold": 0.3,
+    "high_conf_det_threshold": 0.6,
+    "lost_track_buffer": 30,
+    "minimum_consecutive_frames": 2
+  },
+  "margin": 0.05,
+  "detector_settings": {
+    "model": "yolo26n.pt",
+    "confidence": 0.1,
+    "imgsz": 640,
+    "source": "ultralytics",
+    "device": "cpu",
+    "classes": [
+      0
+    ],
+    "max_det": 64,
+    "nms_iou": 0.7,
+    "ultralytics": "8.4.176",
+    "weight_sha256": "9b09cc8bf347f0fc8a5f7657480587f25db09b34bf33b0652110fb03a8ad4fef"
+  },
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv-python": "4.11.0.86",
+    "trackers": "2.6.1",
+    "supervision": "0.27.0",
+    "scipy": "1.18.1"
+  },
+  "upstream_bytetrack_class_sha256": "7ea61408b4908da327ba992f09450865bb16019ab95bed23a512e5c03bef8fda",
+  "implementation_sha256": {
+    "depthport/tracking_past_support_control.py": "d760faddc836de6e299240d84ff3046c559e5b52e55d6a56c0a70a1aa5b251e1",
+    "depthport/tracking_past_exposure.py": "1a43b2bedcb09ecf5c8f0f3d22a9b35d43b81ef78f20560f10559b27a0f083d8",
+    "tools/select_tracking_past_exposure.py": "bc1e378c7864dee1457a81fa0ecbcf50685ae085c6fc574f605f8daaea9331cd",
+    "tests/test_tracking_past_exposure.py": "e424ee3b39bb3d0fdf60a9a2ae8fbbd2a7559d17c8d9693695fc92fd1c40ed4a",
+    "depthport/tracking_recovery_control.py": "123ed43132d33326a0ec0ca1c7deaa23d20f1fa07f35b2df3ee4735efbe4a7b6",
+    "depthport/tracking_exposure.py": "49026e2ef32cf767bf47845c1daba4e89f438291025d799108137a0019228bc0",
+    "depthport/tracking_association_probe.py": "585f2d87b3246644a6df0d96b62fd88998b12dd9bdc86233107e521f4061926e",
+    "depthport/video_tracking_benchmark.py": "42fd7739080b4523f64c8425979e0125b8bfbfee7abfc5f22ed5e41668bbca0c"
+  },
+  "selection": {
+    "order": "All sixteen prior MOT exposure sources in original frozen order, now discovery-only. First two remaining KITTI training IDs in lexical order after previously studied0000\u20130003 reserved before any new source output. No post-output additions, replacements or early stop. Current KITTI0000\u20130003 negatives retained as prior study, excluded from this new scan. All other KITTI IDs excluded prospectively.",
+    "eligibility": "Per treatment independently: first completed full discovery source in fixed order with >=1 actual veto and >=1 veto frame on its own continuous history; three canonical/full-trace/count repeats equal, unhooked reference equal and zero detection-cap frames. No reference opportunities or per-frame favourable selection. Inspect every scheduled source even after a choice.",
+    "failures": "Keep all zero/failed sources with safe reason codes; local full exceptions. Failed source is unknown, not zero. Select first qualifying completed source but mark search incomplete; any discovery or reserved failure blocks replication. No retries, replacements or count/threshold loosening from outcomes.",
+    "separation": "Complete and seal ordered discovery ledger/hash/selections before any reserved detector or tracker output. Build separate hashed confirmation input lock only afterwards; reserve both full sources regardless discovery selection. No reserved scene may fill a discovery slot.",
+    "confirmation_gate": "Each treatment requires a discovery selection, every scheduled discovery and reserved source completed, and >=1 actual own-arm veto in BOTH reserved full sources with equal three repeats/unhooked references/zero cap frames. Otherwise false; no-exposure discovery selection remains null. This confirms mechanism exposure only, never accuracy/physical identity/quality or release acceptance.",
+    "forbidden": "No GT/labels/evaluator/FP/FN/IDSW/Identity/HOTA or accuracy ranking. No new parameters, windows, frame sampling, source substitution or defaults. Existing known GT outcomes not input features; no newly loaded scores.",
+    "independence": "Reserved KITTI IDs unseen to this project and separate dataset/source-family from prior MOT discovery. Shared pretrained model/runtime, non-random source group and two vehicle sequences do not establish independent sites/participants or statistical power. Current KITTI0000\u20130003 are already seen and excluded prospectively; prior negative record retained."
+  },
+  "execution": {
+    "inputs": "Phase-local strict schema accepts only full source video/cache paths and hashes; no GT/evaluator/score keys at any level. Per-source input integrity failure remains in ledger. All original source frames, unchanged cache limits, continuous tracker/observation ownership across shards.",
+    "history": "Fresh tracker/control/probe per source/arm/repeat; independent per-arm accepted observation histories, no cross-ID joins or transferred reference history. Source processes isolated; OpenCV one thread/seed0; rotated arm order. Additional unhooked references. No throughput claim.",
+    "source_timing": "MOT original compressed previews retain original source FPS. KITTI originals lossless FFV1 BGR/pixel-verified10Hz. Buffer30 unchanged: nominal1\u20131.2s on MOT versus3s on KITTI; no FPS normalisation or tuning.",
+    "weak_continuation": "Original weak inputs, active weak continuation, uncontested recovery, upstream activation/high/buffer/confirmation, same causal rule and app/worker defaults unchanged."
+  },
+  "source_terms": [
+    {
+      "dataset": "MOT17",
+      "page": "https://motchallenge.net/data/MOT17/",
+      "license": "CC BY-NC-SA 3.0",
+      "attribution": "MOTChallenge / Milan, Leal-Taixe, Reid, Roth, Schindler; MOT16, arXiv:1603.00831",
+      "retrieved_page_sha256": "fb34867c22c36630c063ea7a87344d5e1e8c2116890a8dd43ccc7c972030cdb8"
+    },
+    {
+      "dataset": "MOT20",
+      "page": "https://motchallenge.net/data/MOT20/",
+      "license": "CC BY-NC-SA 3.0",
+      "attribution": "MOTChallenge / Dendorfer et al.; MOT20, arXiv:2003.09003",
+      "retrieved_page_sha256": "d096d5fad93fcfe3c2c8e796e28488bbc8fe01d3d581272c2e00b7b58bf20576"
+    },
+    {
+      "dataset": "KITTI",
+      "page": "https://www.cvlibs.net/datasets/kitti/",
+      "license": "CC BY-NC-SA 3.0",
+      "attribution": "Geiger, Lenz, Urtasun; Are we ready for Autonomous Driving? CVPR2012",
+      "retrieved_page_sha256": "828a0add3e07f8ae9156ec73bde2ebaa4db0a637ad36e000cf01670b717bcd2a"
+    }
+  ],
+  "public_scope": "Program/synthetic contracts, source hashes, all ordered scene counts/reasons/selections and aggregate numeric figure only. Images, labels, matrices, frame locations/IDs, raw predictions/traces and paths remain ignored local artifacts. Local noncommercial research; no media redistribution, leaderboard submission or dataset relicensing."
+}

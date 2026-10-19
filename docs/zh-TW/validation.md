@@ -1,6 +1,10 @@
 # 驗證紀錄
 [English](../en/validation.md)・[首頁](../../README.zh-TW.md)
 
+## 同一規則的 GT-free 曝光發現與保留確認 — 2026-10-19
+
+[完整規則／清單／決定](tracking-past-exposure.md) · [凍結](../validation/v0.3-past-exposure-protocol.json) · [發現](../validation/v0.3-past-exposure-discovery.json) · [確認](../validation/v0.3-past-exposure-confirmation.json)。既有16段MOT全列發現、17,984格，過去／保護／同時符合實際veto40／8／2、曝光11／6／2段，依原順序選09／10／MOT20-06。完整發現與選取先封存，才在未見KITTI0004／0005做偵測／追蹤（611原格逐像素核對）；兩段各控制均零觸發，沒有控制獨立重現曝光。18段／216次因子對照加18次未掛參考都完成，三次canonical／完整trace／計數一致，零值／失敗規則保留，本輪無失敗。不讀GT／分數、不調參，弱延續／預設不變，原診斷留本機。應用408通過／33選配略過、固定相關契約98通過。下一步先診斷固定規則適用曝光落差，不調門檻；新來源搜尋須另凍結發現／未見確認，品質／傷害仍待驗證。
+
 ## 決策前觀測支援／更新置換保護控制 — 2026-10-19
 
 [規則、全清單與決定](tracking-past-support.md) · [原凍結協定](../validation/v0.3-past-support-protocol.json) · [彙總](../validation/v0.3-past-support.json) · [報表修補附註](../validation/v0.3-past-support-report-amendment.json)。新授權 KITTI 0000–0003，全部978格原圖逐像素核對；四組因子對照×三次重複與四次未掛控制參考一致，全部預測先封存才讀GT。各景／各組均零活躍替代、零veto，canonical預測及官方分數不變：305筆可評分行人GT，FN174／FP169／IDSW0／Frag1；0003可評分行人GT零。逐景傷害無新增FN／IDSW，但零有效曝光使所有控制未通過品質門檻，不是可靠性驗收。空階段／空檔報表修補於讀GT後公開附註，直接使用原封存預測，不重跑追蹤、不調參或升預設。應用401通過／29選配略過，固定相關契約87通過。下一步另凍結同規則不看GT的曝光選取與未見保留確認，原始資料留本機。

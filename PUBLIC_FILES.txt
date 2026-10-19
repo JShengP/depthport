@@ -334,3 +334,19 @@ docs/assets/tracking-v03-past-support.png
 tests/test_tracking_past_support_reporting.py
 docs/validation/v0.3-past-support-report-amendment.json
 docs/validation/v0.3-past-support-report-fix.patch
+
+# Frozen same-rule GT-free discovery and untouched reserved confirmation
+depthport/tracking_past_exposure.py
+tools/select_tracking_past_exposure.py
+tools/plot_tracking_past_exposure.py
+tests/test_tracking_past_exposure.py
+docs/en/tracking-past-exposure.md
+docs/zh-TW/tracking-past-exposure.md
+docs/validation/v0.3-past-exposure-protocol.json
+docs/validation/v0.3-past-exposure-discovery-inputs.json
+docs/validation/v0.3-past-exposure-confirmation-inputs.json
+docs/validation/v0.3-past-exposure-confirmation-seal.json
+docs/validation/v0.3-past-exposure-prepared-sources.json
+docs/validation/v0.3-past-exposure-discovery.json
+docs/validation/v0.3-past-exposure-confirmation.json
+docs/assets/tracking-v03-past-exposure.png

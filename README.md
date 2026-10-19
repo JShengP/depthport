@@ -174,6 +174,8 @@ Completed studies cover [2,700 frames / 27 runs](docs/en/tracking-expanded-accep
 
 [Past-only support/protection controls on new KITTI sources](docs/en/tracking-past-support.md): 978 original frames, four arms × three equal repeats. Zero active alternatives/vetoes; unchanged scores pass harm checks but fail effective-exposure/quality gates. Next freeze GT-free exposure selection plus untouched reserved confirmation; no tuning or default promotion.
 
+[Same-rule GT-free exposure study](docs/en/tracking-past-exposure.md): all 16 seen MOT discovery sources give past/protection/joint vetoes 40/8/2, selecting 09/10/MOT20-06 by order. Complete discovery seals before inference/tracking on untouched KITTI 0004/0005; both reserved sources have zero triggers. Independent exposure remains unverified; no GT scoring, tuning or default promotion, all zeros retained.
+
 These results apply to the named public sequences, fixed caches and recorded versions, not newer detector profiles or other scenes. Only aggregates are distributed for these studies, without raw frames, GT, per-frame tracks or user bookmarks.
 
 </details>
