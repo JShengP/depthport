@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Made this clear-history target visit **Undo clear / Redo clear target frame numbers** clickable to pause and replay the exact saved snapshot, preserving drafts/settings/all clear history and guarding missing/busy/stale/failed targets; updated bilingual help.
+- 這回目標跳轉返回位置的「**復原清除／重做清除目標影格編號**」可點擊，暫停並跳到精確快照，保留草稿、設定與全部清除歷史，防護無目標／操作中／過期／失敗狀態，更新雙語說明。
+
 - Added independent live target frame summaries beside this clear-history target visit **Undo clear / Redo clear**, preserving frame/drafts/playback/all history and showing unavailable states; updated bilingual help.
 - 在這回目標跳轉返回位置的「**復原清除／重做清除**」旁新增各自的目標影格即時摘要，保留影格、草稿、播放與全部既有歷史，標示不可操作狀態，更新雙語說明。
 
