@@ -4752,6 +4752,7 @@
     "application_tests": "318 passed, 8 optional skipped; offline application environment",
     "public_manifest_and_links": "PASS",
     "source_archive": "PASS, built locally only; not a release upload",
-    "static_demo_build": "PASS, synthetic only; not deployed"
+    "static_demo_build": "PASS, synthetic only; not deployed",
+    "base_contracts_without_optional_scipy": "20 passed, 2 opt-in skipped with scipy imports explicitly blocked"
   }
 }

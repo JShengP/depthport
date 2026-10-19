@@ -35,8 +35,15 @@ def test_error_pairing_uses_locations_not_cross_run_ids_and_keeps_regressions():
         'IDSW': {'added': 1, 'removed': 1, 'shared': 0, 'net_change': 0}}
 
 
-def test_error_locations_reconcile_fn_fp_switches_and_original_detection_index():
+def test_error_locations_reconcile_fn_fp_switches_and_original_detection_index(monkeypatch):
     import numpy as np
+    from depthport import tracking_diagnostics
+    from tests.test_tracking_diagnostics import assignment
+    # Tiny synthetic matrices use the existing exhaustive test solver. SciPy is
+    # optional for real benchmarks and is deliberately absent from base CI.
+    original_trace = tracking_diagnostics.clear_trace
+    monkeypatch.setattr(tracking_diagnostics, 'clear_trace',
+                        lambda data: original_trace(data, assign=assignment))
     data = {'gt_ids': [np.array([0]), np.array([0, 1])],
             'tracker_ids': [np.array([2, 3]), np.array([9])],
             'similarity_scores': [np.array([[1., 0.]]), np.array([[1.], [0.]])],
