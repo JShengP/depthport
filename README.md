@@ -17,7 +17,13 @@ Previous release: [v0.2 Alpha — Spatial Analysis](https://github.com/JShengP/d
 
 The download contains public source only; Python dependencies and pretrained model weights must be installed separately.
 
+main also contains post-Alpha dependency/documentation updates. Published packages stay fixed at their version tags and release checksums.
+
 ## Version guide / 版本導覽
+
+![v0.1, v0.2 and v0.3 capabilities using generated schematic data](docs/assets/versions-overview.svg)
+
+*Illustrative workflows, not UI screenshots, inference results or benchmark evidence. Version READMEs below describe exact contents, architecture and validation boundaries.*
 
 Each generation retains the previous foundation. Read the version-specific README for its changes, architecture, contents and validation limits:
 

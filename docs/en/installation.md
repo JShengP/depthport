@@ -37,9 +37,11 @@ Then run `INSTALL_ALL_WINDOWS.bat`, or `bash INSTALL_ALL_UBUNTU.sh`. After setup
 
 Core packages live in `requirements-base.txt`; YOLO in `requirements.txt`; V2 in `requirements-v2.txt`; DA3 in `requirements-da3.txt`. `install.py` resolves the combined requirements before installing the pinned DA3 source separately.
 
-The reference profile retains NumPy 1.26.4 / OpenCV 4.11.0.86, Ultralytics 8.4.115, Transformers 4.57.6 and the DA3 `3d835ec` source revision. These are reference choices, **not a fully locked dependency graph or a clean-install success claim**. Model revisions may be pinned through `DA2_HF_REVISION` / `DA3_HF_REVISION`; otherwise the upstream default can move. Record exact installed versions and weight hashes before benchmarking.
+Current requirements retain NumPy 1.26.4 / OpenCV 4.11.0.86, require Ultralytics >=8.4.176, pin Transformers 4.57.6 and install the DA3 `3d835ec` source revision. These are reference choices, **not a fully locked dependency graph or a clean-install success claim**. Model revisions may be pinned through `DA2_HF_REVISION` / `DA3_HF_REVISION`; otherwise the upstream default can move. Record exact installed versions and weight hashes before benchmarking.
 
 DA3 is installed with `--no-deps` plus an explicit runtime list. Optional `xformers`, Gradio, GS tooling and development hooks are not installed. Upstream package metadata can consequently make `pip check` complain about omitted optional packages. Do not blindly install an xformers wheel that replaces a working torch. All other dependency conflicts must be investigated; this is an alpha recipe, not a guarantee.
+
+The current NumPy 1 geometry profile uses SciPy `>=1.17.1,<1.18`, e3nn `>=0.5.9,<0.6`, Trimesh `>=4.12.2,<5` and plyfile `>=1.1.3,<1.1.4`. SciPy 1.18.x and plyfile 1.1.4 require NumPy 2 and are deferred for this application profile. BoT-SORT keeps its separate NumPy 2 environment; do not combine its requirements with the depth environment. Use Python 3.11 or 3.12 for the full checked profile. Historical tracking caches used Ultralytics 8.4.115; they are not performance evidence for newer versions. See the [dependency validation record](../validation/v0.3-dependency-followup.json).
 
 ## Partial installations
 

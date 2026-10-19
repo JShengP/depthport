@@ -1,0 +1,195 @@
+{
+  "format": "depthport.dependency-followup.v1",
+  "date": "2026-10-19",
+  "status": "post-Alpha main updates",
+  "published_release_unchanged": "v0.3.0-alpha.1",
+  "authenticated_actor": "JShengP",
+  "matrix": {
+    "os": [
+      "ubuntu-latest",
+      "windows-latest"
+    ],
+    "python": [
+      "3.11",
+      "3.12"
+    ],
+    "model_scope": "explicit CPU dependency installation and actual four-model API imports; no pretrained weights or inference"
+  },
+  "pull_requests": [
+    {
+      "number": 10,
+      "head": "ba3ee3acbc8bfccf0802f3965df9e490fd00b60b",
+      "merge": "c9deebfb16735804a2ce59e50fc00f63ea5f84b1",
+      "changes": [
+        "configure-pages v6.0.0 pinned to 45bfe0192ca1faeb007ade9deae92b16b8254a0d",
+        "PR build executes existing public Pages metadata lookup with pages:read and enablement:false",
+        "manual default-branch-only deployment guard retained"
+      ],
+      "ci": {
+        "application": {
+          "run": 39208121377,
+          "passed": 4
+        },
+        "pages_pr": {
+          "run": 39208121341,
+          "build": "success",
+          "deploy": "skipped"
+        },
+        "pages_main": {
+          "run": 39208482150,
+          "build": "success",
+          "deploy": "success"
+        },
+        "application_main": {
+          "run": 39208404942,
+          "passed": 4
+        }
+      },
+      "local": [
+        "YAML and permissions/deployment guard checks",
+        "public-source/link checks",
+        "synthetic static-site build",
+        "published site HTTP 200 with data-demo-only marker"
+      ]
+    },
+    {
+      "number": 13,
+      "head": "9445d4db90466eea6c891e653881737a06f2fb94",
+      "merge": "b19d58291bcd59c90b708d32fbf2155913935463",
+      "changes": [
+        "FastAPI minimum >=0.143.2,<1"
+      ],
+      "ci": {
+        "application": {
+          "run": 39208711176,
+          "passed": 4
+        },
+        "models": {
+          "run": 39208711165,
+          "passed": 4
+        }
+      },
+      "local": {
+        "minimum_fastapi": "0.143.2",
+        "public_session_tests": 106,
+        "app_spatial_tests": 39,
+        "passed": 145
+      },
+      "observed_ubuntu_python311_ci": {
+        "fastapi": "0.146.0",
+        "starlette": "1.9.0",
+        "explicit_runtime_pip_check": "pass",
+        "python_tests": 306,
+        "opt_in_skipped": 6
+      }
+    },
+    {
+      "number": 17,
+      "head": "2e2f192dd551e3a196ab8c1037c6a1c4851a7fb6",
+      "merge": "51054682e9eaa826d6e8b4167f32afd780a2cab3",
+      "changes": [
+        "Hugging Face Hub >=0.36.2,<1 in both V2 and DA3 profiles"
+      ],
+      "ci": {
+        "application": {
+          "run": 39209311603,
+          "passed": 4
+        },
+        "models": {
+          "run": 39209311646,
+          "passed": 4
+        }
+      },
+      "local": {
+        "adapter_tests_passed": 42,
+        "hub_version": "0.36.2",
+        "actual_api_imports": [
+          "Hub download helpers",
+          "Transformers depth APIs",
+          "DA3 API"
+        ],
+        "inference": false
+      }
+    },
+    {
+      "number": 18,
+      "head": "199f8155e97e6386a4b532ba100dc00b29268536",
+      "merge": "1ac83e5a0c92171ec03c9f82d47323cb7bfaf38b",
+      "original_failure": {
+        "run": 39196635890,
+        "failed_jobs": 4,
+        "stage": "Install explicit model and test requirements",
+        "type": "NumPy dependency resolution",
+        "reproduced_minimal_pair": [
+          "numpy==1.26.4",
+          "plyfile==1.1.4"
+        ],
+        "minimal_result": "ResolutionImpossible"
+      },
+      "fixed_profile": {
+        "numpy": "1.26.4",
+        "scipy": ">=1.17.1,<1.18",
+        "e3nn": ">=0.5.9,<0.6",
+        "trimesh": ">=4.12.2,<5",
+        "plyfile": ">=1.1.3,<1.1.4"
+      },
+      "deferred": [
+        "SciPy 1.18.x requires NumPy >=2",
+        "plyfile 1.1.4 requires NumPy >=2"
+      ],
+      "ci": {
+        "application": {
+          "run": 39210210049,
+          "passed": 4
+        },
+        "models": {
+          "run": 39210210046,
+          "passed": 4
+        }
+      },
+      "local": {
+        "adapter_geometry_tests_passed": 34,
+        "exact_geometry_versions": {
+          "scipy": "1.17.1",
+          "e3nn": "0.5.9",
+          "trimesh": "4.12.2",
+          "plyfile": "1.1.3"
+        },
+        "checks": [
+          "compatible resolver dry-run",
+          "SciPy linear solve",
+          "e3nn representation",
+          "binary Trimesh export and PLY readback"
+        ],
+        "inference": false
+      }
+    }
+  ],
+  "tracking_worker": {
+    "numpy": "2.2.6",
+    "requirements_unchanged": true,
+    "isolated_from_application": true
+  },
+  "visuals": {
+    "builder": "tools/build_version_visuals.py",
+    "assets": [
+      "docs/assets/versions-overview.svg",
+      "docs/assets/v0.1-workflow.svg",
+      "docs/assets/v0.2-workflow.svg",
+      "docs/assets/v0.3-workflow.svg"
+    ],
+    "source": "original generated mathematical points, colour swatches and generic object rectangles",
+    "not_screenshots": true,
+    "model_output": false,
+    "private_input_read": false
+  },
+  "remaining_acceptance": [
+    "pretrained inference on updated dependency profile",
+    "physical RTSP and endurance",
+    "Windows real isolated-worker integration",
+    "NVIDIA hardware WebGL",
+    "calibrated metric accuracy",
+    "long-occlusion and independent tracking generalisation"
+  ],
+  "public_payload": "Reviewed source/configuration/docs, curated aggregate evidence and original SVG schematics only; no local sessions, bookmarks/notes, private media, credentials, raw sequence/GT/traces, weights or runtime logs."
+}

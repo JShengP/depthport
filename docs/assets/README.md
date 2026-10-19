@@ -19,3 +19,16 @@
 `tracking-v03-parameters.png` plots only the numeric [09/10 parameter study](../validation/v0.3-mot17-parameters.json): Recall/IDF1 and all-subject endpoint-state counts for five fixed profiles per backend. No source image or per-frame GT/prediction is embedded. [Terms and interpretation](../en/tracking-parameter-acceptance.md).
 
 `tracking-v03-errors.png` is an original aggregate-only Matplotlib plot of [activation-error diagnosis](../validation/v0.3-tracking-error-diagnosis.json): added/removed IDSW, FP geometry, switch contexts and reference-output status. It contains no input images, exact event locations, object IDs or per-frame traces. Contexts are observational, not causal labels; [method and limits](../en/tracking-error-diagnosis.md).
+
+
+## Generated version schematics — 2026-10-19
+
+`versions-overview.svg`, `v0.1-workflow.svg`, `v0.2-workflow.svg` and `v0.3-workflow.svg` are original code-generated SVG illustrations of the documented feature generations. They contain mathematical point patterns, colour swatches and generic object rectangles/IDs only. They are not UI screenshots, camera captures, model outputs, tracking traces or accuracy evidence; no source media, session, bookmark or personal data was read. Existing screenshots/plots above retain their separate provenance.
+
+Rebuild using Python's standard library:
+
+```bash
+python tools/build_version_visuals.py
+```
+
+程式原生 SVG 僅使用數學點、色塊與通用框／ID，標示各版功能與流程；不含私人影像、Session 或備註，也不表示推論／追蹤驗收通過。來源產生器採專案的 AGPL-3.0-only 授權。

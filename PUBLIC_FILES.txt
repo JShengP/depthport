@@ -202,3 +202,11 @@ docs/releases/0.3.0-alpha.1.md
 docs/versions/v0.1/README.md
 docs/versions/v0.2/README.md
 docs/versions/v0.3/README.md
+
+# Original generated version diagrams and reproducible standard-library builder
+tools/build_version_visuals.py
+docs/assets/versions-overview.svg
+docs/assets/v0.1-workflow.svg
+docs/assets/v0.2-workflow.svg
+docs/assets/v0.3-workflow.svg
+docs/validation/v0.3-dependency-followup.json

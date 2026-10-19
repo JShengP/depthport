@@ -1,5 +1,14 @@
 # Changelog / 版本紀錄
 
+## Unreleased — main after v0.3.0-alpha.1 / 發布後的 main 更新
+
+- Merge reviewed PRs #10/#13/#17/#18 sequentially after exact-head validation: configure-pages v6 with real metadata/deployment checks; FastAPI minimum 0.143.2; shared Hub minimum 0.36.2; NumPy 1-compatible DA3 geometry bounds.
+- Keep SciPy on `>=1.17.1,<1.18` and plyfile on `>=1.1.3,<1.1.4`; NumPy 2-only updates remain deferred. e3nn/Trimesh compatible floors are 0.5.9/4.12.2. No inference/accuracy claim or tracking-default change.
+- Add a version comparison SVG, per-version generated workflow illustrations, provenance and a standard-library builder. These are schematics, not screenshots or model output. Published tags and release assets remain unchanged.
+- 依序驗證並合併 Pages／FastAPI／Hub／幾何依賴更新，保留 NumPy 1 深度應用及獨立 NumPy 2 worker；新增各版功能圖與來源說明。已發布 Alpha Tag／下載包不變，待驗證項目與原預設保留。
+
+[Curated validation record / 彙總驗證紀錄](docs/validation/v0.3-dependency-followup.json)
+
 ## 0.3.0-alpha.1 — 2026-10-19 (experimental Alpha pre-release)
 
 - Integrated PR #7 into main: opt-in manual local Sessions, hash-checked same-frame replay and explicit offline semantic tracking; v0.2 Spatial Analysis remains available.

@@ -1,6 +1,12 @@
 # 驗證紀錄
 [English](../en/validation.md)・[首頁](../../README.zh-TW.md)
 
+## Alpha 發布後的依賴與視覺導覽 — 2026-10-19
+
+[依賴彙總紀錄](../validation/v0.3-dependency-followup.json)記錄依序處理 #10／#13／#17／#18、Pages 實際設定／部署、最低版本本機檢查與精確提交 CI。修正後 NumPy 1 配方暫緩 SciPy 1.18.x／plyfile 1.1.4，worker 維持隔離；真 API 安裝／匯入不執行權重推論，也不代表追蹤／實機／精度驗收。
+
+新增的[版本比較圖](../assets/versions-overview.svg)與各版 SVG 均為程式生成的功能示意，不是截圖或模型結果，來源另有說明。已發布 Alpha Tag／附件不變，main 包含後續文件與依賴更新。
+
 ## v0.3 Alpha 整合驗證 — 2026-10-19
 
 v0.3 維持 **Alpha 預發行版／實驗性開發預覽**。[本版範圍與未驗證項目](../releases/0.3.0-alpha.1.md) · [路線圖](../../ROADMAP.md)

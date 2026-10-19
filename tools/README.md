@@ -30,3 +30,8 @@ The tool uses Playwright's installed Chromium unless `CHROMIUM_PATH` names a loc
 `tools/validate_mot_tracking.py --parameter-sweep` runs five fixed activation/high-confidence-split/lost-buffer profiles for both direct backends on a new sequence group, verifies effective thresholds/time budgets and reports paired scenario gains/losses. [Method, protocol and results](../docs/en/tracking-parameter-acceptance.md). This is separate from worker configuration; no app default is changed.
 
 `tools/diagnose_tracking_errors.py` reanalyses saved default/activation-only results with exact official CLEAR reconciliation, pairs FP by immutable cache detection and writes raw cases/ID maps only to the local work directory. It publishes aggregate context counts, not causal labels. [Method, privacy boundary and decisions](../docs/en/tracking-error-diagnosis.md).
+
+
+## Version workflow schematics
+
+`python tools/build_version_visuals.py` rebuilds the four SVG illustrations in `docs/assets/` with the standard library. It reads no camera, model, Session or bookmark data. See [asset provenance and limits](../docs/assets/README.md).

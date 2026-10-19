@@ -7,6 +7,16 @@
 This is a maintained guide to the v0.1 snapshot, not a rewrite of its tag. It establishes the viewer foundation later retained in v0.2/v0.3.
 本頁整理 v0.1 快照，未改寫既有 Tag；這是 v0.2／v0.3 延續的檢視器基礎。
 
+
+## Visual overview / 視覺導覽
+
+![v0.1 capabilities and workflow, generated schematic data](../../assets/v0.1-workflow.svg)
+
+*程式生成的功能示意圖；不是實際 UI 截圖、模型輸出或追蹤品質證據。 / Generated schematic data, not an application screenshot, model output or tracking benchmark.*
+
+The maintained guide and illustrations can be newer than the tagged snapshot; the original release/source links above stay fixed.
+本導覽與插圖可隨文件維護更新，對應舊版本的原始碼與原版 README 仍以各自 Tag 為準。
+
 ## Contents / 功能內容
 
 - RGB image and RTSP inputs; latest-frame capture without a growing application queue.

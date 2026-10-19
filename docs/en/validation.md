@@ -1,6 +1,12 @@
 # Validation record
 [繁體中文](../zh-TW/validation.md) · [Home](../../README.md)
 
+## Post-Alpha dependency and visual follow-up — 2026-10-19
+
+[Curated dependency record](../validation/v0.3-dependency-followup.json) records sequential PR #10/#13/#17/#18 validation, actual Pages metadata/deployment, minimum-version local checks and exact-head CI links. The repaired NumPy 1 profile defers SciPy 1.18.x and plyfile 1.1.4; the worker remains isolated. Checks install/import actual APIs without pretrained inference and do not close tracking/hardware/accuracy acceptance.
+
+The new [version overview](../assets/versions-overview.svg) and per-version workflow SVGs are generated schematics with documented provenance, not screenshots or model results. Published Alpha tags/assets remain unchanged; main includes these later documentation/dependency updates.
+
 ## v0.3 Alpha integration — 2026-10-19
 
 v0.3 is an **experimental development preview / Alpha pre-release**. [Release scope and remaining gates](../releases/0.3.0-alpha.1.md) · [Roadmap](../../ROADMAP.md)

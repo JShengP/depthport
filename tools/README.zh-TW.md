@@ -30,3 +30,8 @@ python tools/browser_offline_smoke.py
 `tools/validate_mot_tracking.py --parameter-sweep` 對另一組序列執行兩個直接後端的五組啟用／高信心分流／保留參數，核對實際門檻及時間預算，並輸出相同事件的改善／退步。[方式、計畫與結果](../docs/zh-TW/tracking-parameter-acceptance.md)；與 worker 設定分開，未變更應用程式預設值。
 
 `tools/diagnose_tracking_errors.py` 重分析預設／降低啟用的保存結果，精確核對官方 CLEAR、依固定偵測配對 FP，原始案例／ID 對照只寫入本機工作目錄，彙總為情境訊號而非因果判定。[方式、公開範圍與改善決定](../docs/zh-TW/tracking-error-diagnosis.md)。
+
+
+## 版本功能示意圖
+
+`python tools/build_version_visuals.py` 以標準函式庫重建 `docs/assets/` 中四份 SVG；只產生合成圖形，不讀相機、模型、Session 或書籤。圖像來源與界線見[資產說明](../docs/assets/README.md)。

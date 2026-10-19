@@ -4,6 +4,16 @@
 
 **Historical Alpha / 歷史 Alpha:** [v0.2.0-alpha.1 Release](https://github.com/JShengP/depthport/releases/tag/v0.2.0-alpha.1) · [exact source / 對應程式](https://github.com/JShengP/depthport/tree/v0.2.0-alpha.1) · [original README](https://github.com/JShengP/depthport/blob/v0.2.0-alpha.1/README.md) · [原版繁中 README](https://github.com/JShengP/depthport/blob/v0.2.0-alpha.1/README.zh-TW.md)
 
+
+## Visual overview / 視覺導覽
+
+![v0.2 capabilities and workflow, generated schematic data](../../assets/v0.2-workflow.svg)
+
+*程式生成的功能示意圖；不是實際 UI 截圖、模型輸出或追蹤品質證據。 / Generated schematic data, not an application screenshot, model output or tracking benchmark.*
+
+The maintained guide and illustrations can be newer than the tagged snapshot; the original release/source links above stay fixed.
+本導覽與插圖可隨文件維護更新，對應舊版本的原始碼與原版 README 仍以各自 Tag 為準。
+
 ## Changes from v0.1 / 相對 v0.1 新增
 
 - `/spatial`: pixel raw-depth/camera-space XYZ inspection and sequential same-image four-engine comparison with native-unit distributions.

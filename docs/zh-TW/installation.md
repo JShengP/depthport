@@ -37,9 +37,11 @@ python3.11 -m venv .venv-depthport
 
 共用依賴在 `requirements-base.txt`，YOLO 在 `requirements.txt`，V2 在 `requirements-v2.txt`，DA3 在 `requirements-da3.txt`。`install.py` 先統一解析套件相依，再單獨安裝固定 DA3 來源。
 
-參考配方保留 NumPy 1.26.4／OpenCV 4.11.0.86、Ultralytics 8.4.115、Transformers 4.57.6 與 DA3 `3d835ec` 來源。這些是參考選擇，**不是完整依賴鎖檔，也不是乾淨安裝已成功的證明**。可透過 `DA2_HF_REVISION`／`DA3_HF_REVISION` 固定權重 revision；未固定時上游預設可能改變。效能測試前應記錄套件版本與權重雜湊。
+目前配方保留 NumPy 1.26.4／OpenCV 4.11.0.86，要求 Ultralytics >=8.4.176、固定 Transformers 4.57.6 與 DA3 `3d835ec` 來源。這些是參考選擇，**不是完整依賴鎖檔，也不是乾淨安裝已成功的證明**。可透過 `DA2_HF_REVISION`／`DA3_HF_REVISION` 固定權重 revision；未固定時上游預設可能改變。效能測試前應記錄套件版本與權重雜湊。
 
 DA3 以 `--no-deps` 加上明列 runtime 安裝，不裝選配 `xformers`、Gradio、GS 工具或開發 hooks；因此上游 metadata 可能使 `pip check` 回報缺少刻意省略的選配套件。不要為消除提示直接安裝可能替換 torch 的 xformers wheel。其他相依衝突仍需排查；這是 Alpha 配方，不是安裝保證。
+
+目前 NumPy 1 幾何配方為 SciPy `>=1.17.1,<1.18`、e3nn `>=0.5.9,<0.6`、Trimesh `>=4.12.2,<5`、plyfile `>=1.1.3,<1.1.4`。SciPy 1.18.x／plyfile 1.1.4 要求 NumPy 2，此應用配方暫緩；BoT-SORT 保留獨立 NumPy 2 環境，不可混裝到深度環境。完整已檢查配方使用 Python 3.11 或 3.12。歷史追蹤快取使用 Ultralytics 8.4.115，不能當新版效能證據；詳見[依賴驗證紀錄](../validation/v0.3-dependency-followup.json)。
 
 ## 部分安裝
 
