@@ -1,5 +1,7 @@
 # Read-only KITTI upstream lifecycle diagnosis — 2026-10-19
 
+Follow-up: [Frozen state-estimation and observation-health audit](tracking-state-observation-health.md) completes the proposed first-anomaly/observation-gap analysis without new tracking. The six invalid snapshots here are a subset of18 full-history invalid prediction rows across four hypotheses; this page retains its original scope.
+
 [繁體中文](../zh-TW/tracking-upstream-lifecycle.md) · [ROADMAP](../../ROADMAP.md) · [Previous exposure gap](tracking-exposure-gap.md) · [Frozen definitions](../validation/v0.3-upstream-lifecycle-protocol.json) · [Full aggregate](../validation/v0.3-upstream-lifecycle.json)
 
 **The two upstream gaps are different.** KITTI-0004 has sparse weak-input/hypothesis co-occurrence, zero overlap on every missed weak-input row, and actual lifecycle removals. KITTI-0005 never receives a high-stage birth seed. Neither source reaches the existing competition controls. No threshold, buffer, control, default, detector or input changed; weak continuation remains intact. This is descriptive mechanism diagnosis, not identity accuracy, independent exposure confirmation or harm acceptance.

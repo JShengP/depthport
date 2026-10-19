@@ -1,0 +1,17 @@
+{
+  "format": "depthport.health-publication-projection.v1",
+  "recorded_at_utc": "2026-10-19T16:53:40.033563+00:00",
+  "report_date_local": "2026-10-20",
+  "timezone": "Asia/Taipei",
+  "protocol_sha256": "4af6002d8f9624c73a7e3623469df7e912ddfed705ccdec35963bff5a09179f3",
+  "original_complete_aggregate_sha256": "68ddc13cca54ed6df9cfacc1f1f64fcc853f9ec9c03713a2ddaba5e6e85a21a0",
+  "public_aggregate_sha256": "0c394d70a6a19869bb1e5d533743f7465af50e8d45ce4781467fa633aee6f967",
+  "projection_sha256": {
+    "tools/project_tracking_health.py": "3eaf7a59d9fd3af831929a0d03d35c42565e5eb095b9e4f1ed007a2ef3ccc01b",
+    "tests/test_tracking_health_publication.py": "45d4d897f33976feb47d6884a5a932f9489fbcb1ab8d6d81ff869d5c51a75ca2"
+  },
+  "timing": "Publication-only minimization specified after health results, before any public upload. Original frozen protocol/analysis and complete local aggregate preserved byte-for-byte; no analysis repair, rule/threshold change or source selection.",
+  "reason": "An exact left/right censor-boundary distance can reveal an event location from the source boundary. The frozen requirement to keep frame positions local takes priority over publishing those distances.",
+  "projection": "Sum censored neighbour buckets into censored counts; sum left/right/both empty-run boundary lengths into separate boundary_length_local counts. Keep all sources/failures/zero groups, event denominators, all other fixed counts/histograms and observed-neighbour distances unchanged. Original exact boundary distances and cases remain local.",
+  "checks": "Two synthetic publication contracts pass; per-context event totals and per-stream run totals unchanged. This is not a new health extraction, tuning or independent confirmation."
+}

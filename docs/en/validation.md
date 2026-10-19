@@ -1,6 +1,10 @@
 # Validation record
 [繁體中文](../zh-TW/validation.md) · [Home](../../README.md)
 
+## State-estimation and observation health — 2026-10-20
+
+[Full frozen audit and decision](tracking-state-observation-health.md) · [Definitions](../validation/v0.3-state-observation-health-protocol.json) · [Aggregate](../validation/v0.3-state-observation-health.json) · [Publication projection](../validation/v0.3-state-observation-health-publication.json). All611 original frames, no new inference/tracking/GT/scoring/tuning.0004 has4 first invalid predictions4/7/8/11 frames after valid accepted inputs/posteriors,18 invalid prediction rows overall, zero invalid accepted posteriors.52/77 terminal row frames lack any input;5 have high gate support without acceptance,0 weak gate support.0005 never initializes. All original reference JSON bytes/native seals,268 stages and prior counts reconcile; repeated audit/raw bytes identical. Exact censor-boundary distances remain local, all censor counts/zeros retained. Next separately freeze numerical shadow replay and high-stage one-to-one audit; no repair or acceptance claim, weak continuation/defaults unchanged.
+
 ## Read-only upstream prediction, birth and expiry — 2026-10-19
 
 [Method, results and limits](tracking-upstream-lifecycle.md) · [Freeze](../validation/v0.3-upstream-lifecycle-protocol.json) · [Aggregate](../validation/v0.3-upstream-lifecycle.json). Both KITTI sources /611 original frames, three isolated reference passes each; original canonical outputs identical, new complete native outputs/final states identical, two observed lifecycle files identical and268 original stages/geometry reconciled. 0004:10 births/7 confirmations,3 immature age1 removals/7 confirmed age11 expiries;70 missed rows split57 without weak input and13 with weak input, all13 zero predicted/last-accepted overlap,6 non-positive predicted boxes. 0005:46 weak-only inputs, no births, hypotheses or expiry. No GT/inference/tuning or control/default changes, weak continuation retained, raw geometry/state local. Next freeze estimator-health/observation-gap audit, not a repair or acceptance claim.

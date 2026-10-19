@@ -1,5 +1,7 @@
 # KITTI 上游生命週期只讀診斷 — 2026-10-19
 
+後續：[凍結狀態估計與觀測健康稽核](tracking-state-observation-health.md)已完成首次異常／觀測空窗分析，沒有新追蹤。本頁6個異常快照是4個假說全歷史18次異常預測列的子集合，本頁維持原範圍。
+
 [English](../en/tracking-upstream-lifecycle.md) · [ROADMAP](../../ROADMAP.md) · [前輪曝光落差](tracking-exposure-gap.md) · [凍結定義](../validation/v0.3-upstream-lifecycle-protocol.json) · [完整彙總](../validation/v0.3-upstream-lifecycle.json)
 
 **兩段上游落差不同。** KITTI-0004有弱輸入／假說共現稀少、漏格弱輸入列全零重疊及實際生命週期刪除；0005始終沒有高階段出生種子。兩者均未到現有競爭控制。門檻、buffer、控制、預設、偵測器與輸入均不改，弱偵測延續保留。這是機制描述，不是身分精度、獨立曝光確認或傷害驗收。

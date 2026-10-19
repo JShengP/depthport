@@ -373,3 +373,15 @@ docs/validation/v0.3-upstream-lifecycle-protocol.json
 docs/validation/v0.3-upstream-lifecycle.json
 docs/en/tracking-upstream-lifecycle.md
 docs/zh-TW/tracking-upstream-lifecycle.md
+
+# Frozen state-estimation / observation-health audit and publication projection
+depthport/tracking_health_audit.py
+tools/audit_tracking_health.py
+tools/project_tracking_health.py
+tests/test_tracking_health_audit.py
+tests/test_tracking_health_publication.py
+docs/validation/v0.3-state-observation-health-protocol.json
+docs/validation/v0.3-state-observation-health.json
+docs/validation/v0.3-state-observation-health-publication.json
+docs/en/tracking-state-observation-health.md
+docs/zh-TW/tracking-state-observation-health.md

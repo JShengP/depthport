@@ -1,6 +1,10 @@
 # 驗證紀錄
 [English](../en/validation.md)・[首頁](../../README.zh-TW.md)
 
+## 狀態估計與觀測健康 — 2026-10-20
+
+[完整凍結稽核／決定](tracking-state-observation-health.md) · [定義](../validation/v0.3-state-observation-health-protocol.json) · [彙總](../validation/v0.3-state-observation-health.json) · [公開投影](../validation/v0.3-state-observation-health-publication.json)。完整611原格，不重跑推論／追蹤、不讀GT／分數、不調參。0004有4個首次異常預測，距有效接受輸入／posterior4／7／8／11格，全母體18次異常預測列，異常接受posterior為0；終端52／77列格無輸入，5個高階段有gate支援未接受、弱gate支援0。0005無初始化。原參考JSON逐位元／原生雜湊、268階段及前輪計數核對，兩次稽核／原始檔一致。精確截尾邊界距離本機、截尾次數／零值皆保留；下一步分別凍結數值影子重播與高階段一對一指派稽核，不宣稱修復或驗收，弱延續／預設不變。
+
 ## 上游預測、出生與到期只讀診斷 — 2026-10-19
 
 [方法／結果／限制](tracking-upstream-lifecycle.md) · [凍結](../validation/v0.3-upstream-lifecycle-protocol.json) · [彙總](../validation/v0.3-upstream-lifecycle.json)。兩段KITTI／611原格，各三次隔離參考，原canonical輸出一致、新全部原生輸出／最終狀態一致、兩次生命週期檔一致，268原階段／幾何核對。0004：出生10／確認7，未成熟age1刪除3／已確認age11到期7；70漏格列中57無弱輸入、13有弱輸入，後13預測／最後接受框皆零重疊，6個非正預測框。0005：46筆全弱輸入，無出生、假說或到期。不讀GT、不推論、不調參或改控制／預設，弱延續保留、原幾何／state本機。下一步先凍結狀態估計健康／觀測空窗稽核，目前不是修復或驗收。
