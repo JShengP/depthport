@@ -1,0 +1,36 @@
+{
+  "format": "depthport.buffer-semantics-erratum.v1",
+  "checked_on": "2026-10-19",
+  "diagnostic_protocol_sha256": "8b6b4230454626c87cb4f8fa54dccaf75d7d8eabf9cc56d706ed248869f9b66d",
+  "original_protocols_preserved_sha256": {
+    "docs/validation/v0.3-past-support-protocol.json": "ff4a9720a0cf039e39255b49054dd68d5d3e8e092e970f4020fc1b5d6362c395",
+    "docs/validation/v0.3-past-exposure-protocol.json": "573b76a8019ce5bb069a6140d2070c26ca7c4071dace026dcef3ea8eba255082"
+  },
+  "upstream_budget_helper_sha256": "6c06e31f4183cb61cb1b4f6f8854fbf75744caf665c15f65a32d6c3bd6a62d3d",
+  "prior_text": "Earlier KITTI reports/frozen prose incorrectly described lost_track_buffer30 as30 native frames/3seconds, and MOT25Hz as1.2seconds.",
+  "actual": "Pinned native helper max(1,ceil(frame_rate/30*lost_track_buffer)); parameter30 gives configured maximum_frames_without_update10/25/30 at10/25/30Hz, nominal1second in all three. maximum_time_without_update=30/30=1. Snapshot/fixed-step ages remain native frame units; equality/lifecycle boundaries are not certified physical timeouts.",
+  "scope": "Documentation interpretation correction only. Original parameters, code, caches, traces, selections and their frozen hashes retained byte-for-byte. No tracking rerun, source substitution, duration fit or causal attribution to the buffer.",
+  "profiles": [
+    {
+      "source_fps": 10,
+      "lost_track_buffer_parameter": 30,
+      "configured_maximum_frames_without_update": 10,
+      "nominal_seconds": 1
+    },
+    {
+      "source_fps": 25,
+      "lost_track_buffer_parameter": 30,
+      "configured_maximum_frames_without_update": 25,
+      "nominal_seconds": 1
+    },
+    {
+      "source_fps": 30,
+      "lost_track_buffer_parameter": 30,
+      "configured_maximum_frames_without_update": 30,
+      "nominal_seconds": 1
+    }
+  ],
+  "tracking_or_configuration_changed": false,
+  "old_protocol_prose_is_superseded_only_for_this_interpretation": true,
+  "interpretation_limit": "Original frozen prose conflicts with the executed pinned implementation on retention units. Recorded runs follow the recorded FPS/parameter and native scaling, not the stated3second interpretation; they do not validate a native30-frame/3second policy at10Hz. No configuration/output was changed or retrofitted."
+}

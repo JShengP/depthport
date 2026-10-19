@@ -1,0 +1,15 @@
+{
+  "format": "depthport.exposure-gap-preflight.v1",
+  "recorded_at_utc": "2026-10-19T15:18:47.229715+00:00",
+  "before_any_funnel_extraction": true,
+  "tracking_or_gt_read": false,
+  "initial_protocol_sha256": "057cb4939f34f958d0cc56d68fc8e749606e8eddd23539b81cf8090ac7bc969a",
+  "initial_runner_sha256": "0578536af29dafb3d8778f851562850bf34b66581d2aaf1cc76442097c5d64a8",
+  "accepted_runner_sha256": "fc7372db449cabe1437cb1c8885736b20a2de715040398fcfdc69c783c05ac27",
+  "correction": "Source exposure schema names its counter joint; diagnostic names it joint_alternatives. Fix only the reconciliation lookup before the first trace traversal. Funnel definitions, cohort and controls unchanged. Initial protocol/seal/runner archived locally; accepted protocol freshly frozen, no result-based change.",
+  "reverse_change": {
+    "from": "'joint':'joint_alternatives'",
+    "to": "'joint_alternatives':'joint_alternatives'"
+  },
+  "accepted_protocol_sha256": "8b6b4230454626c87cb4f8fa54dccaf75d7d8eabf9cc56d706ed248869f9b66d"
+}

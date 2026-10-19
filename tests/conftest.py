@@ -16,3 +16,32 @@ os.environ['DEPTH_ENGINE']='yolo26'
 os.environ['DEPTHPORT_ALLOWED_HOSTS']='127.0.0.1,localhost,testserver'
 os.environ['DA3_CONF_PERCENTILE']='0'
 os.environ['DA3_EXCLUDE_SKY']='1'
+
+
+# The frozen exposure-gap contracts also run in the NumPy-only base CI profile.
+# Keep real pinned SciPy in opt-in research contracts; inject the existing small
+# exhaustive solver only for this file's synthetic base-profile matrices.
+import pytest
+
+
+@pytest.fixture(autouse=True)
+def exposure_gap_base_assignment(request, monkeypatch):
+    if request.node.path.name != 'test_tracking_exposure_gap.py' or os.getenv('RUN_TRACKERS_CONTRACTS') == '1':
+        return
+    import numpy as np
+    import depthport.tracking_exposure_gap as gap
+    from tests.test_tracking_diagnostics import assignment as minimum_cost
+    original_protection = gap.protect_updates
+
+    def maximum_pairs(similarity, gate):
+        if 0 in similarity.shape:
+            return []
+        rows, columns = minimum_cost(-similarity)
+        return [(int(r), int(c)) for r, c in zip(rows, columns)
+                if similarity[r, c] >= np.float32(gate)]
+
+    def protection(*args, **kwargs):
+        return original_protection(*args, **kwargs, assign=minimum_cost)
+
+    monkeypatch.setattr(gap, 'assignment', maximum_pairs)
+    monkeypatch.setattr(gap, 'protect_updates', protection)

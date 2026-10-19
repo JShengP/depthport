@@ -350,3 +350,16 @@ docs/validation/v0.3-past-exposure-prepared-sources.json
 docs/validation/v0.3-past-exposure-discovery.json
 docs/validation/v0.3-past-exposure-confirmation.json
 docs/assets/tracking-v03-past-exposure.png
+
+# Read-only frozen-history exposure-gap diagnosis and buffer-semantics erratum
+depthport/tracking_exposure_gap.py
+tools/diagnose_tracking_exposure_gap.py
+tools/plot_tracking_exposure_gap.py
+tests/test_tracking_exposure_gap.py
+docs/validation/v0.3-exposure-gap-protocol.json
+docs/validation/v0.3-exposure-gap-preflight.json
+docs/validation/v0.3-exposure-gap.json
+docs/validation/v0.3-buffer-semantics-erratum.json
+docs/en/tracking-exposure-gap.md
+docs/zh-TW/tracking-exposure-gap.md
+docs/assets/tracking-v03-exposure-gap.png

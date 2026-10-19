@@ -2,6 +2,8 @@
 
 [English](../en/tracking-past-exposure.md) · [ROADMAP](../../ROADMAP.md) · [前輪因果控制](tracking-past-support.md) · [Protocol](../validation/v0.3-past-exposure-protocol.json) · [Discovery](../validation/v0.3-past-exposure-discovery.json) · [Confirmation](../validation/v0.3-past-exposure-confirmation.json) · [Pre-inference seal](../validation/v0.3-past-exposure-confirmation-seal.json)
 
+後續：[只讀適用性診斷](tracking-exposure-gap.md)確認兩段保留來源均停在已接受漏格弱更新之前，沒有到達過去支援／保護測試，不新增門檻或預設；下文buffer文字勘誤，原凍結紀錄保留。
+
 **三個機制都在發現組實際觸發，但均未在獨立保留組重現曝光。** 完整16段發現組，過去支援／更新保護／同時符合分別 **40／8／2次veto**，依順序選出 **MOT17-09-DPM／MOT17-10-DPM／MOT20-06**；原先保留的兩段KITTI各控制都零觸發。所有排定來源完成、零值完整保留，沒有讀取本輪GT、分數或評分器。曝光不是身分效益或發布驗收。
 
 ![完整發現清單、兩段保留來源與各組實際veto](../assets/tracking-v03-past-exposure.png)
@@ -25,7 +27,7 @@
 
 兩段原PNG核對ZIP CRC／雜湊，以原10Hz FFV1 BGR回放；**611格全部與原圖逐像素相同**，不裁切、重採樣或有損編碼。[準備紀錄](../validation/v0.3-past-exposure-prepared-sources.json)保留圖片清單／影片雜湊、尺寸、格數，並由[推論前封存](../validation/v0.3-past-exposure-confirmation-seal.json)綁定。[發現輸入鎖](../validation/v0.3-past-exposure-discovery-inputs.json)及[確認輸入鎖](../validation/v0.3-past-exposure-confirmation-inputs.json)綁定每個來源／快取雜湊、完整格數、FPS、分段數及偵測／上限數。本輪不下載、開啟或傳入標註；以前本機的KITTI標註ZIP也不讀取。
 
-保留原FPS：MOT25／30Hz、KITTI10Hz，buffer30約為1–1.2秒／3秒，沒有做FPS正規化或調buffer。協定複製的舊因果規則提到原KITTI10Hz背景，本研究明列 `execution.source_timing` 決定兩組原生FPS。YOLO26n行人0／Ultralytics8.4.176 CPU／confidence.10／imgsz640／NMS.70／max64／相同權重，啟用.30／高.60／buffer30／確認2／margin.05均不變；弱輸入、活躍弱延續、無競爭恢復及應用／worker預設保留。
+保留原FPS：MOT25／30Hz、KITTI10Hz。**勘誤：** lost_track_buffer30以30Hz為基準，固定helper在MOT配置25／30原生格、KITTI為10格，名目均約一秒；先前1–1.2秒／3秒解讀有誤。[勘誤紀錄](../validation/v0.3-buffer-semantics-erratum.json)保留原凍結文字／程式／輸出雜湊，不調buffer。YOLO26n行人0／Ultralytics8.4.176 CPU／confidence.10／imgsz640／NMS.70／max64／同權重及啟用.30／高.60／buffer30／確認2／margin.05、弱延續／預設不變。
 
 ## 全清單、零值與確定性選取
 

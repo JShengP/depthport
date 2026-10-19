@@ -1,0 +1,66 @@
+{
+  "format": "depthport.exposure-gap-protocol.v1",
+  "frozen_at_utc": "2026-10-19T15:18:48.082172+00:00",
+  "base_commit": "4370aedfeebecb9425090f629772b77a573c4982",
+  "status": "Local definition freeze after synthetic contracts, before new funnel extraction. Original exposure counts/selections known. Descriptive post-hoc mechanism diagnosis, not independent confirmation or external preregistration.",
+  "source_protocol_sha256": "573b76a8019ce5bb069a6140d2070c26ca7c4071dace026dcef3ea8eba255082",
+  "source_records_sha256": {
+    "docs/validation/v0.3-past-exposure-discovery.json": "4c6492500093bfaac36edeeaa3af0c486485b5f23fc8b01f4bcb8d39d1a2cd24",
+    "docs/validation/v0.3-past-exposure-confirmation.json": "1e19153d2964e5dae07dedcf8c1ca4ed7df4d45a2f57609ab609a44a4ee984f1",
+    "docs/validation/v0.3-past-exposure-discovery-inputs.json": "8656c55169f6010b1806efe70a691d9bd76e06623826e761721f45239f90544a",
+    "docs/validation/v0.3-past-exposure-confirmation-inputs.json": "bda4cfdb16883431c38eccf6696d11d6610a26ee6cec16a2ad7fdb05b1ab21b1"
+  },
+  "implementation_sha256": {
+    "depthport/tracking_exposure_gap.py": "eb6c9e3916e95a82acd18dc20b613b799355889469a954a635b4c14498a5799c",
+    "tools/diagnose_tracking_exposure_gap.py": "fc7372db449cabe1437cb1c8885736b20a2de715040398fcfdc69c783c05ac27",
+    "tests/test_tracking_exposure_gap.py": "63a0b177c53b33556379f45b3491f345819856f5c8f5c4ababb762076674ec5f",
+    "depthport/tracking_past_support_control.py": "d760faddc836de6e299240d84ff3046c559e5b52e55d6a56c0a70a1aa5b251e1",
+    "depthport/tracking_past_exposure.py": "1a43b2bedcb09ecf5c8f0f3d22a9b35d43b81ef78f20560f10559b27a0f083d8",
+    "depthport/tracking_association_probe.py": "585f2d87b3246644a6df0d96b62fd88998b12dd9bdc86233107e521f4061926e",
+    "depthport/tracking_exposure.py": "49026e2ef32cf767bf47845c1daba4e89f438291025d799108137a0019228bc0",
+    "depthport/tracking_recovery_control.py": "123ed43132d33326a0ec0ca1c7deaa23d20f1fa07f35b2df3ee4735efbe4a7b6",
+    "depthport/video_tracking_benchmark.py": "42fd7739080b4523f64c8425979e0125b8bfbfee7abfc5f22ed5e41668bbca0c"
+  },
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv-python": "4.11.0.86",
+    "trackers": "2.6.1",
+    "supervision": "0.27.0",
+    "scipy": "1.18.1"
+  },
+  "upstream_sha256": {
+    "bytetrack": "7ea61408b4908da327ba992f09450865bb16019ab95bed23a512e5c03bef8fda",
+    "budget_helper": "6c06e31f4183cb61cb1b4f6f8854fbf75744caf665c15f65a32d6c3bd6a62d3d",
+    "iou_compute": "e7d7de78643ed864f195915c009d400e02b8d3e57159f6aaa90d707f7f1bd4f0",
+    "box_iou_batch": "d9fac5e31c8bbfc6e7c8d16a91cd49eec11cfe0e7d4ef2c3da286997c53a6b63"
+  },
+  "cohort": {
+    "sources": 18,
+    "source_frames": 18595,
+    "arms": [
+      "activation_control",
+      "past_support_only",
+      "update_protection_only",
+      "past_support_and_protection"
+    ],
+    "trace_frames": 74380,
+    "selection": "All original sixteen discovery and both reserved sources in original order, all four own-history first-repeat traces. No source/arm/event exclusions or reselection; keep all zero categories."
+  },
+  "definitions": {
+    "original_assignment": "For each stage verify exact native maximize(similarity) then original gate. Weak original accepted edges = observed post-veto matched UNION original deferred edges; disjoint and one-to-one. Never rerun a tracker or install an alternative.",
+    "weak_input": "Unchanged cache detection confidence, cast float32 as original _one_step; high>=.6, weak<.6. No new filter. Empty stage requires empty input/no audit/no veto; count separately, never fabricate a comparison.",
+    "opportunity": "Confirmed pre-update age>=2 weak-stage row with >=1 weak input. Partition rows into no column reaching original gate, gate-supported but not accepted by original one-to-one assignment, and original accepted missed-row weak update (opportunity). Count frames, rows and edges separately.",
+    "active_competition": "Per original opportunity partition: no other active confirmed age1 row; active rows but none supports target above original gate; gate support but none within original signed margin; >=1 active gate+margin competitor. Retained/unconfirmed alternatives separate, never active evidence. Preserve float32 current subtraction/comparison; no new cutoff.",
+    "past": "Reconstruct each arm own append-only accepted (source frame, immutable full-cache detection index) histories, using probe ownership tokens only within that trace. Record actual high then weak accepted edges, never deferred edges or birth keys. Recreate selected last-observation context and verify every recorded past reason/qualified key strictly before decision. Distinguish missing recorded history / missing stage comparison / competitor without accepted observation from observed retained/unconfirmed/below-gate/outside-margin ineligibility. Original reason precedence retained. Missing-history side separately selected/competitor/both; no imputed birth.",
+    "protection": "For each active current alternative recompute unchanged frozen protection helper from original matching; verify exact recorded reason and other-update loss. Occupied competitor and displaced other update distinct. No alternative installed, no opportunity-cost threshold. Cross past supported/missing/ineligible with protected/occupied/displaced, all nine cells including zeros.",
+    "units": "Opportunity edges differ from competing alternatives. Per-edge past/protected/joint counts use any qualifying competitor, conjunction on SAME competitor. Across arms histories diverge: no row/ID joins or causal subtraction. Phase sums and conditional ratios; zero denominator = null, never zero success. Per1000 frames and per minute of nominal source duration are descriptive, not FPS or independent-event rates.",
+    "checks": "Consecutive full frames/cache splits; exact pre-veto assignment; remaining snapshots; accepted-history ages; all original audit/veto/competitor lists/past/protection reasons; all ten prior public exposure counts and phase/trace/cache seals. All counters fixed whitelist, raw opportunity locations local."
+  },
+  "buffer_erratum": {
+    "prior_text": "Earlier KITTI reports/frozen prose incorrectly described lost_track_buffer30 as30 native frames/3seconds, and MOT25Hz as1.2seconds.",
+    "actual": "Pinned native helper max(1,ceil(frame_rate/30*lost_track_buffer)); parameter30 gives configured maximum_frames_without_update10/25/30 at10/25/30Hz, nominal1second in all three. maximum_time_without_update=30/30=1. Snapshot/fixed-step ages remain native frame units; equality/lifecycle boundaries are not certified physical timeouts.",
+    "scope": "Documentation interpretation correction only. Original parameters, code, caches, traces, selections and their frozen hashes retained byte-for-byte. No tracking rerun, source substitution, duration fit or causal attribution to the buffer."
+  },
+  "forbidden": "No new inference/tracking, GT/labels/scores/evaluator invocation, accuracy selection, parameter changes, source replacement, intervention or default promotion. Existing known GT scores are not inputs.",
+  "public_scope": "Only source seals, all-source counts/conditional ratios/reasons and numeric chart. Original matrices, frame positions, IDs, accepted observations, cases and paths local. Original source terms/attribution and noncommercial local scope inherited unchanged."
+}

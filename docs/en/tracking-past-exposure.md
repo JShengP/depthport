@@ -2,6 +2,8 @@
 
 [繁體中文](../zh-TW/tracking-past-exposure.md) · [ROADMAP](../../ROADMAP.md) · [Prior causal control](tracking-past-support.md) · [Protocol](../validation/v0.3-past-exposure-protocol.json) · [Discovery](../validation/v0.3-past-exposure-discovery.json) · [Confirmation](../validation/v0.3-past-exposure-confirmation.json) · [Pre-inference seal](../validation/v0.3-past-exposure-confirmation-seal.json)
 
+Follow-up: [read-only applicability diagnosis](tracking-exposure-gap.md) locates both reserved sources before accepted missed-row weak opportunities. Past/protection tests are not reached; no new gate or default is justified. Buffer prose is corrected below with the original frozen records preserved.
+
 **All three mechanisms trigger in discovery; independently replicated exposure still fails.** The complete 16-source discovery ledger gives **40 / 8 / 2 actual vetoes**, selecting **MOT17-09-DPM / MOT17-10-DPM / MOT20-06** by order, separately for past support / update protection / both. The two prospectively reserved KITTI sources both have zero vetoes for all treatments. All scheduled sources complete, including all zeros; no GT, accuracy score or evaluator is read in this study. Exposure is not identity benefit or release acceptance.
 
 ![All ordered discovery sources, reserved sources and actual own-arm vetoes](../assets/tracking-v03-past-exposure.png)
@@ -25,7 +27,7 @@ Reserve **KITTI-0004 (314 frames) / KITTI-0005 (297 frames)**: first two remaini
 
 Both original PNG sequences are ZIP-CRC/hash checked and converted to FFV1 BGR at native 10 Hz; **every one of 611 decoded frames is pixel-identical** to its original, no cropping/resampling/lossy encoding. [Prepared metadata](../validation/v0.3-past-exposure-prepared-sources.json) binds image-manifest/video hashes and complete dimensions/counts, and is hashed in the [pre-inference seal](../validation/v0.3-past-exposure-confirmation-seal.json). [Discovery lock](../validation/v0.3-past-exposure-discovery-inputs.json) and [confirmation lock](../validation/v0.3-past-exposure-confirmation-inputs.json) bind all video/cache hashes, full frame coverage, FPS, shard counts and detection/cap counts. No label archive is downloaded, opened or passed in this study; an older local KITTI ZIP is not accessed.
 
-Native source FPS is preserved: MOT 25/30 Hz versus KITTI 10 Hz; unchanged buffer 30 is nominal 1–1.2 s versus 3 s. The copied historical causal-rule provenance mentions its original KITTI 10 Hz setting; this study's explicit `execution.source_timing` defines native FPS for both groups. No FPS normalisation or buffer tuning. Detector remains YOLO26n person0, Ultralytics 8.4.176 CPU, confidence.10/imgsz640/NMS.70/max64/same weight. Activation.30/high.60/buffer 30/confirmation2/margin.05, weak inputs, active weak continuation, uncontested recovery and app/worker defaults stay unchanged.
+Native source FPS is preserved: MOT 25/30 Hz versus KITTI 10 Hz. **Corrected:** lost_track_buffer 30 is expressed at 30 Hz; the pinned helper configures 25/30 native frames on MOT and 10 on KITTI, nominally1second in each profile. The earlier1–1.2s/3s interpretation was wrong. [Erratum](../validation/v0.3-buffer-semantics-erratum.json) preserves original frozen prose/code/output hashes and documents the correction. No buffer tuning. Detector remains YOLO26n person0, Ultralytics8.4.176 CPU, confidence.10/imgsz640/NMS.70/max64/same weight; activation.30/high.60/buffer 30/confirmation2/margin.05, weak continuation and defaults unchanged.
 
 ## Full ledger and deterministic selections
 
