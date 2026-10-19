@@ -299,3 +299,12 @@ docs/validation/v0.3-exposure-discovery.json
 docs/validation/v0.3-exposure-confirmation.json
 docs/validation/v0.3-exposure-audit.json
 docs/assets/tracking-v03-exposure-selection.png
+
+# Frozen reference alternative cost and exchange-component diagnosis
+tools/diagnose_tracking_competition.py
+tools/plot_tracking_competition.py
+tests/test_tracking_competition_structure.py
+docs/en/tracking-competition-structure.md
+docs/zh-TW/tracking-competition-structure.md
+docs/validation/v0.3-competition-structure.json
+docs/assets/tracking-v03-competition-structure.png

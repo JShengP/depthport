@@ -4,6 +4,8 @@
 
 **The complete frozen search and separated confirmation are finished; neither control has independently replicated exposure.** Availability vetoes occur eight times across six discovery sources, selecting MOT17-10 by fixed order. Both reserved sources have zero vetoes. Equivalent assignment has zero vetoes across all 16 sources and retains a `null` discovery selection. These are negative confirmation results, not reliability/fix acceptance. Controls, weak continuation and defaults are unchanged.
 
+**Follow-up:** [Frozen cost/competition-structure diagnosis](tracking-competition-structure.md) analyzes all 197 reference alternatives without retuning or GT. Exact ties are not validated identity ambiguity; the next mechanism is component-level accepted-update displacement and temporal stability. This does not change the exposure results below.
+
 ![Complete reference-candidate and actual-veto ledger](../assets/tracking-v03-exposure-selection.png)
 
 ## Freeze before searching

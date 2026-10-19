@@ -168,6 +168,8 @@ Alpha.2 封裝已驗證的 Pages／FastAPI／Hub／DA3 相容性更新與各版�
 
 已完成 [2,700 格／27 次比較](docs/zh-TW/tracking-expanded-acceptance.md)、[另一組 1,179 格／60 次參數驗證](docs/zh-TW/tracking-parameter-acceptance.md)、[換 ID／誤追診斷](docs/zh-TW/tracking-error-diagnosis.md)、[8.4.176 快取的 72 次確認／競爭實驗](docs/zh-TW/tracking-admission-acceptance.md)，以及[同一組 09／10 場景的 16 次原輸出不變成本診斷](docs/zh-TW/tracking-association-diagnosis.md)。延長確認的 FP／FN 取捨與出生閘門未觸發保留；診斷選出的控制點為 ByteTrack 漏格假設的弱階段競爭，已觀察到同 GT 恢復風險，[新 MOT20-01 延後接回實驗](docs/zh-TW/tracking-recovery-acceptance.md)通過凍結研究篩選（FP −3、FN −102、換 ID −8），但召回僅 13.98%、碎裂增加，長事件無完整端點；[移動相機不調參重驗](docs/zh-TW/tracking-recovery-moving.md)另測 1,650 格／12 次：FP −8、FN／換 ID 不變，但公車 HOTA 微降、長事件無改善，未通過逐場景篩選；[歷史診斷](docs/zh-TW/tracking-recovery-history.md)再區分保留假說低於閘門、CLEAR 連續性及低定位框 HOTA 損失，[分開的占用／一對一替代控制](docs/zh-TW/tracking-exclusive-competition.md)另以先前研究場景的新快取測試 1,050 格／12 次：新控制都零觸發、等同對照，舊組多 6 筆漏追、FP 不變；[GT-free 曝光發現／確認](docs/zh-TW/tracking-exposure-selection.md)完整檢查 16 段／17,984 格，未配對組只在發現觸發，等價組與兩段保留皆無曝光；獨立重現與長遮擋尚未驗收，**原預設不變**。
 
+[197 個參考替代的凍結分析](docs/zh-TW/tracking-competition-structure.md)已拆開同欄差、完整機會成本與有效更新置換；數值平手尚不代表身分歧義。下一點為分量內跨格穩定性，不從已見差值挑新容差；弱偵測延續與預設不變。
+
 研究結果限指定公開序列、固定快取與已記錄版本，不能外推為新版偵測器或其他場景的表現。這些研究只散布彙總，不發布原始影像、GT、逐格追蹤或使用者書籤。
 
 </details>

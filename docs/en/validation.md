@@ -1,6 +1,10 @@
 # Validation record
 [繁體中文](../zh-TW/validation.md) · [Home](../../README.md)
 
+## Frozen alternative cost and competition structure — 2026-10-19
+
+[Method, all-source ledger and decision](tracking-competition-structure.md) · [Aggregate](../validation/v0.3-competition-structure.json). Analyze all 197 frozen reference alternatives (192 discovery / 5 original reserved confirmation), without tracking, GT or tuning; two byte-identical diagnostic traversals. All full costs are positive, but 188 competitors already support accepted updates and 165 have better same-column scores. Target components: 183 cycles / 14 paths; 56 alternatives stop updating the selected missed row, including 12 equal-count row replacements; 39 costs include below-gate contributions. Exact objective ties are not validated identity ambiguity. Next freeze effective-update displacement groups and temporal stability definitions, without fitting tolerance or changing weak continuation/defaults. Raw traces/IDs stay local. Application tests 363 passed / 20 optional skipped; pinned NumPy 2 contracts 46 passed.
+
 ## GT-free exposure selection and reserved confirmation — 2026-10-19
 
 [Rules/results and all sources](tracking-exposure-selection.md) · [Frozen protocol](../validation/v0.3-exposure-selection-protocol.json) · [Discovery](../validation/v0.3-exposure-discovery.json) · [Confirmation](../validation/v0.3-exposure-confirmation.json). Full fixed cohort: 14 discovery / two reserved sources, 17,984 frames, 144 runs. Availability vetoes eight times in six discovery sources, selecting MOT17-10 by order; both reserved sources have zero vetoes. Equivalent assignment never triggers in any source. No GT/quality score enters selection; neither control has independently replicated exposure or accepted reliability. Keep weak continuation/settings, disclose all zeros and raw data locally. A post-selection audit finds all 197 reference alternatives have positive objective loss. Correct the prior MOT17-04 new-scene claim: it appeared in earlier general benchmarks; only the cache was fresh, original frozen records preserved.
