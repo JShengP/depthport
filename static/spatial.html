@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="theme-color" content="#091929"/>
+<title>DepthPort — Spatial Analysis</title>
+<link rel="icon" href="/static/favicon.svg"/>
+<link rel="stylesheet" href="/static/spatial.css"/>
+</head>
+<body>
+<header class="top"><a class="logo" href="/">DEPTH<span>PORT</span><small> / SPATIAL ANALYSIS</small></a><nav><a href="/" data-tr="back">← Main viewer</a><select id="languageSelect"><option value="en">English</option><option value="zh-TW">繁體中文</option></select></nav></header>
+<main>
+<section class="hero"><div><div class="eyebrow" data-tr="eyebrow">EXPERIMENTAL 0.2 / INSPECT · COMPARE · FUSE · CALIBRATE</div><h1 data-tr="headline">Spatial Analysis Lab</h1><p data-tr="intro">Inspect pixels, compare native model depths, project YOLO objects into the camera frame, and verify measurement scale. No unvalidated depth is a range sensor.</p></div><div class="hero-state"><strong id="frameId">—</strong><small data-tr="current">CURRENT FRAME</small><div id="sourceInfo" class="muted">No processed frame</div><button id="refreshBtn" data-tr="refresh">Refresh frame</button></div></section>
+<div class="quicknav"><a href="#inspector" data-tr="navInspect">01 · Point Inspector</a><a href="#compare" data-tr="navCompare">02 · Model Comparison</a><a href="#semantic" data-tr="navSemantic">03 · Semantic Fusion</a><a href="#calibration" data-tr="navCalibrate">04 · Calibration</a></div>
+<div id="globalNotice" role="status" class="notice"><span data-tr="needFrame">Open the main viewer, upload a still image (or connect RTSP), and complete a real model inference first.</span></div>
+<section id="inspector" class="section">
+ <div class="section-title"><span class="number">01</span><div><h2 data-tr="inspectTitle">Depth / Point Inspector</h2><p data-tr="inspectDesc">Click either aligned image. The backend computes the exact pixel depth and camera XYZ for that frame.</p></div></div>
+ <div class="two">
+ <article class="box"><div class="boxhead"><b data-tr="rgb">RGB source</b><span id="rgbSize">—</span></div><div class="imagearea"><img id="rgbImage" alt="Aligned RGB source"/><div class="reticle" id="rgbMark"></div><span class="overlaylabel" data-tr="clickImage">Click a pixel to inspect</span></div></article>
+ <article class="box"><div class="boxhead"><b data-tr="depth">Depth map</b><span id="depthUnit">—</span></div><div class="imagearea"><img id="depthImage" alt="Aligned depth visualization"/><div class="reticle" id="depthMark"></div><span class="overlaylabel" data-tr="clickImage">Click a pixel to inspect</span></div></article>
+ </div>
+ <article class="box inspector-values"><div class="boxhead"><b data-tr="pixelReadout">Pixel readout</b><span id="inspectModel">—</span></div><div class="readouts"><div><small>PIXEL</small><strong id="pixelXY">—</strong></div><div><small>RGB</small><strong id="pixelRGB">—</strong></div><div><small data-tr="depthValue">DEPTH</small><strong id="pixelDepth">—</strong></div><div><small>CAMERA XYZ</small><strong id="pixelXYZ">—</strong></div><div><small data-tr="intrinsicSource">CAMERA INTRINSICS</small><strong id="pixelK">—</strong></div><div><small>FRAME / MODEL</small><strong id="pixelModel">—</strong></div></div><p class="muted" id="inspectNotes" data-tr="nonmetric">Units and uncertainty always follow the source model; virtual/relative depth is not meters.</p>
+ <div class="controls inline"><button class="accent" id="setPointA" data-tr="setA">Set point A from selected pixel</button><button id="setPointB" data-tr="setB">Set point B from selected pixel</button><span class="mono" id="abInfo">A — / B —</span></div>
+ </article>
+</section>
+<section id="compare" class="section"><div class="section-title"><span class="number">02</span><div><h2 data-tr="compareTitle">Multi-Model Comparison</h2><p data-tr="compareDesc">One retained still image and its SHA-256. Run four models sequentially; keep each native depth unit. Histograms are normalized for shape viewing only.</p></div></div>
+<div class="actionbar"><button id="compareBtn" class="accent" data-tr="runCompare">Compare all four engines</button><button id="compareDownload" disabled data-tr="compareExport">Export comparison ZIP</button><span id="compareStatus" class="muted" data-tr="compareIdle">Upload a still image in the main viewer first.</span></div>
+<div class="cards" id="compareCards"><div class="empty" data-tr="compareEmpty">Each model will appear here with its depth preview, interactive point cloud, histogram, units, and measured wall time.</div></div>
+</section>
+<section id="semantic" class="section"><div class="section-title"><span class="number">03</span><div><h2 data-tr="semanticTitle">2D → 3D Semantic Fusion</h2><p data-tr="semanticDesc">Run a real YOLO Detect or Segment model on the aligned frame. Instance masks form object-point subsets; detection boxes include background.</p></div></div>
+<div class="actionbar"><label><span data-tr="mode">Mode</span> <select id="semanticMode"><option value="segment" data-tr="segment">Instance segmentation</option><option value="detect" data-tr="detect">Detection (box ROI)</option></select></label><label><span data-tr="minConf">Min confidence</span> <input type="number" id="semanticConfidence" min="0.05" max="0.95" step="0.05" value="0.25"/></label><button class="accent" id="semanticBtn" data-tr="semanticRun">Run YOLO fusion</button><span id="semanticStatus" class="muted" data-tr="semanticIdle">Requires an actual completed depth frame and YOLO detection/segmentation weights.</span></div>
+<div class="two semanticgrid"><article class="box"><div class="boxhead"><b data-tr="semanticOverlay">Annotated RGB / estimated masks</b></div><div class="imagearea semanticimg"><img id="semanticImage" alt="YOLO semantic overlay"/></div><div class="objects" id="semanticObjects"></div></article><article class="box"><div class="boxhead"><b data-tr="objectCloud">Selected object point cloud</b></div><div class="mini-large"><canvas id="semanticCloud"></canvas></div><div class="caption" id="objectInfo" data-tr="semanticSelect">Select an object to see its 3D points and median depth.</div></article></div>
+</section>
+<section id="calibration" class="section"><div class="section-title"><span class="number">04</span><div><h2 data-tr="calTitle">Calibration &amp; Measurement</h2><p data-tr="calDesc">Pinhole checkerboard calibration is an offline CLI step. Single scale anchors are not accuracy validation; independent known distances report empirical residuals, not uncertainty bounds.</p></div></div>
+<div class="three">
+<article class="box pad"><h3 data-tr="calCamera">Camera intrinsics</h3><p data-tr="calCameraDesc">Use checkerboard images of the same lens, zoom, resolution and uncropped view. The tool writes a local calibration JSON; set CAMERA_INTRINSICS_FILE in .env and restart.</p><pre>python tools/calibrate_camera.py \
+ --images "calib/*.jpg" \
+ --corners-x 9 --corners-y 6 \
+ --square-mm 25 \
+ --output camera_intrinsics.json</pre><div id="calCameraStatus" class="muted">—</div></article>
+<article class="box pad"><h3 data-tr="calScale">Scale anchor and independent check</h3><p data-tr="calScaleDesc">Pick A and B on the aligned RGB image. Enter a physically measured distance; this requires metric-estimate depth and real camera intrinsics.</p><label><span data-tr="knownDistance">Known distance (m)</span><input id="knownDistance" type="number" min="0.001" step="0.01" value="1"/></label><div class="controls"><button id="measureBtn" data-tr="measure">Measure A–B</button><button id="anchorBtn" class="accent" data-tr="anchor">Use A–B as scale anchor</button><button id="validationBtn" data-tr="validate">Validate with independent A–B</button></div><pre class="result" id="measurementResult">—</pre></article>
+<article class="box pad"><h3 data-tr="groundPlane">Candidate ground plane</h3><p data-tr="planeDesc">Select an image ROI likely to contain floor only. RANSAC returns a candidate plane and residual; confirm it is the ground before use.</p><div class="roi"><label>x0<input id="roiX0" type="number" min="0" max="1" step=".05" value=".05"/></label><label>y0<input id="roiY0" type="number" min="0" max="1" step=".05" value=".55"/></label><label>x1<input id="roiX1" type="number" min="0" max="1" step=".05" value=".95"/></label><label>y1<input id="roiY1" type="number" min="0" max="1" step=".05" value=".95"/></label></div><label><span data-tr="planeThreshold">RANSAC threshold (model units)</span><input id="threshold" type="number" min="0.00001" max="100" step="0.01" value="0.05"/></label><button id="fitPlane" class="accent" data-tr="fitPlane">Fit candidate plane</button><pre class="result" id="planeResult">—</pre></article>
+</div>
+<div class="warning" data-tr="calWarning">Experimental measurements. Estimated meters are not field truth, relative depths are not meters, and reprojection RMS is not metric-depth accuracy. Do not use for safety-critical decisions.</div>
+</section>
+<footer><span>DepthPort v0.2.0-alpha.1 · Spatial Analysis</span><span data-tr="footer">Local-first, four depth engines, English / 繁體中文 · AGPL-3.0-only</span></footer>
+</main>
+<script src="/static/i18n.js"></script><script src="/static/viewer.js"></script><script src="/static/spatial.js"></script>
+</body></html>

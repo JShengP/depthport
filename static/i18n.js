@@ -7,6 +7,7 @@
   "en": {
     "title": "DepthPort | Monocular Depth & Point Cloud Workbench",
     "brand.sub": "MONOCULAR DEPTH / LOCAL WORKBENCH",
+    "spatial.open": "◈ Spatial Analysis Lab — Inspector · Four-Model Comparison · Semantic 3D · Calibration →",
     "source.heading": "Image source",
     "source.rtsp": "RTSP stream",
     "source.label": "IP camera RTSP URL",
@@ -178,6 +179,7 @@
   "zh-TW": {
     "title": "DepthPort｜單目深度與點雲工作台",
     "brand.sub": "單目深度／本地工作台",
+    "spatial.open": "◈ 空間分析工作台 — 點位檢查 · 四模型比較 · 語意 3D · 相機標定 →",
     "source.heading": "影像來源",
     "source.rtsp": "RTSP 串流",
     "source.label": "IP Camera RTSP 網址",

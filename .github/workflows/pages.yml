@@ -1,6 +1,9 @@
 name: Pages - synthetic viewer only
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - ".github/workflows/pages.yml"
 permissions:
   contents: read
 concurrency:
@@ -8,7 +11,6 @@ concurrency:
   cancel-in-progress: false
 jobs:
   build:
-    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -23,10 +25,12 @@ jobs:
           python tools/check_release.py
           python tools/build_site.py
       - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v4
+        if: github.event_name == 'workflow_dispatch' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
   deploy:
+    if: github.event_name == 'workflow_dispatch' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 10

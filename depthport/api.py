@@ -34,6 +34,9 @@ from depthport.config import CFG, ROOT
 from depthport.cloud import CameraGeometry, make_cloud, export_binary_ply
 from depthport.engines import PRESETS, DepthResult, catalog, make_engine, model_location
 from depthport.capture import CaptureWorker
+from depthport.spatial import pixel_inspection, depth_distribution, distance_between, fit_plane, empirical_validation
+from depthport.comparison import compact_card, status_card
+from depthport.semantic import run_ultralytics_semantic
 
 MAX_UPLOAD = 12 * 1024 * 1024
 
@@ -112,11 +115,29 @@ class Service:
         self.latest = self.records = self.result = None
         self.frame_id = 0
         self.source_error = None
+        self.analysis_job = None
+        self.compare_status = {'state': 'idle', 'items': []}
+        self.compare_cards = []
+        self.compare_snapshots = []
+        self.semantic_status = {'state': 'idle'}
+        self.semantic_result = None
+        self.scale_anchor = None
+        self.validation_checks = []
+        self.plane_result = None
         self.last_publish_time = self.update_hz = None
         self.worker = threading.Thread(target=self._work, name='depthport-model-worker', daemon=True)
         self.worker.start()
 
     def _clear(self):
+        self.analysis_job = None
+        self.compare_status = {'state': 'idle', 'items': []}
+        self.compare_cards = []
+        self.compare_snapshots = []
+        self.semantic_status = {'state': 'idle'}
+        self.semantic_result = None
+        self.scale_anchor = None
+        self.validation_checks = []
+        self.plane_result = None
         self.latest = self.records = self.result = None
         self.source_error = None
         self.last_publish_time = self.update_hz = None
@@ -233,6 +254,11 @@ class Service:
                 with self.lock:
                     key, rid, gen = self.selected, self.model_request, self.generation
                     need = self.load_requested and self.handled_request != rid
+                with self.lock:
+                    analysis_job, self.analysis_job = self.analysis_job, None
+                if analysis_job is not None:
+                    self._perform_analysis(analysis_job)
+                    continue
                 if need:
                     self._load_selected(key, rid)
                     continue  # refresh all source/selection tokens after model load
@@ -298,6 +324,126 @@ class Service:
             if self.engine is not None:
                 try: self.engine.unload()
                 except Exception: pass
+
+    # Spatial jobs share the SAME model worker as live inference, avoiding
+    # simultaneous depth+comparison+segmentation GPU work and mixed generations.
+    def request_comparison(self, engines: list[str]) -> str:
+        if not engines or len(engines)>4 or len(set(engines))!=len(engines) or any(k not in PRESETS for k in engines):
+            raise ValueError('Provide 1–4 distinct known engines')
+        with self.lock:
+            if self.mode!='image' or self.still_image is None:
+                raise ValueError('Comparison requires a retained still image')
+            if (self.compare_status.get('state') in ('queued','running') or
+                    self.semantic_status.get('state') in ('queued','running')):
+                raise ValueError('An analysis job is already active')
+            job_id = uuid.uuid4().hex[:12]
+            self.compare_status = {'id':job_id,'state':'queued','engines':list(engines),
+                'source_sha256':self.source_hash,'done':0,'total':len(engines),'items':[]}
+            self.compare_cards = []
+            self.compare_snapshots = []
+            self.analysis_job=('compare', job_id, self.generation, list(engines),self.still_image.copy(),self.source_hash)
+        self.wake.set()
+        return job_id
+
+    def request_semantic(self, mode:str, confidence:float) -> str:
+        if mode not in ('detect','segment') or not .05<=confidence<=.95:
+            raise ValueError('Invalid semantic mode/confidence')
+        with self.lock:
+            if self.latest is None or self.result is None: raise ValueError('Process an image/frame first')
+            if (self.compare_status.get('state') in ('queued','running') or
+                    self.semantic_status.get('state') in ('queued','running')):
+                raise ValueError('An analysis job is already active')
+            job_id=uuid.uuid4().hex[:12]
+            fid=self.latest['frame_id']
+            self.semantic_status={'id':job_id,'state':'queued','mode':mode,'frame_id':fid}
+            self.semantic_result=None
+            self.analysis_job=('semantic',job_id,self.generation,mode,confidence,fid,self.result)
+        self.wake.set()
+        return job_id
+
+    def _analysis_still_current(self, gen:int, job_id:str, kind:str) -> bool:
+        status = self.compare_status if kind=='compare' else self.semantic_status
+        return self.generation==gen and status.get('id')==job_id
+
+    def _perform_analysis(self,job):
+        kind, job_id, gen = job[:3]
+        with self.lock:
+            if not self._analysis_still_current(gen,job_id,kind):return
+            target = self.compare_status if kind=='compare' else self.semantic_status
+            target['state']='running'
+        # Unload active depth engine before loading other weights. Restore it
+        # later in the normal work loop rather than keeping all models in VRAM.
+        if self.engine is not None:
+            try:self.engine.unload()
+            except Exception:pass
+        with self.lock:
+            self.engine=None; self.engine_key=None
+        try:
+            if kind=='compare':
+                _,_,_,keys,image,source_sha=job
+                for key in keys:
+                    with self.lock:
+                        if not self._analysis_still_current(gen,job_id,kind):return
+                    model=None
+                    try:
+                        model=self.engine_factory(key)
+                        load_ms=model.load() or 0
+                        started=time.perf_counter()
+                        prepared, intr=self.geometry.prepare(image,CFG.max_width)
+                        result=model.predict(prepared,intr)
+                        cloud,filters=prepare_cloud(result)
+                        wall=(time.perf_counter()-started)*1000
+                        card=compact_card(cloud,result,engine=key,model=model.model_id,
+                            source_sha256=source_sha,load_ms=load_ms,wall_ms=wall)
+                        card['filter_info']=filters
+                        records=cloud['points_raw']
+                        entry={'engine':key,'state':'done','pipeline_wall_ms':round(wall,2),'units':result.units,
+                               'point_count':int(cloud['count'])}
+                        with self.lock:
+                            if not self._analysis_still_current(gen,job_id,kind):return
+                            self.compare_cards.append(card)
+                            self.compare_snapshots.append((card,records,result))
+                    except Exception as exc:
+                        entry={'engine':key,'state':'error','error':safe_error(exc)}
+                    finally:
+                        if model is not None:
+                            try:model.unload()
+                            except Exception:pass
+                    with self.lock:
+                        if not self._analysis_still_current(gen,job_id,kind):return
+                        self.compare_status['items'].append(entry)
+                        self.compare_status['done']+=1
+                with self.lock:
+                    if self._analysis_still_current(gen,job_id,kind):
+                        self.compare_status['state']='completed'
+            else:
+                _,_,_,mode,confidence,fid,result=job
+                started=time.perf_counter()
+                active_device=getattr(self.engine,'device_name',None) or os.getenv('DEPTH_DEVICE','auto')
+                if active_device=='auto':
+                    try:
+                        import torch
+                        active_device='cuda:0' if torch.cuda.is_available() else 'cpu'
+                    except ImportError: active_device='cpu'
+                semantic=run_ultralytics_semantic(result.bgr,result,mode,active_device,confidence)
+                semantic['inference_wall_ms']=round((time.perf_counter()-started)*1000,2)
+                semantic['source_frame_id']=fid
+                with self.lock:
+                    if self._analysis_still_current(gen,job_id,kind):
+                        self.semantic_result=semantic
+                        self.semantic_status.update({'state':'completed','objects':len(semantic['objects']),
+                                                     'model':semantic['model'],'inference_wall_ms':semantic['inference_wall_ms']})
+        except Exception as exc:
+            with self.lock:
+                if self._analysis_still_current(gen,job_id,kind):
+                    (self.compare_status if kind=='compare' else self.semantic_status).update({'state':'error','error':safe_error(exc)})
+        finally:
+            with self.lock:
+                # Re-load selected depth engine on next loop to resume RTSP or
+                # new image requests; keep prior completed frame available.
+                self.load_requested=True; self.handled_request=-1
+                self.model_state='queued'
+            self.wake.set()
 
     def status(self) -> dict:
         with self.lock:
@@ -381,6 +527,8 @@ async def request_validation_error(request: Request, exc: RequestValidationError
 
 @app.get('/')
 def index(): return FileResponse(ROOT/'static/index.html')
+@app.get('/spatial')
+def spatial_index(): return FileResponse(ROOT/'static/spatial.html')
 @app.get('/api/source-code.zip')
 def download_source():
     try:
@@ -412,6 +560,204 @@ def models(): return {'models': catalog(), 'switch_policy': 'unload_previous; si
 def latest(after: int = 0):
     with app.state.service.lock: frame = app.state.service.latest
     return Response(status_code=204) if frame is None or frame['frame_id'] <= after else JSONResponse(frame)
+
+
+@app.get('/api/spatial/frame')
+def spatial_frame(after:int=0):
+    with app.state.service.lock: frame=app.state.service.latest
+    return Response(status_code=204) if frame is None or frame['frame_id']<=after else JSONResponse({k:v for k,v in frame.items() if k!='points'})
+
+
+@app.get('/api/spatial/inspect')
+def spatial_inspect(u:int, v:int, frame_id:int):
+    frame, _, result = app.state.service.snapshot()
+    if frame['frame_id'] != frame_id:
+        raise HTTPException(409, 'Frame changed. Refresh the displayed frame and click again.')
+    try: return pixel_inspection(result,frame,u,v)
+    except ValueError as exc: raise HTTPException(422,str(exc)) from exc
+
+
+class PixelPair(BaseModel):
+    frame_id: int = Field(ge=1)
+    a: tuple[int,int]
+    b: tuple[int,int]
+
+
+@app.post('/api/spatial/measure')
+def spatial_measure(body:PixelPair):
+    frame, _, result = app.state.service.snapshot()
+    if frame['frame_id']!=body.frame_id: raise HTTPException(409,'Frame changed; select two points on current frame')
+    try:
+        anchor=app.state.service.scale_anchor
+        # Anchor must refer to the same single still frame, not a different
+        # RTSP time or model/geometry. No global physical-unit conversion.
+        calibrated=bool(anchor and anchor['frame_id']==frame['frame_id'])
+        answer=distance_between(result,body.a,body.b,scale=anchor['factor'] if calibrated else 1.)
+    except ValueError as exc:raise HTTPException(422,str(exc)) from exc
+    checks = app.state.service.validation_checks if calibrated else []
+    answer.update({'frame_id':frame['frame_id'],'engine':frame['engine'],
+                   'units_label':'estimated_m' if result.units=='estimated_m' else 'relative_not_meters',
+                   'scale_anchor_applied':calibrated,
+                   'measurement_status':('relative_not_measurable_in_m' if result.units!='estimated_m' else
+                                         'scale_anchored_not_validated' if calibrated else 'unverified_model_estimate'),
+                   'uncertainty_m':None,
+                   'empirical_validation_mae_m':round(sum(c['absolute_error_m'] for c in checks)/len(checks),6) if checks else None,
+                   'validation_sample_count':len(checks),
+                   'warning':'Empirical validation MAE, if present, is NOT a guaranteed uncertainty bound or confidence interval.'})
+    return answer
+
+
+class ScaleAnchor(PixelPair):
+    known_distance_m: float = Field(gt=0,le=10000)
+
+
+@app.post('/api/spatial/calibration/scale')
+def spatial_scale(body:ScaleAnchor):
+    svc=app.state.service
+    frame, _, result=svc.snapshot()
+    if frame['frame_id']!=body.frame_id: raise HTTPException(409,'Frame changed; retry with current frame')
+    if result.units!='estimated_m': raise HTTPException(422,'Relative/virtual depth cannot be calibrated to meters from one arbitrary pair')
+    try: raw=distance_between(result,body.a,body.b)['raw_distance']
+    except ValueError as exc:raise HTTPException(422,str(exc)) from exc
+    if raw < 1e-5:raise HTTPException(422,'Anchor pixel separation is too small')
+    if svc.geometry.calibration is None:
+        # One reference cannot correct incorrect rays from an assumed HFOV.
+        raise HTTPException(422,'Provide a measured camera-intrinsics JSON before metric scale anchoring')
+    anchor={'frame_id':frame['frame_id'],'source_sha256':frame.get('source_sha256'),
+            'engine':frame['engine'],'points_px':[list(body.a),list(body.b)],
+            'known_distance_m':body.known_distance_m,'raw_distance':raw,
+            'factor':float(body.known_distance_m/raw), 'status':'single_anchor_not_independent_validation',
+            'applies_to_export':False}
+    with svc.lock:
+        if svc.latest is None or svc.latest['frame_id']!=frame['frame_id']:
+            raise HTTPException(409,'Frame changed during calibration')
+        svc.scale_anchor=anchor
+        svc.validation_checks=[]
+    return anchor
+
+
+class ValidatePair(ScaleAnchor):
+    pass
+
+
+@app.post('/api/spatial/calibration/validate')
+def spatial_validate(body:ValidatePair):
+    svc=app.state.service
+    frame,_,result=svc.snapshot()
+    if frame['frame_id']!=body.frame_id:raise HTTPException(409,'Frame changed; retry validation')
+    anchor=svc.scale_anchor
+    if not anchor or anchor['frame_id']!=frame['frame_id']:
+        raise HTTPException(409,'Calibrate an independent scale anchor on this frame first')
+    if {tuple(body.a),tuple(body.b)} == set(map(tuple,anchor['points_px'])):
+        raise HTTPException(422,'Validation must use a different pair from the calibration anchor')
+    try: raw=distance_between(result,body.a,body.b)['raw_distance']
+    except ValueError as exc: raise HTTPException(422,str(exc)) from exc
+    check=empirical_validation(raw,body.known_distance_m,anchor['factor'])
+    check['points_px']=[list(body.a),list(body.b)]
+    with svc.lock:
+        if svc.latest is None or svc.latest['frame_id']!=frame['frame_id']:
+            raise HTTPException(409,'Frame changed during validation')
+        svc.validation_checks.append(check)
+    return {**check,'independent_checks':len(svc.validation_checks),
+            'mean_absolute_error_m':sum(c['absolute_error_m'] for c in svc.validation_checks)/len(svc.validation_checks),
+            'uncertainty_m':None,'accuracy_certified':False}
+
+
+class PlaneRequest(BaseModel):
+    frame_id:int=Field(ge=1)
+    roi: tuple[float,float,float,float] = (.05,.55,.95,.95)
+    threshold:float=Field(default=.05,gt=0,le=10000)
+
+
+@app.post('/api/spatial/calibration/plane')
+def spatial_plane(body:PlaneRequest):
+    svc=app.state.service
+    frame,_,result=svc.snapshot()
+    if frame['frame_id']!=body.frame_id:raise HTTPException(409,'Frame changed; retry plane fitting')
+    try: plane=fit_plane(result.depth,result.intrinsics,body.roi,body.threshold)
+    except ValueError as exc:raise HTTPException(422,str(exc)) from exc
+    plane.update({'frame_id':frame['frame_id'],'units':result.units,
+                  'is_metric_estimate':result.units=='estimated_m',
+                  'camera_height_estimate':abs(plane['d']) if result.units=='estimated_m' else None,
+                  'warning':'Unlabelled candidate plane: confirm it is the floor. Residual is not physical accuracy.'})
+    with svc.lock:
+        if svc.latest is None or svc.latest['frame_id']!=frame['frame_id']:
+            raise HTTPException(409,'Frame changed during plane fit')
+        svc.plane_result=plane
+    return plane
+
+
+class CompareRequest(BaseModel):
+    engines: list[Literal['yolo26','da2-small','da3-small','da3-metric']] = Field(default_factory=lambda:list(PRESETS))
+
+
+@app.post('/api/spatial/compare', status_code=202)
+def spatial_compare(body:CompareRequest):
+    try: job=app.state.service.request_comparison(body.engines)
+    except ValueError as exc:raise HTTPException(409,str(exc)) from exc
+    return {'accepted':True,'id':job,'status_url':'/api/spatial/compare/status'}
+
+
+@app.get('/api/spatial/compare/status')
+def spatial_compare_status():
+    with app.state.service.lock:return dict(app.state.service.compare_status)
+
+
+@app.get('/api/spatial/compare/results')
+def spatial_compare_results():
+    svc=app.state.service
+    with svc.lock:
+        return {'status':dict(svc.compare_status),'cards':list(svc.compare_cards),
+                'note':'Normalized histograms compare distribution shape ONLY; not absolute depth. Each model retains its native units.'}
+
+
+@app.get('/api/spatial/compare/export.zip')
+def spatial_compare_export():
+    svc=app.state.service
+    with svc.lock:
+        if svc.compare_status.get('state')!='completed':
+            raise HTTPException(409,'Comparison has not completed')
+        entries=list(svc.compare_snapshots)
+        status=dict(svc.compare_status)
+    out=io.BytesIO()
+    with zipfile.ZipFile(out,'w',compression=zipfile.ZIP_DEFLATED) as bundle:
+        bundle.writestr('comparison.json',json.dumps(status,ensure_ascii=False,indent=2))
+        for card,records,result in entries:
+            folder=card['engine']+'/'
+            bundle.writestr(folder+'pointcloud.ply',export_binary_ply(records,units=card['units'],engine=card['engine']))
+            bundle.writestr(folder+'depth.npy',npy_bytes(result.depth))
+            bundle.writestr(folder+'raw_depth.npy',npy_bytes(result.raw_depth))
+            bundle.writestr(folder+'metrics.json',json.dumps(status_card(card),ensure_ascii=False,indent=2))
+            ok,png=cv2.imencode('.png',result.bgr)
+            if not ok:raise HTTPException(500,'Cannot encode comparison RGB')
+            bundle.writestr(folder+'rgb_aligned.png',png.tobytes())
+    return Response(out.getvalue(),media_type='application/zip',headers={
+        'Content-Disposition':'attachment; filename="depthport_spatial_comparison.zip"'})
+
+
+class SemanticRequest(BaseModel):
+    mode:Literal['detect','segment']='segment'
+    confidence:float=Field(default=.25,ge=.05,le=.95)
+
+
+@app.post('/api/spatial/semantic',status_code=202)
+def spatial_semantic_start(body:SemanticRequest):
+    try: job=app.state.service.request_semantic(body.mode,body.confidence)
+    except ValueError as exc:raise HTTPException(409,str(exc)) from exc
+    return {'accepted':True,'id':job,'status_url':'/api/spatial/semantic/status'}
+
+
+@app.get('/api/spatial/semantic/status')
+def spatial_semantic_status():
+    with app.state.service.lock:return dict(app.state.service.semantic_status)
+
+
+@app.get('/api/spatial/semantic/result')
+def spatial_semantic_result():
+    with app.state.service.lock:
+        if app.state.service.semantic_result is None:raise HTTPException(404,'No semantic result yet')
+        return app.state.service.semantic_result
+
 
 
 class ModelRequest(BaseModel):
@@ -487,7 +833,31 @@ def download_meta():
     f, _, _ = app.state.service.snapshot(); return metadata(f)
 
 
-def bundle_bytes(frame, records, result):
+def spatial_report_for_frame(service, frame):
+    with service.lock:
+        anchor = service.scale_anchor
+        anchor = anchor if anchor and anchor['frame_id']==frame['frame_id'] else None
+        plane = service.plane_result
+        plane = plane if plane and plane['frame_id']==frame['frame_id'] else None
+        semantic = service.semantic_result
+        semantic_meta = ({'mode':semantic['mode'],'model':semantic['model'],
+                          'source_frame_id':semantic['source_frame_id'],
+                          'objects':[{k:v for k,v in obj.items() if not k.startswith('points_packed')} for obj in semantic['objects']]}
+                         if semantic and semantic['source_frame_id']==frame['frame_id'] else None)
+        return {'frame_id':frame['frame_id'],'engine':frame['engine'],
+                'units':frame['units'],'camera_intrinsics':frame['intrinsics'],
+                'scale_anchor':anchor,'validation_checks':list(service.validation_checks) if anchor else [],
+                'candidate_plane':plane,'semantic_objects':semantic_meta,
+                'warning':'Single-view AI geometry, not a certified 3D scan or safety range sensor.'}
+
+
+@app.get('/api/spatial/report.json')
+def spatial_report():
+    frame,_,_=app.state.service.snapshot()
+    return spatial_report_for_frame(app.state.service,frame)
+
+
+def bundle_bytes(frame, records, result, spatial_analysis=None):
     output = io.BytesIO()
     with zipfile.ZipFile(output, 'w', compression=zipfile.ZIP_DEFLATED) as z:
         z.writestr(f'pointcloud_{frame["units"]}.ply', export_binary_ply(records, frame_id=frame['frame_id'],
@@ -497,6 +867,8 @@ def bundle_bytes(frame, records, result):
         if result.confidence is not None: z.writestr('confidence.npy', npy_bytes(result.confidence))
         if result.sky is not None: z.writestr('sky_mask.npy', npy_bytes(result.sky))
         z.writestr('frame.json', json.dumps(metadata(frame), ensure_ascii=False, indent=2, allow_nan=False))
+        if spatial_analysis is not None:
+            z.writestr('spatial_analysis.json', json.dumps(spatial_analysis, ensure_ascii=False, indent=2, allow_nan=False))
         ok, png = cv2.imencode('.png', result.bgr)
         if not ok: raise RuntimeError('PNG encoding failed')
         z.writestr('rgb_aligned.png', png.tobytes())
@@ -507,7 +879,8 @@ def bundle_bytes(frame, records, result):
 @app.get('/api/export.zip')
 def download_bundle():
     f, records, result = app.state.service.snapshot()
-    return attachment(bundle_bytes(f, records, result), f'depthport_{f["engine"]}_frame_{f["frame_id"]}.zip', f['frame_id'], 'application/zip')
+    analysis = spatial_report_for_frame(app.state.service, f)
+    return attachment(bundle_bytes(f, records, result, analysis), f'depthport_{f["engine"]}_frame_{f["frame_id"]}.zip', f['frame_id'], 'application/zip')
 
 
 if __name__ == '__main__':
