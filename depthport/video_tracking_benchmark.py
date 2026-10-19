@@ -84,11 +84,15 @@ def validate_tracker_parameters(method: str, parameters: dict | None) -> dict:
         return {}
     if method not in ('bytetrack', 'botsort') or not isinstance(parameters, dict):
         raise VideoBenchmarkError('Parameters require a direct ByteTrack/BoT-SORT backend')
-    allowed = {'track_activation_threshold', 'high_conf_det_threshold', 'lost_track_buffer'}
+    allowed = {'track_activation_threshold', 'high_conf_det_threshold', 'lost_track_buffer',
+               'minimum_consecutive_frames', 'birth_competition_iou'}
     if set(parameters) - allowed:
         raise VideoBenchmarkError('Unsupported tracker parameter')
     for name, value in parameters.items():
-        if name == 'lost_track_buffer':
+        if name == 'minimum_consecutive_frames':
+            if type(value) is not int or not 1 <= value <= 10:
+                raise VideoBenchmarkError('Confirmation must be 1..10 successful updates')
+        elif name == 'lost_track_buffer':
             if type(value) is not int or not 0 <= value <= 300:
                 raise VideoBenchmarkError('Lost track buffer must be 0..300 frames at 30 FPS')
         elif type(value) not in (int, float) or not math.isfinite(value) or not 0 <= value <= 1:
@@ -121,6 +125,11 @@ def make_tracker(method: str, *, fps: float, parameters: dict | None = None):
     # Fail loudly on other API generations until adapter contract is validated.
     if version != '2.6.1':
         raise VideoBenchmarkError(f'Expected Roboflow trackers 2.6.1, installed {version}')
+    competition = overrides.pop('birth_competition_iou', 0.)
+    if competition:
+        from depthport.tracking_admission import competition_tracker_class
+        cls = competition_tracker_class(cls)
+        overrides['birth_competition_iou'] = competition
     tracker = cls(frame_rate=fps, **overrides)
     return tracker
 
@@ -207,8 +216,11 @@ def run_video_tracker(video: Path, data: dict, method: str, *, parameters: dict 
         meta['parameter_overrides']=dict(parameters)
     if method in ('bytetrack','botsort'):
         fields=('track_activation_threshold','high_conf_det_threshold','maximum_frames_without_update',
-                'maximum_time_without_update','minimum_consecutive_frames','enable_cmc','cmc_method')
+                'maximum_time_without_update','minimum_consecutive_frames','enable_cmc','cmc_method',
+                'instant_first_frame_activation','birth_competition_iou')
         meta['effective_tracker_parameters']={key:getattr(tracker,key) for key in fields if hasattr(tracker,key)}
+        if hasattr(tracker, 'birth_admission_counts'):
+            meta['birth_admission_counts'] = dict(tracker.birth_admission_counts)
     return report,meta
 
 

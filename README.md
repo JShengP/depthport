@@ -166,7 +166,7 @@ Estimated metres, relative depth and V2's virtual 1–5 display geometry remain 
 <details>
 <summary>Tracking studies and next experiments</summary>
 
-Completed studies cover [2,700 frames / 27 runs](docs/en/tracking-expanded-acceptance.md), [1,179 new frames / 60 parameter runs](docs/en/tracking-parameter-acceptance.md), and [ID-switch/false-positive diagnosis](docs/en/tracking-error-diagnosis.md). Lower activation can increase coverage and ID switches/FP; long-occlusion recovery remains unaccepted. Next experiments separate confirmation/competition, detector localisation and recovery. **Defaults stay unchanged.**
+Completed studies cover [2,700 frames / 27 runs](docs/en/tracking-expanded-acceptance.md), [1,179 new frames / 60 parameter runs](docs/en/tracking-parameter-acceptance.md), [ID-switch/false-positive diagnosis](docs/en/tracking-error-diagnosis.md), and [72 confirmation/competition runs on the same 09/10 scenes with fresh 8.4.176 caches](docs/en/tracking-admission-acceptance.md). Longer confirmation reduces FP but adds FN/lower combined IDF1/HOTA; the birth-only veto never triggers. Next instrument promotion/recovery competition, separate localisation and validate independent sequences. Long-occlusion acceptance stays open; **defaults stay unchanged**.
 
 These results apply to the named public sequences, fixed caches and recorded versions, not newer detector profiles or other scenes. Only aggregates are distributed for these studies, without raw frames, GT, per-frame tracks or user bookmarks.
 

@@ -24,6 +24,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from depthport.video_tracking_benchmark import read_cache,run_video_tracker,sha256_file
 from depthport.mot_scenarios import read_mot_gt,scenario_events,score_events,compare_event_recovery
+from depthport.tracking_admission import admission_configurations,admission_error_locations,paired_error_counts
 
 TRACKEVAL_COMMIT='12c8791b303e0a0b50f753af204249e622d0281a'
 METHODS=('baseline','bytetrack','botsort')
@@ -37,7 +38,11 @@ PARAMETER_PROFILES={
 }
 
 
-def run_configurations(parameter_sweep=False):
+def run_configurations(parameter_sweep=False, admission_study=False):
+    if admission_study:
+        if parameter_sweep:
+            raise ValueError('Choose one study, not both')
+        return admission_configurations()
     if not parameter_sweep:
         return {m:{'backend':m,'parameters':None} for m in METHODS}
     return {m+'__'+name:{'backend':m,'profile':name,'parameters':dict(params)}
@@ -138,12 +143,14 @@ def main(argv=None):
     p.add_argument('--work-dir',type=Path,required=True)
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--repeats',type=int,default=3)
-    p.add_argument('--parameter-sweep',action='store_true',help='Five fixed activation/split/buffer profiles per direct backend')
+    study=p.add_mutually_exclusive_group()
+    study.add_argument('--parameter-sweep',action='store_true',help='Five fixed activation/split/buffer profiles per direct backend')
+    study.add_argument('--admission-study',action='store_true',help='Separate confirmation and birth-competition controls; no worker/default change')
     a=p.parse_args(argv)
     if not 1<=a.repeats<=5 or a.output.is_symlink() or a.work_dir.is_symlink():
         p.error('Invalid repeats or symlink output/work directory')
     manifest=load_manifest(a.manifest)
-    configurations=run_configurations(a.parameter_sweep)
+    configurations=run_configurations(a.parameter_sweep, a.admission_study)
     methods=tuple(configurations)
     if a.parameter_sweep and any(s['name'].split('-')[1] in {'04','11','13'} for s in manifest['sequences']):
         p.error('Parameter validation must exclude the earlier 04/11/13 acceptance scenes')
@@ -188,6 +195,12 @@ def main(argv=None):
         report['evaluation']['configurations']=configurations
         report['evaluation']['buffer_units']='lost_track_buffer is 30-FPS reference frames: 30=1s, 90=3s; backend scales to source FPS'
         report['limitations'][2]='Fixed five-profile sensitivity study; no ReID or CMC ablation, exploratory validation rather than a held-out leaderboard or default-selection gate.'
+    if a.admission_study:
+        report['format']='depthport.mot17-admission-acceptance.v1'
+        report['evaluation']['configurations']=configurations
+        report['evaluation']['reference_profile']='activation_control'
+        report['evaluation']['birth_control']='Only veto unmatched high-confidence births after upstream association; IoU >= .5 against confirmed retained track states after CMC/update. No input filtering or changes to weak association.'
+        report['limitations'][2]='Exploratory confirmation/birth-competition ablation on previously studied training scenes, not an independent acceptance group. No ReID, CMC ablation, worker IPC or default change. BoT-SORT successful-update counter and instant-first-frame exception remain upstream behaviour.'
     all_scores={m:{} for m in methods};moving_scores={m:{} for m in methods};frozen=None
     for seq in manifest['sequences']:
         name=seq['name'];video=Path(seq['video']);cache_path=Path(seq['detections']);gt=Path(seq['gt']);ini=Path(seq['seqinfo'])
@@ -223,6 +236,9 @@ def main(argv=None):
                     if (any(effective[k]!=params[k] for k in ('track_activation_threshold','high_conf_det_threshold'))
                         or effective['maximum_time_without_update']!=params['lost_track_buffer']/30):
                         raise ValueError('Backend effective parameters differ from requested profile')
+                    if a.admission_study and (effective['minimum_consecutive_frames']!=params['minimum_consecutive_frames']
+                        or effective.get('birth_competition_iou',0.)!=params.get('birth_competition_iou',0.)):
+                        raise ValueError('Effective admission parameters differ from study profile')
                 identity=canonical_predictions(pred)
                 if method in canonical and identity!=canonical[method]:raise ValueError('Repeated run changed canonical IDs/boxes')
                 canonical[method]=identity;outputs[method].append(timing)
@@ -242,7 +258,7 @@ def main(argv=None):
                 'cached_detections':sum(len(f['detections']) for f in cache['frames']),
                 'gt_pedestrian_observations':len(rows),'scenario_event_counts':{k:len(v) for k,v in events.items()},'methods':{}}
         ids=sorted({r['id'] for r in rows})
-        scenario_matches={}
+        scenario_matches={};error_locations={}
         for method in methods:
             raw=dataset.get_raw_seq_data(method,name);data=dataset.get_preprocessed_seq_data(raw,'pedestrian')
             if data['num_gt_ids']!=len(ids) or data['num_gt_dets']!=len(rows):raise ValueError('GT mapping differs from TrackEval preprocessing')
@@ -261,10 +277,26 @@ def main(argv=None):
               'median_trial_p95_ms':statistics.median(t['tracker_update']['p95_ms'] for t in outputs[method]),
               'repeated_canonical_predictions_equal':True,
               'canonical_predictions_sha256':hashlib.sha256(canonical[method].encode()).hexdigest()}
-        if a.parameter_sweep:
+            if a.admission_study:
+                result['methods'][method]['birth_admission_trials']=[t.get('birth_admission_counts') for t in outputs[method]]
+                locations,counts=admission_error_locations(data,cache,scale)
+                if any(counts[k]!=scores['CLEAR'][k] for k in counts):
+                    raise ValueError('Admission diagnostic counts differ from official CLEAR')
+                error_locations[method]=locations
+                (local/(method+'-error-locations.local.json')).write_text(json.dumps({k:sorted(v) for k,v in locations.items()}))
+        if a.parameter_sweep or a.admission_study:
+            reference='activation_control' if a.admission_study else 'default'
             result['paired_changes_vs_default']={method:{key:compare_event_recovery(value,
-                scenario_matches[configurations[method]['backend']+'__default'],scenario_matches[method])
-                for key,value in events.items()} for method in methods if configurations[method]['profile']!='default'}
+                scenario_matches[configurations[method]['backend']+'__'+reference],scenario_matches[method])
+                for key,value in events.items()} for method in methods if configurations[method]['profile']!=reference}
+            if a.admission_study:
+                result['paired_changes_vs_activation_control']=result.pop('paired_changes_vs_default')
+                result['paired_errors_vs_activation_control']={method:paired_error_counts(
+                    error_locations[configurations[method]['backend']+'__activation_control'], error_locations[method])
+                    for method in methods if configurations[method]['profile']!='activation_control'}
+                result['combined_vs_confirmation_only']={backend:paired_error_counts(
+                    error_locations[backend+'__confirm3'],error_locations[backend+'__confirm3_competition'])
+                    for backend in ('bytetrack','botsort')}
         report['sequences'].append(result)
     report['combined']={}
     for group,source in [('all_sequences',all_scores),('moving_camera_sequences',moving_scores)]:
@@ -274,9 +306,16 @@ def main(argv=None):
                 combined={m.get_name():m.combine_sequences({name:s[m.get_name()] for name,s in source[method].items()}) for m in metrics}
                 report['combined'][group][method]=metric_summary(combined)
     report['combined_scenarios']=combine_scenario_scores(report['sequences'],methods)
-    if a.parameter_sweep:
-        first=report['sequences'][0]['paired_changes_vs_default']
-        report['combined_paired_changes_vs_default']={method:{scenario:{field:sum(s['paired_changes_vs_default'][method][scenario][field]
+    if a.admission_study:
+        for group in ('paired_errors_vs_activation_control','combined_vs_confirmation_only'):
+            first=report['sequences'][0][group]
+            report['combined_'+group]={method:{kind:{field:sum(s[group][method][kind][field]
+                for s in report['sequences']) for field in counts} for kind,counts in kinds.items()}
+                for method,kinds in first.items()}
+    if a.parameter_sweep or a.admission_study:
+        paired_key='paired_changes_vs_activation_control' if a.admission_study else 'paired_changes_vs_default'
+        first=report['sequences'][0][paired_key]
+        report['combined_'+paired_key]={method:{scenario:{field:sum(s[paired_key][method][scenario][field]
             for s in report['sequences']) for field in counts} for scenario,counts in scenarios.items()}
             for method,scenarios in first.items()}
     a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(report,ensure_ascii=False,indent=2,allow_nan=False)+'\n')

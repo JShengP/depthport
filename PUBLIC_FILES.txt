@@ -219,3 +219,13 @@ docs/assets/tracking-replay-later.zh-TW.jpg
 docs/en/tracking-replay-example.md
 docs/zh-TW/tracking-replay-example.md
 docs/validation/v0.3-public-replay-example.json
+
+# Controlled new-ID admission study; aggregates only, raw cases remain local
+depthport/tracking_admission.py
+tools/plot_tracking_admission.py
+tests/test_tracking_admission.py
+docs/en/tracking-admission-acceptance.md
+docs/zh-TW/tracking-admission-acceptance.md
+docs/validation/v0.3-tracking-admission-protocol.json
+docs/validation/v0.3-mot17-admission.json
+docs/assets/tracking-v03-admission.png

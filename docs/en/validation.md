@@ -1,6 +1,10 @@
 # Validation record
 [繁體中文](../zh-TW/validation.md) · [Home](../../README.md)
 
+## Controlled new-ID admission study — 2026-10-19
+
+[Method/results](tracking-admission-acceptance.md) · [Frozen protocol](../validation/v0.3-tracking-admission-protocol.json) · [Aggregate record](../validation/v0.3-mot17-admission.json). Rebuilt shared YOLO26n CPU 8.4.176 caches on the previously studied MOT17-09/10 scenes: 1,179 frames, 18,164 pedestrian observations, six profiles per backend, three repeats, 72 runs. Confirmation 3/5 trades fewer FP for more FN and lower combined IDF1/HOTA. Birth-only IoU .5 competition vetoes zero candidates and yields identical canonical predictions. All repeated predictions agree and all 24 sequence/profile traces reconcile official CLEAR counts. No candidate passes the frozen research screen; no default change or independent/long-occlusion acceptance. Source terms and runtime limits are recorded; raw inputs/cases stay local, historical records/releases remain unchanged.
+
 
 
 ## Public replay documentation example — 2026-10-19

@@ -31,6 +31,8 @@ python tools/browser_offline_smoke.py
 
 `tools/diagnose_tracking_errors.py` 重分析預設／降低啟用的保存結果，精確核對官方 CLEAR、依固定偵測配對 FP，原始案例／ID 對照只寫入本機工作目錄，彙總為情境訊號而非因果判定。[方式、公開範圍與改善決定](../docs/zh-TW/tracking-error-diagnosis.md)。
 
+`tools/validate_mot_tracking.py --admission-study` 分開測確認與出生時競爭閘門，保留上游弱偵測關聯；錯誤位置留本機，只公開配對彙總。`tools/plot_tracking_admission.py` 在獨立追蹤環境以 Matplotlib 從彙總 JSON 畫 FN／FP／IDSW，不讀影片。[凍結配置、結果與限制](../docs/zh-TW/tracking-admission-acceptance.md)。
+
 
 ## 版本功能示意圖
 

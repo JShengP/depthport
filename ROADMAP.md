@@ -68,6 +68,7 @@ Close the shared [P0 hardware/installation gates](#p0--physical-camera-and-insta
 - **Implemented / 功能：** retains v0.1/v0.2; adds opt-in manual same-frame local Sessions, SHA-256 replay, explicit offline YOLO analysis, local Object IDs and camera-space depth/XYZ histories. NumPy 1 application and optional NumPy 2 BoT-SORT worker use bounded IPC. **Storage stays off by default; simple association stays default.** 選用本機快照／離線分析與獨立 worker；不自動錄影，回放不重新推論，原預設不變。
 - **Review / 檢查：** boxes/IDs, playback/speed/timeline/A-B loops, bookmark notes/tags/search/JSON backup and keyboard/IME guards are implemented. **ByteTrack is an offline benchmark backend, not another Session UI selector.** 疊圖、回放及本機書籤檢查已實作；ByteTrack 僅屬研究後端。
 - **Research / 研究：** Baseline/ByteTrack/BoT-SORT comparisons, parameter profiles and ID-switch/false-positive diagnosis are recorded. Lower activation can add coverage and ID switches/FP together; no candidate has been promoted to a new default. 公開序列比較、參數研究與錯誤診斷已記錄，不代表長遮擋驗收通過。
+- **Admission ablation / 新 ID 控制：** [1,179 frames / 72 runs](docs/en/tracking-admission-acceptance.md) / [繁中](docs/zh-TW/tracking-admission-acceptance.md), using fresh 8.4.176 caches on previously studied 09/10 scenes. Longer confirmation reduces FP but increases FN and lowers combined IDF1/HOTA; the birth-only IoU .5 veto never triggers. No candidate passes the frozen research screen. 本輪控制實驗已完成，沒有候選達標，不是獨立序列或可靠性驗收通過。
 - **Real example / 真實範例：** 24 consecutive public Pexels frames exercise genuine depth, YOLO26n CPU detection, the isolated worker and browser replay. It has no identity ground truth and spans only **0.959 s** from first to last frame. The reused CUDA environment is not a fresh installation of the complete Alpha.2 recipe; screenshots/docs were added after its frozen release. 真實短片回放，不是長遮擋、精度或完整配方新安裝驗收；後補文件不改 Tag／下載包。
 - **Current CI / 目前檢查：** Ubuntu/Windows × Python 3.11/3.12 application contracts and model API installation/import checks; no pretrained weights or inference in CI. 跨平台契約與實際 API 匯入，不等於 Windows 真推論或實機通過。
 
@@ -81,8 +82,8 @@ Close the shared [P0 hardware/installation gates](#p0--physical-camera-and-insta
 
 ### Next / 下一步
 
-Prioritise the controlled [P0 tracking experiments](#p0--tracking-reliability--追蹤可靠性), revalidate the current dependency profile and repeat on an independent licensed sequence group. Run shared hardware/installation gates separately; keep defaults unchanged until evidence supports a change.
-先分離新 ID 確認／競爭、框品質與遮擋恢復，用目前依賴及另一組授權明確的序列重驗；另做實機驗收，有證據再決定是否改預設。
+Use the recorded admission ablation to guide [P0 tracking experiments](#p0--tracking-reliability--追蹤可靠性): instrument unconfirmed promotion/recovery competition before another control, isolate localisation, then validate an independent licensed sequence group. Run shared hardware/installation gates separately; keep defaults unchanged.
+依本輪結果先記錄未確認升格／恢復時的競爭，再選控制方式；分離框品質、用新的授權序列組重驗，另做實機驗收，維持原預設。
 
 ## Next acceptance gates / 下一步驗收
 
@@ -91,10 +92,10 @@ These gates apply to current `main`; the version sections above identify which r
 
 ### P0 — Tracking reliability / 追蹤可靠性
 
-1. **Confirmation & competition / 確認與競爭：** test stricter new-track confirmation/competition while retaining weak-box continuation. Pair added/removed ID switches and FP/FN at immutable detection locations; do not promote a profile solely for Recall gains. 分開新 ID 啟用與舊 ID 延續，一起看漏追收益、誤追與換 ID 代價。
+1. **Confirmation & competition / 確認與競爭：** [First controlled study recorded](docs/en/tracking-admission-acceptance.md), not accepted: confirmation 3/5 adds FN and lowers combined identity scores; birth-only competition has zero vetoes/exactly equal predictions. Next instrument competition at unconfirmed promotion/recovery, then test a separately frozen control while retaining weak continuation. Pair added/removed FP/FN/IDSW; do not promote one-metric gains. [本輪實驗](docs/zh-TW/tracking-admission-acceptance.md)已完成但未達標；先記錄升格／恢復的競爭，再凍結新控制，不刪弱偵測或只挑單一指標。
 2. **Localisation & recovery / 框品質與恢復：** isolate detector localisation/resolution controls from association recovery. Instrument ambiguous costs and visibility loss before gate changes or ReID. 固定一邊測另一邊，先記錄模糊關聯成本及可見性，不直接把所有問題歸因關聯。
 3. **Independent sequence group / 獨立序列組：** use licensed continuous sequences with long occlusion, crossing and camera motion. Fix detector/versions/sampling, repeat runs and report IDF1/HOTA/CLEAR, event recovery and failures separately. Include worker IPC in end-to-end latency; do not mix it with direct-library timing. 固定條件、重複執行，同報整體分數與事件失敗，端到端耗時包含 worker IPC。
-4. **Current dependencies / 目前依賴：** revalidate before transferring historical fixed-cache metrics. Prior caches used Ultralytics 8.4.115; current application requirements pin 8.4.176. Historical scores do not validate the current detector stack. 舊偵測快取與新依賴分開記錄，不直接沿用舊分數當新版驗收。
+4. **Current dependencies / 目前依賴：** the admission study regenerates shared 8.4.176 CPU caches for 09/10; this reused runtime is not a fresh full Alpha.2 installation or independent acceptance. Earlier studies keep 8.4.115 caches/scores; do not transfer or pool them. 本輪補目前偵測版本的限定場景證據，仍需獨立序列／完整配方驗收；歷史快取與分數保持分開。
 
 [Diagnosis / 錯誤診斷](docs/en/tracking-error-diagnosis.md) · [繁中診斷](docs/zh-TW/tracking-error-diagnosis.md) · [Parameter study / 參數研究](docs/en/tracking-parameter-acceptance.md) · [Expanded comparison / 三場景比較](docs/en/tracking-expanded-acceptance.md)
 

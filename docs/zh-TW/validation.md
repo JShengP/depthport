@@ -1,6 +1,10 @@
 # 驗證紀錄
 [English](../en/validation.md)・[首頁](../../README.zh-TW.md)
 
+## 新 ID 確認／競爭控制實驗 — 2026-10-19
+
+[方法與結果](tracking-admission-acceptance.md) · [凍結配置](../validation/v0.3-tracking-admission-protocol.json) · [彙總紀錄](../validation/v0.3-mot17-admission.json)。已研究的 MOT17-09／10 場景以 YOLO26n CPU 8.4.176 重建共同快取：1,179 格、18,164 筆行人觀測，兩後端各六配置、三次重複，共 72 次。確認 3／5 減少 FP 卻增加 FN、降低整體 IDF1／HOTA；出生時 IoU .5 競爭閘門阻擋零次，標準化預測完全相同。重複輸出一致，24 份場景／配置診斷與官方 CLEAR 精確核對。沒有候選通過事前研究篩選，不改預設，不宣稱獨立序列／長遮擋通過；來源條款與環境限制保留，原始輸入／案例留本機，歷史紀錄及發布包不變。
+
 
 
 ## 公開影片真實回放文件範例 — 2026-10-19

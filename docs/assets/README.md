@@ -14,6 +14,8 @@
 
 ## MOT17 aggregate plot
 
+`tracking-v03-admission.png` plots only aggregate FN/FP/IDSW from the [new-ID admission study](../validation/v0.3-mot17-admission.json), using `tools/plot_tracking_admission.py`. It contains no media, GT boxes, individual IDs, case windows or local paths. [Terms, paired comparisons and limitations](../en/tracking-admission-acceptance.md): previously studied training scenes, fresh 8.4.176 detections, no candidate accepted, defaults unchanged. 本圖只呈現彙總計數，不含來源影像或個別軌跡。
+
 `tracking-v03-mot17.png` is an original Matplotlib plot of the numeric [expanded acceptance record](../validation/v0.3-mot17-expanded.json). It contains no source image, GT box, per-frame ID, private runtime data or model output image. The [validation method](../en/tracking-expanded-acceptance.md) identifies the dataset terms, cohorts, denominators and limitations.
 
 `tracking-v03-parameters.png` plots only the numeric [09/10 parameter study](../validation/v0.3-mot17-parameters.json): Recall/IDF1 and all-subject endpoint-state counts for five fixed profiles per backend. No source image or per-frame GT/prediction is embedded. [Terms and interpretation](../en/tracking-parameter-acceptance.md).

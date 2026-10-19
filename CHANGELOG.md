@@ -1,6 +1,11 @@
 # Changelog / 版本紀錄
 
-## Unreleased — documentation after v0.3.0-alpha.2 / Alpha.2 後的文件更新
+## Unreleased — research and documentation after v0.3.0-alpha.2 / Alpha.2 後的研究與文件
+
+- Add opt-in benchmark confirmation/birth-competition controls, immutable-location FP/FN/IDSW pairing, real-library continuation/input/registry contracts and an aggregate plot builder. Frozen 72-run MOT17-09/10 ablation with fresh 8.4.176 CPU detections: longer confirmation trades FP for FN/lower identity scores; birth veto never triggers. No candidate passes the research screen; application/worker defaults and published releases remain unchanged.
+- 新增選用研究控制、固定位置錯誤配對、真套件弱偵測延續契約與彙總繪圖；同場景 72 次實驗未找到無退步候選，維持原預設，更新驗證紀錄／ROADMAP，不發布原始影片／GT／逐格軌跡。
+
+[Admission study / 新 ID 控制研究](docs/en/tracking-admission-acceptance.md) · [繁體中文](docs/zh-TW/tracking-admission-acceptance.md)
 
 - Add three actual v0.3 Session replay screenshots on Lukas Kosc / Pexels footage with explicit source terms, source/Session frame mapping, genuine inference/worker conditions and curated hashes/counts. Preserve missing/new observations and timing/accuracy limits; no new tracker/default or benchmark claim.
 - 新增公開展示條款明確的 Pexels 真實回放截圖，呈現 Object ID、部分遮擋與交會；保留缺框／新 ID，補來源授權、版本條件、影格對照與限制。不散布原片、私人 Session／備註或權重，不覆寫既有 Release。

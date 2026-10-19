@@ -31,6 +31,8 @@ The tool uses Playwright's installed Chromium unless `CHROMIUM_PATH` names a loc
 
 `tools/diagnose_tracking_errors.py` reanalyses saved default/activation-only results with exact official CLEAR reconciliation, pairs FP by immutable cache detection and writes raw cases/ID maps only to the local work directory. It publishes aggregate context counts, not causal labels. [Method, privacy boundary and decisions](../docs/en/tracking-error-diagnosis.md).
 
+`tools/validate_mot_tracking.py --admission-study` separately tests bounded confirmation and a birth-only competition veto while preserving upstream weak association; writes only aggregate comparisons publicly and keeps error locations local. `tools/plot_tracking_admission.py` renders FN/FP/IDSW from the aggregate JSON with Matplotlib in the isolated tracker environment. [Frozen protocol, results and limits](../docs/en/tracking-admission-acceptance.md).
+
 
 ## Version workflow schematics
 
