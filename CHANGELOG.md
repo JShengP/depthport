@@ -2,6 +2,11 @@
 
 ## Unreleased — research and documentation after v0.3.0-alpha.2 / Alpha.2 後的研究與文件
 
+- Add separate offline availability-only and equivalent-one-to-one ByteTrack recovery controls, frozen protocol, new MOT17-04 comparison and numeric figure. Twelve repeat runs preserve weak continuation: new controls equal reference with zero exposure; legacy adds six misses with unchanged FP despite identity-score gains. No accepted fix, retuning/default/release change; raw diagnostics stay local.
+- 完成競爭者占用／一對一替代獨立控制、新序列比較與雙語驗證／ROADMAP；如實記錄零觸發與漏追取捨，不發布影像、GT 或原始案例。
+
+[Exclusive competition / 排他競爭控制](docs/en/tracking-exclusive-competition.md) · [繁體中文](docs/zh-TW/tracking-exclusive-competition.md)
+
 - Add read-only immutable-history bridges, weak-state/column analysis and an exact pinned HOTA solver observer. Reproduce frozen scores without tracking or retuning; separate below-gate retained states, CLEAR ownership continuity, one-frame switch displacement and bus low-localisation observation losses. All ten competitors are already occupied and forced-alternative costs overlap; select effective exclusive competition as the next research point, with no new gate/default/release change.
 - 補齊延後接回的狀態與關聯歷史、HOTA 門檻診斷及圖表，原始矩陣／ID／案例留本機，不調參或宣稱修復，保留弱偵測延續。
 

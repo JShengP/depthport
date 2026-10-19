@@ -1,6 +1,10 @@
 # Validation record
 [繁體中文](../zh-TW/validation.md) · [Home](../../README.md)
 
+## Frozen competitor occupancy / one-to-one alternative experiment — 2026-10-19
+
+[Method/results](tracking-exclusive-competition.md) · [Protocol](../validation/v0.3-exclusive-competition-protocol.json) · [Aggregate](../validation/v0.3-exclusive-competition.json). New static MOT17-04, 1,050 dense frames / four separate arms × three identical repeats. Reference/availability/equivalent: FN 38,587, FP 703, IDSW 7, HOTA 29.7320%; legacy: FN +6, FP unchanged, IDSW −1, HOTA 30.3467%. New controls both have zero vetoes and exact reference output: insufficient effective exposure, not accepted fixes. Legacy fails FN/FP screen. Preserve weak continuation and frozen settings; raw matrices/IDs/cases local. Next freeze GT-free exposure cohort selection and independent confirmation; prior bus failure and hardware/long-occlusion limits remain.
+
 ## Frozen recovery state/association-history diagnosis — 2026-10-19
 
 [Method and findings](tracking-recovery-history.md) · [Aggregate](../validation/v0.3-recovery-history.json). No tracking/inference/retuning: all original scores reproduce and observed HOTA solver returns exact fields; repeated full diagnostic hashes agree. Twelve unemitted misses retain below-gate hypotheses; eight retained detections receive other CLEAR owners; one added IDSW location shifts a prefix-equivalent transition by one frame. Bus losses are five low-localisation GT-frame observations at .05–.35. All ten competitors are already assigned elsewhere; forced-alternative costs overlap across TP/FP. Next define effective exclusive competition and find genuine exposure, without a new cutoff, default or acceptance claim. Raw matrices/bridges/cases stay local.

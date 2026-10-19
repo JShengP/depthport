@@ -73,3 +73,5 @@ python tools/diagnose_tracking_recovery_history.py \
 ```
 
 The tool verifies frozen code/inputs/outputs/evaluator files and rejects score mismatches. Full solver costs, bridges and cases are written locally. This explains algorithm/evaluator mechanisms, not physical occlusion or identity causality; these are not new blind scenes. Long occlusion, physical RTSP, Windows inference/worker, calibrated 3D, endurance and throughput remain unverified. Existing releases/tags/defaults remain unchanged.
+
+Follow-up: [separate frozen occupancy/equivalent-assignment controls](tracking-exclusive-competition.md). New static scene has zero effective exposure; this historical diagnosis is not rewritten as acceptance.

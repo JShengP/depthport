@@ -73,3 +73,5 @@ python tools/diagnose_tracking_recovery_history.py \
 ```
 
 工具驗證原凍結程式／輸入／預測／trace 與官方評估檔，拒絕分數不符；完整 solver 成本、橋接及案例只寫在本機。這是演算法／評分機制診斷，不能證明物理遮擋或真實身分因果；既有場景不是新盲測。長遮擋、實體 RTSP、Windows 真推論／worker、3D、長時穩定性及吞吐量仍未驗收，既有 Release／Tag 與預設不變。
+
+後續：[分開凍結的占用／一對一替代控制](tracking-exclusive-competition.md)。新固定相機序列沒有有效觸發，不將本歷史診斷回填成驗收通過。

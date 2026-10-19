@@ -271,3 +271,14 @@ docs/en/tracking-recovery-history.md
 docs/zh-TW/tracking-recovery-history.md
 docs/validation/v0.3-recovery-history.json
 docs/assets/tracking-v03-recovery-history.png
+
+# Frozen exclusive-competition controls and reviewed aggregates
+depthport/tracking_exclusive_control.py
+tests/test_tracking_exclusive_control.py
+tools/validate_tracking_exclusive.py
+tools/plot_tracking_exclusive.py
+docs/en/tracking-exclusive-competition.md
+docs/zh-TW/tracking-exclusive-competition.md
+docs/validation/v0.3-exclusive-competition-protocol.json
+docs/validation/v0.3-exclusive-competition.json
+docs/assets/tracking-v03-exclusive-competition.png

@@ -1,6 +1,10 @@
 # 驗證紀錄
 [English](../en/validation.md)・[首頁](../../README.zh-TW.md)
 
+## 競爭者占用／一對一替代獨立控制 — 2026-10-19
+
+[方法與結果](tracking-exclusive-competition.md) · [凍結配置](../validation/v0.3-exclusive-competition-protocol.json) · [彙總](../validation/v0.3-exclusive-competition.json)。新固定相機 MOT17-04，完整 1,050 格／四組各三次，重複雜湊一致。原對照／未配對競爭者／等價替代：FN 38,587、FP 703、IDSW 7、HOTA 29.7320%；舊控制 FN +6、FP 不變、IDSW −1、HOTA 30.3467%。新控制都零觸發、輸出精確等同對照，是有效曝光不足，不是接受的修復；舊組未通過漏追／FP 篩選。凍結值與弱偵測延續保留，原矩陣／ID／案例留本機；下一步凍結 GT-free 曝光選取與獨立確認，前輪公車及實機／長遮擋未驗收仍保留。
+
 ## 延後接回的狀態／關聯歷史診斷 — 2026-10-19
 
 [方法與發現](tracking-recovery-history.md) · [彙總](../validation/v0.3-recovery-history.json)。不追蹤／推論／調參，原分數及 HOTA solver 全欄位精確重現，重複完整診斷雜湊一致。12 筆未輸出有仍保留但低於閘門的假說，8 筆保留偵測被 CLEAR 配給其他 GT，新增換 ID 位置為同前綴轉換延後一格；公車損失為 .05–.35 的 5 個低定位 GT×影格。10 次觸發的競爭者均已配其他框，強制替代成本 TP／FP 重疊；下一點為有效排他競爭與實際曝光，不直接選新閘門／升預設。原矩陣／橋接／案例留本機。
