@@ -57,7 +57,7 @@ DepthPort 整合既有預訓練模型，**不是新的深度網路或研究模�
 
 *實際 Session 介面的真 YOLO26n＋獨立 BoT-SORT 結果，非合成資料。素材：[Lukas Kosc／Pexels](https://www.pexels.com/video/urban-street-scene-with-people-crossing-34597902/)，依 [Pexels 條款](https://www.pexels.com/terms-of-service/)編入文件作品。Session #12＝來源第 43 格，1.752 秒。*
 
-[三張連續影格導覽、來源授權及完整條件](docs/zh-TW/tracking-replay-example.md)。24 格範例呈現局部 ID、交會、部分遮擋與觀測消失／新 ID；無身分真值，不宣稱長遮擋恢復通過。來源 23.976 fps、worker 固定 30 Hz 步長、UI 1× 每秒 5 個保存影格。此文件於 Alpha.2 後補入 main，既有下載包不變。
+[三張前後影格導覽、來源授權及完整條件](docs/zh-TW/tracking-replay-example.md)。24 格範例呈現局部 ID、交會、部分遮擋與觀測消失／新 ID；無身分真值，不宣稱長遮擋恢復通過。來源 23.976 fps、worker 固定 30 Hz 步長、UI 1× 每秒 5 個保存影格。此文件於 Alpha.2 後補入 main，既有下載包不變。
 
 ### 追蹤研究證據與下一步
 
