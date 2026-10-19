@@ -8,6 +8,7 @@ from __future__ import annotations
 import base64
 import hashlib
 import io
+import ipaddress
 import json
 import os
 import re
@@ -37,6 +38,10 @@ from depthport.capture import CaptureWorker
 from depthport.spatial import pixel_inspection, depth_distribution, distance_between, fit_plane, empirical_validation
 from depthport.comparison import compact_card, status_card
 from depthport.semantic import run_ultralytics_semantic
+from depthport.sessions import (SessionStore, SessionError, SessionIntegrity, SessionNotFound,
+                                SessionLimit, MAX_BOOKMARK_BYTES)
+from depthport.tracking import analyse_session, MAX_TRACK_FRAMES
+from depthport.tracking_worker import worker_configured, close_tracking_workers
 
 MAX_UPLOAD = 12 * 1024 * 1024
 
@@ -485,12 +490,19 @@ class Service:
 @asynccontextmanager
 async def lifespan(app):
     service = Service(); app.state.service = service
+    # Explicit opt-in. No silent RTSP archival, default storage is disabled.
+    app.state.session_store = (SessionStore(ROOT / 'outputs' / 'sessions')
+                               if os.getenv('ENABLE_SESSION_STORAGE', '0') == '1' else None)
+    app.state.tracking_lock = threading.RLock()
+    app.state.tracking_job = {'state':'idle'}
     source = os.getenv('RTSP_URL', '').strip()
     if source:
         try: service.set_source(source)
         except ValueError as exc: service.source_error = safe_error(exc)
     try: yield
-    finally: service.shutdown()
+    finally:
+        close_tracking_workers()
+        service.shutdown()
 
 
 app = FastAPI(title='DepthPort', version=__version__, lifespan=lifespan)
@@ -529,6 +541,8 @@ async def request_validation_error(request: Request, exc: RequestValidationError
 def index(): return FileResponse(ROOT/'static/index.html')
 @app.get('/spatial')
 def spatial_index(): return FileResponse(ROOT/'static/spatial.html')
+@app.get('/sessions')
+def session_index(): return FileResponse(ROOT/'static/sessions.html')
 @app.get('/api/source-code.zip')
 def download_source():
     try:
@@ -881,6 +895,270 @@ def download_bundle():
     f, records, result = app.state.service.snapshot()
     analysis = spatial_report_for_frame(app.state.service, f)
     return attachment(bundle_bytes(f, records, result, analysis), f'depthport_{f["engine"]}_frame_{f["frame_id"]}.zip', f['frame_id'], 'application/zip')
+
+
+# v0.3 opt-in local Session/Replay. Every write is manual; no background recorder.
+# Session IDs and frame indexes are validated by the storage implementation.
+def local_session_store(request: Request) -> SessionStore:
+    peer = request.client.host if request.client else ''
+    try:
+        permitted = ipaddress.ip_address(peer).is_loopback
+    except ValueError:
+        permitted = False
+    if not permitted:
+        raise HTTPException(403, 'Session archive is only available from localhost')
+    store = getattr(request.app.state, 'session_store', None)
+    if store is None:
+        raise HTTPException(404, 'Local session storage is disabled; set ENABLE_SESSION_STORAGE=1')
+    return store
+
+
+class NewSession(BaseModel):
+    label: str = Field(default='', max_length=80)
+
+
+class BookmarkIdentity(BaseModel):
+    model_config = {'extra': 'forbid', 'strict': True}
+    snapshot_sha256: str = Field(min_length=64, max_length=64, pattern=r'^[0-9a-f]{64}$')
+
+
+class BookmarkDeleteRequest(BookmarkIdentity):
+    expected_updated_at: float | None = Field(default=None, ge=0, allow_inf_nan=False)
+
+
+class BookmarkRequest(BookmarkIdentity):
+    create_only: bool = False
+    clear_tags: bool = False
+    add_tag: Literal['id-switch', 'occlusion', 'crossing'] | None = None
+    tags: list[Literal['id-switch', 'occlusion', 'crossing']] = Field(default_factory=list, max_length=3)
+    note: str = Field(default='', max_length=1000)
+
+
+def session_failure(exc: SessionError):
+    if isinstance(exc, SessionNotFound): code=404
+    elif isinstance(exc, SessionLimit): code=413
+    elif isinstance(exc, SessionIntegrity): code=409
+    else: code=422
+    return HTTPException(code,str(exc))
+
+
+@app.get('/api/sessions/status')
+def sessions_status(request: Request):
+    store=local_session_store(request)
+    return {'enabled':True,'manual_capture_only':True,
+            'max_frames_per_session':120,'max_sessions':20,
+            'model_inference_during_replay':False,
+            'tracking_worker_configured':worker_configured()}
+
+
+@app.get('/api/sessions')
+def sessions_list(request: Request):
+    store=local_session_store(request)
+    return {'sessions':store.list_sessions()}
+
+
+@app.post('/api/sessions',status_code=201)
+def sessions_create(request: Request, body: NewSession):
+    store=local_session_store(request)
+    try:return store.create(body.label)
+    except SessionError as exc:raise session_failure(exc) from exc
+
+
+@app.get('/api/sessions/{sid}/frames')
+def sessions_frames(request: Request,sid:str):
+    store=local_session_store(request)
+    try:return store.frames(sid)
+    except SessionError as exc:raise session_failure(exc) from exc
+
+
+@app.get('/api/sessions/{sid}/bookmarks')
+def sessions_bookmarks(request: Request, sid: str):
+    store = local_session_store(request)
+    try:return store.bookmarks(sid)
+    except SessionError as exc:raise session_failure(exc) from exc
+
+
+@app.get('/api/sessions/{sid}/bookmarks/export')
+def sessions_bookmark_export(request: Request, sid: str):
+    store = local_session_store(request)
+    try:data = store.export_bookmarks(sid)
+    except SessionError as exc:raise session_failure(exc) from exc
+    return Response(content=data, media_type='application/json', headers={
+        'Content-Disposition': f'attachment; filename="depthport-bookmarks-{sid}.json"',
+        'Cache-Control': 'no-store'})
+
+
+@app.post('/api/sessions/{sid}/bookmarks/import')
+async def sessions_bookmark_import(request: Request, sid: str):
+    # Gate before reading potentially private annotations, including malformed input.
+    store = local_session_store(request)
+    conflict = request.query_params.get('conflict', 'keep')
+    dry_run = request.query_params.get('dry_run', 'true')
+    if conflict not in ('keep', 'overwrite') or dry_run not in ('true', 'false'):
+        raise HTTPException(422, 'Invalid bookmark import options')
+    length = request.headers.get('content-length')
+    if length is not None:
+        try:declared = int(length)
+        except ValueError:raise HTTPException(422, 'Invalid bookmark JSON request length') from None
+        if declared < 0:
+            raise HTTPException(422, 'Invalid bookmark JSON request length')
+        if declared > MAX_BOOKMARK_BYTES:
+            raise HTTPException(413, 'Bookmark JSON exceeds the 1 MiB limit')
+    raw = bytearray()
+    async for chunk in request.stream():
+        if len(raw) + len(chunk) > MAX_BOOKMARK_BYTES:
+            raise HTTPException(413, 'Bookmark JSON exceeds the 1 MiB limit')
+        raw.extend(chunk)
+    try:
+        result = await run_in_threadpool(store.import_bookmarks, sid, bytes(raw), conflict,
+                                        dry_run == 'true', request.headers.get('if-match'))
+    except SessionError as exc:raise session_failure(exc) from exc
+    return JSONResponse(result, headers={'Cache-Control': 'no-store'})
+
+
+@app.put('/api/sessions/{sid}/frames/{index}/bookmark')
+def sessions_bookmark_save(request: Request, sid: str, index: int, body: BookmarkRequest):
+    store = local_session_store(request)
+    try:return store.save_bookmark(sid, index, body.snapshot_sha256, body.tags, body.note, create_only=body.create_only, add_tag=body.add_tag, clear_tags=body.clear_tags)
+    except SessionError as exc:raise session_failure(exc) from exc
+
+
+@app.delete('/api/sessions/{sid}/frames/{index}/bookmark')
+def sessions_bookmark_delete(request: Request, sid: str, index: int, body: BookmarkDeleteRequest):
+    store = local_session_store(request)
+    try:return store.delete_bookmark(sid, index, body.snapshot_sha256, expected_updated_at=body.expected_updated_at)
+    except SessionError as exc:raise session_failure(exc) from exc
+
+
+@app.post('/api/sessions/{sid}/capture', status_code=201)
+def sessions_capture(request: Request,sid:str):
+    store=local_session_store(request)
+    service=app.state.service
+    # Check the user-requested session before preparing a large archive.
+    try:store.frames(sid)
+    except SessionError as exc:raise session_failure(exc) from exc
+    with service.lock:
+        if service.latest is None:
+            raise HTTPException(409,'No completed inference frame to capture')
+        f,records,result=service.latest,service.records,service.result
+        # Serialization under the lock prevents mixing results on active RTSP.
+        data=bundle_bytes(f,records,result,spatial_report_for_frame(service,f))
+        frame=dict(f)
+    try:return store.capture(sid,data,frame)
+    except SessionError as exc:raise session_failure(exc) from exc
+
+
+@app.get('/api/sessions/{sid}/frames/{index}/bundle.zip')
+def sessions_bundle(request: Request,sid:str,index:int):
+    store=local_session_store(request)
+    try:data=store.bundle(sid,index)
+    except SessionError as exc:raise session_failure(exc) from exc
+    return Response(content=data,media_type='application/zip',headers={
+        'Content-Disposition': f'attachment; filename="depthport-session-{sid}-{index:05d}.zip"'})
+
+
+@app.get('/api/sessions/{sid}/frames/{index}/replay')
+def sessions_replay(request: Request,sid:str,index:int):
+    store=local_session_store(request)
+    try:return store.replay(sid,index)
+    except (SessionError,KeyError,ValueError,zipfile.BadZipFile) as exc:
+        raise session_failure(SessionIntegrity('Saved frame cannot be safely replayed')) from exc
+
+
+@app.get('/api/sessions/{sid}/consistency')
+def sessions_consistency(request: Request, sid: str, max_pairs: int = 32):
+    store = local_session_store(request)
+    try:
+        return store.temporal_consistency(sid, max_pairs=max_pairs)
+    except SessionError as exc:
+        raise session_failure(exc) from exc
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from exc
+
+
+@app.get('/api/sessions/{sid}/consistency/report.json')
+def sessions_consistency_export(request: Request, sid: str):
+    store = local_session_store(request)
+    try:
+        report = store.temporal_consistency(sid)
+    except SessionError as exc:
+        raise session_failure(exc) from exc
+    raw = (json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False) + '\n').encode('utf-8')
+    return Response(raw, media_type='application/json', headers={
+        'Content-Disposition': f'attachment; filename="depthport-temporal-{sid}.json"'})
+
+
+class TrackingRequest(BaseModel):
+    model_config = {'extra': 'forbid'}
+    backend: Literal['baseline','roboflow-botsort']='baseline'
+    mode: Literal['segment','detect']='segment'
+    confidence: float = Field(default=.25, ge=.05, le=.95)
+    max_frames: int = Field(default=12, ge=2, le=MAX_TRACK_FRAMES)
+
+
+def _tracking_work(app: FastAPI, sid: str, job_id: str, mode: str, confidence: float, max_frames: int, backend: str):
+    try:
+        # Isolated CPU-only offline job; does not call the live depth worker.
+        store = app.state.session_store
+        report = analyse_session(store,sid,mode=mode,confidence=confidence,
+                                 max_frames=max_frames,device='cpu',backend=backend)
+        store.save_tracking_report(sid,report)
+        result={'state':'completed','id':job_id,'session_id':sid,
+                'backend':backend,'track_count':report['track_count'],'frames_considered':report['frames_considered']}
+    except Exception as exc:
+        result={'state':'error','id':job_id,'session_id':sid,'error':safe_error(exc)}
+    with app.state.tracking_lock:
+        if app.state.tracking_job.get('id')==job_id:
+            app.state.tracking_job=result
+
+
+@app.post('/api/sessions/{sid}/tracking',status_code=202)
+def sessions_track(request: Request, sid: str, body: TrackingRequest):
+    store=local_session_store(request)
+    try:
+        f=store.frames(sid)
+        if len(f['frames'])<2:raise SessionError('Save two or more frames first')
+    except SessionError as exc:raise session_failure(exc) from exc
+    with request.app.state.tracking_lock:
+        if request.app.state.tracking_job.get('state') in ('queued','running'):
+            raise HTTPException(409,'One tracking job is already running')
+        job_id=uuid.uuid4().hex
+        request.app.state.tracking_job={'state':'running','id':job_id,'session_id':sid,
+                                         'mode':body.mode,'backend':body.backend}
+        thread=threading.Thread(target=_tracking_work,
+              args=(request.app,sid,job_id,body.mode,body.confidence,body.max_frames,body.backend),
+              name='depthport-offline-tracking',daemon=True)
+        thread.start()
+    return {'accepted':True,'id':job_id,'state':'running','backend':body.backend,
+            'note':'Manual saved-frame analysis; CPU-only inference; no auto recording.'}
+
+
+@app.get('/api/sessions/{sid}/tracking/status')
+def sessions_track_status(request: Request, sid: str):
+    store=local_session_store(request)
+    try:store.frames(sid)
+    except SessionError as exc:raise session_failure(exc) from exc
+    with request.app.state.tracking_lock:
+        job=request.app.state.tracking_job.copy()
+    if job.get('session_id')!=sid:return {'state':'idle'}
+    return job
+
+
+@app.get('/api/sessions/{sid}/tracking/report.json')
+def sessions_track_report(request: Request, sid: str, download: bool=False):
+    store=local_session_store(request)
+    try:report=store.tracking_report(sid)
+    except SessionError as exc:raise session_failure(exc) from exc
+    raw=(json.dumps(report,ensure_ascii=False,indent=2,allow_nan=False)+'\n').encode('utf-8')
+    headers={'Content-Disposition':f'attachment; filename="depthport-tracking-{sid}.json"'} if download else {}
+    return Response(raw,media_type='application/json',headers=headers)
+
+
+@app.get('/api/sessions/{sid}/temporal')
+def sessions_temporal(request: Request,sid:str):
+    store=local_session_store(request)
+    try:return store.temporal_summary(sid)
+    except SessionError as exc:raise session_failure(exc) from exc
 
 
 if __name__ == '__main__':

@@ -5,6 +5,7 @@ import io
 import json
 import time
 import zipfile
+from threading import Event
 from types import SimpleNamespace
 from pathlib import Path
 import numpy as np
@@ -158,12 +159,27 @@ def test_metric_measure_and_anchor_requires_calibrated_camera(client):
     assert client.get('/api/spatial/report.json').json()['scale_anchor'] is None
 
 
-def test_comparison_is_sequential_retains_frozen_image_and_exports(client):
+def test_comparison_is_sequential_retains_frozen_image_and_exports(client,monkeypatch):
     first=upload(client)
-    start=client.post('/api/spatial/compare',json={'engines':['yolo26','da2-small','da3-small','da3-metric']})
-    assert start.status_code==202
-    assert client.post('/api/spatial/compare',json={'engines':['yolo26']}).status_code==409
     svc=client.app.state.service
+    entered,release=Event(),Event()
+
+    class GatedEngine(FakeEngine):
+        def load(self):
+            entered.set()
+            assert release.wait(timeout=5), 'Comparison test did not release its worker'
+            return super().load()
+
+    # Hold the first comparison in flight while checking overlap rejection;
+    # a fast worker may otherwise finish before the second HTTP request.
+    monkeypatch.setattr(svc,'engine_factory',GatedEngine)
+    try:
+        start=client.post('/api/spatial/compare',json={'engines':['yolo26','da2-small','da3-small','da3-metric']})
+        assert start.status_code==202
+        assert entered.wait(timeout=5), 'Comparison worker did not start'
+        assert client.post('/api/spatial/compare',json={'engines':['yolo26']}).status_code==409
+    finally:
+        release.set()
     wait_for(lambda:svc.compare_status['state']=='completed',timeout=5)
     answer=client.get('/api/spatial/compare/results').json()
     assert answer['status']['done']==4 and len(answer['cards'])==4
