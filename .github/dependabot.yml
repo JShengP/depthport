@@ -42,6 +42,14 @@ updates:
         versions: ['>=0.6']
       - dependency-name: trimesh
         versions: ['>=5']
+      # Plyfile 1.1.5+ requires NumPy 2, incompatible with the DA3 profile.
+      - dependency-name: plyfile
+        versions: ['>=1.1.5']
+      # Keep the optional Python 3.10 recipe until its minimum is reviewed.
+      - dependency-name: imageio
+        versions: ['>=2.38']
+      - dependency-name: matplotlib
+        versions: ['>=3.11']
       # SciPy 1.18+ requires Python 3.12; this project tests 3.11 and 3.12.
       - dependency-name: scipy
         versions: ['>=1.18']
