@@ -211,3 +211,11 @@ docs/assets/v0.1-workflow.svg
 docs/assets/v0.2-workflow.svg
 docs/assets/v0.3-workflow.svg
 docs/validation/v0.3-dependency-followup.json
+
+# Attributed real public-video replay documentation (not the original footage)
+docs/assets/tracking-replay-start.zh-TW.jpg
+docs/assets/tracking-replay-crossing.zh-TW.jpg
+docs/assets/tracking-replay-later.zh-TW.jpg
+docs/en/tracking-replay-example.md
+docs/zh-TW/tracking-replay-example.md
+docs/validation/v0.3-public-replay-example.json

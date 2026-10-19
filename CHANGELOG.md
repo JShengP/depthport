@@ -1,5 +1,12 @@
 # Changelog / 版本紀錄
 
+## Unreleased — documentation after v0.3.0-alpha.2 / Alpha.2 後的文件更新
+
+- Add three actual v0.3 Session replay screenshots on Lukas Kosc / Pexels footage with explicit source terms, source/Session frame mapping, genuine inference/worker conditions and curated hashes/counts. Preserve missing/new observations and timing/accuracy limits; no new tracker/default or benchmark claim.
+- 新增公開展示條款明確的 Pexels 真實回放截圖，呈現 Object ID、部分遮擋與交會；保留缺框／新 ID，補來源授權、版本條件、影格對照與限制。不散布原片、私人 Session／備註或權重，不覆寫既有 Release。
+
+[Example / 範例](docs/en/tracking-replay-example.md) · [繁體中文](docs/zh-TW/tracking-replay-example.md)
+
 ## 0.3.0-alpha.2 — 2026-10-19 (experimental Alpha pre-release)
 
 - Merge reviewed PRs #10/#13/#17/#18 sequentially after exact-head validation: configure-pages v6 with real metadata/deployment checks; FastAPI minimum 0.143.2; shared Hub minimum 0.36.2; NumPy 1-compatible DA3 geometry bounds.

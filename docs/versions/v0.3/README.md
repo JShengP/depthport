@@ -16,6 +16,13 @@
 Alpha.2 packages the reviewed dependency compatibility updates and workflow illustrations. Earlier [Alpha.1](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.1) stays available; each tag preserves its own source. The maintained guide may evolve after release.
 本導覽與插圖可隨文件維護更新，對應舊版本的原始碼與原版 README 仍以各自 Tag 為準。
 
+## Real replay example / 真實回放範例
+
+![Actual v0.3 replay with Object IDs during crossing and partial occlusion](../../assets/tracking-replay-crossing.zh-TW.jpg)
+
+Real YOLO26n + isolated BoT-SORT on [Lukas Kosc / Pexels footage](https://www.pexels.com/video/urban-street-scene-with-people-crossing-34597902/), not synthetic data. [English: source/license, 3-frame walkthrough and limits](../../en/tracking-replay-example.md) · [繁體中文](../../zh-TW/tracking-replay-example.md). No identity ground truth or long-occlusion acceptance is claimed; full video and private Session data are not published. Documentation added after Alpha.2; its tag/assets stay fixed.
+真實介面與推論，保留觀測消失／新 ID，不宣稱確認換 ID 或長遮擋恢復；原影片不重新散布。
+
 ## Changes from v0.2 / 相對 v0.2 新增
 
 - Opt-in manual local Session snapshots: indexed same-frame RGB/depth/PLY/raw NPY, SHA-256-checked offline replay and model-grouped depth summaries. No automatic camera recording; replay never reruns depth inference.

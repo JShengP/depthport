@@ -1,0 +1,142 @@
+{
+  "format": "depthport.public-replay-example.v1",
+  "recorded_date": "2026-10-19",
+  "code_commit": "28d7b8f1038872735195acc68272162050226026",
+  "code_tag": "v0.3.0-alpha.2",
+  "purpose": "Illustrative real Session replay screenshots; not a tracking accuracy benchmark",
+  "source": {
+    "creator": "Lukas Kosc",
+    "provider": "Pexels",
+    "page_url": "https://www.pexels.com/video/urban-street-scene-with-people-crossing-34597902/",
+    "page_id": 34597902,
+    "page_published_date": "2025-11-04",
+    "sha256": "9b77a4264bb59290335184b77c6300ba43aa6642cb65b594550c44359fd57d4b",
+    "width": 1920,
+    "height": 1080,
+    "decoded_frames": 228,
+    "fps": 23.976023976023978,
+    "license_url": "https://www.pexels.com/license/",
+    "terms_url": "https://www.pexels.com/terms-of-service/",
+    "terms_page_date": "2024-11-15",
+    "terms_reviewed_date": "2026-10-19",
+    "presentation_scope": "Three selected-frame documentation works combined with actual application UI, tracking boxes/IDs and explanation; not standalone original-video redistribution",
+    "rights_notice": "Underlying footage retains Pexels terms, not AGPL; no affiliation or endorsement implied; third-party rights remain applicable"
+  },
+  "selection": {
+    "first_source_frame_1_based": 32,
+    "last_source_frame_1_based": 55,
+    "count": 24,
+    "source_stride": 1,
+    "start_time_s": 1.2929583333333332,
+    "end_time_s": 2.2522499999999996,
+    "span_s": 0.9592916666666667,
+    "aligned_width": 960,
+    "aligned_height": 540,
+    "resize": "OpenCV INTER_AREA",
+    "session_frame_indices": "1..24 map to source frames 32..55"
+  },
+  "execution": {
+    "depth_engine": "Depth Anything V2 Small HF",
+    "depth_revision": "5426e4f0f36572d16453bbda7a8389317b1bef99",
+    "depth_device": "CUDA FP32",
+    "depth_input_size": 518,
+    "depth_units": "relative; per-frame virtual 1..5 display mapping, not metres",
+    "intrinsics": "65-degree HFOV estimate; uncalibrated",
+    "preparation": "Existing real V2Adapter.predict/prepare_cloud/bundle_bytes/SessionStore.capture helpers in a clean local runtime copy",
+    "app_runtime": {
+      "torch": "2.10.0+cu128",
+      "torchvision": "0.25.0+cu128",
+      "numpy": "1.26.4",
+      "opencv-python": "4.11.0.86",
+      "ultralytics": "8.4.176",
+      "transformers": "4.57.6",
+      "fastapi": "0.143.3",
+      "uvicorn": "0.54.0"
+    },
+    "runtime_scope": "Reused local CUDA environment; not a fresh installation of complete Alpha.2 requirements (which specify a newer torch/torchvision pair)",
+    "detector": "YOLO26n Detect",
+    "detector_weight_sha256": "9b09cc8bf347f0fc8a5f7657480587f25db09b34bf33b0652110fb03a8ad4fef",
+    "detector_device": "cpu",
+    "detector_input_size": 640,
+    "detector_confidence": 0.25,
+    "detector_classes": "all",
+    "detector_max_instances": 20,
+    "tracking_request": {
+      "mode": "detect",
+      "backend": "roboflow-botsort",
+      "confidence": 0.25,
+      "max_frames": 24
+    },
+    "worker_runtime": {
+      "trackers": "2.6.1",
+      "supervision": "0.27.0",
+      "numpy": "2.2.6",
+      "opencv-python": "4.11.0.86"
+    },
+    "worker_frame_rate": 30,
+    "worker_settings": "Original defaults, no ReID; one fixed step per saved frame",
+    "ui_analyze_default_frames": 12,
+    "ui_replay_speed_1x_saved_frames_per_second": 5,
+    "browser": "Actual localhost HTTP Session UI, zh-TW; seek 1/12/24 and play to end; unretouched viewport crops"
+  },
+  "observed_counts": {
+    "frames": 24,
+    "local_object_ids": 7,
+    "detector_observations": 230,
+    "associated_observations": 125,
+    "unassociated_detections": 105,
+    "interpretation": "Unassociated is not ground-truth FN; no identity GT, IDSW/IDF1/HOTA or accuracy score"
+  },
+  "screenshots": [
+    {
+      "path": "docs/assets/tracking-replay-start.zh-TW.jpg",
+      "session_index": 1,
+      "source_frame_1_based": 32,
+      "source_time_s": 1.2929583333333332,
+      "associated_detections_visible": 4,
+      "sha256": "39eacfaf5667ad68c91f1fcaf1796a65a4168056ffdbff2b3c8f80c1f85d86fd",
+      "bytes": 100126
+    },
+    {
+      "path": "docs/assets/tracking-replay-crossing.zh-TW.jpg",
+      "session_index": 12,
+      "source_frame_1_based": 43,
+      "source_time_s": 1.75175,
+      "associated_detections_visible": 5,
+      "sha256": "addf7048b4a69c36834e3caa99092aa07e7944a702fd5ac6086f1225956e61f5",
+      "bytes": 100171
+    },
+    {
+      "path": "docs/assets/tracking-replay-later.zh-TW.jpg",
+      "session_index": 24,
+      "source_frame_1_based": 55,
+      "source_time_s": 2.2522499999999996,
+      "associated_detections_visible": 6,
+      "sha256": "4a230da78ec8b449ac5affc7712900b87ca965fc013123684d188cecbd04442e",
+      "bytes": 99955
+    }
+  ],
+  "limits": [
+    "Only 0.959 seconds and partial occlusion/crossing, not long-occlusion acceptance",
+    "Local ID stability does not establish correct identity; missing/new observations not a confirmed ID switch",
+    "Source FPS, fixed worker time step and UI playback rate differ",
+    "Relative depth/HFOV estimates are not metric accuracy or world trajectories",
+    "No fresh complete-install, Windows, physical RTSP, endurance or hardware-WebGL acceptance",
+    "Published tags/assets and historical MOT studies unchanged"
+  ],
+  "public_boundary": {
+    "included": [
+      "Three edited documentation screenshots",
+      "Source attribution, hashes, settings and aggregate evidence",
+      "Documentation"
+    ],
+    "excluded": [
+      "Original MP4",
+      "Full Session or snapshot archives",
+      "Bookmark notes/drafts",
+      "Full per-frame tracking report",
+      "Model weights",
+      "Private images, credentials, runtime logs or host paths"
+    ]
+  }
+}

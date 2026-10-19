@@ -8,6 +8,9 @@
 
 **2026-10-18:** Optional [Roboflow BoT-SORT worker](tracking-worker.md) now supports Session analysis in a separate NumPy 2 environment; the default remains Simple association.
 
+
+[Real replay walkthrough](tracking-replay-example.md): actual YOLO/BoT-SORT UI screenshots on attributed, display-permitted public footage, with source-frame mapping, missing observations and explicit timing/accuracy limits. These are not synthetic preview images.
+
 ## Enable (local machine only)
 
 1. Clone/check out main for the v0.3 experimental development preview and install as documented. This feature does not require installing a new ML package beyond the existing application environment.

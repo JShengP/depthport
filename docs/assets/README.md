@@ -32,3 +32,14 @@ python tools/build_version_visuals.py
 ```
 
 程式原生 SVG 僅使用數學點、色塊與通用框／ID，標示各版功能與流程；不含私人影像、Session 或備註，也不表示推論／追蹤驗收通過。來源產生器採專案的 AGPL-3.0-only 授權。
+
+
+## Real v0.3 replay screenshots — 2026-10-19
+
+`tracking-replay-start.zh-TW.jpg`, `tracking-replay-crossing.zh-TW.jpg` and `tracking-replay-later.zh-TW.jpg` are actual browser viewport crops from Alpha.2 code using genuine DA V2 CUDA depth, YOLO26n CPU Detect and the isolated Roboflow BoT-SORT worker. They show source frames 32, 43 and 55 from one 24-frame analysis. IDs and boxes were not edited. These are distinct from the generated version schematics and prior synthetic previews.
+
+Underlying footage: **Lukas Kosc via Pexels**, [Urban Street Scene with People Crossing](https://www.pexels.com/video/urban-street-scene-with-people-crossing-34597902/), page ID 34597902. [Pexels License](https://www.pexels.com/license/) / [Terms §5–6](https://www.pexels.com/terms-of-service/), reviewed 2026-10-19. Selected frames are combined with application UI, real tracking overlays and explanatory documentation; this is not standalone redistribution of the original MP4. The footage retains its Pexels terms and is **not relicensed by the application's AGPL**. No endorsement or affiliation is implied. Trademarks, depicted content and other third-party rights retain their own protections; the media is not a blanket commercial clearance.
+
+[Walkthrough, exact conditions and limits](../en/tracking-replay-example.md) · [繁體中文](../zh-TW/tracking-replay-example.md) · [Hashes and curated evidence](../validation/v0.3-public-replay-example.json). No original video, full Session archive, notes, model weights or raw tracking report is distributed. Missing/new observations are shown without claiming a confirmed ID switch, accuracy or long-occlusion recovery.
+
+三張為公開影片的真實追蹤回放介面截圖，結合 UI／偵測框／說明後作文件展示；影片原權利與 Pexels 條款保留，不因程式 AGPL 改授權，不暗示人物／商家／作者背書。不散布原片、完整 Session、備註、權重或逐格報告；缺框／新 ID 不等於真值確認的換 ID。

@@ -2,6 +2,11 @@
 [繁體中文](../zh-TW/validation.md) · [Home](../../README.md)
 
 
+
+## Public replay documentation example — 2026-10-19
+
+[Actual screenshots and conditions](tracking-replay-example.md) / [curated record](../validation/v0.3-public-replay-example.json): 24 consecutive Pexels frames through genuine V2 depth and the real 24-frame Session tracking API/isolated worker; 3 unretouched UI viewport crops, source/license attributed. This is a 0.959-second illustrative partial-occlusion/crossing example without identity GT, not a new tracking score or long-occlusion acceptance. Reused CUDA runtime differs from the full current requirements; worker timing and replay speed differ from source FPS. Older benchmark and release evidence remains unchanged.
+
 ## v0.3.0-alpha.2 packaging — 2026-10-19
 
 Alpha.2 packages the reviewed dependency/Pages changes and version illustrations described below. [Release scope and remaining gates](../releases/0.3.0-alpha.2.md). The reviewed integration commit `09c1f8a` passed [4 application jobs](https://github.com/JShengP/depthport/actions/runs/39211080641), [4 real model API import jobs without weights](https://github.com/JShengP/depthport/actions/runs/39211203960), and [Pages build/deployment](https://github.com/JShengP/depthport/actions/runs/39211229203). Exact packaging-commit checks and download checksums are linked from the Release. No new pretrained inference, physical-camera or tracking-quality acceptance was performed.

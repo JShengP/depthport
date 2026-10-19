@@ -51,6 +51,14 @@ DepthPort integrates existing pretrained models; it does **not** introduce a new
 
 Follow the [Session guide](docs/en/sessions.md): set `ENABLE_SESSION_STORAGE=1` locally, restart, and open `/sessions`. [Worker setup](docs/en/tracking-worker.md) · [Tracking acceptance & evaluation](docs/en/tracking-evaluation.md)
 
+### Real tracking replay example
+
+![Actual v0.3 replay during pedestrian crossing and partial occlusion](docs/assets/tracking-replay-crossing.zh-TW.jpg)
+
+*Real YOLO26n + isolated BoT-SORT output in the actual Session UI (Traditional Chinese), not synthetic data. Source: [Lukas Kosc via Pexels](https://www.pexels.com/video/urban-street-scene-with-people-crossing-34597902/), used in edited documentation under the [Pexels terms](https://www.pexels.com/terms-of-service/). Session #12 = source frame 43, 1.752 s.*
+
+[Three-frame walkthrough, source/license and exact conditions](docs/en/tracking-replay-example.md). The 24-frame window illustrates local IDs, crossing, partial occlusion and missing/new observations; no identity ground truth or long-occlusion success is claimed. Source 23.976 fps, worker fixed 30-Hz steps, UI 1× targets 5 saved frames/s. Added to main after Alpha.2; published release downloads remain unchanged.
+
 ### Tracking evidence and next work
 
 Completed studies cover [2,700 frames / 27 runs across three scenes](docs/en/tracking-expanded-acceptance.md), [1,179 new frames / 60 parameter runs](docs/en/tracking-parameter-acceptance.md), and [added ID-switch/false-positive diagnosis](docs/en/tracking-error-diagnosis.md). Lower activation trades coverage for more ID switches/FP; long-occlusion recovery remains unaccepted. Next tests separate new-track confirmation/competition, detector localisation and recovery. **Defaults stay unchanged.**

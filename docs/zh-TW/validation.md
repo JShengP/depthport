@@ -2,6 +2,11 @@
 [English](../en/validation.md)・[首頁](../../README.zh-TW.md)
 
 
+
+## 公開影片真實回放文件範例 — 2026-10-19
+
+[實際截圖與執行條件](tracking-replay-example.md)／[彙總紀錄](../validation/v0.3-public-replay-example.json)：24 格 Pexels 連續影格經真 V2 深度、實際 24 格 Session API／獨立 worker，擷取 3 張未修 ID 的介面畫面並標示來源授權。約 0.959 秒的部分遮擋／交會示例，無身分 GT，不是新追蹤分數或長遮擋驗收；沿用 CUDA 環境不等於完整新版 requirements 全新安裝，worker 步長與回放速度也不同於來源 FPS。歷史研究與發布證據不變。
+
 ## v0.3.0-alpha.2 封裝 — 2026-10-19
 
 Alpha.2 封裝下列已驗證的依賴／Pages 更新與各版流程圖。[本版範圍與未驗證項目](../releases/0.3.0-alpha.2.md)。整合提交 `09c1f8a` 已通過[應用 4 項](https://github.com/JShengP/depthport/actions/runs/39211080641)、[真模型 API 匯入 4 項（無權重）](https://github.com/JShengP/depthport/actions/runs/39211203960)與 [Pages 建置／部署](https://github.com/JShengP/depthport/actions/runs/39211229203)。封裝提交的實際 CI 與下載校驗檔由 Release 提供；本次沒有新增真權重推論、實體相機或追蹤品質驗收。

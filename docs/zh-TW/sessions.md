@@ -8,6 +8,9 @@
 
 **2026-10-18：** Session 已支援選配 [Roboflow BoT-SORT worker](tracking-worker.md)，以獨立 NumPy 2 環境執行；預設仍為簡易關聯。
 
+
+[真實回放範例導覽](tracking-replay-example.md)：使用已註明公開展示條款的影片，呈現真 YOLO／BoT-SORT 介面、來源影格對照與缺失觀測，並說明時間／精度限制；不是合成預覽圖。
+
 ## 啟用方式
 
 1. 使用 main 上的 v0.3 實驗性開發預覽，依原安裝文件準備 DepthPort 環境。

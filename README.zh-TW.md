@@ -51,6 +51,14 @@ DepthPort 整合既有預訓練模型，**不是新的深度網路或研究模�
 
 依 [Session 操作說明](docs/zh-TW/sessions.md)在本機設定 `ENABLE_SESSION_STORAGE=1` 並重啟，再開啟 `/sessions`。[獨立 worker 安裝](docs/zh-TW/tracking-worker.md) · [追蹤驗收與評估](docs/zh-TW/tracking-evaluation.md)
 
+### 真實追蹤回放範例
+
+![v0.3 真實回放：行人交會與部分遮擋時的追蹤框及 Object ID](docs/assets/tracking-replay-crossing.zh-TW.jpg)
+
+*實際 Session 介面的真 YOLO26n＋獨立 BoT-SORT 結果，非合成資料。素材：[Lukas Kosc／Pexels](https://www.pexels.com/video/urban-street-scene-with-people-crossing-34597902/)，依 [Pexels 條款](https://www.pexels.com/terms-of-service/)編入文件作品。Session #12＝來源第 43 格，1.752 秒。*
+
+[三張連續影格導覽、來源授權及完整條件](docs/zh-TW/tracking-replay-example.md)。24 格範例呈現局部 ID、交會、部分遮擋與觀測消失／新 ID；無身分真值，不宣稱長遮擋恢復通過。來源 23.976 fps、worker 固定 30 Hz 步長、UI 1× 每秒 5 個保存影格。此文件於 Alpha.2 後補入 main，既有下載包不變。
+
 ### 追蹤研究證據與下一步
 
 已完成[三場景 2,700 格／27 次比較](docs/zh-TW/tracking-expanded-acceptance.md)、[另一組 1,179 格／60 次參數驗證](docs/zh-TW/tracking-parameter-acceptance.md)及[新增換 ID／誤追診斷](docs/zh-TW/tracking-error-diagnosis.md)。降低啟用門檻的覆蓋改善伴隨更多換 ID／FP；長遮擋恢復仍未通過。下一步分開驗證新 ID 確認／競爭、偵測框品質與遮擋恢復。**維持原預設。**

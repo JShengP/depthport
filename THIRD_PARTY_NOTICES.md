@@ -56,3 +56,10 @@ The new-group parameter study additionally uses MOT17-09/10 under the same MOTCh
 The [activation-error diagnosis](docs/en/tracking-error-diagnosis.md) reuses the same MOT17-09/10 local non-commercial inputs under the preceding terms. Its own diagnostic matching is checked against unmodified pinned TrackEval CLEAR; no upstream package/code archive or dataset imagery is bundled. Only aggregate counts and qualified semantic observations are published; raw traces and review images stay local.
 
 啟用門檻錯誤診斷沿用相同資料條款與來源，官方評估器獨立核對，未封裝上游套件或資料集影像，原始逐格診斷及檢查影像留在本機。
+
+
+## Public replay documentation footage / 公開回放文件素材
+
+Three v0.3 screenshots use selected frames by **Lukas Kosc via Pexels**, [page 34597902](https://www.pexels.com/video/urban-street-scene-with-people-crossing-34597902/), combined with actual DepthPort UI, model overlays and explanation. The underlying footage retains the [Pexels License](https://www.pexels.com/license/) and [Terms](https://www.pexels.com/terms-of-service/), reviewed 2026-10-19; it is not relicensed as AGPL. Standalone redistribution and misleading endorsement restrictions remain applicable. No original MP4 is bundled, and no affiliation/endorsement is implied. [Provenance and exact scope](docs/assets/README.md) · [Example](docs/en/tracking-replay-example.md).
+
+v0.3 回放文件使用 Lukas Kosc／Pexels 公開影片的選定影格，結合真實 UI、疊圖與說明；素材保留自身條款、不改授權 AGPL，不散布原片或暗示背書。此素材與僅發布彙總的 MOTChallenge 研究分開處理。
