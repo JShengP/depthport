@@ -191,3 +191,6 @@ docs/en/tracking-error-diagnosis.md
 docs/zh-TW/tracking-error-diagnosis.md
 docs/validation/v0.3-tracking-error-diagnosis.json
 docs/assets/tracking-v03-errors.png
+
+# Shared model dependency compatibility CI
+.github/workflows/model-compatibility.yml
