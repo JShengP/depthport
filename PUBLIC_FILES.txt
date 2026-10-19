@@ -250,3 +250,16 @@ docs/zh-TW/tracking-recovery-acceptance.md
 docs/validation/v0.3-recovery-deferral-protocol.json
 docs/validation/v0.3-recovery-deferral.json
 docs/assets/tracking-v03-recovery.png
+depthport/tracking_recovery_diagnostics.py
+tests/test_tracking_recovery_diagnostics.py
+tools/validate_tracking_recovery_replication.py
+tools/audit_tracking_recovery_errors.py
+tools/plot_tracking_recovery_replication.py
+docs/en/tracking-recovery-moving.md
+docs/zh-TW/tracking-recovery-moving.md
+docs/validation/v0.3-recovery-moving-protocol.initial.json
+docs/validation/v0.3-recovery-moving-protocol.json
+docs/validation/v0.3-recovery-moving.json
+docs/validation/v0.3-recovery-moving-errors.json
+docs/validation/v0.3-recovery-static-errors.json
+docs/assets/tracking-v03-recovery-moving.png

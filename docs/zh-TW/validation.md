@@ -1,6 +1,10 @@
 # 驗證紀錄
 [English](../en/validation.md)・[首頁](../../README.zh-TW.md)
 
+## 延後接回控制的移動相機重驗 — 2026-10-19
+
+[方法、結果與錯誤補析](tracking-recovery-moving.md) · [凍結配置／修正紀錄](../validation/v0.3-recovery-moving-protocol.json) · [彙總](../validation/v0.3-recovery-moving.json)。MOT17-11／13 共 1,650 格／12 次，控制與版本不變、重建共用偵測，重複／未加探針對照均一致。FP 543→535、FN 13,695／換 ID 21 不變，新增 FN／換 ID 均 0；公車 HOTA 24.9588→24.9473% 退步，整組未通過逐場景篩選，長事件無改善。前輪 22 筆新增 FN 拆為直接延後 2／未匹配 12／仍輸出 8，新增換 ID 當格無延後且輸入相同。報表缺匯入僅作匯入修正，保留原凍結檔；不調參、預設／發布不變，原始診斷留本機。
+
 ## 競爭時延後接回控制實驗 — 2026-10-19
 
 [方法與結果](tracking-recovery-acceptance.md) · [凍結配置](../validation/v0.3-recovery-deferral-protocol.json) · [彙總](../validation/v0.3-recovery-deferral.json)。新 MOT20-01 共 429 格，兩組各重跑三次、完整診斷與輸出一致，另核對未加探針的對照。延後 4 筆：FP 55→52、FN 17,194→17,092、換 ID 21→13、IDF1／HOTA 改善，通過凍結研究篩選；但碎裂 46→48、新增 22 筆 FN／1 次換 ID、召回僅 13.98%、長事件無完整端點，仍未驗收／不升預設。保留一般弱偵測延續，原始診斷留本機；下一步換更多授權場景／移動相機重現，框品質另做控制。

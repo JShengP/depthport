@@ -166,7 +166,7 @@ Alpha.2 封裝已驗證的 Pages／FastAPI／Hub／DA3 相容性更新與各版�
 <details>
 <summary>追蹤研究與下一步實驗</summary>
 
-已完成 [2,700 格／27 次比較](docs/zh-TW/tracking-expanded-acceptance.md)、[另一組 1,179 格／60 次參數驗證](docs/zh-TW/tracking-parameter-acceptance.md)、[換 ID／誤追診斷](docs/zh-TW/tracking-error-diagnosis.md)、[8.4.176 快取的 72 次確認／競爭實驗](docs/zh-TW/tracking-admission-acceptance.md)，以及[同一組 09／10 場景的 16 次原輸出不變成本診斷](docs/zh-TW/tracking-association-diagnosis.md)。延長確認的 FP／FN 取捨與出生閘門未觸發保留；診斷選出的控制點為 ByteTrack 漏格假設的弱階段競爭，已觀察到同 GT 恢復風險，[新 MOT20-01 延後接回實驗](docs/zh-TW/tracking-recovery-acceptance.md)通過凍結研究篩選（FP −3、FN −102、換 ID −8），但召回僅 13.98%、碎裂增加，長事件無完整端點；仍需更多獨立重現，長遮擋尚未通過，**原預設不變**。
+已完成 [2,700 格／27 次比較](docs/zh-TW/tracking-expanded-acceptance.md)、[另一組 1,179 格／60 次參數驗證](docs/zh-TW/tracking-parameter-acceptance.md)、[換 ID／誤追診斷](docs/zh-TW/tracking-error-diagnosis.md)、[8.4.176 快取的 72 次確認／競爭實驗](docs/zh-TW/tracking-admission-acceptance.md)，以及[同一組 09／10 場景的 16 次原輸出不變成本診斷](docs/zh-TW/tracking-association-diagnosis.md)。延長確認的 FP／FN 取捨與出生閘門未觸發保留；診斷選出的控制點為 ByteTrack 漏格假設的弱階段競爭，已觀察到同 GT 恢復風險，[新 MOT20-01 延後接回實驗](docs/zh-TW/tracking-recovery-acceptance.md)通過凍結研究篩選（FP −3、FN −102、換 ID −8），但召回僅 13.98%、碎裂增加，長事件無完整端點；[移動相機不調參重驗](docs/zh-TW/tracking-recovery-moving.md)另測 1,650 格／12 次：FP −8、FN／換 ID 不變，但公車 HOTA 微降、長事件無改善，未通過逐場景篩選；長遮擋尚未驗收，**原預設不變**。
 
 研究結果限指定公開序列、固定快取與已記錄版本，不能外推為新版偵測器或其他場景的表現。這些研究只散布彙總，不發布原始影像、GT、逐格追蹤或使用者書籤。
 

@@ -1,0 +1,193 @@
+{
+  "format": "depthport.recovery-error-audit.v1",
+  "checked_on": "2026-10-19",
+  "input_record_sha256": "259d305994d63d545fe787af9b017d864301cfd16a952b10a4d01243bebcf07e",
+  "source_terms": {
+    "dataset": "MOT17 train / MOT17-11-DPM and MOT17-13-DPM compressed previews",
+    "page": "https://motchallenge.net/data/MOT17/",
+    "license": "CC BY-NC-SA 3.0; original-source conditions may also apply",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+    "terms_page_retrieved_sha256": "fb34867c22c36630c063ea7a87344d5e1e8c2116890a8dd43ccc7c972030cdb8",
+    "source_column": "No additional third-party source link for either selected scene in official table",
+    "scope": "Local non-commercial research only; source media, GT, raw diagnostics not redistributed",
+    "attribution": "MOTChallenge / Milan, Leal-Taixe, Reid, Roth and Schindler; MOT16 benchmark (arXiv:1603.00831)",
+    "labels_url": "https://motchallenge.net/data/MOT17Labels.zip",
+    "labels_archive_sha256": "0aa79322e91583369f42f17c4d79a0b145380d8732487bba59272048dc82b2b9"
+  },
+  "analysis_source_sha256": {
+    "tools/audit_tracking_recovery_errors.py": "9df47459bf60c5a4a049379879354930bd530b15f92913f5650fba84e897bd6e",
+    "depthport/tracking_recovery_diagnostics.py": "3d8cb3fa2be4ee89e5b8bc51a738a82f86d9baadc7cad66b52be27219381d90a"
+  },
+  "scope": "Post-hoc deterministic diagnosis only, after frozen experiment results. No tracking, parameter search or altered inputs.",
+  "sequences": [
+    {
+      "name": "MOT17-11-DPM",
+      "official_scores_reproduced": true,
+      "added_error_diagnosis": {
+        "added_fn": {
+          "total": 0,
+          "categories": {},
+          "signals": {
+            "low_visibility": 0,
+            "current_gt_overlap": 0,
+            "near_crossing_event": 0,
+            "supporting_deferral_within_1s": 0
+          }
+        },
+        "added_idsw": {
+          "total": 0,
+          "categories": {},
+          "signals": {
+            "low_visibility": 0,
+            "current_gt_overlap": 0,
+            "near_crossing_event": 0,
+            "supporting_deferral_within_1s": 0,
+            "reference_unmatched_at_switch": 0,
+            "same_input_detection_as_reference": 0,
+            "same_frame_has_any_deferral": 0,
+            "gap_has_no_raw_overlap": 0,
+            "gap_has_partial_raw_overlap": 0,
+            "visible_gap_missing_raw_box": 0,
+            "low_visibility_gap_missing_raw_box": 0
+          }
+        },
+        "added_fn_episodes": {
+          "count": 0,
+          "max_frames": 0
+        },
+        "added_fn_candidate_weak_stage": {}
+      },
+      "hota_components_mean_over_thresholds": {
+        "activation_control": {
+          "HOTA": 0.4714729080470342,
+          "DetA": 0.4720577650427508,
+          "AssA": 0.47288839380194353,
+          "DetPr": 0.8225388719581949,
+          "DetRe": 0.5013163472479418,
+          "AssPr": 0.8030014946757587,
+          "AssRe": 0.523101085945872
+        },
+        "defer_competing_recovery": {
+          "HOTA": 0.4715962333384179,
+          "DetA": 0.47226279525257236,
+          "AssA": 0.47293062275093223,
+          "DetPr": 0.8231296878004999,
+          "DetRe": 0.5013275027330938,
+          "AssPr": 0.8034400590442203,
+          "AssRe": 0.5231190680911759
+        }
+      },
+      "added_fp": {
+        "total": 0,
+        "categories": {},
+        "reference_emitted_after_preprocessing": 0,
+        "overlaps_excluded_annotation": 0
+      }
+    },
+    {
+      "name": "MOT17-13-DPM",
+      "official_scores_reproduced": true,
+      "added_error_diagnosis": {
+        "added_fn": {
+          "total": 0,
+          "categories": {},
+          "signals": {
+            "low_visibility": 0,
+            "current_gt_overlap": 0,
+            "near_crossing_event": 0,
+            "supporting_deferral_within_1s": 0
+          }
+        },
+        "added_idsw": {
+          "total": 0,
+          "categories": {},
+          "signals": {
+            "low_visibility": 0,
+            "current_gt_overlap": 0,
+            "near_crossing_event": 0,
+            "supporting_deferral_within_1s": 0,
+            "reference_unmatched_at_switch": 0,
+            "same_input_detection_as_reference": 0,
+            "same_frame_has_any_deferral": 0,
+            "gap_has_no_raw_overlap": 0,
+            "gap_has_partial_raw_overlap": 0,
+            "visible_gap_missing_raw_box": 0,
+            "low_visibility_gap_missing_raw_box": 0
+          }
+        },
+        "added_fn_episodes": {
+          "count": 0,
+          "max_frames": 0
+        },
+        "added_fn_candidate_weak_stage": {}
+      },
+      "hota_components_mean_over_thresholds": {
+        "activation_control": {
+          "HOTA": 0.2495878951201094,
+          "DetA": 0.13857418405355953,
+          "AssA": 0.4503210758168447,
+          "DetPr": 0.7585722928009679,
+          "DetRe": 0.14171918371775513,
+          "AssPr": 0.758183126304236,
+          "AssRe": 0.4826969832549221
+        },
+        "defer_competing_recovery": {
+          "HOTA": 0.2494733938205324,
+          "DetA": 0.1384875304327707,
+          "AssA": 0.45018776250602927,
+          "DetPr": 0.7593638633663846,
+          "DetRe": 0.14160616280436533,
+          "AssPr": 0.7587577072303163,
+          "AssRe": 0.48242487677165896
+        }
+      },
+      "added_fp": {
+        "total": 2,
+        "categories": {
+          "partial_overlap_below_.50": 2
+        },
+        "reference_emitted_after_preprocessing": 0,
+        "overlaps_excluded_annotation": 0
+      }
+    }
+  ],
+  "public_scope": "Reviewed aggregate counts/distributions, configuration/source hashes and attributed numeric plots only. Media, GT, exact event windows, per-frame IDs, raw matrices/diagnostics, notes and local paths stay local.",
+  "combined_added_errors": {
+    "added_fn": {
+      "categories": {},
+      "signals": {
+        "current_gt_overlap": 0,
+        "low_visibility": 0,
+        "near_crossing_event": 0,
+        "supporting_deferral_within_1s": 0
+      },
+      "total": 0
+    },
+    "added_fn_candidate_weak_stage": {},
+    "added_fp": {
+      "categories": {
+        "partial_overlap_below_.50": 2
+      },
+      "overlaps_excluded_annotation": 0,
+      "reference_emitted_after_preprocessing": 0,
+      "total": 2
+    },
+    "added_idsw": {
+      "categories": {},
+      "signals": {
+        "current_gt_overlap": 0,
+        "gap_has_no_raw_overlap": 0,
+        "gap_has_partial_raw_overlap": 0,
+        "low_visibility": 0,
+        "low_visibility_gap_missing_raw_box": 0,
+        "near_crossing_event": 0,
+        "reference_unmatched_at_switch": 0,
+        "same_frame_has_any_deferral": 0,
+        "same_input_detection_as_reference": 0,
+        "supporting_deferral_within_1s": 0,
+        "visible_gap_missing_raw_box": 0
+      },
+      "total": 0
+    }
+  }
+}

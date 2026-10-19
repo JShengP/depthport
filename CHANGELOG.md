@@ -2,6 +2,11 @@
 
 ## Unreleased — research and documentation after v0.3.0-alpha.2 / Alpha.2 後的研究與文件
 
+- Replicate unchanged ByteTrack recovery deferral on full moving MOT17-11/13 with fresh fixed detections; add post-hoc added-error/HOTA audit and aggregate figure. FP −8, no added FN/IDSW, but bus-view HOTA regression fails the per-scene screen. Retain the reporting-only import repair and initial freeze; no tuning/default/release change, raw traces remain local.
+- 完成移動相機不調參重驗，補析前輪新增漏追／換 ID 與多門檻 HOTA，明列單場景退步、原始凍結與匯入修正；公開僅彙總，保留一般弱延續。
+
+[Moving replication / 移動重驗](docs/en/tracking-recovery-moving.md) · [繁體中文](docs/zh-TW/tracking-recovery-moving.md)
+
 - Add opt-in instance-local ByteTrack weak-stage competing-recovery deferral and a frozen MOT20-01 two-arm runner. Six identical-repeat runs pass the research screen (FP −3/FN −102/IDSW −8), with explicit new errors, fragmentation increase, poor recall and missing long-event endpoints. Publish reviewed aggregates only; defaults/releases unchanged.
 - 新增獨立延後接回實驗、機制測試及圖表，保留一般弱偵測延續；研究達標不等於可靠性驗收，更新雙語驗證／ROADMAP，原始診斷留本機。
 
