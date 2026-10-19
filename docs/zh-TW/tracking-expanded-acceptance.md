@@ -4,7 +4,7 @@
 
 [English](../en/tracking-expanded-acceptance.md) · [追蹤評估](tracking-evaluation.md)
 
-**狀態：擴大研究實測，長遮擋恢復尚不能算驗收通過。** 本次新增三個場景；條件不同，不能與先前 MOT15 初測直接合併分數。v0.3 維持 Draft，未改變預設追蹤器。
+**狀態：擴大研究實測，長遮擋恢復尚不能算驗收通過。** 本次新增三個場景；條件不同，不能與先前 MOT15 初測直接合併分數。v0.3 Alpha 維持實驗性開發預覽，未改變預設追蹤器。
 
 ![品質與情境覆蓋彙總](../assets/tracking-v03-mot17.png)
 

@@ -26,7 +26,7 @@
 
 Roboflow `trackers==2.6.1` 使用 `supervision.Detections` 接口，程式碼採 Apache-2.0。它要求 NumPy >=2.0.2，而目前 DA3 配方要求 NumPy <2，因此本次以**獨立 NumPy 2.2.6／supervision 0.27.0 環境**比較，四模型環境保留 NumPy 1.26.4。整合需先驗證依賴遷移或獨立 worker；本次未安裝或測試 McByte 的選配遮罩模型。
 
-MOT15 僅供本機非商業研究，遵循[官方 CC-BY-NC-SA-3.0 與原始來源條件](https://motchallenge.net/data/MOT15/)。此 Repo 不包含影片、GT、逐影格框／ID、Session 包或執行日誌。v0.3 PR 維持開發 Draft，繼續補充更多場景與實體相機驗收。
+MOT15 僅供本機非商業研究，遵循[官方 CC-BY-NC-SA-3.0 與原始來源條件](https://motchallenge.net/data/MOT15/)。此 Repo 不包含影片、GT、逐影格框／ID、Session 包或執行日誌。v0.3 Alpha 維持實驗性開發預覽，繼續補充更多場景與實體相機驗收。
 
 ## 應測情境
 
@@ -107,4 +107,4 @@ python tools/evaluate_tracking.py \
 
 參考：[Ultralytics Tracking](https://docs.ultralytics.com/modes/track) 與 [TrackEval](https://github.com/JonathonLuiten/TrackEval)。不同 Ultralytics 版本的內建 Tracker 清單可能不同，使用前需實際檢查。
 
-**驗收原則：** 將同一批人工標註影片交給候選方法，固定模型、硬體、Frame Sampling 和置信門檻，並同時測品質與速度。尚未取得足夠真實標註資料前，不應任意訂出代表產品可靠度的 IDSW／Recall 門檻。v0.3 Draft PR 維持不合併。
+**驗收原則：** 將同一批人工標註影片交給候選方法，固定模型、硬體、Frame Sampling 和置信門檻，並同時測品質與速度。尚未取得足夠真實標註資料前，不應任意訂出代表產品可靠度的 IDSW／Recall 門檻。相關真實資料驗收通過前，維持實驗性定位與原有預設。

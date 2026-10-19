@@ -54,7 +54,7 @@ Scenario diagnostics use full-frame one-to-one Hungarian IoU≥0.5 matching **af
 - **Long low visibility:** no method retained the same ID in any of the 11 events. Both anchors were matched in **6 / 3 / 3** events; all those matched endpoints changed ID. At least one endpoint was missing in **5 / 8 / 8**. This does **not** pass long-occlusion recovery acceptance.
 - **Overlap/order exchange:** same ID retained for **12 / 21 / 19 of 124** subject appearances. Both endpoints matched for **76 / 32 / 27**; those cohorts contain **64 / 11 / 8** changes. At least one endpoint was missing for **48 / 92 / 97**. Reporting only retention among matched endpoints would hide the large coverage difference.
 
-Next work should compare detection coverage and fixed activation/buffer settings on separate sequences before considering ReID or changing defaults. Physical RTSP, Windows real-model/worker, endurance, calibrated 3D and held-out/generalisation testing remain separate gates. v0.3 remains Draft.
+Next work should compare detection coverage and fixed activation/buffer settings on separate sequences before considering ReID or changing defaults. Physical RTSP, Windows real-model/worker, endurance, calibrated 3D and held-out/generalisation testing remain separate gates. v0.3 Alpha remains an experimental development preview; this study does not close those acceptance gates.
 
 ## Reproduce locally
 

@@ -1,7 +1,7 @@
 # Maintainer release guide
 [繁體中文](../zh-TW/publishing.md) · [Home](../../README.md)
 
-The public project is [JShengP/depthport](https://github.com/JShengP/depthport). The first **v0.1.0-alpha.1** pre-release is [published](https://github.com/JShengP/depthport/releases/tag/v0.1.0-alpha.1). This page documents **future** releases; it is not a request to create the repository again. An open draft PR is not a released version.
+The current version is [v0.3.0-alpha.1](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.1), an **Alpha pre-release / experimental development preview**. [v0.2 Alpha](https://github.com/JShengP/depthport/releases/tag/v0.2.0-alpha.1) remains available for comparison. This guide covers future maintenance; a published release does not imply all acceptance gates passed.
 
 ## Check before tagging
 
@@ -30,14 +30,14 @@ git fetch origin
 git switch main
 git pull --ff-only
 # Replace the value below with the reviewed version (example only).
-TAG=v0.2.0-alpha.1
+TAG=v0.3.0-alpha.2
 git tag -a "$TAG" -m "DepthPort $TAG"
 git push origin "$TAG"
 python tools/build_release.py
 # Verify the tag matches VERSION and inspect dist/ before upload.
 gh release create "$TAG" --verify-tag --prerelease --title "DepthPort $TAG" \
   --notes-file path/to/reviewed-bilingual-release-notes.md \
-  dist/depthport-0.2.0-alpha.1-source.zip dist/SHA256SUMS.txt
+  dist/depthport-0.3.0-alpha.2-source.zip dist/SHA256SUMS.txt
 ```
 
 Do not run this on an unmerged draft branch, and do not overwrite an existing tag or published release. The [package workflow](../../.github/workflows/package.yml) builds an artifact but **does not publish** a Release.

@@ -1,13 +1,3 @@
-**Activation-error diagnosis (2026-10-19):** [Added ID switches and false positives analysed](docs/en/tracking-error-diagnosis.md). Errors mix weak/partial detections, visibility-loss recovery and association competition; added switches often expose default FN. Next priority is new-track confirmation/competition controls, with detector and recovery tests separated. Defaults stay unchanged.
-
-**Tracking parameter study (2026-10-19):** [Five profiles on 1,179 new MOT17 frames](docs/en/tracking-parameter-acceptance.md), 60 completed runs. Lower activation modestly improves Recall/IDF1/HOTA with more ID switches; aggressive lower gates hurt identity quality, and longer retention recovers only one ByteTrack long event. App defaults stay unchanged; v0.3 remains an experimental development preview.
-
-**Expanded tracking acceptance (2026-10-19):** [2,700 MOT17 frames across three scenes](docs/en/tracking-expanded-acceptance.md), fixed detections and three repeated runs per method. Lower ID switches came with lower Recall; long-occlusion recovery remains unaccepted. v0.3 remains an experimental development preview.
-
-## v0.3 development preview — Manual Sessions & Replay
-
-The v0.3 experimental development preview adds **opt-in, local-only, manually captured frame sessions** (RGB/depth/PLY/raw NPY metadata), integrity-checked offline replay, and grouped depth-summary trends. A manual CPU-only **Offline Semantic Object Tracking** analysis links saved-frame 2D detections to Object IDs and camera-space depth/XYZ histories. Choose simple association (default) or an optional [Roboflow BoT-SORT worker](docs/en/tracking-worker.md) in a separate NumPy 2 environment; neither provides identity or world trajectories. **No automatic camera recording or model inference on replay.** The v0.2 features remain available. See [Session & Replay documentation](docs/en/sessions.md); this development preview is not a tagged release.
-
 <div align="center">
 
 # DepthPort
@@ -17,11 +7,13 @@ The v0.3 experimental development preview adds **opt-in, local-only, manually ca
 
 English · [繁體中文](README.zh-TW.md)
 
-**v0.2 Alpha released** · **Local-first** · **English / 繁體中文** · **AGPL-3.0-only**
+**v0.3 Alpha** · **Experimental development preview** · **Local-first** · **English / 繁體中文** · **AGPL-3.0-only**
 
 </div>
 
-**Download v0.2.0-alpha.1:** [Release notes & downloads](https://github.com/JShengP/depthport/releases/tag/v0.2.0-alpha.1) · [Source ZIP](https://github.com/JShengP/depthport/releases/download/v0.2.0-alpha.1/depthport-0.2.0-alpha.1-source.zip) · [SHA-256 checksums](https://github.com/JShengP/depthport/releases/download/v0.2.0-alpha.1/SHA256SUMS.txt)
+**Download v0.3.0-alpha.1:** [Release notes & downloads](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.1) · [Source ZIP](https://github.com/JShengP/depthport/releases/download/v0.3.0-alpha.1/depthport-0.3.0-alpha.1-source.zip) · [SHA-256 checksums](https://github.com/JShengP/depthport/releases/download/v0.3.0-alpha.1/SHA256SUMS.txt)
+
+Previous release: [v0.2 Alpha — Spatial Analysis](https://github.com/JShengP/depthport/releases/tag/v0.2.0-alpha.1). See the [Changelog](CHANGELOG.md) and [remaining acceptance roadmap](ROADMAP.md).
 
 The download contains public source only; Python dependencies and pretrained model weights must be installed separately.
 
@@ -33,9 +25,23 @@ DepthPort integrates existing pretrained models; it does **not** introduce a new
 
 *Screenshot: the actual UI showing synthetic test data. No camera or AI model produced this point cloud.*
 
-> **Status:** `v0.2.0-alpha.1` is published as an **experimental pre-release**. On 2026-10-17, a fresh Ubuntu 24.04 / Python 3.12 environment passed all four real pretrained depth-model CUDA smoke tests, YOLO Detect/Segment fusion and browser-to-HTTP checks on one public sample image. This demonstrates execution, not measured distance accuracy, field camera operation or a hardware benchmark. Full Windows model installation, physical RTSP, endurance and NVIDIA WebGL rendering remain unverified. Read the [validation record](docs/en/validation.md).
+> **Status:** `v0.3.0-alpha.1` is an **Alpha pre-release / experimental development preview**. Session storage defaults off and requires explicit local enablement. Application/model API installation CI is not pretrained inference or hardware acceptance. Long-occlusion recovery, physical RTSP, Windows pretrained inference/worker integration, endurance and calibrated distance accuracy remain open. Read the [validation record](docs/en/validation.md) and [release notes](docs/releases/0.3.0-alpha.1.md).
 
-## New in v0.2 — Spatial Analysis Lab
+## v0.3 — Sessions, Replay & Offline Tracking
+
+- **Manual local Sessions:** preserve same-frame RGB/depth/PLY/raw NPY and integrity-check replay with SHA-256. No automatic recording or model inference on replay.
+- **Tracking review:** boxes/Object IDs, playback and speed, timeline seeking, A/B loops, bookmark notes, search/filtering, JSON backup and keyboard help. Notes and exports remain local.
+- **Optional Roboflow BoT-SORT:** a separate NumPy 2 worker preserves the NumPy 1 application environment. Simple association remains the default. Object IDs are not identities or world trajectories.
+
+Follow the [Session guide](docs/en/sessions.md): set `ENABLE_SESSION_STORAGE=1` locally, restart, and open `/sessions`. [Worker setup](docs/en/tracking-worker.md) · [Tracking acceptance & evaluation](docs/en/tracking-evaluation.md)
+
+### Tracking evidence and next work
+
+Completed studies cover [2,700 frames / 27 runs across three scenes](docs/en/tracking-expanded-acceptance.md), [1,179 new frames / 60 parameter runs](docs/en/tracking-parameter-acceptance.md), and [added ID-switch/false-positive diagnosis](docs/en/tracking-error-diagnosis.md). Lower activation trades coverage for more ID switches/FP; long-occlusion recovery remains unaccepted. Next tests separate new-track confirmation/competition, detector localisation and recovery. **Defaults stay unchanged.**
+
+Results apply to the named public sequences, fixed detection caches and recorded versions; they do not establish performance with newer dependencies or other scenes. Only aggregates are published, without raw frames, GT, per-frame tracks or user bookmarks.
+
+## Retained from v0.2 — Spatial Analysis Lab
 
 Open **Spatial Analysis** (`/spatial`) on a running local server (`http://127.0.0.1:8000/spatial`): clickable camera-space XYZ / raw depth inspector, sequential four-engine still-image comparison with native-unit histograms and 3D previews, optional YOLO26 Detect/Segment instance-to-point fusion, and pinhole checkerboard calibration / candidate plane fitting / independent metric-error checks. The original viewer, four depth engines, image/RTSP input, exports and bilingual UI remain available. Analysis is a single-worker experimental feature. Real single-image CUDA inference is verified on the recorded Ubuntu host; physical RTSP and distance accuracy remain unverified.
 
@@ -152,7 +158,7 @@ node tests/test_i18n.cjs
 python tools/check_release.py
 ```
 
-The CI workflow runs deterministic, fake-backed application tests without downloading pretrained weights. Passing application CI is **not** a four-model hardware benchmark. Check [GitHub Actions](https://github.com/JShengP/depthport/actions/workflows/ci.yml) for the current branch and commit results.
+[Application CI](https://github.com/JShengP/depthport/actions/workflows/ci.yml) runs deterministic model-double/CPU tensor contracts. [Model compatibility CI](https://github.com/JShengP/depthport/actions/workflows/model-compatibility.yml) installs the explicit dependency recipe and imports all four actual APIs. Neither downloads pretrained weights nor runs inference; passing CI is **not hardware or accuracy acceptance**.
 
 [Tracking Acceptance & Evaluation](docs/en/tracking-evaluation.md) · [Contributing](CONTRIBUTING.md) · [Roadmap](ROADMAP.md) · [Changelog](CHANGELOG.md) · [Release checklist](docs/en/publishing.md)
 

@@ -1,3 +1,19 @@
+# Changelog / 版本紀錄
+
+## 0.3.0-alpha.1 — 2026-10-19 (experimental Alpha pre-release)
+
+- Integrated PR #7 into main: opt-in manual local Sessions, hash-checked same-frame replay and explicit offline semantic tracking; v0.2 Spatial Analysis remains available.
+- Added optional isolated NumPy 2 Roboflow BoT-SORT, replay boxes/Object IDs, playback/timeline/A-B controls, searchable local bookmarks, JSON backup and guarded keyboard operations.
+- Added reproducible public-sequence Baseline/ByteTrack/BoT-SORT studies, parameter comparisons and ID-switch/FP diagnosis. Publish aggregate evidence only; keep defaults and mark long-occlusion recovery unaccepted.
+- Synchronized Python 3.11/3.12 application/model API compatibility checks on Ubuntu/Windows. No new pretrained-inference or hardware acceptance claim.
+- Consolidated bilingual README downloads, release notes, validation navigation and roadmap; retain the development log below.
+- 本版將 PR #7 的選用本機 Session、完整性回放、獨立 BoT-SORT worker、追蹤疊圖及書籤操作整合到 main，保留 v0.2 功能與原預設；公開序列研究僅發布彙總。長遮擋、實體 RTSP、Windows 真權重／worker、長時穩定性與標定精度仍待驗證。
+
+[Release notes / 版本說明](docs/releases/0.3.0-alpha.1.md)
+
+<details>
+<summary>v0.3.0-alpha.0 development log / 完整開發紀錄（本版前，未獨立發布）</summary>
+
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
 - Added reproducible default-vs-activation error diagnosis with exact official CLEAR count reconciliation, immutable-detection FP pairing, observational gap/overlap/localisation signals and qualified local visual review. Published aggregate evidence and prioritised confirmation/competition, detector-localisation and association-telemetry experiments; no tracker/default change.
 - 新增預設與降低啟用後的可重現錯誤診斷，精確核對官方 CLEAR、依固定偵測配對 FP、記錄缺口／重疊／框品質訊號及附條件的本機影像檢查；公開彙總並決定先測確認／競爭、框品質及關聯成本，不變更追蹤預設。
@@ -355,7 +371,7 @@
 - Added Esc in the focused bookmark note to pause and return focus to replay while retaining unsaved text and tags, including drafts that cannot yet be saved. It uses the shared shortcut switch and IME/repeat/modifier guards, cancels pending presentation without saving or fetching, and lets replay shortcuts resume immediately. Esc in search and other controls keeps its existing behavior.
 - 新增在書籤備註欄內按 Esc，暫停並將焦點移回回放，保留未保存文字與分類，尚不符合保存條件的草稿也不清除。沿用共用快捷鍵開關與組字／長按／修飾鍵防護，取消待顯示結果但不保存或另載入影格，可接續使用回放快捷鍵；搜尋及其他控制項的 Esc 維持原有行為。
 
-# Changelog / 版本紀錄
+</details>
 
 ## 0.2.0-alpha.1 — 2026-10-17 (experimental Alpha pre-release)
 
