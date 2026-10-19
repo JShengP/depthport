@@ -1,6 +1,10 @@
 # 驗證紀錄
 [English](../en/validation.md)・[首頁](../../README.zh-TW.md)
 
+## 決策前觀測支援／更新置換保護控制 — 2026-10-19
+
+[規則、全清單與決定](tracking-past-support.md) · [原凍結協定](../validation/v0.3-past-support-protocol.json) · [彙總](../validation/v0.3-past-support.json) · [報表修補附註](../validation/v0.3-past-support-report-amendment.json)。新授權 KITTI 0000–0003，全部978格原圖逐像素核對；四組因子對照×三次重複與四次未掛控制參考一致，全部預測先封存才讀GT。各景／各組均零活躍替代、零veto，canonical預測及官方分數不變：305筆可評分行人GT，FN174／FP169／IDSW0／Frag1；0003可評分行人GT零。逐景傷害無新增FN／IDSW，但零有效曝光使所有控制未通過品質門檻，不是可靠性驗收。空階段／空檔報表修補於讀GT後公開附註，直接使用原封存預測，不重跑追蹤、不調參或升預設。應用401通過／29選配略過，固定相關契約87通過。下一步另凍結同規則不看GT的曝光選取與未見保留確認，原始資料留本機。
+
 ## 凍結有效更新風險分組與跨格支援 — 2026-10-19
 
 [定義、全清單與決定](tracking-temporal-support.md) · [抽取前協定](../validation/v0.3-temporal-support-protocol.json) · [彙總](../validation/v0.3-temporal-support.json)。完整 197 個參考替代／17,984 格，八個占用×更新變化組、197 個非空已記錄歷史錨點，120,360 次年齡／連續計數核對。不追蹤、不讀 GT、不調參；出生未索引。下一格過門檻支援 114／有號差 19，69 個因原列未更新而未知；有號差前綴只有 1 個達兩格，沒有更長。不新增時間 veto 或挑 N，下一步另凍結只用過去接受觀測的資格、活躍／保留角色與更新保護，再談介入與 GT 傷害分數。全來源零值／未知及原階段保留，原始歷史本機，兩次抽取逐位元相同。

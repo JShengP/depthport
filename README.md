@@ -172,6 +172,8 @@ Completed studies cover [2,700 frames / 27 runs](docs/en/tracking-expanded-accep
 
 [Frozen risk groups and temporal support](docs/en/tracking-temporal-support.md) retain all eight structural groups and all unknown states: next-frame support is 114 gate / 19 signed-gap / 69 selected-no-update. No temporal veto or fitted duration is introduced; the next candidate uses past accepted observations with explicit active/retained roles and update protection.
 
+[Past-only support/protection controls on new KITTI sources](docs/en/tracking-past-support.md): 978 original frames, four arms × three equal repeats. Zero active alternatives/vetoes; unchanged scores pass harm checks but fail effective-exposure/quality gates. Next freeze GT-free exposure selection plus untouched reserved confirmation; no tuning or default promotion.
+
 These results apply to the named public sequences, fixed caches and recorded versions, not newer detector profiles or other scenes. Only aggregates are distributed for these studies, without raw frames, GT, per-frame tracks or user bookmarks.
 
 </details>

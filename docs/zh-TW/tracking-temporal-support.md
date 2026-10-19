@@ -2,6 +2,8 @@
 
 [English](../en/tracking-temporal-support.md) · [ROADMAP](../../ROADMAP.md) · [前輪結構診斷](tracking-competition-structure.md) · [凍結定義](../validation/v0.3-temporal-support-protocol.json) · [彙總結果](../validation/v0.3-temporal-support.json)
 
+後續：[新KITTI來源的決策前支援／更新保護控制](tracking-past-support.md)已完成，零有效曝光，效益仍未驗證。本篇歷史診斷與原凍結紀錄保留。
+
 **先封存定義再抽取跨格資料，目前仍不足以加入新的時間 veto。** 197 個參考替代中，下一格有 114 個仍具同階段過門檻支援，但只有 19 個也符合原有號分差條件；69 個因原選假說未接受更新而無法比較。未知證據與幾何陰性分開。下一候選選為另行凍結的**只用過去已接受觀測的支援資格，搭配活躍／保留角色與更新置換保護**；不從這批結果挑連續影格門檻。
 
 ![八個風險分組、固定延遲支援狀態與連續觀測前綴](../assets/tracking-v03-temporal-support.png)

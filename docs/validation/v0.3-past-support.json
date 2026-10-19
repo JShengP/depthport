@@ -1,0 +1,1271 @@
+{
+  "format": "depthport.past-support-acceptance.v1",
+  "protocol_sha256": "ff4a9720a0cf039e39255b49054dd68d5d3e8e092e970f4020fc1b5d6362c395",
+  "input_lock_sha256": "dd40b73e1e286a8f131167973f6815c6b6474d7c9e76747602d4d6abe035f5bf",
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv-python": "4.11.0.86",
+    "trackers": "2.6.1",
+    "supervision": "0.27.0",
+    "scipy": "1.18.1"
+  },
+  "evaluator_commit": "12c8791b303e0a0b50f753af204249e622d0281a",
+  "repeats": 3,
+  "sequences": [
+    {
+      "name": "KITTI-0000",
+      "frames": 154,
+      "gt_pedestrian_observations": 19,
+      "gt_member_sha256": "97f772a27181dfc7ef51b3e64b86bd42e682753b6855fdc58d259ecbed501fd4",
+      "cached_detections": 326,
+      "methods": {
+        "activation_control": {
+          "metrics": {
+            "CLR_TP": 5,
+            "CLR_FP": 155,
+            "CLR_FN": 14,
+            "IDSW": 0,
+            "Frag": 1,
+            "CLR_Re": 0.2631578947368421,
+            "CLR_Pr": 0.03125,
+            "MOTA": -7.894736842105263,
+            "IDF1": 0.055865921787709494,
+            "HOTA": 0.0895871863654409
+          },
+          "exposure": {
+            "counts": {
+              "frames": 154,
+              "actual_vetoes": 0,
+              "frames_with_veto": 0,
+              "legacy_active_edges": 0,
+              "active_alternatives": 0,
+              "past_qualified_alternatives": 0,
+              "protected_alternatives": 0,
+              "joint_alternatives": 0
+            },
+            "roles": {},
+            "past_reasons": {},
+            "protection_reasons": {},
+            "reference_risk_groups": {
+              "occupied/same_updated_rows": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "occupied/row_replacement": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "occupied/fewer_updates": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "occupied/other": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "available/same_updated_rows": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "available/row_replacement": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "available/fewer_updates": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "available/other": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              }
+            }
+          },
+          "canonical_predictions_sha256": "45b99c02a075b626f3e0e414c2d34a7aaea1e306fd5d661c3bb77b4132d95b70",
+          "trace_sha256": "2e0543981bff8dd2a3b4538cfcb6e7be5c816d15f77bc3b3c4bcf787eca170d0",
+          "repeated_predictions_and_full_trace_equal": true
+        },
+        "past_support_only": {
+          "metrics": {
+            "CLR_TP": 5,
+            "CLR_FP": 155,
+            "CLR_FN": 14,
+            "IDSW": 0,
+            "Frag": 1,
+            "CLR_Re": 0.2631578947368421,
+            "CLR_Pr": 0.03125,
+            "MOTA": -7.894736842105263,
+            "IDF1": 0.055865921787709494,
+            "HOTA": 0.0895871863654409
+          },
+          "exposure": {
+            "counts": {
+              "frames": 154,
+              "actual_vetoes": 0,
+              "frames_with_veto": 0,
+              "legacy_active_edges": 0,
+              "active_alternatives": 0,
+              "past_qualified_alternatives": 0,
+              "protected_alternatives": 0,
+              "joint_alternatives": 0
+            },
+            "roles": {},
+            "past_reasons": {},
+            "protection_reasons": {},
+            "reference_risk_groups": null
+          },
+          "canonical_predictions_sha256": "45b99c02a075b626f3e0e414c2d34a7aaea1e306fd5d661c3bb77b4132d95b70",
+          "trace_sha256": "2e0543981bff8dd2a3b4538cfcb6e7be5c816d15f77bc3b3c4bcf787eca170d0",
+          "repeated_predictions_and_full_trace_equal": true
+        },
+        "update_protection_only": {
+          "metrics": {
+            "CLR_TP": 5,
+            "CLR_FP": 155,
+            "CLR_FN": 14,
+            "IDSW": 0,
+            "Frag": 1,
+            "CLR_Re": 0.2631578947368421,
+            "CLR_Pr": 0.03125,
+            "MOTA": -7.894736842105263,
+            "IDF1": 0.055865921787709494,
+            "HOTA": 0.0895871863654409
+          },
+          "exposure": {
+            "counts": {
+              "frames": 154,
+              "actual_vetoes": 0,
+              "frames_with_veto": 0,
+              "legacy_active_edges": 0,
+              "active_alternatives": 0,
+              "past_qualified_alternatives": 0,
+              "protected_alternatives": 0,
+              "joint_alternatives": 0
+            },
+            "roles": {},
+            "past_reasons": {},
+            "protection_reasons": {},
+            "reference_risk_groups": null
+          },
+          "canonical_predictions_sha256": "45b99c02a075b626f3e0e414c2d34a7aaea1e306fd5d661c3bb77b4132d95b70",
+          "trace_sha256": "2e0543981bff8dd2a3b4538cfcb6e7be5c816d15f77bc3b3c4bcf787eca170d0",
+          "repeated_predictions_and_full_trace_equal": true
+        },
+        "past_support_and_protection": {
+          "metrics": {
+            "CLR_TP": 5,
+            "CLR_FP": 155,
+            "CLR_FN": 14,
+            "IDSW": 0,
+            "Frag": 1,
+            "CLR_Re": 0.2631578947368421,
+            "CLR_Pr": 0.03125,
+            "MOTA": -7.894736842105263,
+            "IDF1": 0.055865921787709494,
+            "HOTA": 0.0895871863654409
+          },
+          "exposure": {
+            "counts": {
+              "frames": 154,
+              "actual_vetoes": 0,
+              "frames_with_veto": 0,
+              "legacy_active_edges": 0,
+              "active_alternatives": 0,
+              "past_qualified_alternatives": 0,
+              "protected_alternatives": 0,
+              "joint_alternatives": 0
+            },
+            "roles": {},
+            "past_reasons": {},
+            "protection_reasons": {},
+            "reference_risk_groups": null
+          },
+          "canonical_predictions_sha256": "45b99c02a075b626f3e0e414c2d34a7aaea1e306fd5d661c3bb77b4132d95b70",
+          "trace_sha256": "2e0543981bff8dd2a3b4538cfcb6e7be5c816d15f77bc3b3c4bcf787eca170d0",
+          "repeated_predictions_and_full_trace_equal": true
+        }
+      },
+      "paired_errors": {
+        "past_support_only": {
+          "FP": {
+            "added": 0,
+            "removed": 0,
+            "shared": 155,
+            "net_change": 0
+          },
+          "FN": {
+            "added": 0,
+            "removed": 0,
+            "shared": 14,
+            "net_change": 0
+          },
+          "IDSW": {
+            "added": 0,
+            "removed": 0,
+            "shared": 0,
+            "net_change": 0
+          }
+        },
+        "update_protection_only": {
+          "FP": {
+            "added": 0,
+            "removed": 0,
+            "shared": 155,
+            "net_change": 0
+          },
+          "FN": {
+            "added": 0,
+            "removed": 0,
+            "shared": 14,
+            "net_change": 0
+          },
+          "IDSW": {
+            "added": 0,
+            "removed": 0,
+            "shared": 0,
+            "net_change": 0
+          }
+        },
+        "past_support_and_protection": {
+          "FP": {
+            "added": 0,
+            "removed": 0,
+            "shared": 155,
+            "net_change": 0
+          },
+          "FN": {
+            "added": 0,
+            "removed": 0,
+            "shared": 14,
+            "net_change": 0
+          },
+          "IDSW": {
+            "added": 0,
+            "removed": 0,
+            "shared": 0,
+            "net_change": 0
+          }
+        }
+      },
+      "screens": {
+        "past_support_only": {
+          "harm_conditions": {
+            "CLR_FN_no_increase": true,
+            "CLR_FP_no_increase": true,
+            "IDSW_no_increase": true,
+            "Frag_no_increase": true,
+            "IDF1_no_decrease": true,
+            "HOTA_no_decrease": true,
+            "no_added_fn": true,
+            "no_added_idsw": true
+          },
+          "harm_passes": true,
+          "effective_exposure": false,
+          "strict_improvement": false,
+          "passes": false,
+          "identity_evaluable": true
+        },
+        "update_protection_only": {
+          "harm_conditions": {
+            "CLR_FN_no_increase": true,
+            "CLR_FP_no_increase": true,
+            "IDSW_no_increase": true,
+            "Frag_no_increase": true,
+            "IDF1_no_decrease": true,
+            "HOTA_no_decrease": true,
+            "no_added_fn": true,
+            "no_added_idsw": true
+          },
+          "harm_passes": true,
+          "effective_exposure": false,
+          "strict_improvement": false,
+          "passes": false,
+          "identity_evaluable": true
+        },
+        "past_support_and_protection": {
+          "harm_conditions": {
+            "CLR_FN_no_increase": true,
+            "CLR_FP_no_increase": true,
+            "IDSW_no_increase": true,
+            "Frag_no_increase": true,
+            "IDF1_no_decrease": true,
+            "HOTA_no_decrease": true,
+            "no_added_fn": true,
+            "no_added_idsw": true
+          },
+          "harm_passes": true,
+          "effective_exposure": false,
+          "strict_improvement": false,
+          "passes": false,
+          "identity_evaluable": true
+        }
+      },
+      "unhooked_reference_equal": true,
+      "official_gt_layout_equal_across_arms": true
+    },
+    {
+      "name": "KITTI-0001",
+      "frames": 447,
+      "gt_pedestrian_observations": 106,
+      "gt_member_sha256": "267c8158eba4581729f84ba971d7c35bb8a0bf1bd3443b7edb6e601cbc21d08a",
+      "cached_detections": 107,
+      "methods": {
+        "activation_control": {
+          "metrics": {
+            "CLR_TP": 25,
+            "CLR_FP": 0,
+            "CLR_FN": 81,
+            "IDSW": 0,
+            "Frag": 0,
+            "CLR_Re": 0.2358490566037736,
+            "CLR_Pr": 1.0,
+            "MOTA": 0.2358490566037736,
+            "IDF1": 0.3816793893129771,
+            "HOTA": 0.18559820354850212
+          },
+          "exposure": {
+            "counts": {
+              "frames": 447,
+              "actual_vetoes": 0,
+              "frames_with_veto": 0,
+              "legacy_active_edges": 0,
+              "active_alternatives": 0,
+              "past_qualified_alternatives": 0,
+              "protected_alternatives": 0,
+              "joint_alternatives": 0
+            },
+            "roles": {},
+            "past_reasons": {},
+            "protection_reasons": {},
+            "reference_risk_groups": {
+              "occupied/same_updated_rows": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "occupied/row_replacement": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "occupied/fewer_updates": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "occupied/other": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "available/same_updated_rows": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "available/row_replacement": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "available/fewer_updates": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "available/other": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              }
+            }
+          },
+          "canonical_predictions_sha256": "915c81e55ce972dcce314b8b4d73778a47062edc5fa36c522cd3a69cf16856d2",
+          "trace_sha256": "08bfbd6f1372cfcf05e5c15f4befc952f5f0d7180d66c0129df69ecda7aa09eb",
+          "repeated_predictions_and_full_trace_equal": true
+        },
+        "past_support_only": {
+          "metrics": {
+            "CLR_TP": 25,
+            "CLR_FP": 0,
+            "CLR_FN": 81,
+            "IDSW": 0,
+            "Frag": 0,
+            "CLR_Re": 0.2358490566037736,
+            "CLR_Pr": 1.0,
+            "MOTA": 0.2358490566037736,
+            "IDF1": 0.3816793893129771,
+            "HOTA": 0.18559820354850212
+          },
+          "exposure": {
+            "counts": {
+              "frames": 447,
+              "actual_vetoes": 0,
+              "frames_with_veto": 0,
+              "legacy_active_edges": 0,
+              "active_alternatives": 0,
+              "past_qualified_alternatives": 0,
+              "protected_alternatives": 0,
+              "joint_alternatives": 0
+            },
+            "roles": {},
+            "past_reasons": {},
+            "protection_reasons": {},
+            "reference_risk_groups": null
+          },
+          "canonical_predictions_sha256": "915c81e55ce972dcce314b8b4d73778a47062edc5fa36c522cd3a69cf16856d2",
+          "trace_sha256": "08bfbd6f1372cfcf05e5c15f4befc952f5f0d7180d66c0129df69ecda7aa09eb",
+          "repeated_predictions_and_full_trace_equal": true
+        },
+        "update_protection_only": {
+          "metrics": {
+            "CLR_TP": 25,
+            "CLR_FP": 0,
+            "CLR_FN": 81,
+            "IDSW": 0,
+            "Frag": 0,
+            "CLR_Re": 0.2358490566037736,
+            "CLR_Pr": 1.0,
+            "MOTA": 0.2358490566037736,
+            "IDF1": 0.3816793893129771,
+            "HOTA": 0.18559820354850212
+          },
+          "exposure": {
+            "counts": {
+              "frames": 447,
+              "actual_vetoes": 0,
+              "frames_with_veto": 0,
+              "legacy_active_edges": 0,
+              "active_alternatives": 0,
+              "past_qualified_alternatives": 0,
+              "protected_alternatives": 0,
+              "joint_alternatives": 0
+            },
+            "roles": {},
+            "past_reasons": {},
+            "protection_reasons": {},
+            "reference_risk_groups": null
+          },
+          "canonical_predictions_sha256": "915c81e55ce972dcce314b8b4d73778a47062edc5fa36c522cd3a69cf16856d2",
+          "trace_sha256": "08bfbd6f1372cfcf05e5c15f4befc952f5f0d7180d66c0129df69ecda7aa09eb",
+          "repeated_predictions_and_full_trace_equal": true
+        },
+        "past_support_and_protection": {
+          "metrics": {
+            "CLR_TP": 25,
+            "CLR_FP": 0,
+            "CLR_FN": 81,
+            "IDSW": 0,
+            "Frag": 0,
+            "CLR_Re": 0.2358490566037736,
+            "CLR_Pr": 1.0,
+            "MOTA": 0.2358490566037736,
+            "IDF1": 0.3816793893129771,
+            "HOTA": 0.18559820354850212
+          },
+          "exposure": {
+            "counts": {
+              "frames": 447,
+              "actual_vetoes": 0,
+              "frames_with_veto": 0,
+              "legacy_active_edges": 0,
+              "active_alternatives": 0,
+              "past_qualified_alternatives": 0,
+              "protected_alternatives": 0,
+              "joint_alternatives": 0
+            },
+            "roles": {},
+            "past_reasons": {},
+            "protection_reasons": {},
+            "reference_risk_groups": null
+          },
+          "canonical_predictions_sha256": "915c81e55ce972dcce314b8b4d73778a47062edc5fa36c522cd3a69cf16856d2",
+          "trace_sha256": "08bfbd6f1372cfcf05e5c15f4befc952f5f0d7180d66c0129df69ecda7aa09eb",
+          "repeated_predictions_and_full_trace_equal": true
+        }
+      },
+      "paired_errors": {
+        "past_support_only": {
+          "FP": {
+            "added": 0,
+            "removed": 0,
+            "shared": 0,
+            "net_change": 0
+          },
+          "FN": {
+            "added": 0,
+            "removed": 0,
+            "shared": 81,
+            "net_change": 0
+          },
+          "IDSW": {
+            "added": 0,
+            "removed": 0,
+            "shared": 0,
+            "net_change": 0
+          }
+        },
+        "update_protection_only": {
+          "FP": {
+            "added": 0,
+            "removed": 0,
+            "shared": 0,
+            "net_change": 0
+          },
+          "FN": {
+            "added": 0,
+            "removed": 0,
+            "shared": 81,
+            "net_change": 0
+          },
+          "IDSW": {
+            "added": 0,
+            "removed": 0,
+            "shared": 0,
+            "net_change": 0
+          }
+        },
+        "past_support_and_protection": {
+          "FP": {
+            "added": 0,
+            "removed": 0,
+            "shared": 0,
+            "net_change": 0
+          },
+          "FN": {
+            "added": 0,
+            "removed": 0,
+            "shared": 81,
+            "net_change": 0
+          },
+          "IDSW": {
+            "added": 0,
+            "removed": 0,
+            "shared": 0,
+            "net_change": 0
+          }
+        }
+      },
+      "screens": {
+        "past_support_only": {
+          "harm_conditions": {
+            "CLR_FN_no_increase": true,
+            "CLR_FP_no_increase": true,
+            "IDSW_no_increase": true,
+            "Frag_no_increase": true,
+            "IDF1_no_decrease": true,
+            "HOTA_no_decrease": true,
+            "no_added_fn": true,
+            "no_added_idsw": true
+          },
+          "harm_passes": true,
+          "effective_exposure": false,
+          "strict_improvement": false,
+          "passes": false,
+          "identity_evaluable": true
+        },
+        "update_protection_only": {
+          "harm_conditions": {
+            "CLR_FN_no_increase": true,
+            "CLR_FP_no_increase": true,
+            "IDSW_no_increase": true,
+            "Frag_no_increase": true,
+            "IDF1_no_decrease": true,
+            "HOTA_no_decrease": true,
+            "no_added_fn": true,
+            "no_added_idsw": true
+          },
+          "harm_passes": true,
+          "effective_exposure": false,
+          "strict_improvement": false,
+          "passes": false,
+          "identity_evaluable": true
+        },
+        "past_support_and_protection": {
+          "harm_conditions": {
+            "CLR_FN_no_increase": true,
+            "CLR_FP_no_increase": true,
+            "IDSW_no_increase": true,
+            "Frag_no_increase": true,
+            "IDF1_no_decrease": true,
+            "HOTA_no_decrease": true,
+            "no_added_fn": true,
+            "no_added_idsw": true
+          },
+          "harm_passes": true,
+          "effective_exposure": false,
+          "strict_improvement": false,
+          "passes": false,
+          "identity_evaluable": true
+        }
+      },
+      "unhooked_reference_equal": true,
+      "official_gt_layout_equal_across_arms": true
+    },
+    {
+      "name": "KITTI-0002",
+      "frames": 233,
+      "gt_pedestrian_observations": 180,
+      "gt_member_sha256": "ba5e11b8a27de653adba8d0641dc0abcb8e3e4d854eb391699748a568e1fe24d",
+      "cached_detections": 286,
+      "methods": {
+        "activation_control": {
+          "metrics": {
+            "CLR_TP": 101,
+            "CLR_FP": 14,
+            "CLR_FN": 79,
+            "IDSW": 0,
+            "Frag": 0,
+            "CLR_Re": 0.5611111111111111,
+            "CLR_Pr": 0.8782608695652174,
+            "MOTA": 0.48333333333333334,
+            "IDF1": 0.6847457627118644,
+            "HOTA": 0.43726388974865454
+          },
+          "exposure": {
+            "counts": {
+              "frames": 233,
+              "actual_vetoes": 0,
+              "frames_with_veto": 0,
+              "legacy_active_edges": 0,
+              "active_alternatives": 0,
+              "past_qualified_alternatives": 0,
+              "protected_alternatives": 0,
+              "joint_alternatives": 0
+            },
+            "roles": {},
+            "past_reasons": {},
+            "protection_reasons": {},
+            "reference_risk_groups": {
+              "occupied/same_updated_rows": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "occupied/row_replacement": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "occupied/fewer_updates": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "occupied/other": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "available/same_updated_rows": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "available/row_replacement": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "available/fewer_updates": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "available/other": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              }
+            }
+          },
+          "canonical_predictions_sha256": "adb4b2ebc7d93f3ddcaeee008b4b091689c3ac116c44dca5ab40cf9f27155080",
+          "trace_sha256": "fa34c61e66267b496354c2ae655945862ecfb08d7778902151f46986db6f594f",
+          "repeated_predictions_and_full_trace_equal": true
+        },
+        "past_support_only": {
+          "metrics": {
+            "CLR_TP": 101,
+            "CLR_FP": 14,
+            "CLR_FN": 79,
+            "IDSW": 0,
+            "Frag": 0,
+            "CLR_Re": 0.5611111111111111,
+            "CLR_Pr": 0.8782608695652174,
+            "MOTA": 0.48333333333333334,
+            "IDF1": 0.6847457627118644,
+            "HOTA": 0.43726388974865454
+          },
+          "exposure": {
+            "counts": {
+              "frames": 233,
+              "actual_vetoes": 0,
+              "frames_with_veto": 0,
+              "legacy_active_edges": 0,
+              "active_alternatives": 0,
+              "past_qualified_alternatives": 0,
+              "protected_alternatives": 0,
+              "joint_alternatives": 0
+            },
+            "roles": {},
+            "past_reasons": {},
+            "protection_reasons": {},
+            "reference_risk_groups": null
+          },
+          "canonical_predictions_sha256": "adb4b2ebc7d93f3ddcaeee008b4b091689c3ac116c44dca5ab40cf9f27155080",
+          "trace_sha256": "fa34c61e66267b496354c2ae655945862ecfb08d7778902151f46986db6f594f",
+          "repeated_predictions_and_full_trace_equal": true
+        },
+        "update_protection_only": {
+          "metrics": {
+            "CLR_TP": 101,
+            "CLR_FP": 14,
+            "CLR_FN": 79,
+            "IDSW": 0,
+            "Frag": 0,
+            "CLR_Re": 0.5611111111111111,
+            "CLR_Pr": 0.8782608695652174,
+            "MOTA": 0.48333333333333334,
+            "IDF1": 0.6847457627118644,
+            "HOTA": 0.43726388974865454
+          },
+          "exposure": {
+            "counts": {
+              "frames": 233,
+              "actual_vetoes": 0,
+              "frames_with_veto": 0,
+              "legacy_active_edges": 0,
+              "active_alternatives": 0,
+              "past_qualified_alternatives": 0,
+              "protected_alternatives": 0,
+              "joint_alternatives": 0
+            },
+            "roles": {},
+            "past_reasons": {},
+            "protection_reasons": {},
+            "reference_risk_groups": null
+          },
+          "canonical_predictions_sha256": "adb4b2ebc7d93f3ddcaeee008b4b091689c3ac116c44dca5ab40cf9f27155080",
+          "trace_sha256": "fa34c61e66267b496354c2ae655945862ecfb08d7778902151f46986db6f594f",
+          "repeated_predictions_and_full_trace_equal": true
+        },
+        "past_support_and_protection": {
+          "metrics": {
+            "CLR_TP": 101,
+            "CLR_FP": 14,
+            "CLR_FN": 79,
+            "IDSW": 0,
+            "Frag": 0,
+            "CLR_Re": 0.5611111111111111,
+            "CLR_Pr": 0.8782608695652174,
+            "MOTA": 0.48333333333333334,
+            "IDF1": 0.6847457627118644,
+            "HOTA": 0.43726388974865454
+          },
+          "exposure": {
+            "counts": {
+              "frames": 233,
+              "actual_vetoes": 0,
+              "frames_with_veto": 0,
+              "legacy_active_edges": 0,
+              "active_alternatives": 0,
+              "past_qualified_alternatives": 0,
+              "protected_alternatives": 0,
+              "joint_alternatives": 0
+            },
+            "roles": {},
+            "past_reasons": {},
+            "protection_reasons": {},
+            "reference_risk_groups": null
+          },
+          "canonical_predictions_sha256": "adb4b2ebc7d93f3ddcaeee008b4b091689c3ac116c44dca5ab40cf9f27155080",
+          "trace_sha256": "fa34c61e66267b496354c2ae655945862ecfb08d7778902151f46986db6f594f",
+          "repeated_predictions_and_full_trace_equal": true
+        }
+      },
+      "paired_errors": {
+        "past_support_only": {
+          "FP": {
+            "added": 0,
+            "removed": 0,
+            "shared": 14,
+            "net_change": 0
+          },
+          "FN": {
+            "added": 0,
+            "removed": 0,
+            "shared": 79,
+            "net_change": 0
+          },
+          "IDSW": {
+            "added": 0,
+            "removed": 0,
+            "shared": 0,
+            "net_change": 0
+          }
+        },
+        "update_protection_only": {
+          "FP": {
+            "added": 0,
+            "removed": 0,
+            "shared": 14,
+            "net_change": 0
+          },
+          "FN": {
+            "added": 0,
+            "removed": 0,
+            "shared": 79,
+            "net_change": 0
+          },
+          "IDSW": {
+            "added": 0,
+            "removed": 0,
+            "shared": 0,
+            "net_change": 0
+          }
+        },
+        "past_support_and_protection": {
+          "FP": {
+            "added": 0,
+            "removed": 0,
+            "shared": 14,
+            "net_change": 0
+          },
+          "FN": {
+            "added": 0,
+            "removed": 0,
+            "shared": 79,
+            "net_change": 0
+          },
+          "IDSW": {
+            "added": 0,
+            "removed": 0,
+            "shared": 0,
+            "net_change": 0
+          }
+        }
+      },
+      "screens": {
+        "past_support_only": {
+          "harm_conditions": {
+            "CLR_FN_no_increase": true,
+            "CLR_FP_no_increase": true,
+            "IDSW_no_increase": true,
+            "Frag_no_increase": true,
+            "IDF1_no_decrease": true,
+            "HOTA_no_decrease": true,
+            "no_added_fn": true,
+            "no_added_idsw": true
+          },
+          "harm_passes": true,
+          "effective_exposure": false,
+          "strict_improvement": false,
+          "passes": false,
+          "identity_evaluable": true
+        },
+        "update_protection_only": {
+          "harm_conditions": {
+            "CLR_FN_no_increase": true,
+            "CLR_FP_no_increase": true,
+            "IDSW_no_increase": true,
+            "Frag_no_increase": true,
+            "IDF1_no_decrease": true,
+            "HOTA_no_decrease": true,
+            "no_added_fn": true,
+            "no_added_idsw": true
+          },
+          "harm_passes": true,
+          "effective_exposure": false,
+          "strict_improvement": false,
+          "passes": false,
+          "identity_evaluable": true
+        },
+        "past_support_and_protection": {
+          "harm_conditions": {
+            "CLR_FN_no_increase": true,
+            "CLR_FP_no_increase": true,
+            "IDSW_no_increase": true,
+            "Frag_no_increase": true,
+            "IDF1_no_decrease": true,
+            "HOTA_no_decrease": true,
+            "no_added_fn": true,
+            "no_added_idsw": true
+          },
+          "harm_passes": true,
+          "effective_exposure": false,
+          "strict_improvement": false,
+          "passes": false,
+          "identity_evaluable": true
+        }
+      },
+      "unhooked_reference_equal": true,
+      "official_gt_layout_equal_across_arms": true
+    },
+    {
+      "name": "KITTI-0003",
+      "frames": 144,
+      "gt_pedestrian_observations": 0,
+      "gt_member_sha256": "1e7ae668ee7ff2a040edbad648fe4a978557028ca39ef7e1a05ef3f8ec3aa9e9",
+      "cached_detections": 13,
+      "methods": {
+        "activation_control": {
+          "metrics": {
+            "CLR_TP": 0,
+            "CLR_FP": 0,
+            "CLR_FN": 0,
+            "IDSW": 0,
+            "Frag": 0,
+            "CLR_Re": 0.0,
+            "CLR_Pr": 0.0,
+            "MOTA": 0.0,
+            "IDF1": 0.0,
+            "HOTA": 0.0
+          },
+          "exposure": {
+            "counts": {
+              "frames": 144,
+              "actual_vetoes": 0,
+              "frames_with_veto": 0,
+              "legacy_active_edges": 0,
+              "active_alternatives": 0,
+              "past_qualified_alternatives": 0,
+              "protected_alternatives": 0,
+              "joint_alternatives": 0
+            },
+            "roles": {},
+            "past_reasons": {},
+            "protection_reasons": {},
+            "reference_risk_groups": {
+              "occupied/same_updated_rows": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "occupied/row_replacement": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "occupied/fewer_updates": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "occupied/other": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "available/same_updated_rows": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "available/row_replacement": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "available/fewer_updates": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              },
+              "available/other": {
+                "alternatives": 0,
+                "past_qualified": 0,
+                "protected": 0,
+                "joint": 0
+              }
+            }
+          },
+          "canonical_predictions_sha256": "87168a3fd696713b43bc64d743d29ff3c41642c496c5180fbd83da6865daf951",
+          "trace_sha256": "9515b0b14c481ec1545b59983a674ba23c6c2481b39a673f2b83fbae835cccec",
+          "repeated_predictions_and_full_trace_equal": true
+        },
+        "past_support_only": {
+          "metrics": {
+            "CLR_TP": 0,
+            "CLR_FP": 0,
+            "CLR_FN": 0,
+            "IDSW": 0,
+            "Frag": 0,
+            "CLR_Re": 0.0,
+            "CLR_Pr": 0.0,
+            "MOTA": 0.0,
+            "IDF1": 0.0,
+            "HOTA": 0.0
+          },
+          "exposure": {
+            "counts": {
+              "frames": 144,
+              "actual_vetoes": 0,
+              "frames_with_veto": 0,
+              "legacy_active_edges": 0,
+              "active_alternatives": 0,
+              "past_qualified_alternatives": 0,
+              "protected_alternatives": 0,
+              "joint_alternatives": 0
+            },
+            "roles": {},
+            "past_reasons": {},
+            "protection_reasons": {},
+            "reference_risk_groups": null
+          },
+          "canonical_predictions_sha256": "87168a3fd696713b43bc64d743d29ff3c41642c496c5180fbd83da6865daf951",
+          "trace_sha256": "9515b0b14c481ec1545b59983a674ba23c6c2481b39a673f2b83fbae835cccec",
+          "repeated_predictions_and_full_trace_equal": true
+        },
+        "update_protection_only": {
+          "metrics": {
+            "CLR_TP": 0,
+            "CLR_FP": 0,
+            "CLR_FN": 0,
+            "IDSW": 0,
+            "Frag": 0,
+            "CLR_Re": 0.0,
+            "CLR_Pr": 0.0,
+            "MOTA": 0.0,
+            "IDF1": 0.0,
+            "HOTA": 0.0
+          },
+          "exposure": {
+            "counts": {
+              "frames": 144,
+              "actual_vetoes": 0,
+              "frames_with_veto": 0,
+              "legacy_active_edges": 0,
+              "active_alternatives": 0,
+              "past_qualified_alternatives": 0,
+              "protected_alternatives": 0,
+              "joint_alternatives": 0
+            },
+            "roles": {},
+            "past_reasons": {},
+            "protection_reasons": {},
+            "reference_risk_groups": null
+          },
+          "canonical_predictions_sha256": "87168a3fd696713b43bc64d743d29ff3c41642c496c5180fbd83da6865daf951",
+          "trace_sha256": "9515b0b14c481ec1545b59983a674ba23c6c2481b39a673f2b83fbae835cccec",
+          "repeated_predictions_and_full_trace_equal": true
+        },
+        "past_support_and_protection": {
+          "metrics": {
+            "CLR_TP": 0,
+            "CLR_FP": 0,
+            "CLR_FN": 0,
+            "IDSW": 0,
+            "Frag": 0,
+            "CLR_Re": 0.0,
+            "CLR_Pr": 0.0,
+            "MOTA": 0.0,
+            "IDF1": 0.0,
+            "HOTA": 0.0
+          },
+          "exposure": {
+            "counts": {
+              "frames": 144,
+              "actual_vetoes": 0,
+              "frames_with_veto": 0,
+              "legacy_active_edges": 0,
+              "active_alternatives": 0,
+              "past_qualified_alternatives": 0,
+              "protected_alternatives": 0,
+              "joint_alternatives": 0
+            },
+            "roles": {},
+            "past_reasons": {},
+            "protection_reasons": {},
+            "reference_risk_groups": null
+          },
+          "canonical_predictions_sha256": "87168a3fd696713b43bc64d743d29ff3c41642c496c5180fbd83da6865daf951",
+          "trace_sha256": "9515b0b14c481ec1545b59983a674ba23c6c2481b39a673f2b83fbae835cccec",
+          "repeated_predictions_and_full_trace_equal": true
+        }
+      },
+      "paired_errors": {
+        "past_support_only": {
+          "FP": {
+            "added": 0,
+            "removed": 0,
+            "shared": 0,
+            "net_change": 0
+          },
+          "FN": {
+            "added": 0,
+            "removed": 0,
+            "shared": 0,
+            "net_change": 0
+          },
+          "IDSW": {
+            "added": 0,
+            "removed": 0,
+            "shared": 0,
+            "net_change": 0
+          }
+        },
+        "update_protection_only": {
+          "FP": {
+            "added": 0,
+            "removed": 0,
+            "shared": 0,
+            "net_change": 0
+          },
+          "FN": {
+            "added": 0,
+            "removed": 0,
+            "shared": 0,
+            "net_change": 0
+          },
+          "IDSW": {
+            "added": 0,
+            "removed": 0,
+            "shared": 0,
+            "net_change": 0
+          }
+        },
+        "past_support_and_protection": {
+          "FP": {
+            "added": 0,
+            "removed": 0,
+            "shared": 0,
+            "net_change": 0
+          },
+          "FN": {
+            "added": 0,
+            "removed": 0,
+            "shared": 0,
+            "net_change": 0
+          },
+          "IDSW": {
+            "added": 0,
+            "removed": 0,
+            "shared": 0,
+            "net_change": 0
+          }
+        }
+      },
+      "screens": {
+        "past_support_only": {
+          "harm_conditions": {
+            "CLR_FN_no_increase": true,
+            "CLR_FP_no_increase": true,
+            "IDSW_no_increase": true,
+            "Frag_no_increase": true,
+            "IDF1_no_decrease": true,
+            "HOTA_no_decrease": true,
+            "no_added_fn": true,
+            "no_added_idsw": true
+          },
+          "harm_passes": true,
+          "effective_exposure": false,
+          "strict_improvement": false,
+          "passes": false,
+          "identity_evaluable": false
+        },
+        "update_protection_only": {
+          "harm_conditions": {
+            "CLR_FN_no_increase": true,
+            "CLR_FP_no_increase": true,
+            "IDSW_no_increase": true,
+            "Frag_no_increase": true,
+            "IDF1_no_decrease": true,
+            "HOTA_no_decrease": true,
+            "no_added_fn": true,
+            "no_added_idsw": true
+          },
+          "harm_passes": true,
+          "effective_exposure": false,
+          "strict_improvement": false,
+          "passes": false,
+          "identity_evaluable": false
+        },
+        "past_support_and_protection": {
+          "harm_conditions": {
+            "CLR_FN_no_increase": true,
+            "CLR_FP_no_increase": true,
+            "IDSW_no_increase": true,
+            "Frag_no_increase": true,
+            "IDF1_no_decrease": true,
+            "HOTA_no_decrease": true,
+            "no_added_fn": true,
+            "no_added_idsw": true
+          },
+          "harm_passes": true,
+          "effective_exposure": false,
+          "strict_improvement": false,
+          "passes": false,
+          "identity_evaluable": false
+        }
+      },
+      "unhooked_reference_equal": true,
+      "official_gt_layout_equal_across_arms": true
+    }
+  ],
+  "group_screens": {
+    "past_support_only": {
+      "all_scene_harm_passes": true,
+      "effectively_exposed_scenes": 0,
+      "all_effectively_exposed_scene_quality_passes": null,
+      "passes": false
+    },
+    "update_protection_only": {
+      "all_scene_harm_passes": true,
+      "effectively_exposed_scenes": 0,
+      "all_effectively_exposed_scene_quality_passes": null,
+      "passes": false
+    },
+    "past_support_and_protection": {
+      "all_scene_harm_passes": true,
+      "effectively_exposed_scenes": 0,
+      "all_effectively_exposed_scene_quality_passes": null,
+      "passes": false
+    }
+  },
+  "tracking_gt_read": false,
+  "retuned": false,
+  "all_predictions_sealed_before_gt": true,
+  "public_raw_data": false,
+  "acceptance_scope": "Frozen research harm/exposure screen only, not release or general physical-identity acceptance.",
+  "report_only_amendment_sha256": "2fb989f3f767f3aa18a2a680632c040974ec7702d9eed58dc796f580e4c60967",
+  "tracking_rerun_after_gt": false
+}

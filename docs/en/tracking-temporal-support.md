@@ -2,6 +2,8 @@
 
 [繁體中文](../zh-TW/tracking-temporal-support.md) · [ROADMAP](../../ROADMAP.md) · [Previous structure diagnosis](tracking-competition-structure.md) · [Frozen definitions](../validation/v0.3-temporal-support-protocol.json) · [Aggregate results](../validation/v0.3-temporal-support.json)
 
+Follow-up: [frozen past-only support/protection on new KITTI sources](tracking-past-support.md) is complete; no effective exposure, so usefulness remains unverified. This historical diagnosis and original freeze are unchanged.
+
 **Definitions were sealed before temporal extraction; no new temporal veto is justified yet.** Of 197 reference alternatives, 114 retain same-stage gate support at the next frame, but only 19 also retain the original signed-gap condition; 69 cannot be compared because the selected hypothesis has no accepted update. Keep unknown evidence separate from negative geometry. Next develop a separately frozen **past-only accepted-observation support qualification, with active/retained roles and update-displacement protection**; do not choose a consecutive-frame threshold from these outcomes.
 
 ![All eight risk groups, fixed-lag support states and observed support prefixes](../assets/tracking-v03-temporal-support.png)

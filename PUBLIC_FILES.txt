@@ -318,3 +318,19 @@ docs/validation/v0.3-temporal-support.json
 docs/en/tracking-temporal-support.md
 docs/zh-TW/tracking-temporal-support.md
 docs/assets/tracking-v03-temporal-support.png
+
+# Frozen causal past-support / update-protection independent KITTI controls
+depthport/tracking_past_support_control.py
+tools/validate_tracking_past_support.py
+tools/plot_tracking_past_support.py
+tests/test_tracking_past_support_control.py
+tests/test_tracking_past_support_validation.py
+docs/validation/v0.3-past-support-protocol.json
+docs/validation/v0.3-past-support-inputs.json
+docs/validation/v0.3-past-support.json
+docs/en/tracking-past-support.md
+docs/zh-TW/tracking-past-support.md
+docs/assets/tracking-v03-past-support.png
+tests/test_tracking_past_support_reporting.py
+docs/validation/v0.3-past-support-report-amendment.json
+docs/validation/v0.3-past-support-report-fix.patch
