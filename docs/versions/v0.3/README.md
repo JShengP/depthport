@@ -1,37 +1,55 @@
-# v0.3 — Sessions, Replay & Offline Tracking / 工作階段、回放與離線追蹤
+<div align="center">
 
-[Project / 主 README](../../../README.md) · [繁體中文首頁](../../../README.zh-TW.md) · [v0.1](../v0.1/README.md) · [v0.2](../v0.2/README.md)
+# v0.3 · Sessions, Replay & Offline Tracking
 
-**Alpha pre-release / experimental development preview — Alpha 預發行版／實驗性開發預覽**
+**工作階段、回放與離線追蹤**<br>
+Experimental Alpha / 實驗性 Alpha
 
-[v0.3.0-alpha.2 Release](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.2) · [exact source / 對應程式](https://github.com/JShengP/depthport/tree/v0.3.0-alpha.2) · [bilingual release notes / 雙語版本說明](../../releases/0.3.0-alpha.2.md)
+[Project](../../../README.md) · [繁體中文首頁](../../../README.zh-TW.md) · [v0.1](../v0.1/README.md) · [v0.2](../v0.2/README.md) · **v0.3**
 
+</div>
 
-## Visual overview / 視覺導覽
+Adds opt-in local Sessions, replay review and offline Object IDs while retaining the viewer and Spatial Analysis.
+保留檢視器與空間分析，新增選用本機 Session、回放檢查與離線 Object ID。
 
-![v0.3 capabilities and workflow, generated schematic data](../../assets/v0.3-workflow.svg)
+**Release / 發布快照:** [v0.3.0-alpha.2](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.2) · [Exact source / 對應程式](https://github.com/JShengP/depthport/tree/v0.3.0-alpha.2) · [Original README](https://github.com/JShengP/depthport/blob/v0.3.0-alpha.2/README.md) · [原版繁中 README](https://github.com/JShengP/depthport/blob/v0.3.0-alpha.2/README.zh-TW.md)
 
-*程式生成的功能示意圖；不是實際 UI 截圖、模型輸出或追蹤品質證據。 / Generated schematic data, not an application screenshot, model output or tracking benchmark.*
+[Differences / 差異](#differences--差異) · [Architecture / 架構](#architecture--架構) · [Examples / 範例](#examples--範例) · [Getting started / 使用入口](#getting-started--使用入口) · [Validation / 驗證紀錄](#validation--驗證紀錄) · [Limits / 驗證限制](#limits--驗證限制)
 
-Alpha.2 packages the reviewed dependency compatibility updates and workflow illustrations. Earlier [Alpha.1](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.1) stays available; each tag preserves its own source. The maintained guide may evolve after release.
-本導覽與插圖可隨文件維護更新，對應舊版本的原始碼與原版 README 仍以各自 Tag 為準。
+> [!IMPORTANT]
+> Session storage is off by default; simple association remains default. Short replay examples and API CI do not close tracking/hardware acceptance.
+> Session 儲存預設關閉、預設仍為簡易關聯；短片範例與 API CI 不代表追蹤或實機驗收通過。
 
-## Real replay example / 真實回放範例
+This maintained guide may include later illustrations/documentation; the tagged source, original READMEs and release assets stay fixed. 本頁可補充後續插圖／文件，既有 Tag、原版 README 與下載包不變。
 
-![Actual v0.3 replay with Object IDs during crossing and partial occlusion](../../assets/tracking-replay-crossing.zh-TW.jpg)
+## Differences / 差異
 
-Real YOLO26n + isolated BoT-SORT on [Lukas Kosc / Pexels footage](https://www.pexels.com/video/urban-street-scene-with-people-crossing-34597902/), not synthetic data. [English: source/license, 3-frame walkthrough and limits](../../en/tracking-replay-example.md) · [繁體中文](../../zh-TW/tracking-replay-example.md). No identity ground truth or long-occlusion acceptance is claimed; full video and private Session data are not published. Documentation added after Alpha.2; its tag/assets stay fixed.
-真實介面與推論，保留觀測消失／新 ID，不宣稱確認換 ID 或長遮擋恢復；原影片不重新散布。
+- **New local archive / 新增本機封存:** opt-in manual same-frame RGB/depth/PLY/raw NPY, SHA-256 replay and model-grouped summaries; no automatic recording or inference during replay. 選用手動保存與完整性回放，不自動錄影，回放不重新推論。
+- **New offline association / 新增離線關聯:** explicitly requested YOLO Detect/Segment analysis creates local Object IDs and camera-space depth/XYZ histories. Simple association stays default; optional BoT-SORT uses an isolated NumPy 2 worker. 明確操作才分析，NumPy 1 應用與 worker 隔離，原預設不變。
+- **New review controls / 新增檢查操作:** boxes/IDs, playback/speed/timeline/A-B loops, searchable bookmark notes/tags, JSON backup and editor/IME guards. 疊圖、回放、書籤備註與輸入／中文組字防誤觸。
+- **Retained & research scope / 延續與研究範圍:** retains v0.1/v0.2 features; Baseline/ByteTrack/BoT-SORT comparison tools support offline studies. **ByteTrack is a benchmark backend, not another Session UI selector.** 保留前版；ByteTrack 僅屬研究後端，沒有新增 UI 選項或 ReID。
 
-## Changes from v0.2 / 相對 v0.2 新增
+<details>
+<summary>Capability illustration / 展開功能示意圖</summary>
 
-- Opt-in manual local Session snapshots: indexed same-frame RGB/depth/PLY/raw NPY, SHA-256-checked offline replay and model-grouped depth summaries. No automatic camera recording; replay never reruns depth inference.
-- Explicit offline YOLO Detect/Segment analysis associates saved observations with local Object IDs and camera-space depth/XYZ histories. Default: Simple association. Optional: Roboflow BoT-SORT in a separate NumPy 2 worker; the depth application stays on NumPy 1.
-- Replay boxes/Object IDs, playback/speed/seeking/A-B loops, local bookmark notes/tags/search/JSON backup, keyboard help and editor/IME guards.
-- Baseline/ByteTrack/BoT-SORT continuous-sequence comparison and diagnosis tools. **ByteTrack is a benchmark backend, not an additional Session UI selector.** No ReID, world trajectories or speed claim.
-- Retains the v0.1 viewer and v0.2 Spatial Analysis. 新增手動本機 Session、完整性回放、離線 Object ID／深度歷史與書籤檢查；簡易關聯仍為預設，BoT-SORT 使用獨立 worker，ByteTrack 用於獨立研究比較工具，未加入 Session 選單。
+![v0.3 generated capability and workflow schematic](../../assets/v0.3-workflow.svg)
+
+*Generated schematic, not a UI screenshot, model output or acceptance evidence. 程式生成的功能示意，不是實際介面、推論結果或驗收證據。*
+
+</details>
 
 ## Architecture / 架構
+
+**Flow / 主流程:** explicit snapshot → integrity-checked local archive → offline YOLO → association → replay overlays and local review.
+
+- **Application / 主應用:** NumPy 1 depth runtime and saved RGB/depth remain aligned. 深度、RGB 與保存資料對齊。
+- **Optional worker / 選配 worker:** one disposable stdio subprocess isolates NumPy 2; bounded JSONL/PNG IPC returns original detection indices and IDs. 單次工作子程序透過有界 IPC 回傳原始偵測索引與 ID。
+- **Review / 回放檢查:** the parent samples original boxes/masks and saved depth, not Kalman-predicted locations; notes and JSON backups stay local. 依原框／遮罩取深度，不用預測位置代替，備註與備份留在本機。
+
+**Contract / 邊界:** manual snapshots advance a fixed tracker step; elapsed snapshot gaps are not modelled. Camera-space XYZ histories do not establish motion-compensated world tracking or speed. 手動快照採固定步長，未建模真實時間間隔，也不是世界軌跡或速度。
+
+<details>
+<summary>Flowchart / 展開架構流程圖</summary>
 
 ```mermaid
 flowchart TD
@@ -49,23 +67,60 @@ flowchart TD
     H --> U
 ```
 
-Saved RGB/depth stay aligned. The worker returns IDs and original detection indices; the application samples original detections/masks, not predicted boxes. A disposable subprocess isolates incompatible NumPy requirements. Manual snapshots advance a fixed tracker step and do not represent continuous elapsed time or motion-compensated world tracking.
-保存影像與深度維持對齊；worker 只回傳 ID 與原始偵測索引，應用對原框／遮罩取深度，不用預測框代替。獨立子程序隔離 NumPy 相容性；手動快照採固定追蹤步長，不代表連續真實時間或世界座標運動。
+</details>
 
-## Entry / 使用入口
+## Examples / 範例
 
-1. Install the application, then set `ENABLE_SESSION_STORAGE=1` **locally** and restart. Session storage defaults off; open `/sessions`. `/` and `/spatial` remain available.
-2. For BoT-SORT, follow the [isolated worker guide](../../en/tracking-worker.md) / [繁中安裝](../../zh-TW/tracking-worker.md), set the local worker interpreter, then explicitly choose that backend for saved-frame analysis.
-3. Use the [Session/replay guide](../../en/sessions.md) / [繁體中文操作](../../zh-TW/sessions.md) for overlays, notes and keyboard controls. User snapshots, bookmarks, notes and JSON backups stay local and are excluded from releases.
+**Real short replay example / 真實短片回放範例.** Genuine YOLO26n CPU Detect + isolated BoT-SORT on public footage by **Lukas Kosc via Pexels**, using Alpha.2 code. The 24 consecutive source frames show Object IDs, crossing, partial occlusion and missing/new observations. 真實推論與介面，24 格連續來源影格保留缺框／新 ID，沒有手動修正。
 
-在本機開啟 Session 設定並重啟，進入 `/sessions`；選配 BoT-SORT 需另外安裝獨立 worker。私人快照、書籤、備註與備份不加入公開 Repo／Release。
+<details>
+<summary>View screenshot / 展開範例畫面</summary>
 
-## Evidence and open gates / 驗證與未完成項目
+<p align="center">
+  <img src="../../assets/tracking-replay-crossing.zh-TW.jpg" width="960" alt="v0.3 real replay with Object IDs during pedestrian crossing and partial occlusion">
+</p>
 
-[Validation record](../../en/validation.md) · [繁中紀錄](../../zh-TW/validation.md) · [Expanded study](../../en/tracking-expanded-acceptance.md) · [Parameter study](../../en/tracking-parameter-acceptance.md) · [Error diagnosis](../../en/tracking-error-diagnosis.md) · [Roadmap](../../../ROADMAP.md)
+</details>
 
-Cross-platform application/model API CI does not run pretrained inference. Public-sequence studies retain their fixed detector caches and recorded versions; newer dependency versions do not inherit those accuracy results. Lower activation can increase coverage and ID switches/FP together; defaults remain unchanged, and long-occlusion recovery is unaccepted.
-跨平台應用／模型 API CI 不執行真權重推論。公開序列保留原偵測快取與版本條件，不能把舊分數當新版精度；降低啟用門檻可能同時增加覆蓋與換 ID／FP，原預設不變，長遮擋恢復未通過。
+Source / 來源：[Lukas Kosc / Pexels](https://www.pexels.com/video/urban-street-scene-with-people-crossing-34597902/), combined with actual UI and explanation under the [Pexels terms](https://www.pexels.com/terms-of-service/). Footage retains its own terms, not the application's AGPL; no endorsement is implied. 原素材保留 Pexels 條款，不因程式 AGPL 改授權或暗示背書。
 
-Independent occlusion/crossing/moving-camera tests, confirmation/competition/localisation/recovery controls, physical RTSP, Windows pretrained inference/real worker integration, endurance, NVIDIA WebGL and calibrated metric accuracy remain open. A published Alpha does not close these gates.
-獨立遮擋／交會／移動相機測試、確認／競爭／框品質／恢復控制、實體 RTSP、Windows 真權重／真 worker、長時穩定性、NVIDIA WebGL 與標定精度仍待驗證，發布 Alpha 不表示通過。
+[Three-frame walkthrough & exact conditions](../../en/tracking-replay-example.md) · [三張前後影格與完整條件](../../zh-TW/tracking-replay-example.md) · [Curated record / 彙總紀錄](../../validation/v0.3-public-replay-example.json)
+
+Session #12 = source frame 43 at 1.752 s. This example reused a documented CUDA environment, not a fresh installation of the complete Alpha.2 requirements. Screenshots/docs were added after Alpha.2; its tag/download assets are unchanged. 圖中 Session #12 對應來源第 43 格；沿用 CUDA 環境，不是完整依賴配方的新安裝驗收，後補文件不覆寫發布包。
+
+## Getting started / 使用入口
+
+1. Install the tagged application, then set `ENABLE_SESSION_STORAGE=1` **locally** and restart. Storage defaults off; open `/sessions`. 安裝本版、明確開啟本機 Session 設定並重啟，再進入 `/sessions`。
+2. For BoT-SORT, install the [isolated worker](../../en/tracking-worker.md) / [繁中 worker](../../zh-TW/tracking-worker.md), configure its local Python interpreter and explicitly select that backend. 選配 worker 需獨立安裝並主動選取。
+3. Follow the [Session/replay guide](../../en/sessions.md) / [繁中操作](../../zh-TW/sessions.md). `/` and `/spatial` remain available. 保留原檢視器與空間分析。
+
+Private snapshots, bookmarks, notes and JSON backups stay local and are excluded from the public Repo/Release. 私人快照、書籤、備註與備份不加入公開 Repo／Release。
+
+## Validation / 驗證紀錄
+
+- **CI / 跨平台檢查:** Ubuntu/Windows × Python 3.11/3.12 application contracts and real model API installation/import. No pretrained weights or inference in CI. 應用契約與實際 API 匯入，不含真權重推論。
+- **Replay example / 回放範例:** the recorded short public clip exercises genuine depth, CPU detection, the isolated worker and the actual browser replay. It has no identity ground truth. 已記錄真深度／偵測／worker／瀏覽器操作，沒有身分真值。
+- **Research / 研究證據:** public-sequence studies keep their fixed detection caches and recorded versions. New dependencies do not inherit those accuracy results; lower activation can add coverage and ID switches/FP together. 舊快取與舊分數不能當新版精度，原預設不變，長遮擋恢復未通過。
+
+[Validation history](../../en/validation.md) · [繁中紀錄](../../zh-TW/validation.md) · [Alpha.2 release notes / 發布說明](../../releases/0.3.0-alpha.2.md)
+
+<details>
+<summary>Research evidence / 展開研究紀錄</summary>
+
+- [Expanded comparison](../../en/tracking-expanded-acceptance.md) / [三場景比較](../../zh-TW/tracking-expanded-acceptance.md)
+- [Parameter study](../../en/tracking-parameter-acceptance.md) / [參數研究](../../zh-TW/tracking-parameter-acceptance.md)
+- [Error diagnosis](../../en/tracking-error-diagnosis.md) / [錯誤診斷](../../zh-TW/tracking-error-diagnosis.md)
+- [Alpha.2 dependency record / 依賴驗證](../../validation/v0.3-dependency-followup.json)
+
+Alpha.2 packages reviewed dependency compatibility updates and workflow illustrations. [Alpha.1](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.1) remains available; publication does not close acceptance gates. Alpha.2 封裝相容性更新與流程圖，發布不等於驗收完成。
+
+</details>
+
+## Limits / 驗證限制
+
+- **Tracking / 追蹤:** generalised long occlusion, crossing/camera-motion ID stability and independent confirmation/competition/localisation/recovery tests remain open. The example spans only 0.959 s between first/last frames and is not long-occlusion acceptance; missing/new IDs are not verified ID switches. 短片不代表長遮擋或確認換 ID。
+- **Timing / 時間:** worker steps are fixed at 30 Hz per saved frame; replay 1× targets 5 saved frames/s. These do not represent the source's 23.976 fps or real-time speed. worker 步長與 UI 回放速度不同於此來源影片，不宣稱即時性或物體速度。
+- **Hardware gates / 實機項目:** physical RTSP, fresh Windows pretrained depth/semantic inference and real worker integration, endurance/VRAM and NVIDIA hardware WebGL remain unverified. 實體串流、Windows 真權重／worker、長時穩定性與硬體繪圖仍待驗證。
+- **Geometry / 幾何:** measured intrinsics and independent calibrated distance accuracy remain open. Relative/virtual depth is not metres; camera-space IDs/XYZ are not identities, world trajectories, hidden-surface reconstruction, SLAM or certified measurement. 深度與相機座標不能視為身分、世界軌跡或認證測量。
+
+[Release scope / 本版範圍](../../releases/0.3.0-alpha.2.md) · [Acceptance roadmap / 驗收路線圖](../../../ROADMAP.md)

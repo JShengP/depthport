@@ -1,30 +1,54 @@
-# v0.1 — Depth & Point Cloud Viewer / 深度與點雲檢視器
+<div align="center">
 
-[Project / 主 README](../../../README.md) · [繁體中文首頁](../../../README.zh-TW.md) · [v0.2](../v0.2/README.md) · [v0.3](../v0.3/README.md)
+# v0.1 · Depth & Point Cloud Viewer
 
-**Historical Alpha / 歷史 Alpha:** [v0.1.0-alpha.1 Release](https://github.com/JShengP/depthport/releases/tag/v0.1.0-alpha.1) · [exact source / 對應程式](https://github.com/JShengP/depthport/tree/v0.1.0-alpha.1) · [original README](https://github.com/JShengP/depthport/blob/v0.1.0-alpha.1/README.md) · [原版繁中 README](https://github.com/JShengP/depthport/blob/v0.1.0-alpha.1/README.zh-TW.md)
+**深度與點雲檢視器**<br>
+Historical Alpha / 歷史 Alpha
 
-This is a maintained guide to the v0.1 snapshot, not a rewrite of its tag. It establishes the viewer foundation later retained in v0.2/v0.3.
-本頁整理 v0.1 快照，未改寫既有 Tag；這是 v0.2／v0.3 延續的檢視器基礎。
+[Project](../../../README.md) · [繁體中文首頁](../../../README.zh-TW.md) · **v0.1** · [v0.2](../v0.2/README.md) · [v0.3](../v0.3/README.md)
 
+</div>
 
-## Visual overview / 視覺導覽
+The viewer foundation retained in later versions: images/RTSP → four depth engines → interactive single-view geometry.
+後續版本延續的檢視器基礎：圖片／RTSP → 四套深度引擎 → 互動式單視角幾何。
 
-![v0.1 capabilities and workflow, generated schematic data](../../assets/v0.1-workflow.svg)
+**Release / 發布快照:** [v0.1.0-alpha.1](https://github.com/JShengP/depthport/releases/tag/v0.1.0-alpha.1) · [Exact source / 對應程式](https://github.com/JShengP/depthport/tree/v0.1.0-alpha.1) · [Original README](https://github.com/JShengP/depthport/blob/v0.1.0-alpha.1/README.md) · [原版繁中 README](https://github.com/JShengP/depthport/blob/v0.1.0-alpha.1/README.zh-TW.md)
 
-*程式生成的功能示意圖；不是實際 UI 截圖、模型輸出或追蹤品質證據。 / Generated schematic data, not an application screenshot, model output or tracking benchmark.*
+[Differences / 差異](#differences--差異) · [Architecture / 架構](#architecture--架構) · [Examples / 範例](#examples--範例) · [Getting started / 使用入口](#getting-started--使用入口) · [Validation / 驗證紀錄](#validation--驗證紀錄) · [Limits / 驗證限制](#limits--驗證限制)
 
-The maintained guide and illustrations can be newer than the tagged snapshot; the original release/source links above stay fixed.
-本導覽與插圖可隨文件維護更新，對應舊版本的原始碼與原版 README 仍以各自 Tag 為準。
+> [!IMPORTANT]
+> This snapshot has application-contract and synthetic-UI evidence; pretrained inference and hardware acceptance were still unverified.
+> 本版證據限應用契約與合成 UI，真權重推論與實機驗收當時仍未完成。
 
-## Contents / 功能內容
+This maintained guide may include later illustrations/documentation; the tagged source, original READMEs and release assets stay fixed. 本頁可補充後續插圖／文件，既有 Tag、原版 README 與下載包不變。
 
-- RGB image and RTSP inputs; latest-frame capture without a growing application queue.
-- Four switchable depth presets: YOLO26 Depth, DA V2 Small, DA3 Small and DA3Metric Large. One shared source/model, one active model at a time.
-- Single-view XYZRGB point cloud, bilingual browser controls and same-frame PLY/NPY/ZIP exports with original depth/unit metadata.
-- 圖片／RTSP、四模型切換、可互動點雲、雙語與同影格匯出；此版尚無 v0.2 空間分析或 v0.3 Session／追蹤回放。
+## Differences / 差異
+
+- **Foundation / 本版基礎:** RGB images and RTSP latest-frame input, with no growing application inference queue. 圖片與 RTSP 最新影格處理，不累積應用層待推論佇列。
+- **Depth & export / 深度與匯出:** four switchable presets, bilingual XYZRGB viewer and same-frame PLY/NPY/ZIP with raw depth and unit metadata. 四模型、雙語點雲與可追溯匯出。
+- **Later additions / 後續版本才有:** [v0.2](../v0.2/README.md) adds Spatial Analysis; [v0.3](../v0.3/README.md) adds manual Sessions, cross-frame local Object IDs and replay review. 本版尚無空間分析或 Session／跨影格追蹤回放。
+
+<details>
+<summary>Capability illustration / 展開功能示意圖</summary>
+
+![v0.1 generated capability and workflow schematic](../../assets/v0.1-workflow.svg)
+
+*Generated schematic, not a UI screenshot, model output or acceptance evidence. 程式生成的功能示意，不是實際介面、推論結果或驗收證據。*
+
+</details>
 
 ## Architecture / 架構
+
+**Flow / 主流程:** RGB image or latest RTSP frame → one depth-model worker → aligned depth/units → XYZRGB → local viewer/export.
+
+- `app.py` launches the service; `depthport/api.py` owns the shared FastAPI lifecycle. 啟動與共用 API 生命週期。
+- `capture.py` reads frames; adapters run inference; `cloud.py` back-projects and exports. 影格讀取、模型推論與幾何匯出。
+- `static/` contains the bilingual UI; generation checks reject stale source/model results. 雙語介面及來源／模型切換後的過期結果防護。
+
+**Contract / 邊界:** one shared source/model, one loaded engine at a time; browser clients do not get isolated users or independent model workers. 單一共用來源／模型，不是多人隔離架構。
+
+<details>
+<summary>Flowchart / 展開架構流程圖</summary>
 
 ```mermaid
 flowchart LR
@@ -38,13 +62,44 @@ flowchart LR
     A --> E[Same-frame PLY / NPY / ZIP]
 ```
 
-`app.py` launches the service; `depthport/api.py` owns FastAPI, `capture.py` reads camera frames, engine adapters run inference, and `cloud.py` handles geometry/export. `static/` contains the browser UI. Generation checks reject stale results after source/model changes. This is shared application state, not isolated users.
-`app.py` 啟動、`api.py` 提供 API、`capture.py` 讀影格、adapter 執行模型、`cloud.py` 做幾何／匯出，`static/` 顯示 UI；來源與模型共用，不是多人隔離架構。
+</details>
 
-## Entry and evidence / 使用與證據
+## Examples / 範例
 
-Use the v0.1 source or download, follow its [installation guide](https://github.com/JShengP/depthport/blob/v0.1.0-alpha.1/docs/en/installation.md), then open `/`. The [v0.1 validation record](https://github.com/JShengP/depthport/blob/v0.1.0-alpha.1/docs/en/validation.md) records application contracts and synthetic UI checks; real pretrained inference, target installation, GPU/physical RTSP/endurance/metric accuracy were unverified in that snapshot. Later v0.2 evidence must not be attributed to v0.1.
-使用對應 Tag 安裝並開啟 `/`。v0.1 當時只完成應用契約／合成 UI 等檢查，真權重、目標環境、GPU、實體 RTSP、長時穩定性與距離精度尚未驗證；不能把後來 v0.2 的結果回填成本版證據。
+**Synthetic UI example / 合成 UI 範例.** The screenshot is identical to the image shipped in the v0.1 tag; it demonstrates the actual viewer with explicitly synthetic data. No camera or pretrained model produced these points. 此圖與 v0.1 Tag 內圖片相同，是真實介面的明示合成資料，不是真模型推論。
 
-All versions remain experimental 2.5D visible-surface tools; V2 virtual depth and DA3 relative depth are not metres. No hidden-surface reconstruction, SLAM or certified distance claim.
-各版均屬實驗性可見表面 2.5D；V2 虛擬深度與 DA3 相對深度不能當公尺，也不代表遮擋還原、SLAM 或認證測距。
+<details>
+<summary>View screenshot / 展開範例畫面</summary>
+
+<p align="center">
+  <img src="../../assets/preview.zh-TW.png" width="960" alt="v0.1 original viewer with explicitly synthetic point-cloud data">
+</p>
+
+</details>
+
+[Tagged screenshot / 本版圖片](https://github.com/JShengP/depthport/blob/v0.1.0-alpha.1/docs/assets/preview.zh-TW.png) · [Asset provenance / 素材說明](../../assets/README.md)
+
+Later v0.2 CUDA results and v0.3 tracking examples must not be attributed to this snapshot. 不把後續版本的 GPU 或追蹤證據回填成 v0.1 驗收。
+
+## Getting started / 使用入口
+
+1. Download the v0.1 release or check out its exact tag. 下載本版或使用對應 Tag。
+2. Follow the tagged [installation guide](https://github.com/JShengP/depthport/blob/v0.1.0-alpha.1/docs/en/installation.md) / [繁中安裝](https://github.com/JShengP/depthport/blob/v0.1.0-alpha.1/docs/zh-TW/installation.md).
+3. Start the local server and open `/` for the viewer. 啟動本機服務後開啟 `/`。
+
+Model weights and local camera settings are separate from the public source package. 權重與本機相機設定不包含在公開原始碼包。
+
+## Validation / 驗證紀錄
+
+- **Recorded / 已記錄:** application contracts and synthetic browser/UI checks, as documented in the tagged record. 已完成當時記錄的應用契約與合成介面檢查。
+- **Scope / 證據範圍:** application integration, not pretrained accuracy, installation acceptance or physical-camera operation. 證明應用整合，不表示真模型精度、安裝或相機驗收。
+
+[Tagged validation record](https://github.com/JShengP/depthport/blob/v0.1.0-alpha.1/docs/en/validation.md) · [本版繁中紀錄](https://github.com/JShengP/depthport/blob/v0.1.0-alpha.1/docs/zh-TW/validation.md)
+
+## Limits / 驗證限制
+
+- **Unverified in this snapshot / 本版當時未驗證:** pretrained inference, fresh Windows/target installation and GPU execution. 真權重、全新目標環境與 GPU。
+- **Hardware gates / 實機項目:** physical RTSP, reconnect/codecs, endurance/VRAM and calibrated metric accuracy remain unverified. 實體串流、重連／編碼、長時穩定性與標定測距。
+- **Geometry / 幾何:** visible-surface 2.5D only; V2 virtual depth and DA3 relative depth are not metres. No hidden-surface reconstruction, SLAM or certified distance claim. 僅可見表面 2.5D，相對／虛擬深度不能當公尺。
+
+[Original release scope / 原版範圍](https://github.com/JShengP/depthport/releases/tag/v0.1.0-alpha.1) · [Current roadmap / 目前路線圖](../../../ROADMAP.md)
