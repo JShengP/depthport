@@ -26,7 +26,7 @@ Separately, **24 consecutive frames (78–101)** passed the actual bounded Sessi
 
 Roboflow `trackers==2.6.1` exposes `supervision.Detections` and uses Apache-2.0 code. Its NumPy >=2.0.2 requirement conflicts with the current DA3 NumPy <2 recipe, so the comparison ran in an **isolated NumPy 2.2.6 environment**, with `supervision==0.27.0`; the four-model environment retained NumPy 1.26.4. Integration needs a separately validated dependency migration or worker boundary. McByte's optional mask models were not installed or evaluated.
 
-The MOT15 data is used locally for non-commercial research under its [CC-BY-NC-SA-3.0 notice and original-source conditions](https://motchallenge.net/data/MOT15/). No video, GT, per-frame boxes/IDs, session bundles or runtime logs are published here. The v0.3 PR remains a development Draft while broader scene and physical-camera acceptance continues.
+The MOT15 data is used locally for non-commercial research under its [CC-BY-NC-SA-3.0 notice and original-source conditions](https://motchallenge.net/data/MOT15/). No video, GT, per-frame boxes/IDs, session bundles or runtime logs are published here. v0.3 Alpha remains an experimental development preview while broader scene and physical-camera acceptance continues.
 
 ## Why
 
@@ -116,4 +116,4 @@ python tools/evaluate_tracking.py \
 
 Official upstream algorithm references: [Ultralytics track mode](https://docs.ultralytics.com/modes/track) (available trackers and YAML parameters) and [TrackEval](https://github.com/JonathonLuiten/TrackEval). If an installed runtime exposes only some tracker types, check its version rather than assuming newer tracker options are available.
 
-**Decision gate:** Compare methods with the *same* labeled test set, detector version, confidence settings, scene mix, compute device and documented real-frame sampling. Report both tracking quality and latency. No fixed IDSW/Recall threshold is credible without a target use case and a sufficient number of real labeled cases. Retain the v0.3 Draft PR until validated with real data.
+**Decision gate:** Compare methods with the *same* labeled test set, detector version, confidence settings, scene mix, compute device and documented real-frame sampling. Report both tracking quality and latency. No fixed IDSW/Recall threshold is credible without a target use case and a sufficient number of real labeled cases. Retain experimental status and unchanged defaults until the relevant real-data acceptance gates pass.

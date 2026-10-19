@@ -1,15 +1,3 @@
-**2026-10-19 啟用門檻錯誤診斷：** [新增換 ID／FP 案例分析](docs/zh-TW/tracking-error-diagnosis.md)顯示弱框／部分框、可見度恢復與關聯競爭混合，且不少新增換 ID 是原本漏追的位置。下一步優先驗證新 ID 確認／競爭控制，再分開測偵測及恢復，維持原預設。
-
-**2026-10-19 追蹤參數驗收：** [另一組 1,179 格 MOT17、五組參數比較](docs/zh-TW/tracking-parameter-acceptance.md)，完成 60 次執行。只降啟用可小幅改善 Recall／IDF1／HOTA，但換 ID 增加；同步降雙門檻損及 ID 品質，延長保留僅多恢復 ByteTrack 1 個長事件。維持原預設，v0.3 維持實驗性開發預覽。
-
-**2026-10-19 擴大追蹤驗收：** [三場景、2,700 格 MOT17 比較](docs/zh-TW/tracking-expanded-acceptance.md)，固定偵測、每方法三次重複；較少換 ID 伴隨較低 Recall，長遮擋恢復仍未通過，v0.3 維持實驗性開發預覽。
-
-**v0.3 離線語意追蹤新增：** 手動分析已存 Session 影格的 YOLO Detect／Segment，可選預設簡易關聯或獨立 NumPy 2 環境的 [Roboflow BoT-SORT worker](docs/zh-TW/tracking-worker.md)，建立 Object ID 與候選相機 XYZ／深度歷史；不做身份辨識、不代表世界座標軌跡，也不會自動錄影。詳見 [Session 文件](docs/zh-TW/sessions.md)。
-
-## v0.3 開發預覽 — Session 與離線回放
-
-新增**預設關閉、僅本機、手動儲存**的影格 Session（RGB／深度／PLY／原始 NPY／metadata），支援 SHA-256 完整性驗證、離線回放及分模型深度摘要趨勢；**不會自動錄製相機，回放不重新呼叫模型。** v0.2 Spatial Analysis 功能仍在。[Session／Replay 操作說明](docs/zh-TW/sessions.md)。v0.3 為實驗性開發預覽，尚未發布帶標籤的 Release；已發布版本仍為 v0.2 Alpha。
-
 <div align="center">
 
 # DepthPort
@@ -19,11 +7,13 @@
 
 [English](README.md) · 繁體中文
 
-**v0.2 Alpha 已發布** · **本地執行** · **英文／繁體中文** · **AGPL-3.0-only**
+**v0.3 Alpha** · **實驗性開發預覽** · **本地執行** · **英文／繁體中文** · **AGPL-3.0-only**
 
 </div>
 
-**下載 v0.2.0-alpha.1：** [Release 說明與下載](https://github.com/JShengP/depthport/releases/tag/v0.2.0-alpha.1) · [原始碼 ZIP](https://github.com/JShengP/depthport/releases/download/v0.2.0-alpha.1/depthport-0.2.0-alpha.1-source.zip) · [SHA-256 校驗檔](https://github.com/JShengP/depthport/releases/download/v0.2.0-alpha.1/SHA256SUMS.txt)
+**下載 v0.3.0-alpha.1：** [Release 說明與下載](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.1) · [原始碼 ZIP](https://github.com/JShengP/depthport/releases/download/v0.3.0-alpha.1/depthport-0.3.0-alpha.1-source.zip) · [SHA-256 校驗檔](https://github.com/JShengP/depthport/releases/download/v0.3.0-alpha.1/SHA256SUMS.txt)
+
+前一版：[v0.2 Alpha — 空間分析](https://github.com/JShengP/depthport/releases/tag/v0.2.0-alpha.1)。版本歷程見 [Changelog](CHANGELOG.md)，後續驗收見[路線圖](ROADMAP.md)。
 
 下載包僅含公開原始碼，Python 依賴與預訓練模型權重需另行安裝。
 
@@ -35,9 +25,23 @@ DepthPort 整合既有預訓練模型，**不是新的深度網路或研究模�
 
 *截圖來自實際 UI 的合成測試資料；不是由相機或 AI 模型產生的點雲。*
 
-> **狀態：** `v0.2.0-alpha.1` 已發布為**實驗性預發行版（Pre-release）**。2026-10-17 已在全新 Ubuntu 24.04／Python 3.12 環境完成四套真深度模型 CUDA smoke test、YOLO 偵測／分割融合及真正瀏覽器 HTTP 操作，輸入為同一張公開範例。這只證明鏈路可執行，不代表測距精度、實體相機運作或正式硬體 benchmark。Windows 完整模型安裝、實體 RTSP、長時間穩定性與 NVIDIA WebGL 繪圖仍未驗證。詳見[驗證紀錄](docs/zh-TW/validation.md)。
+> **狀態：** `v0.3.0-alpha.1` 是 **Alpha Pre-release／實驗性開發預覽**。Session 預設關閉，僅供本機明確啟用。應用與模型 API 安裝相容性 CI 不等於預訓練推論或實機驗收；長遮擋恢復、實體 RTSP、Windows 真權重／worker 整合、長時穩定性與標定距離精度仍待驗證。詳見[驗證紀錄](docs/zh-TW/validation.md)與[本版說明](docs/releases/0.3.0-alpha.1.md)。
 
-## v0.2 新功能 — 空間分析工作台
+## v0.3 — Session、回放與離線追蹤
+
+- **手動、僅本機 Session：** 封存同影格 RGB／深度／PLY／原始 NPY，SHA-256 核對後回放；不自動錄影，回放不重新推論。
+- **追蹤檢查：** 疊加追蹤框／Object ID，提供播放、速度、進度條、A／B 循環、書籤備註、搜尋／篩選、JSON 備份與快捷鍵說明。備註與匯出保留在本機。
+- **選配 Roboflow BoT-SORT：** 使用獨立 NumPy 2 worker；應用維持 NumPy 1，預設仍是簡易關聯。Object ID 不代表身份辨識或世界座標軌跡。
+
+依 [Session 操作說明](docs/zh-TW/sessions.md)在本機設定 `ENABLE_SESSION_STORAGE=1` 並重啟，再開啟 `/sessions`。[獨立 worker 安裝](docs/zh-TW/tracking-worker.md) · [追蹤驗收與評估](docs/zh-TW/tracking-evaluation.md)
+
+### 追蹤研究證據與下一步
+
+已完成[三場景 2,700 格／27 次比較](docs/zh-TW/tracking-expanded-acceptance.md)、[另一組 1,179 格／60 次參數驗證](docs/zh-TW/tracking-parameter-acceptance.md)及[新增換 ID／誤追診斷](docs/zh-TW/tracking-error-diagnosis.md)。降低啟用門檻的覆蓋改善伴隨更多換 ID／FP；長遮擋恢復仍未通過。下一步分開驗證新 ID 確認／競爭、偵測框品質與遮擋恢復。**維持原預設。**
+
+以上為指定公開序列、固定偵測快取與已記錄版本的研究結果，不能直接外推至新版依賴或其他場景；僅公開彙總，未發布原始影像、GT、逐格追蹤與書籤資料。
+
+## v0.2 延續功能 — 空間分析工作台
 
 啟動本地服務後開啟 **http://127.0.0.1:8000/spatial**，可進行像素深度／XYZ 檢查、同圖四模型依序比較、YOLO 偵測／分割 2D→3D 融合，以及相機標定、候選平面與獨立量測誤差記錄。原本四模型、RTSP、主檢視器、匯出及雙語操作均保留。真單圖 CUDA 推論已在上述主機驗證；實體相機與距離精度尚未驗證。
 
@@ -154,7 +158,7 @@ node tests/test_i18n.cjs
 python tools/check_release.py
 ```
 
-CI 執行確定性的替身測試，不下載預訓練權重。CI 通過**不等於四模型硬體 benchmark**；目前分支與 Commit 的執行結果見 [GitHub Actions](https://github.com/JShengP/depthport/actions/workflows/ci.yml)。
+[應用 CI](https://github.com/JShengP/depthport/actions/workflows/ci.yml)執行確定性的替身／CPU tensor 契約測試；[模型相容性 CI](https://github.com/JShengP/depthport/actions/workflows/model-compatibility.yml)安裝明列依賴並匯入四套實際 API。兩者均不下載預訓練權重或執行推論，**不等於實機／精度驗收**。
 
 [Tracking 驗收評估](docs/zh-TW/tracking-evaluation.md)・[貢獻指南](CONTRIBUTING.md)・[Roadmap](ROADMAP.md)・[版本紀錄](CHANGELOG.md)・[發布檢查](docs/zh-TW/publishing.md)
 

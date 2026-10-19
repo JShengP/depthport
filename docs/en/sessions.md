@@ -1,7 +1,7 @@
 # v0.3 research prototype — Manual Sessions & Offline Replay
 [繁體中文](../zh-TW/sessions.md) · [Home](../../README.md)
 
-**Status: experimental development preview, not a tagged release; physical-camera acceptance remains pending.** The v0.2 Spatial Analysis code remains integrated; v0.3 adds a **manual, opt-in, local-only** archive viewer. It does not record RTSP video continuously or perform pose-compensated pixel/3D tracking. Replay itself never reruns depth inference; a separate, explicitly requested offline tracking action can run YOLO Detect/Segment on saved RGB frames.
+**Status: experimental Alpha pre-release / development preview (v0.3.0-alpha.1); physical-camera acceptance remains pending.** The v0.2 Spatial Analysis code remains integrated; v0.3 adds a **manual, opt-in, local-only** archive viewer. It does not record RTSP video continuously or perform pose-compensated pixel/3D tracking. Replay itself never reruns depth inference; a separate, explicitly requested offline tracking action can run YOLO Detect/Segment on saved RGB frames.
 
 **2026-10-17 pilot:** genuine CUDA depth and CPU YOLO Detect/Segment passed the 24-frame saved-session path on a public video, including integrity and replay. A separate 179-frame tracking comparison includes Roboflow Trackers. See [conditions, results and limitations](tracking-evaluation.md#real-video-pilot--2026-10-17); these are not physical-camera or metric-accuracy acceptance.
 

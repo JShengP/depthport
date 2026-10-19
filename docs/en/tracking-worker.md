@@ -6,7 +6,7 @@ The separate direct-library [parameter sensitivity study](tracking-parameter-acc
 **Expanded evidence, 2026-10-19:** [Three-scene MOT17 comparison](tracking-expanded-acceptance.md) evaluates direct Baseline/ByteTrack/BoT-SORT calls separately from this worker pilot. It does not certify extended worker/RTSP or long-occlusion recovery.
 [繁體中文](../zh-TW/tracking-worker.md) · [Sessions](sessions.md) · [Offline benchmark](offline-video-tracking.md)
 
-Development branch only; v0.3 is not released. Sessions keep **Simple association** as the default. Choose **Roboflow BoT-SORT** to associate real YOLO Detect/Segment observations in an explicitly requested offline analysis. Neither backend adds automatic camera recording.
+Available in the v0.3 Alpha experimental development preview; broader acceptance remains pending. Sessions keep **Simple association** as the default. Choose **Roboflow BoT-SORT** to associate real YOLO Detect/Segment observations in an explicitly requested offline analysis. Neither backend adds automatic camera recording.
 
 ## Install in a separate environment
 

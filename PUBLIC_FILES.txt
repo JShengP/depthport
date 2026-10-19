@@ -194,3 +194,6 @@ docs/assets/tracking-v03-errors.png
 
 # Shared model dependency compatibility CI
 .github/workflows/model-compatibility.yml
+
+# v0.3 Alpha release notes (public source only)
+docs/releases/0.3.0-alpha.1.md

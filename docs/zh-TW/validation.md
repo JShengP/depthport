@@ -1,6 +1,15 @@
 # 驗證紀錄
 [English](../en/validation.md)・[首頁](../../README.zh-TW.md)
 
+## v0.3 Alpha 整合驗證 — 2026-10-19
+
+v0.3 維持 **Alpha 預發行版／實驗性開發預覽**。[本版範圍與未驗證項目](../releases/0.3.0-alpha.1.md) · [路線圖](../../ROADMAP.md)
+
+- PR #7 已合併為 `b9b95d4`；[main 應用 CI 4／4](https://github.com/JShengP/depthport/actions/runs/39204293374)及[真模型 API 相容性 4／4](https://github.com/JShengP/depthport/actions/runs/39204293354)通過 Ubuntu／Windows × Python 3.11／3.12。API CI 安裝明列 CPU 配方並匯入四套實際 API，不載權重、不推論；只在這個範圍內更新歷史安裝限制。
+- 前次整合檢查：Python 306 通過／6 個選配跳過；回放控制器 11、疊圖／Session 檢查 606 通過，Session 雙語 key 264 一致。版本與文件封裝驗證另見 Actions 與 GitHub Release。
+- [初測／worker](tracking-worker.md)、[2,700 格擴大研究](tracking-expanded-acceptance.md)、[1,179 格參數研究](tracking-parameter-acceptance.md)與[新增換 ID 診斷](tracking-error-diagnosis.md)保留原條件；固定快取為 Ultralytics 8.4.115，目前依賴 8.4.176，舊分數不是新版偵測器驗收。
+- 長遮擋／泛化、實體 RTSP、Windows 真權重／真 worker、長時穩定性、NVIDIA WebGL 與標定測距仍待驗證。此次封裝沒有新增真權重推論或實體相機測試；下方 GPU 紀錄保留原日期。只散布公開原始碼及彙總，本機 Session／備註／原始序列不公開。
+
 ## v0.2 本機 GPU 驗證 — 2026-10-17
 
 以下是 v0.2 Alpha 的實測；較下方保留歷史 v0.1 紀錄，不應把舊環境限制當成目前 v0.2 結果。[v0.2 機器可讀摘要](../validation/v0.2-summary.json) · [真推論截圖及來源](../assets/README.md)。
