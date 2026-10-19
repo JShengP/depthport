@@ -15,9 +15,16 @@ updates:
         patterns: ['pytest', 'httpx']
       web-runtime:
         patterns: ['Pillow', 'pillow', 'fastapi', 'uvicorn', 'python-multipart', 'python-dotenv']
-      model-runtime-review:
-        patterns: ['*']
-        exclude-patterns: ['pytest', 'httpx', 'Pillow', 'pillow', 'fastapi', 'uvicorn', 'python-multipart', 'python-dotenv']
+      torch-runtime:
+        patterns: ['torch', 'torchvision']
+      shared-model-apis:
+        patterns: ['transformers', 'huggingface-hub', 'safetensors', 'einops']
+      da3-geometry:
+        patterns: ['numpy', 'opencv-python', 'scipy', 'e3nn', 'trimesh', 'open3d', 'pycolmap', 'plyfile']
+      da3-media:
+        patterns: ['pillow-heif', 'imageio', 'imageio-ffmpeg', 'moviepy', 'matplotlib']
+      da3-utilities:
+        patterns: ['addict', 'omegaconf', 'evo', 'requests', 'typer', 'tqdm']
     ignore:
       # DA3 still uses NumPy 1.x; OpenCV 4.12+ wheels require NumPy 2.
       - dependency-name: numpy
@@ -35,6 +42,14 @@ updates:
         versions: ['>=0.6']
       - dependency-name: trimesh
         versions: ['>=5']
+      # Plyfile 1.1.5+ requires NumPy 2, incompatible with the DA3 profile.
+      - dependency-name: plyfile
+        versions: ['>=1.1.5']
+      # Keep the optional Python 3.10 recipe until its minimum is reviewed.
+      - dependency-name: imageio
+        versions: ['>=2.38']
+      - dependency-name: matplotlib
+        versions: ['>=3.11']
       # SciPy 1.18+ requires Python 3.12; this project tests 3.11 and 3.12.
       - dependency-name: scipy
         versions: ['>=1.18']

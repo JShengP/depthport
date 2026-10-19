@@ -1,0 +1,36 @@
+{
+  "format": "depthport.tracking-ground-truth.v1",
+  "session_id": "00000000000000000000000000000000",
+  "sampling": "synthetic_example_not_real_video",
+  "frames": [
+    {
+      "index": 1,
+      "tags": ["normal"],
+      "objects": [
+        {"gt_id": "object-A", "class_id": 0, "bbox": [2, 2, 12, 12]},
+        {"gt_id": "object-B", "class_id": 0, "bbox": [20, 2, 30, 12]}
+      ]
+    },
+    {
+      "index": 2,
+      "tags": ["occlusion"],
+      "objects": [
+        {"gt_id": "object-A", "class_id": 0, "bbox": [4, 2, 14, 12]}
+      ]
+    },
+    {
+      "index": 3,
+      "tags": ["occlusion"],
+      "evaluated": false,
+      "objects": []
+    },
+    {
+      "index": 4,
+      "tags": ["crossing", "occlusion"],
+      "objects": [
+        {"gt_id": "object-A", "class_id": 0, "bbox": [13, 2, 23, 12]},
+        {"gt_id": "object-B", "class_id": 0, "bbox": [10, 2, 20, 12]}
+      ]
+    }
+  ]
+}

@@ -1,6 +1,15 @@
 # Validation record
 [繁體中文](../zh-TW/validation.md) · [Home](../../README.md)
 
+## v0.3 Alpha integration — 2026-10-19
+
+v0.3 is an **experimental development preview / Alpha pre-release**. [Release scope and remaining gates](../releases/0.3.0-alpha.1.md) · [Roadmap](../../ROADMAP.md)
+
+- PR #7 merged as `b9b95d4`; [main application CI, 4/4](https://github.com/JShengP/depthport/actions/runs/39204293374) and [actual model API compatibility, 4/4](https://github.com/JShengP/depthport/actions/runs/39204293354) passed on Ubuntu/Windows × Python 3.11/3.12. API checks install the explicit CPU model recipe and import all four actual APIs, without weights or inference. This supersedes historical installation limitations only for this CI import scope.
+- Prior integration checks: 306 Python tests passed / 6 opt-in skipped; 11 replay-controller and 606 overlay/Session-review tests passed; 264 matched Session keys. Version/documentation packaging checks are recorded separately in Actions and the GitHub Release.
+- [Pilot/worker evidence](tracking-worker.md), [2,700-frame expanded study](tracking-expanded-acceptance.md), [1,179-frame parameter study](tracking-parameter-acceptance.md) and [activation-error diagnosis](tracking-error-diagnosis.md) retain their recorded conditions. Fixed caches used Ultralytics 8.4.115; current requirements use 8.4.176, so old tracking scores are not fresh acceptance of the newer detector.
+- Long-occlusion/generalisation, physical RTSP, Windows pretrained inference/real worker integration, endurance, NVIDIA WebGL and calibrated measurement remain open. No new pretrained inference or physical-camera run was performed for packaging. Historical GPU results below remain dated evidence. Only public source and curated aggregates are distributed; raw sessions/notes/sequence data stay local.
+
 ## v0.2 local GPU validation — 2026-10-17
 
 These v0.2 alpha checks supersede the earlier environment limitations for the items below. The historical v0.1 record is preserved further down. [Machine-readable v0.2 summary](../validation/v0.2-summary.json) · [real-inference screenshot and attribution](../assets/README.md).

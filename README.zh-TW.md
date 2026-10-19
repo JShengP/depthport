@@ -7,13 +7,25 @@
 
 [English](README.md) · 繁體中文
 
-**v0.2 Alpha 已發布** · **本地執行** · **英文／繁體中文** · **AGPL-3.0-only**
+**v0.3 Alpha** · **實驗性開發預覽** · **本地執行** · **英文／繁體中文** · **AGPL-3.0-only**
 
 </div>
 
-**下載 v0.2.0-alpha.1：** [Release 說明與下載](https://github.com/JShengP/depthport/releases/tag/v0.2.0-alpha.1) · [原始碼 ZIP](https://github.com/JShengP/depthport/releases/download/v0.2.0-alpha.1/depthport-0.2.0-alpha.1-source.zip) · [SHA-256 校驗檔](https://github.com/JShengP/depthport/releases/download/v0.2.0-alpha.1/SHA256SUMS.txt)
+**下載 v0.3.0-alpha.1：** [Release 說明與下載](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.1) · [原始碼 ZIP](https://github.com/JShengP/depthport/releases/download/v0.3.0-alpha.1/depthport-0.3.0-alpha.1-source.zip) · [SHA-256 校驗檔](https://github.com/JShengP/depthport/releases/download/v0.3.0-alpha.1/SHA256SUMS.txt)
+
+前一版：[v0.2 Alpha — 空間分析](https://github.com/JShengP/depthport/releases/tag/v0.2.0-alpha.1)。版本歷程見 [Changelog](CHANGELOG.md)，後續驗收見[路線圖](ROADMAP.md)。
 
 下載包僅含公開原始碼，Python 依賴與預訓練模型權重需另行安裝。
+
+## 版本導覽
+
+各版延續前一版基礎；各自 README 分開說明差異、架構、功能內容與驗證限制：
+
+- **[v0.1 — 深度與點雲檢視器](docs/versions/v0.1/README.md)：** 圖片／RTSP → 四深度模型 → 單視角點雲與匯出。
+- **[v0.2 — 空間分析](docs/versions/v0.2/README.md)：** 新增像素 XYZ、模型比較、語意融合與標定／誤差工具。
+- **[v0.3 — Session 與追蹤回放](docs/versions/v0.3/README.md)：** 新增手動本機封存、回放、Object ID、獨立 BoT-SORT 與書籤檢查，維持實驗性 Alpha。
+
+v0.1／v0.2 的原始碼與原版 README 保留在各自 Tag；新的版本導覽整理差異，不改寫舊 Release。
 
 將 RGB 圖片與 RTSP 相機影格轉成可互動的**單視角點雲**。在同一個本地 Web 介面切換深度模型、觀察可見表面的幾何，並匯出產生畫面所使用的數據。
 
@@ -23,9 +35,23 @@ DepthPort 整合既有預訓練模型，**不是新的深度網路或研究模�
 
 *截圖來自實際 UI 的合成測試資料；不是由相機或 AI 模型產生的點雲。*
 
-> **狀態：** `v0.2.0-alpha.1` 已發布為**實驗性預發行版（Pre-release）**。2026-10-17 已在全新 Ubuntu 24.04／Python 3.12 環境完成四套真深度模型 CUDA smoke test、YOLO 偵測／分割融合及真正瀏覽器 HTTP 操作，輸入為同一張公開範例。這只證明鏈路可執行，不代表測距精度、實體相機運作或正式硬體 benchmark。Windows 完整模型安裝、實體 RTSP、長時間穩定性與 NVIDIA WebGL 繪圖仍未驗證。詳見[驗證紀錄](docs/zh-TW/validation.md)。
+> **狀態：** `v0.3.0-alpha.1` 是 **Alpha Pre-release／實驗性開發預覽**。Session 預設關閉，僅供本機明確啟用。應用與模型 API 安裝相容性 CI 不等於預訓練推論或實機驗收；長遮擋恢復、實體 RTSP、Windows 真權重／worker 整合、長時穩定性與標定距離精度仍待驗證。詳見[驗證紀錄](docs/zh-TW/validation.md)與[本版說明](docs/releases/0.3.0-alpha.1.md)。
 
-## v0.2 新功能 — 空間分析工作台
+## v0.3 — Session、回放與離線追蹤
+
+- **手動、僅本機 Session：** 封存同影格 RGB／深度／PLY／原始 NPY，SHA-256 核對後回放；不自動錄影，回放不重新推論。
+- **追蹤檢查：** 疊加追蹤框／Object ID，提供播放、速度、進度條、A／B 循環、書籤備註、搜尋／篩選、JSON 備份與快捷鍵說明。備註與匯出保留在本機。
+- **選配 Roboflow BoT-SORT：** 使用獨立 NumPy 2 worker；應用維持 NumPy 1，預設仍是簡易關聯。Object ID 不代表身份辨識或世界座標軌跡。
+
+依 [Session 操作說明](docs/zh-TW/sessions.md)在本機設定 `ENABLE_SESSION_STORAGE=1` 並重啟，再開啟 `/sessions`。[獨立 worker 安裝](docs/zh-TW/tracking-worker.md) · [追蹤驗收與評估](docs/zh-TW/tracking-evaluation.md)
+
+### 追蹤研究證據與下一步
+
+已完成[三場景 2,700 格／27 次比較](docs/zh-TW/tracking-expanded-acceptance.md)、[另一組 1,179 格／60 次參數驗證](docs/zh-TW/tracking-parameter-acceptance.md)及[新增換 ID／誤追診斷](docs/zh-TW/tracking-error-diagnosis.md)。降低啟用門檻的覆蓋改善伴隨更多換 ID／FP；長遮擋恢復仍未通過。下一步分開驗證新 ID 確認／競爭、偵測框品質與遮擋恢復。**維持原預設。**
+
+以上為指定公開序列、固定偵測快取與已記錄版本的研究結果，不能直接外推至新版依賴或其他場景；僅公開彙總，未發布原始影像、GT、逐格追蹤與書籤資料。
+
+## v0.2 延續功能 — 空間分析工作台
 
 啟動本地服務後開啟 **http://127.0.0.1:8000/spatial**，可進行像素深度／XYZ 檢查、同圖四模型依序比較、YOLO 偵測／分割 2D→3D 融合，以及相機標定、候選平面與獨立量測誤差記錄。原本四模型、RTSP、主檢視器、匯出及雙語操作均保留。真單圖 CUDA 推論已在上述主機驗證；實體相機與距離精度尚未驗證。
 
@@ -142,9 +168,9 @@ node tests/test_i18n.cjs
 python tools/check_release.py
 ```
 
-CI 執行確定性的替身測試，不下載預訓練權重。CI 通過**不等於四模型硬體 benchmark**；目前分支與 Commit 的執行結果見 [GitHub Actions](https://github.com/JShengP/depthport/actions/workflows/ci.yml)。
+[應用 CI](https://github.com/JShengP/depthport/actions/workflows/ci.yml)執行確定性的替身／CPU tensor 契約測試；[模型相容性 CI](https://github.com/JShengP/depthport/actions/workflows/model-compatibility.yml)安裝明列依賴並匯入四套實際 API。兩者均不下載預訓練權重或執行推論，**不等於實機／精度驗收**。
 
-[貢獻指南](CONTRIBUTING.md)・[Roadmap](ROADMAP.md)・[版本紀錄](CHANGELOG.md)・[發布檢查](docs/zh-TW/publishing.md)
+[Tracking 驗收評估](docs/zh-TW/tracking-evaluation.md)・[貢獻指南](CONTRIBUTING.md)・[Roadmap](ROADMAP.md)・[版本紀錄](CHANGELOG.md)・[發布檢查](docs/zh-TW/publishing.md)
 
 ## 授權與致謝
 
