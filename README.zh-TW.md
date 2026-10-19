@@ -1,3 +1,5 @@
+**2026-10-19 啟用門檻錯誤診斷：** [新增換 ID／FP 案例分析](docs/zh-TW/tracking-error-diagnosis.md)顯示弱框／部分框、可見度恢復與關聯競爭混合，且不少新增換 ID 是原本漏追的位置。下一步優先驗證新 ID 確認／競爭控制，再分開測偵測及恢復，維持原預設。
+
 **2026-10-19 追蹤參數驗收：** [另一組 1,179 格 MOT17、五組參數比較](docs/zh-TW/tracking-parameter-acceptance.md)，完成 60 次執行。只降啟用可小幅改善 Recall／IDF1／HOTA，但換 ID 增加；同步降雙門檻損及 ID 品質，延長保留僅多恢復 ByteTrack 1 個長事件。維持原預設，v0.3 仍為 Draft。
 
 **2026-10-19 擴大追蹤驗收：** [三場景、2,700 格 MOT17 比較](docs/zh-TW/tracking-expanded-acceptance.md)，固定偵測、每方法三次重複；較少換 ID 伴隨較低 Recall，長遮擋恢復仍未通過，v0.3 維持 Draft。

@@ -52,3 +52,7 @@ Attribution: MOTChallenge contributors, [MOT17/MOT16 annotations](https://motcha
 The new-group parameter study additionally uses MOT17-09/10 under the same MOTChallenge CC BY-NC-SA 3.0 / original-source terms for local non-commercial research. Attribution and [method](docs/en/tracking-parameter-acceptance.md) are retained; only aggregate records and an aggregate chart are published, with no dataset media, GT or per-frame results.
 
 另一組參數驗證使用 MOT17-09／10，同樣依上述條款本機非商用研究並保留來源，不散布資料集影像、GT 或逐格結果。
+
+The [activation-error diagnosis](docs/en/tracking-error-diagnosis.md) reuses the same MOT17-09/10 local non-commercial inputs under the preceding terms. Its own diagnostic matching is checked against unmodified pinned TrackEval CLEAR; no upstream package/code archive or dataset imagery is bundled. Only aggregate counts and qualified semantic observations are published; raw traces and review images stay local.
+
+啟用門檻錯誤診斷沿用相同資料條款與來源，官方評估器獨立核對，未封裝上游套件或資料集影像，原始逐格診斷及檢查影像留在本機。

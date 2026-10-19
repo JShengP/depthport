@@ -1,5 +1,7 @@
 # Semantic Tracking 實機驗收 — ID Switch／遮擋評估
 
+後續[啟用門檻錯誤診斷](tracking-error-diagnosis.md)核對新增／消失 CLEAR 錯誤、檢查本機案例，並決定改善實驗順序。
+
 新增另一組序列的[參數驗收](tracking-parameter-acceptance.md)，比較啟用門檻與遺失追蹤保留時間，逐一記錄事件改善及退步。
 
 

@@ -1,5 +1,7 @@
 # 追蹤參數驗收 — 2026-10-19
 
+後續[啟用門檻錯誤診斷](tracking-error-diagnosis.md)核對新增／消失 CLEAR 錯誤、檢查本機案例，並決定改善實驗順序。
+
 [English](../en/tracking-parameter-acceptance.md) · [上一輪三場景比較](tracking-expanded-acceptance.md)
 
 這輪用另一組序列進行固定候選參數比較，檢查降低啟用門檻、延長遺失追蹤保留時間，能否改善漏追及長低可見度事件後的 ID 保留。結果屬探索性證據，尚不作為正式預設值或獨立測試集成績。

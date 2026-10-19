@@ -1,5 +1,7 @@
 # Semantic Tracking Acceptance — Offline ID Switch / Occlusion Evaluation
 
+Follow-up [activation-error diagnosis](tracking-error-diagnosis.md) reconciles added/removed CLEAR errors, reviews local cases and prioritises improvement experiments.
+
 New-group [parameter acceptance](tracking-parameter-acceptance.md) compares activation gates and lost-track lifetime with paired event gains/losses.
 
 

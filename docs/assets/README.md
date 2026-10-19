@@ -17,3 +17,5 @@
 `tracking-v03-mot17.png` is an original Matplotlib plot of the numeric [expanded acceptance record](../validation/v0.3-mot17-expanded.json). It contains no source image, GT box, per-frame ID, private runtime data or model output image. The [validation method](../en/tracking-expanded-acceptance.md) identifies the dataset terms, cohorts, denominators and limitations.
 
 `tracking-v03-parameters.png` plots only the numeric [09/10 parameter study](../validation/v0.3-mot17-parameters.json): Recall/IDF1 and all-subject endpoint-state counts for five fixed profiles per backend. No source image or per-frame GT/prediction is embedded. [Terms and interpretation](../en/tracking-parameter-acceptance.md).
+
+`tracking-v03-errors.png` is an original aggregate-only Matplotlib plot of [activation-error diagnosis](../validation/v0.3-tracking-error-diagnosis.json): added/removed IDSW, FP geometry, switch contexts and reference-output status. It contains no input images, exact event locations, object IDs or per-frame traces. Contexts are observational, not causal labels; [method and limits](../en/tracking-error-diagnosis.md).

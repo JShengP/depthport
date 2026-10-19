@@ -1,5 +1,7 @@
 # Tracking parameter acceptance — 2026-10-19
 
+Follow-up [activation-error diagnosis](tracking-error-diagnosis.md) reconciles added/removed CLEAR errors, reviews local cases and prioritises improvement experiments.
+
 [繁體中文](../zh-TW/tracking-parameter-acceptance.md) · [Previous three-scene comparison](tracking-expanded-acceptance.md)
 
 This is a fixed-profile sensitivity study on a new sequence group. It assesses whether lower activation gates and a longer lost-track buffer improve missing tracks and long-visibility-loss ID continuity. It does not select a production default or establish held-out benchmark accuracy.

@@ -1,0 +1,871 @@
+{
+  "format": "depthport.activation-error-diagnosis.v1",
+  "checked_on": "2026-10-19",
+  "source_terms": {
+    "dataset": "MOT17 train",
+    "page": "https://motchallenge.net/data/MOT17/",
+    "license": "CC-BY-NC-SA-3.0; original-source conditions may also apply",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+    "use": "Local non-commercial research; inputs and per-frame results not redistributed",
+    "labels_url": "https://motchallenge.net/data/MOT17Labels.zip",
+    "labels_archive_sha256": "0aa79322e91583369f42f17c4d79a0b145380d8732487bba59272048dc82b2b9"
+  },
+  "input_validation_sha256": "d6d2a6014112c39951503708171150921362b824a810aff09fed580b5ba7fc46",
+  "evaluator_commit": "12c8791b303e0a0b50f753af204249e622d0281a",
+  "comparison": "default vs activation_only; split .60 and 1s buffer unchanged",
+  "methods": {
+    "bytetrack": {
+      "official_counts": {
+        "default": {
+          "CLR_TP": 7292,
+          "CLR_FP": 828,
+          "CLR_FN": 10872,
+          "IDSW": 140
+        },
+        "activation_only": {
+          "CLR_TP": 7848,
+          "CLR_FP": 1118,
+          "CLR_FN": 10316,
+          "IDSW": 170
+        }
+      },
+      "switch": {
+        "shared_location_count": 102,
+        "net_change": 30,
+        "added": {
+          "total": 68,
+          "categories": {
+            "continuous_other": 9,
+            "continuous_overlap_or_crossing": 6,
+            "gap_with_missing_raw_detection": 45,
+            "gap_with_raw_detection_support": 8
+          },
+          "signals": {
+            "low_visibility_context": 35,
+            "long_visibility_event_context": 9,
+            "crossing_event_context": 11,
+            "current_gt_overlap": 49,
+            "current_match_ambiguous": 15,
+            "recent_other_gt_owner": 25,
+            "reference_unmatched_at_switch": 41,
+            "gap_has_no_raw_overlap": 17,
+            "gap_has_partial_raw_overlap": 42,
+            "visible_gap_missing_raw_box": 17,
+            "low_visibility_gap_missing_raw_box": 30
+          },
+          "current_confidence_bands": {
+            ".60_to_.70": 21,
+            "at_least_.70": 11,
+            "below_.60": 36
+          }
+        },
+        "removed": {
+          "total": 38,
+          "categories": {
+            "continuous_other": 1,
+            "continuous_overlap_or_crossing": 2,
+            "gap_with_missing_raw_detection": 26,
+            "gap_with_raw_detection_support": 9
+          },
+          "signals": {
+            "low_visibility_context": 26,
+            "long_visibility_event_context": 8,
+            "crossing_event_context": 5,
+            "current_gt_overlap": 26,
+            "current_match_ambiguous": 12,
+            "recent_other_gt_owner": 12,
+            "reference_unmatched_at_switch": 0,
+            "gap_has_no_raw_overlap": 10,
+            "gap_has_partial_raw_overlap": 25,
+            "visible_gap_missing_raw_box": 11,
+            "low_visibility_gap_missing_raw_box": 21
+          },
+          "current_confidence_bands": {
+            ".60_to_.70": 13,
+            "at_least_.70": 13,
+            "below_.60": 12
+          }
+        }
+      },
+      "fp": {
+        "shared_location_count": 821,
+        "net_change": 290,
+        "added": {
+          "total": 297,
+          "categories": {
+            "duplicate_or_assignment_competition": 140,
+            "no_evaluated_pedestrian_overlap": 24,
+            "partial_overlap_below_.50": 133
+          },
+          "signals": {
+            "overlaps_excluded_annotation": 0,
+            "track_has_no_tp": 38,
+            "track_matches_multiple_gt": 164
+          },
+          "current_confidence_bands": {
+            ".60_to_.70": 33,
+            "at_least_.70": 15,
+            "below_.60": 249
+          },
+          "contiguous_track_category_episodes": {
+            "count": 102,
+            "max_frames": 16,
+            "median_frames": 2.0
+          },
+          "reference_output_status": {
+            "not_emitted_by_reference": 242,
+            "reference_tp": 55
+          }
+        },
+        "removed": {
+          "total": 7,
+          "categories": {
+            "duplicate_or_assignment_competition": 5,
+            "no_evaluated_pedestrian_overlap": 1,
+            "partial_overlap_below_.50": 1
+          },
+          "signals": {
+            "overlaps_excluded_annotation": 0,
+            "track_has_no_tp": 0,
+            "track_matches_multiple_gt": 2
+          },
+          "current_confidence_bands": {
+            "at_least_.70": 1,
+            "below_.60": 6
+          },
+          "contiguous_track_category_episodes": {
+            "count": 5,
+            "max_frames": 3,
+            "median_frames": 1
+          }
+        }
+      }
+    },
+    "botsort": {
+      "official_counts": {
+        "default": {
+          "CLR_TP": 6782,
+          "CLR_FP": 382,
+          "CLR_FN": 11382,
+          "IDSW": 49
+        },
+        "activation_only": {
+          "CLR_TP": 7122,
+          "CLR_FP": 440,
+          "CLR_FN": 11042,
+          "IDSW": 58
+        }
+      },
+      "switch": {
+        "shared_location_count": 30,
+        "net_change": 9,
+        "added": {
+          "total": 28,
+          "categories": {
+            "continuous_other": 1,
+            "gap_with_missing_raw_detection": 26,
+            "gap_with_raw_detection_support": 1
+          },
+          "signals": {
+            "low_visibility_context": 21,
+            "long_visibility_event_context": 5,
+            "crossing_event_context": 4,
+            "current_gt_overlap": 19,
+            "current_match_ambiguous": 3,
+            "recent_other_gt_owner": 4,
+            "reference_unmatched_at_switch": 26,
+            "gap_has_no_raw_overlap": 10,
+            "gap_has_partial_raw_overlap": 26,
+            "visible_gap_missing_raw_box": 11,
+            "low_visibility_gap_missing_raw_box": 20
+          },
+          "current_confidence_bands": {
+            ".60_to_.70": 17,
+            "at_least_.70": 10,
+            "below_.60": 1
+          }
+        },
+        "removed": {
+          "total": 19,
+          "categories": {
+            "gap_with_missing_raw_detection": 17,
+            "gap_with_raw_detection_support": 2
+          },
+          "signals": {
+            "low_visibility_context": 15,
+            "long_visibility_event_context": 3,
+            "crossing_event_context": 4,
+            "current_gt_overlap": 12,
+            "current_match_ambiguous": 2,
+            "recent_other_gt_owner": 3,
+            "reference_unmatched_at_switch": 0,
+            "gap_has_no_raw_overlap": 7,
+            "gap_has_partial_raw_overlap": 17,
+            "visible_gap_missing_raw_box": 6,
+            "low_visibility_gap_missing_raw_box": 13
+          },
+          "current_confidence_bands": {
+            ".60_to_.70": 8,
+            "at_least_.70": 10,
+            "below_.60": 1
+          }
+        }
+      },
+      "fp": {
+        "shared_location_count": 382,
+        "net_change": 58,
+        "added": {
+          "total": 58,
+          "categories": {
+            "duplicate_or_assignment_competition": 19,
+            "partial_overlap_below_.50": 39
+          },
+          "signals": {
+            "overlaps_excluded_annotation": 0,
+            "track_has_no_tp": 17,
+            "track_matches_multiple_gt": 4
+          },
+          "current_confidence_bands": {
+            ".60_to_.70": 13,
+            "at_least_.70": 9,
+            "below_.60": 36
+          },
+          "contiguous_track_category_episodes": {
+            "count": 19,
+            "max_frames": 12,
+            "median_frames": 2
+          },
+          "reference_output_status": {
+            "not_emitted_by_reference": 52,
+            "reference_tp": 6
+          }
+        },
+        "removed": {
+          "total": 0,
+          "categories": {},
+          "signals": {
+            "overlaps_excluded_annotation": 0,
+            "track_has_no_tp": 0,
+            "track_matches_multiple_gt": 0
+          },
+          "current_confidence_bands": {},
+          "contiguous_track_category_episodes": {
+            "count": 0,
+            "max_frames": 0,
+            "median_frames": null
+          }
+        }
+      }
+    }
+  },
+  "sequences": [
+    {
+      "name": "MOT17-09-DPM",
+      "frames": 525,
+      "methods": {
+        "bytetrack": {
+          "official_counts": {
+            "default": {
+              "CLR_TP": 3215,
+              "CLR_FP": 312,
+              "CLR_FN": 2110,
+              "IDSW": 79
+            },
+            "activation_only": {
+              "CLR_TP": 3350,
+              "CLR_FP": 389,
+              "CLR_FN": 1975,
+              "IDSW": 87
+            }
+          },
+          "switch": {
+            "shared_location_count": 60,
+            "net_change": 8,
+            "added": {
+              "total": 27,
+              "categories": {
+                "continuous_overlap_or_crossing": 6,
+                "gap_with_missing_raw_detection": 15,
+                "gap_with_raw_detection_support": 6
+              },
+              "signals": {
+                "low_visibility_context": 15,
+                "long_visibility_event_context": 4,
+                "crossing_event_context": 10,
+                "current_gt_overlap": 25,
+                "current_match_ambiguous": 8,
+                "recent_other_gt_owner": 12,
+                "reference_unmatched_at_switch": 16,
+                "gap_has_no_raw_overlap": 3,
+                "gap_has_partial_raw_overlap": 15,
+                "visible_gap_missing_raw_box": 3,
+                "low_visibility_gap_missing_raw_box": 11
+              },
+              "current_confidence_bands": {
+                ".60_to_.70": 5,
+                "at_least_.70": 6,
+                "below_.60": 16
+              }
+            },
+            "removed": {
+              "total": 19,
+              "categories": {
+                "continuous_other": 1,
+                "gap_with_missing_raw_detection": 10,
+                "gap_with_raw_detection_support": 8
+              },
+              "signals": {
+                "low_visibility_context": 14,
+                "long_visibility_event_context": 5,
+                "crossing_event_context": 3,
+                "current_gt_overlap": 14,
+                "current_match_ambiguous": 8,
+                "recent_other_gt_owner": 9,
+                "reference_unmatched_at_switch": 0,
+                "gap_has_no_raw_overlap": 2,
+                "gap_has_partial_raw_overlap": 10,
+                "visible_gap_missing_raw_box": 2,
+                "low_visibility_gap_missing_raw_box": 9
+              },
+              "current_confidence_bands": {
+                ".60_to_.70": 7,
+                "at_least_.70": 6,
+                "below_.60": 6
+              }
+            }
+          },
+          "fp": {
+            "shared_location_count": 311,
+            "net_change": 77,
+            "added": {
+              "total": 78,
+              "categories": {
+                "duplicate_or_assignment_competition": 45,
+                "no_evaluated_pedestrian_overlap": 3,
+                "partial_overlap_below_.50": 30
+              },
+              "signals": {
+                "overlaps_excluded_annotation": 0,
+                "track_has_no_tp": 0,
+                "track_matches_multiple_gt": 73
+              },
+              "current_confidence_bands": {
+                ".60_to_.70": 2,
+                "at_least_.70": 3,
+                "below_.60": 73
+              },
+              "contiguous_track_category_episodes": {
+                "count": 34,
+                "max_frames": 16,
+                "median_frames": 2.0
+              },
+              "reference_output_status": {
+                "not_emitted_by_reference": 71,
+                "reference_tp": 7
+              }
+            },
+            "removed": {
+              "total": 1,
+              "categories": {
+                "duplicate_or_assignment_competition": 1
+              },
+              "signals": {
+                "overlaps_excluded_annotation": 0,
+                "track_has_no_tp": 0,
+                "track_matches_multiple_gt": 1
+              },
+              "current_confidence_bands": {
+                "below_.60": 1
+              },
+              "contiguous_track_category_episodes": {
+                "count": 1,
+                "max_frames": 1,
+                "median_frames": 1
+              }
+            }
+          }
+        },
+        "botsort": {
+          "official_counts": {
+            "default": {
+              "CLR_TP": 3083,
+              "CLR_FP": 181,
+              "CLR_FN": 2242,
+              "IDSW": 33
+            },
+            "activation_only": {
+              "CLR_TP": 3178,
+              "CLR_FP": 189,
+              "CLR_FN": 2147,
+              "IDSW": 35
+            }
+          },
+          "switch": {
+            "shared_location_count": 24,
+            "net_change": 2,
+            "added": {
+              "total": 11,
+              "categories": {
+                "gap_with_missing_raw_detection": 10,
+                "gap_with_raw_detection_support": 1
+              },
+              "signals": {
+                "low_visibility_context": 8,
+                "long_visibility_event_context": 2,
+                "crossing_event_context": 3,
+                "current_gt_overlap": 8,
+                "current_match_ambiguous": 1,
+                "recent_other_gt_owner": 2,
+                "reference_unmatched_at_switch": 10,
+                "gap_has_no_raw_overlap": 1,
+                "gap_has_partial_raw_overlap": 10,
+                "visible_gap_missing_raw_box": 2,
+                "low_visibility_gap_missing_raw_box": 8
+              },
+              "current_confidence_bands": {
+                ".60_to_.70": 6,
+                "at_least_.70": 5
+              }
+            },
+            "removed": {
+              "total": 9,
+              "categories": {
+                "gap_with_missing_raw_detection": 7,
+                "gap_with_raw_detection_support": 2
+              },
+              "signals": {
+                "low_visibility_context": 8,
+                "long_visibility_event_context": 1,
+                "crossing_event_context": 3,
+                "current_gt_overlap": 6,
+                "current_match_ambiguous": 1,
+                "recent_other_gt_owner": 2,
+                "reference_unmatched_at_switch": 0,
+                "gap_has_no_raw_overlap": 2,
+                "gap_has_partial_raw_overlap": 7,
+                "visible_gap_missing_raw_box": 0,
+                "low_visibility_gap_missing_raw_box": 7
+              },
+              "current_confidence_bands": {
+                ".60_to_.70": 1,
+                "at_least_.70": 7,
+                "below_.60": 1
+              }
+            }
+          },
+          "fp": {
+            "shared_location_count": 181,
+            "net_change": 8,
+            "added": {
+              "total": 8,
+              "categories": {
+                "duplicate_or_assignment_competition": 3,
+                "partial_overlap_below_.50": 5
+              },
+              "signals": {
+                "overlaps_excluded_annotation": 0,
+                "track_has_no_tp": 0,
+                "track_matches_multiple_gt": 2
+              },
+              "current_confidence_bands": {
+                ".60_to_.70": 2,
+                "at_least_.70": 3,
+                "below_.60": 3
+              },
+              "contiguous_track_category_episodes": {
+                "count": 4,
+                "max_frames": 3,
+                "median_frames": 2.0
+              },
+              "reference_output_status": {
+                "not_emitted_by_reference": 5,
+                "reference_tp": 3
+              }
+            },
+            "removed": {
+              "total": 0,
+              "categories": {},
+              "signals": {
+                "overlaps_excluded_annotation": 0,
+                "track_has_no_tp": 0,
+                "track_matches_multiple_gt": 0
+              },
+              "current_confidence_bands": {},
+              "contiguous_track_category_episodes": {
+                "count": 0,
+                "max_frames": 0,
+                "median_frames": null
+              }
+            }
+          }
+        }
+      },
+      "source_hashes": {
+        "video_sha256": "44472faa5643b173fa9b0d4837d3018cd1f5c4a3f13ab4bc9f865cf552022f9d",
+        "gt_sha256": "592f0d5b519c03b35bb1578c33d726460f63abb91ea0c515f87e8d6d76be001d",
+        "detection_cache_sha256": "450b69fbec4701cdeb4cd2501fff80f208b81eeb21fe4b231a5cb1c3ea76bacb"
+      }
+    },
+    {
+      "name": "MOT17-10-DPM",
+      "frames": 654,
+      "methods": {
+        "bytetrack": {
+          "official_counts": {
+            "default": {
+              "CLR_TP": 4077,
+              "CLR_FP": 516,
+              "CLR_FN": 8762,
+              "IDSW": 61
+            },
+            "activation_only": {
+              "CLR_TP": 4498,
+              "CLR_FP": 729,
+              "CLR_FN": 8341,
+              "IDSW": 83
+            }
+          },
+          "switch": {
+            "shared_location_count": 42,
+            "net_change": 22,
+            "added": {
+              "total": 41,
+              "categories": {
+                "continuous_other": 9,
+                "gap_with_missing_raw_detection": 30,
+                "gap_with_raw_detection_support": 2
+              },
+              "signals": {
+                "low_visibility_context": 20,
+                "long_visibility_event_context": 5,
+                "crossing_event_context": 1,
+                "current_gt_overlap": 24,
+                "current_match_ambiguous": 7,
+                "recent_other_gt_owner": 13,
+                "reference_unmatched_at_switch": 25,
+                "gap_has_no_raw_overlap": 14,
+                "gap_has_partial_raw_overlap": 27,
+                "visible_gap_missing_raw_box": 14,
+                "low_visibility_gap_missing_raw_box": 19
+              },
+              "current_confidence_bands": {
+                ".60_to_.70": 16,
+                "at_least_.70": 5,
+                "below_.60": 20
+              }
+            },
+            "removed": {
+              "total": 19,
+              "categories": {
+                "continuous_overlap_or_crossing": 2,
+                "gap_with_missing_raw_detection": 16,
+                "gap_with_raw_detection_support": 1
+              },
+              "signals": {
+                "low_visibility_context": 12,
+                "long_visibility_event_context": 3,
+                "crossing_event_context": 2,
+                "current_gt_overlap": 12,
+                "current_match_ambiguous": 4,
+                "recent_other_gt_owner": 3,
+                "reference_unmatched_at_switch": 0,
+                "gap_has_no_raw_overlap": 8,
+                "gap_has_partial_raw_overlap": 15,
+                "visible_gap_missing_raw_box": 9,
+                "low_visibility_gap_missing_raw_box": 12
+              },
+              "current_confidence_bands": {
+                ".60_to_.70": 6,
+                "at_least_.70": 7,
+                "below_.60": 6
+              }
+            }
+          },
+          "fp": {
+            "shared_location_count": 510,
+            "net_change": 213,
+            "added": {
+              "total": 219,
+              "categories": {
+                "duplicate_or_assignment_competition": 95,
+                "no_evaluated_pedestrian_overlap": 21,
+                "partial_overlap_below_.50": 103
+              },
+              "signals": {
+                "overlaps_excluded_annotation": 0,
+                "track_has_no_tp": 38,
+                "track_matches_multiple_gt": 91
+              },
+              "current_confidence_bands": {
+                ".60_to_.70": 31,
+                "at_least_.70": 12,
+                "below_.60": 176
+              },
+              "contiguous_track_category_episodes": {
+                "count": 68,
+                "max_frames": 16,
+                "median_frames": 2.0
+              },
+              "reference_output_status": {
+                "not_emitted_by_reference": 171,
+                "reference_tp": 48
+              }
+            },
+            "removed": {
+              "total": 6,
+              "categories": {
+                "duplicate_or_assignment_competition": 4,
+                "no_evaluated_pedestrian_overlap": 1,
+                "partial_overlap_below_.50": 1
+              },
+              "signals": {
+                "overlaps_excluded_annotation": 0,
+                "track_has_no_tp": 0,
+                "track_matches_multiple_gt": 1
+              },
+              "current_confidence_bands": {
+                "at_least_.70": 1,
+                "below_.60": 5
+              },
+              "contiguous_track_category_episodes": {
+                "count": 4,
+                "max_frames": 3,
+                "median_frames": 1.0
+              }
+            }
+          }
+        },
+        "botsort": {
+          "official_counts": {
+            "default": {
+              "CLR_TP": 3699,
+              "CLR_FP": 201,
+              "CLR_FN": 9140,
+              "IDSW": 16
+            },
+            "activation_only": {
+              "CLR_TP": 3944,
+              "CLR_FP": 251,
+              "CLR_FN": 8895,
+              "IDSW": 23
+            }
+          },
+          "switch": {
+            "shared_location_count": 6,
+            "net_change": 7,
+            "added": {
+              "total": 17,
+              "categories": {
+                "continuous_other": 1,
+                "gap_with_missing_raw_detection": 16
+              },
+              "signals": {
+                "low_visibility_context": 13,
+                "long_visibility_event_context": 3,
+                "crossing_event_context": 1,
+                "current_gt_overlap": 11,
+                "current_match_ambiguous": 2,
+                "recent_other_gt_owner": 2,
+                "reference_unmatched_at_switch": 16,
+                "gap_has_no_raw_overlap": 9,
+                "gap_has_partial_raw_overlap": 16,
+                "visible_gap_missing_raw_box": 9,
+                "low_visibility_gap_missing_raw_box": 12
+              },
+              "current_confidence_bands": {
+                ".60_to_.70": 11,
+                "at_least_.70": 5,
+                "below_.60": 1
+              }
+            },
+            "removed": {
+              "total": 10,
+              "categories": {
+                "gap_with_missing_raw_detection": 10
+              },
+              "signals": {
+                "low_visibility_context": 7,
+                "long_visibility_event_context": 2,
+                "crossing_event_context": 1,
+                "current_gt_overlap": 6,
+                "current_match_ambiguous": 1,
+                "recent_other_gt_owner": 1,
+                "reference_unmatched_at_switch": 0,
+                "gap_has_no_raw_overlap": 5,
+                "gap_has_partial_raw_overlap": 10,
+                "visible_gap_missing_raw_box": 6,
+                "low_visibility_gap_missing_raw_box": 6
+              },
+              "current_confidence_bands": {
+                ".60_to_.70": 7,
+                "at_least_.70": 3
+              }
+            }
+          },
+          "fp": {
+            "shared_location_count": 201,
+            "net_change": 50,
+            "added": {
+              "total": 50,
+              "categories": {
+                "duplicate_or_assignment_competition": 16,
+                "partial_overlap_below_.50": 34
+              },
+              "signals": {
+                "overlaps_excluded_annotation": 0,
+                "track_has_no_tp": 17,
+                "track_matches_multiple_gt": 2
+              },
+              "current_confidence_bands": {
+                ".60_to_.70": 11,
+                "at_least_.70": 6,
+                "below_.60": 33
+              },
+              "contiguous_track_category_episodes": {
+                "count": 15,
+                "max_frames": 12,
+                "median_frames": 3
+              },
+              "reference_output_status": {
+                "not_emitted_by_reference": 47,
+                "reference_tp": 3
+              }
+            },
+            "removed": {
+              "total": 0,
+              "categories": {},
+              "signals": {
+                "overlaps_excluded_annotation": 0,
+                "track_has_no_tp": 0,
+                "track_matches_multiple_gt": 0
+              },
+              "current_confidence_bands": {},
+              "contiguous_track_category_episodes": {
+                "count": 0,
+                "max_frames": 0,
+                "median_frames": null
+              }
+            }
+          }
+        }
+      },
+      "source_hashes": {
+        "video_sha256": "0780ec0d648cfbca71a92cf0e45811e591b0f014307e3291a5f970112d855d01",
+        "gt_sha256": "f8cca05d98fa36d8b6f2b807e03d32407d00d40299d679e4da320e42862677c0",
+        "detection_cache_sha256": "ab9294f64e697dccd8bd6b0ce61aa1bcaec09e4a062816bcd4291511808af8c6"
+      }
+    }
+  ],
+  "limitations": [
+    "Observational contexts can co-occur; they do not establish causal blame.",
+    "Added/removed IDSW locations use (frame, GT); shared locations may have different transitions. Raw IDs are never compared across runs.",
+    "FP locations use immutable (frame, cache detection index), after official preprocessing. Metric FP is not proof of a nonexistent person.",
+    "Per-GT raw detection support is a geometric upper bound, not one-to-one matching or proof a backend could associate it.",
+    "Existing compressed training clips; no new accuracy experiment, tuning, default change, ReID or held-out claim."
+  ],
+  "public_scope": "Aggregate counts/hashes only. Raw cases, GT, images, event windows, per-frame boxes/IDs and paths remain local.",
+  "audit_selection": {
+    "policy": "One added case per backend/kind/category; longest FP episode or largest IDSW match gap; stable sequence/frame/ID ties. No image/semantic judgment in automatic category.",
+    "selected_cases": 12,
+    "status": "Local visual audit not performed by this tool"
+  },
+  "visual_audit": {
+    "performed": "Assisted visual inspection of all 12 deterministically selected cases",
+    "case_count": 12,
+    "panels": 72,
+    "unique_source_frames": 33,
+    "sampling": "Seven added IDSW examples and five added FP examples, one per available backend/context category; two profiles and three time points per case. Not random or exhaustive.",
+    "observations": [
+      {
+        "kind": "continuous_id_churn",
+        "note": "Visible adjacent pedestrians; target remains observable, no clear full occlusion. Immediate ID churn remains unresolved between localization and association."
+      },
+      {
+        "kind": "overlapping_pedestrians",
+        "note": "Nearby projected boxes overlap; candidate changes ID while the default continues matching. Supports association competition; not certified 3D crossing."
+      },
+      {
+        "kind": "long_gap_mixed_localization_and_ownership",
+        "note": "Long match gap with partial/nearby people and another GT previously owning the candidate ID. Detection localization and association are confounded."
+      },
+      {
+        "kind": "short_gap_ambiguity_with_detections",
+        "note": "Crowded group and partly visible target; raw boxes remain available during a short gap, with ambiguous/current ownership evidence. Association candidate, not a buffer-expiry explanation."
+      },
+      {
+        "kind": "duplicate_competition",
+        "note": "Several boxes compete over pedestrians in a dense group; selected metric FP overlaps a GT already assigned elsewhere."
+      },
+      {
+        "kind": "poster_false_activation",
+        "note": "Selected extra track surrounds a person image on an illuminated advertising display; background false activation supported for this example."
+      },
+      {
+        "kind": "partial_body_localization",
+        "note": "A person behind a planter yields a torso-sized detection versus full-body GT. Metric FP is a real-person box/localization issue, not evidence of an invented person."
+      },
+      {
+        "kind": "continuous_small_target_churn",
+        "note": "Small visible background pedestrian changes ID between adjacent frames; default is unmatched. Additional coverage exposes instability; cause not isolated."
+      },
+      {
+        "kind": "low_visibility_reacquisition",
+        "note": "Partly visible target behind/near pedestrians, long match gap, then reappears with a new candidate ID; default unmatched at event. Detection and recovery both implicated."
+      },
+      {
+        "kind": "short_gap_weak_detection",
+        "note": "Child partly obscured by nearby adults; raw geometric support exists during a short gap, but mostly below high-confidence split. Low-confidence recovery/association candidate."
+      },
+      {
+        "kind": "duplicate_competition",
+        "note": "Extra candidate output competes with another pedestrian box over the same evaluated GT. Person is real; unmatched output is not automatically background hallucination."
+      },
+      {
+        "kind": "partial_body_localization",
+        "note": "Same planter/torso localization pattern as the ByteTrack example, under a different backend; not independent visual evidence of a second scene condition."
+      }
+    ],
+    "privacy": "Images, frame locations, object IDs, cache indices and raw review mapping remain local."
+  },
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv-python": "4.11.0.86",
+    "scipy": "1.18.1",
+    "python": "3.12.3"
+  },
+  "implementation_sha256": {
+    "depthport/tracking_diagnostics.py": "09838945d8d72da9c28bdb8dad432a335d7ae4be4ff08f62059c70fd05d2ba67",
+    "tools/diagnose_tracking_errors.py": "52aafe20285f0898fb16cb3e8b79ae7d73f73150c2b343e52b51e19900a9a64d"
+  },
+  "decisions": {
+    "app_defaults_changed": false,
+    "priority_1": "Test stricter temporal/new-track confirmation and competition-aware duplicate control while preserving weak detections for existing tracks; compare TP gains against FP/IDSW costs.",
+    "priority_2": "Isolate detector localization at occlusion and small targets using a separate resolution/detector comparison; do not alter official IoU scoring.",
+    "priority_3": "Instrument recovery/association costs and ownership ambiguity before changing association gates or adding ReID; longer buffer alone does not explain short gaps.",
+    "evaluation": "Separate baseline-matched from baseline-unmatched switch cohorts; keep all-subject and added/removed denominators. Test fixes separately on independent sequences before promotion."
+  },
+  "software_validation": {
+    "python_suite": {
+      "passed": 306,
+      "skipped": 6
+    },
+    "targeted_synthetic_contracts": {
+      "passed": 32,
+      "skipped": 2
+    },
+    "isolated_numpy2_diagnostic_contracts_passed": 8,
+    "official_saved_run_reconciliations": 8,
+    "fields_checked_per_run": [
+      "CLR_TP",
+      "CLR_FP",
+      "CLR_FN",
+      "IDSW"
+    ],
+    "public_manifest_files": 173,
+    "public_file_links_and_obvious_secret_patterns": "PASS; limited scan, not a full security audit",
+    "loopback_http_smoke": "PASS; no model inference",
+    "isolated_environment_pip_check": "PASS",
+    "application_numpy_unchanged": "1.26.4",
+    "original_private_files_sha256_unchanged": 27
+  }
+}

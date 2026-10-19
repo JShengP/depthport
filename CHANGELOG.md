@@ -1,4 +1,7 @@
 ## v0.3.0-alpha.0 — Offline semantic tracking development addition
+- Added reproducible default-vs-activation error diagnosis with exact official CLEAR count reconciliation, immutable-detection FP pairing, observational gap/overlap/localisation signals and qualified local visual review. Published aggregate evidence and prioritised confirmation/competition, detector-localisation and association-telemetry experiments; no tracker/default change.
+- 新增預設與降低啟用後的可重現錯誤診斷，精確核對官方 CLEAR、依固定偵測配對 FP、記錄缺口／重疊／框品質訊號及附條件的本機影像檢查；公開彙總並決定先測確認／競爭、框品質及關聯成本，不變更追蹤預設。
+
 - Added bounded direct-backend parameter overrides, five fixed activation/split/buffer profiles, effective-parameter checks and paired event gains/losses. New MOT17-09/10 study: 1,179 frames / 60 runs; modest activation-only coverage gains trade off ID switches, aggressive lower gates hurt identity quality, and longer retention adds only one ByteTrack long-event recovery. Defaults unchanged; aggregates only.
 - 新增有界的直接後端參數、五組啟用／分流／保留比較、實際生效核對及事件改善／退步配對。另一組 MOT17-09／10 共 1,179 格、60 次執行；只降啟用的覆蓋改善伴隨較多換 ID，同步降雙門檻損及 ID 品質，延長保留僅新增 ByteTrack 1 個長事件恢復，維持原預設並僅公開彙總。
 
