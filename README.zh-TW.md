@@ -1,3 +1,15 @@
+**2026-10-19 啟用門檻錯誤診斷：** [新增換 ID／FP 案例分析](docs/zh-TW/tracking-error-diagnosis.md)顯示弱框／部分框、可見度恢復與關聯競爭混合，且不少新增換 ID 是原本漏追的位置。下一步優先驗證新 ID 確認／競爭控制，再分開測偵測及恢復，維持原預設。
+
+**2026-10-19 追蹤參數驗收：** [另一組 1,179 格 MOT17、五組參數比較](docs/zh-TW/tracking-parameter-acceptance.md)，完成 60 次執行。只降啟用可小幅改善 Recall／IDF1／HOTA，但換 ID 增加；同步降雙門檻損及 ID 品質，延長保留僅多恢復 ByteTrack 1 個長事件。維持原預設，v0.3 維持實驗性開發預覽。
+
+**2026-10-19 擴大追蹤驗收：** [三場景、2,700 格 MOT17 比較](docs/zh-TW/tracking-expanded-acceptance.md)，固定偵測、每方法三次重複；較少換 ID 伴隨較低 Recall，長遮擋恢復仍未通過，v0.3 維持實驗性開發預覽。
+
+**v0.3 離線語意追蹤新增：** 手動分析已存 Session 影格的 YOLO Detect／Segment，可選預設簡易關聯或獨立 NumPy 2 環境的 [Roboflow BoT-SORT worker](docs/zh-TW/tracking-worker.md)，建立 Object ID 與候選相機 XYZ／深度歷史；不做身份辨識、不代表世界座標軌跡，也不會自動錄影。詳見 [Session 文件](docs/zh-TW/sessions.md)。
+
+## v0.3 開發預覽 — Session 與離線回放
+
+新增**預設關閉、僅本機、手動儲存**的影格 Session（RGB／深度／PLY／原始 NPY／metadata），支援 SHA-256 完整性驗證、離線回放及分模型深度摘要趨勢；**不會自動錄製相機，回放不重新呼叫模型。** v0.2 Spatial Analysis 功能仍在。[Session／Replay 操作說明](docs/zh-TW/sessions.md)。v0.3 為實驗性開發預覽，尚未發布帶標籤的 Release；已發布版本仍為 v0.2 Alpha。
+
 <div align="center">
 
 # DepthPort
@@ -144,7 +156,7 @@ python tools/check_release.py
 
 CI 執行確定性的替身測試，不下載預訓練權重。CI 通過**不等於四模型硬體 benchmark**；目前分支與 Commit 的執行結果見 [GitHub Actions](https://github.com/JShengP/depthport/actions/workflows/ci.yml)。
 
-[貢獻指南](CONTRIBUTING.md)・[Roadmap](ROADMAP.md)・[版本紀錄](CHANGELOG.md)・[發布檢查](docs/zh-TW/publishing.md)
+[Tracking 驗收評估](docs/zh-TW/tracking-evaluation.md)・[貢獻指南](CONTRIBUTING.md)・[Roadmap](ROADMAP.md)・[版本紀錄](CHANGELOG.md)・[發布檢查](docs/zh-TW/publishing.md)
 
 ## 授權與致謝
 

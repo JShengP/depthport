@@ -1,3 +1,13 @@
+**Activation-error diagnosis (2026-10-19):** [Added ID switches and false positives analysed](docs/en/tracking-error-diagnosis.md). Errors mix weak/partial detections, visibility-loss recovery and association competition; added switches often expose default FN. Next priority is new-track confirmation/competition controls, with detector and recovery tests separated. Defaults stay unchanged.
+
+**Tracking parameter study (2026-10-19):** [Five profiles on 1,179 new MOT17 frames](docs/en/tracking-parameter-acceptance.md), 60 completed runs. Lower activation modestly improves Recall/IDF1/HOTA with more ID switches; aggressive lower gates hurt identity quality, and longer retention recovers only one ByteTrack long event. App defaults stay unchanged; v0.3 remains an experimental development preview.
+
+**Expanded tracking acceptance (2026-10-19):** [2,700 MOT17 frames across three scenes](docs/en/tracking-expanded-acceptance.md), fixed detections and three repeated runs per method. Lower ID switches came with lower Recall; long-occlusion recovery remains unaccepted. v0.3 remains an experimental development preview.
+
+## v0.3 development preview — Manual Sessions & Replay
+
+The v0.3 experimental development preview adds **opt-in, local-only, manually captured frame sessions** (RGB/depth/PLY/raw NPY metadata), integrity-checked offline replay, and grouped depth-summary trends. A manual CPU-only **Offline Semantic Object Tracking** analysis links saved-frame 2D detections to Object IDs and camera-space depth/XYZ histories. Choose simple association (default) or an optional [Roboflow BoT-SORT worker](docs/en/tracking-worker.md) in a separate NumPy 2 environment; neither provides identity or world trajectories. **No automatic camera recording or model inference on replay.** The v0.2 features remain available. See [Session & Replay documentation](docs/en/sessions.md); this development preview is not a tagged release.
+
 <div align="center">
 
 # DepthPort
@@ -144,7 +154,7 @@ python tools/check_release.py
 
 The CI workflow runs deterministic, fake-backed application tests without downloading pretrained weights. Passing application CI is **not** a four-model hardware benchmark. Check [GitHub Actions](https://github.com/JShengP/depthport/actions/workflows/ci.yml) for the current branch and commit results.
 
-[Contributing](CONTRIBUTING.md) · [Roadmap](ROADMAP.md) · [Changelog](CHANGELOG.md) · [Release checklist](docs/en/publishing.md)
+[Tracking Acceptance & Evaluation](docs/en/tracking-evaluation.md) · [Contributing](CONTRIBUTING.md) · [Roadmap](ROADMAP.md) · [Changelog](CHANGELOG.md) · [Release checklist](docs/en/publishing.md)
 
 ## License and acknowledgments
 

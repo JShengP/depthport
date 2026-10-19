@@ -25,6 +25,7 @@ def main() -> None:
         shutil.copyfile(ROOT/'static'/name, out/'static'/name)
     html = (ROOT/'static/index.html').read_text(encoding='utf-8')
     html = re.sub(r'<div[^>]*id="spatialLinkBox".*?</div>\s*', '', html, flags=re.S)
+    html = re.sub(r'<div[^>]*id="sessionLinkBox".*?</div>\s*', '', html, flags=re.S)
     html = html.replace('<html lang="en">', '<html lang="en" data-demo-only="true">')
     if 'data-demo-only="true"' not in html:
         raise SystemExit('The static demo marker was not applied.')

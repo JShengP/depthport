@@ -1,0 +1,28 @@
+{
+  "format": "depthport.semantic-tracking.v1",
+  "session_id": "00000000000000000000000000000000",
+  "source": "synthetic_example_not_actual_ai",
+  "frames": [
+    {
+      "index": 1,
+      "objects": [
+        {"object_id": "obj-0001", "class_id": 0, "bbox": [2, 2, 12, 12]},
+        {"object_id": "obj-0002", "class_id": 0, "bbox": [20, 2, 30, 12]}
+      ]
+    },
+    {
+      "index": 2,
+      "objects": [
+        {"object_id": "obj-0001", "class_id": 0, "bbox": [4, 2, 14, 12]}
+      ]
+    },
+    {"index": 3, "objects": []},
+    {
+      "index": 4,
+      "objects": [
+        {"object_id": "obj-0002", "class_id": 0, "bbox": [13, 2, 23, 12]},
+        {"object_id": "obj-0003", "class_id": 0, "bbox": [10, 2, 20, 12]}
+      ]
+    }
+  ]
+}
