@@ -11,13 +11,13 @@
 
 </div>
 
-**下載 v0.3.0-alpha.1：** [Release 說明與下載](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.1) · [原始碼 ZIP](https://github.com/JShengP/depthport/releases/download/v0.3.0-alpha.1/depthport-0.3.0-alpha.1-source.zip) · [SHA-256 校驗檔](https://github.com/JShengP/depthport/releases/download/v0.3.0-alpha.1/SHA256SUMS.txt)
+**下載 v0.3.0-alpha.2：** [Release 說明與下載](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.2) · [原始碼 ZIP](https://github.com/JShengP/depthport/releases/download/v0.3.0-alpha.2/depthport-0.3.0-alpha.2-source.zip) · [SHA-256 校驗檔](https://github.com/JShengP/depthport/releases/download/v0.3.0-alpha.2/SHA256SUMS.txt)
 
-前一版：[v0.2 Alpha — 空間分析](https://github.com/JShengP/depthport/releases/tag/v0.2.0-alpha.1)。版本歷程見 [Changelog](CHANGELOG.md)，後續驗收見[路線圖](ROADMAP.md)。
+前一個 v0.3 封裝：[v0.3.0-alpha.1](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.1)。前一代：[v0.2 Alpha — 空間分析](https://github.com/JShengP/depthport/releases/tag/v0.2.0-alpha.1)。版本歷程見 [Changelog](CHANGELOG.md)，後續驗收見[路線圖](ROADMAP.md)。
 
 下載包僅含公開原始碼，Python 依賴與預訓練模型權重需另行安裝。
 
-main 另含 Alpha 發布後的依賴／文件更新；已發布套件固定在版本 Tag，下載時請以該 Release 的校驗檔為準。
+Alpha.2 納入已驗證的 Pages／FastAPI／Hub／DA3 相容性更新與各版流程圖；沒有新增推論或實機驗收。已發布套件固定在版本 Tag，下載時請以該 Release 的校驗檔為準。
 
 ## 版本導覽
 
@@ -41,7 +41,7 @@ DepthPort 整合既有預訓練模型，**不是新的深度網路或研究模�
 
 *截圖來自實際 UI 的合成測試資料；不是由相機或 AI 模型產生的點雲。*
 
-> **狀態：** `v0.3.0-alpha.1` 是 **Alpha Pre-release／實驗性開發預覽**。Session 預設關閉，僅供本機明確啟用。應用與模型 API 安裝相容性 CI 不等於預訓練推論或實機驗收；長遮擋恢復、實體 RTSP、Windows 真權重／worker 整合、長時穩定性與標定距離精度仍待驗證。詳見[驗證紀錄](docs/zh-TW/validation.md)與[本版說明](docs/releases/0.3.0-alpha.1.md)。
+> **狀態：** `v0.3.0-alpha.2` 是 **Alpha Pre-release／實驗性開發預覽**。Session 預設關閉，僅供本機明確啟用。應用與模型 API 安裝相容性 CI 不等於預訓練推論或實機驗收；長遮擋恢復、實體 RTSP、Windows 真權重／worker 整合、長時穩定性與標定距離精度仍待驗證。詳見[驗證紀錄](docs/zh-TW/validation.md)與[本版說明](docs/releases/0.3.0-alpha.2.md)。
 
 ## v0.3 — Session、回放與離線追蹤
 

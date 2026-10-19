@@ -1,6 +1,11 @@
 # Validation record
 [繁體中文](../zh-TW/validation.md) · [Home](../../README.md)
 
+
+## v0.3.0-alpha.2 packaging — 2026-10-19
+
+Alpha.2 packages the reviewed dependency/Pages changes and version illustrations described below. [Release scope and remaining gates](../releases/0.3.0-alpha.2.md). The reviewed integration commit `09c1f8a` passed [4 application jobs](https://github.com/JShengP/depthport/actions/runs/39211080641), [4 real model API import jobs without weights](https://github.com/JShengP/depthport/actions/runs/39211203960), and [Pages build/deployment](https://github.com/JShengP/depthport/actions/runs/39211229203). Exact packaging-commit checks and download checksums are linked from the Release. No new pretrained inference, physical-camera or tracking-quality acceptance was performed.
+
 ## Post-Alpha dependency and visual follow-up — 2026-10-19
 
 [Curated dependency record](../validation/v0.3-dependency-followup.json) records sequential PR #10/#13/#17/#18 validation, actual Pages metadata/deployment, minimum-version local checks and exact-head CI links. The repaired NumPy 1 profile defers SciPy 1.18.x and plyfile 1.1.4; the worker remains isolated. Checks install/import actual APIs without pretrained inference and do not close tracking/hardware/accuracy acceptance.

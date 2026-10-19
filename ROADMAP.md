@@ -1,6 +1,6 @@
 # Roadmap / 路線圖
 
-Updated / 更新：2026-10-19 · [v0.3 Alpha notes / 版本說明](docs/releases/0.3.0-alpha.1.md) · [Changelog / 歷程](CHANGELOG.md)
+Updated / 更新：2026-10-19 · [v0.3 Alpha notes / 版本說明](docs/releases/0.3.0-alpha.2.md) · [Changelog / 歷程](CHANGELOG.md)
 
 Priorities are acceptance gates, not promised deadlines. v0.3 Alpha remains an **experimental development preview**; publishing source is not product or hardware acceptance.
 以下為驗收優先順序，不承諾期限。v0.3 Alpha 維持**實驗性開發預覽**，發布程式不等於產品或實機驗收。

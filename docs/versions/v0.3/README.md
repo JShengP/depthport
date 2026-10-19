@@ -4,7 +4,7 @@
 
 **Alpha pre-release / experimental development preview — Alpha 預發行版／實驗性開發預覽**
 
-[v0.3.0-alpha.1 Release](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.1) · [exact source / 對應程式](https://github.com/JShengP/depthport/tree/v0.3.0-alpha.1) · [bilingual release notes / 雙語版本說明](../../releases/0.3.0-alpha.1.md)
+[v0.3.0-alpha.2 Release](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.2) · [exact source / 對應程式](https://github.com/JShengP/depthport/tree/v0.3.0-alpha.2) · [bilingual release notes / 雙語版本說明](../../releases/0.3.0-alpha.2.md)
 
 
 ## Visual overview / 視覺導覽
@@ -13,7 +13,7 @@
 
 *程式生成的功能示意圖；不是實際 UI 截圖、模型輸出或追蹤品質證據。 / Generated schematic data, not an application screenshot, model output or tracking benchmark.*
 
-The maintained guide and illustrations can be newer than the tagged snapshot; the original release/source links above stay fixed.
+Alpha.2 packages the reviewed dependency compatibility updates and workflow illustrations. Earlier [Alpha.1](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.1) stays available; each tag preserves its own source. The maintained guide may evolve after release.
 本導覽與插圖可隨文件維護更新，對應舊版本的原始碼與原版 README 仍以各自 Tag 為準。
 
 ## Changes from v0.2 / 相對 v0.2 新增

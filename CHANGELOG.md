@@ -1,13 +1,13 @@
 # Changelog / 版本紀錄
 
-## Unreleased — main after v0.3.0-alpha.1 / 發布後的 main 更新
+## 0.3.0-alpha.2 — 2026-10-19 (experimental Alpha pre-release)
 
 - Merge reviewed PRs #10/#13/#17/#18 sequentially after exact-head validation: configure-pages v6 with real metadata/deployment checks; FastAPI minimum 0.143.2; shared Hub minimum 0.36.2; NumPy 1-compatible DA3 geometry bounds.
 - Keep SciPy on `>=1.17.1,<1.18` and plyfile on `>=1.1.3,<1.1.4`; NumPy 2-only updates remain deferred. e3nn/Trimesh compatible floors are 0.5.9/4.12.2. No inference/accuracy claim or tracking-default change.
-- Add a version comparison SVG, per-version generated workflow illustrations, provenance and a standard-library builder. These are schematics, not screenshots or model output. Published tags and release assets remain unchanged.
-- 依序驗證並合併 Pages／FastAPI／Hub／幾何依賴更新，保留 NumPy 1 深度應用及獨立 NumPy 2 worker；新增各版功能圖與來源說明。已發布 Alpha Tag／下載包不變，待驗證項目與原預設保留。
+- Add a version comparison SVG, per-version generated workflow illustrations, provenance and a standard-library builder. These are schematics, not screenshots or model output. Earlier published tags and release assets remain unchanged.
+- 依序驗證並合併 Pages／FastAPI／Hub／幾何依賴更新，保留 NumPy 1 深度應用及獨立 NumPy 2 worker；新增各版功能圖與來源說明。既有 Alpha.1 Tag／下載包不變；本批封裝為 Alpha.2，待驗證項目與原預設保留。
 
-[Curated validation record / 彙總驗證紀錄](docs/validation/v0.3-dependency-followup.json)
+[Release notes / 版本說明](docs/releases/0.3.0-alpha.2.md) · [Curated validation record / 彙總驗證紀錄](docs/validation/v0.3-dependency-followup.json)
 
 ## 0.3.0-alpha.1 — 2026-10-19 (experimental Alpha pre-release)
 

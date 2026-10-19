@@ -1,7 +1,7 @@
 # v0.3 研究版 — 手動 Session 儲存與離線回放
 [English](../en/sessions.md) · [首頁](../../README.zh-TW.md)
 
-**狀態：實驗性 Alpha 預發行版／開發預覽（v0.3.0-alpha.1），實體相機驗收仍待完成。** v0.2 Spatial Analysis 保留不變；v0.3 新增**手動、選擇啟用、僅本機**的影格封存與回放工具。它**不會**自動錄製 RTSP 影片或進行位姿補償的像素／3D 追蹤。單純回放不會重新執行深度估計；只有使用者另外按下離線追蹤分析時，才會對已保存的 RGB 影格執行 YOLO Detect／Segment。
+**狀態：實驗性 Alpha 預發行版／開發預覽（v0.3.0-alpha.2），實體相機驗收仍待完成。** v0.2 Spatial Analysis 保留不變；v0.3 新增**手動、選擇啟用、僅本機**的影格封存與回放工具。它**不會**自動錄製 RTSP 影片或進行位姿補償的像素／3D 追蹤。單純回放不會重新執行深度估計；只有使用者另外按下離線追蹤分析時，才會對已保存的 RGB 影格執行 YOLO Detect／Segment。
 
 **2026-10-17 初步驗證：** 公開影片的 24 影格 Session 流程已通過真 CUDA 深度、CPU YOLO 偵測／分割、完整性與回放；另完成含 Roboflow Trackers 的 179 影格比較。見[條件、結果與限制](tracking-evaluation.md)。這些不代表實體相機或公尺精度驗收。
 

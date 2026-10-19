@@ -11,13 +11,13 @@ English · [繁體中文](README.zh-TW.md)
 
 </div>
 
-**Download v0.3.0-alpha.1:** [Release notes & downloads](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.1) · [Source ZIP](https://github.com/JShengP/depthport/releases/download/v0.3.0-alpha.1/depthport-0.3.0-alpha.1-source.zip) · [SHA-256 checksums](https://github.com/JShengP/depthport/releases/download/v0.3.0-alpha.1/SHA256SUMS.txt)
+**Download v0.3.0-alpha.2:** [Release notes & downloads](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.2) · [Source ZIP](https://github.com/JShengP/depthport/releases/download/v0.3.0-alpha.2/depthport-0.3.0-alpha.2-source.zip) · [SHA-256 checksums](https://github.com/JShengP/depthport/releases/download/v0.3.0-alpha.2/SHA256SUMS.txt)
 
-Previous release: [v0.2 Alpha — Spatial Analysis](https://github.com/JShengP/depthport/releases/tag/v0.2.0-alpha.1). See the [Changelog](CHANGELOG.md) and [remaining acceptance roadmap](ROADMAP.md).
+Previous v0.3 package: [v0.3.0-alpha.1](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.1). Earlier generation: [v0.2 Alpha — Spatial Analysis](https://github.com/JShengP/depthport/releases/tag/v0.2.0-alpha.1). See the [Changelog](CHANGELOG.md) and [remaining acceptance roadmap](ROADMAP.md).
 
 The download contains public source only; Python dependencies and pretrained model weights must be installed separately.
 
-main also contains post-Alpha dependency/documentation updates. Published packages stay fixed at their version tags and release checksums.
+Alpha.2 includes the reviewed Pages/FastAPI/Hub/DA3 compatibility updates and version workflow illustrations. It adds no new inference or hardware acceptance; published packages stay fixed at their version tags and release checksums.
 
 ## Version guide / 版本導覽
 
@@ -41,7 +41,7 @@ DepthPort integrates existing pretrained models; it does **not** introduce a new
 
 *Screenshot: the actual UI showing synthetic test data. No camera or AI model produced this point cloud.*
 
-> **Status:** `v0.3.0-alpha.1` is an **Alpha pre-release / experimental development preview**. Session storage defaults off and requires explicit local enablement. Application/model API installation CI is not pretrained inference or hardware acceptance. Long-occlusion recovery, physical RTSP, Windows pretrained inference/worker integration, endurance and calibrated distance accuracy remain open. Read the [validation record](docs/en/validation.md) and [release notes](docs/releases/0.3.0-alpha.1.md).
+> **Status:** `v0.3.0-alpha.2` is an **Alpha pre-release / experimental development preview**. Session storage defaults off and requires explicit local enablement. Application/model API installation CI is not pretrained inference or hardware acceptance. Long-occlusion recovery, physical RTSP, Windows pretrained inference/worker integration, endurance and calibrated distance accuracy remain open. Read the [validation record](docs/en/validation.md) and [release notes](docs/releases/0.3.0-alpha.2.md).
 
 ## v0.3 — Sessions, Replay & Offline Tracking
 

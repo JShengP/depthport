@@ -1,7 +1,7 @@
 # 維護者版本發布指南
 [English](../en/publishing.md) · [首頁](../../README.zh-TW.md)
 
-目前版本為 [v0.3.0-alpha.1](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.1)，維持 **Alpha 預發行版／實驗性開發預覽**；[v0.2 Alpha](https://github.com/JShengP/depthport/releases/tag/v0.2.0-alpha.1)保留供比較。本頁供後續維護使用；發布版本不表示所有驗收項目通過。
+目前版本為 [v0.3.0-alpha.2](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.2)，維持 **Alpha 預發行版／實驗性開發預覽**；[v0.2 Alpha](https://github.com/JShengP/depthport/releases/tag/v0.2.0-alpha.1)保留供比較。本頁供後續維護使用；發布版本不表示所有驗收項目通過。
 
 ## 建立標籤前的確認
 
@@ -30,14 +30,14 @@ git fetch origin
 git switch main
 git pull --ff-only
 # 僅示例，請依實際版本替換，並確認 VERSION 一致。
-TAG=v0.3.0-alpha.2
+TAG=v0.3.0-alpha.3
 git tag -a "$TAG" -m "DepthPort $TAG"
 git push origin "$TAG"
 python tools/build_release.py
 # 發布前檢查 dist/ 與雙語版本說明。
 gh release create "$TAG" --verify-tag --prerelease --title "DepthPort $TAG" \
   --notes-file path/to/reviewed-bilingual-release-notes.md \
-  dist/depthport-0.3.0-alpha.2-source.zip dist/SHA256SUMS.txt
+  dist/depthport-0.3.0-alpha.3-source.zip dist/SHA256SUMS.txt
 ```
 
 不要在未合併 Draft PR 的情況下執行，也不要強制覆寫既有 Tag／Release。[package workflow](../../.github/workflows/package.yml) 僅產生可下載的 artifact，**不會自動發布 Release**。

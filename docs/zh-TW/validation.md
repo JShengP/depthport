@@ -1,6 +1,11 @@
 # 驗證紀錄
 [English](../en/validation.md)・[首頁](../../README.zh-TW.md)
 
+
+## v0.3.0-alpha.2 封裝 — 2026-10-19
+
+Alpha.2 封裝下列已驗證的依賴／Pages 更新與各版流程圖。[本版範圍與未驗證項目](../releases/0.3.0-alpha.2.md)。整合提交 `09c1f8a` 已通過[應用 4 項](https://github.com/JShengP/depthport/actions/runs/39211080641)、[真模型 API 匯入 4 項（無權重）](https://github.com/JShengP/depthport/actions/runs/39211203960)與 [Pages 建置／部署](https://github.com/JShengP/depthport/actions/runs/39211229203)。封裝提交的實際 CI 與下載校驗檔由 Release 提供；本次沒有新增真權重推論、實體相機或追蹤品質驗收。
+
 ## Alpha 發布後的依賴與視覺導覽 — 2026-10-19
 
 [依賴彙總紀錄](../validation/v0.3-dependency-followup.json)記錄依序處理 #10／#13／#17／#18、Pages 實際設定／部署、最低版本本機檢查與精確提交 CI。修正後 NumPy 1 配方暫緩 SciPy 1.18.x／plyfile 1.1.4，worker 維持隔離；真 API 安裝／匯入不執行權重推論，也不代表追蹤／實機／精度驗收。
