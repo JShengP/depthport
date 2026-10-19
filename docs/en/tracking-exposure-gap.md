@@ -1,5 +1,7 @@
 # Exposure-gap diagnosis on frozen histories — 2026-10-19
 
+Follow-up: [Frozen read-only prediction, birth and expiry observation](tracking-upstream-lifecycle.md) now completes the proposed KITTI reference telemetry with original canonical output equality. This report retains the earlier no-rerun historical diagnosis.
+
 [繁體中文](../zh-TW/tracking-exposure-gap.md) · [ROADMAP](../../ROADMAP.md) · [Source discovery/confirmation](tracking-past-exposure.md) · [Definitions](../validation/v0.3-exposure-gap-protocol.json) · [Aggregate](../validation/v0.3-exposure-gap.json) · [Buffer erratum](../validation/v0.3-buffer-semantics-erratum.json)
 
 **The KITTI gap occurs before the intervention's accepted missed-row weak update.** KITTI-0004 has 13 missed-row/weak-input row observations in five frames; all 13 have no column reaching the original association gate, so no original accepted opportunity exists. KITTI-0005 has 46 detections, all weak, no high-stage birth seed and no hypothesis rows to continue. Neither source reaches active-competition/past-support/protection eligibility. Their zero vetoes therefore do not show that past qualification or update protection rejected recovery, and do not establish accuracy, safe identity or efficacy.

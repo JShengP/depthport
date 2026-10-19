@@ -1,5 +1,7 @@
 # 已封存歷史的曝光落差診斷 — 2026-10-19
 
+後續：[凍結只讀預測、出生與到期觀察](tracking-upstream-lifecycle.md)已完成原先提議的KITTI參考遙測，原canonical輸出等價。本頁保留前輪未重跑追蹤的歷史診斷。
+
 [English](../en/tracking-exposure-gap.md) · [ROADMAP](../../ROADMAP.md) · [原發現／確認研究](tracking-past-exposure.md) · [Definitions](../validation/v0.3-exposure-gap-protocol.json) · [Aggregate](../validation/v0.3-exposure-gap.json) · [Buffer erratum](../validation/v0.3-buffer-semantics-erratum.json)
 
 **兩段KITTI在介入前的「已接受漏格弱更新」就沒有機會。** 0004有13個漏格假說／弱輸入列次（五格），全部沒有偵測欄過原關聯門檻；0005的46筆輸入全弱，沒有高階段出生種子及可延續假說。兩段均未進入活躍競爭、過去支援或更新保護判定，不能把零veto解釋為後兩項太嚴，更不代表精度／安全／效益驗收。

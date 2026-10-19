@@ -363,3 +363,13 @@ docs/validation/v0.3-buffer-semantics-erratum.json
 docs/en/tracking-exposure-gap.md
 docs/zh-TW/tracking-exposure-gap.md
 docs/assets/tracking-v03-exposure-gap.png
+
+# Frozen read-only KITTI prediction / birth / expiry observation
+depthport/tracking_lifecycle_probe.py
+depthport/tracking_upstream_diagnostics.py
+tools/diagnose_tracking_upstream.py
+tests/test_tracking_lifecycle_probe.py
+docs/validation/v0.3-upstream-lifecycle-protocol.json
+docs/validation/v0.3-upstream-lifecycle.json
+docs/en/tracking-upstream-lifecycle.md
+docs/zh-TW/tracking-upstream-lifecycle.md
