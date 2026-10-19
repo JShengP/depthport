@@ -385,3 +385,15 @@ docs/validation/v0.3-state-observation-health.json
 docs/validation/v0.3-state-observation-health-publication.json
 docs/en/tracking-state-observation-health.md
 docs/zh-TW/tracking-state-observation-health.md
+
+# Frozen numerical shadow replay and independent high-stage assignment audit
+depthport/tracking_estimator_shadow.py
+depthport/tracking_shadow_analysis.py
+depthport/tracking_high_assignment_audit.py
+tools/audit_tracking_estimator_shadow.py
+tests/test_tracking_estimator_shadow.py
+tests/test_tracking_high_assignment_audit.py
+docs/validation/v0.3-estimator-shadow-protocol.json
+docs/validation/v0.3-estimator-shadow.json
+docs/en/tracking-estimator-shadow.md
+docs/zh-TW/tracking-estimator-shadow.md

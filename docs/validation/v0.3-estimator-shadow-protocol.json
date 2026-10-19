@@ -1,0 +1,74 @@
+{
+  "format": "depthport.estimator-shadow-protocol.v1",
+  "frozen_at_utc": "2026-10-19T17:15:23.253273+00:00",
+  "report_date_local": "2026-10-20",
+  "report_timezone": "Asia/Taipei",
+  "base_commit": "29e0c4a2864fd7e134723e554a0504f3e59d7d5d",
+  "status": "Local freeze after synthetic/native contracts, before new internal-state replay or assignment-case extraction. Four first prediction failures and five terminal high-gate/unaccepted row frames are already known aggregate findings. Two seen sources, retrospective diagnosis, not independent confirmation or external preregistration.",
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv-python": "4.11.0.86",
+    "trackers": "2.6.1",
+    "supervision": "0.27.0",
+    "scipy": "1.18.1"
+  },
+  "upstream_sha256": {
+    "tracker": "7ea61408b4908da327ba992f09450865bb16019ab95bed23a512e5c03bef8fda",
+    "tracklet": "66c4b84cb28b1b2abd9b288b2b0f594814e4eb11d55ac8c295386415da022885",
+    "base_tracker": "64813fbf4b6441080b005a99f2908c137435107d54eaaab6bf8625a54395e948",
+    "base_tracklet": "96e4d4a01064b15f178e190e80a88bb8bbed38476a275b7d659181532a21e8d8",
+    "alive": "345242f72dc5fb43b70953546dde8b66759377f6c63ed91d1995c320affb5f84",
+    "estimator": "fe8abe96d398685abe2055a78e51f2f9906522877c5130b1d476ee3dc8c0fff0",
+    "iou": "e7d7de78643ed864f195915c009d400e02b8d3e57159f6aaa90d707f7f1bd4f0",
+    "box_iou": "d9fac5e31c8bbfc6e7c8d16a91cd49eec11cfe0e7d4ef2c3da286997c53a6b63"
+  },
+  "numerical_modules_sha256": {
+    "kalman_filter_module": "ba812be3e00fd0386feb48eea5f6c2665a31af925cba28acd4c0d946d300adc2",
+    "motion_models_module": "ccb9b99030ba13c46d8769176d21206380339cdadac8e4d20b8f22f51d3130c3",
+    "state_representations_module": "7db45970850783bd1da31cdc3371fa8a3a5615267b29df9018152946de945b0d",
+    "scipy_lsap_binary": "67871ca804df8da4fadf4e9238ea0536d92ff0915ddae885b368c65ce43e5b3f"
+  },
+  "implementation_sha256": {
+    "depthport/tracking_estimator_shadow.py": "a159fd6803ba542ed59479b1afaeb5af0fa3a0552c4949e0eb0fcec9c92ed1d3",
+    "depthport/tracking_shadow_analysis.py": "d28280ec149add4c0aacd01884423ae2b44dd8dd3b36fc06f5aa7847e4251f1b",
+    "depthport/tracking_high_assignment_audit.py": "232252374c7c08a14156b0d6a525146390f043d4294d9bf1c3c0023dd0871357",
+    "tools/audit_tracking_estimator_shadow.py": "66d472a8b91e845ac060bf03f14a0477e9c0fc0d8edad8acb31d7fe7cdac6a72",
+    "tests/test_tracking_estimator_shadow.py": "336ecc395f2607c06688fbf95ab9fc89658a016a321f43f87f72197120890c80",
+    "tests/test_tracking_high_assignment_audit.py": "5362f961c7adb3a78faf87d1090dd4d7ad7cc43ccf675479c07c7235f1524c49"
+  },
+  "source_records_sha256": {
+    "docs/validation/v0.3-upstream-lifecycle.json": "ac5296ab6edf4810d48e41f03b3fdd43697b9641f7554fcb700435ee535e3380",
+    "docs/validation/v0.3-state-observation-health-protocol.json": "4af6002d8f9624c73a7e3623469df7e912ddfed705ccdec35963bff5a09179f3",
+    "docs/validation/v0.3-state-observation-health.json": "0c394d70a6a19869bb1e5d533743f7465af50e8d45ce4781467fa633aee6f967",
+    "docs/validation/v0.3-state-observation-health-publication.json": "f443ea0a7e47530f96760dc94333e6ba144bcc464329854ba0db556ade6c10b2",
+    "docs/validation/v0.3-upstream-lifecycle-protocol.json": "d296d92d0e595c3f53ab9ce727a8cb0e8522007c8f7cd484d74f57f097467a72",
+    "docs/validation/v0.3-past-exposure-protocol.json": "573b76a8019ce5bb069a6140d2070c26ca7c4071dace026dcef3ea8eba255082",
+    "docs/validation/v0.3-past-exposure-confirmation.json": "1e19153d2964e5dae07dedcf8c1ca4ed7df4d45a2f57609ab609a44a4ee984f1",
+    "docs/validation/v0.3-past-exposure-confirmation-inputs.json": "bda4cfdb16883431c38eccf6696d11d6610a26ee6cec16a2ad7fdb05b1ab21b1"
+  },
+  "sources": [
+    "KITTI-0004",
+    "KITTI-0005"
+  ],
+  "frames": 611,
+  "parameters": {
+    "track_activation_threshold": 0.3,
+    "high_conf_det_threshold": 0.6,
+    "lost_track_buffer": 30,
+    "minimum_consecutive_frames": 2
+  },
+  "original_prediction_bytes_sha256": {
+    "KITTI-0004": "ee3db3886f6534d16cb6534b61f4b7d9c8f2412a9c408920e9603bfcc51dc4cd",
+    "KITTI-0005": "0d704e9320a06f8db05b3557c49025921ee7769cdffc6431e3425601f1ff66fa"
+  },
+  "definitions": {
+    "execution": "Three full isolated processes/source, OpenCV one thread/seed0: unhooked native reference, LifecycleProbe plus numerical shadow twice. Original float32 caches, dense decoded original frames, fps10 and all settings unchanged. Pin prior frozen helpers and original source/cache locks. Complete saved confirmed JSON bytes (including IDs), complete native outputs, final native pickle hashes must equal original sealed files; observed lifecycle hashes equal original, numerical bytes and both independent audits repeat exactly. All zeros/failures retained, no retries/reselection.",
+    "shadow": "Enter numerical observer after unchanged lifecycle observer. Copy native estimator at every birth; retain detached copy across all subsequent frames including misses. Before every live operation compare full kf/motion state to shadow; forward exact original arguments/result once; replay same operation on detached copy only; require complete dtype/shape/value equality of all kf arrays and motion caches before/after. Temporary instance estimator hooks removed in finally; tracker hooks restored on exit. No global patch, solver, live estimator, constructor, birth, prune or app modification.",
+    "numerical": "All births, all prediction and accepted update operations, not just four cases. Exact F*x and F*P*F.T+Q reconstruction for each prediction. Finite arrays required (failure ledger if not). Covariance P/Q/R symmetry maxabs<=1e-10 and symmetrized eigenminimum>=-1e-10 are fixed diagnostic screens, never repair/acceptance tolerances. Save means, coordinate velocities, P/F/H/Q/R, prior/post, gain/innovation/S and full motion/noise caches locally. Match each known first prediction event to prior health raw seal; compare immediately previous dimensions, dimension velocity differences, last accepted update before/after velocity, unchanged missed-interval velocity and last-posterior dimensions+native-gap*velocity (absolute scalar rearrangement tolerance1e-10; native shadow remains exact). Distinguish inherited from newly introduced shrink; prediction linearity does not establish identity correctness or valid unconstrained shape.",
+    "assignment": "Independent sealed-lifecycle traversal, without numerical replay output. Reproduce every high_all original whole-matrix SciPy maximize assignment then >=.1 gate and unmatched partitions exactly. Select all expired terminal row frames after last accepted/seed through removal with any high score>=.1; reconcile exactly prior health terminal exposure count (known5/0). Distinguish unassigned rectangular from raw-assigned below gate. For every gate-supported edge record raw owner unused/active(age1)/retained(age>1), confirmation and accepted update. Force that edge using reduced whole-matrix assignment with same full cardinality, original objective minus forced objective (exact signed arithmetic, no fitted tolerance), gate count change and lost accepted row membership. Retain all candidate edges; never install alternatives, infer identity, call them false tracks, or equate score loss with harm.",
+    "decision": "No intervention installed. Decide whether numerical model or assignment mechanics need separately frozen causal controls only after both complete ledgers. Positive covariance/boxes and objective preference are not quality/harm acceptance. No detector, duration, threshold, representation, control/default or weak-continuation change.",
+    "publication": "Only fixed aggregate counts, check denominators/failures, whole-source input/output/code/runtime seals and equality flags. No frame positions, tokens/IDs, boxes, state vectors/matrices/velocities, individual case costs, exact boundary/censor distances, accepted histories, media, labels, raw outputs/pickles or local paths. Keep complete raw records under ignored artifacts, do not project a partial case selection. Include all zero branches and failures."
+  },
+  "forbidden": "No GT, annotation files, accuracy scores/evaluator, new inference, tuning, new sources/windows, source reselection, input filtering or app integration. Preserve weak continuation.",
+  "terms": "KITTI terms/attribution inherited from original past-exposure source protocol; local noncommercial research only, no media/GT/raw redistribution or dataset relicensing."
+}

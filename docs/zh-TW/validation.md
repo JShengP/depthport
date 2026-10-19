@@ -1,6 +1,10 @@
 # 驗證紀錄
 [English](../en/validation.md)・[首頁](../../README.zh-TW.md)
 
+## 數值影子重播與獨立高階段指派 — 2026-10-20
+
+[定義、結果與介入決定](tracking-estimator-shadow.md) · [凍結](../validation/v0.3-estimator-shadow-protocol.json) · [彙總](../validation/v0.3-estimator-shadow.json)。完整611原格／六次隔離執行，完整參考JSON位元、原生輸出／最終狀態與原生命週期封存一致。0004：124操作與影子精確相同、四個首次異常符合角點持續縮小速度，數值檢查失敗0。另獨立稽核五個高階段列，四個矩形未配對、一個低於gate；候選皆已有活躍確認owner，強制改配降低目標值、置換更新對象但未增加接受數。0005無估計器曝光。不讀GT、不推論、不調參或介入；下一步凍結mean／covariance一致的預測幾何有效性及逐場景傷害門檻，弱延續／預設不變，原state／病例本機。相關契約181通過，主程式455通過／61選配略過。
+
 ## 狀態估計與觀測健康 — 2026-10-20
 
 [完整凍結稽核／決定](tracking-state-observation-health.md) · [定義](../validation/v0.3-state-observation-health-protocol.json) · [彙總](../validation/v0.3-state-observation-health.json) · [公開投影](../validation/v0.3-state-observation-health-publication.json)。完整611原格，不重跑推論／追蹤、不讀GT／分數、不調參。0004有4個首次異常預測，距有效接受輸入／posterior4／7／8／11格，全母體18次異常預測列，異常接受posterior為0；終端52／77列格無輸入，5個高階段有gate支援未接受、弱gate支援0。0005無初始化。原參考JSON逐位元／原生雜湊、268階段及前輪計數核對，兩次稽核／原始檔一致。精確截尾邊界距離本機、截尾次數／零值皆保留；下一步分別凍結數值影子重播與高階段一對一指派稽核，不宣稱修復或驗收，弱延續／預設不變。

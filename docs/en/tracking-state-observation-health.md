@@ -2,6 +2,8 @@
 
 [繁體中文](../zh-TW/tracking-state-observation-health.md) · [ROADMAP](../../ROADMAP.md) · [Earlier lifecycle diagnosis](tracking-upstream-lifecycle.md) · [Definitions](../validation/v0.3-state-observation-health-protocol.json) · [Public aggregate](../validation/v0.3-state-observation-health.json) · [Publication projection](../validation/v0.3-state-observation-health-publication.json)
 
+**Follow-up — 2026-10-20:** The separately [frozen numerical shadow and independent assignment audit](tracking-estimator-shadow.md) is now complete: all native seals unchanged, four constant corner-velocity collapses, five occupied high-stage edges that would displace accepted updates. This earlier audit and its sealed results remain unchanged; the next candidate is a separately frozen prediction-geometry validity control.
+
 **Four hypotheses first acquire non-positive dimensions during prediction after an accepted update, while most terminal row frames lack any input.** This locates an operation and an observation-availability gap; it does not establish a numerical Kalman root cause, correct physical identity, or a safe intervention. Current parameters, controls, defaults and weak continuation remain unchanged.
 
 ## Frozen scope and equality

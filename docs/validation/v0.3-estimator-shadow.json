@@ -1,0 +1,189 @@
+{
+  "format": "depthport.estimator-shadow-public.v1",
+  "protocol_sha256": "a339cfbc3d7f7fab688c7f7419173e7ae71b198471f682959b2a7c2a97514624",
+  "gt_read": false,
+  "accuracy_scoring": false,
+  "inference": false,
+  "retuned": false,
+  "intervention": false,
+  "weak_continuation_changed": false,
+  "all_scheduled_completed": true,
+  "ledger": [
+    {
+      "name": "KITTI-0004",
+      "frames": 314,
+      "status": "completed",
+      "assignment_status": "completed",
+      "assignment": {
+        "high_stages": 95,
+        "cases": 5,
+        "candidate_edges": 5,
+        "unassigned_rectangular": 4,
+        "assigned_below_gate": 1,
+        "owner_accepted": 5,
+        "owner_unused": 0,
+        "owner_active": 5,
+        "owner_retained": 0,
+        "owner_confirmed": 5,
+        "owner_tentative": 0,
+        "objective_loss_positive": 5,
+        "objective_loss_zero": 0,
+        "objective_loss_negative": 0,
+        "forced_acceptance_fewer": 0,
+        "forced_acceptance_equal": 5,
+        "forced_acceptance_more": 0,
+        "forced_loses_accepted_row": 5
+      },
+      "raw_assignment_sha256": "dbb13677e2984ab4d15da90f98299a5767df387e7b8e2dff6778d8ee5d0f631f",
+      "source_lock": {
+        "name": "KITTI-0004",
+        "video_sha256": "673ed7ef252c1e9e1c8bcf55c140404f628015f040a51647cde8afa44f0c1702",
+        "cache_sha256": [
+          "a58da9bd2a8b7eaffce017e156890145a5a119113f36ede49e165857ea09589b"
+        ],
+        "frames": 314,
+        "fps": 10,
+        "resolution": [
+          1242,
+          375
+        ],
+        "cache_shards": 1,
+        "cached_detections": 191,
+        "capped_frames": 0
+      },
+      "original_prediction_bytes_equal": true,
+      "original_native_output_equal": true,
+      "original_final_state_equal": true,
+      "original_lifecycle_equal": true,
+      "numerical_and_independent_assignment_repeat_equal": true,
+      "original_health_cases_reconciled": true,
+      "output_sha256": {
+        "predictions.local.json": "ee3db3886f6534d16cb6534b61f4b7d9c8f2412a9c408920e9603bfcc51dc4cd",
+        "native-output.local.json": "4be08fe5362c40f278f991219fad4c05a3aa77402172a6e4a1cad9e6ad528764",
+        "final-state.local.pickle": "15a16e8f4d8595d03202b6925cb6a99e18e5afbf493af0b04e7975304434c556",
+        "lifecycle.local.jsonl": "f90a696cea261e41af4bb71e17ef865bfcfeb5b3249ea6f385fbc7784d3e799e",
+        "numerical.local.jsonl": "5e75af590428d9cd4c1c1d70c882c88c60addb2a124c3892b99182d713e96215"
+      },
+      "raw_cases_sha256": "935bcfb2dbd59fb4780f9542e563a8be4b9fec1f489b7067b10f80b6d3bb84ec",
+      "numerical": {
+        "counts": {
+          "frames": 314,
+          "births": 10,
+          "predictions": 102,
+          "updates_high": 17,
+          "updates_weak": 5,
+          "shadow_operation_equal": 124,
+          "first_cases": 4,
+          "first_width": 2,
+          "first_height": 2,
+          "first_both": 0,
+          "first_previous_positive": 4,
+          "first_negative_dimension_velocity": 4,
+          "first_velocity_unchanged_since_update": 4,
+          "first_matches_last_posterior_linear_projection": 4,
+          "first_inherited_shrink": 1,
+          "first_update_introduced_shrink": 3
+        },
+        "numerical_check_denominators": {
+          "covariance_algebra_exact": 102,
+          "mean_algebra_exact": 102,
+          "measurement_noise_psd": 124,
+          "measurement_noise_symmetric": 124,
+          "process_noise_psd": 124,
+          "process_noise_symmetric": 124,
+          "state_covariance_psd": 124,
+          "state_covariance_symmetric": 124
+        },
+        "numerical_check_failures": {
+          "covariance_algebra_exact": 0,
+          "mean_algebra_exact": 0,
+          "measurement_noise_psd": 0,
+          "measurement_noise_symmetric": 0,
+          "process_noise_psd": 0,
+          "process_noise_symmetric": 0,
+          "state_covariance_psd": 0,
+          "state_covariance_symmetric": 0
+        }
+      }
+    },
+    {
+      "name": "KITTI-0005",
+      "frames": 297,
+      "status": "completed",
+      "assignment_status": "completed",
+      "assignment": {
+        "high_stages": 39,
+        "cases": 0,
+        "candidate_edges": 0,
+        "unassigned_rectangular": 0,
+        "assigned_below_gate": 0,
+        "owner_accepted": 0,
+        "owner_unused": 0,
+        "owner_active": 0,
+        "owner_retained": 0,
+        "owner_confirmed": 0,
+        "owner_tentative": 0,
+        "objective_loss_positive": 0,
+        "objective_loss_zero": 0,
+        "objective_loss_negative": 0,
+        "forced_acceptance_fewer": 0,
+        "forced_acceptance_equal": 0,
+        "forced_acceptance_more": 0,
+        "forced_loses_accepted_row": 0
+      },
+      "raw_assignment_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "source_lock": {
+        "name": "KITTI-0005",
+        "video_sha256": "860e56b5dbb670d877aeb4fba5921a284b09e86619f0cbdf15e36abd6f025260",
+        "cache_sha256": [
+          "083e71126bc87368db4b294b1f8c602ddbf5be24497a1da525b9d5a547be6520"
+        ],
+        "frames": 297,
+        "fps": 10,
+        "resolution": [
+          1242,
+          375
+        ],
+        "cache_shards": 1,
+        "cached_detections": 46,
+        "capped_frames": 0
+      },
+      "original_prediction_bytes_equal": true,
+      "original_native_output_equal": true,
+      "original_final_state_equal": true,
+      "original_lifecycle_equal": true,
+      "numerical_and_independent_assignment_repeat_equal": true,
+      "original_health_cases_reconciled": true,
+      "output_sha256": {
+        "predictions.local.json": "0d704e9320a06f8db05b3557c49025921ee7769cdffc6431e3425601f1ff66fa",
+        "native-output.local.json": "886340c209d788bf8d9abefe4ebd56d6390ff389b50e48a73b076bc3d55c3b87",
+        "final-state.local.pickle": "4a45361ac779b794f8347421a25169432a13b24713477d78bdb4de31577d7675",
+        "lifecycle.local.jsonl": "3c8926c42199f6e1353284c3d334c65a9b3cd38d5dba8262a39e0569b28171da",
+        "numerical.local.jsonl": "1778b2c98650d318fb6a17542092496bac6792a2a62d236c8aea9bfd79b7e7b7"
+      },
+      "raw_cases_sha256": "7fb3156db2663900a042c05a3517f452e94f3a12cdf1ae052fbc3c0c97965635",
+      "numerical": {
+        "counts": {
+          "frames": 297,
+          "births": 0,
+          "predictions": 0,
+          "updates_high": 0,
+          "updates_weak": 0,
+          "shadow_operation_equal": 0,
+          "first_cases": 0,
+          "first_width": 0,
+          "first_height": 0,
+          "first_both": 0,
+          "first_previous_positive": 0,
+          "first_negative_dimension_velocity": 0,
+          "first_velocity_unchanged_since_update": 0,
+          "first_matches_last_posterior_linear_projection": 0,
+          "first_inherited_shrink": 0,
+          "first_update_introduced_shrink": 0
+        },
+        "numerical_check_denominators": {},
+        "numerical_check_failures": {}
+      }
+    }
+  ]
+}

@@ -2,6 +2,8 @@
 
 [English](../en/tracking-state-observation-health.md) · [ROADMAP](../../ROADMAP.md) · [前輪生命週期診斷](tracking-upstream-lifecycle.md) · [凍結定義](../validation/v0.3-state-observation-health-protocol.json) · [公開彙總](../validation/v0.3-state-observation-health.json) · [公開投影紀錄](../validation/v0.3-state-observation-health-publication.json)
 
+**後續 — 2026-10-20：** 另行[凍結的數值影子與獨立指派稽核](tracking-estimator-shadow.md)已完成：原生封存不變、四個固定角點速度尺寸崩落，五條占用高階段邊若強制改配會置換既有更新。本篇與封存結果保留；下一候選為另凍結預測幾何有效性控制。
+
 **4個假說在接受更新之後，首次於預測階段出現非正寬高；多數終端列格則完全沒有輸入。** 這定位了操作階段與觀測可用性落差，不能判定內部Kalman數值根因、物理身分正確性或安全介入。現行參數、控制、預設與弱偵測延續不變。
 
 ## 凍結範圍與輸出等價
