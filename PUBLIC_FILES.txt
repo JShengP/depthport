@@ -528,3 +528,8 @@ docs/zh-TW/pages-browser-compatibility.md
 
 # Independent headless browser follow-up
 docs/validation/pages-standalone-plan.json
+tools/pages_browser_acceptance.py
+requirements-browser-tests.txt
+docs/en/pages-standalone-browsers.md
+docs/zh-TW/pages-standalone-browsers.md
+docs/validation/pages-standalone-acceptance.json

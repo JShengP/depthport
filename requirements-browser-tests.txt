@@ -1,0 +1,3 @@
+# Optional standalone browser acceptance only; never install into the app env.
+selenium==4.51.0
+pillow==13.0.0
