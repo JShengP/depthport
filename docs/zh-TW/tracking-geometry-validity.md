@@ -1,12 +1,14 @@
 # 預測幾何有效性保護控制 — 2026-10-20
 
-[English](../en/tracking-geometry-validity.md) · [ROADMAP](../../ROADMAP.md) · [前輪數值／指派診斷](tracking-estimator-shadow.md) · [凍結定義](../validation/v0.3-geometry-validity-protocol.json)
+[English](../en/tracking-geometry-validity.md) · [ROADMAP](../../ROADMAP.md) · [前輪數值／指派診斷](tracking-estimator-shadow.md) · [凍結定義](../validation/v0.3-geometry-validity-protocol.json) · [原生參考封存](../validation/v0.3-geometry-validity-references.json) · [完整結果](../validation/v0.3-geometry-validity.json)
+
+**新來源組未通過凍結的重現門檻：**0006觸發一次，消除9列非正預測；0007沒有觸發。各場景可觀測傷害檢查都通過，仍不代表追蹤品質或身分驗收。
 
 本輪獨立控制ByteTrack預測幾何，保留原參數、輸入、高／弱階段關聯、接受量測更新與生命週期。**不接入應用程式／worker或更改預設。** 不讀GT或精度分數，可觀測傷害檢查與追蹤品質驗收分開。
 
 ## 凍結與來源分離
 
-定義雜湊為 **`733053db5e0a009ae3cdf9841b672dfaf54ff63cc3b28425b7e4f63c7b3b68fe`**。凍結前24項新合成／原生契約及20項既有數值／指派契約通過；只先讀新來源官方影像目錄metadata，尚未讀新PNG、推論輸出或控制結果。先前四個數值異常、五個指派案例皆揭露為已知證據。這是本機事前定義凍結，非外部預註冊。
+定義雜湊為 **`733053db5e0a009ae3cdf9841b672dfaf54ff63cc3b28425b7e4f63c7b3b68fe`**。凍結前24項新合成／原生契約及20項既有數值／指派契約通過；只先讀新來源官方影像目錄metadata，尚未讀新PNG、推論輸出或控制結果。先前四個數值異常、五個指派案例皆揭露為已知證據。[方法凍結提交](https://github.com/JShengP/depthport/commit/b61baf8bba7193aab341776019026449635bbfea)在任何控制執行前已公開，當時影像準備已開始；更早的本機凍結不變，非外部預註冊。
 
 固定完整清單為已見KITTI0004／0005（314／297格）做機制核對，未使用的KITTI0006／0007（270／800格）做來源保留控制驗證。新組依已使用0000–0005之後的編號順序選取，不看GT或偵測／追蹤結果；不截片、不換來源、不提早停止、不挑有利結果、不調參，零值與失敗皆保留。同資料集的新序列不代表獨立場域、參與者、模型訓練資料或統計能力。
 
@@ -24,7 +26,7 @@
 
 ## 接受更新與假說角色
 
-未確認／已確認假說使用相同規則，分開記錄預測前活躍`time_since_update==0`與保留`>0`；不改成熟／等待條件或buffer。每筆高／弱階段接受量測都照原參數進原生Kalman update一次，不clip、拒絕、投影或改道接受更新。接受posterior非正會使逐場景檢查失敗。保留全部弱輸入與原生弱階段，實際弱接受結果是否改變另行量測，不預設它必然不變。
+未確認／已確認假說使用相同規則，分開記錄預測前活躍`time_since_update==0`與保留`>0`；不改成熟／等待條件或buffer。每筆高／弱階段接受量測都照原參數進原生Kalman update一次，不clip、拒絕、投影或改道接受更新。接受posterior非正會使逐場景檢查失敗。投影不計為接受觀測、不重設漏格age／hit計數或確認，空輸入仍只預測並照原生到期。保留全部弱輸入與原生弱階段，實際弱接受結果是否改變另行量測，不預設它必然不變。
 
 ## 原生封存、重複與逐場景門檻
 
@@ -43,7 +45,37 @@
 
 ## 結果與決定
 
-執行尚未完成；發布前會保留全部來源的曝光、幾何、代理傷害與一致性結果，不依結果換規則或調參。
+全部 **四段／1,681個不重複原格／20次預定執行** 完成，沒有剔除、來源失敗、重試、偵測上限影格或凍結後修訂。新來源組1,070原格；重複執行只核對一致性，不增加獨立樣本數。來源／程式／環境封存均保持不變。
+
+- **已見機制0004：**191筆輸入、10次出生、102次預測、高17／弱5次接受更新。四次保留且確認的投影（四軸）使非正預測 **18→0**；接受posterior非正0，代理傷害全通過。
+- **已見機制0005：**46筆輸入，出生／預測／更新／投影皆0；明列無幾何曝光，此處數值／角色效益未量測。
+- **保留來源0006：**496筆輸入、2次出生、29次預測、高0／弱5次接受更新、5筆確認輸入觀測。一次保留且確認投影（一軸）使非正預測 **9→0**。數值與代理傷害全通過；弱／活躍更新／確認輸入遺失、新出生與新增確認輸入皆0。
+- **保留來源0007：**208筆輸入、2次出生、48次預測、高8／弱18次接受更新、26筆確認輸入觀測。非正預測 **0→0**、實際投影0。代理傷害全通過，但只有估計器曝光、**沒有幾何控制曝光**；保留為陰性，不能算第二段有效重現。
+
+所有場景的活躍確認、活躍未確認、保留未確認投影列皆0；只有保留且確認角色有觸發（已見四次／新來源一次），不混合分組。接受posterior皆正、數值檢查失敗0，每次原生操作與持續影子精確相同；這驗證既定矩轉換與原生更新執行，不代表協方差校準或未曝光角色的實際安全性。
+
+十二份原生／觀察參考預測檔，含ID／格式，都等於各來源未掛參考封存；其中舊來源六份等於既有原封存，新來源則等於本輪先封存參考。原生輸出／最終state與兩段舊生命週期皆核對。每段兩次控制的完整輸出、state、原始歷史／事件集合相同。四段參考與控制的完整預測／原生回傳／最終state雜湊也相同，但0004／0006中間的估計器歷史確實有投影差異。**沒有新增確認觀測，也未展示恢復或身分效益。**
+
+**決定：不升預設、不放寬兩來源門檻。** 凍結結果`held_out_geometry_proxy_gate_pass=false`：僅0006有有效幾何減少，0007未曝光。雖各場景保守可觀測傷害檢查皆通過，沒有GT仍不能證明真實追蹤傷害或品質。參數、原生關聯、弱延續與應用／worker預設保持不變。
+
+下一步另凍結 **GT-free幾何曝光選取流程**：完整固定來源順序、依自身控制實際投影及角色分組、保留所有零值／失敗，並在輸出前另留未見確認。0006／0007現在都已見，不可重新當獨立確認；不依本輪結果擬合epsilon／時間窗或事後換有利場景。活躍／未確認角色的介入曝光、獨立重現、身分／定位／長遮擋及逐場景真實傷害／HOTA仍未通過。
+
+## 重現與程式檢查
+
+使用原固定NumPy2追蹤環境、封存本機來源／快取／原始歷史與凍結receipt。公開repo刻意不包含原始診斷或推論快取；換環境重建得到新雜湊時，不可冒稱原封存一致。新影像準備另用固定8.4.176模型環境，不與追蹤NumPy2環境混用。
+
+```bash
+python tools/validate_tracking_geometry.py run \
+  --protocol docs/validation/v0.3-geometry-validity-protocol.json \
+  --seal artifacts/tracking-geometry-validity/freeze.local.json \
+  --old-inputs artifacts/tracking-past-exposure/confirmation-inputs.local.json \
+  --new-inputs artifacts/tracking-geometry-validity/inputs/inputs.local.json \
+  --work artifacts/tracking-geometry-validity/new-run \
+  --references artifacts/tracking-geometry-validity/new-references.local.json \
+  --output artifacts/tracking-geometry-validity/new-results.local.json
+```
+
+程式驗證：24項新契約／205項相關固定研究契約通過；同步Pages後的主程式測試 **475 passed／68 optional skipped**，另有既有Starlette／httpx警告一項。公開凍結程式提交的[應用](https://github.com/JShengP/depthport/actions/runs/39353765810)／[模型API](https://github.com/JShengP/depthport/actions/runs/39353764966)共八項CI全通過（Linux／Windows、Python3.11／3.12，CI不跑真權重推論）。另核對公開清單／連結／明顯憑證、未變的凍結／輔助程式／來源封存、全部原始參考與純原始碼封裝。沿用研究／模型環境，不等於完整Alpha全新安裝、硬體或品質驗收。
 
 ## 條款與公開邊界
 

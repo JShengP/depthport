@@ -1,6 +1,10 @@
 # 驗證紀錄
 [English](../en/validation.md)・[首頁](../../README.zh-TW.md)
 
+## 凍結預測幾何保護控制 — 2026-10-20
+
+[方法、全部場景與決定](tracking-geometry-validity.md) · [凍結](../validation/v0.3-geometry-validity-protocol.json) · [處置前原生封存](../validation/v0.3-geometry-validity-references.json) · [完整結果](../validation/v0.3-geometry-validity.json)。四段／1,681原格／20次執行完成，無失敗、不調參、不讀GT或分數。保留來源0006：一次保留確認投影、非正9→0；0007：48預測但投影0。已見0004：四次投影、18→0；0005無估計器。逐場景代理傷害全通過，弱／確認觀測不變、沒有額外恢復證據。原生參考／重複皆核對，舊位元等於原封存；處置與參考的完整輸出也相同。**兩新來源皆需觸發門檻未過，不升預設／品質驗收。** 下一步凍結GT-free實際投影曝光選取與未見確認，新場景現均已見；原診斷本機。相關205／應用475項通過、68選配略過，凍結程式CI8／8。
+
 ## 數值影子重播與獨立高階段指派 — 2026-10-20
 
 [定義、結果與介入決定](tracking-estimator-shadow.md) · [凍結](../validation/v0.3-estimator-shadow-protocol.json) · [彙總](../validation/v0.3-estimator-shadow.json)。完整611原格／六次隔離執行，完整參考JSON位元、原生輸出／最終狀態與原生命週期封存一致。0004：124操作與影子精確相同、四個首次異常符合角點持續縮小速度，數值檢查失敗0。另獨立稽核五個高階段列，四個矩形未配對、一個低於gate；候選皆已有活躍確認owner，強制改配降低目標值、置換更新對象但未增加接受數。0005無估計器曝光。不讀GT、不推論、不調參或介入；下一步凍結mean／covariance一致的預測幾何有效性及逐場景傷害門檻，弱延續／預設不變，原state／病例本機。相關契約181通過，主程式455通過／61選配略過。

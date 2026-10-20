@@ -1,12 +1,14 @@
 # Prediction-geometry validity control — 2026-10-20
 
-[繁體中文](../zh-TW/tracking-geometry-validity.md) · [ROADMAP](../../ROADMAP.md) · [Prior numerical/assignment diagnosis](tracking-estimator-shadow.md) · [Frozen definitions](../validation/v0.3-geometry-validity-protocol.json)
+[繁體中文](../zh-TW/tracking-geometry-validity.md) · [ROADMAP](../../ROADMAP.md) · [Prior numerical/assignment diagnosis](tracking-estimator-shadow.md) · [Frozen definitions](../validation/v0.3-geometry-validity-protocol.json) · [Native reference seal](../validation/v0.3-geometry-validity-references.json) · [Complete results](../validation/v0.3-geometry-validity.json)
+
+**The held-out group does not pass the frozen replication gate:**0006 triggers once and removes9 invalid prediction rows, but0007 has no trigger. Every per-scene observable harm screen passes; this is not tracking-quality or identity acceptance.
 
 This experiment isolates one opt-in ByteTrack prediction control. It preserves the original parameters, inputs, high/weak association, accepted measurement update and lifetime semantics. **No application/worker/default change is installed.** GT and accuracy scores are not read; observable harm screens are deliberately separate from tracking-quality acceptance.
 
 ## Freeze and source separation
 
-The definition seal is **`733053db5e0a009ae3cdf9841b672dfaf54ff63cc3b28425b7e4f63c7b3b68fe`**. Twenty-four new synthetic/native contracts plus20 earlier numerical/assignment contracts pass before the freeze. Only official image-directory metadata for the two new sources is inspected beforehand; no new PNG member, inference output or control result is read. The four prior numerical failures and five prior assignment cases are disclosed known evidence. This is a local definition freeze, not external preregistration.
+The definition seal is **`733053db5e0a009ae3cdf9841b672dfaf54ff63cc3b28425b7e4f63c7b3b68fe`**. Twenty-four new synthetic/native contracts plus20 earlier numerical/assignment contracts pass before the freeze. Only official image-directory metadata for the two new sources is inspected beforehand; no new PNG member, inference output or control result is read. The four prior numerical failures and five prior assignment cases are disclosed known evidence. The [frozen method commit](https://github.com/JShengP/depthport/commit/b61baf8bba7193aab341776019026449635bbfea) is public before any control execution (after image preparation had started); the earlier local freeze remains unchanged. This is not external preregistration.
 
 The complete fixed ledger contains seen KITTI0004/0005 (314/297 frames) for mechanism checks and previously unused KITTI0006/0007 (270/800 frames) for source-held-out control validation. The new pair is the next two training IDs in lexical order after all previously used0000–0005, selected without GT or detector/tracker outcomes. There is no clipping, source substitution, early stop, favourable-result selection or parameter adjustment. Every zero/failed source is retained. Same-dataset source separation does not establish independent sites, participants, model training data or statistical power.
 
@@ -24,7 +26,7 @@ The live estimator and a persistent detached shadow receive the same projection.
 
 ## Accepted updates and roles
 
-Apply the same rule to all tentative/confirmed hypotheses, recording active pre-predict `time_since_update==0` and retained `>0` separately. No maturity/waiting or buffer change is made. Every accepted high/weak measurement still enters the original Kalman update once, with its original measurement; no accepted update is clipped, rejected, projected or rerouted. A non-positive accepted posterior fails the per-scene screen. All weak inputs and the native weak stage remain enabled. Effects on actual accepted weak observations are measured rather than assumed unchanged.
+Apply the same rule to all tentative/confirmed hypotheses, recording active pre-predict `time_since_update==0` and retained `>0` separately. No maturity/waiting or buffer change is made. Every accepted high/weak measurement still enters the original Kalman update once, with its original measurement; no accepted update is clipped, rejected, projected or rerouted. A non-positive accepted posterior fails the per-scene screen. Projection is not accepted observation evidence: it resets no missed-frame age, hit counter or confirmation, and empty-input frames remain prediction-only with normal expiry. All weak inputs and the native weak stage remain enabled. Effects on actual accepted weak observations are measured rather than assumed unchanged.
 
 ## Native seals, repeats and per-scene gates
 
@@ -43,7 +45,37 @@ No scene compensates another. Both new full sources must additionally have at le
 
 ## Results and decision
 
-Execution is pending. This section will retain every scheduled source and its exposure, geometry, proxy-harm and equality outcomes before publication; no rule will be selected or retuned from them.
+All **four sources /1,681 unique original frames /20 scheduled passes** complete without exclusion, source failure, retry, cap frame or post-freeze amendment. The held-out pair contributes1,070 unique frames; repeats are equality checks, not additional independent samples. All source/implementation/runtime seals remain unchanged.
+
+- **Seen mechanism0004:**191 inputs,10 births,102 predictions,17 high/5 weak accepted updates. Four retained-confirmed projections (four axes) reduce non-positive prediction rows **18→0**; accepted-posterior violations0, all proxy-harm gates pass.
+- **Seen mechanism0005:**46 inputs, zero births/predictions/updates/projections. Zero geometry exposure remains explicit; numerical/role efficacy is unmeasured here.
+- **Held-out0006:**496 inputs,2 births,29 predictions,0 high/5 weak accepted updates,5 confirmed input observations. One retained-confirmed projection (one axis) reduces invalid predictions **9→0**. Every numerical and proxy-harm gate passes; lost weak/active-update/confirmed-input events, new births and additional confirmed inputs are all0.
+- **Held-out0007:**208 inputs,2 births,48 predictions,8 high/18 weak accepted updates,26 confirmed input observations. Native invalid predictions **0→0**, actual projections0. All proxy-harm screens pass; the scene has estimator exposure but **no geometry-control exposure**. It is a retained negative, not a second effective replication.
+
+Across all scenes, applied active-confirmed, active-tentative and retained-tentative rows are0; only retained-confirmed projections are exposed (four seen/one new). These strata remain distinct. Every accepted posterior stays positive, every numerical check passes, and the persistent shadow matches each native operation exactly. This verifies the declared moment transform/native update execution, not covariance calibration or empirical safety in unexposed roles.
+
+All twelve native/observed-reference prediction files equal their source's unhooked seal, including IDs/formatting. The six old-source files also equal the pre-existing archive; the new-source files match newly sealed references. Native outputs/final-state seals and both old lifecycle seals reconcile. Two control repeats/source agree in all complete outputs, state and raw histories/events. Reference and control also have identical complete predictions/native returns/final-state hashes in all four scenes, while the intentionally projected intermediate estimator histories differ in0004/0006. **There are no additional confirmed observations or demonstrated recovery/identity gains.**
+
+**Decision: do not promote the control or relax the two-source gate.** Frozen `held_out_geometry_proxy_gate_pass=false`: only0006 has effective geometry reduction,0007 is unexposed. Every scene passes conservative observable harm screens, but GT-free checks cannot establish true tracking harm or quality. Keep parameters, native assignment, weak continuation and app/worker defaults unchanged.
+
+The next step is a separately frozen **GT-free geometry-exposure selection** process: fixed complete source order, actual own-arm projections/role groups, all zeros/failures retained, and untouched confirmation reserved before outputs.0006/0007 are now seen and cannot be relabelled independent confirmation. Do not fit a new epsilon/duration or substitute a favourable scene after this result. Active/tentative intervention exposure, independent replication, identity/localisation/long-occlusion and per-scene true-harm/HOTA gates remain open.
+
+## Reproduction and checks
+
+Use the original pinned NumPy2 tracker environment, sealed local source/cache/archive files and local freeze receipt. The public repository intentionally contains no original raw diagnostics or inference caches; rebuilding them on a different recipe yields new hashes and must not be described as original-archive equality. New image preparation uses the separate model environment with the frozen8.4.176 detector, not the tracker NumPy2 environment.
+
+```bash
+python tools/validate_tracking_geometry.py run \
+  --protocol docs/validation/v0.3-geometry-validity-protocol.json \
+  --seal artifacts/tracking-geometry-validity/freeze.local.json \
+  --old-inputs artifacts/tracking-past-exposure/confirmation-inputs.local.json \
+  --new-inputs artifacts/tracking-geometry-validity/inputs/inputs.local.json \
+  --work artifacts/tracking-geometry-validity/new-run \
+  --references artifacts/tracking-geometry-validity/new-references.local.json \
+  --output artifacts/tracking-geometry-validity/new-results.local.json
+```
+
+Validation:24 new contracts /205 related pinned research contracts pass; the updated base suite is **475 passed /68 optional skipped**, with one existing Starlette/httpx warning. The publicly frozen program commit passes all eight [application](https://github.com/JShengP/depthport/actions/runs/39353765810) / [model API](https://github.com/JShengP/depthport/actions/runs/39353764966) jobs (Linux/Windows, Python3.11/3.12, no pretrained inference in CI). Public-file/link/obvious-secret, unchanged freeze/helper/source seals, every original reference and source-only archive checks are performed. Reused research/model environments are not a fresh full Alpha installation or hardware/quality acceptance.
 
 ## Terms and public boundary
 

@@ -2,6 +2,8 @@
 
 [繁體中文](../zh-TW/tracking-estimator-shadow.md) · [ROADMAP](../../ROADMAP.md) · [Prior health audit](tracking-state-observation-health.md) · [Frozen definitions](../validation/v0.3-estimator-shadow-protocol.json) · [Complete public aggregate](../validation/v0.3-estimator-shadow.json)
 
+**Follow-up — 2026-10-20:** The separately [frozen prediction-geometry control](tracking-geometry-validity.md) is complete:0006 removes9 invalid predictions with one retained-confirmed projection,0007 is unexposed, all proxy-harm gates pass but the both-source replication gate fails. No outputs improve or defaults change. This earlier numerical diagnosis and its seals remain unchanged.
+
 **All four first non-positive boxes follow unchanged independent-corner velocities through missed predictions. All five high-stage gate-supported terminal rows compete for detections already accepted by active, confirmed hypotheses.** The numerical mechanism and original assignment accounting are now reproduced. No intervention, parameter/default change or identity-quality claim follows from these seen cases; weak continuation remains intact.
 
 ## Freeze, scope and equality

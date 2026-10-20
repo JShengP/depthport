@@ -2,6 +2,8 @@
 
 [English](../en/tracking-estimator-shadow.md) · [ROADMAP](../../ROADMAP.md) · [前輪健康稽核](tracking-state-observation-health.md) · [凍結定義](../validation/v0.3-estimator-shadow-protocol.json) · [完整公開彙總](../validation/v0.3-estimator-shadow.json)
 
+**後續 — 2026-10-20：** 另凍結的[預測幾何控制](tracking-geometry-validity.md)已完成：0006一次保留確認投影消除9列非正，0007未曝光；代理傷害全過，但兩段重現門檻未過。沒有輸出效益或預設更動，本篇數值診斷與封存保留。
+
 **四個首次非正框都符合四角速度不變、在漏格預測中持續縮小寬／高的機制；五個高階段過門檻的終端列，競爭的偵測都已被活躍且確認的假說接受。** 數值機制與原始指派帳目已重現。本輪不新增介入、不調參或改預設，弱偵測延續保留；這些已見案例不能用來宣稱身分正確或品質改善。
 
 ## 凍結、範圍與一致性

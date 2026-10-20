@@ -418,3 +418,5 @@ tests/test_tracking_geometry_inputs.py
 docs/validation/v0.3-geometry-validity-protocol.json
 docs/en/tracking-geometry-validity.md
 docs/zh-TW/tracking-geometry-validity.md
+docs/validation/v0.3-geometry-validity-references.json
+docs/validation/v0.3-geometry-validity.json
