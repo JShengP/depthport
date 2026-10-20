@@ -1,0 +1,796 @@
+{
+  "format": "depthport.geometry-exposure-protocol.v1",
+  "frozen_at_utc": "2026-10-20T03:22:06.035068+00:00",
+  "base_commit": "e4a512c8e61e55dbac42a8fc671985a977ad557d",
+  "status": "Local prospective freeze after synthetic/native contracts and source directory/input metadata, before new geometry exposure runs or reserved image reads/inference. Seen-source prior GT outcomes known; an old aggregate report was previewed before freeze, not used as a selection feature. No new GT loaded or scored; not external preregistration.",
+  "same_geometry_protocol_sha256": "733053db5e0a009ae3cdf9841b672dfaf54ff63cc3b28425b7e4f63c7b3b68fe",
+  "pinned_files_sha256": {
+    "docs/validation/v0.3-geometry-validity-protocol.json": "733053db5e0a009ae3cdf9841b672dfaf54ff63cc3b28425b7e4f63c7b3b68fe",
+    "depthport/tracking_geometry_control.py": "43b6cb47efb86f5f33a8243d93ee055d5347abd101fc64bf658f697c088c9cf9",
+    "depthport/tracking_geometry_validation.py": "f3216f2a1636e455f2815212ba7a278299ec7e3294498f2106bf69226994851b",
+    "tools/validate_tracking_geometry.py": "804866bbfb993b70f112b63eb25420a9edf0462fabd09d315538fd8c3d273b1e",
+    "tools/prepare_tracking_geometry.py": "8ae51bd1598787ce9faa2b1238170aa71ceef6e69dec6ec2d56a914db4e3c72b",
+    "tests/test_tracking_geometry_control.py": "deba6b3421ec30db062fc1602819a1fc469a9256770d8ccce61b973aaf89895a",
+    "tests/test_tracking_geometry_inputs.py": "65baf90828169c5c57133002ae9f5e85229e85d938a53173b3054d12202e4a03",
+    "tools/cache_video_detections.py": "9fca335da835821476e17ee1daa42298b0ded12b2de502b69549355221fb0380",
+    "docs/validation/v0.3-estimator-shadow-protocol.json": "a339cfbc3d7f7fab688c7f7419173e7ae71b198471f682959b2a7c2a97514624",
+    "docs/validation/v0.3-estimator-shadow.json": "736f912e4268ca0729a77a03265c11643b5c09a7b5201e5fbd98fd0d5ddcc767",
+    "docs/validation/v0.3-state-observation-health-protocol.json": "4af6002d8f9624c73a7e3623469df7e912ddfed705ccdec35963bff5a09179f3",
+    "docs/validation/v0.3-state-observation-health.json": "0c394d70a6a19869bb1e5d533743f7465af50e8d45ce4781467fa633aee6f967",
+    "docs/validation/v0.3-upstream-lifecycle-protocol.json": "d296d92d0e595c3f53ab9ce727a8cb0e8522007c8f7cd484d74f57f097467a72",
+    "docs/validation/v0.3-upstream-lifecycle.json": "ac5296ab6edf4810d48e41f03b3fdd43697b9641f7554fcb700435ee535e3380",
+    "docs/validation/v0.3-past-exposure-protocol.json": "573b76a8019ce5bb069a6140d2070c26ca7c4071dace026dcef3ea8eba255082",
+    "docs/validation/v0.3-past-exposure-confirmation-inputs.json": "bda4cfdb16883431c38eccf6696d11d6610a26ee6cec16a2ad7fdb05b1ab21b1",
+    "depthport/tracking_estimator_shadow.py": "a159fd6803ba542ed59479b1afaeb5af0fa3a0552c4949e0eb0fcec9c92ed1d3",
+    "depthport/tracking_shadow_analysis.py": "d28280ec149add4c0aacd01884423ae2b44dd8dd3b36fc06f5aa7847e4251f1b",
+    "depthport/tracking_high_assignment_audit.py": "232252374c7c08a14156b0d6a525146390f043d4294d9bf1c3c0023dd0871357",
+    "tools/audit_tracking_estimator_shadow.py": "66d472a8b91e845ac060bf03f14a0477e9c0fc0d8edad8acb31d7fe7cdac6a72",
+    "tests/test_tracking_estimator_shadow.py": "336ecc395f2607c06688fbf95ab9fc89658a016a321f43f87f72197120890c80",
+    "tests/test_tracking_high_assignment_audit.py": "5362f961c7adb3a78faf87d1090dd4d7ad7cc43ccf675479c07c7235f1524c49",
+    "depthport/tracking_health_audit.py": "72dbba87bfc3bf6e71e42d0bf6e488f9583ffb11de7d0109c7db785ed420b231",
+    "tools/audit_tracking_health.py": "80068a7862a1de70bf6705d718e4ca34e65a98694958922278473a0f9d8b40a5",
+    "tests/test_tracking_health_audit.py": "0aad4fa4675923868c789a6646e1550d4c97c2da9ac05d44663c3e6fbd90ba39",
+    "depthport/tracking_lifecycle_probe.py": "52d787d9d22ca6438dfab2d2d6da2ca3802d9d347576fad96acd55f90561e96d",
+    "depthport/tracking_upstream_diagnostics.py": "51bd7a2e72a68bc964d41bc7bce1ed003bca14230b19810ce23ed2308a908cd0",
+    "tools/diagnose_tracking_upstream.py": "09a96959cc38cd8cd22f89b975e37b4914e3af149c8be081e75846219ef7366b",
+    "depthport/tracking_past_exposure.py": "1a43b2bedcb09ecf5c8f0f3d22a9b35d43b81ef78f20560f10559b27a0f083d8",
+    "depthport/tracking_exposure.py": "49026e2ef32cf767bf47845c1daba4e89f438291025d799108137a0019228bc0",
+    "depthport/video_tracking_benchmark.py": "42fd7739080b4523f64c8425979e0125b8bfbfee7abfc5f22ed5e41668bbca0c",
+    "tests/test_tracking_lifecycle_probe.py": "c3eb87932d9fe8ecdfdbef22b23aeb2147256e9944314fd86af01967572e6f96",
+    "depthport/tracking_recovery_control.py": "123ed43132d33326a0ec0ca1c7deaa23d20f1fa07f35b2df3ee4735efbe4a7b6",
+    "depthport/tracking_geometry_exposure.py": "5c83b97cfd47dcb778174978dba574f5b7bd9a1c86021d2d3e9e1337d1ac6e5a",
+    "tools/select_tracking_geometry_exposure.py": "7107f36178a824ee8e7ef0b1c36bc156a7d24745191ff6aeb45113e4990d103a",
+    "tools/prepare_tracking_geometry_exposure.py": "d6f4189a769886cc922ec8edb1ee5fa16dce659b1a390d6932cfedd08933a635",
+    "tests/test_tracking_geometry_exposure.py": "082754b15d991f9f2aecd4ece3767cf5bff2ed19134350057073c116577d9d37",
+    "tools/freeze_tracking_geometry_exposure.py": "2ff82699a086436aff6883d3a4c9b3ca8272a7097c1f3cf32344cbaec73f5120",
+    "docs/validation/v0.3-geometry-validity-references.json": "e24a60d41feb72c5aa01c9a25c99db51f4ecb21c073aaae6876e25439d8491d1",
+    "docs/validation/v0.3-geometry-validity.json": "99647e57b6886a30cd4bd0bc4f4ad6cf9114cd6ca83a2f072a3c2a83782e17cb"
+  },
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv-python": "4.11.0.86",
+    "trackers": "2.6.1",
+    "supervision": "0.27.0",
+    "scipy": "1.18.1"
+  },
+  "upstream_sha256": {
+    "tracker": "7ea61408b4908da327ba992f09450865bb16019ab95bed23a512e5c03bef8fda",
+    "tracklet": "66c4b84cb28b1b2abd9b288b2b0f594814e4eb11d55ac8c295386415da022885",
+    "base_tracker": "64813fbf4b6441080b005a99f2908c137435107d54eaaab6bf8625a54395e948",
+    "base_tracklet": "96e4d4a01064b15f178e190e80a88bb8bbed38476a275b7d659181532a21e8d8",
+    "alive": "345242f72dc5fb43b70953546dde8b66759377f6c63ed91d1995c320affb5f84",
+    "estimator": "fe8abe96d398685abe2055a78e51f2f9906522877c5130b1d476ee3dc8c0fff0",
+    "iou": "e7d7de78643ed864f195915c009d400e02b8d3e57159f6aaa90d707f7f1bd4f0",
+    "box_iou": "d9fac5e31c8bbfc6e7c8d16a91cd49eec11cfe0e7d4ef2c3da286997c53a6b63"
+  },
+  "numerical_modules_sha256": {
+    "kalman_filter_module": "ba812be3e00fd0386feb48eea5f6c2665a31af925cba28acd4c0d946d300adc2",
+    "motion_models_module": "ccb9b99030ba13c46d8769176d21206380339cdadac8e4d20b8f22f51d3130c3",
+    "state_representations_module": "7db45970850783bd1da31cdc3371fa8a3a5615267b29df9018152946de945b0d",
+    "scipy_lsap_binary": "67871ca804df8da4fadf4e9238ea0536d92ff0915ddae885b368c65ce43e5b3f"
+  },
+  "parameters": {
+    "track_activation_threshold": 0.3,
+    "high_conf_det_threshold": 0.6,
+    "lost_track_buffer": 30,
+    "minimum_consecutive_frames": 2
+  },
+  "detector_settings": {
+    "model": "yolo26n.pt",
+    "confidence": 0.1,
+    "imgsz": 640,
+    "source": "ultralytics",
+    "device": "cpu",
+    "classes": [
+      0
+    ],
+    "max_det": 64,
+    "nms_iou": 0.7,
+    "ultralytics": "8.4.176",
+    "weight_sha256": "9b09cc8bf347f0fc8a5f7657480587f25db09b34bf33b0652110fb03a8ad4fef"
+  },
+  "groups": [
+    "active_confirmed",
+    "active_tentative",
+    "retained_confirmed",
+    "retained_tentative",
+    "active",
+    "retained",
+    "unconfirmed",
+    "any"
+  ],
+  "repeats": 2,
+  "source_processes": 4,
+  "sequences": [
+    {
+      "name": "MOT17-09-DPM",
+      "frames": 525,
+      "fps": 30,
+      "phase": "discovery"
+    },
+    {
+      "name": "MOT17-10-DPM",
+      "frames": 654,
+      "fps": 30,
+      "phase": "discovery"
+    },
+    {
+      "name": "MOT17-11-DPM",
+      "frames": 900,
+      "fps": 30,
+      "phase": "discovery"
+    },
+    {
+      "name": "MOT17-13-DPM",
+      "frames": 750,
+      "fps": 25,
+      "phase": "discovery"
+    },
+    {
+      "name": "MOT17-04-DPM",
+      "frames": 1050,
+      "fps": 30,
+      "phase": "discovery"
+    },
+    {
+      "name": "MOT20-01",
+      "frames": 429,
+      "fps": 25,
+      "phase": "discovery"
+    },
+    {
+      "name": "MOT20-02",
+      "frames": 2782,
+      "fps": 25,
+      "phase": "discovery"
+    },
+    {
+      "name": "MOT20-06",
+      "frames": 1008,
+      "fps": 25,
+      "phase": "discovery"
+    },
+    {
+      "name": "MOT20-07",
+      "frames": 585,
+      "fps": 25,
+      "phase": "discovery"
+    },
+    {
+      "name": "MOT20-08",
+      "frames": 806,
+      "fps": 25,
+      "phase": "discovery"
+    },
+    {
+      "name": "MOT17-07-DPM",
+      "frames": 500,
+      "fps": 30,
+      "phase": "discovery"
+    },
+    {
+      "name": "MOT17-08-DPM",
+      "frames": 625,
+      "fps": 30,
+      "phase": "discovery"
+    },
+    {
+      "name": "MOT17-12-DPM",
+      "frames": 900,
+      "fps": 30,
+      "phase": "discovery"
+    },
+    {
+      "name": "MOT17-14-DPM",
+      "frames": 750,
+      "fps": 25,
+      "phase": "discovery"
+    },
+    {
+      "name": "MOT20-03",
+      "frames": 2405,
+      "fps": 25,
+      "phase": "discovery"
+    },
+    {
+      "name": "MOT20-05",
+      "frames": 3315,
+      "fps": 25,
+      "phase": "discovery"
+    },
+    {
+      "name": "KITTI-0000",
+      "frames": 154,
+      "fps": 10,
+      "phase": "discovery"
+    },
+    {
+      "name": "KITTI-0001",
+      "frames": 447,
+      "fps": 10,
+      "phase": "discovery"
+    },
+    {
+      "name": "KITTI-0002",
+      "frames": 233,
+      "fps": 10,
+      "phase": "discovery"
+    },
+    {
+      "name": "KITTI-0003",
+      "frames": 144,
+      "fps": 10,
+      "phase": "discovery"
+    },
+    {
+      "name": "KITTI-0004",
+      "frames": 314,
+      "fps": 10,
+      "phase": "discovery"
+    },
+    {
+      "name": "KITTI-0005",
+      "frames": 297,
+      "fps": 10,
+      "phase": "discovery"
+    },
+    {
+      "name": "KITTI-0006",
+      "frames": 270,
+      "fps": 10,
+      "phase": "discovery"
+    },
+    {
+      "name": "KITTI-0007",
+      "frames": 800,
+      "fps": 10,
+      "phase": "discovery"
+    },
+    {
+      "name": "KITTI-0008",
+      "phase": "confirmation",
+      "fps": 10,
+      "frames": 390,
+      "member_manifest_sha256": "cb12333639f5579d18b352d18e6640bd6179e13ace6e53486cbf95902d77a3ab",
+      "byte_start": 5183470490,
+      "byte_end": 5457618377
+    },
+    {
+      "name": "KITTI-0009",
+      "phase": "confirmation",
+      "fps": 10,
+      "frames": 803,
+      "member_manifest_sha256": "60138ec545f4ee681845964750ef4590fca6518c72501e9e42176d2366c72a77",
+      "byte_start": 157,
+      "byte_end": 666932776
+    }
+  ],
+  "discovery_inputs": {
+    "MOT17-09-DPM": {
+      "name": "MOT17-09-DPM",
+      "video_sha256": "44472faa5643b173fa9b0d4837d3018cd1f5c4a3f13ab4bc9f865cf552022f9d",
+      "cache_sha256": [
+        "331845d105f109f670a35eb141b9ad3ffbf044964d51374ffaa23e22be93085a"
+      ],
+      "frames": 525,
+      "fps": 30,
+      "resolution": [
+        960,
+        540
+      ],
+      "cache_shards": 1,
+      "cached_detections": 6691,
+      "capped_frames": 0
+    },
+    "MOT17-10-DPM": {
+      "name": "MOT17-10-DPM",
+      "video_sha256": "0780ec0d648cfbca71a92cf0e45811e591b0f014307e3291a5f970112d855d01",
+      "cache_sha256": [
+        "6e5a08a2998c696561aec4662e4ec3b41e750694bc3baa429d37aed0ae7dc9ae"
+      ],
+      "frames": 654,
+      "fps": 30,
+      "resolution": [
+        960,
+        540
+      ],
+      "cache_shards": 1,
+      "cached_detections": 10794,
+      "capped_frames": 0
+    },
+    "MOT17-11-DPM": {
+      "name": "MOT17-11-DPM",
+      "video_sha256": "315f28aedefb503d4b7405a36475481eefd7d3072ab9c27286716ed224736ec5",
+      "cache_sha256": [
+        "723eea651fcd458fb68b7361183552388142d4dde9270fb57a6e34b83ec3400f"
+      ],
+      "frames": 900,
+      "fps": 30,
+      "resolution": [
+        960,
+        540
+      ],
+      "cache_shards": 1,
+      "cached_detections": 8558,
+      "capped_frames": 0
+    },
+    "MOT17-13-DPM": {
+      "name": "MOT17-13-DPM",
+      "video_sha256": "3c643abd4f37f1c67815c5faaebac6bea98fe536e45d97aa82e9682991e47fae",
+      "cache_sha256": [
+        "18e18639957a173dfcb4aa3356f9280750f9c1deac1590181cbb38b68180b4ca"
+      ],
+      "frames": 750,
+      "fps": 25,
+      "resolution": [
+        960,
+        540
+      ],
+      "cache_shards": 1,
+      "cached_detections": 8285,
+      "capped_frames": 0
+    },
+    "MOT17-04-DPM": {
+      "name": "MOT17-04-DPM",
+      "video_sha256": "ab0d2fc03bce5e112abe9a173de7a2d70b39875c0af3eca49d6160c6e317e495",
+      "cache_sha256": [
+        "b537ab8b1a22452ce35e334088fc6579c2ed555b5411e88024696d5e2eb8257f"
+      ],
+      "frames": 1050,
+      "fps": 30,
+      "resolution": [
+        960,
+        540
+      ],
+      "cache_shards": 1,
+      "cached_detections": 20133,
+      "capped_frames": 0
+    },
+    "MOT20-01": {
+      "name": "MOT20-01",
+      "video_sha256": "0105c42857c50f73c6ec50d3456f9bb8a04cbe45944bf7bbc3c77dc755feeae8",
+      "cache_sha256": [
+        "6db33759b20eabd0680c95da9c3808f284869ff919138965db8f3af043c6cea0"
+      ],
+      "frames": 429,
+      "fps": 25,
+      "resolution": [
+        960,
+        540
+      ],
+      "cache_shards": 1,
+      "cached_detections": 7529,
+      "capped_frames": 0
+    },
+    "MOT20-02": {
+      "name": "MOT20-02",
+      "video_sha256": "84b7a7d240522c82b24078de1c3084561b604f0360cec8a0e48d1b2ac06276de",
+      "cache_sha256": [
+        "94a459500229fb3eef68f3f65988dc33e13791739359ad88b5292a058c13aef5",
+        "0e6cb0f1c5f1f380c5c4c5d423eb9b1fb7e012033d50865cec9a93073ed215e6"
+      ],
+      "frames": 2782,
+      "fps": 25,
+      "resolution": [
+        960,
+        540
+      ],
+      "cache_shards": 2,
+      "cached_detections": 59523,
+      "capped_frames": 0
+    },
+    "MOT20-06": {
+      "name": "MOT20-06",
+      "video_sha256": "fc1f0afa16c32ca9218fcaf531fe561a5a6264b0841a21102703139eb0c16ee0",
+      "cache_sha256": [
+        "534b804dd5af74ff998b4b0b601fa4c964948c8e7ce8b79625b1d470c84ee499"
+      ],
+      "frames": 1008,
+      "fps": 25,
+      "resolution": [
+        960,
+        366
+      ],
+      "cache_shards": 1,
+      "cached_detections": 16663,
+      "capped_frames": 0
+    },
+    "MOT20-07": {
+      "name": "MOT20-07",
+      "video_sha256": "e3fa42ee6276a97a1d2af72825531a647d0412243b8cc6b16a3d32e14377ad97",
+      "cache_sha256": [
+        "9a5592944acaec693589b3a17031e5ac62df2fb767cad03374226f46678533f5"
+      ],
+      "frames": 585,
+      "fps": 25,
+      "resolution": [
+        960,
+        540
+      ],
+      "cache_shards": 1,
+      "cached_detections": 11184,
+      "capped_frames": 0
+    },
+    "MOT20-08": {
+      "name": "MOT20-08",
+      "video_sha256": "ef9d89cfb6df80fa56bbe0e0afb8d5ca352119d07db0eabf23876574448767a1",
+      "cache_sha256": [
+        "66f83e3f9d11d9efdae7097848aa09dde38d2c6b67a61d8b3802945589fe07d8"
+      ],
+      "frames": 806,
+      "fps": 25,
+      "resolution": [
+        960,
+        366
+      ],
+      "cache_shards": 1,
+      "cached_detections": 10401,
+      "capped_frames": 0
+    },
+    "MOT17-07-DPM": {
+      "name": "MOT17-07-DPM",
+      "video_sha256": "e697175a64408fc198de761374e36ae01ba8edd4f349490e654a2f2293010032",
+      "cache_sha256": [
+        "18835997f2cdd0ac2944b3e66e012e58edac5e7a13bfb426fa260a33c2b4ee55"
+      ],
+      "frames": 500,
+      "fps": 30,
+      "resolution": [
+        960,
+        540
+      ],
+      "cache_shards": 1,
+      "cached_detections": 12733,
+      "capped_frames": 0
+    },
+    "MOT17-08-DPM": {
+      "name": "MOT17-08-DPM",
+      "video_sha256": "d105cf5ac8202609086e5610d30f32db4deefb99081912e5995e27c088707b7c",
+      "cache_sha256": [
+        "67392da03cc05a3c364fecec16b01c8e993a9ad3f4426b35e8007d3cdd63454b"
+      ],
+      "frames": 625,
+      "fps": 30,
+      "resolution": [
+        960,
+        540
+      ],
+      "cache_shards": 1,
+      "cached_detections": 11666,
+      "capped_frames": 0
+    },
+    "MOT17-12-DPM": {
+      "name": "MOT17-12-DPM",
+      "video_sha256": "db15e4a26907e29d4d32ab3cb393934e99ccc5959d79763b14f5b0fc6f9bbdc4",
+      "cache_sha256": [
+        "79b4742894c7ce6ab6e0575803d1512516c06647db097f7897bbc26dc188754b"
+      ],
+      "frames": 900,
+      "fps": 30,
+      "resolution": [
+        960,
+        540
+      ],
+      "cache_shards": 1,
+      "cached_detections": 7806,
+      "capped_frames": 0
+    },
+    "MOT17-14-DPM": {
+      "name": "MOT17-14-DPM",
+      "video_sha256": "8411fb87f3669df8ded029a07f4ef0d6b127953efda5912d1376054fef15be5c",
+      "cache_sha256": [
+        "3e509b33410eccb19290d6f534c1203cb07c9905bb39f8a59e37b19ec9e55ff6"
+      ],
+      "frames": 750,
+      "fps": 25,
+      "resolution": [
+        960,
+        540
+      ],
+      "cache_shards": 1,
+      "cached_detections": 12970,
+      "capped_frames": 0
+    },
+    "MOT20-03": {
+      "name": "MOT20-03",
+      "video_sha256": "a93dc3d6ef9d3f897db2dd493e96f3077ad7b6edc31225fefd5f4d204b9faba3",
+      "cache_sha256": [
+        "e1ecbf13121c176ad98b802186a0f59071e286c943b77f35ff00f57cdb0cc0e9",
+        "2d4f4a2c0166bd9e9e04a75f6f5f2036b0a2fcfa745eb5b09c60f0f1ac447905"
+      ],
+      "frames": 2405,
+      "fps": 25,
+      "resolution": [
+        586,
+        440
+      ],
+      "cache_shards": 2,
+      "cached_detections": 76712,
+      "capped_frames": 0
+    },
+    "MOT20-05": {
+      "name": "MOT20-05",
+      "video_sha256": "e5d1099517a3d5fe8cded2035fce54ff641171b3be5b97cfcb774db90a64bc8e",
+      "cache_sha256": [
+        "74feedc3beb511a334144f559c19168dd608d0a81d68b56fcacbf13fde67978e",
+        "192f3f01bb762daa8c0e0ac73f45d802db7f6796dc4ea2eaf12aada7041f6115"
+      ],
+      "frames": 3315,
+      "fps": 25,
+      "resolution": [
+        826,
+        540
+      ],
+      "cache_shards": 2,
+      "cached_detections": 89810,
+      "capped_frames": 0
+    },
+    "KITTI-0000": {
+      "name": "KITTI-0000",
+      "video_sha256": "4e7ea710806f97df82f77f943c2c2e2cbe2e503445fecf6abffee274df28094c",
+      "cache_sha256": [
+        "2905e954715d97ec37446a9936c3d04591c112c02c3014701117379208139587"
+      ],
+      "frames": 154,
+      "fps": 10,
+      "resolution": [
+        1242,
+        375
+      ],
+      "cache_shards": 1,
+      "cached_detections": 326,
+      "capped_frames": 0
+    },
+    "KITTI-0001": {
+      "name": "KITTI-0001",
+      "video_sha256": "352194bdd90a09fd1e0dae59acbd1caeeac266137c2118d3303bba548bebe6c0",
+      "cache_sha256": [
+        "5912cbe4d6a9ecb4c1d0dccbc42b36edeb9f847f50ff032f0c21a38074df35a2"
+      ],
+      "frames": 447,
+      "fps": 10,
+      "resolution": [
+        1242,
+        375
+      ],
+      "cache_shards": 1,
+      "cached_detections": 107,
+      "capped_frames": 0
+    },
+    "KITTI-0002": {
+      "name": "KITTI-0002",
+      "video_sha256": "6347e10f4f1b8dfec98d36862b1dd54669e8ca9918ad1e0c89f7218fa1b75eba",
+      "cache_sha256": [
+        "817c0adf6a48cfc1b43cd28da9c802922bbf5dfd9427afd7bf5b984f63108de9"
+      ],
+      "frames": 233,
+      "fps": 10,
+      "resolution": [
+        1242,
+        375
+      ],
+      "cache_shards": 1,
+      "cached_detections": 286,
+      "capped_frames": 0
+    },
+    "KITTI-0003": {
+      "name": "KITTI-0003",
+      "video_sha256": "5a40436f76662feec102b584eecec2859fa1d161466a84ec3084e5b5ce10dfa0",
+      "cache_sha256": [
+        "9a9cc405f9a284ca4a6f7880b16fa26449bf095ada689f3be4ee909442a98f3d"
+      ],
+      "frames": 144,
+      "fps": 10,
+      "resolution": [
+        1242,
+        375
+      ],
+      "cache_shards": 1,
+      "cached_detections": 13,
+      "capped_frames": 0
+    },
+    "KITTI-0004": {
+      "name": "KITTI-0004",
+      "video_sha256": "673ed7ef252c1e9e1c8bcf55c140404f628015f040a51647cde8afa44f0c1702",
+      "cache_sha256": [
+        "a58da9bd2a8b7eaffce017e156890145a5a119113f36ede49e165857ea09589b"
+      ],
+      "frames": 314,
+      "fps": 10,
+      "resolution": [
+        1242,
+        375
+      ],
+      "cache_shards": 1,
+      "cached_detections": 191,
+      "capped_frames": 0
+    },
+    "KITTI-0005": {
+      "name": "KITTI-0005",
+      "video_sha256": "860e56b5dbb670d877aeb4fba5921a284b09e86619f0cbdf15e36abd6f025260",
+      "cache_sha256": [
+        "083e71126bc87368db4b294b1f8c602ddbf5be24497a1da525b9d5a547be6520"
+      ],
+      "frames": 297,
+      "fps": 10,
+      "resolution": [
+        1242,
+        375
+      ],
+      "cache_shards": 1,
+      "cached_detections": 46,
+      "capped_frames": 0
+    },
+    "KITTI-0006": {
+      "name": "KITTI-0006",
+      "video_sha256": "ee0612f0d0f8a24f1779e622afe1d9e9f461593c28cd268de71f98a09f0e1f57",
+      "cache_sha256": [
+        "3c24d14b71a86542fdb49fe07f00001c0d5bdd3dc8bdfccb163f0f19cce236a4"
+      ],
+      "frames": 270,
+      "fps": 10,
+      "resolution": [
+        1242,
+        375
+      ],
+      "cache_shards": 1,
+      "cached_detections": 496,
+      "capped_frames": 0
+    },
+    "KITTI-0007": {
+      "name": "KITTI-0007",
+      "video_sha256": "c40ee675a516ba1af911a87db9a24315d08af8d7e80186b7b72153b413509e39",
+      "cache_sha256": [
+        "bc42c3e8b5770d4f35493eb5c1ca31d3dcaec12388d7d22eee4d30ca8d03df4f"
+      ],
+      "frames": 800,
+      "fps": 10,
+      "resolution": [
+        1242,
+        375
+      ],
+      "cache_shards": 1,
+      "cached_detections": 208,
+      "capped_frames": 0
+    }
+  },
+  "historical_references": {
+    "MOT17-09-DPM": {
+      "prediction_bytes_sha256": "672e8a571d58b93a9729c777037cac6d3d02834274f8ab298498874c5a42f4f0"
+    },
+    "MOT17-10-DPM": {
+      "prediction_bytes_sha256": "d39f91be9e51772d63d3002c9d742acdc2101c500c845948645327bfb7b0438f"
+    },
+    "MOT17-11-DPM": {
+      "prediction_bytes_sha256": "72ba044ca5c6da50c8c8e5ed98676f83c4f36374a7d5975e53ea5e56a46f625b"
+    },
+    "MOT17-13-DPM": {
+      "prediction_bytes_sha256": "bbfb3140f986aef0e98a0fb578822998c9674171d46b4f82b4a79b9b7b3d5405"
+    },
+    "MOT17-04-DPM": {
+      "prediction_bytes_sha256": "e5ef5e4c0f7cee4486808e258cc9d6f035546f6a25b60ddf4fd2be098257536b"
+    },
+    "MOT20-01": {
+      "prediction_bytes_sha256": "80df0e30bc1865587a66bbd7f4625e0241649aed6bbb9595462707047d3703f1"
+    },
+    "MOT20-02": {
+      "prediction_bytes_sha256": "1736c6604c6c43ca35bfcbd9819dccb5fd5825dad02e1ec37d1d0717ff6be3d2"
+    },
+    "MOT20-06": {
+      "prediction_bytes_sha256": "798eef93afa4f9317b77a68f5de7930085978a820371632a7ed33b9cc682b934"
+    },
+    "MOT20-07": {
+      "prediction_bytes_sha256": "141e930414e3798054e065ac8d23bde1061f0f7540a75d0f46fb34b77041817e"
+    },
+    "MOT20-08": {
+      "prediction_bytes_sha256": "8bb924a3809c84caa5ef465970dbc39cfcd16cb2520d5583c597b177a6901270"
+    },
+    "MOT17-07-DPM": {
+      "prediction_bytes_sha256": "4052089fe392a3b3fdc908e4945a99381704bb7e61a5341a3dd82361e051d8b5"
+    },
+    "MOT17-08-DPM": {
+      "prediction_bytes_sha256": "f69765681917d7f7f3625d27d37fafb3656b7081ed160d64eb2dd0266ef7aba8"
+    },
+    "MOT17-12-DPM": {
+      "prediction_bytes_sha256": "e55256ee4cc3fa62f23d1ac709976c9a13f3221762d1e1fe7e93f2003e682838"
+    },
+    "MOT17-14-DPM": {
+      "prediction_bytes_sha256": "e0d21424bf7c30e7a4048ea35874130081a1a16ecd4802dfbb6dfce889d46cf4"
+    },
+    "MOT20-03": {
+      "prediction_bytes_sha256": "e50ce5710d0bd1de05431dc05c325b60466924d3f1824dbd9716c283d5ed4cd9"
+    },
+    "MOT20-05": {
+      "prediction_bytes_sha256": "290e2e0ad41338fabc807e267dc70c288f11d1903ae2a0e36f2798040f31aa24"
+    },
+    "KITTI-0000": {
+      "prediction_bytes_sha256": "0b785202cfdb141037a30efe813628c6482e69e21afd777b3bde41b7a3ab357f"
+    },
+    "KITTI-0001": {
+      "prediction_bytes_sha256": "f189ff7057af36b6fbc2c175712db02cf4305bd9c0ceaea319f5501317755323"
+    },
+    "KITTI-0002": {
+      "prediction_bytes_sha256": "a3be7a54255ddb30691a2553d34a4d438a50cd4d6ed369c463e1020ccd61f5f3"
+    },
+    "KITTI-0003": {
+      "prediction_bytes_sha256": "dd90236ed61a9d847a64b4a18bb93d0e94db8626f4a2a77c700d74863d8096d1"
+    },
+    "KITTI-0004": {
+      "prediction_bytes_sha256": "ee3db3886f6534d16cb6534b61f4b7d9c8f2412a9c408920e9603bfcc51dc4cd",
+      "native_sha256": {
+        "predictions.local.json": "ee3db3886f6534d16cb6534b61f4b7d9c8f2412a9c408920e9603bfcc51dc4cd",
+        "native-output.local.json": "4be08fe5362c40f278f991219fad4c05a3aa77402172a6e4a1cad9e6ad528764",
+        "final-state.local.pickle": "15a16e8f4d8595d03202b6925cb6a99e18e5afbf493af0b04e7975304434c556"
+      }
+    },
+    "KITTI-0005": {
+      "prediction_bytes_sha256": "0d704e9320a06f8db05b3557c49025921ee7769cdffc6431e3425601f1ff66fa",
+      "native_sha256": {
+        "predictions.local.json": "0d704e9320a06f8db05b3557c49025921ee7769cdffc6431e3425601f1ff66fa",
+        "native-output.local.json": "886340c209d788bf8d9abefe4ebd56d6390ff389b50e48a73b076bc3d55c3b87",
+        "final-state.local.pickle": "4a45361ac779b794f8347421a25169432a13b24713477d78bdb4de31577d7675"
+      }
+    },
+    "KITTI-0006": {
+      "prediction_bytes_sha256": "37bd68558116f30bedc05dc9ea7b29336953c765c0623e35eb33f5f1f87ec314",
+      "native_sha256": {
+        "predictions.local.json": "37bd68558116f30bedc05dc9ea7b29336953c765c0623e35eb33f5f1f87ec314",
+        "native-output.local.json": "d33e0701f4eee7770a29cbddd5c2ded51b28dff741a099aa7d601aab1eb46e65",
+        "final-state.local.pickle": "d8866ad7e21aed52e5ac9cb7135289d073e612e1ef6265a5fd2f8efa5d4df323"
+      }
+    },
+    "KITTI-0007": {
+      "prediction_bytes_sha256": "e5d077922cc34f3461a16f38a684fb62b9124a99a5d6721a9c898c56700002b3",
+      "native_sha256": {
+        "predictions.local.json": "e5d077922cc34f3461a16f38a684fb62b9124a99a5d6721a9c898c56700002b3",
+        "native-output.local.json": "37961989b107fbc4587d9517f640a64fa5999e570ec7cbd978bebce3a7f98e3e",
+        "final-state.local.pickle": "d8866ad7e21aed52e5ac9cb7135289d073e612e1ef6265a5fd2f8efa5d4df323"
+      }
+    }
+  },
+  "image_archive": {
+    "url": "https://s3.eu-central-1.amazonaws.com/avg-kitti/data_tracking_image_2.zip",
+    "etag": "\"5eed58a54608975e5c81b610b8461f2b-1886\"",
+    "size": 15813146295,
+    "central_start": 15811016707
+  },
+  "source_terms": [
+    {
+      "dataset": "MOT17",
+      "page": "https://motchallenge.net/data/MOT17/",
+      "license": "CC BY-NC-SA 3.0",
+      "page_sha256": "fb34867c22c36630c063ea7a87344d5e1e8c2116890a8dd43ccc7c972030cdb8",
+      "attribution": "MOTChallenge / Milan, Leal-Taixe, Reid, Roth, Schindler; MOT16, arXiv:1603.00831",
+      "scope": "Local noncommercial research. No media, labels, caches or raw diagnostic redistribution or relicensing."
+    },
+    {
+      "dataset": "MOT20",
+      "page": "https://motchallenge.net/data/MOT20/",
+      "license": "CC BY-NC-SA 3.0",
+      "page_sha256": "d096d5fad93fcfe3c2c8e796e28488bbc8fe01d3d581272c2e00b7b58bf20576",
+      "attribution": "MOTChallenge / Dendorfer et al.; MOT20, arXiv:2003.09003",
+      "scope": "Local noncommercial research. No media, labels, caches or raw diagnostic redistribution or relicensing."
+    },
+    {
+      "dataset": "KITTI",
+      "page": "https://www.cvlibs.net/datasets/kitti/",
+      "license": "CC BY-NC-SA 3.0",
+      "page_sha256": "828a0add3e07f8ae9156ec73bde2ebaa4db0a637ad36e000cf01670b717bcd2a",
+      "attribution": "Geiger, Lenz, Urtasun; Are we ready for Autonomous Driving? CVPR2012",
+      "scope": "Local noncommercial research. No media, labels, caches or raw diagnostic redistribution or relicensing."
+    }
+  ],
+  "definitions": {
+    "same_rule": "Exact prior x=T*x, P=T*P*T.T guard, native updates/weak stage/solver/parameters and all four role handling unchanged; pinned original source and protocol hashes. No new epsilon, duration, confidence, frame sampling or app/worker/default change.",
+    "roles": "Pre-predict actual own-arm rows: active age0 vs retained age>0, confirmed ID>=0 vs tentative ID<0. Four mutually exclusive roles. Additional overlapping active/retained/unconfirmed/any groups; totals across overlapping groups must not be summed. Count projected rows and distinct source frames per group, never reference hypothetical candidates or repeated passes as new exposure.",
+    "selection": "Fixed prior16 MOT order then KITTI0000-0007 lexical,24 seen sources. First completed source/group with >=1 actual projected row AND >=1 exposed source frame, two exact arm repeats, full native reference equality, zero cap frames/numerical failures/nonpositive projected predictions or accepted posteriors. No count ranking, GT/quality score or outcome-based changes. All scheduled sources inspected even after selection. No discovery match remains null.",
+    "zero_failure": "Retain complete ordered ledger including zero births, zero estimator exposure, zero projections, cap frames and failures with safe reason codes/available pass counts. Failure is unknown, never zero; any scheduled failure blocks confirmation replication. No retry, replacement, amendment, source/clip substitution, early stop or threshold relaxation.",
+    "separation": "Finish and seal full discovery ledger/hash/selections before ANY reserved PNG member read, inference or tracking. Prepare both full reserved0008/0009 regardless discovery selections. Write immutable pre-inference seal tied to discovery, separate native references and confirmation ledger. Reserved sources never fill discovery slots.0000-0007 now seen; every scheduled source belongs exactly once.",
+    "confirmation": "Each group requires discovery selection, all scheduled discovery and two reserved sources completed, >=1 actual projection/frame in EACH reserved source, exact repeats/native seals, zero cap/numerical/invalid treatment rows. Otherwise false. Mechanism exposure only, never per-scene harm, quality, identity or release acceptance; no pooling or compensation.",
+    "independence": "KITTI0008/0009 fixed next unseen training IDs before outputs, no prior project member/inference/tracker/GT read. Unseen source separation only; same KITTI camera/dataset as some discovery, shared pretrained detector/runtime and nonrandom two-source sample. Not source-family/site/person/training independence or statistical power.",
+    "native_reference": "Unhooked complete prediction JSON including IDs/format must equal existing archived bytes for ALL24 discovery sources;0004-0007 native-output/final-state seals additionally equal original geometry archive. All phase native references sealed before any phase treatment. Two observed-reference passes equal native full predictions/returns/final-state bytes, two treatment repeats equal full output/state/uncompressed diagnostic histories/role counts. Every pass fresh isolated process; all source frames continuous across cache shards. Do not load pickles.",
+    "timing": "Original source FPS (MOT25/30, KITTI10); tracker parameters including buffer30 unchanged, no FPS normalization. Native budget=floor(frame_rate/30*buffer), i.e.25/30/10 frames, not fixed3s. Original fixed one-frame F, no elapsed-time mode.",
+    "preparation": "Official image-only ZIP metadata/ETag frozen. Only after discovery seal, four concurrent exact8MiB If-Match ranges into local sparse image-only ZIP; no network retry. Full ordered PNG CRC/SHA and FFV1 bgr0 native10Hz pixel equality. Frozen YOLO26n8.4.176 CPU person detector, weights/settings unchanged. Full390/803 reserved frames; no clipping or labels archive.",
+    "scope": "All source-level counts/selections/zero/failure reasons and whole-input/output/code/runtime seals public. Streaming raw states/covariances/coordinates/case axes/matrices, frame/IDs/events, media/weights/caches, paths and exceptions stay ignored local. No GT/evaluator/FP/FN/IDSW/HOTA inputs or scoring. Weak continuation remains native and measured accepted counts may change; no claim of equal accepted events or true harm. No default promotion."
+  }
+}

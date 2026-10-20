@@ -420,3 +420,13 @@ docs/en/tracking-geometry-validity.md
 docs/zh-TW/tracking-geometry-validity.md
 docs/validation/v0.3-geometry-validity-references.json
 docs/validation/v0.3-geometry-validity.json
+
+# Frozen geometry exposure discovery and untouched confirmation
+depthport/tracking_geometry_exposure.py
+tools/select_tracking_geometry_exposure.py
+tools/prepare_tracking_geometry_exposure.py
+tools/freeze_tracking_geometry_exposure.py
+tests/test_tracking_geometry_exposure.py
+docs/validation/v0.3-geometry-exposure-protocol.json
+docs/en/tracking-geometry-exposure.md
+docs/zh-TW/tracking-geometry-exposure.md
