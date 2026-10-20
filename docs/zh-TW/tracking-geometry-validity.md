@@ -82,3 +82,5 @@ python tools/validate_tracking_geometry.py run \
 [KITTI官方條款](https://www.cvlibs.net/datasets/kitti/)為CC BY-NC-SA3.0；引用Andreas Geiger、Philip Lenz、Raquel Urtasun，*Are we ready for Autonomous Driving? The KITTI Vision Benchmark Suite*，CVPR2012。限本機非商業研究，不散布來源媒體／GT／原始結果，也不重新授權為專案程式。
 
 只發布審查過的來源層級計數、各場景門檻／零值／失敗及完整來源／程式／輸出雜湊。完整state／covariance／矩陣、個案觸發軸、影格／ID／出生key／事件集合、路徑、媒體、權重、快取與原始診斷都留ignored artifacts；既有Release tag／下載包不改。
+
+[另凍結的GT-free曝光選取及未見確認已完成](tracking-geometry-exposure.md)；本頁原凍結定義與結果不改寫。

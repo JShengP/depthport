@@ -1,0 +1,16 @@
+{
+  "protocol_sha256": "0e17491922bcada995e96882a0fdf53fe40827f10d1d03b2fd301fd758b0b21f",
+  "discovery_sha256": "5b80ff38b3b0806b81a5f7cd35fe2c5a4216b487ed412321d396daa6bb113347",
+  "selection": {
+    "active_confirmed": "MOT17-12-DPM",
+    "active_tentative": null,
+    "retained_confirmed": "MOT17-09-DPM",
+    "retained_tentative": null,
+    "active": "MOT17-12-DPM",
+    "retained": "MOT17-09-DPM",
+    "unconfirmed": null,
+    "any": "MOT17-09-DPM"
+  },
+  "reserved_inference_started": false,
+  "sealed_at_utc": "2026-10-20T03:38:51.155471+00:00"
+}

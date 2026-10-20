@@ -1,0 +1,20 @@
+{
+  "protocol_sha256": "0e17491922bcada995e96882a0fdf53fe40827f10d1d03b2fd301fd758b0b21f",
+  "discovery_sha256": "5b80ff38b3b0806b81a5f7cd35fe2c5a4216b487ed412321d396daa6bb113347",
+  "ledger": [
+    {
+      "name": "KITTI-0008",
+      "status": "completed",
+      "frames": 390,
+      "pixel_identical_frames": 390,
+      "image_manifest_sha256": "8c3449653d43f56ba8e714b23d45942c47834e973400b197736cd912c70b7c09"
+    },
+    {
+      "name": "KITTI-0009",
+      "status": "completed",
+      "frames": 803,
+      "pixel_identical_frames": 803,
+      "image_manifest_sha256": "97287558ce7bc5b7af27850a1fa7f1072978b30cc06a840174aed6fcfbfdf3de"
+    }
+  ]
+}

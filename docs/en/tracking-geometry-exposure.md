@@ -2,7 +2,7 @@
 
 [繁體中文](../zh-TW/tracking-geometry-exposure.md) · [ROADMAP](../../ROADMAP.md) · [Original geometry rule](tracking-geometry-validity.md) · [Frozen protocol](../validation/v0.3-geometry-exposure-protocol.json)
 
-**Discovery sealed; reserved confirmation pending.** Preserve the previous geometry rule and failed two-source gate. No accuracy or default promotion is claimed.
+**Discovery and unseen confirmation are complete; the formal replication gate remains blocked by four retained archive failures.** Preserve the previous geometry rule and failed two-source gate. No accuracy or default promotion is claimed.
 
 ## Frozen process
 
@@ -46,6 +46,27 @@ Fixed-order selections are **MOT17-12-DPM** for active-confirmed/active and **MO
 
 The four failures are serialization compatibility: old archives have a Session object around `frames`, while the current replay saves the frame list. A separate post-failure read-only comparison finds every full frame list (including IDs) equal and its unchanged JSON serialization equal the new native file hash. No tracker rerun is used for this diagnosis. This does **not** satisfy frozen whole-file equality or change the failure status. A future format-aware protocol needs a separate prospective freeze; do not repair this result into a pass.
 
-Reserved0008/0009 preparation and confirmation remain pending at this discovery publication. Only after this full discovery hash/selection seal may they be read or inferred. Parameters, weak continuation and defaults remain unchanged.
+At the discovery publication, reserved0008/0009 preparation and confirmation were still pending. Only after this full discovery hash/selection seal may they be read or inferred. Parameters, weak continuation and defaults remain unchanged.
 
 Native weak-stage code/inputs remain enabled; accepted weak updates total55,604→55,625 and three sources have different complete saved outputs. This is not an accepted-event membership harm audit or proof of recovery/identity benefit.
+
+## Unseen confirmation and final decision
+
+[Confirmation ledger](../validation/v0.3-geometry-exposure-confirmation.json) · [New native seals](../validation/v0.3-geometry-exposure-confirmation-references.json) · [Preparation](../validation/v0.3-geometry-exposure-preparation.json) · [Pre-inference seal](../validation/v0.3-geometry-exposure-pre-inference.json)
+
+The [method commit](https://github.com/JShengP/depthport/commit/0892857b5f03dba413f0a41f53b66d2651c296b1) precedes every new geometry scan. The [complete discovery publication](https://github.com/JShengP/depthport/commit/c590532171f61401ec99653ea8fbf7d5f7c49b26), with SHA256 `5b80ff38b3b0806b81a5f7cd35fe2c5a4216b487ed412321d396daa6bb113347`, precedes any reserved PNG-member read/inference. The local pre-inference seal binds that complete ledger and unchanged selections. Both full sources prepare successfully:390/803 original PNGs and video frames are pixel-identical, with original detector/settings/runtime/weights. No new GT, accuracy evaluator, tuning, retry, source replacement or default change.
+
+All ten reserved passes complete, with complete reference/native-output/final-state equality and exact two repeats per observed arm. These are newly sealed unhooked native references, not pre-existing historical archives. Both have zero cap frames, numerical failures, nonpositive accepted posteriors and treatment nonpositive predictions.
+
+- **KITTI0008:**390 frames,26 births,190 prediction rows,4 high/40 weak accepted updates,44 confirmed observations. Two actual retained-confirmed projections in two source frames; native invalid prediction rows8→0. The native reference has only one hypothetical candidate row: selection correctly uses the two actual treatment-history rows. Active-confirmed and both tentative roles0.
+- **KITTI0009:**803 frames,1 birth,19 predictions,8 high/0 weak accepted updates,8 confirmed observations. One actual retained-confirmed projection in one source frame; native invalid predictions3→0. Active-confirmed and both tentative roles0. Zero weak acceptance is retained, not interpreted as weak-stage filtering or efficacy.
+
+Both reserved sources therefore have eligible **retained-confirmed/retained/any exposure**. Active-confirmed/active have discovery exposure but no reserved exposure; tentative/unconfirmed have neither a discovery selection nor reserved exposure. Complete saved outputs/native returns/final states are unchanged between reference and treatment in both sources, while intermediate projected histories differ. This demonstrates geometry/exposure, not recovery or identity benefit, and final-state equality does not imply unchanged intermediate states.
+
+**Every formal `replicated_in_both_reserved` remains false.** The frozen rule requires every scheduled discovery source to complete; the four original whole-file failures block it. Do not remove failures, relax equality retrospectively, compensate across groups or call the retained-source triggers a passed study. Per-scene accepted-event membership/true harm, covariance calibration, tracking quality and app/release acceptance remain open; this exposure protocol does not repeat the earlier event-membership harm gate.
+
+Across both phases:26 scheduled full sources /21,836 unique source frames;22 sources /20,858 frames have full observed comparisons, four /978 frames have native-only archive failures and unmeasured role exposure.26 native plus88 observed passes execute;16 dependent observed passes are blocked. No retries, source substitutions, omitted zeros or new source/run/preparation failures occur beyond the four retained archive-contract failures. Repeats are not independent samples.0008/0009 are now seen and cannot be future untouched confirmation.
+
+Next prospectively freeze archive-carrier compatibility contracts and read-only tentative-role reachability. Preserve this original failure ledger. Separately freeze accepted-event membership/proxy-harm auditing for the three changed discovery outputs before interpreting their additional weak updates or designing a new intervention. Keep the same rule, parameters, native weak continuation and defaults. Future untouched-source confirmation requires a new prospective seal; do not tune from these outcomes.
+
+Checks:22 new synthetic/native contracts plus24 original geometry contracts pass; full base suite495 passed/70 optional skipped (one existing Starlette/httpx deprecation warning). Method-head application and model API CI both pass,8/8 Linux/Windows Python3.11/3.12 jobs. Discovery publication application CI passes4/4. Public manifest, links, pinned hashes and reviewed source archive are checked again for the final documentation publication. Raw diagnostics/media remain local.

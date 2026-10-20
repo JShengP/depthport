@@ -1,0 +1,76 @@
+{
+  "format": "depthport.geometry-exposure-native.v1",
+  "protocol_sha256": "0e17491922bcada995e96882a0fdf53fe40827f10d1d03b2fd301fd758b0b21f",
+  "phase": "confirmation",
+  "sealed_before_phase_control": true,
+  "ledger": [
+    {
+      "name": "KITTI-0008",
+      "phase": "confirmation",
+      "frames": 390,
+      "fps": 10,
+      "status": "reference_sealed",
+      "passes": {
+        "native": {
+          "sha256": {
+            "predictions.local.json": "a90cf11d2d4c893be6868a5864995f97b6dc8db94dd922465022f5c2f2aa9cf4",
+            "native-output.local.json": "93b690fd9933416311d0df28aeb2c70d260163e7a2d5cd2232321b18fc03c477",
+            "final-state.local.pickle": "7e7655251de0a06920ff2d860e65c05261692b86cf47059b11cd8dee4f8df36c"
+          },
+          "canonical_prediction_sha256": "12a2d526ca02448988ee63ed8b496d43b3d1dc4d768b2804811732be43e61b45",
+          "trace_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "source_lock": {
+        "name": "KITTI-0008",
+        "video_sha256": "5ec0ca650fcafbe3e7612f13307494fba951e6dd8e5eda55983df1376bb15876",
+        "cache_sha256": [
+          "88bf1759acac6d002bf9a76b838cee24ca3384508827d95d7185485d83d701f4"
+        ],
+        "frames": 390,
+        "fps": 10,
+        "resolution": [
+          1242,
+          375
+        ],
+        "cache_shards": 1,
+        "cached_detections": 1055,
+        "capped_frames": 0
+      }
+    },
+    {
+      "name": "KITTI-0009",
+      "phase": "confirmation",
+      "frames": 803,
+      "fps": 10,
+      "status": "reference_sealed",
+      "passes": {
+        "native": {
+          "sha256": {
+            "predictions.local.json": "7174148325342b0f7687479ab7ffed9f894176686c4eb61b1fecf40ce8630f15",
+            "native-output.local.json": "fc1d72b61b113d61731732020614a384ec9b5f9e97709ebfdb38577dd33a89af",
+            "final-state.local.pickle": "0c9b13875641142cfe7b4ad8cc6ddcfdd4587ccb5b5cb4baf56ea5f544065a16"
+          },
+          "canonical_prediction_sha256": "069ad2a4bdefbc68ece80e381fe708fd7ec8acec01c1d4d106ce6a09605cb7fa",
+          "trace_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "source_lock": {
+        "name": "KITTI-0009",
+        "video_sha256": "df05fc200cebeaa011fc732bc1d1b012cfebc9966ab1affadc298782aac941eb",
+        "cache_sha256": [
+          "ed5f1e939dc3a315020979489fabdb558794f315983a8c0fd4bf7ef862ae1e32"
+        ],
+        "frames": 803,
+        "fps": 10,
+        "resolution": [
+          1242,
+          375
+        ],
+        "cache_shards": 1,
+        "cached_detections": 76,
+        "capped_frames": 0
+      }
+    }
+  ]
+}

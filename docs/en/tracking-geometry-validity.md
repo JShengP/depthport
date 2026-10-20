@@ -82,3 +82,5 @@ Validation:24 new contracts /205 related pinned research contracts pass; the upd
 [KITTI official terms](https://www.cvlibs.net/datasets/kitti/) are CC BY-NC-SA3.0; attribution: Andreas Geiger, Philip Lenz, Raquel Urtasun, *Are we ready for Autonomous Driving? The KITTI Vision Benchmark Suite*, CVPR2012. This is local noncommercial research; no source media, GT or raw results are redistributed or relicensed as project code.
 
 Only reviewed source-level counts, each scene's gates/zeros/failures and complete source/code/output seals are published. Full states/covariances/matrices, individual trigger axes, frame/ID/birth keys/event sets, paths, media, weights, caches and raw diagnostics remain under ignored local artifacts. Existing release tags/download assets are unchanged.
+
+[The separately frozen GT-free exposure follow-up is now complete](tracking-geometry-exposure.md); the original definitions/results above remain unchanged.

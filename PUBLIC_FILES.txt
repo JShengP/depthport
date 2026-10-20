@@ -435,3 +435,9 @@ docs/zh-TW/tracking-geometry-exposure.md
 docs/validation/v0.3-geometry-exposure-discovery.json
 docs/validation/v0.3-geometry-exposure-discovery-references.json
 docs/validation/v0.3-geometry-exposure-archive-compatibility.json
+
+# Untouched source preparation seal and complete geometry confirmation
+docs/validation/v0.3-geometry-exposure-confirmation.json
+docs/validation/v0.3-geometry-exposure-confirmation-references.json
+docs/validation/v0.3-geometry-exposure-preparation.json
+docs/validation/v0.3-geometry-exposure-pre-inference.json
