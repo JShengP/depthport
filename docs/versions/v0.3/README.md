@@ -9,6 +9,8 @@ Experimental Alpha / 實驗性 Alpha
 
 </div>
 
+[Results Index / 測試結果總覽](https://jshengp.github.io/depthport/results/?lang=zh-TW) · Models, trackers, platforms & limits / 模型、追蹤器、平台與限制
+
 Adds opt-in local Sessions, replay review and offline Object IDs while retaining the viewer and Spatial Analysis.
 保留檢視器與空間分析，新增選用本機 Session、回放檢查與離線 Object ID。
 

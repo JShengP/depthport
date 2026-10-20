@@ -8,27 +8,46 @@ function sample(data,u,v){
  return {u:x,v:y,raw,z,xyz:[(x-k.cx)*z/k.fx,(y-k.cy)*z/k.fy,z]};
 }
 const atFrame=(observations,index)=>observations.find(o=>o.index===index)||null;
-const api={sourcePixel,sample,atFrame};
+// Bound the complete load, including a stalled response body or decompression.
+async function withDeadline(task, milliseconds=45000){
+ const controller=new AbortController();let timer;
+ const expired=new Promise((_,reject)=>{timer=setTimeout(()=>{const error=new Error('Load timed out');error.name='TimeoutError';controller.abort(error);reject(error);},milliseconds);});
+ try{return await Promise.race([Promise.resolve().then(()=>task(controller.signal)),expired]);}finally{clearTimeout(timer);}
+}
+async function readJSON(url,{signal,onProgress}={}){
+ const response=await fetch(url,{signal});if(!response.ok)throw Error('Static data HTTP '+response.status);
+ if(!response.body?.getReader)return response.json();
+ const reader=response.body.getReader(),decoder=new TextDecoder();let text='',bytes=0;
+ try{while(true){const {done,value}=await reader.read();if(done)break;bytes+=value.byteLength;text+=decoder.decode(value,{stream:true});onProgress?.(bytes);}text+=decoder.decode();}
+ finally{reader.releaseLock();}
+ signal?.throwIfAborted();return JSON.parse(text);
+}
+const api={sourcePixel,sample,atFrame,withDeadline,readJSON};
 if(typeof module==='object'&&module.exports){module.exports=api;return;}
 root.RealResults=api;
 const q=s=>document.querySelector(s),zh=()=>document.documentElement.lang.startsWith('zh'),tr=(en,tw)=>zh()?tw:en;
 const fmt=n=>Number.isFinite(n)?Number(n).toPrecision(7):'—';
-const get=async url=>{const r=await fetch(url);if(!r.ok)throw Error('Static data HTTP '+r.status);return r.json();};
-const image=src=>new Promise((resolve,reject)=>{const i=new Image();i.onload=()=>resolve(i);i.onerror=()=>reject(Error('Image unavailable: '+src));i.src=src;});
-async function floats(encoded){
+const get=readJSON;
+const image=(src,signal)=>new Promise((resolve,reject)=>{
+ const i=new Image(),cleanup=()=>{i.onload=i.onerror=null;signal?.removeEventListener('abort',abort);};
+ const abort=()=>{cleanup();i.src='';reject(signal.reason);};
+ i.onload=()=>{cleanup();resolve(i);};i.onerror=()=>{cleanup();reject(Error('Image unavailable'));};
+ if(signal?.aborted){abort();return;}signal?.addEventListener('abort',abort,{once:true});i.src=src;
+});
+async function floats(encoded,signal){
  if(!root.DecompressionStream)throw Error('This browser needs gzip DecompressionStream support to read exact Float32 arrays.');
  const bytes=Uint8Array.from(atob(encoded.data),c=>c.charCodeAt(0));
- const buffer=await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
+ const buffer=await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'),{signal})).arrayBuffer();
  if(buffer.byteLength!==encoded.shape.reduce((a,b)=>a*b,1)*4)throw Error('Float32 length mismatch');
  if(root.crypto?.subtle){const h=await crypto.subtle.digest('SHA-256',buffer);if(Array.from(new Uint8Array(h),x=>x.toString(16).padStart(2,'0')).join('')!==encoded.sha256)throw Error('Float32 hash mismatch');}
+ signal?.throwIfAborted();
  const view=new DataView(buffer),out=new Float32Array(buffer.byteLength/4);for(let i=0;i<out.length;i++)out[i]=view.getFloat32(i*4,true);return out;
 }
 function fail(node,error){node.textContent=tr('Saved data could not load: ','保存資料無法載入：')+error.message;node.setAttribute('role','alert');}
 function point(event,canvas){const r=canvas.getBoundingClientRect();return [(event.clientX-r.left)*canvas.width/r.width,(event.clientY-r.top)*canvas.height/r.height];}
 function median(values){values.sort((a,b)=>a-b);const m=Math.floor(values.length/2);return values.length%2?values[m]:(values[m-1]+values[m])/2;}
 async function bus(){
- const status=q('#realBusStatus'),base='../data/bus/';let data=null,rgb=null,semantic=null,viewer=null,token=0;
- const manifest=await get(base+'manifest.json');semantic=await get(base+manifest.semantic);
+ const status=q('#realBusStatus'),retry=q('#realBusRetry'),base='../data/bus/';let data=null,rgb=null,semantic=null,viewer=null,manifest=null,loading=false,problem=null;const cache=new Map();
  const canvas=q('#realCloud');try{viewer=new root.CloudViewer(canvas);}catch(e){fail(q('#realCloudStatus'),e);}
  q('#realPointSize').oninput=e=>{if(viewer)viewer.size=Number(e.target.value);};
  q('#realColor').onchange=e=>viewer?.setColorMode(e.target.value);
@@ -74,10 +93,44 @@ async function bus(){
   q('#realProvenance').textContent=JSON.stringify({model:data.model,weights_sha256:data.weights_sha256,depth_sha256:data.depth.sha256,raw_sha256:(data.raw_depth==='depth'?data.depth:data.raw_depth).sha256,depth_info:data.depth_info,intrinsics:data.intrinsics,source_sha256:manifest.source.sha256},null,2);
  }
  function selectObjects(){q('#realObject').replaceChildren();const opt=document.createElement('option');opt.value='-1';opt.textContent=tr('All objects / full cloud','全部物件／完整點雲');q('#realObject').append(opt);objects().forEach((o,i)=>{const n=document.createElement('option');n.value=i;n.textContent=`${i+1}: ${o.label} (${o.confidence.toFixed(3)})`;q('#realObject').append(n);});update();}
- async function load(){const id=++token;status.textContent=tr('Loading saved Float32 results…','載入保存的 Float32 結果…');q('#realEngine').disabled=true;
-  try{const entry=manifest.engines.find(e=>e.id===q('#realEngine').value),d=await get(base+entry.path);const values=await floats(d.depth),raw=d.raw_depth==='depth'?values:await floats(d.raw_depth),im=await image(base+d.rgb);if(id!==token)return;data={...d,values,raw};rgb=im;selectObjects();query(405,540);}catch(e){fail(status,e);}finally{q('#realEngine').disabled=false;}}
+ function loadStatus(phase='',bytes=0){status.textContent=tr('Loading depth and point cloud data…','正在載入深度與點雲資料…')+(phase?' '+phase:'')+(bytes?' · '+(bytes/1048576).toFixed(1)+' MB':'');}
+ function loadFailure(){status.textContent=problem?.name==='TimeoutError'?tr('Loading timed out (45 seconds). Check your connection and retry.','載入逾時（45 秒）。請檢查連線後重試。'):tr('Depth and point cloud data could not load. Check your connection or browser support, then retry.','深度與點雲資料無法載入。請檢查連線或瀏覽器支援後重試。');status.setAttribute('role','alert');}
+ async function load(){
+  if(loading)return;loading=true;problem=null;data=null;rgb=null;
+  status.setAttribute('role','status');retry.hidden=true;q('#realEngine').disabled=true;for(const id of ['#realMapKind','#realSemanticMode','#realObject'])q(id).disabled=true;q('#realBus').setAttribute('aria-busy','true');
+  for(const id of ['#realPixel','#realNative','#realZ','#realXYZ'])q(id).textContent='—';
+  for(const id of ['#realStats','#realObjectStats','#realProvenance'])q(id).textContent='';
+  for(const id of ['#realRGB','#realDepth']){const c=q(id);c.getContext('2d').clearRect(0,0,c.width,c.height);}
+  viewer?.setPoints(new Float32Array(),new Uint8Array());if(viewer)q('#realCloudStatus').textContent='';loadStatus();
+  try{await withDeadline(async signal=>{
+   const step=(en,tw,bytes=0)=>{signal.throwIfAborted();loadStatus(tr(en,tw),bytes);};
+   if(!manifest){step('Reading catalog','讀取資料目錄');manifest=await get(base+'manifest.json',{signal});}
+   if(!semantic){step('Reading object masks','讀取物件遮罩');semantic=await get(base+manifest.semantic,{signal});}
+   const entry=manifest.engines.find(e=>e.id===q('#realEngine').value);
+   const cached=cache.get(entry.id);if(cached){data=cached.data;rgb=cached.rgb;selectObjects();query(405,540);if(viewer)q('#realCloudStatus').textContent='';return;}
+   step('Loading point cloud first','優先載入點雲');
+   // Failure of an optional small pack must not block the original full pack.
+   try{
+    await withDeadline(async previewSignal=>{
+     const preview=await get(base+'previews/'+entry.id+'.json',{signal:previewSignal});
+     const im=await image(base+preview.rgb,previewSignal);signal.throwIfAborted();previewSignal.throwIfAborted();
+     if(viewer){viewer.setPacked(preview.cloud.packed,preview.cloud.count,true,preview.color_range);q('#realCloudStatus').textContent=tr('Point cloud ready to rotate/zoom. Exact depth queries are still loading.','點雲已可旋轉／縮放；完整深度查詢資料仍在載入。');}
+     const c=q('#realRGB');c.width=preview.width;c.height=preview.height;c.getContext('2d').drawImage(im,0,0,c.width,c.height);
+    },8000);
+   }catch(e){signal.throwIfAborted();}
+   let last=0;
+   step('Downloading saved results','下載保存結果');
+   const d=await get(base+entry.path,{signal,onProgress:bytes=>{const now=Date.now();if(now-last>200){last=now;step('Downloading saved results','下載保存結果',bytes);}}});
+   step('Decoding and verifying depth','解壓縮並驗證深度');
+   const values=await floats(d.depth,signal),raw=d.raw_depth==='depth'?values:await floats(d.raw_depth,signal);
+   step('Loading aligned image','載入對齊影像');const im=await image(base+d.rgb,signal);signal.throwIfAborted();
+   data={...d,values,raw};rgb=im;selectObjects();query(405,540);cache.set(entry.id,{data,rgb});if(viewer)q('#realCloudStatus').textContent='';
+  });}catch(e){data=null;rgb=null;problem=e;loadFailure();retry.hidden=false;if(viewer?.points)q('#realCloudStatus').textContent=tr('The point cloud preview remains available. Exact depth queries are unavailable; retry loading.','點雲預覽仍可操作；完整深度查詢尚未載入，請重試。');}
+  finally{loading=false;q('#realEngine').disabled=false;for(const id of ['#realMapKind','#realSemanticMode','#realObject'])q(id).disabled=!data;q('#realBus').setAttribute('aria-busy','false');}
+ }
+ retry.onclick=load;
  q('#realEngine').onchange=load;q('#realObject').onchange=update;q('#realSemanticMode').onchange=selectObjects;q('#realMapKind').onchange=update;
- document.addEventListener('depthport:language',()=>{if(data){q('#realObject').options[0].textContent=tr('All objects / full cloud','全部物件／完整點雲');update();}});await load();
+ document.addEventListener('depthport:language',()=>{if(loading)loadStatus();else if(problem)loadFailure();if(data){q('#realObject').options[0].textContent=tr('All objects / full cloud','全部物件／完整點雲');update();}});await load();
 }
 async function replay(){
  const base='../data/tracking/',status=q('#realReplayStatus'),manifest=await get(base+'manifest.json'),frames=await get(base+manifest.frames),tracks=await get(base+manifest.tracks),c=q('#realReplayCanvas'),ctx=c.getContext('2d');

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DepthPort — Results Index</title>
+  <meta name="description" content="Browse dated DepthPort model, tracker, browser and platform test results, with source evidence and unverified limits.">
+  <link rel="icon" href="../static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/showcase.css"><link rel="stylesheet" href="../assets/results.css">
+  <script src="../assets/showcase.js" defer></script><script src="../assets/results.js" defer></script>
+</head>
+<body data-showcase="results" data-demo-only="true">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><div class="shell header-inner"><a class="brand" href="../">◈ DEPTH<span class="brand-accent">PORT</span></a><nav class="header-nav" aria-label="Results navigation"><a href="../" data-en="Explore" data-zh="版本展示">Explore</a><a href="./" aria-current="page" data-en="Results" data-zh="測試結果">Results</a><button class="lang-button" type="button" data-lang-switch aria-label="Switch between English and Traditional Chinese">繁體中文</button></nav></div></header>
+<main id="main" class="shell results-main">
+  <section class="results-intro"><p class="eyebrow">DEPTHPORT / RESULTS INDEX</p><h1 data-en="What has actually been tested?" data-zh="哪些功能，實際測過了？">What has actually been tested?</h1><p class="results-lead" data-en="Find a model, tracker or platform. See the recorded outcome, its conditions and limits, then open the full evidence." data-zh="找到模型、追蹤器或平台，直接查看已記錄結果、測試條件與限制，再開啟完整證據。">Find a model, tracker or platform. See the recorded outcome, its conditions and limits, then open the full evidence.</p>
+  <div class="results-summary"><span><strong>{{RESULTS_COUNT}}</strong> <span data-en="indexed records" data-zh="筆索引條目">indexed records</span></span><span><strong>4</strong> <span data-en="depth models" data-zh="個深度模型">depth models</span></span><span><strong>3</strong> <span data-en="main trackers" data-zh="種主要追蹤器">main trackers</span></span><span><span data-en="Updated" data-zh="更新日期">Updated</span> <time>{{UPDATED}}</time></span></div>
+  <p class="results-boundary" data-en="A dated evidence index, not a global leaderboard or live CI status. Records can share inputs; counts do not represent independent experiments. Scores are comparable only within the same cohort/configuration. Experimental Alpha acceptance remains open." data-zh="這是有日期的證據索引，不是全球排行榜或即時 CI 狀態。條目可能共用輸入，數量不代表獨立實驗；分數只在相同場景組與配置條件下比較，實驗性 Alpha 仍有未驗收項目。">A dated evidence index, not a global leaderboard or live CI status. Records can share inputs; counts do not represent independent experiments. Scores are comparable only within the same cohort/configuration. Experimental Alpha acceptance remains open.</p></section>
+  <form class="results-filters" role="search" aria-label="Filter test results">
+    <label for="resultsSearch"><span data-en="Search" data-zh="搜尋">Search</span><input id="resultsSearch" type="search" autocomplete="off" placeholder="KITTI, HOTA, CUDA…" disabled></label>
+    <label for="resultsKind"><span data-en="Category" data-zh="分類">Category</span><select id="resultsKind" data-facet="kind" disabled><option value="" data-en="All categories" data-zh="全部分類">All categories</option><!--OPTIONS_KIND--></select></label>
+    <label for="resultsModel"><span data-en="Model" data-zh="模型">Model</span><select id="resultsModel" data-facet="model" disabled><option value="" data-en="All models" data-zh="全部模型">All models</option><!--OPTIONS_MODEL--></select></label>
+    <label for="resultsTracker"><span data-en="Tracker" data-zh="追蹤器">Tracker</span><select id="resultsTracker" data-facet="tracker" disabled><option value="" data-en="All trackers" data-zh="全部追蹤器">All trackers</option><!--OPTIONS_TRACKER--></select></label>
+    <label for="resultsPlatform"><span data-en="Platform" data-zh="平台">Platform</span><select id="resultsPlatform" data-facet="platform" disabled><option value="" data-en="All platforms" data-zh="全部平台">All platforms</option><!--OPTIONS_PLATFORM--></select></label>
+    <label for="resultsStatus"><span data-en="Outcome" data-zh="結果狀態">Outcome</span><select id="resultsStatus" data-facet="status" disabled><option value="" data-en="All outcomes" data-zh="全部狀態">All outcomes</option><!--OPTIONS_STATUS--></select></label>
+    <button type="reset" class="small-button quiet" data-en="Clear filters" data-zh="清除篩選" disabled>Clear filters</button>
+  </form>
+  <noscript><p>所有結果已列於下方；啟用 JavaScript 可使用篩選。 / All records appear below; enable JavaScript to filter.</p></noscript>
+  <p id="resultsCount" class="results-count" role="status" aria-live="polite">{{RESULTS_COUNT}} records</p>
+  <p id="resultsEmpty" hidden data-en="No matching records. Try another filter or clear the selection." data-zh="沒有符合的紀錄；請調整條件或清除篩選。">No matching records. Try another filter or clear the selection.</p>
+  <div id="resultsList"><!--RESULTS_ROWS--></div>
+  <aside class="results-archive"><details><summary data-en="All tracking studies &amp; diagnostic reports" data-zh="全部追蹤研究與診斷紀錄">All tracking studies &amp; diagnostic reports</summary><p data-en="Historical protocols, rejected candidates, zero exposure and read-only follow-ups remain in their original records." data-zh="歷史協定、未通過候選、零曝光與只讀後續分析均保留於原紀錄。">Historical protocols, rejected candidates, zero exposure and read-only follow-ups remain in their original records.</p><ul><!--RESEARCH_LINKS--></ul></details></aside>
+  <aside class="results-legend"><h2 data-en="How to read the numbers" data-zh="數字怎麼看">How to read the numbers</h2><p data-en="FN: missed ground-truth observations. FP: false-positive observations. IDSW: identity switches. HOTA/IDF1: higher is better within the same evaluation conditions. A blank/unmeasured result is never zero. Website replay detection counts are not these accuracy metrics." data-zh="FN：漏掉的真值觀測；FP：誤報觀測；IDSW：換 ID 次數。HOTA／IDF1 在相同評估條件下越高越好；未量測不當成零。網站回放的偵測數量不是這些精度指標。">FN: missed ground-truth observations. FP: false-positive observations. IDSW: identity switches. HOTA/IDF1: higher is better within the same evaluation conditions. A blank/unmeasured result is never zero. Website replay detection counts are not these accuracy metrics.</p><a href="https://github.com/JShengP/depthport/blob/main/ROADMAP.md" data-en="Open acceptance gates &amp; next steps ↗" data-zh="未驗收門檻與下一步 ↗">Open acceptance gates &amp; next steps ↗</a></aside>
+</main>
+<footer class="site-footer"><div class="shell footer-inner"><span>DepthPort · Experimental Alpha · AGPL v3</span><a href="../" data-en="← Explore the demos" data-zh="← 返回版本展示">← Explore the demos</a></div></footer>
+</body></html>

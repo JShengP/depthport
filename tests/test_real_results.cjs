@@ -37,3 +37,55 @@ for(const name of ['yolo26','da2-small','da3-small','da3-metric']){
  viewer.setColorMode('depth');viewer.size=5;viewer.reset();
 }
 viewer.destroy();console.log('Actual CloudViewer Canvas fallback, rotate, zoom, pan, size and color: PASS');
+
+// A server can send headers and then stall its body: the entire read must be
+// bounded, release its connection, and permit a later successful retry.
+async function checkLoadingRecovery(){
+ const {withDeadline,readJSON}=require('../website/real-results.js');
+ const http=require('node:http');let aborted=0;const sockets=new Set();
+ const server=http.createServer((request,response)=>{
+  if(request.url==='/headers'){
+   request.on('close',()=>aborted++);return;
+  }
+  if(request.url==='/body'){
+   response.writeHead(200,{'Content-Type':'application/json'});response.write('{');
+   response.on('close',()=>aborted++);return;
+  }
+  if(request.url==='/404'){response.writeHead(404);response.end();return;}
+  if(request.url==='/invalid'){response.end('{');return;}
+  response.end('{"ready":true}');
+ });
+ server.on('connection',socket=>{sockets.add(socket);socket.on('close',()=>sockets.delete(socket));});
+ await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+ const base='http://127.0.0.1:'+server.address().port;
+ try{
+  const sizes=[];assert.deepEqual(await withDeadline(signal=>readJSON(base,{signal,onProgress:n=>sizes.push(n)}),2000),{ready:true});
+  assert.equal(sizes.at(-1),14);
+  await assert.rejects(withDeadline(signal=>readJSON(base+'/404',{signal}),2000),/HTTP 404/);
+  await assert.rejects(withDeadline(signal=>readJSON(base+'/invalid',{signal}),2000),SyntaxError);
+  for(const route of ['/headers','/body']){
+   const start=Date.now();let signal;
+   await assert.rejects(withDeadline(s=>{signal=s;return readJSON(base+route,{signal:s});},100),{name:'TimeoutError'});
+   assert.ok(signal.aborted);assert.ok(Date.now()-start<1500);
+  }
+  // Also bound a task that never observes cancellation (e.g. a stuck decoder).
+  await assert.rejects(withDeadline(()=>new Promise(()=>{}),20),{name:'TimeoutError'});
+  assert.deepEqual(await withDeadline(signal=>readJSON(base,{signal}),2000),{ready:true});
+  await new Promise(resolve=>setTimeout(resolve,30));assert.equal(aborted,2);
+  console.log('Loading: stream progress, HTTP/JSON errors, header/body/decoder deadlines and retry: PASS');
+ }finally{for(const socket of sockets)socket.destroy();await new Promise(resolve=>server.close(resolve));}
+}
+checkLoadingRecovery().catch(error=>{console.error(error);process.exitCode=1;});
+
+// Results filters are intersections; missing platforms and failed gates stay
+// discoverable and bilingual search must not depend on the current UI language.
+const {matches}=require('../website/results.js');
+const result={kind:'tracking',status:'failed',model:'yolo26n',tracker:'bytetrack botsort',platform:'linux-cpu',text:'KITTI 控制 未通過 HOTA'};
+assert.equal(matches(result,{tracker:'botsort',status:'failed'},'kitti'),true);
+assert.equal(matches(result,{tracker:'botsort',platform:'windows-ci'}),false);
+assert.equal(matches(result,{model:'yolo26'}),false);
+assert.equal(matches(result,{},'ＫＩＴＴＩ'),true);
+assert.equal(matches(result,{},'未通過'),true);
+assert.equal(matches(result,{status:'not_run'}),false);
+assert.equal(matches({status:'not_run',text:'Physical iOS'}, {status:'not_run'}, 'ios'),true);
+console.log('Results index facet intersections, exact tags, missing outcomes and Unicode search: PASS');

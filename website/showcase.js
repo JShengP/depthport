@@ -24,8 +24,8 @@
     const toggle = q('[data-lang-switch]');
     if (toggle) toggle.textContent = chinese() ? 'English' : '繁體中文';
     try { localStorage.setItem('depthport.showcase.lang', lang); } catch (_) { /* disabled storage */ }
-    document.querySelectorAll('a[href^="./v0."], a[href^="../v0."]').forEach(a => {
-      if (!/^\.\.?\/v0\.[123]\/(?:\?.*)?$/.test(a.getAttribute('href'))) return;
+    document.querySelectorAll('a[href^="./v0."], a[href^="../v0."], a[href^="./results/"], a[href^="../results/"], a[href="../"], a[href="./"], a[href^="../?lang="], a[href^="./?lang="]').forEach(a => {
+      if (!/^\.\.?\/(?:(?:v0\.[123]|results)\/)?(?:\?.*)?$/.test(a.getAttribute('href'))) return;
       const path = a.getAttribute('href').split('?')[0];
       a.setAttribute('href', path + '?lang=' + lang);
     });

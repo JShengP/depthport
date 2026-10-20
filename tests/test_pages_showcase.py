@@ -154,3 +154,60 @@ def test_version_navigation_identifies_its_actual_destination(tmp_path):
         links = [(label, href) for label, href in parser.links if label in versions]
         assert {label for label, _ in links} == versions - {version}
         assert all(urlsplit(href).path == f'../{label}/' for label, href in links)
+
+
+def test_progressive_cloud_packs_preserve_original_points(tmp_path):
+    """Faster first paint must not substitute or downsample saved coordinates."""
+    out = tmp_path / 'site'
+    build(out)
+    manifest = json.loads((ROOT / 'website/data/bus/manifest.json').read_text())
+    for entry in manifest['engines']:
+        source = json.loads((ROOT / 'website/data/bus' / entry['path']).read_text())
+        small = out / 'data/bus/previews' / (entry['id'] + '.json')
+        preview = json.loads(small.read_text())
+        assert preview == {key: source[key] for key in
+                           ('engine', 'model', 'width', 'height', 'rgb', 'cloud', 'color_range')}
+        assert small.stat().st_size < 0.17 * (ROOT / 'website/data/bus' / entry['path']).stat().st_size
+        assert (out / 'data/bus' / entry['path']).read_bytes() == (ROOT / 'website/data/bus' / entry['path']).read_bytes()
+
+
+def test_results_index_metrics_keep_source_cohorts_and_unverified_gates(tmp_path):
+    from tools.build_results import pointer
+    from html import escape
+    out = tmp_path / 'site'
+    build(out)
+    html = (out / 'results/index.html').read_text(encoding='utf-8')
+    config = json.loads((ROOT / 'website/results-index.json').read_text(encoding='utf-8'))
+    assert html.count('data-result=') == len(config['records']) == 26
+    assert '<!--RESULTS_ROWS-->' not in html and '<!--OPTIONS_' not in html
+    assert 'not a global leaderboard' in html and '未量測不當成零' in html
+    assert 'unique frozen matrix remains 33 passed / 31 not run' in html
+    assert 'status-not_run' in html and 'status-failed' in html
+    for row in config['records']:
+        for path in [row['source'], *row['report'].values()]:
+            assert (ROOT / path).is_file()
+        if not row['metrics']:
+            continue
+        source = json.loads((ROOT / row['source']).read_text())
+        for metric in row['metrics']:
+            value = pointer(source, metric['pointer'])
+            if metric['format'] == 'percent':
+                value = f'{value * 100:.2f}%'
+            elif metric['format'] == 'number':
+                value = f'{value:,}'
+            assert '<dd>' + escape(str(value)) + '</dd>' in html
+    # No extra network/data payload is needed to see results; only filtering
+    # needs JavaScript. Project-site local links must resolve at this depth.
+    parser = Links()
+    parser.feed(html)
+    for href in parser.paths:
+        url = urlsplit(href)
+        if url.scheme or url.netloc or not url.path:
+            continue
+        resolved = ((out / 'results') / unquote(url.path)).resolve()
+        assert resolved.is_relative_to(out)
+        if resolved.is_dir():
+            resolved /= 'index.html'
+        assert resolved.is_file()
+    js = (ROOT / 'website/results.js').read_text()
+    assert 'fetch(' not in js and '/api/' not in js and 'innerHTML' not in js

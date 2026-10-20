@@ -1,0 +1,1498 @@
+{
+  "format": "depthport.results-index.v1",
+  "updated": "2026-10-20",
+  "ui": {
+    "kind": {
+      "depth": {
+        "en": "Depth & semantics",
+        "zh": "深度與語意"
+      },
+      "tracking": {
+        "en": "Tracking scores",
+        "zh": "追蹤指標"
+      },
+      "diagnostic": {
+        "en": "Control studies & audits",
+        "zh": "控制實驗與稽核"
+      },
+      "browser": {
+        "en": "Browser compatibility",
+        "zh": "瀏覽器相容性"
+      },
+      "platform": {
+        "en": "Installation & hardware",
+        "zh": "安裝與實機"
+      }
+    },
+    "model": {
+      "yolo26": {
+        "en": "YOLO26 Depth",
+        "zh": "YOLO26 Depth"
+      },
+      "da2-small": {
+        "en": "Depth Anything V2 Small",
+        "zh": "Depth Anything V2 Small"
+      },
+      "da3-small": {
+        "en": "DA3 Small",
+        "zh": "DA3 Small"
+      },
+      "da3-metric": {
+        "en": "DA3 Metric Large",
+        "zh": "DA3 Metric Large"
+      },
+      "yolo26n": {
+        "en": "YOLO26n detection / segmentation",
+        "zh": "YOLO26n 偵測／分割"
+      }
+    },
+    "tracker": {
+      "baseline": {
+        "en": "Baseline IoU",
+        "zh": "Baseline IoU"
+      },
+      "bytetrack": {
+        "en": "Roboflow ByteTrack",
+        "zh": "Roboflow ByteTrack"
+      },
+      "botsort": {
+        "en": "Roboflow BoT-SORT (no ReID)",
+        "zh": "Roboflow BoT-SORT（無 ReID）"
+      }
+    },
+    "platform": {
+      "ubuntu-cuda": {
+        "en": "Ubuntu · CUDA",
+        "zh": "Ubuntu · CUDA"
+      },
+      "linux-cpu": {
+        "en": "Linux · CPU / isolated worker",
+        "zh": "Linux · CPU／獨立 worker"
+      },
+      "linux-browser": {
+        "en": "Linux · browsers",
+        "zh": "Linux · 瀏覽器"
+      },
+      "ubuntu-ci": {
+        "en": "Ubuntu · CI (no weights)",
+        "zh": "Ubuntu · CI（無權重）"
+      },
+      "windows-ci": {
+        "en": "Windows · CI (no weights)",
+        "zh": "Windows · CI（無權重）"
+      },
+      "windows-local": {
+        "en": "Windows · real local application",
+        "zh": "Windows · 真實本機應用"
+      },
+      "macos": {
+        "en": "macOS / Safari",
+        "zh": "macOS／Safari"
+      },
+      "android": {
+        "en": "Physical Android",
+        "zh": "實體 Android"
+      },
+      "ios": {
+        "en": "Physical iOS",
+        "zh": "實體 iOS"
+      },
+      "camera": {
+        "en": "Physical RTSP camera",
+        "zh": "實體 RTSP 相機"
+      }
+    },
+    "status": {
+      "observed": {
+        "en": "Tested · scoped evidence",
+        "zh": "已實測 · 限定範圍"
+      },
+      "tradeoff": {
+        "en": "Trade-offs · acceptance open",
+        "zh": "有取捨 · 尚未驗收"
+      },
+      "failed": {
+        "en": "Gate not passed",
+        "zh": "門檻未通過"
+      },
+      "inconclusive": {
+        "en": "Diagnosis / insufficient exposure",
+        "zh": "診斷／曝光不足"
+      },
+      "ci": {
+        "en": "CI passed · no pretrained inference",
+        "zh": "CI 通過 · 無真權重推論"
+      },
+      "not_run": {
+        "en": "Not yet verified",
+        "zh": "尚未驗證"
+      }
+    }
+  },
+  "groups": [
+    {
+      "id": "depth",
+      "title": {
+        "en": "Four depth models · one shared public image",
+        "zh": "四個深度模型 · 共用一張公開圖片"
+      },
+      "note": {
+        "en": "CUDA execution and saved-output checks. These are not four independent samples, depth-accuracy scores or FPS benchmarks.",
+        "zh": "CUDA 真推論與保存輸出檢查；不是四個獨立樣本、測距精度分數或 FPS 排名。"
+      }
+    },
+    {
+      "id": "mot17",
+      "title": {
+        "en": "Tracking comparison · MOT17 expanded cohort",
+        "zh": "追蹤比較 · MOT17 擴大場景組"
+      },
+      "note": {
+        "en": "Only these three rows share the same three sequences, cached detector input and evaluator. Lower ID switches can coexist with more missed observations.",
+        "zh": "僅下方三筆共用同組三段序列、偵測快取與評估器；換 ID 較少可能同時伴隨更多漏追。"
+      }
+    },
+    {
+      "id": "parameters",
+      "title": {
+        "en": "Tracking follow-ups · separate cohorts",
+        "zh": "追蹤後續研究 · 場景組分開"
+      },
+      "note": {
+        "en": "Different data/configurations from the expanded cohort. Open each report for all profiles, per-scene scores, zeros and rejected candidates.",
+        "zh": "資料與配置不同於上組；各報告保留全部配置、逐場景分數、零值與未通過候選，不跨組排名。"
+      }
+    },
+    {
+      "id": "audits",
+      "title": {
+        "en": "Current controls & read-only diagnosis",
+        "zh": "目前控制實驗與只讀診斷"
+      },
+      "note": {
+        "en": "GT-free means no ground-truth scoring in these studies. A diagnosis can complete while the original control gate remains failed. Defaults and weak continuation remain unchanged.",
+        "zh": "GT-free 研究未讀取真值評分；稽核完成不會把原控制門檻改判通過，預設與弱偵測延續保留。"
+      }
+    },
+    {
+      "id": "browsers",
+      "title": {
+        "en": "Saved-result website · Linux browser builds",
+        "zh": "保存結果網站 · Linux 瀏覽器版本"
+      },
+      "note": {
+        "en": "Dated headed and headless modes are recorded separately on the same browser rows. The unique frozen matrix remains 33 passed / 31 not run; repeated modes are not extra browsers.",
+        "zh": "有視窗／無頭分開留證，同一瀏覽器不重複加列；唯一凍結矩陣仍為 33 通過／31 未測，完整驗收尚未完成。"
+      }
+    },
+    {
+      "id": "platforms",
+      "title": {
+        "en": "Installation, camera & missing platforms",
+        "zh": "安裝、相機與未驗證平台"
+      },
+      "note": {
+        "en": "CI/API-import success does not certify fresh pretrained inference, physical capture, calibration or sustained device performance.",
+        "zh": "CI／API 匯入成功不等於全新真權重推論、實體擷取、標定精度或長時間裝置效能通過。"
+      }
+    }
+  ],
+  "records": [
+    {
+      "id": "depth-yolo26",
+      "group": "depth",
+      "title": {
+        "en": "YOLO26 Depth",
+        "zh": "YOLO26 Depth"
+      },
+      "kind": "depth",
+      "status": "observed",
+      "models": [
+        "yolo26"
+      ],
+      "trackers": [],
+      "platforms": [
+        "ubuntu-cuda"
+      ],
+      "scope": {
+        "en": "Ubuntu 24.04 · RTX 4090 · original CUDA inference, 17 Oct 2026.",
+        "zh": "Ubuntu 24.04 · RTX 4090 · 2026-10-17 原始 CUDA 真推論。"
+      },
+      "limit": {
+        "en": "HFOV-estimated intrinsics; no calibrated distance truth. Relative/virtual depth is not metres. All models share bus.jpg.",
+        "zh": "內參為 HFOV 估計，無標定距離真值；相對／虛擬深度不是公尺，四模型共用 bus.jpg。"
+      },
+      "source": "website/data/bus/yolo26.json",
+      "report": {
+        "en": "docs/en/real-ai-pages.md",
+        "zh": "docs/zh-TW/real-ai-pages.md"
+      },
+      "date": "2026-10-17",
+      "metrics": [
+        {
+          "label": {
+            "en": "Width (px)",
+            "zh": "寬度（像素）"
+          },
+          "pointer": "/width",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "Height (px)",
+            "zh": "高度（像素）"
+          },
+          "pointer": "/height",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "Saved points",
+            "zh": "保存點數"
+          },
+          "pointer": "/cloud/count",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "Geometry units",
+            "zh": "幾何單位"
+          },
+          "pointer": "/units",
+          "format": "text"
+        }
+      ]
+    },
+    {
+      "id": "depth-da2-small",
+      "group": "depth",
+      "title": {
+        "en": "Depth Anything V2 Small",
+        "zh": "Depth Anything V2 Small"
+      },
+      "kind": "depth",
+      "status": "observed",
+      "models": [
+        "da2-small"
+      ],
+      "trackers": [],
+      "platforms": [
+        "ubuntu-cuda"
+      ],
+      "scope": {
+        "en": "Ubuntu 24.04 · RTX 4090 · original CUDA inference, 17 Oct 2026.",
+        "zh": "Ubuntu 24.04 · RTX 4090 · 2026-10-17 原始 CUDA 真推論。"
+      },
+      "limit": {
+        "en": "HFOV-estimated intrinsics; no calibrated distance truth. Relative/virtual depth is not metres. All models share bus.jpg.",
+        "zh": "內參為 HFOV 估計，無標定距離真值；相對／虛擬深度不是公尺，四模型共用 bus.jpg。"
+      },
+      "source": "website/data/bus/da2-small.json",
+      "report": {
+        "en": "docs/en/real-ai-pages.md",
+        "zh": "docs/zh-TW/real-ai-pages.md"
+      },
+      "date": "2026-10-17",
+      "metrics": [
+        {
+          "label": {
+            "en": "Width (px)",
+            "zh": "寬度（像素）"
+          },
+          "pointer": "/width",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "Height (px)",
+            "zh": "高度（像素）"
+          },
+          "pointer": "/height",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "Saved points",
+            "zh": "保存點數"
+          },
+          "pointer": "/cloud/count",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "Geometry units",
+            "zh": "幾何單位"
+          },
+          "pointer": "/units",
+          "format": "text"
+        }
+      ]
+    },
+    {
+      "id": "depth-da3-small",
+      "group": "depth",
+      "title": {
+        "en": "DA3 Small",
+        "zh": "DA3 Small"
+      },
+      "kind": "depth",
+      "status": "observed",
+      "models": [
+        "da3-small"
+      ],
+      "trackers": [],
+      "platforms": [
+        "ubuntu-cuda"
+      ],
+      "scope": {
+        "en": "Ubuntu 24.04 · RTX 4090 · original CUDA inference, 17 Oct 2026.",
+        "zh": "Ubuntu 24.04 · RTX 4090 · 2026-10-17 原始 CUDA 真推論。"
+      },
+      "limit": {
+        "en": "HFOV-estimated intrinsics; no calibrated distance truth. Relative/virtual depth is not metres. All models share bus.jpg.",
+        "zh": "內參為 HFOV 估計，無標定距離真值；相對／虛擬深度不是公尺，四模型共用 bus.jpg。"
+      },
+      "source": "website/data/bus/da3-small.json",
+      "report": {
+        "en": "docs/en/real-ai-pages.md",
+        "zh": "docs/zh-TW/real-ai-pages.md"
+      },
+      "date": "2026-10-17",
+      "metrics": [
+        {
+          "label": {
+            "en": "Width (px)",
+            "zh": "寬度（像素）"
+          },
+          "pointer": "/width",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "Height (px)",
+            "zh": "高度（像素）"
+          },
+          "pointer": "/height",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "Saved points",
+            "zh": "保存點數"
+          },
+          "pointer": "/cloud/count",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "Geometry units",
+            "zh": "幾何單位"
+          },
+          "pointer": "/units",
+          "format": "text"
+        }
+      ]
+    },
+    {
+      "id": "depth-da3-metric",
+      "group": "depth",
+      "title": {
+        "en": "DA3 Metric Large",
+        "zh": "DA3 Metric Large"
+      },
+      "kind": "depth",
+      "status": "observed",
+      "models": [
+        "da3-metric"
+      ],
+      "trackers": [],
+      "platforms": [
+        "ubuntu-cuda"
+      ],
+      "scope": {
+        "en": "Ubuntu 24.04 · RTX 4090 · original CUDA inference, 17 Oct 2026.",
+        "zh": "Ubuntu 24.04 · RTX 4090 · 2026-10-17 原始 CUDA 真推論。"
+      },
+      "limit": {
+        "en": "HFOV-estimated intrinsics; no calibrated distance truth. Relative/virtual depth is not metres. All models share bus.jpg.",
+        "zh": "內參為 HFOV 估計，無標定距離真值；相對／虛擬深度不是公尺，四模型共用 bus.jpg。"
+      },
+      "source": "website/data/bus/da3-metric.json",
+      "report": {
+        "en": "docs/en/real-ai-pages.md",
+        "zh": "docs/zh-TW/real-ai-pages.md"
+      },
+      "date": "2026-10-17",
+      "metrics": [
+        {
+          "label": {
+            "en": "Width (px)",
+            "zh": "寬度（像素）"
+          },
+          "pointer": "/width",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "Height (px)",
+            "zh": "高度（像素）"
+          },
+          "pointer": "/height",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "Saved points",
+            "zh": "保存點數"
+          },
+          "pointer": "/cloud/count",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "Geometry units",
+            "zh": "幾何單位"
+          },
+          "pointer": "/units",
+          "format": "text"
+        }
+      ]
+    },
+    {
+      "id": "semantic",
+      "group": "depth",
+      "title": {
+        "en": "YOLO26n · Detect / Segment",
+        "zh": "YOLO26n · 偵測／分割"
+      },
+      "kind": "depth",
+      "status": "observed",
+      "models": [
+        "yolo26n"
+      ],
+      "trackers": [],
+      "platforms": [
+        "ubuntu-cuda"
+      ],
+      "scope": {
+        "en": "Real boxes/masks on the shared bus image; resampled to depth grids.",
+        "zh": "共用公車圖的真實框／遮罩，明確重取樣至各深度網格。"
+      },
+      "limit": {
+        "en": "Detect ROI can include background; instance masks are model predictions, not semantic ground truth.",
+        "zh": "Detect ROI 可能含背景；實例遮罩是模型預測，不是語意真值。"
+      },
+      "source": "docs/validation/v0.2-summary.json",
+      "report": {
+        "en": "docs/en/validation.md",
+        "zh": "docs/zh-TW/validation.md"
+      },
+      "date": "2026-10-17",
+      "metrics": [
+        {
+          "label": {
+            "en": "Detected objects",
+            "zh": "偵測物件數"
+          },
+          "pointer": "/real_semantic/detect/objects",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "Segmented objects",
+            "zh": "分割物件數"
+          },
+          "pointer": "/real_semantic/segment/objects",
+          "format": "number"
+        }
+      ]
+    },
+    {
+      "id": "mot17-baseline",
+      "group": "mot17",
+      "title": {
+        "en": "Baseline IoU",
+        "zh": "Baseline IoU"
+      },
+      "kind": "tracking",
+      "status": "tradeoff",
+      "models": [
+        "yolo26n"
+      ],
+      "trackers": [
+        "baseline"
+      ],
+      "platforms": [
+        "linux-cpu"
+      ],
+      "scope": {
+        "en": "MOT17-04/11/13 · YOLO26n 8.4.115 CPU · same cached detections · DepthPort baseline IoU.",
+        "zh": "MOT17-04／11／13 · YOLO26n 8.4.115 CPU · 共用偵測快取 · DepthPort Baseline IoU。"
+      },
+      "limit": {
+        "en": "Compressed training clips, not official leaderboard results. Long occlusion/general identity stability remain unaccepted. FN/FP are evaluator counts.",
+        "zh": "壓縮訓練影片，非官方排行榜；長遮擋與泛化身分穩定性未驗收。FN／FP 為評估器計數。"
+      },
+      "source": "docs/validation/v0.3-mot17-expanded.json",
+      "report": {
+        "en": "docs/en/tracking-expanded-acceptance.md",
+        "zh": "docs/zh-TW/tracking-expanded-acceptance.md"
+      },
+      "date": "2026-10-19",
+      "metrics": [
+        {
+          "label": {
+            "en": "CLR_FN",
+            "zh": "CLR_FN"
+          },
+          "pointer": "/combined/all_sequences/baseline/CLR_FN",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "CLR_FP",
+            "zh": "CLR_FP"
+          },
+          "pointer": "/combined/all_sequences/baseline/CLR_FP",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "IDSW",
+            "zh": "IDSW"
+          },
+          "pointer": "/combined/all_sequences/baseline/IDSW",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "HOTA",
+            "zh": "HOTA"
+          },
+          "pointer": "/combined/all_sequences/baseline/HOTA",
+          "format": "percent"
+        },
+        {
+          "label": {
+            "en": "IDF1",
+            "zh": "IDF1"
+          },
+          "pointer": "/combined/all_sequences/baseline/IDF1",
+          "format": "percent"
+        }
+      ]
+    },
+    {
+      "id": "mot17-bytetrack",
+      "group": "mot17",
+      "title": {
+        "en": "Roboflow ByteTrack",
+        "zh": "Roboflow ByteTrack"
+      },
+      "kind": "tracking",
+      "status": "tradeoff",
+      "models": [
+        "yolo26n"
+      ],
+      "trackers": [
+        "bytetrack"
+      ],
+      "platforms": [
+        "linux-cpu"
+      ],
+      "scope": {
+        "en": "MOT17-04/11/13 · YOLO26n 8.4.115 CPU · same cached detections · trackers 2.6.1.",
+        "zh": "MOT17-04／11／13 · YOLO26n 8.4.115 CPU · 共用偵測快取 · trackers 2.6.1。"
+      },
+      "limit": {
+        "en": "Compressed training clips, not official leaderboard results. Long occlusion/general identity stability remain unaccepted. FN/FP are evaluator counts.",
+        "zh": "壓縮訓練影片，非官方排行榜；長遮擋與泛化身分穩定性未驗收。FN／FP 為評估器計數。"
+      },
+      "source": "docs/validation/v0.3-mot17-expanded.json",
+      "report": {
+        "en": "docs/en/tracking-expanded-acceptance.md",
+        "zh": "docs/zh-TW/tracking-expanded-acceptance.md"
+      },
+      "date": "2026-10-19",
+      "metrics": [
+        {
+          "label": {
+            "en": "CLR_FN",
+            "zh": "CLR_FN"
+          },
+          "pointer": "/combined/all_sequences/bytetrack/CLR_FN",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "CLR_FP",
+            "zh": "CLR_FP"
+          },
+          "pointer": "/combined/all_sequences/bytetrack/CLR_FP",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "IDSW",
+            "zh": "IDSW"
+          },
+          "pointer": "/combined/all_sequences/bytetrack/IDSW",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "HOTA",
+            "zh": "HOTA"
+          },
+          "pointer": "/combined/all_sequences/bytetrack/HOTA",
+          "format": "percent"
+        },
+        {
+          "label": {
+            "en": "IDF1",
+            "zh": "IDF1"
+          },
+          "pointer": "/combined/all_sequences/bytetrack/IDF1",
+          "format": "percent"
+        }
+      ]
+    },
+    {
+      "id": "mot17-botsort",
+      "group": "mot17",
+      "title": {
+        "en": "Roboflow BoT-SORT (no ReID)",
+        "zh": "Roboflow BoT-SORT（無 ReID）"
+      },
+      "kind": "tracking",
+      "status": "tradeoff",
+      "models": [
+        "yolo26n"
+      ],
+      "trackers": [
+        "botsort"
+      ],
+      "platforms": [
+        "linux-cpu"
+      ],
+      "scope": {
+        "en": "MOT17-04/11/13 · YOLO26n 8.4.115 CPU · same cached detections · trackers 2.6.1.",
+        "zh": "MOT17-04／11／13 · YOLO26n 8.4.115 CPU · 共用偵測快取 · trackers 2.6.1。"
+      },
+      "limit": {
+        "en": "Compressed training clips, not official leaderboard results. Long occlusion/general identity stability remain unaccepted. FN/FP are evaluator counts.",
+        "zh": "壓縮訓練影片，非官方排行榜；長遮擋與泛化身分穩定性未驗收。FN／FP 為評估器計數。"
+      },
+      "source": "docs/validation/v0.3-mot17-expanded.json",
+      "report": {
+        "en": "docs/en/tracking-expanded-acceptance.md",
+        "zh": "docs/zh-TW/tracking-expanded-acceptance.md"
+      },
+      "date": "2026-10-19",
+      "metrics": [
+        {
+          "label": {
+            "en": "CLR_FN",
+            "zh": "CLR_FN"
+          },
+          "pointer": "/combined/all_sequences/botsort/CLR_FN",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "CLR_FP",
+            "zh": "CLR_FP"
+          },
+          "pointer": "/combined/all_sequences/botsort/CLR_FP",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "IDSW",
+            "zh": "IDSW"
+          },
+          "pointer": "/combined/all_sequences/botsort/IDSW",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "HOTA",
+            "zh": "HOTA"
+          },
+          "pointer": "/combined/all_sequences/botsort/HOTA",
+          "format": "percent"
+        },
+        {
+          "label": {
+            "en": "IDF1",
+            "zh": "IDF1"
+          },
+          "pointer": "/combined/all_sequences/botsort/IDF1",
+          "format": "percent"
+        }
+      ]
+    },
+    {
+      "id": "parameters-bytetrack",
+      "group": "parameters",
+      "title": {
+        "en": "Roboflow ByteTrack · gate / buffer profiles",
+        "zh": "Roboflow ByteTrack · 門檻／保留時間配置"
+      },
+      "kind": "tracking",
+      "status": "tradeoff",
+      "models": [
+        "yolo26n"
+      ],
+      "trackers": [
+        "bytetrack"
+      ],
+      "platforms": [
+        "linux-cpu"
+      ],
+      "scope": {
+        "en": "MOT17-09/10 · five frozen profiles per tracker; values below are this cohort’s default arm only.",
+        "zh": "MOT17-09／10 · 每追蹤器五個凍結配置；下列數值僅為本組預設對照。"
+      },
+      "limit": {
+        "en": "Lower gates reduce misses but add false tracks/ID switches. Longer buffers do not establish long-occlusion recovery; defaults unchanged.",
+        "zh": "降低門檻減少漏追卻增加誤追／換 ID；延長保留不等於長遮擋恢復驗收，預設不變。"
+      },
+      "source": "docs/validation/v0.3-mot17-parameters.json",
+      "report": {
+        "en": "docs/en/tracking-parameter-acceptance.md",
+        "zh": "docs/zh-TW/tracking-parameter-acceptance.md"
+      },
+      "date": "2026-10-19",
+      "metrics": [
+        {
+          "label": {
+            "en": "CLR_FN",
+            "zh": "CLR_FN"
+          },
+          "pointer": "/combined/all_sequences/bytetrack__default/CLR_FN",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "CLR_FP",
+            "zh": "CLR_FP"
+          },
+          "pointer": "/combined/all_sequences/bytetrack__default/CLR_FP",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "IDSW",
+            "zh": "IDSW"
+          },
+          "pointer": "/combined/all_sequences/bytetrack__default/IDSW",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "HOTA",
+            "zh": "HOTA"
+          },
+          "pointer": "/combined/all_sequences/bytetrack__default/HOTA",
+          "format": "percent"
+        }
+      ]
+    },
+    {
+      "id": "parameters-botsort",
+      "group": "parameters",
+      "title": {
+        "en": "Roboflow BoT-SORT · gate / buffer profiles",
+        "zh": "Roboflow BoT-SORT · 門檻／保留時間配置"
+      },
+      "kind": "tracking",
+      "status": "tradeoff",
+      "models": [
+        "yolo26n"
+      ],
+      "trackers": [
+        "botsort"
+      ],
+      "platforms": [
+        "linux-cpu"
+      ],
+      "scope": {
+        "en": "MOT17-09/10 · five frozen profiles per tracker; values below are this cohort’s default arm only.",
+        "zh": "MOT17-09／10 · 每追蹤器五個凍結配置；下列數值僅為本組預設對照。"
+      },
+      "limit": {
+        "en": "Lower gates reduce misses but add false tracks/ID switches. Longer buffers do not establish long-occlusion recovery; defaults unchanged.",
+        "zh": "降低門檻減少漏追卻增加誤追／換 ID；延長保留不等於長遮擋恢復驗收，預設不變。"
+      },
+      "source": "docs/validation/v0.3-mot17-parameters.json",
+      "report": {
+        "en": "docs/en/tracking-parameter-acceptance.md",
+        "zh": "docs/zh-TW/tracking-parameter-acceptance.md"
+      },
+      "date": "2026-10-19",
+      "metrics": [
+        {
+          "label": {
+            "en": "CLR_FN",
+            "zh": "CLR_FN"
+          },
+          "pointer": "/combined/all_sequences/botsort__default/CLR_FN",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "CLR_FP",
+            "zh": "CLR_FP"
+          },
+          "pointer": "/combined/all_sequences/botsort__default/CLR_FP",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "IDSW",
+            "zh": "IDSW"
+          },
+          "pointer": "/combined/all_sequences/botsort__default/IDSW",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "HOTA",
+            "zh": "HOTA"
+          },
+          "pointer": "/combined/all_sequences/botsort__default/HOTA",
+          "format": "percent"
+        }
+      ]
+    },
+    {
+      "id": "worker",
+      "group": "parameters",
+      "title": {
+        "en": "BoT-SORT · isolated worker integration",
+        "zh": "BoT-SORT · 獨立 worker 整合"
+      },
+      "kind": "tracking",
+      "status": "observed",
+      "models": [
+        "yolo26n",
+        "da2-small"
+      ],
+      "trackers": [
+        "botsort"
+      ],
+      "platforms": [
+        "linux-cpu",
+        "ubuntu-cuda"
+      ],
+      "scope": {
+        "en": "179-frame MOT15 clip · CPU tracker in isolated NumPy 2 worker; Session depth reuses saved CUDA bundles.",
+        "zh": "179 格 MOT15 短片 · CPU 追蹤器在獨立 NumPy 2 worker；Session 深度沿用 CUDA 保存資料。"
+      },
+      "limit": {
+        "en": "Same pilot source reused for integration; not new independent evidence or a complete fresh Alpha.2 installation.",
+        "zh": "沿用初測來源做整合，不算新獨立證據，也不等於完整 Alpha.2 全新安裝。"
+      },
+      "source": "docs/validation/v0.3-botsort-worker.json",
+      "report": {
+        "en": "docs/en/tracking-worker.md",
+        "zh": "docs/zh-TW/tracking-worker.md"
+      },
+      "date": "2026-10-18",
+      "metrics": [
+        {
+          "label": {
+            "en": "Frames",
+            "zh": "影格數"
+          },
+          "pointer": "/dense_video/frames",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "IDSW",
+            "zh": "IDSW"
+          },
+          "pointer": "/dense_video/metrics/IDSW",
+          "format": "number"
+        },
+        {
+          "label": {
+            "en": "HOTA",
+            "zh": "HOTA"
+          },
+          "pointer": "/dense_video/metrics/HOTA",
+          "format": "percent"
+        }
+      ]
+    },
+    {
+      "id": "admission",
+      "group": "audits",
+      "title": {
+        "en": "New-ID confirmation & competition",
+        "zh": "新 ID 確認與競爭"
+      },
+      "kind": "diagnostic",
+      "status": "failed",
+      "models": [
+        "yolo26n"
+      ],
+      "trackers": [
+        "bytetrack",
+        "botsort"
+      ],
+      "platforms": [
+        "linux-cpu"
+      ],
+      "scope": {
+        "en": "72 runs on already-studied MOT17-09/10; frozen confirmation/competition controls.",
+        "zh": "已研究的 MOT17-09／10，共 72 次；確認／競爭控制凍結。"
+      },
+      "limit": {
+        "en": "No candidate passed the prospective research screen; weak continuation and defaults preserved.",
+        "zh": "沒有候選通過事前研究篩選；保留弱偵測延續與原預設。"
+      },
+      "source": "docs/validation/v0.3-mot17-admission.json",
+      "report": {
+        "en": "docs/en/tracking-admission-acceptance.md",
+        "zh": "docs/zh-TW/tracking-admission-acceptance.md"
+      },
+      "date": "2026-10-19",
+      "metrics": []
+    },
+    {
+      "id": "geometry",
+      "group": "audits",
+      "title": {
+        "en": "Prediction geometry protection",
+        "zh": "預測幾何有效性保護"
+      },
+      "kind": "diagnostic",
+      "status": "failed",
+      "models": [
+        "yolo26n"
+      ],
+      "trackers": [
+        "bytetrack"
+      ],
+      "platforms": [
+        "linux-cpu"
+      ],
+      "scope": {
+        "en": "KITTI0006/0007 · frozen geometry control · no GT scoring.",
+        "zh": "KITTI0006／0007 · 凍結幾何控制 · 未讀 GT 評分。"
+      },
+      "limit": {
+        "en": "One source triggered, one did not: replication gate failed even though observable proxy harm checks passed.",
+        "zh": "一段觸發、一段未觸發；可觀測代理傷害檢查通過仍未通過重現門檻。"
+      },
+      "source": "docs/validation/v0.3-geometry-validity.json",
+      "report": {
+        "en": "docs/en/tracking-geometry-validity.md",
+        "zh": "docs/zh-TW/tracking-geometry-validity.md"
+      },
+      "date": "2026-10-20",
+      "metrics": []
+    },
+    {
+      "id": "exposure",
+      "group": "audits",
+      "title": {
+        "en": "Geometry exposure discovery / confirmation",
+        "zh": "幾何曝光發現／確認"
+      },
+      "kind": "diagnostic",
+      "status": "failed",
+      "models": [
+        "yolo26n"
+      ],
+      "trackers": [
+        "bytetrack"
+      ],
+      "platforms": [
+        "linux-cpu"
+      ],
+      "scope": {
+        "en": "Seen discovery sources and prospectively reserved KITTI0008/0009 are recorded separately.",
+        "zh": "已見發現組與事前保留的 KITTI0008／0009 分開記錄。"
+      },
+      "limit": {
+        "en": "Four original archive failures remain failed; zero exposures are retained. No quality acceptance/default promotion.",
+        "zh": "四個原封存失敗仍失敗，零曝光保留；未通過品質驗收，不升預設。"
+      },
+      "source": "docs/validation/v0.3-geometry-exposure-confirmation.json",
+      "report": {
+        "en": "docs/en/tracking-geometry-exposure.md",
+        "zh": "docs/zh-TW/tracking-geometry-exposure.md"
+      },
+      "date": "2026-10-20",
+      "metrics": []
+    },
+    {
+      "id": "carrier",
+      "group": "audits",
+      "title": {
+        "en": "Carrier format & tentative-role audit",
+        "zh": "外層格式與未確認角色稽核"
+      },
+      "kind": "diagnostic",
+      "status": "inconclusive",
+      "models": [
+        "yolo26n"
+      ],
+      "trackers": [
+        "bytetrack"
+      ],
+      "platforms": [
+        "linux-cpu"
+      ],
+      "scope": {
+        "en": "Read-only analysis of 434 sealed files; no inference, GT access or tracking rerun.",
+        "zh": "只讀分析 434 個封存檔；不推論、不讀 GT、不重跑追蹤。"
+      },
+      "limit": {
+        "en": "Audit completed; original four failures remain failed, blocked histories stay unmeasured and quality is not accepted.",
+        "zh": "稽核完成；原四個失敗仍失敗、受阻歷史仍未量測，品質未驗收。"
+      },
+      "source": "docs/validation/v0.3-carrier-role-audit.json",
+      "report": {
+        "en": "docs/en/tracking-carrier-roles.md",
+        "zh": "docs/zh-TW/tracking-carrier-roles.md"
+      },
+      "date": "2026-10-20",
+      "metrics": []
+    },
+    {
+      "id": "browser-chrome",
+      "group": "browsers",
+      "title": {
+        "en": "Chrome · Linux headed / headless",
+        "zh": "Chrome · Linux 有視窗／無頭"
+      },
+      "kind": "browser",
+      "status": "observed",
+      "models": [
+        "yolo26",
+        "da2-small",
+        "da3-small",
+        "da3-metric",
+        "yolo26n"
+      ],
+      "trackers": [],
+      "platforms": [
+        "linux-browser"
+      ],
+      "scope": {
+        "en": "Saved-result compatibility only; exact vendor versions and separate modes in the report.",
+        "zh": "僅驗證保存結果的相容性；報告列出確切版本與分開的模式。"
+      },
+      "limit": {
+        "en": "B01–B07 pass; B08 natural unsupported gzip/Canvas path untested. Not inference, phone or whole-application GPU acceptance.",
+        "zh": "B01–B07 通過；B08 自然不支援 gzip／Canvas 路徑未測，不代表推論、手機或完整應用 GPU 驗收。"
+      },
+      "source": "docs/validation/pages-headed-acceptance.json",
+      "report": {
+        "en": "docs/en/pages-headed-browsers.md",
+        "zh": "docs/zh-TW/pages-headed-browsers.md"
+      },
+      "date": "2026-10-20",
+      "metrics": [
+        {
+          "label": {
+            "en": "Version",
+            "zh": "版本"
+          },
+          "pointer": "/attempts/0/environment/version",
+          "format": "text"
+        }
+      ]
+    },
+    {
+      "id": "browser-edge",
+      "group": "browsers",
+      "title": {
+        "en": "Edge · Linux headed / headless",
+        "zh": "Edge · Linux 有視窗／無頭"
+      },
+      "kind": "browser",
+      "status": "observed",
+      "models": [
+        "yolo26",
+        "da2-small",
+        "da3-small",
+        "da3-metric",
+        "yolo26n"
+      ],
+      "trackers": [],
+      "platforms": [
+        "linux-browser"
+      ],
+      "scope": {
+        "en": "Saved-result compatibility only; exact vendor versions and separate modes in the report.",
+        "zh": "僅驗證保存結果的相容性；報告列出確切版本與分開的模式。"
+      },
+      "limit": {
+        "en": "B01–B07 pass; B08 natural unsupported gzip/Canvas path untested. Not inference, phone or whole-application GPU acceptance.",
+        "zh": "B01–B07 通過；B08 自然不支援 gzip／Canvas 路徑未測，不代表推論、手機或完整應用 GPU 驗收。"
+      },
+      "source": "docs/validation/pages-headed-acceptance.json",
+      "report": {
+        "en": "docs/en/pages-headed-browsers.md",
+        "zh": "docs/zh-TW/pages-headed-browsers.md"
+      },
+      "date": "2026-10-20",
+      "metrics": [
+        {
+          "label": {
+            "en": "Version",
+            "zh": "版本"
+          },
+          "pointer": "/attempts/1/environment/version",
+          "format": "text"
+        }
+      ]
+    },
+    {
+      "id": "browser-firefox",
+      "group": "browsers",
+      "title": {
+        "en": "Firefox · Linux headed / headless",
+        "zh": "Firefox · Linux 有視窗／無頭"
+      },
+      "kind": "browser",
+      "status": "observed",
+      "models": [
+        "yolo26",
+        "da2-small",
+        "da3-small",
+        "da3-metric",
+        "yolo26n"
+      ],
+      "trackers": [],
+      "platforms": [
+        "linux-browser"
+      ],
+      "scope": {
+        "en": "Saved-result compatibility only; exact vendor versions and separate modes in the report.",
+        "zh": "僅驗證保存結果的相容性；報告列出確切版本與分開的模式。"
+      },
+      "limit": {
+        "en": "B01–B07 pass; B08 natural unsupported gzip/Canvas path untested. Not inference, phone or whole-application GPU acceptance.",
+        "zh": "B01–B07 通過；B08 自然不支援 gzip／Canvas 路徑未測，不代表推論、手機或完整應用 GPU 驗收。"
+      },
+      "source": "docs/validation/pages-headed-acceptance.json",
+      "report": {
+        "en": "docs/en/pages-headed-browsers.md",
+        "zh": "docs/zh-TW/pages-headed-browsers.md"
+      },
+      "date": "2026-10-20",
+      "metrics": [
+        {
+          "label": {
+            "en": "Version",
+            "zh": "版本"
+          },
+          "pointer": "/attempts/2/environment/version",
+          "format": "text"
+        }
+      ]
+    },
+    {
+      "id": "ubuntu-install",
+      "group": "platforms",
+      "title": {
+        "en": "Ubuntu 24.04 · historical fresh v0.2 install",
+        "zh": "Ubuntu 24.04 · 歷史 v0.2 全新安裝"
+      },
+      "kind": "platform",
+      "status": "observed",
+      "models": [
+        "yolo26",
+        "da2-small",
+        "da3-small",
+        "da3-metric",
+        "yolo26n"
+      ],
+      "trackers": [],
+      "platforms": [
+        "ubuntu-cuda"
+      ],
+      "scope": {
+        "en": "Dated v0.2 environment: pretrained CUDA tests and fresh virtual environment.",
+        "zh": "有日期的 v0.2 環境：真權重 CUDA 測試與全新虛擬環境。"
+      },
+      "limit": {
+        "en": "Does not transfer to a full fresh v0.3 Alpha.2 recipe, sustained VRAM or physical cameras.",
+        "zh": "不直接延伸為完整 v0.3 Alpha.2 全新配方、長時 VRAM 或實體相機驗收。"
+      },
+      "source": "docs/validation/v0.2-summary.json",
+      "report": {
+        "en": "docs/en/validation.md",
+        "zh": "docs/zh-TW/validation.md"
+      },
+      "date": "2026-10-17",
+      "metrics": [
+        {
+          "label": {
+            "en": "Real pretrained tests",
+            "zh": "真權重測試"
+          },
+          "pointer": "/separate_real_pretrained_pytest/passed",
+          "format": "number"
+        }
+      ]
+    },
+    {
+      "id": "ubuntu-ci",
+      "group": "platforms",
+      "title": {
+        "en": "Ubuntu · CI (no weights)",
+        "zh": "Ubuntu · CI（無權重）"
+      },
+      "kind": "platform",
+      "status": "ci",
+      "models": [
+        "yolo26",
+        "da2-small",
+        "da3-small",
+        "da3-metric",
+        "yolo26n"
+      ],
+      "trackers": [],
+      "platforms": [
+        "ubuntu-ci"
+      ],
+      "scope": {
+        "en": "Post-Alpha dependency follow-up: Python 3.11/3.12 contract/API-import CI.",
+        "zh": "Alpha 後依賴更新：Python 3.11／3.12 契約／API 匯入 CI。"
+      },
+      "limit": {
+        "en": "No model weights or pretrained inference in this matrix; use the linked dated commit/run evidence, not a live CI badge.",
+        "zh": "此矩陣不含權重或真推論；連結是有日期的提交／執行證據，不是即時 CI 狀態。"
+      },
+      "source": "docs/validation/v0.3-dependency-followup.json",
+      "report": {
+        "en": "docs/en/validation.md",
+        "zh": "docs/zh-TW/validation.md"
+      },
+      "date": "2026-10-19",
+      "metrics": []
+    },
+    {
+      "id": "windows-ci",
+      "group": "platforms",
+      "title": {
+        "en": "Windows · CI (no weights)",
+        "zh": "Windows · CI（無權重）"
+      },
+      "kind": "platform",
+      "status": "ci",
+      "models": [
+        "yolo26",
+        "da2-small",
+        "da3-small",
+        "da3-metric",
+        "yolo26n"
+      ],
+      "trackers": [],
+      "platforms": [
+        "windows-ci"
+      ],
+      "scope": {
+        "en": "Post-Alpha dependency follow-up: Python 3.11/3.12 contract/API-import CI.",
+        "zh": "Alpha 後依賴更新：Python 3.11／3.12 契約／API 匯入 CI。"
+      },
+      "limit": {
+        "en": "No model weights or pretrained inference in this matrix; use the linked dated commit/run evidence, not a live CI badge.",
+        "zh": "此矩陣不含權重或真推論；連結是有日期的提交／執行證據，不是即時 CI 狀態。"
+      },
+      "source": "docs/validation/v0.3-dependency-followup.json",
+      "report": {
+        "en": "docs/en/validation.md",
+        "zh": "docs/zh-TW/validation.md"
+      },
+      "date": "2026-10-19",
+      "metrics": []
+    },
+    {
+      "id": "fresh-alpha",
+      "group": "platforms",
+      "title": {
+        "en": "Full fresh Alpha.2 installation / real worker",
+        "zh": "完整 Alpha.2 全新安裝／真 worker"
+      },
+      "kind": "platform",
+      "status": "not_run",
+      "models": [
+        "yolo26",
+        "da2-small",
+        "da3-small",
+        "da3-metric"
+      ],
+      "trackers": [],
+      "platforms": [
+        "windows-local",
+        "ubuntu-cuda"
+      ],
+      "scope": {
+        "en": "Fresh Windows pretrained inference and complete updated local recipe remain open.",
+        "zh": "Windows 全新真推論與完整更新後本機配方仍待驗證。"
+      },
+      "limit": {
+        "en": "No result is substituted from CI, static examples or another operating system. See ROADMAP for the open gate.",
+        "zh": "不以 CI、靜態範例或其他作業系統結果替代；待驗收門檻見 ROADMAP。"
+      },
+      "source": "ROADMAP.md",
+      "report": {
+        "en": "docs/en/validation.md",
+        "zh": "docs/zh-TW/validation.md"
+      },
+      "date": "2026-10-20",
+      "metrics": []
+    },
+    {
+      "id": "rtsp",
+      "group": "platforms",
+      "title": {
+        "en": "Physical RTSP / endurance",
+        "zh": "實體 RTSP／長時間穩定性"
+      },
+      "kind": "platform",
+      "status": "not_run",
+      "models": [
+        "yolo26",
+        "da2-small",
+        "da3-small",
+        "da3-metric"
+      ],
+      "trackers": [],
+      "platforms": [
+        "camera"
+      ],
+      "scope": {
+        "en": "Authentication, H.264/H.265, reconnect, latency and sustained memory/VRAM.",
+        "zh": "認證、H.264／H.265、重連、延遲與長時記憶體／VRAM。"
+      },
+      "limit": {
+        "en": "No result is substituted from CI, static examples or another operating system. See ROADMAP for the open gate.",
+        "zh": "不以 CI、靜態範例或其他作業系統結果替代；待驗收門檻見 ROADMAP。"
+      },
+      "source": "ROADMAP.md",
+      "report": {
+        "en": "docs/en/validation.md",
+        "zh": "docs/zh-TW/validation.md"
+      },
+      "date": "2026-10-20",
+      "metrics": []
+    },
+    {
+      "id": "safari",
+      "group": "platforms",
+      "title": {
+        "en": "Safari / macOS",
+        "zh": "Safari／macOS"
+      },
+      "kind": "platform",
+      "status": "not_run",
+      "models": [
+        "yolo26",
+        "da2-small",
+        "da3-small",
+        "da3-metric"
+      ],
+      "trackers": [],
+      "platforms": [
+        "macos"
+      ],
+      "scope": {
+        "en": "No independent Safari/macOS frozen browser matrix execution yet.",
+        "zh": "尚未執行獨立 Safari／macOS 凍結瀏覽器矩陣。"
+      },
+      "limit": {
+        "en": "No result is substituted from CI, static examples or another operating system. See ROADMAP for the open gate.",
+        "zh": "不以 CI、靜態範例或其他作業系統結果替代；待驗收門檻見 ROADMAP。"
+      },
+      "source": "ROADMAP.md",
+      "report": {
+        "en": "docs/en/validation.md",
+        "zh": "docs/zh-TW/validation.md"
+      },
+      "date": "2026-10-20",
+      "metrics": []
+    },
+    {
+      "id": "phones",
+      "group": "platforms",
+      "title": {
+        "en": "Physical Android / iOS",
+        "zh": "實體 Android／iOS"
+      },
+      "kind": "platform",
+      "status": "not_run",
+      "models": [
+        "yolo26",
+        "da2-small",
+        "da3-small",
+        "da3-metric"
+      ],
+      "trackers": [],
+      "platforms": [
+        "android",
+        "ios"
+      ],
+      "scope": {
+        "en": "CSS narrow layouts are tested separately; native touch and actual phones remain untested.",
+        "zh": "CSS 窄版另有檢查；原生觸控與實體手機仍未測。"
+      },
+      "limit": {
+        "en": "No result is substituted from CI, static examples or another operating system. See ROADMAP for the open gate.",
+        "zh": "不以 CI、靜態範例或其他作業系統結果替代；待驗收門檻見 ROADMAP。"
+      },
+      "source": "ROADMAP.md",
+      "report": {
+        "en": "docs/en/validation.md",
+        "zh": "docs/zh-TW/validation.md"
+      },
+      "date": "2026-10-20",
+      "metrics": []
+    },
+    {
+      "id": "metric",
+      "group": "platforms",
+      "title": {
+        "en": "Calibrated depth / world motion",
+        "zh": "標定測距／世界運動"
+      },
+      "kind": "platform",
+      "status": "not_run",
+      "models": [
+        "yolo26",
+        "da2-small",
+        "da3-small",
+        "da3-metric"
+      ],
+      "trackers": [],
+      "platforms": [
+        "ubuntu-cuda",
+        "camera"
+      ],
+      "scope": {
+        "en": "Measured intrinsics, independent distances and motion-compensated trajectories are not accepted.",
+        "zh": "實測內參、獨立距離與運動補償世界軌跡仍未驗收。"
+      },
+      "limit": {
+        "en": "No result is substituted from CI, static examples or another operating system. See ROADMAP for the open gate.",
+        "zh": "不以 CI、靜態範例或其他作業系統結果替代；待驗收門檻見 ROADMAP。"
+      },
+      "source": "ROADMAP.md",
+      "report": {
+        "en": "docs/en/validation.md",
+        "zh": "docs/zh-TW/validation.md"
+      },
+      "date": "2026-10-20",
+      "metrics": []
+    }
+  ]
+}

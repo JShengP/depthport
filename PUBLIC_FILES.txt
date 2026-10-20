@@ -539,3 +539,9 @@ docs/validation/pages-headed-plan.json
 docs/en/pages-headed-browsers.md
 docs/zh-TW/pages-headed-browsers.md
 docs/validation/pages-headed-acceptance.json
+tools/build_results.py
+website/results/index.html
+website/results-index.json
+website/results.js
+website/results.css
+docs/zh-TW/pages-results-index.md
