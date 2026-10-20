@@ -18,6 +18,12 @@ function filter(){
   const bilingual=Array.from(card.querySelectorAll('[data-en]')).map(node=>node.dataset.en+' '+node.dataset.zh).join(' ');
   card.hidden=!matches({...card.dataset,text:card.textContent+' '+bilingual},selected,search.value);if(!card.hidden)count++;
  }
+ for(const comparison of document.querySelectorAll('[data-comparison]')){
+  const members=comparison.dataset.members.split(' '),visible=members.filter(id=>cards.some(card=>card.dataset.result===id&&!card.hidden));
+  comparison.hidden=visible.length===0;
+  for(const row of comparison.querySelectorAll('[data-comparison-member]'))row.hidden=!visible.includes(row.dataset.comparisonMember);
+  comparison.querySelector('.comparison-visible').textContent=chinese()?`本組顯示 ${visible.length}／${members.length} 個追蹤器；比例尺保持不變`:`Showing ${visible.length} of ${members.length} trackers in this cohort; scales unchanged`;
+ }
  for(const group of groups)group.hidden=!Array.from(group.querySelectorAll('[data-result]')).some(card=>!card.hidden);
  document.querySelector('#resultsCount').textContent=chinese()?`顯示 ${count}／${cards.length} 筆結果條目`:`Showing ${count} of ${cards.length} indexed records`;
  document.querySelector('#resultsEmpty').hidden=count!==0;

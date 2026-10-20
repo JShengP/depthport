@@ -18,7 +18,7 @@
 > [!IMPORTANT]
 > **實驗性開發預覽。** Session 儲存預設關閉；長遮擋恢復、實體 RTSP、Windows 真權重／worker 整合、長時穩定性與標定距離精度仍待驗證。[驗證紀錄](docs/zh-TW/validation.md)
 
-**測試結果總覽：** [Results Index](https://jshengp.github.io/depthport/results/?lang=zh-TW) — 依模型、追蹤器與平台查看實測、CI、未通過與未驗證項目。
+**測試結果總覽：** [Results Index](https://jshengp.github.io/depthport/results/?lang=zh-TW) — 依模型、追蹤器與平台查看實測、CI、未通過與未驗證項目，並比較同場景組的 HOTA／IDSW／FN／FP。
 
 ## 真實資料互動展示
 

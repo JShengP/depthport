@@ -1494,5 +1494,59 @@
       "date": "2026-10-20",
       "metrics": []
     }
+  ],
+  "comparisons": [
+    {
+      "id": "mot17-expanded",
+      "group": "mot17",
+      "title": {
+        "en": "Same-cohort tracking comparison · MOT17-04 / 11 / 13",
+        "zh": "同場景組追蹤比較 · MOT17-04／11／13"
+      },
+      "source": "docs/validation/v0.3-mot17-expanded.json",
+      "score_root": "/combined/all_sequences",
+      "members": [
+        {
+          "record": "mot17-baseline",
+          "arm": "baseline"
+        },
+        {
+          "record": "mot17-bytetrack",
+          "arm": "bytetrack"
+        },
+        {
+          "record": "mot17-botsort",
+          "arm": "botsort"
+        }
+      ],
+      "note": {
+        "en": "Three trackers share the same detector cache and evaluator. Baseline uses DepthPort IoU; ByteTrack/BoT-SORT use the recorded default configurations, without ReID.",
+        "zh": "三個追蹤器共用偵測快取與評估器；Baseline 為 DepthPort IoU，ByteTrack／BoT-SORT 採原紀錄的預設配置，不使用 ReID。"
+      }
+    },
+    {
+      "id": "mot17-parameters-default",
+      "group": "parameters",
+      "title": {
+        "en": "Same-cohort default controls · MOT17-09 / 10",
+        "zh": "同場景組預設對照 · MOT17-09／10"
+      },
+      "source": "docs/validation/v0.3-mot17-parameters.json",
+      "score_root": "/combined/all_sequences",
+      "members": [
+        {
+          "record": "parameters-bytetrack",
+          "arm": "bytetrack__default"
+        },
+        {
+          "record": "parameters-botsort",
+          "arm": "botsort__default"
+        }
+      ],
+      "note": {
+        "en": "Default control arms only: activation 0.7, high detection gate 0.6, buffer parameter 30. Other parameter profiles and the MOT15 worker run are not part of this chart; see their separate records.",
+        "zh": "僅比較預設對照：啟用門檻 0.7、高偵測門檻 0.6、buffer 參數 30。其他參數配置與 MOT15 worker 執行不放入本圖，請查看各自紀錄。"
+      }
+    }
   ]
 }
