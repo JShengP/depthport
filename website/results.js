@@ -21,6 +21,8 @@ function filter(){
  for(const comparison of document.querySelectorAll('[data-comparison]')){
   const members=comparison.dataset.members.split(' '),visible=members.filter(id=>cards.some(card=>card.dataset.result===id&&!card.hidden));
   comparison.hidden=visible.length===0;
+  const sequence=comparison.querySelector('[data-comparison-sequence]');
+  for(const view of comparison.querySelectorAll('[data-comparison-view]'))view.hidden=view.dataset.comparisonView!==sequence.value;
   for(const row of comparison.querySelectorAll('[data-comparison-member]'))row.hidden=!visible.includes(row.dataset.comparisonMember);
   comparison.querySelector('.comparison-visible').textContent=chinese()?`本組顯示 ${visible.length}／${members.length} 個追蹤器；比例尺保持不變`:`Showing ${visible.length} of ${members.length} trackers in this cohort; scales unchanged`;
  }
@@ -30,6 +32,7 @@ function filter(){
  for(const link of document.querySelectorAll('[data-report-en]'))link.href=chinese()?link.dataset.reportZh:link.dataset.reportEn;
 }
 for(const input of form.querySelectorAll('input,select,button'))input.disabled=false;
+for(const sequence of document.querySelectorAll('[data-comparison-sequence]')){sequence.disabled=false;sequence.addEventListener('change',filter);}
 form.addEventListener('submit',event=>event.preventDefault());form.addEventListener('input',filter);form.addEventListener('change',filter);
 // Reset explicitly: Chromium can flush microtasks before native form reset.
 form.addEventListener('reset',event=>{event.preventDefault();for(const node of facets)node.value='';search.value='';filter();});document.addEventListener('depthport:language',filter);filter();

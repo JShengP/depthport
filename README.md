@@ -18,7 +18,7 @@ Turn RGB images and RTSP frames into interactive **single-view point clouds**. C
 > [!IMPORTANT]
 > **Experimental development preview.** Session storage is off by default. Long-occlusion recovery, physical RTSP, Windows pretrained inference/worker integration, endurance and calibrated distance accuracy remain open. [Validation record](docs/en/validation.md)
 
-**Test results:** [Results Index](https://jshengp.github.io/depthport/results/?lang=en) — browse models, trackers and platforms with scoped results, same-cohort HOTA/IDSW/FN/FP charts, CI, failed gates and unverified items.
+**Test results:** [Results Index](https://jshengp.github.io/depthport/results/?lang=en) — browse models, trackers and platforms with scoped results, same-cohort HOTA/IDSW/FN/FP charts with combined/individual-sequence views, CI, failed gates and unverified items.
 
 ## Real-data interactive demos
 

@@ -49,6 +49,19 @@ Safari、實體手機／原生觸控、其他 OS／build、完整新版全新安
 
 驗證：聚焦離線測試 18 通過，涵蓋來源／長條數值與順序、比例尺、禁止混組／混配置、真零值及缺值拒絕。另以 Linux 無頭 Chrome／Edge／Firefox 檢查 20 根長條的數字與實際顯示寬度、兩組圖在中英桌面／390px CSS 窄版的 8 種布局、篩選後比例尺不變、無結果／worker／未驗證條件隱藏圖、語言切換與卡片跳轉。這是軟體回歸，原瀏覽器矩陣與未測項目不改判；原始截圖及診斷只留本機。
 
+## 逐序列切換 — 2026-10-21
+
+兩組比較圖各提供獨立的「全組序列（原彙總）」與逐序列選單：MOT17-04／11／13 三段，以及預設對照組的 MOT17-09／10 兩段。切換一次會同步更新 HOTA、IDSW、FN、FP；當前序列顯示原紀錄日期、影格數、FPS、解析度及固定／移動相機條件。共同的偵測器、追蹤器配置、來源報告及驗證限制繼續可見。
+
+- 共 7 個視圖、28 個指標面板、72 根長條，全部在建置時從原公開 JSON 讀取。逐序列只讀取該組原 `sequences/.../methods/<arm>/metrics`；全組沿用原 `combined/all_sequences`，不從四捨五入後的逐序列值重算，也不改寫歷史證據。
+- 全組與逐序列共用本場景組的固定比例尺，切換與篩選均不縮放、不按成績重排，不跨組排名。缺值、錯誤配置或不合法數值會使建置失敗，不補零、不回退為全組分數。
+- 兩個選單互不影響；切換語言、追蹤器等篩選、暫時隱藏比較圖與清除篩選，都保留已選序列。清除篩選只清除條件與搜尋，不重設序列。點選長條仍前往明確標示的追蹤器**全組結果卡片**，逐序列分數以當前比較圖及完整報告為準。
+- 沒有額外下載大型資料包、讀取原始診斷、重新推論／評分或調參；弱偵測延續與研究控制不變。停用 JavaScript 時保留全組圖與全部結果卡片，逐序列選單停用並附說明。
+
+軟體驗證：聚焦離線測試 **20 通過**，涵蓋全部視圖的來源值／順序／比例尺、真零值、缺值拒絕及逐序列配置一致性。Linux 無頭 Chrome 155.0.8059.84／Edge 155.0.4283.62／Firefox 157.0 均核對 7 視圖的 72 根長條數字與實際寬度、獨立選擇與篩選／語言保留、全組卡片跳轉，以及中英桌面／390px CSS 窄版共 **28 種布局／每瀏覽器**；未發現頁面 JavaScript 錯誤或水平溢出。
+
+以上只驗證網站軟體呈現，不新增追蹤品質或實體手機證據，不改判原瀏覽器凍結矩陣（33 通過／31 未測）。Safari、原生手機／觸控、其他 OS，以及長遮擋恢復與泛化 ID 穩定性仍保留原未驗證／未驗收狀態。原始瀏覽器檢查、截圖與環境紀錄只留本機。
+
 ## English summary
 
 The bilingual Results Index renders 26 dated, source-linked records at build time. Numeric metrics come from allowlisted evidence through JSON pointers; no browser API, raw diagnostic data or inference is used. Cohorts, failed gates, CI without weights and unverified platforms stay separate. This is an evidence index, not a global leaderboard or live CI status.
@@ -56,3 +69,5 @@ The bilingual Results Index renders 26 dated, source-linked records at build tim
 Homepage tracking details now sit in a closed disclosure. v0.1/v0.2 show the unchanged saved point cloud through a small derived pack before loading exact Float32 queries. Loads show progress, have a 45-second deadline and retry, and cache completed models for the current page. Local three-browser regression and controlled Chrome network-failure tests are scoped software evidence, not new hardware, accuracy or full frozen-matrix acceptance. Raw captures and diagnostics remain local.
 
 Within-cohort charts now show HOTA, IDSW, FN and FP separately for the MOT17-04/11/13 comparison and MOT17-09/10 default controls. Values are read from their original source branches; scales start at zero and stay fixed under filtering. Missing values and mismatched cohorts/profiles fail the build instead of becoming zero. No scores are rerun or ranked across cohorts.
+
+Each cohort also has an independent combined/individual-sequence selector. All four metrics and recorded sequence conditions change together; filtering, resets and language changes preserve the selection. Combined scores remain the original aggregates, bar links are explicitly labelled as combined-cohort cards, and axes stay fixed within each cohort. Twenty focused offline tests and three Linux headless browsers cover all seven views, 72 bar values/widths and 28 bilingual desktop/narrow layouts per browser. This remains scoped software regression, not new accuracy, hardware or full frozen-matrix acceptance.
