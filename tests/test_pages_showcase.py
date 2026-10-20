@@ -7,6 +7,7 @@ import subprocess
 import sys
 from urllib.parse import urlsplit, unquote
 import zipfile
+import json
 import shutil
 import pytest
 
@@ -40,6 +41,11 @@ def test_build_multi_version_showcase_with_safe_artefacts(tmp_path):
                 'media/preview.en.png', 'media/spatial-preview.en.png',
                 'media/tracking-replay-crossing.zh-TW.jpg')
     assert all((out / file).is_file() for file in expected)
+    # Reuse the exact reviewed README images, including the second language.
+    captures = json.loads((ROOT / 'docs/validation/readme-real-pages.json').read_text(encoding='utf-8'))
+    for entry in captures['images']:
+        original = ROOT / entry['path']
+        assert (out / 'media' / original.name).read_bytes() == original.read_bytes()
     pages = [out / p for p in ('index.html', 'v0.1/index.html',
                              'v0.2/index.html', 'v0.3/index.html')]
     assert 'data-demo-only="true"' in pages[1].read_text(encoding='utf-8')
@@ -92,4 +98,12 @@ def test_showcase_js_parses_if_node_is_available():
     if node is None:
         pytest.skip('Node.js is not installed')
     subprocess.run([node, '--check', str(ROOT / 'website' / 'showcase.js')],
+                   check=True, capture_output=True, text=True)
+
+
+def test_home_card_images_and_links_follow_language_if_node_available():
+    node = shutil.which('node')
+    if node is None:
+        pytest.skip('Node.js is not installed')
+    subprocess.run([node, str(ROOT / 'tests/test_home_cards.cjs')],
                    check=True, capture_output=True, text=True)

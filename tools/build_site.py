@@ -23,7 +23,10 @@ SHOWCASE_ASSETS = ('showcase.css', 'showcase.js', 'recorded-examples.css', 'reco
 SCREENSHOTS = ('preview.en.png', 'spatial-preview.en.png',
                'tracking-replay-start.zh-TW.jpg',
                'tracking-replay-crossing.zh-TW.jpg',
-               'tracking-replay-later.zh-TW.jpg')
+               'tracking-replay-later.zh-TW.jpg',
+               'pages-v01-cloud.en.jpg', 'pages-v01-cloud.zh-TW.jpg',
+               'pages-v02-inspector.en.jpg', 'pages-v02-inspector.zh-TW.jpg',
+               'pages-v03-replay.en.jpg', 'pages-v03-replay.zh-TW.jpg')
 BUS_SHA256 = 'c02019c4979c191eb739ddd944445ef408dad5679acab6fd520ef9d434bfbc63'
 
 
@@ -57,6 +60,11 @@ def main() -> None:
     for file in SHOWCASE_ASSETS:
         shutil.copyfile(ROOT / 'website' / file, out / 'assets' / file)
     (out / 'media').mkdir()
+    captures = json.loads((ROOT / 'docs/validation/readme-real-pages.json').read_text(encoding='utf-8'))
+    for entry in captures['images']:
+        payload = (ROOT / entry['path']).read_bytes()
+        if len(payload) != entry['bytes'] or hashlib.sha256(payload).hexdigest() != entry['sha256']:
+            raise SystemExit('Reviewed UI screenshot hash mismatch: ' + entry['path'])
     for file in SCREENSHOTS:
         shutil.copyfile(ROOT / 'docs' / 'assets' / file, out / 'media' / file)
     bus_file = ROOT / 'website' / 'media' / 'bus.jpg'
@@ -86,8 +94,8 @@ def main() -> None:
                         ' · Synthetic viewer / 合成檢視器</nav>')
     (out / 'v0.1' / 'synthetic.html').write_text(html, encoding='utf-8')
 
-    # v0.2 and v0.3 are standalone read-only canvases with synthetic inputs;
-    # they must not fetch API resources, execute models or persist user content.
+    # Standalone read-only demos load reviewed saved data and separate synthetic
+    # exercises; no API, inference runtime or private user content is needed.
     for ver in ('v0.1', 'v0.2', 'v0.3'):
         (out / ver).mkdir(exist_ok=True)
         shutil.copyfile(ROOT / 'website' / ver / 'index.html', out / ver / 'index.html')

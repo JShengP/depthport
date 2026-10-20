@@ -514,3 +514,6 @@ docs/assets/pages-v02-inspector.zh-TW.jpg
 docs/assets/pages-v03-replay.en.jpg
 docs/assets/pages-v03-replay.zh-TW.jpg
 docs/validation/readme-real-pages.json
+
+# Homepage language-switch regression
+tests/test_home_cards.cjs

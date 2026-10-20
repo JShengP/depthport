@@ -1,5 +1,6 @@
 /* SPDX-License-Identifier: AGPL-3.0-only */
-/* Static showcase only: generated geometry and tracking cues, never pretrained AI predictions. */
+/* Static showcase language controls and clearly separate synthetic exercises.
+ * Saved inference widgets are handled by real-results.js. */
 (() => {
   'use strict';
   const q = (s) => document.querySelector(s);
@@ -23,9 +24,14 @@
     const toggle = q('[data-lang-switch]');
     if (toggle) toggle.textContent = chinese() ? 'English' : '繁體中文';
     try { localStorage.setItem('depthport.showcase.lang', lang); } catch (_) { /* disabled storage */ }
-    document.querySelectorAll('a[href^="./v0.1/"], a[href^="../v0.1/"]').forEach(a => {
+    document.querySelectorAll('a[href^="./v0."], a[href^="../v0."]').forEach(a => {
+      if (!/^\.\.?\/v0\.[123]\/(?:\?.*)?$/.test(a.getAttribute('href'))) return;
       const path = a.getAttribute('href').split('?')[0];
       a.setAttribute('href', path + '?lang=' + lang);
+    });
+    document.querySelectorAll('img[data-src-en][data-src-zh]').forEach(img => {
+      img.src = chinese() ? img.dataset.srcZh : img.dataset.srcEn;
+      img.alt = chinese() ? img.dataset.altZh : img.dataset.altEn;
     });
     refreshPage();
     document.dispatchEvent(new Event('depthport:language'));
