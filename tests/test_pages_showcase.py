@@ -211,3 +211,104 @@ def test_results_index_metrics_keep_source_cohorts_and_unverified_gates(tmp_path
         assert resolved.is_file()
     js = (ROOT / 'website/results.js').read_text()
     assert 'fetch(' not in js and '/api/' not in js and 'innerHTML' not in js
+
+
+def test_tracking_comparison_charts_keep_cohort_values_order_and_scales(tmp_path):
+    import math
+    from tools.build_results import comparison_series, count_axis_maximum, render_comparison
+    config = json.loads((ROOT / 'website/results-index.json').read_text())
+    records = {row['id']: row for row in config['records']}
+    approved = set((ROOT / 'PUBLIC_FILES.txt').read_text().splitlines())
+    out = tmp_path / 'site'
+    build(out)
+    html = (out / 'results/index.html').read_text()
+
+    class Charts(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.chart = self.metric = self.member = None
+            self.figures = {}
+            self.rows = []
+
+        def handle_starttag(self, tag, attrs):
+            a = dict(attrs)
+            if 'data-comparison' in a:
+                self.chart = a['data-comparison']
+            if 'data-metric' in a:
+                self.metric = a['data-metric']
+                self.figures[(self.chart, self.metric)] = float(a['data-axis-max'])
+            if 'data-comparison-member' in a:
+                self.member = a['data-comparison-member']
+                self.rows.append({'chart': self.chart, 'metric': self.metric,
+                                  'member': self.member, 'value': float(a['data-value'])})
+            if tag == 'i':
+                self.rows[-1]['width'] = float(a['style'].split(':')[1].rstrip('%'))
+
+    parser = Charts()
+    parser.feed(html)
+    assert len(parser.figures) == 8 and len(parser.rows) == 20
+    assert all(r['member'] != 'worker' for r in parser.rows)
+    for spec in config['comparisons']:
+        source, series = comparison_series(ROOT, spec, records, approved)
+        for metric in ('HOTA', 'IDSW', 'CLR_FN', 'CLR_FP'):
+            actual = [r for r in parser.rows if r['chart'] == spec['id'] and r['metric'] == metric]
+            assert [r['member'] for r in actual] == [m['record'] for m in spec['members']]
+            values = [v[metric] * 100 if metric == 'HOTA' else v[metric] for _, v in series]
+            upper = 100 if metric == 'HOTA' else count_axis_maximum(values)
+            assert parser.figures[(spec['id'], metric)] == upper
+            for row, value in zip(actual, values):
+                assert row['value'] == value
+                assert math.isclose(row['width'], value / upper * 100, abs_tol=1e-8)
+            assert 'starts at zero' in html and '篩選不重算' in html
+        for member in spec['members']:
+            assert 'href="#result-' + member['record'] + '"' in html
+            assert 'id="result-' + member['record'] + '"' in html
+
+
+def test_tracking_comparison_rejects_cross_cohort_and_profile_members():
+    import copy
+    from tools.build_results import comparison_series
+    config = json.loads((ROOT / 'website/results-index.json').read_text())
+    records = {row['id']: row for row in config['records']}
+    approved = set((ROOT / 'PUBLIC_FILES.txt').read_text().splitlines())
+    spec = copy.deepcopy(config['comparisons'][1])
+    spec['members'][1] = {'record': 'worker', 'arm': 'botsort'}
+    with pytest.raises(ValueError, match='share a source and cohort'):
+        comparison_series(ROOT, spec, records, approved)
+    spec = copy.deepcopy(config['comparisons'][1])
+    spec['members'][0]['arm'] = 'bytetrack__activation_only'
+    with pytest.raises(ValueError, match='different arm'):
+        comparison_series(ROOT, spec, records, approved)
+
+
+def test_tracking_comparison_does_not_turn_missing_into_zero(tmp_path):
+    import copy
+    from tools.build_results import comparison_series, count_axis_maximum, render_comparison
+    config = json.loads((ROOT / 'website/results-index.json').read_text())
+    records = {row['id']: copy.deepcopy(row) for row in config['records']}
+    spec = config['comparisons'][0]
+    path = tmp_path / spec['source']
+    path.parent.mkdir(parents=True)
+    source = json.loads((ROOT / spec['source']).read_text())
+    for values in source['combined']['all_sequences'].values():
+        for key in ('HOTA', 'IDSW', 'CLR_FN', 'CLR_FP'):
+            values[key] = 0
+    path.write_text(json.dumps(source))
+    approved = {spec['source']}
+    _, series = comparison_series(tmp_path, spec, records, approved)
+    assert all(value == 0 for _, values in series for value in values.values())
+    assert count_axis_maximum([0, 0, 0]) == 1
+    zero_html = render_comparison(tmp_path, spec, records, approved)
+    assert zero_html.count('width:0.00000000%') == 12
+    assert zero_html.count('<strong>0.00%</strong>') == 3
+    assert zero_html.count('data-axis-max="1"') == 3
+    for values in source['combined']['all_sequences'].values():
+        values.update(IDSW=3, CLR_FN=5, CLR_FP=7)
+    path.write_text(json.dumps(source))
+    small_html = render_comparison(tmp_path, spec, records, approved)
+    for upper in (3, 5, 7):
+        assert f'<span>0</span><span>{upper}</span>' in small_html
+    source['combined']['all_sequences']['baseline'].pop('CLR_FN')
+    path.write_text(json.dumps(source))
+    with pytest.raises(KeyError):
+        comparison_series(tmp_path, spec, records, approved)

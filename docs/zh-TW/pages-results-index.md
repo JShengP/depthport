@@ -34,8 +34,25 @@ v0.1／v0.2 原本需下載完整 Float32 JSON 才顯示點雲。預設 V2 JSON 
 
 Safari、實體手機／原生觸控、其他 OS／build、完整新版全新安裝、實體 RTSP、長時資源與校正測距仍未驗證。未執行模型／追蹤器新效能或品質測試；弱偵測延續、參數與研究接受條件保持原樣。
 
+## 同場景組追蹤比較圖 — 2026-10-20
+
+[直接查看三追蹤器比較](https://jshengp.github.io/depthport/results/?lang=zh-TW#comparison-mot17-expanded)。新增兩組獨立圖：
+
+- **MOT17-04／11／13：** Baseline IoU、Roboflow ByteTrack、BoT-SORT（無 ReID），共用原偵測快取與評估器，2,700 格。
+- **MOT17-09／10：** ByteTrack／BoT-SORT 的預設對照，1,179 格。啟用門檻 0.7、高偵測門檻 0.6、buffer 參數 30；其他配置仍在各自完整報告，不混入本圖。MOT15 worker 整合不加入這兩組比較。
+
+每組各四個長條面板：HOTA（0–100%，越高越好）、IDSW、FN、FP（計數，越低越好）。所有軸從零起算，長條旁保留完整數字；計數比例尺由該完整場景組決定，篩選只隱藏不符合的追蹤器，不改比例尺、不重算指標、不按成績重排。沒有符合條目時隱藏該圖，不冒充零值。點選長條可跳到同一筆完整結果卡片。
+
+建置從既有兩份彙總 JSON 的相同 `combined/all_sequences` 分支讀取數值，另核對組別、來源與配置路徑；缺值、跨組／跨來源、配置不符、非有限數值或不合法計數會中止建置，不補 0。圖上直接列出序列、影格數、日期、偵測器版本、CPU、輸入尺寸、信心／NMS 門檻、偵測上限、類別與追蹤套件版本，並保留完整條件連結及驗證限制。
+
+這是既有研究結果的視覺呈現，**沒有重新推論、評分、調參或新增獨立證據**。兩組不互排排名，不把較少換 ID 當成長遮擋／泛化追蹤已驗收。模型、追蹤器、原研究輸出、弱偵測延續與預設不變。
+
+驗證：聚焦離線測試 18 通過，涵蓋來源／長條數值與順序、比例尺、禁止混組／混配置、真零值及缺值拒絕。另以 Linux 無頭 Chrome／Edge／Firefox 檢查 20 根長條的數字與實際顯示寬度、兩組圖在中英桌面／390px CSS 窄版的 8 種布局、篩選後比例尺不變、無結果／worker／未驗證條件隱藏圖、語言切換與卡片跳轉。這是軟體回歸，原瀏覽器矩陣與未測項目不改判；原始截圖及診斷只留本機。
+
 ## English summary
 
 The bilingual Results Index renders 26 dated, source-linked records at build time. Numeric metrics come from allowlisted evidence through JSON pointers; no browser API, raw diagnostic data or inference is used. Cohorts, failed gates, CI without weights and unverified platforms stay separate. This is an evidence index, not a global leaderboard or live CI status.
 
 Homepage tracking details now sit in a closed disclosure. v0.1/v0.2 show the unchanged saved point cloud through a small derived pack before loading exact Float32 queries. Loads show progress, have a 45-second deadline and retry, and cache completed models for the current page. Local three-browser regression and controlled Chrome network-failure tests are scoped software evidence, not new hardware, accuracy or full frozen-matrix acceptance. Raw captures and diagnostics remain local.
+
+Within-cohort charts now show HOTA, IDSW, FN and FP separately for the MOT17-04/11/13 comparison and MOT17-09/10 default controls. Values are read from their original source branches; scales start at zero and stay fixed under filtering. Missing values and mismatched cohorts/profiles fail the build instead of becoming zero. No scores are rerun or ranked across cohorts.
