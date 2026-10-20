@@ -520,3 +520,4 @@ tests/test_home_cards.cjs
 
 # Frozen saved-result browser compatibility protocol
 docs/validation/pages-browser-protocol.json
+docs/validation/pages-browser-initial.json
