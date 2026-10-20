@@ -38,4 +38,4 @@ Only explicitly reviewed paths in `PUBLIC_FILES.txt` are copied. Native arrays/P
 
 ## Browser compatibility / 瀏覽器相容性
 
-[Historical in-app protocol/results / 原內建瀏覽器紀錄](pages-browser-compatibility.md) · [Independent headless follow-up / 獨立無頭補驗](pages-standalone-browsers.md): exact Linux Chrome155 / Edge155 / Firefox157 builds pass B01–B07, including Shift-pan; B08 remains not_run. Combined matrix33 pass /31 not_run; Safari, physical phones, headed/other OS and natural unsupported/fallback paths remain open. 原失敗／工具更正保留，無頭與視窗尺寸結果不代替實機／精度驗收。
+[Historical in-app record / 原內建紀錄](pages-browser-compatibility.md) · [Headless / 無頭](pages-standalone-browsers.md) · [Native headed / 原生有視窗](pages-headed-browsers.md): exact Linux Chrome155 / Edge155 / Firefox157 pass B01–B07 in each separate mode; B08 remains not_run. Each mode21 pass/3 not_run; unique matrix33 pass/31 not_run, without counting modes twice. Safari, physical phones, other OS/builds and natural unsupported/fallback paths remain open. 原失敗保留，桌面有視窗與尺寸覆寫不代替實體手機／完整應用硬體／精度驗收。

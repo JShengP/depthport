@@ -1,0 +1,981 @@
+{
+  "format": "depthport.pages-headed-acceptance.v1",
+  "checked_at": "2026-10-20T14:08:23.062161+00:00",
+  "protocol_commit": "8c5a25efe68a303d01eb4ccb02557cafa1f91bf3",
+  "protocol_sha256": "fd0851f025d7b1e3bf6cced37c8553a074ce29e33db64e06e8eccaf3d316d38d",
+  "execution_plan_commit": "c5060e4fe920bd1ae2c1fc9d76cc520518d9875a",
+  "execution_plan_sha256": "88cc6f9ea99851bd26214c50be19d43d57a5f5eca4617c6917d5ff1db584d255",
+  "target_commit": "2f77579583c7598e3e18b74e516ed19919e3a57c",
+  "target_url": "https://jshengp.github.io/depthport/",
+  "scope": "Native Linux X11 headed saved-result compatibility only; no Xvfb, model inference, GT, tracker rerun, tuning, saved data or default changes.",
+  "runtime": {
+    "selenium": "4.51.0",
+    "pillow": "13.0.0",
+    "python": "3.12",
+    "platform": "Linux x86_64, native X.Org21.1.11 X11 desktop1920x1080x24; no Xvfb",
+    "harness_sha256": "a91e914269717b8dd1494935bed32727d33a019ca93f1dae3309729324377d7c",
+    "browser_sources": "Same unchanged official vendor executables/drivers and archive digests as pages-standalone-plan.json; no installation or daily-profile change."
+  },
+  "setup": {
+    "observations": [
+      {
+        "attempt": "preflight",
+        "chrome": "Browser launched but visibility probe failed: driver main-thread child list empty, missing headless_switches proof. Not a Pages product test.",
+        "edge": "Same process-identification probe error. Not a Pages product test.",
+        "firefox": "Native visible window and moz:headless=false observed."
+      },
+      {
+        "attempt": "preflight02",
+        "outcome": "All three visible windows/no-headless verified via vendor PID capabilities; both viewports reachable. Desktop initially used BiDi override. Not a Pages product test."
+      },
+      {
+        "attempt": "preflight03",
+        "outcome": "All three visible windows/no-headless verified; desktop now native content-area resize,390 supplemental override separately recorded. Only about:blank used throughout setup."
+      }
+    ],
+    "preflight_raw_seals": [
+      {
+        "attempt": "preflight",
+        "sha256": "2a99c12414d3e3d3b0bf73cd42345af4973499f72ac24b427c7c2371cc93d0e9"
+      },
+      {
+        "attempt": "preflight02",
+        "sha256": "b398f4ee4585a7de5e0966471cac1d38ebd2d2301b5bd7aaa0342647787a6c42"
+      },
+      {
+        "attempt": "preflight03",
+        "sha256": "2d9ba900aeddcdbc73239213de0cb2139e6ae9ef7fd68d3b176419eeda1be1d0"
+      }
+    ],
+    "notice": "All setup probes used about:blank only. Initial Chromium main-thread-child PID lookup failed; vendor PID capability corrected before public plan seal and real Pages tests. Desktop BiDi override was refined to native content resize before seal."
+  },
+  "attempts": [
+    {
+      "id": "chrome-01",
+      "time": "2026-10-20T13:58:43.104853+00:00",
+      "browser": "chrome",
+      "result_sha256": "a02e1cbcacfa3353ee7bc764856f7f93f00ef6fac99d94d094f2895e326259af",
+      "harness_sha256": "a91e914269717b8dd1494935bed32727d33a019ca93f1dae3309729324377d7c",
+      "environment": {
+        "version": "155.0.8059.84",
+        "driver": "155.0.8059.84 (5869fe313571d75152b77813cf0a4ee26a4e6df0-refs/branch-heads/8059@{#1303})",
+        "headless": false,
+        "platform": "linux",
+        "headless_switches": [],
+        "firefox_headless_capability": null,
+        "native_window": {
+          "observed": true,
+          "display_server": "X11",
+          "windows": [
+            {
+              "viewable": true,
+              "width": 1324,
+              "height": 1087
+            }
+          ]
+        }
+      },
+      "cases": {
+        "B01": "pass",
+        "B02": "pass",
+        "B03": "pass",
+        "B04": "pass",
+        "B05": "pass",
+        "B06": "pass",
+        "B07": "pass",
+        "B08": "not_run"
+      },
+      "failed_subchecks": [],
+      "screenshots": 138,
+      "page_events": 0,
+      "asset_checks_sha256": "f400d300588f0199510596fcc5a3a0d194135893472eddcfca49f76a39b879aa"
+    },
+    {
+      "id": "edge-01",
+      "time": "2026-10-20T14:03:05.869501+00:00",
+      "browser": "edge",
+      "result_sha256": "8261c716fccf03489ace32fd711123cb28a516bb041aa1d11bcbb325dcfe8c47",
+      "harness_sha256": "a91e914269717b8dd1494935bed32727d33a019ca93f1dae3309729324377d7c",
+      "environment": {
+        "version": "155.0.4283.62",
+        "driver": "155.0.4283.62 (aa3a7406ba8c53a83536df539f07124d73c899bd)",
+        "headless": false,
+        "platform": "linux",
+        "headless_switches": [],
+        "firefox_headless_capability": null,
+        "native_window": {
+          "observed": true,
+          "display_server": "X11",
+          "windows": [
+            {
+              "viewable": true,
+              "width": 1332,
+              "height": 1078
+            }
+          ]
+        }
+      },
+      "cases": {
+        "B01": "pass",
+        "B02": "pass",
+        "B03": "pass",
+        "B04": "pass",
+        "B05": "pass",
+        "B06": "pass",
+        "B07": "pass",
+        "B08": "not_run"
+      },
+      "failed_subchecks": [],
+      "screenshots": 138,
+      "page_events": 0,
+      "asset_checks_sha256": "f400d300588f0199510596fcc5a3a0d194135893472eddcfca49f76a39b879aa"
+    },
+    {
+      "id": "firefox-01",
+      "time": "2026-10-20T14:06:41.772467+00:00",
+      "browser": "firefox",
+      "result_sha256": "eef4c2a4e7fd49644bfdb00cc7d285f8a1490e1bd3c59b44b6ca636fac488362",
+      "harness_sha256": "a91e914269717b8dd1494935bed32727d33a019ca93f1dae3309729324377d7c",
+      "environment": {
+        "version": "157.0",
+        "driver": "0.37.1",
+        "headless": false,
+        "platform": "linux",
+        "headless_switches": [],
+        "firefox_headless_capability": false,
+        "native_window": {
+          "observed": true,
+          "display_server": "X11",
+          "windows": [
+            {
+              "viewable": true,
+              "width": 1332,
+              "height": 1037
+            }
+          ]
+        }
+      },
+      "cases": {
+        "B01": "pass",
+        "B02": "pass",
+        "B03": "pass",
+        "B04": "pass",
+        "B05": "pass",
+        "B06": "pass",
+        "B07": "pass",
+        "B08": "not_run"
+      },
+      "failed_subchecks": [],
+      "screenshots": 138,
+      "page_events": 0,
+      "asset_checks_sha256": "f400d300588f0199510596fcc5a3a0d194135893472eddcfca49f76a39b879aa"
+    }
+  ],
+  "matrix": [
+    {
+      "id": "IAB-D",
+      "cases": {
+        "B01": "pass",
+        "B02": "not_run",
+        "B03": "pass",
+        "B04": "pass",
+        "B05": "pass",
+        "B06": "pass",
+        "B07": "pass",
+        "B08": "not_run"
+      },
+      "remaining_subchecks": {
+        "B02": "Four models rendered/orbited/zoomed/colors/size/reset on v0.1 and v0.2; modifier/right-button pan not executed by available drag API.",
+        "B08": "Native gzip and WebGL available; naturally unsupported decoding and Canvas fallback not reached."
+      },
+      "basis": "Original target for unchanged data/widgets; local repaired build for B06/B07 and critical query/mask/replay smoke."
+    },
+    {
+      "id": "IAB-M",
+      "cases": {
+        "B01": "pass",
+        "B02": "not_run",
+        "B03": "pass",
+        "B04": "pass",
+        "B05": "pass",
+        "B06": "pass",
+        "B07": "pass",
+        "B08": "not_run"
+      },
+      "remaining_subchecks": {
+        "B02": "Four models rendered/orbited/zoomed/colors/size/reset on v0.1 and v0.2; modifier/right-button pan not executed by available drag API.",
+        "B08": "Native gzip and WebGL available; naturally unsupported decoding and Canvas fallback not reached."
+      },
+      "basis": "Original target for unchanged data/widgets; local repaired build for B06/B07 and critical query/mask/replay smoke."
+    },
+    {
+      "id": "CHROME-D",
+      "mode": "native Linux X11 headed",
+      "viewport": [
+        1280,
+        900
+      ],
+      "supplemental_B06": [
+        390,
+        844
+      ],
+      "cases": {
+        "B01": "pass",
+        "B02": "pass",
+        "B03": "pass",
+        "B04": "pass",
+        "B05": "pass",
+        "B06": "pass",
+        "B07": "pass",
+        "B08": "not_run"
+      },
+      "case_origin": {
+        "B01": "chrome-01",
+        "B02": "chrome-01",
+        "B03": "chrome-01",
+        "B04": "chrome-01",
+        "B05": "chrome-01",
+        "B06": "chrome-01",
+        "B07": "chrome-01",
+        "B08": "chrome-01"
+      },
+      "basis": "Current headed execution; previous headless modes remain in their unchanged ledger. Not extra browser rows."
+    },
+    {
+      "id": "EDGE-D",
+      "mode": "native Linux X11 headed",
+      "viewport": [
+        1280,
+        900
+      ],
+      "supplemental_B06": [
+        390,
+        844
+      ],
+      "cases": {
+        "B01": "pass",
+        "B02": "pass",
+        "B03": "pass",
+        "B04": "pass",
+        "B05": "pass",
+        "B06": "pass",
+        "B07": "pass",
+        "B08": "not_run"
+      },
+      "case_origin": {
+        "B01": "edge-01",
+        "B02": "edge-01",
+        "B03": "edge-01",
+        "B04": "edge-01",
+        "B05": "edge-01",
+        "B06": "edge-01",
+        "B07": "edge-01",
+        "B08": "edge-01"
+      },
+      "basis": "Current headed execution; previous headless modes remain in their unchanged ledger. Not extra browser rows."
+    },
+    {
+      "id": "FIREFOX-D",
+      "mode": "native Linux X11 headed",
+      "viewport": [
+        1280,
+        900
+      ],
+      "supplemental_B06": [
+        390,
+        844
+      ],
+      "cases": {
+        "B01": "pass",
+        "B02": "pass",
+        "B03": "pass",
+        "B04": "pass",
+        "B05": "pass",
+        "B06": "pass",
+        "B07": "pass",
+        "B08": "not_run"
+      },
+      "case_origin": {
+        "B01": "firefox-01",
+        "B02": "firefox-01",
+        "B03": "firefox-01",
+        "B04": "firefox-01",
+        "B05": "firefox-01",
+        "B06": "firefox-01",
+        "B07": "firefox-01",
+        "B08": "firefox-01"
+      },
+      "basis": "Current headed execution; previous headless modes remain in their unchanged ledger. Not extra browser rows."
+    },
+    {
+      "id": "SAFARI-D",
+      "cases": {
+        "B01": "not_run",
+        "B02": "not_run",
+        "B03": "not_run",
+        "B04": "not_run",
+        "B05": "not_run",
+        "B06": "not_run",
+        "B07": "not_run",
+        "B08": "not_run"
+      },
+      "reason": "No controllable standalone browser or physical device on enabled surfaces."
+    },
+    {
+      "id": "ANDROID",
+      "cases": {
+        "B01": "not_run",
+        "B02": "not_run",
+        "B03": "not_run",
+        "B04": "not_run",
+        "B05": "not_run",
+        "B06": "not_run",
+        "B07": "not_run",
+        "B08": "not_run"
+      },
+      "reason": "No controllable standalone browser or physical device on enabled surfaces."
+    },
+    {
+      "id": "IOS",
+      "cases": {
+        "B01": "not_run",
+        "B02": "not_run",
+        "B03": "not_run",
+        "B04": "not_run",
+        "B05": "not_run",
+        "B06": "not_run",
+        "B07": "not_run",
+        "B08": "not_run"
+      },
+      "reason": "No controllable standalone browser or physical device on enabled surfaces."
+    }
+  ],
+  "headed_totals": {
+    "pass": 21,
+    "fail": 0,
+    "not_run": 3,
+    "blocked": 0
+  },
+  "prior_headless_totals_unchanged": {
+    "pass": 21,
+    "fail": 0,
+    "not_run": 3,
+    "blocked": 0
+  },
+  "unique_frozen_matrix_totals": {
+    "pass": 33,
+    "fail": 0,
+    "not_run": 31,
+    "blocked": 0
+  },
+  "full_matrix_accepted": false,
+  "accounting": "Headed/headless each retain24 mode-specific cells but occupy the same three desktop rows. The unique64-cell matrix is not enlarged or summed across modes. Historical IAB rows retain their original limited scope; repeated data are not independent tracking samples.",
+  "metrics": {
+    "cloud_model_layouts": 24,
+    "query_samples": 48,
+    "query_maximum_display_error": 4.854751476379704e-07,
+    "semantic_checks": 24,
+    "semantic_maximum_median_error": 4.2369079578108426e-07,
+    "replay_states": 21,
+    "bilingual_route_layouts": 48
+  },
+  "visual_review": {
+    "checked_at": "2026-10-20T14:08:23.040931+00:00",
+    "method": "Original native WebDriver viewport PNGs inspected with image viewer; no desktop/other-app screenshots, media edits or compositing. All24 baseline cloud/model/layouts plus representative native operations, masks/ROI, gaps and EN/zh-TW narrow layouts inspected. Automated pixel differences cover every operation; not every stored PNG was manually reviewed.",
+    "baseline_clouds_reviewed": 24,
+    "outcome": "No visible rendering, gap interpolation, clipped control or overlap defect in inspected states. Native font/range styling differences retained.",
+    "reviewed": [
+      {
+        "attempt": "chrome-01",
+        "file": "v0.1-yolo26-cloud.png",
+        "sha256": "2912c7ab75eede13d7623d6368e6ed731a695696cfb7b6693366e3f2553d3c4e",
+        "review": "Native viewport shows actual saved bus cloud, correct engine/layout, usable controls."
+      },
+      {
+        "attempt": "chrome-01",
+        "file": "v0.1-da2-small-cloud.png",
+        "sha256": "ef384979cafb5131698b614fdefefeaa5b4ca197f9d7a0e38553496e076c7469",
+        "review": "Native viewport shows actual saved bus cloud, correct engine/layout, usable controls."
+      },
+      {
+        "attempt": "chrome-01",
+        "file": "v0.1-da3-small-cloud.png",
+        "sha256": "6c0aacb0d57b32824222ab938a0804c558b6706fd8b0a5c6ab043379063c22e2",
+        "review": "Native viewport shows actual saved bus cloud, correct engine/layout, usable controls."
+      },
+      {
+        "attempt": "chrome-01",
+        "file": "v0.1-da3-metric-cloud.png",
+        "sha256": "bb5363e6f8d6e62d1ef20a81e49949caa816366644995e98ef53f7a77bb19ae2",
+        "review": "Native viewport shows actual saved bus cloud, correct engine/layout, usable controls."
+      },
+      {
+        "attempt": "chrome-01",
+        "file": "v0.2-yolo26-cloud.png",
+        "sha256": "9a3d3217fd7a6ef5d877af26821df5fd3471de024c89b2d9b2afdd511bb3df02",
+        "review": "Native viewport shows actual saved bus cloud, correct engine/layout, usable controls."
+      },
+      {
+        "attempt": "chrome-01",
+        "file": "v0.2-da2-small-cloud.png",
+        "sha256": "fbf520e0a75e99d6e0c8f3b2d1ac735dea7cf8c7e8d1f8f291df7a8db786bc0c",
+        "review": "Native viewport shows actual saved bus cloud, correct engine/layout, usable controls."
+      },
+      {
+        "attempt": "chrome-01",
+        "file": "v0.2-da3-small-cloud.png",
+        "sha256": "35214cd72fcf1553c8a28188b651f99474c5f1d8dc4218929a91237575986220",
+        "review": "Native viewport shows actual saved bus cloud, correct engine/layout, usable controls."
+      },
+      {
+        "attempt": "chrome-01",
+        "file": "v0.2-da3-metric-cloud.png",
+        "sha256": "8979fba575329fdfbacf529bb7f77588d3c9386ebbce99bd1fdbaef78011d70e",
+        "review": "Native viewport shows actual saved bus cloud, correct engine/layout, usable controls."
+      },
+      {
+        "attempt": "chrome-01",
+        "file": "v0.2-da3-small-pan.png",
+        "sha256": "c76030adede63aa66e3ae46c4ec5c9118a45237bfd16b7fdae45460d7a74ee21",
+        "review": "Representative native operation, semantic silhouette, preserved history gap or bilingual narrow layout inspected."
+      },
+      {
+        "attempt": "chrome-01",
+        "file": "da2-small-segment-overlay.png",
+        "sha256": "72555a2424ece4df20fa39050b4b753f39f45f69af8004313cb337bd77a18029",
+        "review": "Representative native operation, semantic silhouette, preserved history gap or bilingual narrow layout inspected."
+      },
+      {
+        "attempt": "chrome-01",
+        "file": "gap-history.png",
+        "sha256": "0e42042b110688a60dcb2d0c1163285da3ec79c06561949f3612ac1619e24e76",
+        "review": "Representative native operation, semantic silhouette, preserved history gap or bilingual narrow layout inspected."
+      },
+      {
+        "attempt": "chrome-01",
+        "file": "v0.2-en-mobile-header.png",
+        "sha256": "593790a5388a7f3e71267163e8ff18299a9e92206bfb6a2ac673bb5a708c6300",
+        "review": "Representative native operation, semantic silhouette, preserved history gap or bilingual narrow layout inspected."
+      },
+      {
+        "attempt": "chrome-01",
+        "file": "v0.3-zh-TW-mobile.png",
+        "sha256": "463616e664bf4eb05b79cd252e1d7d3804404e1500b4faf4ee0689677b2384c9",
+        "review": "Representative native operation, semantic silhouette, preserved history gap or bilingual narrow layout inspected."
+      },
+      {
+        "attempt": "edge-01",
+        "file": "v0.1-yolo26-cloud.png",
+        "sha256": "6d2303fade1c7e58bb7afc1abdf706c96bfdd1d1d993eebec37ba2b034cb5bfa",
+        "review": "Native viewport shows actual saved bus cloud, correct engine/layout, usable controls."
+      },
+      {
+        "attempt": "edge-01",
+        "file": "v0.1-da2-small-cloud.png",
+        "sha256": "0eb815c315201e69234785a8f811a3edb00213cc3ff6243354956c163950ca4a",
+        "review": "Native viewport shows actual saved bus cloud, correct engine/layout, usable controls."
+      },
+      {
+        "attempt": "edge-01",
+        "file": "v0.1-da3-small-cloud.png",
+        "sha256": "9f9935afda80e46784bdb85ce96208ebf3e2e5fd3ed0d1abc367414c97d2bff2",
+        "review": "Native viewport shows actual saved bus cloud, correct engine/layout, usable controls."
+      },
+      {
+        "attempt": "edge-01",
+        "file": "v0.1-da3-metric-cloud.png",
+        "sha256": "5cf3b94535b4f55903f0d96667cb6c20b3e4db3e5e1b3a906232251a60d751a0",
+        "review": "Native viewport shows actual saved bus cloud, correct engine/layout, usable controls."
+      },
+      {
+        "attempt": "edge-01",
+        "file": "v0.2-yolo26-cloud.png",
+        "sha256": "63b1c52572b9a9b4c32d1e9ed6080347b2118c460932b654adcd319b2b3d2e8f",
+        "review": "Native viewport shows actual saved bus cloud, correct engine/layout, usable controls."
+      },
+      {
+        "attempt": "edge-01",
+        "file": "v0.2-da2-small-cloud.png",
+        "sha256": "4ab8ca06b5c455bfb1e60b8961e27250d200d35c018d99c2910c47c7eaa4bbef",
+        "review": "Native viewport shows actual saved bus cloud, correct engine/layout, usable controls."
+      },
+      {
+        "attempt": "edge-01",
+        "file": "v0.2-da3-small-cloud.png",
+        "sha256": "a4865aa441d125984bf75e4f3ce06fa07f92d5aa694e870844d3c9182e3e6df7",
+        "review": "Native viewport shows actual saved bus cloud, correct engine/layout, usable controls."
+      },
+      {
+        "attempt": "edge-01",
+        "file": "v0.2-da3-metric-cloud.png",
+        "sha256": "fa265edd6eef2aa0e347eacc4497bd63b642cbd582c5b8d1c532b670091fa477",
+        "review": "Native viewport shows actual saved bus cloud, correct engine/layout, usable controls."
+      },
+      {
+        "attempt": "edge-01",
+        "file": "v0.1-da3-metric-pan.png",
+        "sha256": "f3daf19a03f34f657e3c0640c4accdbfe83f287d55a84a02f934e96ccb600ded",
+        "review": "Representative native operation, ROI subset, preserved history gap or bilingual narrow layout inspected."
+      },
+      {
+        "attempt": "edge-01",
+        "file": "da3-small-detect-cloud.png",
+        "sha256": "d107f6c5317f5014df387cf68e4d88c93b63a6c5203cd2773cc8f11869056159",
+        "review": "Representative native operation, ROI subset, preserved history gap or bilingual narrow layout inspected."
+      },
+      {
+        "attempt": "edge-01",
+        "file": "gap-history.png",
+        "sha256": "d1222de7d08700a1b8cd6265d07bc4a6ac04d9760c98c55057d5f4d2d78dd505",
+        "review": "Representative native operation, ROI subset, preserved history gap or bilingual narrow layout inspected."
+      },
+      {
+        "attempt": "edge-01",
+        "file": "v0.2-en-mobile-header.png",
+        "sha256": "76eb9e8bb3827b54c37634944f5e1d370f52bf607d9496087fb18bed6be1dc81",
+        "review": "Representative native operation, ROI subset, preserved history gap or bilingual narrow layout inspected."
+      },
+      {
+        "attempt": "edge-01",
+        "file": "v0.3-zh-TW-mobile.png",
+        "sha256": "a94ac4dd500c829d11e027589bde345869b6ad2a2623ad575ba4165cb1d59878",
+        "review": "Representative native operation, ROI subset, preserved history gap or bilingual narrow layout inspected."
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "v0.1-yolo26-cloud.png",
+        "sha256": "ba7c8e3098ee6abb544405a6dc728b31f948dd021ad110c8641a70ca776fff31",
+        "review": "Native viewport shows actual saved bus cloud, correct engine/layout, usable controls."
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "v0.1-da2-small-cloud.png",
+        "sha256": "0a48771ae01b429275eea7d9a6bd0797427a1fb5e539670de855fe6ae2b051ea",
+        "review": "Native viewport shows actual saved bus cloud, correct engine/layout, usable controls."
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "v0.1-da3-small-cloud.png",
+        "sha256": "c0ff5719da28bb217b2fe1c8f4a8241c19b322606f375dd8e9d62b183f671121",
+        "review": "Native viewport shows actual saved bus cloud, correct engine/layout, usable controls."
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "v0.1-da3-metric-cloud.png",
+        "sha256": "18dd955968bc3ccf112348450c4b933e6d58c2725c65940eaf7cfef57277d83d",
+        "review": "Native viewport shows actual saved bus cloud, correct engine/layout, usable controls."
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "v0.2-yolo26-cloud.png",
+        "sha256": "7f39bca09a293ce3e452c5935b30a375e08feac49066f4c723e53509c28310de",
+        "review": "Native viewport shows actual saved bus cloud, correct engine/layout, usable controls."
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "v0.2-da2-small-cloud.png",
+        "sha256": "b3e4f0702b9a8a8871bc7c687e57ac52aebebf3be761d8b6816de9f19fa3553c",
+        "review": "Native viewport shows actual saved bus cloud, correct engine/layout, usable controls."
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "v0.2-da3-small-cloud.png",
+        "sha256": "184b9d78b11d8fe596054c879b3dbdd65473b8f38efd5d6fdefa88a6bbe347d1",
+        "review": "Native viewport shows actual saved bus cloud, correct engine/layout, usable controls."
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "v0.2-da3-metric-cloud.png",
+        "sha256": "53e5ea6b8e5375a7c70b8fe118dda0834cb08c858c7a0a15fccf21a3ff44fe2a",
+        "review": "Native viewport shows actual saved bus cloud, correct engine/layout, usable controls."
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "v0.2-yolo26-pan.png",
+        "sha256": "c72fa5c0a7c52e0cbce76dfcdf249d29a14f621efd6c23b8ab6dffa18b20e0ed",
+        "review": "Representative native operation, semantic mask, true history gap or bilingual narrow layout inspected."
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "da3-metric-segment-overlay.png",
+        "sha256": "2c93e98d53b43ceb874f02dbe81b05487c376b1b68bf50c79a43f5b728a5b975",
+        "review": "Representative native operation, semantic mask, true history gap or bilingual narrow layout inspected."
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "gap-history.png",
+        "sha256": "5e50817ce66c7b52a2f8ef268c0de16f21a5d27f0264a40148ec2ee2fc568c50",
+        "review": "Representative native operation, semantic mask, true history gap or bilingual narrow layout inspected."
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "v0.2-en-mobile-header.png",
+        "sha256": "95c8f25cee6fc7de753f511434f01824a0fd9f4622c67219d8a79e55c58ed829",
+        "review": "Representative native operation, semantic mask, true history gap or bilingual narrow layout inspected."
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "v0.2-zh-TW-mobile.png",
+        "sha256": "d16e53b0ccefe85b22a417d4a0776087f52f46e62539e9e8875f0abad2237ab0",
+        "review": "Representative native operation, semantic mask, true history gap or bilingual narrow layout inspected."
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "v0.3-zh-TW-mobile.png",
+        "sha256": "d1206c3f51fa784f1895e580412ce4f4e534289904943a699526e082dd1082bb",
+        "review": "Representative native operation, semantic mask, true history gap or bilingual narrow layout inspected."
+      }
+    ]
+  },
+  "public_asset_checks": [
+    {
+      "path": "index.html",
+      "sha256": "334624c481cca73085f91204e165e9c3d0bc4bb2723f684ceae7949274816b38",
+      "bytes": 16291,
+      "matches": true
+    },
+    {
+      "path": "v0.1/index.html",
+      "sha256": "b2d38aefd25d3b07161fdd7eeec4c198c65546dc87927d3f3166e44e15a27c1d",
+      "bytes": 8104,
+      "matches": true
+    },
+    {
+      "path": "v0.2/index.html",
+      "sha256": "adb72f75e15e67c99141c4d9f033778a13213de0bed53100efc5a63e8789f532",
+      "bytes": 18092,
+      "matches": true
+    },
+    {
+      "path": "v0.3/index.html",
+      "sha256": "b9e865662d850cab36ecb6a7c26435a7613c89ff4e06e7a979fcc89750abdf6a",
+      "bytes": 17354,
+      "matches": true
+    },
+    {
+      "path": "data/catalog.json",
+      "sha256": "e1f64ffbfc4f9b0ac1aa9ca69475ea1818db57a30ee8acfad0dcacc89859d5b9",
+      "bytes": 5623,
+      "matches": true
+    },
+    {
+      "path": "data/bus/yolo26.json",
+      "sha256": "2bd3f79e20f26f33ed4e4fb3e6668c4dbc241b9612b515cfe4abd4d713974332",
+      "bytes": 3079837,
+      "matches": true
+    },
+    {
+      "path": "data/bus/manifest.json",
+      "sha256": "385895c7d2560413440615290f49d1c51417889df5c6f95c63f1628f407cb135",
+      "bytes": 2780,
+      "matches": true
+    },
+    {
+      "path": "data/bus/da3-metric.json",
+      "sha256": "1d3290649a93453e3f1710522a9ca9857277e832c01c67106300b0e545c53d85",
+      "bytes": 1795315,
+      "matches": true
+    },
+    {
+      "path": "data/bus/da3-small.json",
+      "sha256": "dcd148a0c37b237059b2d1c823b043ad558756d85f5f1ca7b0c42959144df7f8",
+      "bytes": 979195,
+      "matches": true
+    },
+    {
+      "path": "data/bus/da2-small.json",
+      "sha256": "3b8fa53717a6c35f25d68ab0058bedb1d79ec6d28899a0e96c2846dd453bda7f",
+      "bytes": 5824697,
+      "matches": true
+    },
+    {
+      "path": "data/bus/rgb-378.png",
+      "sha256": "e8bae9dd2261206d580eb3f5b584cb8d5f9c9e0ed57e089322ed091b4df349f5",
+      "bytes": 396180,
+      "matches": true
+    },
+    {
+      "path": "data/bus/semantic.json",
+      "sha256": "a750dbdfae990fa1911ff62d28884cbe799a1b7d072791fab51b223715bbd087",
+      "bytes": 79525,
+      "matches": true
+    },
+    {
+      "path": "data/bus/rgb-720.png",
+      "sha256": "a354556550b5771a025138cd85ce8a793e3c13255d1be362d75f85f000892418",
+      "bytes": 1344797,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/manifest.json",
+      "sha256": "82f24ae13513ffcd312606ec2d37da1c1a610a307fad0efb7154650be67e871a",
+      "bytes": 2938,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/tracks.json",
+      "sha256": "893d137d59c846136a27123b1e38dc10eaa0b3dcfd926d211d261562b8b36796",
+      "bytes": 56467,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/frames.json",
+      "sha256": "40b392afa967ae16942e33e0d19d426aeeba70b5b2ca02a3bdfe3da4161d6b44",
+      "bytes": 84260,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/05.jpg",
+      "sha256": "f1842e0832484b748b02fab3f9503f136af26cb02c807c8d65f7da69385036ca",
+      "bytes": 85111,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/01.jpg",
+      "sha256": "374a6be53936a51fa723c52e8ed528c42a7bab34474bd565bc231a08aa04be81",
+      "bytes": 85350,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/02.jpg",
+      "sha256": "62593e2fccbfc5218ddc07989622904074bcdb19713dd4985ee43a98d2562cff",
+      "bytes": 85292,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/08.jpg",
+      "sha256": "7181a1d7095a70ea87a7195ffa188a37b7de4026b7cda98a900979cba5d6efb1",
+      "bytes": 85520,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/14.jpg",
+      "sha256": "3e6d0500a0d7510c416372b5430f2fcb92c50068ea59954d69d01e34fdaf7bd9",
+      "bytes": 85691,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/12.jpg",
+      "sha256": "c24459a9b6a250359904730fd5a5422153a22188a9f1ed7cb7691f479febf4f9",
+      "bytes": 85858,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/06.jpg",
+      "sha256": "e110e4264355d1e55a03ba8ff90bd8cad62209b1b27e5083591d58fcf408d1f4",
+      "bytes": 85126,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/13.jpg",
+      "sha256": "7b861087258ca409b9ce23a95c1737a49a2c5305001e27eb40f92585c20903f9",
+      "bytes": 85757,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/19.jpg",
+      "sha256": "364f4214752259b640a3c6dd120553cdc1dcec19c99ef7526bfbf5cdc224c1ae",
+      "bytes": 85796,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/18.jpg",
+      "sha256": "959caf4c5a55847a54b144d4c857004ef3ed7be2f70564e55eafd73deb480a0b",
+      "bytes": 85910,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/21.jpg",
+      "sha256": "7ec7d68ed12452bf4b58c7db545a8cf78f6150fa15803179fe06c137f653f277",
+      "bytes": 85424,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/17.jpg",
+      "sha256": "f8ac4c9be8abd97b537925a1ac0b22d8d4b2e2c72c22b264e1b79d62ad5710e6",
+      "bytes": 86126,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/24.jpg",
+      "sha256": "f33ae8e10dc66d0ca0240b1cb88f4e9ac556b08055d41f2a07ff427ba2ba0651",
+      "bytes": 85242,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/22.jpg",
+      "sha256": "88edd033f5c23d823a231ed067edcfff55e2a8e6a1eb9e06a7f26777fd2116f0",
+      "bytes": 85590,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/11.jpg",
+      "sha256": "245a4cd96390ee70b278de00629150001c6b8512df977da312fe750c7080bc15",
+      "bytes": 84794,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/04.jpg",
+      "sha256": "d5c218c390fedaa052a1effd9fc9f0bef46ee0e00636abdb17ac6c016f399bd2",
+      "bytes": 84799,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/03.jpg",
+      "sha256": "83b1cbb200afdcc818bf8bb8e7ca3f945012665ac1329f2c5428641e459977a6",
+      "bytes": 84897,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/15.jpg",
+      "sha256": "9d4c38d6cf74d9eadd7cd9d983459981a8080a476431dd8d8e5d7fbae3c971d6",
+      "bytes": 86277,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/10.jpg",
+      "sha256": "2ab9f8c6ddc33d1ce8e8f18fb378121c302fce2d8367cec778b787c2ccca2624",
+      "bytes": 85257,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/20.jpg",
+      "sha256": "99f5cd4854ef680380a30d1a1565ec3e7fbde5e988fa1fe2ce30cc3633b4be20",
+      "bytes": 85625,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/23.jpg",
+      "sha256": "e7af43ac010a77d5216c534e88db1a61d8e36cfd758a4fba0eea666cf6dd3b93",
+      "bytes": 85060,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/16.jpg",
+      "sha256": "09ecda4b65a3cfc42e724575812f50c45574eb239b4bb0b27c8dffd44b27368c",
+      "bytes": 85924,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/09.jpg",
+      "sha256": "befe68945feb4494e52690133502f3479ea2b39d6b74a9bb59aa416ed5e8805f",
+      "bytes": 85167,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/07.jpg",
+      "sha256": "d57984fb2d0e7e14e824fd6c5a07a82bba2413a364c4c474e794e9b038a340bc",
+      "bytes": 85451,
+      "matches": true
+    },
+    {
+      "path": "assets/real-results.js",
+      "sha256": "858f19684f524201b984f997dbc36342b8533cd1ce5153998d91af83e67aa153",
+      "bytes": 13823,
+      "matches": true
+    },
+    {
+      "path": "assets/real-results.css",
+      "sha256": "e139d2804642a761467278df5f2e7e913ce1d4bece9301eaee093c7d77cd1fcc",
+      "bytes": 1520,
+      "matches": true
+    },
+    {
+      "path": "assets/showcase.js",
+      "sha256": "3d160e348297f2321c9ed7122e51c2721b3dc30d43ce3a93a666ef9016708033",
+      "bytes": 15036,
+      "matches": true
+    },
+    {
+      "path": "assets/showcase.css",
+      "sha256": "2c22efda04396ac8ba3319ef78692f113bfc1d0e1876d5630c58e797e64c7b8c",
+      "bytes": 13226,
+      "matches": true
+    },
+    {
+      "path": "assets/recorded-examples.js",
+      "sha256": "f2d85efc88f04cdcd1a15665ee3200557a28723ffcd44f141ad1f67f207e41d2",
+      "bytes": 3093,
+      "matches": true
+    },
+    {
+      "path": "assets/recorded-examples.css",
+      "sha256": "895486948e6028ce69465ab5d8690dbcdfb4e9b83e1116d5cba88c912dd7ba44",
+      "bytes": 2084,
+      "matches": true
+    },
+    {
+      "path": "static/viewer.js",
+      "sha256": "7e3438831f6517bb023fd2c71c163266010e76716444adb74cc66b9388192f21",
+      "bytes": 13233,
+      "matches": true
+    },
+    {
+      "path": "media/pages-v01-cloud.en.jpg",
+      "sha256": "a5bf728fb19620ab1e1abde7248bb88c15dcf040a4b64134de29403cf7f164fc",
+      "bytes": 49013,
+      "matches": true
+    },
+    {
+      "path": "media/pages-v01-cloud.zh-TW.jpg",
+      "sha256": "9c1d0c8315ab3df92c17251a5e6f4a09270427dc22f6f1dd0b4dd70de7ebb928",
+      "bytes": 55959,
+      "matches": true
+    },
+    {
+      "path": "media/pages-v02-inspector.en.jpg",
+      "sha256": "abfa23389d2f9972ea454bfef81676e748be29a6062745d7b1245806e5494c23",
+      "bytes": 88712,
+      "matches": true
+    },
+    {
+      "path": "media/pages-v02-inspector.zh-TW.jpg",
+      "sha256": "c3ff89eba447dd2a0ee0f071ebba4227c08c83410ebd1ca193454caa4a8ea6b9",
+      "bytes": 93447,
+      "matches": true
+    },
+    {
+      "path": "media/pages-v03-replay.en.jpg",
+      "sha256": "17367bbebbd5088abea6f3a91ced7d79909eb7fc2063c146839921ce0bc8cce4",
+      "bytes": 72919,
+      "matches": true
+    },
+    {
+      "path": "media/pages-v03-replay.zh-TW.jpg",
+      "sha256": "197296479e2ef51c65f245fc4d2e9c775e16044d39ce22873fd474640735699e",
+      "bytes": 72953,
+      "matches": true
+    }
+  ],
+  "asset_bookend_notice": "Each browser initial53 hashes and post-study53 hashes matched pinned source; collected before changing the homepage compatibility caption for publication.",
+  "historical_json_unchanged_sha256": {
+    "pages-browser-protocol.json": "fd0851f025d7b1e3bf6cced37c8553a074ce29e33db64e06e8eccaf3d316d38d",
+    "pages-browser-initial.json": "3afd8db666fb49b231eb9437bfab7bace0c165b046dd63ee89da5bb133acc832",
+    "pages-browser-addendum.json": "cff8f6c1f24f454d0a7ef9676f1965dbbf4f70a442726dcecff5b0e51d2a3d1b",
+    "pages-browser-acceptance.json": "06c8d56fdb5137586222831ef2c7e56e8fcef90493e2ffe13a0bcbb69a632bc8",
+    "pages-standalone-plan.json": "60905d62eed561e63c9aac8b604e2088d8b533acbe8c37995fd04c27ee2bc4db",
+    "pages-standalone-acceptance.json": "6f3d850f786189c03f0c056b44af3f5582a51aba9e781df7509e48eb703dbe7a"
+  },
+  "product_repairs": [],
+  "local_checks": {
+    "pages_regression_tests": {
+      "passed": 13,
+      "failed": 0
+    },
+    "public_allowlist_and_local_markdown_links": "pass",
+    "static_build": "pass",
+    "diff_check": "pass",
+    "default_headless_about_blank": "pass (no product cases); source defaults retained",
+    "default_mode_raw_sha256": "d495c14a989a2f9305a356bd5d4e4ad348dc9d77fa3c5a567004ee592544c3c4",
+    "ci_and_deployment": "Exact PR/main workflows and deployed smoke are recorded with PR #28; ordinary CI does not run browsers or pretrained inference."
+  },
+  "pr": "https://github.com/JShengP/depthport/pull/28",
+  "remaining": [
+    "Natural unsupported gzip and actual browser Canvas fallback (B08)",
+    "Safari/macOS, physical Android/iOS, native touch and other OS/build combinations",
+    "Native minimum-window widths, OS chrome/panels and whole-monitor window-manager layout;390px is a CSS override only",
+    "Historical IAB modifier pan remains not_run",
+    "All calibration, identity/IDSW/HOTA, long-occlusion/moving-camera, RTSP, fresh Windows/full Alpha installation and endurance/VRAM gates"
+  ],
+  "publication": "Only reviewed aggregate results, source/plan and public-data hashes. Raw screenshots, events, logs, profiles, executables, process/window IDs and diagnostic paths remain ignored/local."
+}

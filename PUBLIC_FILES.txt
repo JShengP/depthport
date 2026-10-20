@@ -533,3 +533,9 @@ requirements-browser-tests.txt
 docs/en/pages-standalone-browsers.md
 docs/zh-TW/pages-standalone-browsers.md
 docs/validation/pages-standalone-acceptance.json
+
+# Native headed browser follow-up
+docs/validation/pages-headed-plan.json
+docs/en/pages-headed-browsers.md
+docs/zh-TW/pages-headed-browsers.md
+docs/validation/pages-headed-acceptance.json

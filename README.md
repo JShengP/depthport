@@ -165,7 +165,7 @@ Estimated metres, relative depth and V2's virtual 1–5 display geometry remain 
 
 - **CI:** Ubuntu/Windows × Python 3.11/3.12 application contracts and real model API installation/import checks. CI uses no pretrained weights or inference and does not establish hardware or accuracy acceptance.
 - **Real examples:** dated v0.2 single-image CUDA evidence and the short v0.3 replay example have separate source/runtime records. [Validation history](docs/en/validation.md) · [Replay conditions](docs/en/tracking-replay-example.md)
-- **Pages compatibility:** [Independent headless Chrome155 / Edge155 / Firefox157](docs/en/pages-standalone-browsers.md): B01–B07 passed in each exact Linux build, including Shift-pan; 21 pass / 3 not_run. Combined with the [historical in-app checks](docs/en/pages-browser-compatibility.md): 33 pass / 31 not_run. Original failures and harness corrections remain recorded; Safari, physical phones, headed/other OS and natural fallback paths remain open.
+- **Pages compatibility:** exact Linux Chrome155 / Edge155 / Firefox157 builds pass B01–B07 in separate [native headed](docs/en/pages-headed-browsers.md) and [headless](docs/en/pages-standalone-browsers.md) studies,21 pass/3 not_run per mode. The unique matrix remains33 pass/31 not_run; modes are not extra browsers. Original failures remain recorded; Safari, physical phones, other OS/builds and natural fallback paths remain open.
 - **Still open:** generalised long-occlusion/crossing/camera-motion reliability, physical RTSP, Windows pretrained inference/real worker integration, endurance/VRAM, NVIDIA hardware WebGL and independently calibrated distance accuracy. [Acceptance roadmap](ROADMAP.md)
 
 <details>
