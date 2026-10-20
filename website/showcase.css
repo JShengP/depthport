@@ -12,3 +12,7 @@
 
 /* Keep every version destination reachable on narrow layouts. */
 @media(max-width:650px){.header-nav[aria-label="Version navigation"]{flex-wrap:wrap;justify-content:flex-end;gap:8px}.header-nav[aria-label="Version navigation"]>a:nth-of-type(2){display:block}}
+
+.run-note summary{cursor:pointer;color:var(--accent);font-weight:700;padding:8px 0}.run-note details[open] summary{margin-bottom:12px}.run-note summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+
+@media(max-width:650px){.header-nav[aria-label="Main navigation"]{flex-wrap:wrap;justify-content:flex-end;gap:8px}.header-nav[aria-label="Main navigation"]>a{display:block}}

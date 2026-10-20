@@ -17,9 +17,10 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from depthport.source_archive import source_bytes, public_files
+from tools.build_results import render_results
 
 STATIC_ASSETS = ('style.css', 'viewer.js', 'i18n.js', 'main.js', 'favicon.svg')
-SHOWCASE_ASSETS = ('showcase.css', 'showcase.js', 'recorded-examples.css', 'recorded-examples.js', 'real-results.js', 'real-results.css')
+SHOWCASE_ASSETS = ('showcase.css', 'showcase.js', 'recorded-examples.css', 'recorded-examples.js', 'real-results.js', 'real-results.css', 'results.js', 'results.css')
 SCREENSHOTS = ('preview.en.png', 'spatial-preview.en.png',
                'tracking-replay-start.zh-TW.jpg',
                'tracking-replay-crossing.zh-TW.jpg',
@@ -115,6 +116,19 @@ def main() -> None:
             target = out / rel.removeprefix('website/')
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(file, target)
+    # Small derived packs unblock the existing point-cloud renderer before the
+    # multi-megabyte exact depth arrays finish. Original result bytes stay intact.
+    preview_dir = out / 'data/bus/previews'
+    preview_dir.mkdir()
+    manifest = json.loads((ROOT / 'website/data/bus/manifest.json').read_text(encoding='utf-8'))
+    for engine in manifest['engines']:
+        payload = json.loads((ROOT / 'website/data/bus' / engine['path']).read_text(encoding='utf-8'))
+        preview = {key: payload[key] for key in
+                   ('engine', 'model', 'width', 'height', 'rgb', 'cloud', 'color_range')}
+        (preview_dir / (engine['id'] + '.json')).write_text(
+            json.dumps(preview, separators=(',', ':')), encoding='utf-8')
+    (out / 'results').mkdir()
+    (out / 'results/index.html').write_text(render_results(ROOT, approved), encoding='utf-8')
     shutil.copyfile(ROOT / 'website' / 'index.html', out / 'index.html')
     shutil.copyfile(ROOT / 'LICENSE', out / 'LICENSE.txt')
     (out / 'source.zip').write_bytes(source_bytes(ROOT))

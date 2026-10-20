@@ -18,6 +18,8 @@ Turn RGB images and RTSP frames into interactive **single-view point clouds**. C
 > [!IMPORTANT]
 > **Experimental development preview.** Session storage is off by default. Long-occlusion recovery, physical RTSP, Windows pretrained inference/worker integration, endurance and calibrated distance accuracy remain open. [Validation record](docs/en/validation.md)
 
+**Test results:** [Results Index](https://jshengp.github.io/depthport/results/?lang=en) — browse models, trackers and platforms with scoped results, CI, failed gates and unverified items.
+
 ## Real-data interactive demos
 
 Click a screenshot to open the **saved-result interactive website**. These are screenshots of the current Pages UI, not new live inference or historical Alpha acceptance.
