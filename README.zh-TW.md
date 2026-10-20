@@ -39,7 +39,7 @@
 
 影片來源：**[Lukas Kosc／Pexels](https://www.pexels.com/video/urban-street-scene-with-people-crossing-34597902/)**，保留[自身條款](https://www.pexels.com/terms-of-service/)，不因程式 AGPL 改授權或暗示背書。兩次片段都僅 **0.959 秒**、沒有身分 GT，不代表長遮擋、換 ID 正確性或追蹤精度已通過；未關聯不等於真值漏檢。V2 逐格虛擬深度與 Camera XYZ 不是世界軌跡或速度。Pages 只讀靜態保存結果，不提供線上模型推論、私人 Session 或 RTSP 接入。
 
-[完整來源、原生單位與限制](docs/zh-TW/real-ai-pages.md) · [截圖狀態與雜湊](docs/validation/readme-real-pages.json)
+[完整來源、原生單位與限制](docs/zh-TW/real-ai-pages.md) · [截圖狀態與雜湊](docs/validation/readme-real-pages.json) · [展示進度與下一步](ROADMAP.md#current-pages--目前互動展示)
 
 ## 快速開始
 
