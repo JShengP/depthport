@@ -36,9 +36,15 @@ if(gallery){
 const rgb=document.getElementById('recordedBusPhoto'),out=document.getElementById('recordedBusCoords');
 if(rgb&&out){
  rgb.addEventListener('click',e=>{
-  const r=rgb.getBoundingClientRect();if(!r.width||!r.height||!rgb.naturalWidth)return;
-  const u=Math.min(rgb.naturalWidth-1,Math.max(0,Math.floor((e.clientX-r.left)/r.width*rgb.naturalWidth)));
-  const v=Math.min(rgb.naturalHeight-1,Math.max(0,Math.floor((e.clientY-r.top)/r.height*rgb.naturalHeight)));
+  const r=rgb.getBoundingClientRect();if(!r.width||!r.height||!rgb.naturalWidth||!rgb.naturalHeight)return;
+  // object-fit: contain may letterbox the portrait RGB inside a wide card.
+  const scale=Math.min(r.width/rgb.naturalWidth,r.height/rgb.naturalHeight);
+  const width=rgb.naturalWidth*scale,height=rgb.naturalHeight*scale;
+  const x=e.clientX-r.left-(r.width-width)/2;
+  const y=e.clientY-r.top-(r.height-height)/2;
+  if(x<0||y<0||x>=width||y>=height)return; // letterbox is not a source pixel
+  const u=Math.min(rgb.naturalWidth-1,Math.floor(x/scale));
+  const v=Math.min(rgb.naturalHeight-1,Math.floor(y/scale));
   const zh=document.documentElement.lang.toLowerCase().startsWith('zh');
   out.textContent=zh?'原始 RGB 像素 ('+u+', '+v+')；沒有已發布原始 Depth 矩陣，不能推測 Z／XYZ。'
     :'Original RGB pixel ('+u+', '+v+'); no native depth matrix is published for numeric Z/XYZ.';
