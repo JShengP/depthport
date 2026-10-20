@@ -452,3 +452,8 @@ docs/zh-TW/tracking-carrier-roles.md
 
 # Complete read-only carrier/role aggregate; raw cases remain local
 docs/validation/v0.3-carrier-role-audit.json
+
+website/recorded-examples.css
+website/recorded-examples.js
+website/media/bus.jpg
+tests/test_recorded_examples.py

@@ -7,11 +7,11 @@ This source produces a **single GitHub Pages site** with three capability demos;
 | URL within the Pages project | What the browser actually runs | What it does **not** run |
 | --- | --- | --- |
 | `/` | Version hub with reviewed screenshots and links | No inference or accounts |
-| `/v0.1/` | Existing original WebGL/Canvas2D viewer with built-in synthetic cloud | No image upload, API or RTSP processing |
-| `/v0.2/` | Generated RGB/depth pixels, synthetic camera-space XYZ, optional mask outline, orbitable point cloud and histogram | No YOLO/DA3, actual model comparison or calibrated measurements |
-| `/v0.3/` | 24 generated tracking frames with playable Object IDs and simulated virtual-depth history | No YOLO/BoT-SORT, identity recognition, saved private Session or real trajectories |
+| `/v0.1/` | Genuine original `bus.jpg` with a later validated CUDA screenshot; original WebGL viewer remains a clearly synthetic 3D exercise | No native bus depth/XYZ arrays, API, image upload or RTSP |
+| `/v0.2/` | Real original `bus.jpg` and verified RTX 4090 four-model/semantic screenshot; optional separate generated geometry lab | No numeric native depth/XYZ from screenshot, no live YOLO/DA3 inference or metric accuracy |
+| `/v0.3/` | Three unchanged recorded Session UI screenshots (saved #1/#12/#24; source #32/#43/#55) with real YOLO/BoT-SORT IDs; a separate synthetic replay exercise remains | The full 24 real frames / per-frame JSON, real-time online tracking, identity recognition and world trajectories are not provided |
 
-All synthetic computations are deterministic browser JavaScript. The screenshots on the homepage and explanatory lower panels are **separate original documentation images**, and their true provenance and original-source rights are recorded in [Screenshot sources](../assets/README.md). In particular, the real v0.3 example image includes a credited Lukas Kosc / Pexels source; it is not the input to the generated 24-frame interactive scene. The four depth engines and real Session tracking remain available only after [running DepthPort locally](installation.md).
+The **main** examples are genuine, attributed public inputs/recorded inference screenshots. The original Ultralytics `bus.jpg` file is copied byte-for-byte from a fixed revision and verified against the original experiment SHA-256. The v0.2 CUDA result is a saved screen, not a native depth matrix. v0.3 reuses three existing unretouched screenshots of one 24-frame analysis on a Lukas Kosc / Pexels source, not all 24 frames or native tracking JSON. The separately labeled synthetic exercises still run entirely in browser JavaScript. See [Screenshot sources](../assets/README.md) for rights and experiment limits. The four depth engines and real Session tracking remain available only after [running DepthPort locally](installation.md).
 
 ## Build and preview locally
 
@@ -28,13 +28,14 @@ Browse `http://127.0.0.1:8765/` and test `/v0.1/`, `/v0.2/`, and `/v0.3/`. The r
 Run smoke checks:
 
 ```bash
-python -m pytest -q tests/test_pages_showcase.py
+python -m pytest -q tests/test_pages_showcase.py tests/test_recorded_examples.py
 node --check website/showcase.js
+node --check website/recorded-examples.js
 ```
 
 ## GitHub Pages rollout
 
-The [Pages workflow](../../.github/workflows/pages.yml) builds and uploads the static site for affected PRs **without deployment**. Deployment still requires a manual **workflow_dispatch on reviewed main**. Published releases/tags are not changed by the website builder. If a newer `main` has been updated concurrently, review and integrate the PR before manual deployment.
+The [Pages workflow](../../.github/workflows/pages.yml) builds and uploads the static site for affected PRs **without deployment**. Deployment runs after a reviewed **push/merge to `main`**, or can also be launched manually with **workflow_dispatch** from `main`. Published releases/tags are not changed by the website builder. If a newer `main` has been updated concurrently, review and integrate the PR before manual deployment.
 
 After deployment, open `https://jshengp.github.io/depthport/` and check all links, language changes, canvas interaction, replay controls, mobile layouts and that no API/network inference requests occur. To populate GitHub **About → Website**, click the repository's About edit gear and enter `https://jshengp.github.io/depthport/` (without tracking query parameters). This repository-setting field is not modified by the site build workflow.
 

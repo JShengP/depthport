@@ -5,7 +5,7 @@
 **單目深度與點雲工作台**<br>
 一支相機 · 四種深度引擎 · 本地執行
 
-[English](README.md) · 繁體中文 · 實驗性 Alpha · AGPL-3.0-only
+[English](README.md) · 繁體中文 · 實驗性 Alpha · [GNU AGPL v3](LICENSE)
 
 </div>
 
@@ -60,16 +60,16 @@ bash RUN_UBUNTU.sh
 - **工作階段** `/sessions`：在本機明確設定 `ENABLE_SESSION_STORAGE=1` 並重啟，再啟用手動保存與回放。[Session 操作](docs/zh-TW/sessions.md) · [選配 worker 安裝](docs/zh-TW/tracking-worker.md)
 
 <details>
-<summary>不安裝 AI，先試合成資料檢視器</summary>
+<summary>不安裝 AI，體驗真實記錄範例與合成互動練習</summary>
 
-[開啟公開合成示範頁](https://jshengp.github.io/depthport/)，或用 Python 標準函式庫在本機建立：
+[開啟多版本展示網站](https://jshengp.github.io/depthport/)：v0.1／v0.2 直接展示公開的 Ultralytics `bus.jpg` 和有記錄的 CUDA 真模型截圖；v0.3 展示三張 Pexels 真實 Session 截圖。合成互動練習均有獨立標示。也可以用 Python 標準函式庫在本機建立：
 
 ```bash
 python tools/build_site.py
 python -m http.server 8765 --directory _site --bind 127.0.0.1
 ```
 
-開啟 [http://127.0.0.1:8765/](http://127.0.0.1:8765/)。這是合成資料靜態頁，不會執行深度模型、接收圖片或連線 RTSP。內附的手動 Pages workflow 部署相同的合成檢視器。
+開啟 [http://127.0.0.1:8765/](http://127.0.0.1:8765/)。GitHub Pages 使用經確認來源的公開素材，另保留明確標示的合成互動練習；不執行 AI 模型、不接收訪客上傳或 RTSP。原生 Depth／XYZ 矩陣及完整 24 格追蹤報告尚未公開，因此不會從截圖造出深度數值或假的 Object ID。Website 在經審核的變更合併至 `main` 後自動部署。
 
 </details>
 
@@ -256,6 +256,6 @@ python tools/check_release.py
 
 ## 授權與致謝
 
-DepthPort 應用程式碼採用 **AGPL-3.0-only**；見 [LICENSE](LICENSE) 與 [NOTICE](NOTICE)。外部程式及權重保留各自授權，本專案不能替它們重新授權。Ultralytics 有 AGPL 與另行提供的 Enterprise 路線；本版選定的 V2 Small／DA3 Small／DA3Metric 模型卡標示 Apache-2.0，不代表其他尺寸也相同。
+DepthPort 應用程式碼採用 **GNU Affero General Public License v3.0**（**SPDX：`AGPL-3.0-only`**，僅限第 3 版，不含自動升級至後續版本的選項）；見 [LICENSE](LICENSE) 與 [NOTICE](NOTICE)。外部程式及權重保留各自授權，本專案不能替它們重新授權。Ultralytics 有 AGPL 與另行提供的 Enterprise 路線；本版選定的 V2 Small／DA3 Small／DA3Metric 模型卡標示 Apache-2.0，不代表其他尺寸也相同。
 
 模型與研究成果歸屬 [Ultralytics](https://docs.ultralytics.com/tasks/depth/)、[Depth Anything V2](https://github.com/DepthAnything/Depth-Anything-V2)、[Depth Anything 3](https://github.com/ByteDance-Seed/Depth-Anything-3) 作者。DepthPort 是獨立專案，不代表上游背書。散布或商用整合前請閱讀[第三方聲明](THIRD_PARTY_NOTICES.md)。
