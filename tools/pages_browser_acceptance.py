@@ -19,9 +19,12 @@ import hashlib
 import io
 import json
 import math
+import os
 from pathlib import Path
 import re
+import shutil
 import statistics
+import subprocess
 import sys
 import time
 import traceback
@@ -59,6 +62,30 @@ def close(actual, expected):
     error = abs(actual - expected)
     assert error <= max(5e-6, abs(expected) * 5e-7), (actual, expected, error)
     return error
+
+
+def native_window_evidence(browser_pid):
+    """Only inspect PID properties, then our own browser's window geometry.
+
+    Never enumerate window titles or capture the desktop/other applications.
+    Unsupported platforms remain unobserved rather than claiming visibility.
+    """
+    if not (sys.platform.startswith('linux') and os.environ.get('DISPLAY') and
+            shutil.which('xprop') and shutil.which('xwininfo') and browser_pid):
+        return {'observed':False, 'reason':'Native X11 observation unavailable'}
+    windows = subprocess.check_output(['xprop','-root','_NET_CLIENT_LIST'],text=True)
+    found = []
+    for window in re.findall(r'0x[0-9a-fA-F]+',windows):
+        pid = subprocess.run(['xprop','-id',window,'_NET_WM_PID'],
+                             text=True,capture_output=True,check=False).stdout
+        match = re.search(r'=\s*(\d+)',pid)
+        if not match or int(match.group(1)) != browser_pid:
+            continue
+        info = subprocess.check_output(['xwininfo','-id',window,'-stats'],text=True)
+        found.append({'viewable':'Map State: IsViewable' in info,
+                      'width':int(re.search(r'Width:\s*(\d+)',info).group(1)),
+                      'height':int(re.search(r'Height:\s*(\d+)',info).group(1))})
+    return {'observed':True, 'display_server':'X11', 'windows':found}
 
 
 class Oracle:
@@ -145,7 +172,9 @@ class Study:
         options.binary_location = str(Path(self.args.binary).resolve())
         options.set_capability('webSocketUrl', True)
         options.accept_insecure_certs = False
-        options.add_argument('-headless' if name == 'firefox' else '--headless=new')
+        headed = getattr(self.args,'headed',False)
+        if not headed:
+            options.add_argument('-headless' if name == 'firefox' else '--headless=new')
         if name != 'firefox':
             options.add_argument('--window-size=1280,900')
         service = {'chrome': ChromeService, 'edge': EdgeService,
@@ -160,14 +189,44 @@ class Study:
         self.environment = {'version':caps['browserVersion'],
             'driver':caps.get('chrome',{}).get('chromedriverVersion') or
                      caps.get('msedge',{}).get('msedgedriverVersion') or caps.get('moz:geckodriverVersion'),
-            'headless':True, 'platform':caps['platformName']}
+            'headless':not headed, 'platform':caps['platformName']}
+        if headed:
+            pid = caps.get('moz:processID') or caps.get('goog:processID') or caps.get('ms:processID')
+            if not pid and sys.platform.startswith('linux'):
+                children = Path(f'/proc/{service.process.pid}/task/{service.process.pid}/children')
+                for child in children.read_text().split():
+                    argv = Path(f'/proc/{child}/cmdline').read_bytes().decode().split('\0')
+                    if argv[0] and Path(argv[0]).name == Path(options.binary_location).name:
+                        pid = int(child)
+                        break
+            if pid and sys.platform.startswith('linux'):
+                argv = Path(f'/proc/{pid}/cmdline').read_bytes().decode().split('\0')
+                self.environment['headless_switches'] = [a for a in argv if 'headless' in a.lower()]
+            self.environment['firefox_headless_capability'] = caps.get('moz:headless')
+            self.environment['native_window'] = native_window_evidence(pid)
 
     def event(self, kind, event):
         self.events.append({'kind': kind, 'data': getattr(event, '__dict__', str(event))})
 
     def viewport(self, width, height):
-        self.driver.browsing_context.set_viewport(context=self.driver.current_window_handle,
-            viewport={'width': width, 'height': height}, device_pixel_ratio=1)
+        if getattr(self.args,'headed',False) and (width,height)==(1280,900):
+            # Desktop evidence uses the real native content area, including
+            # room for browser chrome; clear any prior responsive override.
+            self.driver.browsing_context.set_viewport(context=self.driver.current_window_handle,
+                viewport=None,device_pixel_ratio=None)
+            for _ in range(4):
+                inner = self.driver.execute_script('return [innerWidth,innerHeight]')
+                if inner == [width,height]:
+                    break
+                rect = self.driver.get_window_rect()
+                self.driver.set_window_rect(x=20,y=20,
+                    width=rect['width']+width-inner[0],height=rect['height']+height-inner[1])
+                time.sleep(.2)
+        else:
+            # Supplemental narrow layout is a CSS viewport override, never a
+            # physical phone or a claim about the native window's minimum size.
+            self.driver.browsing_context.set_viewport(context=self.driver.current_window_handle,
+                viewport={'width': width, 'height': height}, device_pixel_ratio=1)
         assert self.driver.execute_script('return [innerWidth,innerHeight]') == [width, height]
 
     def el(self, selector):
@@ -548,6 +607,8 @@ if __name__ == '__main__':
     parser.add_argument('--driver', required=True)
     parser.add_argument('--output', required=True, help='New local-only directory; refuses overwrite')
     parser.add_argument('--url', default='https://jshengp.github.io/depthport/')
+    parser.add_argument('--headed', action='store_true',
+                        help='Use a native visible browser window; default remains headless')
     parser.add_argument('--cases', default='B01,B02,B03,B04,B05,B06,B07,B08',
                         help='Comma-separated frozen case IDs; omitted cases remain not_run')
     Study(parser.parse_args()).run()

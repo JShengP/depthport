@@ -1,0 +1,200 @@
+{
+  "format": "depthport.pages-headed-plan.v1",
+  "frozen_at": "2026-10-20T13:54:13.750772+00:00",
+  "protocol_commit": "8c5a25efe68a303d01eb4ccb02557cafa1f91bf3",
+  "protocol_sha256": "fd0851f025d7b1e3bf6cced37c8553a074ce29e33db64e06e8eccaf3d316d38d",
+  "target_commit": "2f77579583c7598e3e18b74e516ed19919e3a57c",
+  "target_url": "https://jshengp.github.io/depthport/",
+  "authorization": "User explicitly requested native headed Chrome/Edge/Firefox testing, retaining frozen cases and private raw diagnostics.",
+  "cases_unchanged": [
+    "B01",
+    "B02",
+    "B03",
+    "B04",
+    "B05",
+    "B06",
+    "B07",
+    "B08"
+  ],
+  "rows": {
+    "CHROME-D": {
+      "browser": "chrome",
+      "launch": "success",
+      "environment": {
+        "version": "155.0.8059.84",
+        "driver": "155.0.8059.84 (5869fe313571d75152b77813cf0a4ee26a4e6df0-refs/branch-heads/8059@{#1303})",
+        "headless": false,
+        "platform": "linux",
+        "headless_switches": [],
+        "firefox_headless_capability": null,
+        "native_window": {
+          "observed": true,
+          "display_server": "X11",
+          "windows": [
+            {
+              "viewable": true,
+              "width": 1324,
+              "height": 1087
+            }
+          ]
+        }
+      },
+      "facts": {
+        "dpr": 1,
+        "gzip": "function",
+        "height": 900,
+        "outerHeight": 1087,
+        "outerWidth": 1324,
+        "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4090/PCIe/SSE2, OpenGL 4.5.0)",
+        "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+        "webgl": true,
+        "width": 1280
+      },
+      "supplemental_viewport": {
+        "height": 844,
+        "outerHeight": 1087,
+        "outerWidth": 1324,
+        "width": 390
+      }
+    },
+    "EDGE-D": {
+      "browser": "edge",
+      "launch": "success",
+      "environment": {
+        "version": "155.0.4283.62",
+        "driver": "155.0.4283.62 (aa3a7406ba8c53a83536df539f07124d73c899bd)",
+        "headless": false,
+        "platform": "linux",
+        "headless_switches": [],
+        "firefox_headless_capability": null,
+        "native_window": {
+          "observed": true,
+          "display_server": "X11",
+          "windows": [
+            {
+              "viewable": true,
+              "width": 1332,
+              "height": 1078
+            }
+          ]
+        }
+      },
+      "facts": {
+        "dpr": 1,
+        "gzip": "function",
+        "height": 900,
+        "outerHeight": 1078,
+        "outerWidth": 1332,
+        "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4090/PCIe/SSE2, OpenGL 4.5.0)",
+        "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+        "webgl": true,
+        "width": 1280
+      },
+      "supplemental_viewport": {
+        "height": 844,
+        "outerHeight": 1078,
+        "outerWidth": 1332,
+        "width": 390
+      }
+    },
+    "FIREFOX-D": {
+      "browser": "firefox",
+      "launch": "success",
+      "environment": {
+        "version": "157.0",
+        "driver": "0.37.1",
+        "headless": false,
+        "platform": "linux",
+        "headless_switches": [],
+        "firefox_headless_capability": false,
+        "native_window": {
+          "observed": true,
+          "display_server": "X11",
+          "windows": [
+            {
+              "viewable": true,
+              "width": 1332,
+              "height": 1037
+            }
+          ]
+        }
+      },
+      "facts": {
+        "dpr": 1,
+        "gzip": "function",
+        "height": 900,
+        "outerHeight": 1037,
+        "outerWidth": 1332,
+        "renderer": "NVIDIA GeForce GTX 980, or similar",
+        "ua": "Mozilla/5.0 (X11; Linux x86_64; rv:157.0) Gecko/20100101 Firefox/157.0",
+        "webgl": true,
+        "width": 1280
+      },
+      "supplemental_viewport": {
+        "height": 844,
+        "outerHeight": 1037,
+        "outerWidth": 1332,
+        "width": 390
+      }
+    }
+  },
+  "runtime": {
+    "selenium": "4.51.0",
+    "pillow": "13.0.0",
+    "python": "3.12",
+    "platform": "Linux x86_64, native X.Org21.1.11 X11 desktop1920x1080x24; no Xvfb",
+    "harness_sha256": "a91e914269717b8dd1494935bed32727d33a019ca93f1dae3309729324377d7c",
+    "browser_sources": "Same unchanged official vendor executables/drivers and archive digests as pages-standalone-plan.json; no installation or daily-profile change."
+  },
+  "execution": {
+    "mode": "headed, sequential, fresh disposable profiles",
+    "flags": {
+      "chrome": [
+        "--window-size=1280,900"
+      ],
+      "edge": [
+        "--window-size=1280,900"
+      ],
+      "firefox": []
+    },
+    "headless": false,
+    "desktop_viewport": [
+      1280,
+      900
+    ],
+    "desktop_method": "Clear BiDi overrides, then native WebDriver setWindowRect until actual innerWidth/innerHeight equals1280x900. Browser chrome/native outer geometry is recorded separately; not a desktop-window-manager/whole-monitor UI certification.",
+    "supplemental_B06": [
+      390,
+      844
+    ],
+    "supplemental_method": "Native WebDriver BiDi CSS viewport override/DPR1 inside existing visible window. Outer window size is not390px; no physical phone/touch/OS claim. Restore desktop with null viewport/DPR and native window resizing.",
+    "visibility": "Read vendor capability browser PID, inspect only PID properties then matching own-window map state/geometry. No other window titles, desktop screenshots or private profile inspection. Record actual absence of headless switches and Firefox moz:headless=false.",
+    "screenshots": "Original native viewport PNGs only; independent pixel differences and manual review of all24 baseline clouds plus representative masks/gaps/bilingual narrow layouts. Raw screenshots remain local.",
+    "controls": "Same native WebDriver click/select/keys/wheel/Shift-pan and explicit instant UI scroll as accepted headless harness; no CSS or browser-global/app-state overrides.",
+    "B01": "Same pinned-byte integrity checks plus real page load/console errors; HTTP hashes are separate from browser UI evidence.",
+    "B03_B04": "Same independent stdlib Float32/K/source-pixel/RLE/box oracle and frozen tolerance; no model execution.",
+    "B05": "Same saved boundaries1/6/7/12/19/20/24, obj-0005 gap7..19, speed/pause/step/end checks; no identity/performance claim.",
+    "B06_B07": "Same bilingual layouts, links/titles, new9/209/152/57 vs old7/230/125/105, source/terms and numerical boundaries.",
+    "B08": "Do not manufacture unsupported APIs. Natural no-gzip and Canvas-fallback paths not exercised stay not_run.",
+    "security": "Fresh temporary browser profiles, certificate validation/sandbox enabled. No daily user data, private Sessions, notes, RTSP or credentials.",
+    "data": "Read existing public saved results only; no inference, GT, tracker rerun, tuning, default change or source-data modification.",
+    "accounting": "Record all attempts/failures/zeros/not_run and case-only retest origins. Headed and headless are separate modes of existing three desktop rows, never six independent browser rows or added64-cell matrix totals. Original protocol and historical JSON records remain immutable.",
+    "publication": "Only harness source, frozen plan, reviewed aggregate outcomes and hashes; raw events/logs/screenshots/profiles/binaries/diagnostic paths remain ignored and local."
+  },
+  "setup_observations": [
+    {
+      "attempt": "preflight",
+      "chrome": "Browser launched but visibility probe failed: driver main-thread child list empty, missing headless_switches proof. Not a Pages product test.",
+      "edge": "Same process-identification probe error. Not a Pages product test.",
+      "firefox": "Native visible window and moz:headless=false observed."
+    },
+    {
+      "attempt": "preflight02",
+      "outcome": "All three visible windows/no-headless verified via vendor PID capabilities; both viewports reachable. Desktop initially used BiDi override. Not a Pages product test."
+    },
+    {
+      "attempt": "preflight03",
+      "outcome": "All three visible windows/no-headless verified; desktop now native content-area resize,390 supplemental override separately recorded. Only about:blank used throughout setup."
+    }
+  ]
+}
