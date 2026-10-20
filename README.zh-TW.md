@@ -18,24 +18,28 @@
 > [!IMPORTANT]
 > **實驗性開發預覽。** Session 儲存預設關閉；長遮擋恢復、實體 RTSP、Windows 真權重／worker 整合、長時穩定性與標定距離精度仍待驗證。[驗證紀錄](docs/zh-TW/validation.md)
 
-## 真實回放範例
+## 真實資料互動展示
+
+點擊截圖即可開啟**保存結果的互動網站**。圖中是目前 Pages 的實際介面，不是新的即時推論，也不代表歷史 Alpha 已完成驗收。
 
 <p align="center">
-  <img src="docs/assets/tracking-replay-crossing.zh-TW.jpg" width="960" alt="v0.3 實際 Session 回放：行人交會與部分遮擋時的 Object ID">
+  <a href="https://jshengp.github.io/depthport/v0.1/?lang=zh-TW"><img src="docs/assets/pages-v01-cloud.zh-TW.jpg" width="30%" alt="v0.1: 原始 CloudViewer 的 DA3 Metric 真實點雲"></a>
+  <a href="https://jshengp.github.io/depthport/v0.2/?lang=zh-TW"><img src="docs/assets/pages-v02-inspector.zh-TW.jpg" width="30%" alt="v0.2: V2 原生深度、語意遮罩與 Camera XYZ"></a>
+  <a href="https://jshengp.github.io/depthport/v0.3/?lang=zh-TW"><img src="docs/assets/pages-v03-replay.zh-TW.jpg" width="30%" alt="v0.3: 新執行 9-ID 回放及實際觀測缺口"></a>
 </p>
 
-*實際 Session 介面的真 YOLO26n＋獨立 BoT-SORT 結果。素材：[Lukas Kosc／Pexels](https://www.pexels.com/video/urban-street-scene-with-people-crossing-34597902/)，依 [Pexels 條款](https://www.pexels.com/terms-of-service/)編入文件作品。*
+**[v0.1 · 旋轉真實點雲](https://jshengp.github.io/depthport/v0.1/?lang=zh-TW)** · **[v0.2 · 查詢原生深度／XYZ／遮罩](https://jshengp.github.io/depthport/v0.2/?lang=zh-TW)** · **[v0.3 · 播放真實追蹤結果](https://jshengp.github.io/depthport/v0.3/?lang=zh-TW)**
 
-[查看三張前後影格、來源授權與完整條件 →](docs/zh-TW/tracking-replay-example.md)
+公車畫面沿用 [Ultralytics bus.jpg](https://github.com/ultralytics/assets/blob/53d4e2a8fd15f473c29a148c317a8477be559327/im/bus.jpg) 的原始四模型 CUDA 匯出。點雲圖為 **DA3 Metric Large**；檢查器為 **V2 原生相對接近度＋最終虛擬 Z**，搭配新執行的真 YOLO 遮罩。內參由 65° HFOV 估計，未經實測標定；相對／虛擬深度不是公尺，估計公尺也不等於已驗證物理距離。此後續展示不回填為 v0.1 歷史驗收。
 
-24 格範例呈現局部 Object ID、交會、部分遮擋與觀測消失／新 ID。沒有身分真值，不代表長遮擋恢復已通過。
+**兩次追蹤執行分開呈現，不混用 ID 與數量：**
 
-<details>
-<summary>影格時間與證據界線</summary>
+- **目前 Pages 新執行，2026-10-20：9 IDs／209 筆偵測／152 筆關聯／57 筆未關聯**，YOLO26n **8.4.115**。原 Session 未找回，因此以相同雜湊影片與來源影格 32–55 重跑。圖中保存 #12＝來源 #43，1.751750 秒；`obj-0005` 在此格沒有觀測，Z／XYZ 留白，歷史保留缺口。
+- **先前截圖執行，2026-10-19：7 IDs／230 筆偵測／125 筆關聯／105 筆未關聯**，YOLO26n **8.4.176**。[原三張截圖與條件](docs/zh-TW/tracking-replay-example.md)保持不變；不同執行中同名 ID 不代表相同物件，不把兩次數量差異解讀為受控精度比較。
 
-圖中 Session #12＝來源第 43 格，1.752 秒。來源影片為 23.976 fps、worker 每格採固定 30 Hz 步長，UI 1× 目標為每秒 5 個保存影格。範例沿用已記錄的 CUDA 環境，不是目前完整依賴配方的全新安裝驗收。這些文件於 Alpha.2 後補入 main，已發布 Tag／下載包保持不變；原影片、完整 Session、備註與權重不散布。
+影片來源：**[Lukas Kosc／Pexels](https://www.pexels.com/video/urban-street-scene-with-people-crossing-34597902/)**，保留[自身條款](https://www.pexels.com/terms-of-service/)，不因程式 AGPL 改授權或暗示背書。兩次片段都僅 **0.959 秒**、沒有身分 GT，不代表長遮擋、換 ID 正確性或追蹤精度已通過；未關聯不等於真值漏檢。V2 逐格虛擬深度與 Camera XYZ 不是世界軌跡或速度。Pages 只讀靜態保存結果，不提供線上模型推論、私人 Session 或 RTSP 接入。
 
-</details>
+[完整來源、原生單位與限制](docs/zh-TW/real-ai-pages.md) · [截圖狀態與雜湊](docs/validation/readme-real-pages.json)
 
 ## 快速開始
 
@@ -108,11 +112,11 @@ Alpha.2 封裝已驗證的 Pages／FastAPI／Hub／DA3 相容性更新與各版�
 - **可追溯匯出：** 同影格 PLY、float32 NPY、原始模型輸出、對齊 RGB 與模型／單位資訊。英文／繁中選擇保留在瀏覽器，也可用 `?lang=en`／`?lang=zh-TW`；不改變資料與 API 欄位，上游診斷保留原文。
 
 <details>
-<summary>原始檢視器截圖 — 合成資料</summary>
+<summary>目前 Pages 點雲互動 — 真實保存資料</summary>
 
-![DepthPort 繁體中文介面，使用合成展示資料](docs/assets/preview.zh-TW.png)
+[![CloudViewer 中 DA3 Metric Large 的真實 XYZRGB](docs/assets/pages-v01-cloud.zh-TW.jpg)](https://jshengp.github.io/depthport/v0.1/?lang=zh-TW)
 
-*實際 UI 的明示合成資料；不是由相機或 AI 模型產生的點雲。*
+*旋轉／縮放／平移保存的模型幾何。估計公尺與 HFOV 內參未經標定；後續展示不算歷史 v0.1 驗收。[原合成截圖](docs/assets/preview.zh-TW.png)另作參考。*
 
 </details>
 
@@ -123,11 +127,11 @@ Alpha.2 封裝已驗證的 Pages／FastAPI／Hub／DA3 相容性更新與各版�
 [空間分析指南](docs/zh-TW/spatial-analysis.md) · [模型與幾何](docs/zh-TW/models-and-geometry.md)
 
 <details>
-<summary>空間分析截圖 — 真單圖 CUDA 推論</summary>
+<summary>目前 Pages 檢查器 — 真實深度、XYZ 與 YOLO 遮罩</summary>
 
-![真模型深度比較與 YOLO 分割](docs/assets/spatial-preview.zh-TW.png)
+[![V2 原生深度、保存的 Camera XYZ 及真 YOLO 分割](docs/assets/pages-v02-inspector.zh-TW.jpg)](https://jshengp.github.io/depthport/v0.2/?lang=zh-TW)
 
-*公開 [Ultralytics 公車範例](https://github.com/ultralytics/assets/blob/53d4e2a8fd15f473c29a148c317a8477be559327/im/bus.jpg)的真模型推論，非實體 IPCam 或測距精度驗證。[截圖來源](docs/assets/README.md)*
+*直接查詢 Float32，不從預覽色彩反推。V2 最終幾何採虛擬 1–5，內參為 HFOV 估計。[歷史 v0.2 CUDA 截圖](docs/assets/spatial-preview.zh-TW.png)保持不變。*
 
 </details>
 

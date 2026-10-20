@@ -66,20 +66,22 @@ flowchart LR
 
 ## Examples / 範例
 
-**Synthetic UI example / 合成 UI 範例.** The screenshot is identical to the image shipped in the v0.1 tag; it demonstrates the actual viewer with explicitly synthetic data. No camera or pretrained model produced these points. 此圖與 v0.1 Tag 內圖片相同，是真實介面的明示合成資料，不是真模型推論。
+**[Open interactive website / 開啟互動網站](https://jshengp.github.io/depthport/v0.1/?lang=zh-TW)** · [English demo](https://jshengp.github.io/depthport/v0.1/?lang=en)
+
+**Current Pages, later real-model validation / 目前網站，後續真模型驗證。** The current CloudViewer reads the original saved bus XYZRGB; switch four engines, orbit/zoom/pan, and adjust point size/color. The image shows **DA3 Metric Large**, estimated metres, RGB coloring and a rotated view. 目前網站沿用原始 CloudViewer，讀取同一張 bus.jpg 的真實保存點雲；可切四模型、旋轉／縮放／平移及調整點大小／顏色，圖中為 DA3 Metric Large 的估計公尺、RGB 與旋轉視角。
+
+[![v0.1 current Pages UI with actual saved model results](../../assets/pages-v01-cloud.zh-TW.jpg)](https://jshengp.github.io/depthport/v0.1/?lang=zh-TW)
+
+Source / 來源：[Ultralytics bus.jpg](https://github.com/ultralytics/assets/blob/53d4e2a8fd15f473c29a148c317a8477be559327/im/bus.jpg). The four original CUDA exports were validated on **2026-10-17**, after v0.1; this website is a capability demonstration, not the historical tag's runtime or acceptance. 這是後續能力展示，不是 v0.1 Tag 當時的真權重驗收。65° HFOV intrinsics are estimated; relative/virtual values are not metres and estimated metres are not independently verified distances. 內參未實測標定，各單位不可直接比較，不宣稱測距精度。
+
+[Data, hashes and limits](../../en/real-ai-pages.md) · [繁中來源與限制](../../zh-TW/real-ai-pages.md) · [Screenshot state / 截圖狀態](../../validation/readme-real-pages.json)
 
 <details>
-<summary>View screenshot / 展開範例畫面</summary>
+<summary>Historical synthetic screenshot / 歷史合成截圖</summary>
 
-<p align="center">
-  <img src="../../assets/preview.zh-TW.png" width="960" alt="v0.1 original viewer with explicitly synthetic point-cloud data">
-</p>
+[Original v0.1 screenshot](https://github.com/JShengP/depthport/blob/v0.1.0-alpha.1/docs/assets/preview.zh-TW.png) is unchanged. It shows the actual historical UI with explicitly synthetic points; no model or camera generated them. 原圖保持不變，為實際歷史 UI 的明示合成資料；後續 CUDA／追蹤證據不回填為本版驗收。
 
 </details>
-
-[Tagged screenshot / 本版圖片](https://github.com/JShengP/depthport/blob/v0.1.0-alpha.1/docs/assets/preview.zh-TW.png) · [Asset provenance / 素材說明](../../assets/README.md)
-
-Later v0.2 CUDA results and v0.3 tracking examples must not be attributed to this snapshot. 不把後續版本的 GPU 或追蹤證據回填成 v0.1 驗收。
 
 ## Getting started / 使用入口
 
