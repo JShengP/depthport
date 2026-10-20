@@ -397,3 +397,13 @@ docs/validation/v0.3-estimator-shadow-protocol.json
 docs/validation/v0.3-estimator-shadow.json
 docs/en/tracking-estimator-shadow.md
 docs/zh-TW/tracking-estimator-shadow.md
+
+# Static GitHub Pages multi-version showcase
+website/index.html
+website/v0.2/index.html
+website/v0.3/index.html
+website/showcase.css
+website/showcase.js
+tests/test_pages_showcase.py
+docs/en/pages-showcase.md
+docs/zh-TW/pages-showcase.md

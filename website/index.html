@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Explore DepthPort v0.1, v0.2 and v0.3 in a static, local-first interactive showcase. Real AI inference requires the local Python application.">
+  <title>DepthPort — Explore the versions</title>
+  <link rel="icon" href="./static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/showcase.css">
+  <script src="./assets/showcase.js" defer></script>
+</head>
+<body data-showcase="home">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="./" aria-label="DepthPort showcase home"><span class="brand-mark" aria-hidden="true">◈</span><span>DEPTH<span class="brand-accent">PORT</span></span></a>
+      <nav aria-label="Main navigation" class="header-nav">
+        <a class="nav-active" href="./" data-en="Explore" data-zh="版本展示">Explore</a>
+        <a href="https://github.com/JShengP/depthport" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+        <button class="lang-button" type="button" data-lang-switch aria-label="Switch between English and Traditional Chinese">繁體中文</button>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="shell hero">
+      <div>
+        <div class="eyebrow"><span class="pulse-dot"></span> OPEN SOURCE · LOCAL FIRST · STATIC SHOWCASE</div>
+        <h1 data-en="Explore depth. Understand space." data-zh="探索深度，理解空間。">Explore depth. Understand space.</h1>
+        <p class="hero-copy" data-en="Three generations of a monocular depth and point-cloud workbench. Explore interactive, clearly labeled static demos — then run the real models locally." data-zh="從單目深度、空間分析到 Session 追蹤的三代工作台。先體驗有明確標示的靜態互動展示，再於本機執行真正的 AI 模型。">Three generations of a monocular depth and point-cloud workbench. Explore interactive, clearly labeled static demos — then run the real models locally.</p>
+        <div class="hero-actions">
+          <a class="primary-link" href="#versions" data-en="Explore the demos ↓" data-zh="探索版本 Demo ↓">Explore the demos ↓</a>
+          <a class="secondary-link" href="https://github.com/JShengP/depthport#quick-start" data-en="Run locally ↗" data-zh="本機啟動教學 ↗">Run locally ↗</a>
+        </div>
+        <p class="hero-note" data-en="No server, no model weights, no camera access, and no visitor uploads on this website." data-zh="此網站沒有推論伺服器、不載入權重、不接相機，也不接收訪客上傳。">No server, no model weights, no camera access, and no visitor uploads on this website.</p>
+      </div>
+      <div class="hero-orbit" aria-hidden="true">
+        <div class="orbit-ring ring-one"></div><div class="orbit-ring ring-two"></div><div class="orbit-core">2.5<span>D</span></div>
+        <span class="orbit-tag tag-top">RGB → Depth</span><span class="orbit-tag tag-bottom">XYZ · Object IDs</span>
+      </div>
+    </section>
+    <section id="versions" class="shell version-section" aria-labelledby="versions-heading">
+      <div class="section-intro"><div><p class="eyebrow small" data-en="THE VERSIONS" data-zh="版本導覽">THE VERSIONS</p><h2 id="versions-heading" data-en="Choose an experience" data-zh="選擇體驗內容">Choose an experience</h2></div><p class="intro-side" data-en="Every demo tells you what is simulated and what actually runs in the local application." data-zh="每個 Demo 都清楚區分合成示範與本機正式運作的功能。">Every demo tells you what is simulated and what actually runs in the local application.</p></div>
+      <div class="version-grid">
+        <article class="version-card">
+          <a class="picture-link" href="./v0.1/" aria-label="Open v0.1 interactive point cloud viewer"><img src="./media/preview.en.png" alt="Original DepthPort viewer interface with an explicitly synthetic point cloud" width="800" height="480" loading="lazy"><span class="image-shine" aria-hidden="true"></span></a>
+          <div class="card-content"><div class="card-overline"><span>v0.1</span><span class="type-pill" data-en="Interactive" data-zh="可互動">Interactive</span></div><h3>Depth &amp; Point Cloud Viewer</h3><p data-en="Orbit, pan, zoom and recolor a synthetic 2.5D point cloud using the original viewer." data-zh="使用原始檢視器旋轉、縮放、平移及調整合成的 2.5D 點雲。">Orbit, pan, zoom and recolor a synthetic 2.5D point cloud using the original viewer.</p><a class="card-link" href="./v0.1/" data-en="Open v0.1 demo →" data-zh="開啟 v0.1 展示 →">Open v0.1 demo →</a></div>
+        </article>
+        <article class="version-card">
+          <a class="picture-link" href="./v0.2/" aria-label="Open v0.2 interactive synthetic spatial inspector"><img src="./media/spatial-preview.en.png" alt="Actual Spatial Analysis interface screenshot from an attributed single-image CUDA experiment" width="800" height="480" loading="lazy"><span class="image-shine" aria-hidden="true"></span></a>
+          <div class="card-content"><div class="card-overline"><span>v0.2</span><span class="type-pill" data-en="Interactive" data-zh="可互動">Interactive</span></div><h3>Spatial Analysis Lab</h3><p data-en="Select synthetic pixels, inspect camera-space XYZ, explore segmentation and orbit a generated point cloud." data-zh="點選合成場景像素、查看相機 XYZ、切換模擬分割與旋轉生成的點雲。">Select synthetic pixels, inspect camera-space XYZ, explore segmentation and orbit a generated point cloud.</p><a class="card-link" href="./v0.2/" data-en="Open v0.2 demo →" data-zh="開啟 v0.2 展示 →">Open v0.2 demo →</a></div>
+        </article>
+        <article class="version-card">
+          <a class="picture-link" href="./v0.3/" aria-label="Open v0.3 interactive synthetic tracking replay"><img src="./media/tracking-replay-crossing.zh-TW.jpg" alt="Actual DepthPort Session replay interface screenshot with local Object IDs; third-party video source attributed in documentation" width="800" height="480" loading="lazy"><span class="image-shine" aria-hidden="true"></span></a>
+          <div class="card-content"><div class="card-overline"><span>v0.3</span><span class="type-pill" data-en="Interactive" data-zh="可互動">Interactive</span></div><h3>Sessions &amp; Object Tracking</h3><p data-en="Scrub a synthetic 24-frame sequence, inspect local Object IDs and visualize relative depth history." data-zh="拖曳 24 張合成影格時間軸，觀察 Object ID、物件交會與相對深度歷史。">Scrub a synthetic 24-frame sequence, inspect local Object IDs and visualize relative depth history.</p><a class="card-link" href="./v0.3/" data-en="Open v0.3 demo →" data-zh="開啟 v0.3 展示 →">Open v0.3 demo →</a></div>
+        </article>
+      </div>
+      <p class="attribution" data-en="Card images: original synthetic v0.1 viewer, documented real CUDA v0.2 screenshot, and documented real v0.3 Session interface. The v0.3 underlying footage is credited to Lukas Kosc / Pexels; these are not the datasets driving the interactive static demos." data-zh="卡片圖片：v0.1 合成介面、v0.2 真 CUDA 截圖及 v0.3 真 Session 畫面。v0.3 原始影片來源為 Lukas Kosc／Pexels；卡片圖片不是下方靜態互動場景的資料來源。">Card images: original synthetic v0.1 viewer, documented real CUDA v0.2 screenshot, and documented real v0.3 Session interface. The v0.3 underlying footage is credited to Lukas Kosc / Pexels; these are not the datasets driving the interactive static demos.</p>
+    </section>
+    <section class="shell boundary-section"><div class="boundary-grid"><div><p class="eyebrow small" data-en="WHAT THIS SITE IS" data-zh="網站能做到什麼">WHAT THIS SITE IS</p><h2 data-en="A showcase, not a hosted GPU." data-zh="這是展示網站，不是雲端 GPU。">A showcase, not a hosted GPU.</h2></div><div class="boundary-copy"><p data-en="GitHub Pages serves static assets. Interactive examples use generated synthetic fixtures; real depth models, RTSP capture, calibrated measurements and saved private Sessions run only in your local DepthPort installation." data-zh="GitHub Pages 僅提供靜態檔案。互動操作使用生成的合成資料；真深度模型、RTSP 接流、實測標定及私人 Session 僅在本機 DepthPort 程式中執行。">GitHub Pages serves static assets. Interactive examples use generated synthetic fixtures; real depth models, RTSP capture, calibrated measurements and saved private Sessions run only in your local DepthPort installation.</p><a href="https://github.com/JShengP/depthport/blob/main/docs/en/validation.md" data-en="Read validation & limits ↗" data-zh="查看驗證結果與限制 ↗">Read validation &amp; limits ↗</a></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="shell footer-inner"><span>DepthPort · AGPL-3.0-only · <span data-en="Static demonstration" data-zh="靜態展示">Static demonstration</span></span><div><a href="https://github.com/JShengP/depthport/releases" data-en="Releases" data-zh="下載版本">Releases</a><a href="https://github.com/JShengP/depthport/blob/main/docs/assets/README.md" data-en="Image provenance" data-zh="圖像來源">Image provenance</a></div></div></footer>
+</body>
+</html>
