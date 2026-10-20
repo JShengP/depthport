@@ -1,0 +1,849 @@
+{
+  "format": "depthport.exposure-selection.v1",
+  "phase": "discovery",
+  "checked_on": "2026-10-19",
+  "protocol_sha256": "279e5d8d81fceb2409a0259a84d78ceee1a48ca4d04d81e2e1be91364ad4f36c",
+  "input_lock_sha256": "bd360bad00df843ce297ecda8cdf0450240f7eb71e73755706038fd09db91653",
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv-python": "4.11.0.86",
+    "trackers": "2.6.1",
+    "supervision": "0.27.0",
+    "scipy": "1.18.1"
+  },
+  "gt_read": false,
+  "accuracy_scoring": false,
+  "repeats": 3,
+  "ledger": [
+    {
+      "name": "MOT17-09-DPM",
+      "phase": "discovery",
+      "prior_use": "Previously scored; discovery only",
+      "frames": 525,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "9e9361ce0ec717cc2ec65befaf11f65f176f455b4e92fae4c6e475294dbd1777",
+          "trace_sha256": "6fbf5e54dacb04efda00599beeef2adf7f1cd5d5cd6ac9e724cc3acba8e1e895",
+          "counts": {
+            "legacy_eligible_edges": 18,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 27,
+            "occupied_alternatives": 27,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_available_competitor": {
+          "prediction_sha256": "9e9361ce0ec717cc2ec65befaf11f65f176f455b4e92fae4c6e475294dbd1777",
+          "trace_sha256": "6fbf5e54dacb04efda00599beeef2adf7f1cd5d5cd6ac9e724cc3acba8e1e895",
+          "counts": {
+            "legacy_eligible_edges": 18,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 27,
+            "occupied_alternatives": 27,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_equivalent_assignment": {
+          "prediction_sha256": "9e9361ce0ec717cc2ec65befaf11f65f176f455b4e92fae4c6e475294dbd1777",
+          "trace_sha256": "6fbf5e54dacb04efda00599beeef2adf7f1cd5d5cd6ac9e724cc3acba8e1e895",
+          "counts": {
+            "legacy_eligible_edges": 18,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 27,
+            "occupied_alternatives": 27,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 6691,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT17-10-DPM",
+      "phase": "discovery",
+      "prior_use": "Previously scored; discovery only",
+      "frames": 654,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "0a2fc2beaa6d8c0c9b1e7158a94973ff7b63acb6830a96994de87e26c6294cbe",
+          "trace_sha256": "d3e025b181b42c42cef923187b07b2ad1004f1b636d8c78dad6166e38eba0188",
+          "counts": {
+            "legacy_eligible_edges": 16,
+            "available_edges": 1,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 16,
+            "occupied_alternatives": 15,
+            "available_alternatives": 1,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_available_competitor": {
+          "prediction_sha256": "74deaea9a7b85cd10c95cc067a612b41aa65311a4bbe112fb5e5dec261d8183f",
+          "trace_sha256": "7ae96aaca6befeb0ed1c56a3f0c497002598ade186fa5faa5728f58b9ab61032",
+          "counts": {
+            "legacy_eligible_edges": 15,
+            "available_edges": 1,
+            "equivalent_edges": 0,
+            "actual_vetoes": 1,
+            "frames_with_veto": 1,
+            "competitor_alternatives": 15,
+            "occupied_alternatives": 14,
+            "available_alternatives": 1,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_equivalent_assignment": {
+          "prediction_sha256": "0a2fc2beaa6d8c0c9b1e7158a94973ff7b63acb6830a96994de87e26c6294cbe",
+          "trace_sha256": "d3e025b181b42c42cef923187b07b2ad1004f1b636d8c78dad6166e38eba0188",
+          "counts": {
+            "legacy_eligible_edges": 16,
+            "available_edges": 1,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 16,
+            "occupied_alternatives": 15,
+            "available_alternatives": 1,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 10794,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT17-11-DPM",
+      "phase": "discovery",
+      "prior_use": "Previously scored; discovery only",
+      "frames": 900,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "5ddcbe1b16f210ec635ce21978baddc857309e2576df387b816aa4196ff4e34b",
+          "trace_sha256": "d886a1b50551564b4957dce498b7437755f7f5f604177799a823f472c1eefcec",
+          "counts": {
+            "legacy_eligible_edges": 4,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 4,
+            "occupied_alternatives": 4,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_available_competitor": {
+          "prediction_sha256": "5ddcbe1b16f210ec635ce21978baddc857309e2576df387b816aa4196ff4e34b",
+          "trace_sha256": "d886a1b50551564b4957dce498b7437755f7f5f604177799a823f472c1eefcec",
+          "counts": {
+            "legacy_eligible_edges": 4,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 4,
+            "occupied_alternatives": 4,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_equivalent_assignment": {
+          "prediction_sha256": "5ddcbe1b16f210ec635ce21978baddc857309e2576df387b816aa4196ff4e34b",
+          "trace_sha256": "d886a1b50551564b4957dce498b7437755f7f5f604177799a823f472c1eefcec",
+          "counts": {
+            "legacy_eligible_edges": 4,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 4,
+            "occupied_alternatives": 4,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 8558,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT17-13-DPM",
+      "phase": "discovery",
+      "prior_use": "Previously scored; discovery only",
+      "frames": 750,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "b9f2817194b648c92081d71779d182ce7c5f901665baf9b4e4d312ecc7c17fef",
+          "trace_sha256": "478103940f1cc7bf077c2defac8e0c41fd1055c92f14dc3cf857c3e9feb38337",
+          "counts": {
+            "legacy_eligible_edges": 4,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 4,
+            "occupied_alternatives": 4,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_available_competitor": {
+          "prediction_sha256": "b9f2817194b648c92081d71779d182ce7c5f901665baf9b4e4d312ecc7c17fef",
+          "trace_sha256": "478103940f1cc7bf077c2defac8e0c41fd1055c92f14dc3cf857c3e9feb38337",
+          "counts": {
+            "legacy_eligible_edges": 4,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 4,
+            "occupied_alternatives": 4,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_equivalent_assignment": {
+          "prediction_sha256": "b9f2817194b648c92081d71779d182ce7c5f901665baf9b4e4d312ecc7c17fef",
+          "trace_sha256": "478103940f1cc7bf077c2defac8e0c41fd1055c92f14dc3cf857c3e9feb38337",
+          "counts": {
+            "legacy_eligible_edges": 4,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 4,
+            "occupied_alternatives": 4,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 8285,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT17-04-DPM",
+      "phase": "discovery",
+      "prior_use": "Previously scored in general benchmarks and prior control; correct erroneous new-scene claim",
+      "frames": 1050,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "3e68bb626c3511755ca9e081716739097715842b1eb8785fbd7426da55be3f0e",
+          "trace_sha256": "2d47057bbd3ebc0c6ef72eda0588b156099fa6e125e6dc5a2e53752334c4fcad",
+          "counts": {
+            "legacy_eligible_edges": 1,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 1,
+            "occupied_alternatives": 1,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_available_competitor": {
+          "prediction_sha256": "3e68bb626c3511755ca9e081716739097715842b1eb8785fbd7426da55be3f0e",
+          "trace_sha256": "2d47057bbd3ebc0c6ef72eda0588b156099fa6e125e6dc5a2e53752334c4fcad",
+          "counts": {
+            "legacy_eligible_edges": 1,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 1,
+            "occupied_alternatives": 1,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_equivalent_assignment": {
+          "prediction_sha256": "3e68bb626c3511755ca9e081716739097715842b1eb8785fbd7426da55be3f0e",
+          "trace_sha256": "2d47057bbd3ebc0c6ef72eda0588b156099fa6e125e6dc5a2e53752334c4fcad",
+          "counts": {
+            "legacy_eligible_edges": 1,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 1,
+            "occupied_alternatives": 1,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 20133,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT20-01",
+      "phase": "discovery",
+      "prior_use": "Previously scored; discovery only",
+      "frames": 429,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "97e6ed42766c5387c311a35fb991e9674be8deae7a3adcd162f0a1c97b2135c7",
+          "trace_sha256": "13aaf0f46fabf7c42bdfd8c34ad51a56037bc4ce5d890102e87e9604e88947f2",
+          "counts": {
+            "legacy_eligible_edges": 5,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 5,
+            "occupied_alternatives": 5,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_available_competitor": {
+          "prediction_sha256": "97e6ed42766c5387c311a35fb991e9674be8deae7a3adcd162f0a1c97b2135c7",
+          "trace_sha256": "13aaf0f46fabf7c42bdfd8c34ad51a56037bc4ce5d890102e87e9604e88947f2",
+          "counts": {
+            "legacy_eligible_edges": 5,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 5,
+            "occupied_alternatives": 5,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_equivalent_assignment": {
+          "prediction_sha256": "97e6ed42766c5387c311a35fb991e9674be8deae7a3adcd162f0a1c97b2135c7",
+          "trace_sha256": "13aaf0f46fabf7c42bdfd8c34ad51a56037bc4ce5d890102e87e9604e88947f2",
+          "counts": {
+            "legacy_eligible_edges": 5,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 5,
+            "occupied_alternatives": 5,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 7529,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT20-02",
+      "phase": "discovery",
+      "prior_use": "Preview downloaded previously, no prior project tracking; full source now enabled by bounded shards",
+      "frames": 2782,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "6035203c20049177cb676151bb5c27660bf98ca3f0ff6f5f8fc8d2017f8056b6",
+          "trace_sha256": "bbe847ad1aef95509a39672febef3faad35cb3ca1508dd719275e0ac5dd8f960",
+          "counts": {
+            "legacy_eligible_edges": 55,
+            "available_edges": 2,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 59,
+            "occupied_alternatives": 57,
+            "available_alternatives": 2,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_available_competitor": {
+          "prediction_sha256": "1739853116d697320acfa96b4c511d23cca218733988fdc391472dbc1abec055",
+          "trace_sha256": "670fcf5145992cc27dffa6bb71f9d05c6828677b429e4be85355bc4e570deb1f",
+          "counts": {
+            "legacy_eligible_edges": 55,
+            "available_edges": 2,
+            "equivalent_edges": 0,
+            "actual_vetoes": 2,
+            "frames_with_veto": 2,
+            "competitor_alternatives": 59,
+            "occupied_alternatives": 57,
+            "available_alternatives": 2,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_equivalent_assignment": {
+          "prediction_sha256": "6035203c20049177cb676151bb5c27660bf98ca3f0ff6f5f8fc8d2017f8056b6",
+          "trace_sha256": "bbe847ad1aef95509a39672febef3faad35cb3ca1508dd719275e0ac5dd8f960",
+          "counts": {
+            "legacy_eligible_edges": 55,
+            "available_edges": 2,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 59,
+            "occupied_alternatives": 57,
+            "available_alternatives": 2,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 59523,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT20-06",
+      "phase": "discovery",
+      "prior_use": "No prior project tracking; public test preview; no GT",
+      "frames": 1008,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "56bf6eba46da59f44ef4566179b1ed3c7d3ca4280e805677553f65ab2d2dccef",
+          "trace_sha256": "42986a2e4d30551b7b4efb6ba0bf028c235a963d670e6020bad572e3ef1c8f74",
+          "counts": {
+            "legacy_eligible_edges": 16,
+            "available_edges": 2,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 16,
+            "occupied_alternatives": 14,
+            "available_alternatives": 2,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_available_competitor": {
+          "prediction_sha256": "7c7a82dfe696f1abcbac84bb80899e6bc893df84807d9c46268ab5b7aeea70cc",
+          "trace_sha256": "1c350402d7bb359ed125268975feb6943fcd6b430ea265a6b004f978db163178",
+          "counts": {
+            "legacy_eligible_edges": 13,
+            "available_edges": 1,
+            "equivalent_edges": 0,
+            "actual_vetoes": 1,
+            "frames_with_veto": 1,
+            "competitor_alternatives": 13,
+            "occupied_alternatives": 12,
+            "available_alternatives": 1,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_equivalent_assignment": {
+          "prediction_sha256": "56bf6eba46da59f44ef4566179b1ed3c7d3ca4280e805677553f65ab2d2dccef",
+          "trace_sha256": "42986a2e4d30551b7b4efb6ba0bf028c235a963d670e6020bad572e3ef1c8f74",
+          "counts": {
+            "legacy_eligible_edges": 16,
+            "available_edges": 2,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 16,
+            "occupied_alternatives": 14,
+            "available_alternatives": 2,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 16663,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT20-07",
+      "phase": "discovery",
+      "prior_use": "No prior project tracking; public test preview; no GT",
+      "frames": 585,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "c99b2be521424bbcf10e3a5007f31304801070734a1ef20e9f5b2d4621cc6400",
+          "trace_sha256": "6704930cc3908d426a2ff96cfa0e31c1707f5ca5948dbb441ec7f26f655974c6",
+          "counts": {
+            "legacy_eligible_edges": 1,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 1,
+            "occupied_alternatives": 1,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_available_competitor": {
+          "prediction_sha256": "c99b2be521424bbcf10e3a5007f31304801070734a1ef20e9f5b2d4621cc6400",
+          "trace_sha256": "6704930cc3908d426a2ff96cfa0e31c1707f5ca5948dbb441ec7f26f655974c6",
+          "counts": {
+            "legacy_eligible_edges": 1,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 1,
+            "occupied_alternatives": 1,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_equivalent_assignment": {
+          "prediction_sha256": "c99b2be521424bbcf10e3a5007f31304801070734a1ef20e9f5b2d4621cc6400",
+          "trace_sha256": "6704930cc3908d426a2ff96cfa0e31c1707f5ca5948dbb441ec7f26f655974c6",
+          "counts": {
+            "legacy_eligible_edges": 1,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 1,
+            "occupied_alternatives": 1,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 11184,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT20-08",
+      "phase": "discovery",
+      "prior_use": "No prior project tracking; public test preview; no GT",
+      "frames": 806,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "fa41146682a963272d486c435d0e377a2404dfc04434f304f55c1a692e499741",
+          "trace_sha256": "d4e5c4f086d4ed22915a779f8c783b0e54a7a86a66fa0b0641435f58bf7ecef6",
+          "counts": {
+            "legacy_eligible_edges": 6,
+            "available_edges": 1,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 6,
+            "occupied_alternatives": 5,
+            "available_alternatives": 1,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_available_competitor": {
+          "prediction_sha256": "622a6d1bc462540a2dd505ff0175f86709703c19a4561c40cbfde97ed3a6f66a",
+          "trace_sha256": "1ad2a2a2a4968b8d5cd963fc43eb96b15f4512a8d6078c3ebcf90827e022734d",
+          "counts": {
+            "legacy_eligible_edges": 6,
+            "available_edges": 1,
+            "equivalent_edges": 0,
+            "actual_vetoes": 1,
+            "frames_with_veto": 1,
+            "competitor_alternatives": 6,
+            "occupied_alternatives": 5,
+            "available_alternatives": 1,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_equivalent_assignment": {
+          "prediction_sha256": "fa41146682a963272d486c435d0e377a2404dfc04434f304f55c1a692e499741",
+          "trace_sha256": "d4e5c4f086d4ed22915a779f8c783b0e54a7a86a66fa0b0641435f58bf7ecef6",
+          "counts": {
+            "legacy_eligible_edges": 6,
+            "available_edges": 1,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 6,
+            "occupied_alternatives": 5,
+            "available_alternatives": 1,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 10401,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT17-07-DPM",
+      "phase": "discovery",
+      "prior_use": "No prior project tracking; public test preview; no GT",
+      "frames": 500,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "1d3531f018b7d7dad894feb490cce49b237a3caa5b79de2aa3b76ae4f602a415",
+          "trace_sha256": "e6118d866a2db1f4fe3cda756c614be24ad2817eb6ca5e751bb952fbb9a837b2",
+          "counts": {
+            "legacy_eligible_edges": 10,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 12,
+            "occupied_alternatives": 12,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_available_competitor": {
+          "prediction_sha256": "1d3531f018b7d7dad894feb490cce49b237a3caa5b79de2aa3b76ae4f602a415",
+          "trace_sha256": "e6118d866a2db1f4fe3cda756c614be24ad2817eb6ca5e751bb952fbb9a837b2",
+          "counts": {
+            "legacy_eligible_edges": 10,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 12,
+            "occupied_alternatives": 12,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_equivalent_assignment": {
+          "prediction_sha256": "1d3531f018b7d7dad894feb490cce49b237a3caa5b79de2aa3b76ae4f602a415",
+          "trace_sha256": "e6118d866a2db1f4fe3cda756c614be24ad2817eb6ca5e751bb952fbb9a837b2",
+          "counts": {
+            "legacy_eligible_edges": 10,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 12,
+            "occupied_alternatives": 12,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 12733,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT17-08-DPM",
+      "phase": "discovery",
+      "prior_use": "No prior project tracking; public test preview; no GT",
+      "frames": 625,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "9e812b72af5d80219c52f6d773daed865338922e8b09a4ff1296f27d8a8abeb3",
+          "trace_sha256": "6a4acb15dc2a3528ed27b4043885af32852e55af3ac0e56aee639882108725b7",
+          "counts": {
+            "legacy_eligible_edges": 24,
+            "available_edges": 2,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 26,
+            "occupied_alternatives": 24,
+            "available_alternatives": 2,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_available_competitor": {
+          "prediction_sha256": "4f090744e7cd846432b50fd105592da42c40fd77b8e39831de25ff48390ce32e",
+          "trace_sha256": "4dea693da19c48179cdbeba5d4b42b1231d3882bd4242b473cada60681184c50",
+          "counts": {
+            "legacy_eligible_edges": 24,
+            "available_edges": 2,
+            "equivalent_edges": 0,
+            "actual_vetoes": 2,
+            "frames_with_veto": 2,
+            "competitor_alternatives": 26,
+            "occupied_alternatives": 24,
+            "available_alternatives": 2,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_equivalent_assignment": {
+          "prediction_sha256": "9e812b72af5d80219c52f6d773daed865338922e8b09a4ff1296f27d8a8abeb3",
+          "trace_sha256": "6a4acb15dc2a3528ed27b4043885af32852e55af3ac0e56aee639882108725b7",
+          "counts": {
+            "legacy_eligible_edges": 24,
+            "available_edges": 2,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 26,
+            "occupied_alternatives": 24,
+            "available_alternatives": 2,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 11666,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT17-12-DPM",
+      "phase": "discovery",
+      "prior_use": "No prior project tracking; public test preview; no GT",
+      "frames": 900,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "457818c0425cad74c9bfdc0b658bcdef9b67be88a6d26ee84e9992657f0a9d4e",
+          "trace_sha256": "a597137d8f4f7a42b492fce9ae146c1a6237148dd4e9328a268e8bf63fc9ad55",
+          "counts": {
+            "legacy_eligible_edges": 4,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 4,
+            "occupied_alternatives": 4,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_available_competitor": {
+          "prediction_sha256": "457818c0425cad74c9bfdc0b658bcdef9b67be88a6d26ee84e9992657f0a9d4e",
+          "trace_sha256": "a597137d8f4f7a42b492fce9ae146c1a6237148dd4e9328a268e8bf63fc9ad55",
+          "counts": {
+            "legacy_eligible_edges": 4,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 4,
+            "occupied_alternatives": 4,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_equivalent_assignment": {
+          "prediction_sha256": "457818c0425cad74c9bfdc0b658bcdef9b67be88a6d26ee84e9992657f0a9d4e",
+          "trace_sha256": "a597137d8f4f7a42b492fce9ae146c1a6237148dd4e9328a268e8bf63fc9ad55",
+          "counts": {
+            "legacy_eligible_edges": 4,
+            "available_edges": 0,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 4,
+            "occupied_alternatives": 4,
+            "available_alternatives": 0,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 7806,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT17-14-DPM",
+      "phase": "discovery",
+      "prior_use": "No prior project tracking; public test preview; no GT",
+      "frames": 750,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "27da04e4db1f59f397d158d7bfc72dc520cc54f6c26924fb5ac55588ed9680d8",
+          "trace_sha256": "a1e99efb56bd33770d89376e1ac4f61af8ba28bfd53ed64d3dcf50acfea1d262",
+          "counts": {
+            "legacy_eligible_edges": 9,
+            "available_edges": 1,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 11,
+            "occupied_alternatives": 10,
+            "available_alternatives": 1,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_available_competitor": {
+          "prediction_sha256": "9c810c0ed8c8ca28c149e3426242ad5fabba2f5e116e046b4cd4a252d3c3db36",
+          "trace_sha256": "4078d4221622dcdc1db1fe5fba9d18edfd8ada072c8cd25601f96c90308c6718",
+          "counts": {
+            "legacy_eligible_edges": 9,
+            "available_edges": 1,
+            "equivalent_edges": 0,
+            "actual_vetoes": 1,
+            "frames_with_veto": 1,
+            "competitor_alternatives": 11,
+            "occupied_alternatives": 10,
+            "available_alternatives": 1,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        },
+        "defer_equivalent_assignment": {
+          "prediction_sha256": "27da04e4db1f59f397d158d7bfc72dc520cc54f6c26924fb5ac55588ed9680d8",
+          "trace_sha256": "a1e99efb56bd33770d89376e1ac4f61af8ba28bfd53ed64d3dcf50acfea1d262",
+          "counts": {
+            "legacy_eligible_edges": 9,
+            "available_edges": 1,
+            "equivalent_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "competitor_alternatives": 11,
+            "occupied_alternatives": 10,
+            "available_alternatives": 1,
+            "equivalent_alternatives": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 12970,
+      "capped_frames": 0
+    }
+  ],
+  "selection": {
+    "defer_available_competitor": "MOT17-10-DPM",
+    "defer_equivalent_assignment": null
+  }
+}

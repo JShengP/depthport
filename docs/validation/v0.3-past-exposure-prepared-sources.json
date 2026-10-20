@@ -1,0 +1,22 @@
+[
+  {
+    "name": "KITTI-0004",
+    "frames": 314,
+    "image_manifest_sha256": "896ea0c6040483911b0ed70d8ce918776d8fdaae4eff806ad31e41473d713c11",
+    "video_sha256": "673ed7ef252c1e9e1c8bcf55c140404f628015f040a51647cde8afa44f0c1702",
+    "width": 1242,
+    "height": 375,
+    "pixel_identical_frames": 314,
+    "fps": 10
+  },
+  {
+    "name": "KITTI-0005",
+    "frames": 297,
+    "image_manifest_sha256": "4d4032aa885806f62f0bfff37725795a0ec2709fcf75b63e659169ebc9e5747c",
+    "video_sha256": "860e56b5dbb670d877aeb4fba5921a284b09e86619f0cbdf15e36abd6f025260",
+    "width": 1242,
+    "height": 375,
+    "pixel_identical_frames": 297,
+    "fps": 10
+  }
+]

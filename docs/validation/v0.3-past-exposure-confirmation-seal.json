@@ -1,0 +1,12 @@
+{
+  "protocol_sha256": "573b76a8019ce5bb069a6140d2070c26ca7c4071dace026dcef3ea8eba255082",
+  "discovery_sha256": "4c6492500093bfaac36edeeaa3af0c486485b5f23fc8b01f4bcb8d39d1a2cd24",
+  "selection": {
+    "past_support_only": "MOT17-09-DPM",
+    "update_protection_only": "MOT17-10-DPM",
+    "past_support_and_protection": "MOT20-06"
+  },
+  "sealed_at_utc": "2026-10-19T14:56:49.380112+00:00",
+  "reserved_inference_started": false,
+  "pixel_verified_prepared_sha256": "881da5f225e4730f7437bf4336d3074501827ac16c34bd5ca9c92d6b79b3f2f2"
+}

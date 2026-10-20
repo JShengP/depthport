@@ -1,0 +1,1299 @@
+{
+  "format": "depthport.state-observation-health-public.v1",
+  "protocol_sha256": "4af6002d8f9624c73a7e3623469df7e912ddfed705ccdec35963bff5a09179f3",
+  "gt_read": false,
+  "accuracy_scoring": false,
+  "new_tracking": false,
+  "inference": false,
+  "retuned": false,
+  "all_scheduled_completed": true,
+  "ledger": [
+    {
+      "name": "KITTI-0004",
+      "frames": 314,
+      "status": "completed",
+      "reference_prediction_bytes_equal": true,
+      "native_seals_equal": true,
+      "original_stage_aggregate_equal": true,
+      "repeat_aggregate_and_raw_equal": true,
+      "source_lock": {
+        "name": "KITTI-0004",
+        "video_sha256": "673ed7ef252c1e9e1c8bcf55c140404f628015f040a51647cde8afa44f0c1702",
+        "cache_sha256": [
+          "a58da9bd2a8b7eaffce017e156890145a5a119113f36ede49e165857ea09589b"
+        ],
+        "frames": 314,
+        "fps": 10,
+        "resolution": [
+          1242,
+          375
+        ],
+        "cache_shards": 1,
+        "cached_detections": 191,
+        "capped_frames": 0
+      },
+      "original_lifecycle_sha256": "f90a696cea261e41af4bb71e17ef865bfcfeb5b3249ea6f385fbc7784d3e799e",
+      "original_prediction_sha256": "d8994eab2788da8a4b1c0634eb6a70348cbec77b34bb5db380527a004b9758a9",
+      "raw_audit_sha256": "53d184336417810b1cfb996433f98d800b66b33a9604f6e0da5176731b72aae2",
+      "summary": {
+        "counts": {
+          "frames": 314,
+          "inputs": 191,
+          "input_nonfinite": 0,
+          "input_nonfinite_confidence": 0,
+          "input_nonpositive": 0,
+          "births": 10,
+          "accepted_high": 17,
+          "accepted_weak": 5,
+          "accepted_nonpositive_input": 0,
+          "accepted_from_nonpositive_prediction": 0,
+          "accepted_nonpositive_posterior": 0,
+          "accepted_repaired_prediction": 0,
+          "accepted_created_nonpositive": 0,
+          "predicted_rows": 102,
+          "nonpositive_predicted_rows": 18,
+          "posterior_rows": 112,
+          "nonpositive_posterior_rows": 18,
+          "prediction_positive_to_nonpositive": 4,
+          "prediction_nonpositive_to_positive": 0,
+          "hypotheses_ever_nonpositive": 4,
+          "hypotheses_width_nonpositive": 2,
+          "hypotheses_height_nonpositive": 2,
+          "first_birth": 0,
+          "first_prediction": 4,
+          "first_accepted_high": 0,
+          "first_accepted_weak": 0,
+          "first_prediction_with_prior_update": 4,
+          "first_prediction_seed_only": 0,
+          "nonpositive_removed": 4,
+          "removed_expired": 7,
+          "removed_immature_unmatched": 3,
+          "removed_expired_and_immature": 0,
+          "source_end_censored": 0,
+          "continuity_checks": 102
+        },
+        "first_phase": {
+          "birth": 0,
+          "prediction": 4,
+          "accepted_high": 0,
+          "accepted_weak": 0
+        },
+        "first_dimensions": {
+          "width": 2,
+          "height": 2,
+          "both": 0
+        },
+        "first_role": {
+          "confirmed": 4,
+          "tentative": 0
+        },
+        "first_prior_stage": {
+          "high": 3,
+          "weak": 1,
+          "seed_only": 0
+        },
+        "first_prior_gap_histogram": {
+          "accepted:11": 1,
+          "accepted:4": 1,
+          "accepted:7": 1,
+          "accepted:8": 1
+        },
+        "first_prior_input_health": {
+          "accepted_positive": 4,
+          "accepted_nonpositive": 0,
+          "seed_positive": 0,
+          "seed_nonpositive": 0
+        },
+        "first_prior_posterior_health": {
+          "accepted_positive": 4,
+          "accepted_nonpositive": 0,
+          "seed_positive": 0,
+          "seed_nonpositive": 0
+        },
+        "dimension_first_phase": {
+          "width:birth": 0,
+          "width:prediction": 2,
+          "width:accepted_high": 0,
+          "width:accepted_weak": 0,
+          "height:birth": 0,
+          "height:prediction": 2,
+          "height:accepted_high": 0,
+          "height:accepted_weak": 0
+        },
+        "accepted_interupdate_gap_histogram": {
+          "1": 15
+        },
+        "birth_to_first_update_gap_histogram": {
+          "1": 7
+        },
+        "global_empty_runs": {
+          "any": {
+            "interior:1": 7,
+            "interior:12": 1,
+            "interior:13": 1,
+            "interior:17": 1,
+            "interior:2": 1,
+            "interior:3": 2,
+            "interior:45": 1,
+            "interior:6": 2,
+            "interior:65": 1,
+            "interior:7": 3,
+            "left:boundary_length_local": 1,
+            "right:boundary_length_local": 1
+          },
+          "high": {
+            "interior:1": 1,
+            "interior:20": 1,
+            "interior:3": 1,
+            "interior:82": 1,
+            "left:boundary_length_local": 1,
+            "right:boundary_length_local": 1
+          },
+          "weak": {
+            "interior:1": 10,
+            "interior:12": 1,
+            "interior:13": 1,
+            "interior:17": 1,
+            "interior:2": 1,
+            "interior:3": 2,
+            "interior:45": 1,
+            "interior:6": 3,
+            "interior:65": 1,
+            "interior:7": 2,
+            "interior:9": 1,
+            "left:boundary_length_local": 1,
+            "right:boundary_length_local": 1
+          }
+        },
+        "contexts": {
+          "birth": {
+            "any": {
+              "events": 10,
+              "at_event": 10,
+              "before": {
+                "observed:1": 10
+              },
+              "after": {
+                "observed:1": 9,
+                "observed:8": 1
+              }
+            },
+            "high": {
+              "events": 10,
+              "at_event": 10,
+              "before": {
+                "censored": 1,
+                "observed:1": 5,
+                "observed:21": 1,
+                "observed:4": 1,
+                "observed:83": 2
+              },
+              "after": {
+                "censored": 1,
+                "observed:1": 7,
+                "observed:2": 1,
+                "observed:83": 1
+              }
+            },
+            "weak": {
+              "events": 10,
+              "at_event": 5,
+              "before": {
+                "observed:1": 9,
+                "observed:2": 1
+              },
+              "after": {
+                "observed:1": 7,
+                "observed:2": 1,
+                "observed:8": 1,
+                "observed:9": 1
+              }
+            },
+            "any:positive": {
+              "events": 10,
+              "at_event": 10,
+              "before": {
+                "censored": 2,
+                "observed:1": 6,
+                "observed:87": 2
+              },
+              "after": {
+                "observed:1": 7,
+                "observed:11": 1,
+                "observed:87": 2
+              }
+            },
+            "any:gate": {
+              "events": 10,
+              "at_event": 10,
+              "before": {
+                "censored": 2,
+                "observed:1": 5,
+                "observed:21": 1,
+                "observed:87": 2
+              },
+              "after": {
+                "observed:1": 7,
+                "observed:11": 1,
+                "observed:87": 2
+              }
+            },
+            "high:positive": {
+              "events": 10,
+              "at_event": 10,
+              "before": {
+                "censored": 5,
+                "observed:1": 1,
+                "observed:21": 1,
+                "observed:87": 2,
+                "observed:89": 1
+              },
+              "after": {
+                "censored": 1,
+                "observed:1": 5,
+                "observed:2": 1,
+                "observed:3": 1,
+                "observed:87": 2
+              }
+            },
+            "high:gate": {
+              "events": 10,
+              "at_event": 10,
+              "before": {
+                "censored": 5,
+                "observed:1": 1,
+                "observed:21": 1,
+                "observed:87": 2,
+                "observed:90": 1
+              },
+              "after": {
+                "censored": 2,
+                "observed:1": 5,
+                "observed:3": 1,
+                "observed:87": 2
+              }
+            },
+            "weak:positive": {
+              "events": 10,
+              "at_event": 1,
+              "before": {
+                "censored": 5,
+                "observed:1": 5
+              },
+              "after": {
+                "observed:1": 2,
+                "observed:102": 1,
+                "observed:11": 1,
+                "observed:112": 1,
+                "observed:2": 1,
+                "observed:21": 2,
+                "observed:23": 1,
+                "observed:89": 1
+              }
+            },
+            "weak:gate": {
+              "events": 10,
+              "at_event": 0,
+              "before": {
+                "censored": 6,
+                "observed:1": 4
+              },
+              "after": {
+                "observed:1": 2,
+                "observed:108": 1,
+                "observed:11": 1,
+                "observed:112": 1,
+                "observed:2": 1,
+                "observed:23": 2,
+                "observed:25": 1,
+                "observed:89": 1
+              }
+            }
+          },
+          "expired": {
+            "any": {
+              "events": 7,
+              "at_event": 3,
+              "before": {
+                "observed:1": 2,
+                "observed:2": 1,
+                "observed:6": 1,
+                "observed:7": 1,
+                "observed:8": 2
+              },
+              "after": {
+                "observed:1": 3,
+                "observed:18": 1,
+                "observed:2": 3
+              }
+            },
+            "high": {
+              "events": 7,
+              "at_event": 0,
+              "before": {
+                "observed:10": 1,
+                "observed:11": 1,
+                "observed:6": 1,
+                "observed:7": 1,
+                "observed:8": 2,
+                "observed:9": 1
+              },
+              "after": {
+                "observed:10": 1,
+                "observed:11": 1,
+                "observed:12": 1,
+                "observed:13": 1,
+                "observed:14": 1,
+                "observed:15": 1,
+                "observed:75": 1
+              }
+            },
+            "weak": {
+              "events": 7,
+              "at_event": 3,
+              "before": {
+                "observed:1": 2,
+                "observed:10": 1,
+                "observed:2": 1,
+                "observed:6": 1,
+                "observed:7": 1,
+                "observed:8": 1
+              },
+              "after": {
+                "observed:1": 3,
+                "observed:18": 1,
+                "observed:2": 3
+              }
+            },
+            "any:positive": {
+              "events": 7,
+              "at_event": 0,
+              "before": {
+                "observed:10": 1,
+                "observed:11": 3,
+                "observed:8": 1,
+                "observed:9": 2
+              },
+              "after": {
+                "observed:10": 1,
+                "observed:6": 1,
+                "observed:74": 1,
+                "observed:8": 2,
+                "observed:9": 2
+              }
+            },
+            "any:gate": {
+              "events": 7,
+              "at_event": 0,
+              "before": {
+                "observed:11": 4,
+                "observed:9": 3
+              },
+              "after": {
+                "censored": 3,
+                "observed:10": 2,
+                "observed:75": 1,
+                "observed:9": 1
+              }
+            },
+            "high:positive": {
+              "events": 7,
+              "at_event": 0,
+              "before": {
+                "censored": 1,
+                "observed:10": 1,
+                "observed:11": 2,
+                "observed:8": 1,
+                "observed:9": 2
+              },
+              "after": {
+                "censored": 5,
+                "observed:10": 1,
+                "observed:75": 1
+              }
+            },
+            "high:gate": {
+              "events": 7,
+              "at_event": 0,
+              "before": {
+                "censored": 1,
+                "observed:11": 3,
+                "observed:9": 3
+              },
+              "after": {
+                "censored": 5,
+                "observed:10": 1,
+                "observed:75": 1
+              }
+            },
+            "weak:positive": {
+              "events": 7,
+              "at_event": 0,
+              "before": {
+                "observed:11": 2,
+                "observed:12": 2,
+                "observed:13": 1,
+                "observed:14": 2
+              },
+              "after": {
+                "observed:10": 1,
+                "observed:6": 1,
+                "observed:74": 1,
+                "observed:8": 2,
+                "observed:9": 2
+              }
+            },
+            "weak:gate": {
+              "events": 7,
+              "at_event": 0,
+              "before": {
+                "censored": 1,
+                "observed:100": 1,
+                "observed:11": 2,
+                "observed:12": 2,
+                "observed:14": 1
+              },
+              "after": {
+                "censored": 3,
+                "observed:10": 1,
+                "observed:11": 1,
+                "observed:76": 1,
+                "observed:9": 1
+              }
+            }
+          },
+          "immature_unmatched": {
+            "any": {
+              "events": 3,
+              "at_event": 2,
+              "before": {
+                "observed:1": 3
+              },
+              "after": {
+                "observed:7": 2,
+                "observed:8": 1
+              }
+            },
+            "high": {
+              "events": 3,
+              "at_event": 1,
+              "before": {
+                "observed:1": 3
+              },
+              "after": {
+                "censored": 1,
+                "observed:82": 1,
+                "observed:83": 1
+              }
+            },
+            "weak": {
+              "events": 3,
+              "at_event": 1,
+              "before": {
+                "observed:1": 1,
+                "observed:2": 1,
+                "observed:3": 1
+              },
+              "after": {
+                "observed:7": 2,
+                "observed:8": 1
+              }
+            },
+            "any:positive": {
+              "events": 3,
+              "at_event": 0,
+              "before": {
+                "observed:1": 3
+              },
+              "after": {
+                "observed:10": 1,
+                "observed:86": 2
+              }
+            },
+            "any:gate": {
+              "events": 3,
+              "at_event": 0,
+              "before": {
+                "observed:1": 3
+              },
+              "after": {
+                "observed:10": 1,
+                "observed:86": 2
+              }
+            },
+            "high:positive": {
+              "events": 3,
+              "at_event": 0,
+              "before": {
+                "observed:1": 3
+              },
+              "after": {
+                "censored": 1,
+                "observed:86": 2
+              }
+            },
+            "high:gate": {
+              "events": 3,
+              "at_event": 0,
+              "before": {
+                "observed:1": 3
+              },
+              "after": {
+                "censored": 1,
+                "observed:86": 2
+              }
+            },
+            "weak:positive": {
+              "events": 3,
+              "at_event": 0,
+              "before": {
+                "censored": 2,
+                "observed:2": 1
+              },
+              "after": {
+                "observed:10": 1,
+                "observed:111": 1,
+                "observed:88": 1
+              }
+            },
+            "weak:gate": {
+              "events": 3,
+              "at_event": 0,
+              "before": {
+                "censored": 3
+              },
+              "after": {
+                "observed:10": 1,
+                "observed:111": 1,
+                "observed:88": 1
+              }
+            }
+          },
+          "expired_and_immature": {
+            "any": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "high": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "weak": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "any:positive": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "any:gate": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "high:positive": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "high:gate": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "weak:positive": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "weak:gate": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            }
+          },
+          "source_end": {
+            "any": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "high": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "weak": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "any:positive": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "any:gate": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "high:positive": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "high:gate": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "weak:positive": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "weak:gate": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            }
+          }
+        },
+        "terminal": {
+          "expired": {
+            "hypotheses": 7,
+            "row_frames": 77,
+            "seed_only": 0,
+            "any": 25,
+            "high": 17,
+            "weak": 17,
+            "any:positive": 8,
+            "any:gate": 6,
+            "high:positive": 8,
+            "high:gate": 6,
+            "weak:positive": 0,
+            "weak:gate": 0,
+            "prediction:any:positive": 9,
+            "prediction:any:gate": 5,
+            "prediction:high:positive": 8,
+            "prediction:high:gate": 5,
+            "prediction:weak:positive": 1,
+            "prediction:weak:gate": 0
+          },
+          "immature_unmatched": {
+            "hypotheses": 3,
+            "row_frames": 3,
+            "seed_only": 3,
+            "any": 2,
+            "high": 1,
+            "weak": 1,
+            "any:positive": 0,
+            "any:gate": 0,
+            "high:positive": 0,
+            "high:gate": 0,
+            "weak:positive": 0,
+            "weak:gate": 0,
+            "prediction:any:positive": 0,
+            "prediction:any:gate": 0,
+            "prediction:high:positive": 0,
+            "prediction:high:gate": 0,
+            "prediction:weak:positive": 0,
+            "prediction:weak:gate": 0
+          },
+          "expired_and_immature": {
+            "hypotheses": 0,
+            "row_frames": 0,
+            "seed_only": 0,
+            "any": 0,
+            "high": 0,
+            "weak": 0,
+            "any:positive": 0,
+            "any:gate": 0,
+            "high:positive": 0,
+            "high:gate": 0,
+            "weak:positive": 0,
+            "weak:gate": 0,
+            "prediction:any:positive": 0,
+            "prediction:any:gate": 0,
+            "prediction:high:positive": 0,
+            "prediction:high:gate": 0,
+            "prediction:weak:positive": 0,
+            "prediction:weak:gate": 0
+          },
+          "source_end": {
+            "hypotheses": 0,
+            "row_frames": 0,
+            "seed_only": 0,
+            "any": 0,
+            "high": 0,
+            "weak": 0,
+            "any:positive": 0,
+            "any:gate": 0,
+            "high:positive": 0,
+            "high:gate": 0,
+            "weak:positive": 0,
+            "weak:gate": 0,
+            "prediction:any:positive": 0,
+            "prediction:any:gate": 0,
+            "prediction:high:positive": 0,
+            "prediction:high:gate": 0,
+            "prediction:weak:positive": 0,
+            "prediction:weak:gate": 0
+          }
+        },
+        "terminal_gap_histograms": {
+          "expired": {
+            "11": 7
+          },
+          "immature_unmatched": {
+            "1": 3
+          },
+          "expired_and_immature": {},
+          "source_end": {}
+        }
+      }
+    },
+    {
+      "name": "KITTI-0005",
+      "frames": 297,
+      "status": "completed",
+      "reference_prediction_bytes_equal": true,
+      "native_seals_equal": true,
+      "original_stage_aggregate_equal": true,
+      "repeat_aggregate_and_raw_equal": true,
+      "source_lock": {
+        "name": "KITTI-0005",
+        "video_sha256": "860e56b5dbb670d877aeb4fba5921a284b09e86619f0cbdf15e36abd6f025260",
+        "cache_sha256": [
+          "083e71126bc87368db4b294b1f8c602ddbf5be24497a1da525b9d5a547be6520"
+        ],
+        "frames": 297,
+        "fps": 10,
+        "resolution": [
+          1242,
+          375
+        ],
+        "cache_shards": 1,
+        "cached_detections": 46,
+        "capped_frames": 0
+      },
+      "original_lifecycle_sha256": "3c8926c42199f6e1353284c3d334c65a9b3cd38d5dba8262a39e0569b28171da",
+      "original_prediction_sha256": "341a4f52e8b356a3f1aa69b950e534618495e5e4dce95eb4eaff662c5223642e",
+      "raw_audit_sha256": "a3b9b2eefa892a7d2047b39d127633d7c0b7a84572363a3cd128939081b3a3cb",
+      "summary": {
+        "counts": {
+          "frames": 297,
+          "inputs": 46,
+          "input_nonfinite": 0,
+          "input_nonfinite_confidence": 0,
+          "input_nonpositive": 0,
+          "births": 0,
+          "accepted_high": 0,
+          "accepted_weak": 0,
+          "accepted_nonpositive_input": 0,
+          "accepted_from_nonpositive_prediction": 0,
+          "accepted_nonpositive_posterior": 0,
+          "accepted_repaired_prediction": 0,
+          "accepted_created_nonpositive": 0,
+          "predicted_rows": 0,
+          "nonpositive_predicted_rows": 0,
+          "posterior_rows": 0,
+          "nonpositive_posterior_rows": 0,
+          "prediction_positive_to_nonpositive": 0,
+          "prediction_nonpositive_to_positive": 0,
+          "hypotheses_ever_nonpositive": 0,
+          "hypotheses_width_nonpositive": 0,
+          "hypotheses_height_nonpositive": 0,
+          "first_birth": 0,
+          "first_prediction": 0,
+          "first_accepted_high": 0,
+          "first_accepted_weak": 0,
+          "first_prediction_with_prior_update": 0,
+          "first_prediction_seed_only": 0,
+          "nonpositive_removed": 0,
+          "removed_expired": 0,
+          "removed_immature_unmatched": 0,
+          "removed_expired_and_immature": 0,
+          "source_end_censored": 0,
+          "continuity_checks": 0
+        },
+        "first_phase": {
+          "birth": 0,
+          "prediction": 0,
+          "accepted_high": 0,
+          "accepted_weak": 0
+        },
+        "first_dimensions": {
+          "width": 0,
+          "height": 0,
+          "both": 0
+        },
+        "first_role": {
+          "confirmed": 0,
+          "tentative": 0
+        },
+        "first_prior_stage": {
+          "high": 0,
+          "weak": 0,
+          "seed_only": 0
+        },
+        "first_prior_gap_histogram": {},
+        "first_prior_input_health": {
+          "accepted_positive": 0,
+          "accepted_nonpositive": 0,
+          "seed_positive": 0,
+          "seed_nonpositive": 0
+        },
+        "first_prior_posterior_health": {
+          "accepted_positive": 0,
+          "accepted_nonpositive": 0,
+          "seed_positive": 0,
+          "seed_nonpositive": 0
+        },
+        "dimension_first_phase": {
+          "width:birth": 0,
+          "width:prediction": 0,
+          "width:accepted_high": 0,
+          "width:accepted_weak": 0,
+          "height:birth": 0,
+          "height:prediction": 0,
+          "height:accepted_high": 0,
+          "height:accepted_weak": 0
+        },
+        "accepted_interupdate_gap_histogram": {},
+        "birth_to_first_update_gap_histogram": {},
+        "global_empty_runs": {
+          "any": {
+            "interior:1": 7,
+            "interior:10": 2,
+            "interior:14": 1,
+            "interior:2": 3,
+            "interior:3": 1,
+            "interior:38": 1,
+            "interior:4": 2,
+            "interior:48": 1,
+            "interior:6": 1,
+            "interior:68": 1,
+            "interior:8": 1,
+            "interior:9": 1,
+            "left:boundary_length_local": 1,
+            "right:boundary_length_local": 1
+          },
+          "high": {
+            "both:boundary_length_local": 1
+          },
+          "weak": {
+            "interior:1": 7,
+            "interior:10": 2,
+            "interior:14": 1,
+            "interior:2": 3,
+            "interior:3": 1,
+            "interior:38": 1,
+            "interior:4": 2,
+            "interior:48": 1,
+            "interior:6": 1,
+            "interior:68": 1,
+            "interior:8": 1,
+            "interior:9": 1,
+            "left:boundary_length_local": 1,
+            "right:boundary_length_local": 1
+          }
+        },
+        "contexts": {
+          "birth": {
+            "any": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "high": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "weak": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "any:positive": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "any:gate": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "high:positive": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "high:gate": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "weak:positive": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "weak:gate": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            }
+          },
+          "expired": {
+            "any": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "high": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "weak": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "any:positive": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "any:gate": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "high:positive": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "high:gate": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "weak:positive": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "weak:gate": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            }
+          },
+          "immature_unmatched": {
+            "any": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "high": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "weak": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "any:positive": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "any:gate": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "high:positive": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "high:gate": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "weak:positive": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "weak:gate": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            }
+          },
+          "expired_and_immature": {
+            "any": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "high": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "weak": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "any:positive": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "any:gate": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "high:positive": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "high:gate": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "weak:positive": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "weak:gate": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            }
+          },
+          "source_end": {
+            "any": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "high": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "weak": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "any:positive": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "any:gate": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "high:positive": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "high:gate": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "weak:positive": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            },
+            "weak:gate": {
+              "events": 0,
+              "at_event": 0,
+              "before": {},
+              "after": {}
+            }
+          }
+        },
+        "terminal": {
+          "expired": {
+            "hypotheses": 0,
+            "row_frames": 0,
+            "seed_only": 0,
+            "any": 0,
+            "high": 0,
+            "weak": 0,
+            "any:positive": 0,
+            "any:gate": 0,
+            "high:positive": 0,
+            "high:gate": 0,
+            "weak:positive": 0,
+            "weak:gate": 0,
+            "prediction:any:positive": 0,
+            "prediction:any:gate": 0,
+            "prediction:high:positive": 0,
+            "prediction:high:gate": 0,
+            "prediction:weak:positive": 0,
+            "prediction:weak:gate": 0
+          },
+          "immature_unmatched": {
+            "hypotheses": 0,
+            "row_frames": 0,
+            "seed_only": 0,
+            "any": 0,
+            "high": 0,
+            "weak": 0,
+            "any:positive": 0,
+            "any:gate": 0,
+            "high:positive": 0,
+            "high:gate": 0,
+            "weak:positive": 0,
+            "weak:gate": 0,
+            "prediction:any:positive": 0,
+            "prediction:any:gate": 0,
+            "prediction:high:positive": 0,
+            "prediction:high:gate": 0,
+            "prediction:weak:positive": 0,
+            "prediction:weak:gate": 0
+          },
+          "expired_and_immature": {
+            "hypotheses": 0,
+            "row_frames": 0,
+            "seed_only": 0,
+            "any": 0,
+            "high": 0,
+            "weak": 0,
+            "any:positive": 0,
+            "any:gate": 0,
+            "high:positive": 0,
+            "high:gate": 0,
+            "weak:positive": 0,
+            "weak:gate": 0,
+            "prediction:any:positive": 0,
+            "prediction:any:gate": 0,
+            "prediction:high:positive": 0,
+            "prediction:high:gate": 0,
+            "prediction:weak:positive": 0,
+            "prediction:weak:gate": 0
+          },
+          "source_end": {
+            "hypotheses": 0,
+            "row_frames": 0,
+            "seed_only": 0,
+            "any": 0,
+            "high": 0,
+            "weak": 0,
+            "any:positive": 0,
+            "any:gate": 0,
+            "high:positive": 0,
+            "high:gate": 0,
+            "weak:positive": 0,
+            "weak:gate": 0,
+            "prediction:any:positive": 0,
+            "prediction:any:gate": 0,
+            "prediction:high:positive": 0,
+            "prediction:high:gate": 0,
+            "prediction:weak:positive": 0,
+            "prediction:weak:gate": 0
+          }
+        },
+        "terminal_gap_histograms": {
+          "expired": {},
+          "immature_unmatched": {},
+          "expired_and_immature": {},
+          "source_end": {}
+        }
+      }
+    }
+  ],
+  "publication_projection": "Censored-neighbour and boundary-run distances remain local; all censor counts, interior empty-run lengths, observed neighbour distances and all other original aggregate values retained. No source/event selection or scientific reanalysis."
+}

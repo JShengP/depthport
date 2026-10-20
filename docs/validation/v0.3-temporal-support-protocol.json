@@ -1,0 +1,85 @@
+{
+  "format": "depthport.temporal-support-protocol.v1",
+  "frozen_at_utc": "2026-10-19T13:44:41.838423+00:00",
+  "base_commit": "583527acf03cb469cbe76a462f09f6b5b36558f9",
+  "status": "Local freeze after synthetic contracts, before temporal extraction; prior structure outcomes already known. Not external preregistration or new independent confirmation.",
+  "source_protocol": {
+    "path": "docs/validation/v0.3-exposure-selection-protocol.json",
+    "sha256": "279e5d8d81fceb2409a0259a84d78ceee1a48ca4d04d81e2e1be91364ad4f36c"
+  },
+  "structure_record": {
+    "path": "docs/validation/v0.3-competition-structure.json",
+    "sha256": "a23d998c83f8ac6fce79f4511265e3e992f13f138a2a4f408b7c2929679090a2"
+  },
+  "phase_records": [
+    {
+      "path": "docs/validation/v0.3-exposure-discovery.json",
+      "sha256": "fe8b549aab7da1ab9a4434c6475418bebde75bedb4528e36159bb18163563ac5"
+    },
+    {
+      "path": "docs/validation/v0.3-exposure-confirmation.json",
+      "sha256": "7c4c37d53716c478f6a687e06d37bd35cd0d99c0c42da2163dfd1434478a34ad"
+    }
+  ],
+  "runtime": {
+    "numpy": "2.2.6",
+    "scipy": "1.18.1"
+  },
+  "implementation_sha256": {
+    "depthport/tracking_exposure.py": "49026e2ef32cf767bf47845c1daba4e89f438291025d799108137a0019228bc0",
+    "tools/select_tracking_exposure.py": "19434d2a858bff378905cfed7b5cb0da34bc6a3ca12c2a5af37117c6d94d6da9",
+    "tools/cache_video_detection_shards.py": "01a19bcbf11411713ebf6ebb47dffaccce43878d421bb08301ecef608509f4af",
+    "tests/test_tracking_exposure.py": "0b89a7e45a18b8e773731dc0cb29aa6432e1d52fd3da90e61d917fc7e3894f9a",
+    "depthport/tracking_exclusive_control.py": "3f49c1754d1cfbf50c1aa27af05a0c2a2bb01418066d0373cde117c640cb6d10",
+    "depthport/tracking_recovery_control.py": "123ed43132d33326a0ec0ca1c7deaa23d20f1fa07f35b2df3ee4735efbe4a7b6",
+    "depthport/video_tracking_benchmark.py": "42fd7739080b4523f64c8425979e0125b8bfbfee7abfc5f22ed5e41668bbca0c",
+    "depthport/tracking_association_probe.py": "585f2d87b3246644a6df0d96b62fd88998b12dd9bdc86233107e521f4061926e",
+    "tools/diagnose_tracking_competition.py": "eb18aee6c7e7da0a8a1792a23861b08364e126b3690d7633afa6f4ea15cb24a8",
+    "tools/diagnose_tracking_temporal_support.py": "61cab3900143fdff129a54d22d5b1ab02d2ccd5a178e5fd8df98adb9d98fbdcc",
+    "tests/test_tracking_temporal_support.py": "8fae24da1e2aab3942c70b898dcb222811f6bf49ad09ea8439dcf3e86a4ea317"
+  },
+  "cohort": "All 197 reference alternatives, 178 selected edges / 177 frames / 16 sources. Preserve original discovery and reserved-confirmation labels, zeros and complete source order. No GT or new source/clip selection.",
+  "risk_groups": {
+    "occupancy": [
+      "occupied",
+      "available"
+    ],
+    "effects": [
+      "same_updated_rows",
+      "row_replacement",
+      "fewer_updates",
+      "other"
+    ],
+    "definition": "Occupancy of competitor in accepted weak matching crossed with forced-alternative accepted update-set effect: same rows; equal count with row replacement; fewer updates; all remaining other. No dropped/merged groups; hypothetical replacement, not veto effects."
+  },
+  "history": "Append-only accepted association keys (frame, immutable full-cache detection index), across high/weak stages. Probe token owns one ledger; verify nonempty anchor prefixes, consecutive-update counters and age. Pinned ByteTrack cumulative successful-update counter is unavailable (null), not fabricated. No native-ID, nearest-box or cross-arm joins. Birth indices not recorded: do not invent them or claim complete birth histories. Unanchored pairs retain explicit unknown status.",
+  "support": "At each next frame use the same selected hypothesis recorded accepted observation and the competitor in that same stage. Compare stored score against that stage original gate. Missing update, absent hypothesis, earlier-stage accepted competitor, sequence end and unanchored history are separate states, not negative geometry. No comparison to the same numeric detection index in a different frame.",
+  "signed_gap_support": "Secondary: admissible same-stage support and selected_score-competitor_score <= 0.05; original one-sided margin, not new tolerance. Active confirmed competitor role is reported separately; future selected hypothesis need not remain missed.",
+  "primary_lag_frames": 1,
+  "report_lags_frames": [
+    1,
+    2,
+    5,
+    10,
+    30
+  ],
+  "followup_horizon_frames": 30,
+  "horizon_rationale": "All consecutive frames through existing buffer=30, not 30 seconds or a tuned decision window. Primary adjacent-frame result; fixed secondary lags only descriptive.",
+  "previous_support": "Relation on last recorded selected-hypothesis accepted observation strictly before anchor, with elapsed gap; do not skip forward to next update or substitute another hypothesis.",
+  "persistence": "Length of consecutive observed same-stage gate-support prefix starting at anchor+1; stop on first non-support OR not-comparable state, distinguish stop reason. End/horizon censored. Also report secondary signed-gap prefix and later resumption. No continuity claim across unknowns.",
+  "denominator": "Every original alternative at every lag, including not-comparable/censored. Group/source counts not independent people/events; no post-hoc cutoff, risk ranking, quality score or online use of future observations.",
+  "decision": "Temporal support can motivate a separately frozen causal/past-only intervention; it cannot establish correct physical identity or select an online veto without GT harm criteria and genuinely new confirmation. Keep weak continuation and all controls/defaults unchanged.",
+  "support_states": [
+    "shared_stage_gate",
+    "shared_stage_below_gate",
+    "competitor_other_stage_update",
+    "competitor_absent",
+    "selected_no_update",
+    "selected_absent",
+    "unanchored_history",
+    "sequence_end",
+    "no_recorded_selected_update"
+  ],
+  "gt_read": false,
+  "retuned": false
+}

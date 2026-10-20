@@ -1,0 +1,72 @@
+--- a/tools/validate_tracking_past_support.py
++++ b/tools/validate_tracking_past_support.py
+@@ -86 +86 @@
+-    path.write_text('\n'.join(lines)+'\n')
++    path.write_text('\n'.join(lines)+('\n' if lines else ''))
+@@ -108,0 +109,3 @@
++            if len(frame['stages']) < 2:
++                require(not frame['past_support_audit'] and not frame['deferred'], 'Audit requires an association stage')
++                continue
+@@ -255,0 +259,8 @@
++    (work/'predictions-seal.local.json').write_text(json.dumps({'canonical': hashes, 'traces': trace_hashes}, indent=2)+'\n')
++    score_predictions(protocol, digest, manifest, lock, input_lock_path, evaluator, work, output, first, caches, hashes, trace_hashes)
++
++
++def score_predictions(protocol, digest, manifest, lock, input_lock_path, evaluator, work, output, first, caches, hashes, trace_hashes):
++    import numpy as np
++    runtime = {n: importlib.metadata.version(n) for n in protocol['runtime']}
++    archive = local(Path(manifest['labels_archive']))
+@@ -257 +268 @@
+-    (work/'predictions-seal.local.json').write_text(json.dumps({'canonical': hashes, 'traces': trace_hashes}, indent=2)+'\n')
++
+@@ -262 +273 @@
+-    gt_folder = work/'evaluation-gt'; (gt_folder/'label_02').mkdir(parents=True)
++    gt_folder = work/'evaluation-gt'; (gt_folder/'label_02').mkdir(parents=True, exist_ok=True)
+@@ -311,0 +323,40 @@
++def resume_report(protocol_path, seal, manifest_path, input_lock_path, amendment_path, evaluator, work, output):
++    protocol = json.loads(protocol_path.read_text()); digest = sha256_file(protocol_path)
++    amendment = json.loads(amendment_path.read_text()); lock = json.loads(input_lock_path.read_text())
++    manifest = json.loads(local(manifest_path).read_text())
++    require(digest == amendment['protocol_sha256'] == lock['protocol_sha256'] == json.loads(local(seal).read_text())['protocol_sha256'], 'Original freeze differs')
++    require(amendment['tracking_rules_changed'] is False and amendment['tracking_rerun'] is False, 'Report-only amendment required')
++    for name, original in protocol['implementation_sha256'].items():
++        expected = original
++        if name == 'tools/validate_tracking_past_support.py':
++            require(amendment['original_runner_sha256'] == original, 'Original implementation differs')
++            expected = amendment['report_runner_sha256']
++        verify_hash(ROOT/name, expected)
++    runtime = {n: importlib.metadata.version(n) for n in protocol['runtime']}
++    require(runtime == protocol['runtime'], 'Pinned research runtime differs')
++    require(subprocess.check_output(['git', '-C', str(evaluator), 'rev-parse', 'HEAD'], text=True).strip() == TRACKEVAL_COMMIT
++            and subprocess.run(['git', '-C', str(evaluator), 'diff', '--quiet', 'HEAD']).returncode == 0, 'Clean pinned evaluator required')
++    require([s['name'] for s in manifest['sequences']] == list(SCENES) == [s['name'] for s in lock['sequences']], 'Complete source order required')
++    verify_hash(local(work/'predictions-seal.local.json'), amendment['original_prediction_seal_sha256'])
++    sealed = json.loads((work/'predictions-seal.local.json').read_text()); first = {}; caches = {}
++    verify_hash(local(Path(manifest['labels_archive'])), lock['labels_archive_sha256'])
++    for source, locked, frozen in zip(manifest['sequences'], lock['sequences'], protocol['sequences']):
++        name = source['name']; video = local(Path(source['video'])); cache_path = local(Path(source['detections']))
++        verify_hash(video, frozen['video_sha256']); verify_hash(cache_path, locked['cache_sha256'])
++        cache = read_cache(cache_path); caches[name] = cache
++        require(len(cache['frames']) == frozen['frames'] and cache['fps'] == 10 and cache['video_sha256'] == frozen['video_sha256'], 'Source coverage differs')
++        require({k: cache['detector'][k] for k in protocol['detector']} == protocol['detector'] and cache['detector']['frames_at_detection_cap'] == 0, 'Detector differs')
++        first[name] = {}
++        for arm in ARMS:
++            pred = json.loads(local(work/name/(arm+'-predictions.local.json')).read_text())
++            require(hashlib.sha256(canonical_predictions(pred).encode()).hexdigest() == sealed['canonical'][name][arm], 'Sealed prediction differs')
++            verify_hash(local(work/name/(arm+'-trace.local.jsonl')), sealed['traces'][name][arm])
++            require(len(pred['frames']) == frozen['frames'], 'Prediction coverage differs')
++            first[name][arm] = pred
++    score_predictions(protocol, digest, manifest, lock, input_lock_path, evaluator, work, output,
++                      first, caches, sealed['canonical'], sealed['traces'])
++    result = json.loads(output.read_text()); result['report_only_amendment_sha256'] = sha256_file(amendment_path)
++    result['tracking_rerun_after_gt'] = False
++    output.write_text(json.dumps(result, indent=2, allow_nan=False)+'\n')
++
++
+@@ -319,0 +371,3 @@
++    r = sub.add_parser('resume-report', help='Use sealed predictions; no tracker calls')
++    for arg in ('protocol', 'seal', 'manifest', 'input-lock', 'amendment', 'trackeval-root', 'work-dir', 'output'):
++        r.add_argument('--'+arg, type=Path, required=True)
+@@ -322,0 +377,2 @@
++    elif a.command == 'resume-report':
++        resume_report(a.protocol, a.seal, a.manifest, a.input_lock, a.amendment, a.trackeval_root.resolve(), a.work_dir.resolve(), a.output)

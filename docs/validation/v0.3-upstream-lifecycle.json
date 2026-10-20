@@ -1,0 +1,185 @@
+{
+  "format": "depthport.upstream-lifecycle.v1",
+  "protocol_sha256": "d296d92d0e595c3f53ab9ce727a8cb0e8522007c8f7cd484d74f57f097467a72",
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv-python": "4.11.0.86",
+    "trackers": "2.6.1",
+    "supervision": "0.27.0",
+    "scipy": "1.18.1"
+  },
+  "parameters": {
+    "track_activation_threshold": 0.3,
+    "high_conf_det_threshold": 0.6,
+    "lost_track_buffer": 30,
+    "minimum_consecutive_frames": 2
+  },
+  "gt_read": false,
+  "accuracy_scoring": false,
+  "retuned": false,
+  "inference": false,
+  "all_scheduled_completed": true,
+  "ledger": [
+    {
+      "name": "KITTI-0004",
+      "frames": 314,
+      "fps": 10,
+      "status": "completed",
+      "source_lock": {
+        "name": "KITTI-0004",
+        "video_sha256": "673ed7ef252c1e9e1c8bcf55c140404f628015f040a51647cde8afa44f0c1702",
+        "cache_sha256": [
+          "a58da9bd2a8b7eaffce017e156890145a5a119113f36ede49e165857ea09589b"
+        ],
+        "frames": 314,
+        "fps": 10,
+        "resolution": [
+          1242,
+          375
+        ],
+        "cache_shards": 1,
+        "cached_detections": 191,
+        "capped_frames": 0
+      },
+      "canonical_reference_equal": true,
+      "native_output_equal": true,
+      "final_state_equal": true,
+      "observed_repeat_equal": true,
+      "original_trace_sha256": "24cf9901a15fbc4e16db69f640e596bd42decd5e184d251dab49ee40b10877b7",
+      "prediction_sha256": "d8994eab2788da8a4b1c0634eb6a70348cbec77b34bb5db380527a004b9758a9",
+      "native_output_sha256": "4be08fe5362c40f278f991219fad4c05a3aa77402172a6e4a1cad9e6ad528764",
+      "final_state_sha256": "15a16e8f4d8595d03202b6925cb6a99e18e5afbf493af0b04e7975304434c556",
+      "lifecycle_sha256": "f90a696cea261e41af4bb71e17ef865bfcfeb5b3249ea6f385fbc7784d3e799e",
+      "summary": {
+        "counts": {
+          "frames": 314,
+          "inputs": 191,
+          "high_inputs": 27,
+          "weak_inputs": 164,
+          "weak_input_frames": 68,
+          "birth_candidates": 10,
+          "births": 10,
+          "births_rejected_activation": 0,
+          "confirmed_promotions": 7,
+          "high_updates": 17,
+          "weak_updates": 5,
+          "weak_confirmed_updates": 3,
+          "missed_rows": 70,
+          "missed_rows_with_weak_input": 13,
+          "missed_rows_without_weak_input": 57,
+          "missed_weak_rows_gate_supported": 0,
+          "missed_weak_rows_zero_overlap": 13,
+          "missed_weak_rows_positive_below_gate": 0,
+          "missed_weak_rows_invalid_prediction": 6,
+          "missed_weak_rows_without_last_accepted_update": 0,
+          "missed_weak_rows_prediction_better": 0,
+          "missed_weak_rows_prediction_equal": 13,
+          "missed_weak_rows_prediction_worse": 0,
+          "missed_weak_rows_last_update_gate_supported": 0,
+          "missed_weak_rows_best_horizontal_disjoint": 12,
+          "missed_weak_rows_best_vertical_disjoint": 6,
+          "weak_frames_with_remaining_rows": 13,
+          "weak_frames_all_rows_consumed_high": 1,
+          "weak_frames_no_hypothesis_never_born": 6,
+          "weak_frames_no_hypothesis_after_removal": 48,
+          "removed_expired": 7,
+          "removed_immature_unmatched": 3,
+          "removed_expired_and_immature": 0,
+          "expired_confirmed": 7,
+          "expired_unconfirmed": 0,
+          "removed_with_weak_input": 4,
+          "retained_at_source_end": 0,
+          "confirmed_at_source_end": 0,
+          "stage_geometry_checks": 190,
+          "old_stage_checks": 190,
+          "no_association_frames": 219
+        },
+        "removal_age_histogram": {
+          "expired:11": 7,
+          "immature_unmatched:1": 3
+        },
+        "expiry_last_update_gap_histogram": {
+          "11": 7
+        }
+      }
+    },
+    {
+      "name": "KITTI-0005",
+      "frames": 297,
+      "fps": 10,
+      "status": "completed",
+      "source_lock": {
+        "name": "KITTI-0005",
+        "video_sha256": "860e56b5dbb670d877aeb4fba5921a284b09e86619f0cbdf15e36abd6f025260",
+        "cache_sha256": [
+          "083e71126bc87368db4b294b1f8c602ddbf5be24497a1da525b9d5a547be6520"
+        ],
+        "frames": 297,
+        "fps": 10,
+        "resolution": [
+          1242,
+          375
+        ],
+        "cache_shards": 1,
+        "cached_detections": 46,
+        "capped_frames": 0
+      },
+      "canonical_reference_equal": true,
+      "native_output_equal": true,
+      "final_state_equal": true,
+      "observed_repeat_equal": true,
+      "original_trace_sha256": "bc2909cbc5a263d095cf474e4263ac7252e3b39622caa01dc3f3ba960121109b",
+      "prediction_sha256": "341a4f52e8b356a3f1aa69b950e534618495e5e4dce95eb4eaff662c5223642e",
+      "native_output_sha256": "886340c209d788bf8d9abefe4ebd56d6390ff389b50e48a73b076bc3d55c3b87",
+      "final_state_sha256": "4a45361ac779b794f8347421a25169432a13b24713477d78bdb4de31577d7675",
+      "lifecycle_sha256": "3c8926c42199f6e1353284c3d334c65a9b3cd38d5dba8262a39e0569b28171da",
+      "summary": {
+        "counts": {
+          "frames": 297,
+          "inputs": 46,
+          "high_inputs": 0,
+          "weak_inputs": 46,
+          "weak_input_frames": 39,
+          "birth_candidates": 0,
+          "births": 0,
+          "births_rejected_activation": 0,
+          "confirmed_promotions": 0,
+          "high_updates": 0,
+          "weak_updates": 0,
+          "weak_confirmed_updates": 0,
+          "missed_rows": 0,
+          "missed_rows_with_weak_input": 0,
+          "missed_rows_without_weak_input": 0,
+          "missed_weak_rows_gate_supported": 0,
+          "missed_weak_rows_zero_overlap": 0,
+          "missed_weak_rows_positive_below_gate": 0,
+          "missed_weak_rows_invalid_prediction": 0,
+          "missed_weak_rows_without_last_accepted_update": 0,
+          "missed_weak_rows_prediction_better": 0,
+          "missed_weak_rows_prediction_equal": 0,
+          "missed_weak_rows_prediction_worse": 0,
+          "missed_weak_rows_last_update_gate_supported": 0,
+          "missed_weak_rows_best_horizontal_disjoint": 0,
+          "missed_weak_rows_best_vertical_disjoint": 0,
+          "weak_frames_with_remaining_rows": 0,
+          "weak_frames_all_rows_consumed_high": 0,
+          "weak_frames_no_hypothesis_never_born": 39,
+          "weak_frames_no_hypothesis_after_removal": 0,
+          "removed_expired": 0,
+          "removed_immature_unmatched": 0,
+          "removed_expired_and_immature": 0,
+          "expired_confirmed": 0,
+          "expired_unconfirmed": 0,
+          "removed_with_weak_input": 0,
+          "retained_at_source_end": 0,
+          "confirmed_at_source_end": 0,
+          "stage_geometry_checks": 78,
+          "old_stage_checks": 78,
+          "no_association_frames": 258
+        },
+        "removal_age_histogram": {},
+        "expiry_last_update_gap_histogram": {}
+      }
+    }
+  ]
+}

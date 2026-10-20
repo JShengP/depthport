@@ -1,0 +1,17 @@
+{
+  "format": "depthport.past-support-report-amendment.v1",
+  "recorded_at_utc": "2026-10-19T14:24:36.828700+00:00",
+  "protocol_sha256": "ff4a9720a0cf039e39255b49054dd68d5d3e8e092e970f4020fc1b5d6362c395",
+  "original_runner_sha256": "f82996c44e13f4e0feeccb9916caa139bf68cdeafa5a9031b42c587151d942ba",
+  "report_runner_sha256": "ef3f13b7eedcd9249dec037d9550b0f9bef2171bf700572ca0abdb77dbb97df4",
+  "original_prediction_seal_sha256": "48838dc5ce7fa98a8ab59cf256bdf54504d492bfa47de5894ebaefcd7c945eaf",
+  "patch_sha256": "ceea9db52b7e130ad77e415498a58596292006c380bfb1756cbf4bac1d2f7489",
+  "tracking_rules_changed": false,
+  "tracking_rerun": false,
+  "gt_was_opened_before_report_repair": true,
+  "failure": "IndexError in audit_counts when an empty-hypothesis frame had no weak association stage, after all 48 runs, repeat checks, unhooked checks and the complete prediction seal; first KITTI-0000 reference GT metrics had been evaluated. No complete public score aggregate existed.",
+  "repair": "Skip missing-stage frames only when audit/veto lists are empty, counting the frame; add a report-only resume that verifies original freeze, source/cache/archive/prediction/trace seals and unchanged control/test files. No new predictions, labels, gates, parameters, selection or tracker history.",
+  "reconstruction": "Reverse the published zero-context patch with git apply --reverse --unidiff-zero to recover the exact original frozen runner; original protocol is retained byte-for-byte.",
+  "updated_at_utc": "2026-10-19T14:25:31.124831+00:00",
+  "additional_reporting_failure": "The first report-only resume scored 0000\u20130002, then official KITTI parser rejected a newline-only file for empty predictions in 0003. Write exactly zero bytes for an empty prediction file; keep the empty scene and original canonical predictions. No tracker rerun or data/rule change."
+}

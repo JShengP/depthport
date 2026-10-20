@@ -1,0 +1,114 @@
+{
+  "format": "depthport.state-observation-health-protocol.v1",
+  "frozen_at_utc": "2026-10-19T16:50:30.666310+00:00",
+  "report_date_local": "2026-10-20",
+  "report_timezone": "Asia/Taipei",
+  "base_commit": "652d6334134bf1ee36eecf178cee6fa7080fc8db",
+  "status": "Local definition freeze after synthetic contracts, before new health extraction. Prior lifecycle results known (six invalid missed-row snapshots, ten births). Two already-seen sources; descriptive retrospective audit, not independent confirmation or external preregistration.",
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv-python": "4.11.0.86",
+    "trackers": "2.6.1",
+    "supervision": "0.27.0",
+    "scipy": "1.18.1"
+  },
+  "upstream_sha256": {
+    "tracker": "7ea61408b4908da327ba992f09450865bb16019ab95bed23a512e5c03bef8fda",
+    "tracklet": "66c4b84cb28b1b2abd9b288b2b0f594814e4eb11d55ac8c295386415da022885",
+    "base_tracker": "64813fbf4b6441080b005a99f2908c137435107d54eaaab6bf8625a54395e948",
+    "base_tracklet": "96e4d4a01064b15f178e190e80a88bb8bbed38476a275b7d659181532a21e8d8",
+    "alive": "345242f72dc5fb43b70953546dde8b66759377f6c63ed91d1995c320affb5f84",
+    "estimator": "fe8abe96d398685abe2055a78e51f2f9906522877c5130b1d476ee3dc8c0fff0",
+    "iou": "e7d7de78643ed864f195915c009d400e02b8d3e57159f6aaa90d707f7f1bd4f0",
+    "box_iou": "d9fac5e31c8bbfc6e7c8d16a91cd49eec11cfe0e7d4ef2c3da286997c53a6b63"
+  },
+  "implementation_sha256": {
+    "depthport/tracking_health_audit.py": "72dbba87bfc3bf6e71e42d0bf6e488f9583ffb11de7d0109c7db785ed420b231",
+    "tools/audit_tracking_health.py": "80068a7862a1de70bf6705d718e4ca34e65a98694958922278473a0f9d8b40a5",
+    "tests/test_tracking_health_audit.py": "0aad4fa4675923868c789a6646e1550d4c97c2da9ac05d44663c3e6fbd90ba39",
+    "depthport/tracking_lifecycle_probe.py": "52d787d9d22ca6438dfab2d2d6da2ca3802d9d347576fad96acd55f90561e96d",
+    "depthport/tracking_upstream_diagnostics.py": "51bd7a2e72a68bc964d41bc7bce1ed003bca14230b19810ce23ed2308a908cd0",
+    "tools/diagnose_tracking_upstream.py": "09a96959cc38cd8cd22f89b975e37b4914e3af149c8be081e75846219ef7366b",
+    "depthport/tracking_past_exposure.py": "1a43b2bedcb09ecf5c8f0f3d22a9b35d43b81ef78f20560f10559b27a0f083d8",
+    "depthport/tracking_exposure.py": "49026e2ef32cf767bf47845c1daba4e89f438291025d799108137a0019228bc0",
+    "depthport/video_tracking_benchmark.py": "42fd7739080b4523f64c8425979e0125b8bfbfee7abfc5f22ed5e41668bbca0c"
+  },
+  "source_records_sha256": {
+    "docs/validation/v0.3-upstream-lifecycle-protocol.json": "d296d92d0e595c3f53ab9ce727a8cb0e8522007c8f7cd484d74f57f097467a72",
+    "docs/validation/v0.3-upstream-lifecycle.json": "ac5296ab6edf4810d48e41f03b3fdd43697b9641f7554fcb700435ee535e3380",
+    "docs/validation/v0.3-past-exposure-protocol.json": "573b76a8019ce5bb069a6140d2070c26ca7c4071dace026dcef3ea8eba255082",
+    "docs/validation/v0.3-past-exposure-confirmation.json": "1e19153d2964e5dae07dedcf8c1ca4ed7df4d45a2f57609ab609a44a4ee984f1",
+    "docs/validation/v0.3-past-exposure-confirmation-inputs.json": "bda4cfdb16883431c38eccf6696d11d6610a26ee6cec16a2ad7fdb05b1ab21b1"
+  },
+  "sources": [
+    "KITTI-0004",
+    "KITTI-0005"
+  ],
+  "source_frames": 611,
+  "execution": "Read both original observed lifecycle files, require sealed hashes/bit equality, and audit each independently. Check all three previous full prediction JSON files against original reference bytes before canonicalization, native output/final pickle hashes without loading pickle. Reconcile every original stage/aggregate and immutable cache. No inference, tracking, GT, labels, scores/evaluator, new sources, windows, parameter/default/control/input changes or source reselection. Keep all zeros/failures.",
+  "definitions": {
+    "health": "Positive dimensions require finite xyxy, x2>x1 and y2>y1. Input boxes/confidences finite; non-positive width/height separately. Full original high>=.6 /weak<.6 partition, native IoU gate .1 unchanged. Original trace geometry is recomputed from exact cached float32 inputs by prior ledger.",
+    "first": "Every born owned hypothesis, all full source frames, not only six known rows. Preserve exact posterior->next before-predict continuity, +1 native clocks, matched ownership, and prune partition. Earliest non-positive observation phase in native chronology: birth, prediction, accepted_high, accepted_weak. One first event per hypothesis plus independent first width/height phase; repeated invalid predictions are row observations, not independent objects.",
+    "accepted_relation": "Actual high then weak accepted updates only; birth is a separate seed, never an accepted match. At a first prediction use only strictly earlier accepted history; at a first accepted-posterior violation record current accepted update separately from previous history. Keep stage, prior input/posterior validity, exact gap histogram and seed-only cases. Prediction/accepted transitions and repair/creation counts retain zero branches. No internal Kalman mean/covariance/noise data was recorded, so locate operation/sequence, not numerical root cause or identity correctness.",
+    "gaps": "Complete source any/high/weak presence streams; histogram every maximal empty run, mark left/right/both boundary censoring. At every birth and each removal (all three reasons) or source-end survivor, count event-frame availability and nearest strictly earlier/later frames over full source; observed distances separate from censored boundary distances, including censored0. No fitted time window. Global input availability never means same-object observation.",
+    "anchor": "Birth context uses its seed box; removal/end context uses last actual accepted detection box, explicitly seed-only if none. For each any/high/weak stream compute positive IoU>0 and original gate>=.1 at event/strict full-source neighbours. Fixed stale anchor geometry, no extrapolation after deletion, no ROI/threshold fit or identity claim. Future neighbours are retrospective context only, never causal support for an intervention.",
+    "terminal": "Per removed/censored hypothesis, all frames after last accepted update (or separately labelled seed) through removal/source end inclusive. Count any/high/weak inputs, fixed-anchor positive/gate support and actual alive-prediction positive/gate support separately. Exact terminal-gap and accepted-interupdate/birth-to-first-update histograms; source-end is censored. Row frames may overlap across hypotheses, never pooled as independent source frames or GT misses.",
+    "decision": "Describe whether first failures arise from birth, prediction, or accepted posterior, and distinguish absent inputs from geometric non-support. No safe repair, duration, detector threshold or identity claim from these data alone. Decide next separately frozen control/audit only after full ledger; no intervention or promotion in this study.",
+    "public": "Only fixed aggregate counts/groups/histograms, all-source source/code/output seals and equality/failure flags. Frame positions, IDs/tokens, boxes, matrices, accepted histories, contextual cases/native states and paths remain ignored local artifacts."
+  },
+  "count_keys": [
+    "frames",
+    "inputs",
+    "input_nonfinite",
+    "input_nonfinite_confidence",
+    "input_nonpositive",
+    "births",
+    "accepted_high",
+    "accepted_weak",
+    "accepted_nonpositive_input",
+    "accepted_from_nonpositive_prediction",
+    "accepted_nonpositive_posterior",
+    "accepted_repaired_prediction",
+    "accepted_created_nonpositive",
+    "predicted_rows",
+    "nonpositive_predicted_rows",
+    "posterior_rows",
+    "nonpositive_posterior_rows",
+    "prediction_positive_to_nonpositive",
+    "prediction_nonpositive_to_positive",
+    "hypotheses_ever_nonpositive",
+    "hypotheses_width_nonpositive",
+    "hypotheses_height_nonpositive",
+    "first_birth",
+    "first_prediction",
+    "first_accepted_high",
+    "first_accepted_weak",
+    "first_prediction_with_prior_update",
+    "first_prediction_seed_only",
+    "nonpositive_removed",
+    "removed_expired",
+    "removed_immature_unmatched",
+    "removed_expired_and_immature",
+    "source_end_censored",
+    "continuity_checks"
+  ],
+  "phases": [
+    "birth",
+    "prediction",
+    "accepted_high",
+    "accepted_weak"
+  ],
+  "kinds": [
+    "any",
+    "high",
+    "weak"
+  ],
+  "events": [
+    "birth",
+    "expired",
+    "immature_unmatched",
+    "expired_and_immature",
+    "source_end"
+  ],
+  "terms": "Original KITTI attribution/terms inherited from tracking-past-exposure, local noncommercial research; no media/GT/raw output redistribution or dataset relicensing."
+}

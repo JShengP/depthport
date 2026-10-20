@@ -1,0 +1,5389 @@
+{
+  "format": "depthport.temporal-support.v1",
+  "protocol_sha256": "cb70d22d5c28875d7edd00126720fbda21500350c1aeec2e438de9554fb020be",
+  "scope": "Frozen definitions before temporal extraction on already known reference cohort; no identity/quality or independent confirmation claim.",
+  "tracking_rerun": false,
+  "retuned": false,
+  "gt_read": false,
+  "raw_details_public": false,
+  "birth_observations_complete": false,
+  "reconciliation": {
+    "frames": 17984,
+    "age_checks": 120360,
+    "counter_checks": 120360,
+    "tokens_with_unindexed_birth": 640
+  },
+  "phases": [
+    {
+      "phase": "discovery",
+      "sequences": [
+        {
+          "name": "MOT17-09-DPM",
+          "frames_inspected": 525,
+          "groups": {
+            "occupied/same_updated_rows": 20,
+            "occupied/row_replacement": 0,
+            "occupied/fewer_updates": 7,
+            "occupied/other": 0,
+            "available/same_updated_rows": 0,
+            "available/row_replacement": 0,
+            "available/fewer_updates": 0,
+            "available/other": 0
+          },
+          "summary": {
+            "alternatives": 27,
+            "history_anchored": 27,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 13,
+              "shared_stage_below_gate": 2,
+              "competitor_other_stage_update": 12,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 2,
+            "previous_update_gap": {
+              "min": 2.0,
+              "q25": 2.0,
+              "median": 4.0,
+              "q75": 4.0,
+              "max": 9.0
+            },
+            "lags": {
+              "1": {
+                "denominator": 27,
+                "states": {
+                  "shared_stage_gate": 19,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 1,
+                  "competitor_absent": 0,
+                  "selected_no_update": 6,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 2,
+                "active_confirmed_gate_support": 19
+              },
+              "2": {
+                "denominator": 27,
+                "states": {
+                  "shared_stage_gate": 17,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 3,
+                  "competitor_absent": 0,
+                  "selected_no_update": 6,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 1,
+                "active_confirmed_gate_support": 14
+              },
+              "5": {
+                "denominator": 27,
+                "states": {
+                  "shared_stage_gate": 5,
+                  "shared_stage_below_gate": 7,
+                  "competitor_other_stage_update": 5,
+                  "competitor_absent": 0,
+                  "selected_no_update": 10,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 1,
+                "active_confirmed_gate_support": 3
+              },
+              "10": {
+                "denominator": 27,
+                "states": {
+                  "shared_stage_gate": 5,
+                  "shared_stage_below_gate": 10,
+                  "competitor_other_stage_update": 3,
+                  "competitor_absent": 0,
+                  "selected_no_update": 9,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 4
+              },
+              "30": {
+                "denominator": 27,
+                "states": {
+                  "shared_stage_gate": 2,
+                  "shared_stage_below_gate": 10,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 14,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 1,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 2
+              }
+            },
+            "gate_prefix_lengths": {
+              "0": 8,
+              "1": 3,
+              "2": 4,
+              "3": 7,
+              "4": 3,
+              "5": 1,
+              "9": 1
+            },
+            "gate_prefix_stops": {
+              "competitor_other_stage_update": 7,
+              "selected_no_update": 14,
+              "shared_stage_below_gate": 6
+            },
+            "signed_gap_prefix_lengths": {
+              "0": 25,
+              "1": 2
+            },
+            "signed_gap_prefix_stops": {
+              "competitor_other_stage_update": 1,
+              "gap_not_supported": 19,
+              "selected_no_update": 6,
+              "shared_stage_below_gate": 1
+            },
+            "gate_support_resumes_after_first_stop": 12
+          }
+        },
+        {
+          "name": "MOT17-10-DPM",
+          "frames_inspected": 654,
+          "groups": {
+            "occupied/same_updated_rows": 14,
+            "occupied/row_replacement": 0,
+            "occupied/fewer_updates": 1,
+            "occupied/other": 0,
+            "available/same_updated_rows": 0,
+            "available/row_replacement": 1,
+            "available/fewer_updates": 0,
+            "available/other": 0
+          },
+          "summary": {
+            "alternatives": 16,
+            "history_anchored": 16,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 11,
+              "shared_stage_below_gate": 2,
+              "competitor_other_stage_update": 3,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 5,
+            "previous_update_gap": {
+              "min": 2.0,
+              "q25": 2.0,
+              "median": 2.0,
+              "q75": 3.25,
+              "max": 13.0
+            },
+            "lags": {
+              "1": {
+                "denominator": 16,
+                "states": {
+                  "shared_stage_gate": 11,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 5,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 1,
+                "active_confirmed_gate_support": 10
+              },
+              "2": {
+                "denominator": 16,
+                "states": {
+                  "shared_stage_gate": 9,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 1,
+                  "competitor_absent": 0,
+                  "selected_no_update": 6,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 3,
+                "active_confirmed_gate_support": 8
+              },
+              "5": {
+                "denominator": 16,
+                "states": {
+                  "shared_stage_gate": 7,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 8,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 2,
+                "active_confirmed_gate_support": 5
+              },
+              "10": {
+                "denominator": 16,
+                "states": {
+                  "shared_stage_gate": 4,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 12,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 2,
+                "active_confirmed_gate_support": 2
+              },
+              "30": {
+                "denominator": 16,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 16,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              }
+            },
+            "gate_prefix_lengths": {
+              "0": 5,
+              "1": 3,
+              "2": 2,
+              "3": 2,
+              "4": 2,
+              "7": 1,
+              "9": 1
+            },
+            "gate_prefix_stops": {
+              "selected_no_update": 15,
+              "shared_stage_below_gate": 1
+            },
+            "signed_gap_prefix_lengths": {
+              "0": 15,
+              "1": 1
+            },
+            "signed_gap_prefix_stops": {
+              "gap_not_supported": 10,
+              "selected_no_update": 6
+            },
+            "gate_support_resumes_after_first_stop": 9
+          }
+        },
+        {
+          "name": "MOT17-11-DPM",
+          "frames_inspected": 900,
+          "groups": {
+            "occupied/same_updated_rows": 1,
+            "occupied/row_replacement": 0,
+            "occupied/fewer_updates": 3,
+            "occupied/other": 0,
+            "available/same_updated_rows": 0,
+            "available/row_replacement": 0,
+            "available/fewer_updates": 0,
+            "available/other": 0
+          },
+          "summary": {
+            "alternatives": 4,
+            "history_anchored": 4,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 1,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 3,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 1,
+            "previous_update_gap": {
+              "min": 3.0,
+              "q25": 3.0,
+              "median": 8.5,
+              "q75": 14.25,
+              "max": 15.0
+            },
+            "lags": {
+              "1": {
+                "denominator": 4,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 4,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "2": {
+                "denominator": 4,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 4,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "5": {
+                "denominator": 4,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 4,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "10": {
+                "denominator": 4,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 4,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "30": {
+                "denominator": 4,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 4,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              }
+            },
+            "gate_prefix_lengths": {
+              "0": 4
+            },
+            "gate_prefix_stops": {
+              "selected_no_update": 4
+            },
+            "signed_gap_prefix_lengths": {
+              "0": 4
+            },
+            "signed_gap_prefix_stops": {
+              "selected_no_update": 4
+            },
+            "gate_support_resumes_after_first_stop": 1
+          }
+        },
+        {
+          "name": "MOT17-13-DPM",
+          "frames_inspected": 750,
+          "groups": {
+            "occupied/same_updated_rows": 3,
+            "occupied/row_replacement": 0,
+            "occupied/fewer_updates": 1,
+            "occupied/other": 0,
+            "available/same_updated_rows": 0,
+            "available/row_replacement": 0,
+            "available/fewer_updates": 0,
+            "available/other": 0
+          },
+          "summary": {
+            "alternatives": 4,
+            "history_anchored": 4,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 3,
+              "shared_stage_below_gate": 1,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 1,
+            "previous_update_gap": {
+              "min": 2.0,
+              "q25": 2.75,
+              "median": 3.5,
+              "q75": 4.75,
+              "max": 7.0
+            },
+            "lags": {
+              "1": {
+                "denominator": 4,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 1,
+                  "competitor_absent": 0,
+                  "selected_no_update": 3,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "2": {
+                "denominator": 4,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 1,
+                  "competitor_absent": 0,
+                  "selected_no_update": 3,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "5": {
+                "denominator": 4,
+                "states": {
+                  "shared_stage_gate": 1,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 3,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 1,
+                "active_confirmed_gate_support": 1
+              },
+              "10": {
+                "denominator": 4,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 1,
+                  "competitor_absent": 0,
+                  "selected_no_update": 3,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "30": {
+                "denominator": 4,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 3,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              }
+            },
+            "gate_prefix_lengths": {
+              "0": 4
+            },
+            "gate_prefix_stops": {
+              "competitor_other_stage_update": 1,
+              "selected_no_update": 3
+            },
+            "signed_gap_prefix_lengths": {
+              "0": 4
+            },
+            "signed_gap_prefix_stops": {
+              "competitor_other_stage_update": 1,
+              "selected_no_update": 3
+            },
+            "gate_support_resumes_after_first_stop": 1
+          }
+        },
+        {
+          "name": "MOT17-04-DPM",
+          "frames_inspected": 1050,
+          "groups": {
+            "occupied/same_updated_rows": 1,
+            "occupied/row_replacement": 0,
+            "occupied/fewer_updates": 0,
+            "occupied/other": 0,
+            "available/same_updated_rows": 0,
+            "available/row_replacement": 0,
+            "available/fewer_updates": 0,
+            "available/other": 0
+          },
+          "summary": {
+            "alternatives": 1,
+            "history_anchored": 1,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 1,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 0,
+            "previous_update_gap": {
+              "min": 19.0,
+              "q25": 19.0,
+              "median": 19.0,
+              "q75": 19.0,
+              "max": 19.0
+            },
+            "lags": {
+              "1": {
+                "denominator": 1,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 1,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "2": {
+                "denominator": 1,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "5": {
+                "denominator": 1,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "10": {
+                "denominator": 1,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "30": {
+                "denominator": 1,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              }
+            },
+            "gate_prefix_lengths": {
+              "0": 1
+            },
+            "gate_prefix_stops": {
+              "selected_no_update": 1
+            },
+            "signed_gap_prefix_lengths": {
+              "0": 1
+            },
+            "signed_gap_prefix_stops": {
+              "selected_no_update": 1
+            },
+            "gate_support_resumes_after_first_stop": 0
+          }
+        },
+        {
+          "name": "MOT20-01",
+          "frames_inspected": 429,
+          "groups": {
+            "occupied/same_updated_rows": 4,
+            "occupied/row_replacement": 0,
+            "occupied/fewer_updates": 1,
+            "occupied/other": 0,
+            "available/same_updated_rows": 0,
+            "available/row_replacement": 0,
+            "available/fewer_updates": 0,
+            "available/other": 0
+          },
+          "summary": {
+            "alternatives": 5,
+            "history_anchored": 5,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 3,
+              "shared_stage_below_gate": 2,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 0,
+            "previous_update_gap": {
+              "min": 2.0,
+              "q25": 2.0,
+              "median": 2.0,
+              "q75": 4.0,
+              "max": 6.0
+            },
+            "lags": {
+              "1": {
+                "denominator": 5,
+                "states": {
+                  "shared_stage_gate": 4,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 1,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 1,
+                "active_confirmed_gate_support": 4
+              },
+              "2": {
+                "denominator": 5,
+                "states": {
+                  "shared_stage_gate": 3,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 1,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 1,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 2,
+                "active_confirmed_gate_support": 2
+              },
+              "5": {
+                "denominator": 5,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 3,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 1,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 1,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "10": {
+                "denominator": 5,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 3,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 1,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 1,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "30": {
+                "denominator": 5,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 1,
+                  "unanchored_history": 0,
+                  "sequence_end": 3,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              }
+            },
+            "gate_prefix_lengths": {
+              "0": 1,
+              "1": 1,
+              "2": 2,
+              "4": 1
+            },
+            "gate_prefix_stops": {
+              "selected_no_update": 2,
+              "sequence_end": 1,
+              "shared_stage_below_gate": 2
+            },
+            "signed_gap_prefix_lengths": {
+              "0": 4,
+              "1": 1
+            },
+            "signed_gap_prefix_stops": {
+              "gap_not_supported": 3,
+              "selected_no_update": 1,
+              "sequence_end": 1
+            },
+            "gate_support_resumes_after_first_stop": 0
+          }
+        },
+        {
+          "name": "MOT20-02",
+          "frames_inspected": 2782,
+          "groups": {
+            "occupied/same_updated_rows": 44,
+            "occupied/row_replacement": 1,
+            "occupied/fewer_updates": 12,
+            "occupied/other": 0,
+            "available/same_updated_rows": 0,
+            "available/row_replacement": 2,
+            "available/fewer_updates": 0,
+            "available/other": 0
+          },
+          "summary": {
+            "alternatives": 59,
+            "history_anchored": 59,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 39,
+              "shared_stage_below_gate": 12,
+              "competitor_other_stage_update": 8,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 9,
+            "previous_update_gap": {
+              "min": 2.0,
+              "q25": 3.0,
+              "median": 6.0,
+              "q75": 8.0,
+              "max": 26.0
+            },
+            "lags": {
+              "1": {
+                "denominator": 59,
+                "states": {
+                  "shared_stage_gate": 36,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 1,
+                  "competitor_absent": 0,
+                  "selected_no_update": 21,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 5,
+                "active_confirmed_gate_support": 34
+              },
+              "2": {
+                "denominator": 59,
+                "states": {
+                  "shared_stage_gate": 34,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 3,
+                  "competitor_absent": 0,
+                  "selected_no_update": 21,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 8,
+                "active_confirmed_gate_support": 23
+              },
+              "5": {
+                "denominator": 59,
+                "states": {
+                  "shared_stage_gate": 23,
+                  "shared_stage_below_gate": 9,
+                  "competitor_other_stage_update": 4,
+                  "competitor_absent": 0,
+                  "selected_no_update": 23,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 3,
+                "active_confirmed_gate_support": 17
+              },
+              "10": {
+                "denominator": 59,
+                "states": {
+                  "shared_stage_gate": 11,
+                  "shared_stage_below_gate": 18,
+                  "competitor_other_stage_update": 4,
+                  "competitor_absent": 0,
+                  "selected_no_update": 26,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 2,
+                "active_confirmed_gate_support": 5
+              },
+              "30": {
+                "denominator": 59,
+                "states": {
+                  "shared_stage_gate": 8,
+                  "shared_stage_below_gate": 18,
+                  "competitor_other_stage_update": 4,
+                  "competitor_absent": 0,
+                  "selected_no_update": 22,
+                  "selected_absent": 6,
+                  "unanchored_history": 0,
+                  "sequence_end": 1,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 4
+              }
+            },
+            "gate_prefix_lengths": {
+              "0": 23,
+              "1": 10,
+              "2": 6,
+              "3": 2,
+              "4": 4,
+              "5": 1,
+              "6": 3,
+              "7": 3,
+              "9": 3,
+              "10": 1,
+              "24": 1,
+              "30": 2
+            },
+            "gate_prefix_stops": {
+              "competitor_other_stage_update": 4,
+              "horizon_end": 2,
+              "selected_no_update": 42,
+              "shared_stage_below_gate": 11
+            },
+            "signed_gap_prefix_lengths": {
+              "0": 54,
+              "1": 4,
+              "2": 1
+            },
+            "signed_gap_prefix_stops": {
+              "competitor_other_stage_update": 1,
+              "gap_not_supported": 33,
+              "selected_no_update": 24,
+              "shared_stage_below_gate": 1
+            },
+            "gate_support_resumes_after_first_stop": 36
+          }
+        },
+        {
+          "name": "MOT20-06",
+          "frames_inspected": 1008,
+          "groups": {
+            "occupied/same_updated_rows": 9,
+            "occupied/row_replacement": 0,
+            "occupied/fewer_updates": 5,
+            "occupied/other": 0,
+            "available/same_updated_rows": 0,
+            "available/row_replacement": 2,
+            "available/fewer_updates": 0,
+            "available/other": 0
+          },
+          "summary": {
+            "alternatives": 16,
+            "history_anchored": 16,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 8,
+              "shared_stage_below_gate": 5,
+              "competitor_other_stage_update": 3,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 5,
+            "previous_update_gap": {
+              "min": 2.0,
+              "q25": 3.0,
+              "median": 5.0,
+              "q75": 8.0,
+              "max": 20.0
+            },
+            "lags": {
+              "1": {
+                "denominator": 16,
+                "states": {
+                  "shared_stage_gate": 7,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 8,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 3,
+                "active_confirmed_gate_support": 5
+              },
+              "2": {
+                "denominator": 16,
+                "states": {
+                  "shared_stage_gate": 5,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 1,
+                  "competitor_absent": 0,
+                  "selected_no_update": 9,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 1,
+                "active_confirmed_gate_support": 4
+              },
+              "5": {
+                "denominator": 16,
+                "states": {
+                  "shared_stage_gate": 4,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 11,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 3
+              },
+              "10": {
+                "denominator": 16,
+                "states": {
+                  "shared_stage_gate": 3,
+                  "shared_stage_below_gate": 4,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 9,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 1
+              },
+              "30": {
+                "denominator": 16,
+                "states": {
+                  "shared_stage_gate": 1,
+                  "shared_stage_below_gate": 4,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 6,
+                  "selected_absent": 4,
+                  "unanchored_history": 0,
+                  "sequence_end": 1,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 1
+              }
+            },
+            "gate_prefix_lengths": {
+              "0": 9,
+              "1": 3,
+              "2": 1,
+              "6": 1,
+              "10": 1,
+              "17": 1
+            },
+            "gate_prefix_stops": {
+              "selected_no_update": 13,
+              "shared_stage_below_gate": 3
+            },
+            "signed_gap_prefix_lengths": {
+              "0": 13,
+              "1": 3
+            },
+            "signed_gap_prefix_stops": {
+              "gap_not_supported": 5,
+              "selected_no_update": 10,
+              "shared_stage_below_gate": 1
+            },
+            "gate_support_resumes_after_first_stop": 9
+          }
+        },
+        {
+          "name": "MOT20-07",
+          "frames_inspected": 585,
+          "groups": {
+            "occupied/same_updated_rows": 1,
+            "occupied/row_replacement": 0,
+            "occupied/fewer_updates": 0,
+            "occupied/other": 0,
+            "available/same_updated_rows": 0,
+            "available/row_replacement": 0,
+            "available/fewer_updates": 0,
+            "available/other": 0
+          },
+          "summary": {
+            "alternatives": 1,
+            "history_anchored": 1,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 1,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 0,
+            "previous_update_gap": {
+              "min": 3.0,
+              "q25": 3.0,
+              "median": 3.0,
+              "q75": 3.0,
+              "max": 3.0
+            },
+            "lags": {
+              "1": {
+                "denominator": 1,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "2": {
+                "denominator": 1,
+                "states": {
+                  "shared_stage_gate": 1,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 1
+              },
+              "5": {
+                "denominator": 1,
+                "states": {
+                  "shared_stage_gate": 1,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 1
+              },
+              "10": {
+                "denominator": 1,
+                "states": {
+                  "shared_stage_gate": 1,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "30": {
+                "denominator": 1,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 1,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              }
+            },
+            "gate_prefix_lengths": {
+              "0": 1
+            },
+            "gate_prefix_stops": {
+              "shared_stage_below_gate": 1
+            },
+            "signed_gap_prefix_lengths": {
+              "0": 1
+            },
+            "signed_gap_prefix_stops": {
+              "shared_stage_below_gate": 1
+            },
+            "gate_support_resumes_after_first_stop": 1
+          }
+        },
+        {
+          "name": "MOT20-08",
+          "frames_inspected": 806,
+          "groups": {
+            "occupied/same_updated_rows": 4,
+            "occupied/row_replacement": 0,
+            "occupied/fewer_updates": 1,
+            "occupied/other": 0,
+            "available/same_updated_rows": 0,
+            "available/row_replacement": 1,
+            "available/fewer_updates": 0,
+            "available/other": 0
+          },
+          "summary": {
+            "alternatives": 6,
+            "history_anchored": 6,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 3,
+              "shared_stage_below_gate": 1,
+              "competitor_other_stage_update": 2,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 1,
+            "previous_update_gap": {
+              "min": 2.0,
+              "q25": 3.5,
+              "median": 5.0,
+              "q75": 8.75,
+              "max": 16.0
+            },
+            "lags": {
+              "1": {
+                "denominator": 6,
+                "states": {
+                  "shared_stage_gate": 5,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 1,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 1,
+                "active_confirmed_gate_support": 4
+              },
+              "2": {
+                "denominator": 6,
+                "states": {
+                  "shared_stage_gate": 2,
+                  "shared_stage_below_gate": 2,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 2,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 1,
+                "active_confirmed_gate_support": 1
+              },
+              "5": {
+                "denominator": 6,
+                "states": {
+                  "shared_stage_gate": 1,
+                  "shared_stage_below_gate": 2,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 3,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 1
+              },
+              "10": {
+                "denominator": 6,
+                "states": {
+                  "shared_stage_gate": 2,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 4,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 2
+              },
+              "30": {
+                "denominator": 6,
+                "states": {
+                  "shared_stage_gate": 2,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 2,
+                  "selected_absent": 2,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 2
+              }
+            },
+            "gate_prefix_lengths": {
+              "0": 1,
+              "1": 3,
+              "3": 1,
+              "6": 1
+            },
+            "gate_prefix_stops": {
+              "selected_no_update": 2,
+              "shared_stage_below_gate": 4
+            },
+            "signed_gap_prefix_lengths": {
+              "0": 5,
+              "1": 1
+            },
+            "signed_gap_prefix_stops": {
+              "gap_not_supported": 5,
+              "selected_no_update": 1
+            },
+            "gate_support_resumes_after_first_stop": 3
+          }
+        },
+        {
+          "name": "MOT17-07-DPM",
+          "frames_inspected": 500,
+          "groups": {
+            "occupied/same_updated_rows": 11,
+            "occupied/row_replacement": 0,
+            "occupied/fewer_updates": 1,
+            "occupied/other": 0,
+            "available/same_updated_rows": 0,
+            "available/row_replacement": 0,
+            "available/fewer_updates": 0,
+            "available/other": 0
+          },
+          "summary": {
+            "alternatives": 12,
+            "history_anchored": 12,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 5,
+              "shared_stage_below_gate": 1,
+              "competitor_other_stage_update": 6,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 1,
+            "previous_update_gap": {
+              "min": 2.0,
+              "q25": 2.0,
+              "median": 5.0,
+              "q75": 16.0,
+              "max": 18.0
+            },
+            "lags": {
+              "1": {
+                "denominator": 12,
+                "states": {
+                  "shared_stage_gate": 4,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 8,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 4
+              },
+              "2": {
+                "denominator": 12,
+                "states": {
+                  "shared_stage_gate": 6,
+                  "shared_stage_below_gate": 2,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 4,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 1,
+                "active_confirmed_gate_support": 5
+              },
+              "5": {
+                "denominator": 12,
+                "states": {
+                  "shared_stage_gate": 2,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 1,
+                  "competitor_absent": 0,
+                  "selected_no_update": 8,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 2
+              },
+              "10": {
+                "denominator": 12,
+                "states": {
+                  "shared_stage_gate": 1,
+                  "shared_stage_below_gate": 2,
+                  "competitor_other_stage_update": 2,
+                  "competitor_absent": 0,
+                  "selected_no_update": 7,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "30": {
+                "denominator": 12,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 1,
+                  "competitor_absent": 0,
+                  "selected_no_update": 7,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 4,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              }
+            },
+            "gate_prefix_lengths": {
+              "0": 8,
+              "1": 2,
+              "6": 1,
+              "11": 1
+            },
+            "gate_prefix_stops": {
+              "selected_no_update": 9,
+              "shared_stage_below_gate": 3
+            },
+            "signed_gap_prefix_lengths": {
+              "0": 12
+            },
+            "signed_gap_prefix_stops": {
+              "gap_not_supported": 4,
+              "selected_no_update": 8
+            },
+            "gate_support_resumes_after_first_stop": 5
+          }
+        },
+        {
+          "name": "MOT17-08-DPM",
+          "frames_inspected": 625,
+          "groups": {
+            "occupied/same_updated_rows": 18,
+            "occupied/row_replacement": 0,
+            "occupied/fewer_updates": 6,
+            "occupied/other": 0,
+            "available/same_updated_rows": 0,
+            "available/row_replacement": 2,
+            "available/fewer_updates": 0,
+            "available/other": 0
+          },
+          "summary": {
+            "alternatives": 26,
+            "history_anchored": 26,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 15,
+              "shared_stage_below_gate": 3,
+              "competitor_other_stage_update": 6,
+              "competitor_absent": 2,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 3,
+            "previous_update_gap": {
+              "min": 2.0,
+              "q25": 2.0,
+              "median": 3.0,
+              "q75": 9.5,
+              "max": 26.0
+            },
+            "lags": {
+              "1": {
+                "denominator": 26,
+                "states": {
+                  "shared_stage_gate": 17,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 2,
+                  "competitor_absent": 0,
+                  "selected_no_update": 6,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 4,
+                "active_confirmed_gate_support": 15
+              },
+              "2": {
+                "denominator": 26,
+                "states": {
+                  "shared_stage_gate": 16,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 10,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 1,
+                "active_confirmed_gate_support": 16
+              },
+              "5": {
+                "denominator": 26,
+                "states": {
+                  "shared_stage_gate": 9,
+                  "shared_stage_below_gate": 8,
+                  "competitor_other_stage_update": 2,
+                  "competitor_absent": 0,
+                  "selected_no_update": 7,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 8
+              },
+              "10": {
+                "denominator": 26,
+                "states": {
+                  "shared_stage_gate": 3,
+                  "shared_stage_below_gate": 11,
+                  "competitor_other_stage_update": 1,
+                  "competitor_absent": 0,
+                  "selected_no_update": 10,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 1,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 1,
+                "active_confirmed_gate_support": 3
+              },
+              "30": {
+                "denominator": 26,
+                "states": {
+                  "shared_stage_gate": 2,
+                  "shared_stage_below_gate": 9,
+                  "competitor_other_stage_update": 1,
+                  "competitor_absent": 0,
+                  "selected_no_update": 12,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 2,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 2
+              }
+            },
+            "gate_prefix_lengths": {
+              "0": 9,
+              "1": 4,
+              "2": 5,
+              "3": 2,
+              "4": 2,
+              "5": 2,
+              "8": 1,
+              "13": 1
+            },
+            "gate_prefix_stops": {
+              "competitor_other_stage_update": 2,
+              "selected_no_update": 13,
+              "shared_stage_below_gate": 11
+            },
+            "signed_gap_prefix_lengths": {
+              "0": 22,
+              "1": 4
+            },
+            "signed_gap_prefix_stops": {
+              "competitor_other_stage_update": 2,
+              "gap_not_supported": 16,
+              "selected_no_update": 7,
+              "shared_stage_below_gate": 1
+            },
+            "gate_support_resumes_after_first_stop": 14
+          }
+        },
+        {
+          "name": "MOT17-12-DPM",
+          "frames_inspected": 900,
+          "groups": {
+            "occupied/same_updated_rows": 2,
+            "occupied/row_replacement": 1,
+            "occupied/fewer_updates": 1,
+            "occupied/other": 0,
+            "available/same_updated_rows": 0,
+            "available/row_replacement": 0,
+            "available/fewer_updates": 0,
+            "available/other": 0
+          },
+          "summary": {
+            "alternatives": 4,
+            "history_anchored": 4,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 2,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 2,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 1,
+            "previous_update_gap": {
+              "min": 2.0,
+              "q25": 2.0,
+              "median": 2.0,
+              "q75": 3.5,
+              "max": 8.0
+            },
+            "lags": {
+              "1": {
+                "denominator": 4,
+                "states": {
+                  "shared_stage_gate": 2,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 1,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 2
+              },
+              "2": {
+                "denominator": 4,
+                "states": {
+                  "shared_stage_gate": 1,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 2,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 1
+              },
+              "5": {
+                "denominator": 4,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 1,
+                  "competitor_absent": 0,
+                  "selected_no_update": 2,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "10": {
+                "denominator": 4,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 3,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "30": {
+                "denominator": 4,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 3,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 1,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              }
+            },
+            "gate_prefix_lengths": {
+              "0": 2,
+              "1": 1,
+              "3": 1
+            },
+            "gate_prefix_stops": {
+              "competitor_other_stage_update": 1,
+              "selected_no_update": 2,
+              "shared_stage_below_gate": 1
+            },
+            "signed_gap_prefix_lengths": {
+              "0": 4
+            },
+            "signed_gap_prefix_stops": {
+              "gap_not_supported": 2,
+              "selected_no_update": 1,
+              "shared_stage_below_gate": 1
+            },
+            "gate_support_resumes_after_first_stop": 0
+          }
+        },
+        {
+          "name": "MOT17-14-DPM",
+          "frames_inspected": 750,
+          "groups": {
+            "occupied/same_updated_rows": 5,
+            "occupied/row_replacement": 1,
+            "occupied/fewer_updates": 4,
+            "occupied/other": 0,
+            "available/same_updated_rows": 0,
+            "available/row_replacement": 1,
+            "available/fewer_updates": 0,
+            "available/other": 0
+          },
+          "summary": {
+            "alternatives": 11,
+            "history_anchored": 11,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 3,
+              "shared_stage_below_gate": 4,
+              "competitor_other_stage_update": 4,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 0,
+            "previous_update_gap": {
+              "min": 2.0,
+              "q25": 2.0,
+              "median": 3.0,
+              "q75": 4.5,
+              "max": 7.0
+            },
+            "lags": {
+              "1": {
+                "denominator": 11,
+                "states": {
+                  "shared_stage_gate": 7,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 1,
+                  "competitor_absent": 0,
+                  "selected_no_update": 2,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 2,
+                "active_confirmed_gate_support": 6
+              },
+              "2": {
+                "denominator": 11,
+                "states": {
+                  "shared_stage_gate": 6,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 1,
+                  "competitor_absent": 0,
+                  "selected_no_update": 3,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 4
+              },
+              "5": {
+                "denominator": 11,
+                "states": {
+                  "shared_stage_gate": 2,
+                  "shared_stage_below_gate": 3,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 6,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 2
+              },
+              "10": {
+                "denominator": 11,
+                "states": {
+                  "shared_stage_gate": 1,
+                  "shared_stage_below_gate": 3,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 7,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "30": {
+                "denominator": 11,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 1,
+                  "selected_no_update": 4,
+                  "selected_absent": 4,
+                  "unanchored_history": 0,
+                  "sequence_end": 1,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              }
+            },
+            "gate_prefix_lengths": {
+              "0": 4,
+              "1": 1,
+              "2": 2,
+              "3": 2,
+              "5": 1,
+              "12": 1
+            },
+            "gate_prefix_stops": {
+              "competitor_other_stage_update": 1,
+              "selected_no_update": 6,
+              "shared_stage_below_gate": 4
+            },
+            "signed_gap_prefix_lengths": {
+              "0": 9,
+              "1": 2
+            },
+            "signed_gap_prefix_stops": {
+              "competitor_other_stage_update": 1,
+              "gap_not_supported": 6,
+              "selected_no_update": 3,
+              "shared_stage_below_gate": 1
+            },
+            "gate_support_resumes_after_first_stop": 1
+          }
+        }
+      ],
+      "summary": {
+        "all": {
+          "alternatives": 192,
+          "history_anchored": 192,
+          "previous_accepted_observation": {
+            "shared_stage_gate": 107,
+            "shared_stage_below_gate": 34,
+            "competitor_other_stage_update": 49,
+            "competitor_absent": 2,
+            "selected_no_update": 0,
+            "selected_absent": 0,
+            "unanchored_history": 0,
+            "sequence_end": 0,
+            "no_recorded_selected_update": 0
+          },
+          "previous_signed_gap_support": 29,
+          "previous_update_gap": {
+            "min": 2.0,
+            "q25": 2.0,
+            "median": 4.0,
+            "q75": 7.25,
+            "max": 26.0
+          },
+          "lags": {
+            "1": {
+              "denominator": 192,
+              "states": {
+                "shared_stage_gate": 112,
+                "shared_stage_below_gate": 7,
+                "competitor_other_stage_update": 6,
+                "competitor_absent": 0,
+                "selected_no_update": 66,
+                "selected_absent": 0,
+                "unanchored_history": 0,
+                "sequence_end": 1,
+                "no_recorded_selected_update": 0
+              },
+              "signed_gap_support": 19,
+              "active_confirmed_gate_support": 103
+            },
+            "2": {
+              "denominator": 192,
+              "states": {
+                "shared_stage_gate": 100,
+                "shared_stage_below_gate": 10,
+                "competitor_other_stage_update": 10,
+                "competitor_absent": 0,
+                "selected_no_update": 71,
+                "selected_absent": 0,
+                "unanchored_history": 0,
+                "sequence_end": 1,
+                "no_recorded_selected_update": 0
+              },
+              "signed_gap_support": 18,
+              "active_confirmed_gate_support": 79
+            },
+            "5": {
+              "denominator": 192,
+              "states": {
+                "shared_stage_gate": 55,
+                "shared_stage_below_gate": 37,
+                "competitor_other_stage_update": 13,
+                "competitor_absent": 0,
+                "selected_no_update": 86,
+                "selected_absent": 0,
+                "unanchored_history": 0,
+                "sequence_end": 1,
+                "no_recorded_selected_update": 0
+              },
+              "signed_gap_support": 7,
+              "active_confirmed_gate_support": 43
+            },
+            "10": {
+              "denominator": 192,
+              "states": {
+                "shared_stage_gate": 31,
+                "shared_stage_below_gate": 53,
+                "competitor_other_stage_update": 11,
+                "competitor_absent": 0,
+                "selected_no_update": 95,
+                "selected_absent": 0,
+                "unanchored_history": 0,
+                "sequence_end": 2,
+                "no_recorded_selected_update": 0
+              },
+              "signed_gap_support": 5,
+              "active_confirmed_gate_support": 17
+            },
+            "30": {
+              "denominator": 192,
+              "states": {
+                "shared_stage_gate": 15,
+                "shared_stage_below_gate": 45,
+                "competitor_other_stage_update": 6,
+                "competitor_absent": 1,
+                "selected_no_update": 91,
+                "selected_absent": 20,
+                "unanchored_history": 0,
+                "sequence_end": 14,
+                "no_recorded_selected_update": 0
+              },
+              "signed_gap_support": 0,
+              "active_confirmed_gate_support": 11
+            }
+          },
+          "gate_prefix_lengths": {
+            "0": 80,
+            "1": 31,
+            "2": 22,
+            "3": 17,
+            "4": 12,
+            "5": 5,
+            "6": 6,
+            "7": 4,
+            "8": 1,
+            "9": 5,
+            "10": 2,
+            "11": 1,
+            "12": 1,
+            "13": 1,
+            "17": 1,
+            "24": 1,
+            "30": 2
+          },
+          "gate_prefix_stops": {
+            "competitor_other_stage_update": 16,
+            "horizon_end": 2,
+            "selected_no_update": 126,
+            "sequence_end": 1,
+            "shared_stage_below_gate": 47
+          },
+          "signed_gap_prefix_lengths": {
+            "0": 173,
+            "1": 18,
+            "2": 1
+          },
+          "signed_gap_prefix_stops": {
+            "competitor_other_stage_update": 6,
+            "gap_not_supported": 103,
+            "selected_no_update": 75,
+            "sequence_end": 1,
+            "shared_stage_below_gate": 7
+          },
+          "gate_support_resumes_after_first_stop": 92
+        },
+        "groups": {
+          "occupied/same_updated_rows": {
+            "alternatives": 137,
+            "history_anchored": 137,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 86,
+              "shared_stage_below_gate": 17,
+              "competitor_other_stage_update": 33,
+              "competitor_absent": 1,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 25,
+            "previous_update_gap": {
+              "min": 2.0,
+              "q25": 2.0,
+              "median": 4.0,
+              "q75": 8.0,
+              "max": 24.0
+            },
+            "lags": {
+              "1": {
+                "denominator": 137,
+                "states": {
+                  "shared_stage_gate": 83,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 3,
+                  "competitor_absent": 0,
+                  "selected_no_update": 49,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 1,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 12,
+                "active_confirmed_gate_support": 83
+              },
+              "2": {
+                "denominator": 137,
+                "states": {
+                  "shared_stage_gate": 74,
+                  "shared_stage_below_gate": 4,
+                  "competitor_other_stage_update": 3,
+                  "competitor_absent": 0,
+                  "selected_no_update": 55,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 1,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 13,
+                "active_confirmed_gate_support": 60
+              },
+              "5": {
+                "denominator": 137,
+                "states": {
+                  "shared_stage_gate": 37,
+                  "shared_stage_below_gate": 26,
+                  "competitor_other_stage_update": 7,
+                  "competitor_absent": 0,
+                  "selected_no_update": 66,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 1,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 3,
+                "active_confirmed_gate_support": 28
+              },
+              "10": {
+                "denominator": 137,
+                "states": {
+                  "shared_stage_gate": 23,
+                  "shared_stage_below_gate": 34,
+                  "competitor_other_stage_update": 8,
+                  "competitor_absent": 0,
+                  "selected_no_update": 70,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 2,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 4,
+                "active_confirmed_gate_support": 11
+              },
+              "30": {
+                "denominator": 137,
+                "states": {
+                  "shared_stage_gate": 11,
+                  "shared_stage_below_gate": 28,
+                  "competitor_other_stage_update": 3,
+                  "competitor_absent": 1,
+                  "selected_no_update": 67,
+                  "selected_absent": 14,
+                  "unanchored_history": 0,
+                  "sequence_end": 13,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 8
+              }
+            },
+            "gate_prefix_lengths": {
+              "0": 54,
+              "1": 22,
+              "2": 18,
+              "3": 12,
+              "4": 10,
+              "5": 3,
+              "6": 2,
+              "7": 3,
+              "9": 5,
+              "10": 2,
+              "11": 1,
+              "12": 1,
+              "13": 1,
+              "24": 1,
+              "30": 2
+            },
+            "gate_prefix_stops": {
+              "competitor_other_stage_update": 10,
+              "horizon_end": 2,
+              "selected_no_update": 95,
+              "sequence_end": 1,
+              "shared_stage_below_gate": 29
+            },
+            "signed_gap_prefix_lengths": {
+              "0": 125,
+              "1": 12
+            },
+            "signed_gap_prefix_stops": {
+              "competitor_other_stage_update": 3,
+              "gap_not_supported": 77,
+              "selected_no_update": 55,
+              "sequence_end": 1,
+              "shared_stage_below_gate": 1
+            },
+            "gate_support_resumes_after_first_stop": 61
+          },
+          "occupied/row_replacement": {
+            "alternatives": 3,
+            "history_anchored": 3,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 2,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 1,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 1,
+            "previous_update_gap": {
+              "min": 2.0,
+              "q25": 2.0,
+              "median": 2.0,
+              "q75": 5.5,
+              "max": 9.0
+            },
+            "lags": {
+              "1": {
+                "denominator": 3,
+                "states": {
+                  "shared_stage_gate": 1,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 1,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 1
+              },
+              "2": {
+                "denominator": 3,
+                "states": {
+                  "shared_stage_gate": 1,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 1,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "5": {
+                "denominator": 3,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 2,
+                  "competitor_absent": 0,
+                  "selected_no_update": 1,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "10": {
+                "denominator": 3,
+                "states": {
+                  "shared_stage_gate": 1,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 2,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 1
+              },
+              "30": {
+                "denominator": 3,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 1,
+                  "selected_absent": 1,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              }
+            },
+            "gate_prefix_lengths": {
+              "0": 2,
+              "3": 1
+            },
+            "gate_prefix_stops": {
+              "selected_no_update": 2,
+              "shared_stage_below_gate": 1
+            },
+            "signed_gap_prefix_lengths": {
+              "0": 3
+            },
+            "signed_gap_prefix_stops": {
+              "gap_not_supported": 1,
+              "selected_no_update": 1,
+              "shared_stage_below_gate": 1
+            },
+            "gate_support_resumes_after_first_stop": 1
+          },
+          "occupied/fewer_updates": {
+            "alternatives": 43,
+            "history_anchored": 43,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 11,
+              "shared_stage_below_gate": 17,
+              "competitor_other_stage_update": 14,
+              "competitor_absent": 1,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 1,
+            "previous_update_gap": {
+              "min": 2.0,
+              "q25": 3.0,
+              "median": 4.0,
+              "q75": 7.0,
+              "max": 26.0
+            },
+            "lags": {
+              "1": {
+                "denominator": 43,
+                "states": {
+                  "shared_stage_gate": 19,
+                  "shared_stage_below_gate": 5,
+                  "competitor_other_stage_update": 3,
+                  "competitor_absent": 0,
+                  "selected_no_update": 16,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 4,
+                "active_confirmed_gate_support": 19
+              },
+              "2": {
+                "denominator": 43,
+                "states": {
+                  "shared_stage_gate": 19,
+                  "shared_stage_below_gate": 4,
+                  "competitor_other_stage_update": 6,
+                  "competitor_absent": 0,
+                  "selected_no_update": 14,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 4,
+                "active_confirmed_gate_support": 16
+              },
+              "5": {
+                "denominator": 43,
+                "states": {
+                  "shared_stage_gate": 14,
+                  "shared_stage_below_gate": 10,
+                  "competitor_other_stage_update": 4,
+                  "competitor_absent": 0,
+                  "selected_no_update": 15,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 3,
+                "active_confirmed_gate_support": 13
+              },
+              "10": {
+                "denominator": 43,
+                "states": {
+                  "shared_stage_gate": 6,
+                  "shared_stage_below_gate": 16,
+                  "competitor_other_stage_update": 3,
+                  "competitor_absent": 0,
+                  "selected_no_update": 18,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 1,
+                "active_confirmed_gate_support": 5
+              },
+              "30": {
+                "denominator": 43,
+                "states": {
+                  "shared_stage_gate": 3,
+                  "shared_stage_below_gate": 14,
+                  "competitor_other_stage_update": 3,
+                  "competitor_absent": 0,
+                  "selected_no_update": 19,
+                  "selected_absent": 3,
+                  "unanchored_history": 0,
+                  "sequence_end": 1,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 3
+              }
+            },
+            "gate_prefix_lengths": {
+              "0": 24,
+              "1": 6,
+              "2": 3,
+              "3": 2,
+              "4": 2,
+              "5": 2,
+              "6": 3,
+              "8": 1
+            },
+            "gate_prefix_stops": {
+              "competitor_other_stage_update": 6,
+              "selected_no_update": 22,
+              "shared_stage_below_gate": 15
+            },
+            "signed_gap_prefix_lengths": {
+              "0": 39,
+              "1": 3,
+              "2": 1
+            },
+            "signed_gap_prefix_stops": {
+              "competitor_other_stage_update": 3,
+              "gap_not_supported": 18,
+              "selected_no_update": 17,
+              "shared_stage_below_gate": 5
+            },
+            "gate_support_resumes_after_first_stop": 24
+          },
+          "occupied/other": {
+            "alternatives": 0,
+            "history_anchored": 0,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 0,
+            "previous_update_gap": null,
+            "lags": {
+              "1": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "2": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "5": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "10": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "30": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              }
+            },
+            "gate_prefix_lengths": {},
+            "gate_prefix_stops": {},
+            "signed_gap_prefix_lengths": {},
+            "signed_gap_prefix_stops": {},
+            "gate_support_resumes_after_first_stop": 0
+          },
+          "available/same_updated_rows": {
+            "alternatives": 0,
+            "history_anchored": 0,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 0,
+            "previous_update_gap": null,
+            "lags": {
+              "1": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "2": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "5": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "10": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "30": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              }
+            },
+            "gate_prefix_lengths": {},
+            "gate_prefix_stops": {},
+            "signed_gap_prefix_lengths": {},
+            "signed_gap_prefix_stops": {},
+            "gate_support_resumes_after_first_stop": 0
+          },
+          "available/row_replacement": {
+            "alternatives": 9,
+            "history_anchored": 9,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 8,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 1,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 2,
+            "previous_update_gap": {
+              "min": 2.0,
+              "q25": 2.0,
+              "median": 3.0,
+              "q75": 4.0,
+              "max": 6.0
+            },
+            "lags": {
+              "1": {
+                "denominator": 9,
+                "states": {
+                  "shared_stage_gate": 9,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 3,
+                "active_confirmed_gate_support": 0
+              },
+              "2": {
+                "denominator": 9,
+                "states": {
+                  "shared_stage_gate": 6,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 2,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 1,
+                "active_confirmed_gate_support": 3
+              },
+              "5": {
+                "denominator": 9,
+                "states": {
+                  "shared_stage_gate": 4,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 4,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 1,
+                "active_confirmed_gate_support": 2
+              },
+              "10": {
+                "denominator": 9,
+                "states": {
+                  "shared_stage_gate": 1,
+                  "shared_stage_below_gate": 3,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 5,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "30": {
+                "denominator": 9,
+                "states": {
+                  "shared_stage_gate": 1,
+                  "shared_stage_below_gate": 2,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 4,
+                  "selected_absent": 2,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              }
+            },
+            "gate_prefix_lengths": {
+              "1": 3,
+              "2": 1,
+              "3": 2,
+              "6": 1,
+              "7": 1,
+              "17": 1
+            },
+            "gate_prefix_stops": {
+              "selected_no_update": 7,
+              "shared_stage_below_gate": 2
+            },
+            "signed_gap_prefix_lengths": {
+              "0": 6,
+              "1": 3
+            },
+            "signed_gap_prefix_stops": {
+              "gap_not_supported": 7,
+              "selected_no_update": 2
+            },
+            "gate_support_resumes_after_first_stop": 6
+          },
+          "available/fewer_updates": {
+            "alternatives": 0,
+            "history_anchored": 0,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 0,
+            "previous_update_gap": null,
+            "lags": {
+              "1": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "2": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "5": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "10": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "30": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              }
+            },
+            "gate_prefix_lengths": {},
+            "gate_prefix_stops": {},
+            "signed_gap_prefix_lengths": {},
+            "signed_gap_prefix_stops": {},
+            "gate_support_resumes_after_first_stop": 0
+          },
+          "available/other": {
+            "alternatives": 0,
+            "history_anchored": 0,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 0,
+            "previous_update_gap": null,
+            "lags": {
+              "1": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "2": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "5": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "10": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "30": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              }
+            },
+            "gate_prefix_lengths": {},
+            "gate_prefix_stops": {},
+            "signed_gap_prefix_lengths": {},
+            "signed_gap_prefix_stops": {},
+            "gate_support_resumes_after_first_stop": 0
+          }
+        }
+      }
+    },
+    {
+      "phase": "confirmation",
+      "sequences": [
+        {
+          "name": "MOT20-03",
+          "frames_inspected": 2405,
+          "groups": {
+            "occupied/same_updated_rows": 4,
+            "occupied/row_replacement": 0,
+            "occupied/fewer_updates": 1,
+            "occupied/other": 0,
+            "available/same_updated_rows": 0,
+            "available/row_replacement": 0,
+            "available/fewer_updates": 0,
+            "available/other": 0
+          },
+          "summary": {
+            "alternatives": 5,
+            "history_anchored": 5,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 2,
+              "shared_stage_below_gate": 3,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 1,
+            "previous_update_gap": {
+              "min": 2.0,
+              "q25": 3.0,
+              "median": 3.0,
+              "q75": 3.0,
+              "max": 5.0
+            },
+            "lags": {
+              "1": {
+                "denominator": 5,
+                "states": {
+                  "shared_stage_gate": 2,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 3,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 2
+              },
+              "2": {
+                "denominator": 5,
+                "states": {
+                  "shared_stage_gate": 2,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 3,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 2
+              },
+              "5": {
+                "denominator": 5,
+                "states": {
+                  "shared_stage_gate": 2,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 2,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 1,
+                "active_confirmed_gate_support": 2
+              },
+              "10": {
+                "denominator": 5,
+                "states": {
+                  "shared_stage_gate": 1,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 3,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 1
+              },
+              "30": {
+                "denominator": 5,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 4,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 1,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              }
+            },
+            "gate_prefix_lengths": {
+              "0": 3,
+              "1": 1,
+              "13": 1
+            },
+            "gate_prefix_stops": {
+              "selected_no_update": 4,
+              "shared_stage_below_gate": 1
+            },
+            "signed_gap_prefix_lengths": {
+              "0": 5
+            },
+            "signed_gap_prefix_stops": {
+              "gap_not_supported": 2,
+              "selected_no_update": 3
+            },
+            "gate_support_resumes_after_first_stop": 3
+          }
+        },
+        {
+          "name": "MOT20-05",
+          "frames_inspected": 3315,
+          "groups": {
+            "occupied/same_updated_rows": 0,
+            "occupied/row_replacement": 0,
+            "occupied/fewer_updates": 0,
+            "occupied/other": 0,
+            "available/same_updated_rows": 0,
+            "available/row_replacement": 0,
+            "available/fewer_updates": 0,
+            "available/other": 0
+          },
+          "summary": {
+            "alternatives": 0,
+            "history_anchored": 0,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 0,
+            "previous_update_gap": null,
+            "lags": {
+              "1": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "2": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "5": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "10": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "30": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              }
+            },
+            "gate_prefix_lengths": {},
+            "gate_prefix_stops": {},
+            "signed_gap_prefix_lengths": {},
+            "signed_gap_prefix_stops": {},
+            "gate_support_resumes_after_first_stop": 0
+          }
+        }
+      ],
+      "summary": {
+        "all": {
+          "alternatives": 5,
+          "history_anchored": 5,
+          "previous_accepted_observation": {
+            "shared_stage_gate": 2,
+            "shared_stage_below_gate": 3,
+            "competitor_other_stage_update": 0,
+            "competitor_absent": 0,
+            "selected_no_update": 0,
+            "selected_absent": 0,
+            "unanchored_history": 0,
+            "sequence_end": 0,
+            "no_recorded_selected_update": 0
+          },
+          "previous_signed_gap_support": 1,
+          "previous_update_gap": {
+            "min": 2.0,
+            "q25": 3.0,
+            "median": 3.0,
+            "q75": 3.0,
+            "max": 5.0
+          },
+          "lags": {
+            "1": {
+              "denominator": 5,
+              "states": {
+                "shared_stage_gate": 2,
+                "shared_stage_below_gate": 0,
+                "competitor_other_stage_update": 0,
+                "competitor_absent": 0,
+                "selected_no_update": 3,
+                "selected_absent": 0,
+                "unanchored_history": 0,
+                "sequence_end": 0,
+                "no_recorded_selected_update": 0
+              },
+              "signed_gap_support": 0,
+              "active_confirmed_gate_support": 2
+            },
+            "2": {
+              "denominator": 5,
+              "states": {
+                "shared_stage_gate": 2,
+                "shared_stage_below_gate": 0,
+                "competitor_other_stage_update": 0,
+                "competitor_absent": 0,
+                "selected_no_update": 3,
+                "selected_absent": 0,
+                "unanchored_history": 0,
+                "sequence_end": 0,
+                "no_recorded_selected_update": 0
+              },
+              "signed_gap_support": 0,
+              "active_confirmed_gate_support": 2
+            },
+            "5": {
+              "denominator": 5,
+              "states": {
+                "shared_stage_gate": 2,
+                "shared_stage_below_gate": 1,
+                "competitor_other_stage_update": 0,
+                "competitor_absent": 0,
+                "selected_no_update": 2,
+                "selected_absent": 0,
+                "unanchored_history": 0,
+                "sequence_end": 0,
+                "no_recorded_selected_update": 0
+              },
+              "signed_gap_support": 1,
+              "active_confirmed_gate_support": 2
+            },
+            "10": {
+              "denominator": 5,
+              "states": {
+                "shared_stage_gate": 1,
+                "shared_stage_below_gate": 1,
+                "competitor_other_stage_update": 0,
+                "competitor_absent": 0,
+                "selected_no_update": 3,
+                "selected_absent": 0,
+                "unanchored_history": 0,
+                "sequence_end": 0,
+                "no_recorded_selected_update": 0
+              },
+              "signed_gap_support": 0,
+              "active_confirmed_gate_support": 1
+            },
+            "30": {
+              "denominator": 5,
+              "states": {
+                "shared_stage_gate": 0,
+                "shared_stage_below_gate": 4,
+                "competitor_other_stage_update": 0,
+                "competitor_absent": 0,
+                "selected_no_update": 0,
+                "selected_absent": 1,
+                "unanchored_history": 0,
+                "sequence_end": 0,
+                "no_recorded_selected_update": 0
+              },
+              "signed_gap_support": 0,
+              "active_confirmed_gate_support": 0
+            }
+          },
+          "gate_prefix_lengths": {
+            "0": 3,
+            "1": 1,
+            "13": 1
+          },
+          "gate_prefix_stops": {
+            "selected_no_update": 4,
+            "shared_stage_below_gate": 1
+          },
+          "signed_gap_prefix_lengths": {
+            "0": 5
+          },
+          "signed_gap_prefix_stops": {
+            "gap_not_supported": 2,
+            "selected_no_update": 3
+          },
+          "gate_support_resumes_after_first_stop": 3
+        },
+        "groups": {
+          "occupied/same_updated_rows": {
+            "alternatives": 4,
+            "history_anchored": 4,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 2,
+              "shared_stage_below_gate": 2,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 1,
+            "previous_update_gap": {
+              "min": 3.0,
+              "q25": 3.0,
+              "median": 3.0,
+              "q75": 3.5,
+              "max": 5.0
+            },
+            "lags": {
+              "1": {
+                "denominator": 4,
+                "states": {
+                  "shared_stage_gate": 1,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 3,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 1
+              },
+              "2": {
+                "denominator": 4,
+                "states": {
+                  "shared_stage_gate": 1,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 3,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 1
+              },
+              "5": {
+                "denominator": 4,
+                "states": {
+                  "shared_stage_gate": 1,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 2,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 1,
+                "active_confirmed_gate_support": 1
+              },
+              "10": {
+                "denominator": 4,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 3,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "30": {
+                "denominator": 4,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 3,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 1,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              }
+            },
+            "gate_prefix_lengths": {
+              "0": 3,
+              "1": 1
+            },
+            "gate_prefix_stops": {
+              "selected_no_update": 4
+            },
+            "signed_gap_prefix_lengths": {
+              "0": 4
+            },
+            "signed_gap_prefix_stops": {
+              "gap_not_supported": 1,
+              "selected_no_update": 3
+            },
+            "gate_support_resumes_after_first_stop": 3
+          },
+          "occupied/row_replacement": {
+            "alternatives": 0,
+            "history_anchored": 0,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 0,
+            "previous_update_gap": null,
+            "lags": {
+              "1": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "2": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "5": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "10": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "30": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              }
+            },
+            "gate_prefix_lengths": {},
+            "gate_prefix_stops": {},
+            "signed_gap_prefix_lengths": {},
+            "signed_gap_prefix_stops": {},
+            "gate_support_resumes_after_first_stop": 0
+          },
+          "occupied/fewer_updates": {
+            "alternatives": 1,
+            "history_anchored": 1,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 1,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 0,
+            "previous_update_gap": {
+              "min": 2.0,
+              "q25": 2.0,
+              "median": 2.0,
+              "q75": 2.0,
+              "max": 2.0
+            },
+            "lags": {
+              "1": {
+                "denominator": 1,
+                "states": {
+                  "shared_stage_gate": 1,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 1
+              },
+              "2": {
+                "denominator": 1,
+                "states": {
+                  "shared_stage_gate": 1,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 1
+              },
+              "5": {
+                "denominator": 1,
+                "states": {
+                  "shared_stage_gate": 1,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 1
+              },
+              "10": {
+                "denominator": 1,
+                "states": {
+                  "shared_stage_gate": 1,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 1
+              },
+              "30": {
+                "denominator": 1,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 1,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              }
+            },
+            "gate_prefix_lengths": {
+              "13": 1
+            },
+            "gate_prefix_stops": {
+              "shared_stage_below_gate": 1
+            },
+            "signed_gap_prefix_lengths": {
+              "0": 1
+            },
+            "signed_gap_prefix_stops": {
+              "gap_not_supported": 1
+            },
+            "gate_support_resumes_after_first_stop": 0
+          },
+          "occupied/other": {
+            "alternatives": 0,
+            "history_anchored": 0,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 0,
+            "previous_update_gap": null,
+            "lags": {
+              "1": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "2": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "5": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "10": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "30": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              }
+            },
+            "gate_prefix_lengths": {},
+            "gate_prefix_stops": {},
+            "signed_gap_prefix_lengths": {},
+            "signed_gap_prefix_stops": {},
+            "gate_support_resumes_after_first_stop": 0
+          },
+          "available/same_updated_rows": {
+            "alternatives": 0,
+            "history_anchored": 0,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 0,
+            "previous_update_gap": null,
+            "lags": {
+              "1": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "2": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "5": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "10": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "30": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              }
+            },
+            "gate_prefix_lengths": {},
+            "gate_prefix_stops": {},
+            "signed_gap_prefix_lengths": {},
+            "signed_gap_prefix_stops": {},
+            "gate_support_resumes_after_first_stop": 0
+          },
+          "available/row_replacement": {
+            "alternatives": 0,
+            "history_anchored": 0,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 0,
+            "previous_update_gap": null,
+            "lags": {
+              "1": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "2": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "5": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "10": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "30": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              }
+            },
+            "gate_prefix_lengths": {},
+            "gate_prefix_stops": {},
+            "signed_gap_prefix_lengths": {},
+            "signed_gap_prefix_stops": {},
+            "gate_support_resumes_after_first_stop": 0
+          },
+          "available/fewer_updates": {
+            "alternatives": 0,
+            "history_anchored": 0,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 0,
+            "previous_update_gap": null,
+            "lags": {
+              "1": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "2": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "5": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "10": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "30": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              }
+            },
+            "gate_prefix_lengths": {},
+            "gate_prefix_stops": {},
+            "signed_gap_prefix_lengths": {},
+            "signed_gap_prefix_stops": {},
+            "gate_support_resumes_after_first_stop": 0
+          },
+          "available/other": {
+            "alternatives": 0,
+            "history_anchored": 0,
+            "previous_accepted_observation": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "previous_signed_gap_support": 0,
+            "previous_update_gap": null,
+            "lags": {
+              "1": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "2": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "5": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "10": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              },
+              "30": {
+                "denominator": 0,
+                "states": {
+                  "shared_stage_gate": 0,
+                  "shared_stage_below_gate": 0,
+                  "competitor_other_stage_update": 0,
+                  "competitor_absent": 0,
+                  "selected_no_update": 0,
+                  "selected_absent": 0,
+                  "unanchored_history": 0,
+                  "sequence_end": 0,
+                  "no_recorded_selected_update": 0
+                },
+                "signed_gap_support": 0,
+                "active_confirmed_gate_support": 0
+              }
+            },
+            "gate_prefix_lengths": {},
+            "gate_prefix_stops": {},
+            "signed_gap_prefix_lengths": {},
+            "signed_gap_prefix_stops": {},
+            "gate_support_resumes_after_first_stop": 0
+          }
+        }
+      }
+    }
+  ],
+  "combined": {
+    "all": {
+      "alternatives": 197,
+      "history_anchored": 197,
+      "previous_accepted_observation": {
+        "shared_stage_gate": 109,
+        "shared_stage_below_gate": 37,
+        "competitor_other_stage_update": 49,
+        "competitor_absent": 2,
+        "selected_no_update": 0,
+        "selected_absent": 0,
+        "unanchored_history": 0,
+        "sequence_end": 0,
+        "no_recorded_selected_update": 0
+      },
+      "previous_signed_gap_support": 30,
+      "previous_update_gap": {
+        "min": 2.0,
+        "q25": 2.0,
+        "median": 4.0,
+        "q75": 7.0,
+        "max": 26.0
+      },
+      "lags": {
+        "1": {
+          "denominator": 197,
+          "states": {
+            "shared_stage_gate": 114,
+            "shared_stage_below_gate": 7,
+            "competitor_other_stage_update": 6,
+            "competitor_absent": 0,
+            "selected_no_update": 69,
+            "selected_absent": 0,
+            "unanchored_history": 0,
+            "sequence_end": 1,
+            "no_recorded_selected_update": 0
+          },
+          "signed_gap_support": 19,
+          "active_confirmed_gate_support": 105
+        },
+        "2": {
+          "denominator": 197,
+          "states": {
+            "shared_stage_gate": 102,
+            "shared_stage_below_gate": 10,
+            "competitor_other_stage_update": 10,
+            "competitor_absent": 0,
+            "selected_no_update": 74,
+            "selected_absent": 0,
+            "unanchored_history": 0,
+            "sequence_end": 1,
+            "no_recorded_selected_update": 0
+          },
+          "signed_gap_support": 18,
+          "active_confirmed_gate_support": 81
+        },
+        "5": {
+          "denominator": 197,
+          "states": {
+            "shared_stage_gate": 57,
+            "shared_stage_below_gate": 38,
+            "competitor_other_stage_update": 13,
+            "competitor_absent": 0,
+            "selected_no_update": 88,
+            "selected_absent": 0,
+            "unanchored_history": 0,
+            "sequence_end": 1,
+            "no_recorded_selected_update": 0
+          },
+          "signed_gap_support": 8,
+          "active_confirmed_gate_support": 45
+        },
+        "10": {
+          "denominator": 197,
+          "states": {
+            "shared_stage_gate": 32,
+            "shared_stage_below_gate": 54,
+            "competitor_other_stage_update": 11,
+            "competitor_absent": 0,
+            "selected_no_update": 98,
+            "selected_absent": 0,
+            "unanchored_history": 0,
+            "sequence_end": 2,
+            "no_recorded_selected_update": 0
+          },
+          "signed_gap_support": 5,
+          "active_confirmed_gate_support": 18
+        },
+        "30": {
+          "denominator": 197,
+          "states": {
+            "shared_stage_gate": 15,
+            "shared_stage_below_gate": 49,
+            "competitor_other_stage_update": 6,
+            "competitor_absent": 1,
+            "selected_no_update": 91,
+            "selected_absent": 21,
+            "unanchored_history": 0,
+            "sequence_end": 14,
+            "no_recorded_selected_update": 0
+          },
+          "signed_gap_support": 0,
+          "active_confirmed_gate_support": 11
+        }
+      },
+      "gate_prefix_lengths": {
+        "0": 83,
+        "1": 32,
+        "2": 22,
+        "3": 17,
+        "4": 12,
+        "5": 5,
+        "6": 6,
+        "7": 4,
+        "8": 1,
+        "9": 5,
+        "10": 2,
+        "11": 1,
+        "12": 1,
+        "13": 2,
+        "17": 1,
+        "24": 1,
+        "30": 2
+      },
+      "gate_prefix_stops": {
+        "competitor_other_stage_update": 16,
+        "horizon_end": 2,
+        "selected_no_update": 130,
+        "sequence_end": 1,
+        "shared_stage_below_gate": 48
+      },
+      "signed_gap_prefix_lengths": {
+        "0": 178,
+        "1": 18,
+        "2": 1
+      },
+      "signed_gap_prefix_stops": {
+        "competitor_other_stage_update": 6,
+        "gap_not_supported": 105,
+        "selected_no_update": 78,
+        "sequence_end": 1,
+        "shared_stage_below_gate": 7
+      },
+      "gate_support_resumes_after_first_stop": 95
+    },
+    "groups": {
+      "occupied/same_updated_rows": {
+        "alternatives": 141,
+        "history_anchored": 141,
+        "previous_accepted_observation": {
+          "shared_stage_gate": 88,
+          "shared_stage_below_gate": 19,
+          "competitor_other_stage_update": 33,
+          "competitor_absent": 1,
+          "selected_no_update": 0,
+          "selected_absent": 0,
+          "unanchored_history": 0,
+          "sequence_end": 0,
+          "no_recorded_selected_update": 0
+        },
+        "previous_signed_gap_support": 26,
+        "previous_update_gap": {
+          "min": 2.0,
+          "q25": 2.0,
+          "median": 4.0,
+          "q75": 8.0,
+          "max": 24.0
+        },
+        "lags": {
+          "1": {
+            "denominator": 141,
+            "states": {
+              "shared_stage_gate": 84,
+              "shared_stage_below_gate": 1,
+              "competitor_other_stage_update": 3,
+              "competitor_absent": 0,
+              "selected_no_update": 52,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 1,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 12,
+            "active_confirmed_gate_support": 84
+          },
+          "2": {
+            "denominator": 141,
+            "states": {
+              "shared_stage_gate": 75,
+              "shared_stage_below_gate": 4,
+              "competitor_other_stage_update": 3,
+              "competitor_absent": 0,
+              "selected_no_update": 58,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 1,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 13,
+            "active_confirmed_gate_support": 61
+          },
+          "5": {
+            "denominator": 141,
+            "states": {
+              "shared_stage_gate": 38,
+              "shared_stage_below_gate": 27,
+              "competitor_other_stage_update": 7,
+              "competitor_absent": 0,
+              "selected_no_update": 68,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 1,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 4,
+            "active_confirmed_gate_support": 29
+          },
+          "10": {
+            "denominator": 141,
+            "states": {
+              "shared_stage_gate": 23,
+              "shared_stage_below_gate": 35,
+              "competitor_other_stage_update": 8,
+              "competitor_absent": 0,
+              "selected_no_update": 73,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 2,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 4,
+            "active_confirmed_gate_support": 11
+          },
+          "30": {
+            "denominator": 141,
+            "states": {
+              "shared_stage_gate": 11,
+              "shared_stage_below_gate": 31,
+              "competitor_other_stage_update": 3,
+              "competitor_absent": 1,
+              "selected_no_update": 67,
+              "selected_absent": 15,
+              "unanchored_history": 0,
+              "sequence_end": 13,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 8
+          }
+        },
+        "gate_prefix_lengths": {
+          "0": 57,
+          "1": 23,
+          "2": 18,
+          "3": 12,
+          "4": 10,
+          "5": 3,
+          "6": 2,
+          "7": 3,
+          "9": 5,
+          "10": 2,
+          "11": 1,
+          "12": 1,
+          "13": 1,
+          "24": 1,
+          "30": 2
+        },
+        "gate_prefix_stops": {
+          "competitor_other_stage_update": 10,
+          "horizon_end": 2,
+          "selected_no_update": 99,
+          "sequence_end": 1,
+          "shared_stage_below_gate": 29
+        },
+        "signed_gap_prefix_lengths": {
+          "0": 129,
+          "1": 12
+        },
+        "signed_gap_prefix_stops": {
+          "competitor_other_stage_update": 3,
+          "gap_not_supported": 78,
+          "selected_no_update": 58,
+          "sequence_end": 1,
+          "shared_stage_below_gate": 1
+        },
+        "gate_support_resumes_after_first_stop": 64
+      },
+      "occupied/row_replacement": {
+        "alternatives": 3,
+        "history_anchored": 3,
+        "previous_accepted_observation": {
+          "shared_stage_gate": 2,
+          "shared_stage_below_gate": 0,
+          "competitor_other_stage_update": 1,
+          "competitor_absent": 0,
+          "selected_no_update": 0,
+          "selected_absent": 0,
+          "unanchored_history": 0,
+          "sequence_end": 0,
+          "no_recorded_selected_update": 0
+        },
+        "previous_signed_gap_support": 1,
+        "previous_update_gap": {
+          "min": 2.0,
+          "q25": 2.0,
+          "median": 2.0,
+          "q75": 5.5,
+          "max": 9.0
+        },
+        "lags": {
+          "1": {
+            "denominator": 3,
+            "states": {
+              "shared_stage_gate": 1,
+              "shared_stage_below_gate": 1,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 1,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 1
+          },
+          "2": {
+            "denominator": 3,
+            "states": {
+              "shared_stage_gate": 1,
+              "shared_stage_below_gate": 1,
+              "competitor_other_stage_update": 1,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 0
+          },
+          "5": {
+            "denominator": 3,
+            "states": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 2,
+              "competitor_absent": 0,
+              "selected_no_update": 1,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 0
+          },
+          "10": {
+            "denominator": 3,
+            "states": {
+              "shared_stage_gate": 1,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 2,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 1
+          },
+          "30": {
+            "denominator": 3,
+            "states": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 1,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 1,
+              "selected_absent": 1,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 0
+          }
+        },
+        "gate_prefix_lengths": {
+          "0": 2,
+          "3": 1
+        },
+        "gate_prefix_stops": {
+          "selected_no_update": 2,
+          "shared_stage_below_gate": 1
+        },
+        "signed_gap_prefix_lengths": {
+          "0": 3
+        },
+        "signed_gap_prefix_stops": {
+          "gap_not_supported": 1,
+          "selected_no_update": 1,
+          "shared_stage_below_gate": 1
+        },
+        "gate_support_resumes_after_first_stop": 1
+      },
+      "occupied/fewer_updates": {
+        "alternatives": 44,
+        "history_anchored": 44,
+        "previous_accepted_observation": {
+          "shared_stage_gate": 11,
+          "shared_stage_below_gate": 18,
+          "competitor_other_stage_update": 14,
+          "competitor_absent": 1,
+          "selected_no_update": 0,
+          "selected_absent": 0,
+          "unanchored_history": 0,
+          "sequence_end": 0,
+          "no_recorded_selected_update": 0
+        },
+        "previous_signed_gap_support": 1,
+        "previous_update_gap": {
+          "min": 2.0,
+          "q25": 2.75,
+          "median": 3.5,
+          "q75": 7.0,
+          "max": 26.0
+        },
+        "lags": {
+          "1": {
+            "denominator": 44,
+            "states": {
+              "shared_stage_gate": 20,
+              "shared_stage_below_gate": 5,
+              "competitor_other_stage_update": 3,
+              "competitor_absent": 0,
+              "selected_no_update": 16,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 4,
+            "active_confirmed_gate_support": 20
+          },
+          "2": {
+            "denominator": 44,
+            "states": {
+              "shared_stage_gate": 20,
+              "shared_stage_below_gate": 4,
+              "competitor_other_stage_update": 6,
+              "competitor_absent": 0,
+              "selected_no_update": 14,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 4,
+            "active_confirmed_gate_support": 17
+          },
+          "5": {
+            "denominator": 44,
+            "states": {
+              "shared_stage_gate": 15,
+              "shared_stage_below_gate": 10,
+              "competitor_other_stage_update": 4,
+              "competitor_absent": 0,
+              "selected_no_update": 15,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 3,
+            "active_confirmed_gate_support": 14
+          },
+          "10": {
+            "denominator": 44,
+            "states": {
+              "shared_stage_gate": 7,
+              "shared_stage_below_gate": 16,
+              "competitor_other_stage_update": 3,
+              "competitor_absent": 0,
+              "selected_no_update": 18,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 1,
+            "active_confirmed_gate_support": 6
+          },
+          "30": {
+            "denominator": 44,
+            "states": {
+              "shared_stage_gate": 3,
+              "shared_stage_below_gate": 15,
+              "competitor_other_stage_update": 3,
+              "competitor_absent": 0,
+              "selected_no_update": 19,
+              "selected_absent": 3,
+              "unanchored_history": 0,
+              "sequence_end": 1,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 3
+          }
+        },
+        "gate_prefix_lengths": {
+          "0": 24,
+          "1": 6,
+          "2": 3,
+          "3": 2,
+          "4": 2,
+          "5": 2,
+          "6": 3,
+          "8": 1,
+          "13": 1
+        },
+        "gate_prefix_stops": {
+          "competitor_other_stage_update": 6,
+          "selected_no_update": 22,
+          "shared_stage_below_gate": 16
+        },
+        "signed_gap_prefix_lengths": {
+          "0": 40,
+          "1": 3,
+          "2": 1
+        },
+        "signed_gap_prefix_stops": {
+          "competitor_other_stage_update": 3,
+          "gap_not_supported": 19,
+          "selected_no_update": 17,
+          "shared_stage_below_gate": 5
+        },
+        "gate_support_resumes_after_first_stop": 24
+      },
+      "occupied/other": {
+        "alternatives": 0,
+        "history_anchored": 0,
+        "previous_accepted_observation": {
+          "shared_stage_gate": 0,
+          "shared_stage_below_gate": 0,
+          "competitor_other_stage_update": 0,
+          "competitor_absent": 0,
+          "selected_no_update": 0,
+          "selected_absent": 0,
+          "unanchored_history": 0,
+          "sequence_end": 0,
+          "no_recorded_selected_update": 0
+        },
+        "previous_signed_gap_support": 0,
+        "previous_update_gap": null,
+        "lags": {
+          "1": {
+            "denominator": 0,
+            "states": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 0
+          },
+          "2": {
+            "denominator": 0,
+            "states": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 0
+          },
+          "5": {
+            "denominator": 0,
+            "states": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 0
+          },
+          "10": {
+            "denominator": 0,
+            "states": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 0
+          },
+          "30": {
+            "denominator": 0,
+            "states": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 0
+          }
+        },
+        "gate_prefix_lengths": {},
+        "gate_prefix_stops": {},
+        "signed_gap_prefix_lengths": {},
+        "signed_gap_prefix_stops": {},
+        "gate_support_resumes_after_first_stop": 0
+      },
+      "available/same_updated_rows": {
+        "alternatives": 0,
+        "history_anchored": 0,
+        "previous_accepted_observation": {
+          "shared_stage_gate": 0,
+          "shared_stage_below_gate": 0,
+          "competitor_other_stage_update": 0,
+          "competitor_absent": 0,
+          "selected_no_update": 0,
+          "selected_absent": 0,
+          "unanchored_history": 0,
+          "sequence_end": 0,
+          "no_recorded_selected_update": 0
+        },
+        "previous_signed_gap_support": 0,
+        "previous_update_gap": null,
+        "lags": {
+          "1": {
+            "denominator": 0,
+            "states": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 0
+          },
+          "2": {
+            "denominator": 0,
+            "states": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 0
+          },
+          "5": {
+            "denominator": 0,
+            "states": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 0
+          },
+          "10": {
+            "denominator": 0,
+            "states": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 0
+          },
+          "30": {
+            "denominator": 0,
+            "states": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 0
+          }
+        },
+        "gate_prefix_lengths": {},
+        "gate_prefix_stops": {},
+        "signed_gap_prefix_lengths": {},
+        "signed_gap_prefix_stops": {},
+        "gate_support_resumes_after_first_stop": 0
+      },
+      "available/row_replacement": {
+        "alternatives": 9,
+        "history_anchored": 9,
+        "previous_accepted_observation": {
+          "shared_stage_gate": 8,
+          "shared_stage_below_gate": 0,
+          "competitor_other_stage_update": 1,
+          "competitor_absent": 0,
+          "selected_no_update": 0,
+          "selected_absent": 0,
+          "unanchored_history": 0,
+          "sequence_end": 0,
+          "no_recorded_selected_update": 0
+        },
+        "previous_signed_gap_support": 2,
+        "previous_update_gap": {
+          "min": 2.0,
+          "q25": 2.0,
+          "median": 3.0,
+          "q75": 4.0,
+          "max": 6.0
+        },
+        "lags": {
+          "1": {
+            "denominator": 9,
+            "states": {
+              "shared_stage_gate": 9,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 3,
+            "active_confirmed_gate_support": 0
+          },
+          "2": {
+            "denominator": 9,
+            "states": {
+              "shared_stage_gate": 6,
+              "shared_stage_below_gate": 1,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 2,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 1,
+            "active_confirmed_gate_support": 3
+          },
+          "5": {
+            "denominator": 9,
+            "states": {
+              "shared_stage_gate": 4,
+              "shared_stage_below_gate": 1,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 4,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 1,
+            "active_confirmed_gate_support": 2
+          },
+          "10": {
+            "denominator": 9,
+            "states": {
+              "shared_stage_gate": 1,
+              "shared_stage_below_gate": 3,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 5,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 0
+          },
+          "30": {
+            "denominator": 9,
+            "states": {
+              "shared_stage_gate": 1,
+              "shared_stage_below_gate": 2,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 4,
+              "selected_absent": 2,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 0
+          }
+        },
+        "gate_prefix_lengths": {
+          "1": 3,
+          "2": 1,
+          "3": 2,
+          "6": 1,
+          "7": 1,
+          "17": 1
+        },
+        "gate_prefix_stops": {
+          "selected_no_update": 7,
+          "shared_stage_below_gate": 2
+        },
+        "signed_gap_prefix_lengths": {
+          "0": 6,
+          "1": 3
+        },
+        "signed_gap_prefix_stops": {
+          "gap_not_supported": 7,
+          "selected_no_update": 2
+        },
+        "gate_support_resumes_after_first_stop": 6
+      },
+      "available/fewer_updates": {
+        "alternatives": 0,
+        "history_anchored": 0,
+        "previous_accepted_observation": {
+          "shared_stage_gate": 0,
+          "shared_stage_below_gate": 0,
+          "competitor_other_stage_update": 0,
+          "competitor_absent": 0,
+          "selected_no_update": 0,
+          "selected_absent": 0,
+          "unanchored_history": 0,
+          "sequence_end": 0,
+          "no_recorded_selected_update": 0
+        },
+        "previous_signed_gap_support": 0,
+        "previous_update_gap": null,
+        "lags": {
+          "1": {
+            "denominator": 0,
+            "states": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 0
+          },
+          "2": {
+            "denominator": 0,
+            "states": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 0
+          },
+          "5": {
+            "denominator": 0,
+            "states": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 0
+          },
+          "10": {
+            "denominator": 0,
+            "states": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 0
+          },
+          "30": {
+            "denominator": 0,
+            "states": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 0
+          }
+        },
+        "gate_prefix_lengths": {},
+        "gate_prefix_stops": {},
+        "signed_gap_prefix_lengths": {},
+        "signed_gap_prefix_stops": {},
+        "gate_support_resumes_after_first_stop": 0
+      },
+      "available/other": {
+        "alternatives": 0,
+        "history_anchored": 0,
+        "previous_accepted_observation": {
+          "shared_stage_gate": 0,
+          "shared_stage_below_gate": 0,
+          "competitor_other_stage_update": 0,
+          "competitor_absent": 0,
+          "selected_no_update": 0,
+          "selected_absent": 0,
+          "unanchored_history": 0,
+          "sequence_end": 0,
+          "no_recorded_selected_update": 0
+        },
+        "previous_signed_gap_support": 0,
+        "previous_update_gap": null,
+        "lags": {
+          "1": {
+            "denominator": 0,
+            "states": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 0
+          },
+          "2": {
+            "denominator": 0,
+            "states": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 0
+          },
+          "5": {
+            "denominator": 0,
+            "states": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 0
+          },
+          "10": {
+            "denominator": 0,
+            "states": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 0
+          },
+          "30": {
+            "denominator": 0,
+            "states": {
+              "shared_stage_gate": 0,
+              "shared_stage_below_gate": 0,
+              "competitor_other_stage_update": 0,
+              "competitor_absent": 0,
+              "selected_no_update": 0,
+              "selected_absent": 0,
+              "unanchored_history": 0,
+              "sequence_end": 0,
+              "no_recorded_selected_update": 0
+            },
+            "signed_gap_support": 0,
+            "active_confirmed_gate_support": 0
+          }
+        },
+        "gate_prefix_lengths": {},
+        "gate_prefix_stops": {},
+        "signed_gap_prefix_lengths": {},
+        "signed_gap_prefix_stops": {},
+        "gate_support_resumes_after_first_stop": 0
+      }
+    }
+  }
+}

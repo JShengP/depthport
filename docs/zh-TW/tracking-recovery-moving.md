@@ -8,6 +8,8 @@
 
 ![兩移動視角的漏追、誤追及換 ID](../assets/tracking-v03-recovery-moving.png)
 
+> 後續[狀態與關聯歷史診斷](tracking-recovery-history.md)精確重現本篇分數，補齊保留狀態、連續性歸屬及低門檻 HOTA 損失；原控制／預設不變。
+
 ## 序列、條款與證據界線
 
 完整 **MOT17-11-DPM 900 格／30 fps**（前進中的商場相機）及 **MOT17-13-DPM 750 格／25 fps**（公車拍攝路口），共 **1,650 格**。與前輪 MOT20-01 固定相機及政策發現用的 MOT17-09／10 分開；11／13 曾用於較早的一般基準，但**尚未測此控制**，不是從未看過的盲測場景。事前選定整段，不依本輪分數取片段或替換場景。
@@ -57,7 +59,7 @@
 
 ## 重現、限制與下一步
 
-輸入／快取／GT／metadata／原程式雜湊全部不變，原始 trace、逐格 ID、確切事件位置與病例僅存本機。固定 runtime 的獨立 NumPy 2 環境執行：
+輸入／快取／GT／metadata／原程式雜湊全部不變，原始 trace、逐格 ID、確切事件位置與案例僅存本機。固定 runtime 的獨立 NumPy 2 環境執行：
 
 ```bash
 python tools/validate_tracking_recovery_replication.py \
@@ -70,6 +72,6 @@ python tools/audit_tracking_recovery_errors.py \
   --work-dir artifacts/recovery-moving/audit --output artifacts/recovery-moving/errors.json
 ```
 
-診斷工具另外支援前輪 MOT20-01 紀錄。HOTA 拆分與前輪病例分類是結果後的確定性分析，不回填為事前規則。無關 BURST 的 `pycocotools` 選配匯入提示仍有記錄；本次 loader／三指標都完成。公開只含檢查過的彙總、雜湊與數值圖，既有 Release／Tag 不變。
+診斷工具另外支援前輪 MOT20-01 紀錄。HOTA 拆分與前輪案例分類是結果後的確定性分析，不回填為事前規則。無關 BURST 的 `pycocotools` 選配匯入提示仍有記錄；本次 loader／三指標都完成。公開只含檢查過的彙總、雜湊與數值圖，既有 Release／Tag 不變。
 
 下一步先釐清弱恢復延後後的狀態／關聯歷史、未匹配與 GT 競爭，以及公車多門檻 DetA／AssA 的損失，再另凍結有明確風險範圍的新控制。偵測框品質／解析度另做獨立實驗，不混入這輪。一般弱延續不能整批刪掉；目前資料不足以採用新預設或宣稱長遮擋／移動相機普遍可靠。實體 RTSP、Windows 真推論／worker、3D、長時穩定性與吞吐量仍未驗收。

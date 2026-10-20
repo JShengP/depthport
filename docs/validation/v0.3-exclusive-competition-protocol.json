@@ -1,0 +1,111 @@
+{
+  "format": "depthport.exclusive-competition-protocol.v1",
+  "recorded_at_utc": "2026-10-19T12:31:09.528244+00:00",
+  "checked_on": "2026-10-19",
+  "base_commit": "629d8e311628cfdae0eb20314083db0a30b7c646",
+  "status": "Frozen locally after common cache and synthetic contracts, before any tracker output/evaluation on this cohort. Not external preregistration. No post-result tuning.",
+  "selection": "Full MOT17-04-DPM 1050-frame night elevated-view pedestrian street; no earlier project tracking study on this scene. Selected from official train table, no additional third-party source link. One new static scene, not a held-out benchmark or moving-camera validation. Other third-party scenes excluded when original terms unavailable; MOT20-02 preview downloaded but excluded before tracking because full length exceeds unchanged 1800-frame cache limit. No output-driven replacement or clipping.",
+  "source_terms": {
+    "dataset": "MOT17 train / MOT17-04-DPM compressed preview",
+    "page": "https://motchallenge.net/data/MOT17/",
+    "license": "CC BY-NC-SA 3.0; original-source conditions may also apply",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+    "terms_page_retrieved_sha256": "fb34867c22c36630c063ea7a87344d5e1e8c2116890a8dd43ccc7c972030cdb8",
+    "source_column": "No additional third-party source link for MOT17-04-DPM in official table",
+    "scope": "Local non-commercial research only; source media, GT and raw diagnostics not redistributed",
+    "attribution": "MOTChallenge / Milan, Leal-Taixe, Reid, Roth and Schindler; MOT16 benchmark (arXiv:1603.00831)",
+    "labels_url": "https://motchallenge.net/data/MOT17Labels.zip",
+    "labels_archive_sha256": "0aa79322e91583369f42f17c4d79a0b145380d8732487bba59272048dc82b2b9"
+  },
+  "sequence": {
+    "name": "MOT17-04-DPM",
+    "frames": 1050,
+    "fps": 30.0,
+    "camera_motion": false,
+    "video_url": "https://motchallenge.net/sequenceVideos/MOT17-04-DPM-raw.mp4",
+    "video_sha256": "ab0d2fc03bce5e112abe9a173de7a2d70b39875c0af3eca49d6160c6e317e495",
+    "detections_sha256": "b537ab8b1a22452ce35e334088fc6579c2ed555b5411e88024696d5e2eb8257f",
+    "gt_sha256": "f8cfbe36ef38a2e1857d7ebfe7d754b2355a3ffb9e1f9cedea435e86e4fbc948",
+    "seqinfo_sha256": "b2270ebf3723d53b35a432a4c5d4d72831c445bd9c774bf6c79b3db8cc030995"
+  },
+  "detector": {
+    "model": "yolo26n.pt",
+    "confidence": 0.1,
+    "imgsz": 640,
+    "source": "ultralytics",
+    "device": "cpu",
+    "classes": [
+      0
+    ],
+    "max_det": 64,
+    "nms_iou": 0.7,
+    "ultralytics": "8.4.176",
+    "weight_sha256": "9b09cc8bf347f0fc8a5f7657480587f25db09b34bf33b0652110fb03a8ad4fef",
+    "frames_at_detection_cap": 0
+  },
+  "parameters": {
+    "track_activation_threshold": 0.3,
+    "high_conf_det_threshold": 0.6,
+    "lost_track_buffer": 30,
+    "minimum_consecutive_frames": 2
+  },
+  "arms": [
+    "activation_control",
+    "defer_competing_recovery",
+    "defer_available_competitor",
+    "defer_equivalent_assignment"
+  ],
+  "margin": 0.05,
+  "objective_atol": 1e-12,
+  "repeats": 3,
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv-python": "4.11.0.86",
+    "trackers": "2.6.1",
+    "supervision": "0.27.0",
+    "scipy": "1.18.1"
+  },
+  "upstream_bytetrack_class_sha256": "7ea61408b4908da327ba992f09450865bb16019ab95bed23a512e5c03bef8fda",
+  "implementation_sha256": {
+    "depthport/tracking_exclusive_control.py": "3f49c1754d1cfbf50c1aa27af05a0c2a2bb01418066d0373cde117c640cb6d10",
+    "tools/validate_tracking_exclusive.py": "a82af9524749b3a9bc8f64317f257aee200f94ab8271c7d25847c3eb9151baaa",
+    "depthport/tracking_recovery_control.py": "123ed43132d33326a0ec0ca1c7deaa23d20f1fa07f35b2df3ee4735efbe4a7b6",
+    "depthport/tracking_association_probe.py": "585f2d87b3246644a6df0d96b62fd88998b12dd9bdc86233107e521f4061926e",
+    "depthport/tracking_admission.py": "d327ade6c1a7a72d97e2dcd13a8f2bd6c583bde48b46aca15a3edfc7915d3a89",
+    "depthport/video_tracking_benchmark.py": "42fd7739080b4523f64c8425979e0125b8bfbfee7abfc5f22ed5e41668bbca0c",
+    "depthport/mot_scenarios.py": "00e7dfd32856ee5cac4da9ad3142ce64428a006405d326889f02c87b80ce5bce",
+    "depthport/tracking_diagnostics.py": "09838945d8d72da9c28bdb8dad432a335d7ae4be4ff08f62059c70fd05d2ba67",
+    "depthport/tracking_recovery_diagnostics.py": "3d8cb3fa2be4ee89e5b8bc51a738a82f86d9baadc7cad66b52be27219381d90a",
+    "tools/validate_tracking_recovery.py": "fbaca84154570f686f4dfc4463e798d8cfc8191db3635fbe3d4ff7a1138badde",
+    "tools/validate_mot_tracking.py": "6736bd42599bcbfd1d046229e07d061c36fa954b16a44bdf41f55995ea58c766",
+    "tools/diagnose_tracking_association.py": "6aef32d07901e60d93489ef8dcee1f42615754e608eddea967cbb1675ca1b95c",
+    "tools/cache_video_detections.py": "9fca335da835821476e17ee1daa42298b0ded12b2de502b69549355221fb0380",
+    "tests/test_tracking_exclusive_control.py": "97cf20f0e2251fb11defe3d8f84b29257a50bf142380a08ad14822f2a0cac893"
+  },
+  "interventions": {
+    "common": "Only confirmed selected weak-stage rows, predicted age >=2; candidate active confirmed competitor age 1, similarity >=.1 and selected-minus-competitor <= unchanged .05. All weak inputs remain. No GT or numeric ID comparison across arms.",
+    "activation_control": "No veto; observed reference audited against unhooked upstream.",
+    "defer_competing_recovery": "Original same-column policy; audited against unchanged original runner.",
+    "defer_available_competitor": "Veto only if any eligible active competitor has no gate-accepted assignment to another weak detection in original result. Does not also require alternative-objective equivalence.",
+    "defer_equivalent_assignment": "Separately force eligible competitor to target column and solve remaining unfiltered one-to-one matrix with pinned SciPy; veto only if total objective loss <=1e-12 numerical roundoff and gate-admissible pair count >= actual original accepted count. Occupied rows allowed. Does not also require availability. Alternative is never installed. Solver-returned tied optimum only; ties not exhaustively enumerated.",
+    "action": "Remove only qualifying originally selected missed-row edges after upstream assignment; do not rematch, claim competitor ownership, update state manually or extend lifetime. Deferred detection remains upstream output as ID -1. Decisions for a frame simultaneous from unmodified assignment.",
+    "unchanged": "Activation .3, high .6, buffer30, confirmation2, ordinary active weak continuation, uncontested weak recovery, weak detector cache >=.1, high stage, births, lifecycle, box/score updates, fixed source-FPS, app/worker/defaults/CMC/ReID."
+  },
+  "order": "Fresh tracker each arm; rotate four arms by repeat index 0/1/2; OpenCV seed0/one thread. Three identical canonical prediction and complete diagnostic trace hashes required. Additional unhooked/legacy audits are not independent repeats.",
+  "evaluation": {
+    "official": "Clean TrackEval 12c8791b303e0a0b50f753af204249e622d0281a, official MOT17 pedestrian preprocessing, CLEAR IoU .5, Identity and HOTA all 19 localisation thresholds. Independent local NumPy2 process.",
+    "screen": "For each treatment against activation_control: must trigger, strictly reduce FP, no FN/IDSW increase, no IDF1/HOTA decrease, no loss of same-ID scenario endpoints. Zero exposure is inconclusive, never a passed fix. One-scene pass is not release acceptance.",
+    "paired_errors": "Exact official CLEAR reconciliation; FP keyed by immutable frame/cache detection, FN/IDSW by frame/GT. No cross-arm numeric native ID equality. Raw locations stay local.",
+    "scenarios": "Existing GT-only long-low-visibility/overlap/order-exchange proxies, separate IoU .5 endpoints; not proof of physical occlusion or official scenario metrics.",
+    "exposure": "Report own-history legacy-eligible edges, availability/equivalence and occupied rows per arm; no pooling as independent events, no counterfactual inference by removing old decisions.",
+    "timing": "No throughput or end-to-end timing claim."
+  },
+  "limitations": [
+    "Single new static training preview; not independent held-out official benchmark, moving-camera or general long-occlusion acceptance.",
+    "Compressed/downscaled preview and one fixed YOLO26n CPU cache; DPM names identify GT source, supplied DPM detections are not used.",
+    "No parameter search; exact equivalent-objective criterion can have zero genuine exposure. Do not relax after result.",
+    "Prior bus HOTA failure and prior recall/fragmentation limits remain; no application default promotion or historical release validation.",
+    "Raw video/GT/matrices/IDs/diagnostic cases remain local; only aggregate counts/metrics and source/code hashes public."
+  ],
+  "public_scope": "Code, frozen protocol, fixed-label aggregate metrics/counts, provenance and numeric-only plots. No raw media/GT/predictions/IDs/frame locations/paths/credentials."
+}

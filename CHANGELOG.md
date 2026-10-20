@@ -2,6 +2,21 @@
 
 ## Unreleased — research and documentation after v0.3.0-alpha.2 / Alpha.2 後的研究與文件
 
+- Add GT-free frozen exposure selection, continuous bounded-cache shards and complete discovery/reserved-confirmation ledgers for 16 full sources / 17,984 frames / 144 runs. Availability triggers eight times in discovery only; equivalent assignment remains unexposed, neither replicates in reserved sources. Keep weak continuation and original controls/settings; raw observations/diagnoses local. Add post-selection objective-reason audit and correct the earlier MOT17-04 new-scene provenance claim without rewriting frozen records.
+- 完成不靠 GT 分數的完整曝光搜尋與分離確認，公開所有序列與零值彙總；未找到兩個可獨立重現曝光的控制，不調參或升預設。來源文字／舊圖更正為先前場景的新快取，歷史數值不改。
+
+[GT-free exposure / GT-free 曝光](docs/en/tracking-exposure-selection.md) · [繁體中文](docs/zh-TW/tracking-exposure-selection.md)
+
+- Add separate offline availability-only and equivalent-one-to-one ByteTrack recovery controls, frozen protocol, fresh-cache MOT17-04 comparison and numeric figure. Twelve repeat runs preserve weak continuation: new controls equal reference with zero exposure; legacy adds six misses with unchanged FP despite identity-score gains. No accepted fix, retuning/default/release change; raw diagnostics stay local.
+- 完成競爭者占用／一對一替代獨立控制、新快取比較與雙語驗證／ROADMAP；如實記錄零觸發與漏追取捨，不發布影像、GT 或原始案例。
+
+[Exclusive competition / 排他競爭控制](docs/en/tracking-exclusive-competition.md) · [繁體中文](docs/zh-TW/tracking-exclusive-competition.md)
+
+- Add read-only immutable-history bridges, weak-state/column analysis and an exact pinned HOTA solver observer. Reproduce frozen scores without tracking or retuning; separate below-gate retained states, CLEAR ownership continuity, one-frame switch displacement and bus low-localisation observation losses. All ten competitors are already occupied and forced-alternative costs overlap; select effective exclusive competition as the next research point, with no new gate/default/release change.
+- 補齊延後接回的狀態與關聯歷史、HOTA 門檻診斷及圖表，原始矩陣／ID／案例留本機，不調參或宣稱修復，保留弱偵測延續。
+
+[History diagnosis / 歷史診斷](docs/en/tracking-recovery-history.md) · [繁體中文](docs/zh-TW/tracking-recovery-history.md)
+
 - Replicate unchanged ByteTrack recovery deferral on full moving MOT17-11/13 with fresh fixed detections; add post-hoc added-error/HOTA audit and aggregate figure. FP −8, no added FN/IDSW, but bus-view HOTA regression fails the per-scene screen. Retain the reporting-only import repair and initial freeze; no tuning/default/release change, raw traces remain local.
 - 完成移動相機不調參重驗，補析前輪新增漏追／換 ID 與多門檻 HOTA，明列單場景退步、原始凍結與匯入修正；公開僅彙總，保留一般弱延續。
 

@@ -1,0 +1,268 @@
+{
+  "format": "depthport.past-exposure-lock.v1",
+  "protocol_sha256": "573b76a8019ce5bb069a6140d2070c26ca7c4071dace026dcef3ea8eba255082",
+  "phase": "discovery",
+  "discovery_sha256": null,
+  "preparation_seal_sha256": null,
+  "sequences": [
+    {
+      "name": "MOT17-09-DPM",
+      "video_sha256": "44472faa5643b173fa9b0d4837d3018cd1f5c4a3f13ab4bc9f865cf552022f9d",
+      "cache_sha256": [
+        "331845d105f109f670a35eb141b9ad3ffbf044964d51374ffaa23e22be93085a"
+      ],
+      "frames": 525,
+      "fps": 30,
+      "resolution": [
+        960,
+        540
+      ],
+      "cache_shards": 1,
+      "cached_detections": 6691,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT17-10-DPM",
+      "video_sha256": "0780ec0d648cfbca71a92cf0e45811e591b0f014307e3291a5f970112d855d01",
+      "cache_sha256": [
+        "6e5a08a2998c696561aec4662e4ec3b41e750694bc3baa429d37aed0ae7dc9ae"
+      ],
+      "frames": 654,
+      "fps": 30,
+      "resolution": [
+        960,
+        540
+      ],
+      "cache_shards": 1,
+      "cached_detections": 10794,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT17-11-DPM",
+      "video_sha256": "315f28aedefb503d4b7405a36475481eefd7d3072ab9c27286716ed224736ec5",
+      "cache_sha256": [
+        "723eea651fcd458fb68b7361183552388142d4dde9270fb57a6e34b83ec3400f"
+      ],
+      "frames": 900,
+      "fps": 30,
+      "resolution": [
+        960,
+        540
+      ],
+      "cache_shards": 1,
+      "cached_detections": 8558,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT17-13-DPM",
+      "video_sha256": "3c643abd4f37f1c67815c5faaebac6bea98fe536e45d97aa82e9682991e47fae",
+      "cache_sha256": [
+        "18e18639957a173dfcb4aa3356f9280750f9c1deac1590181cbb38b68180b4ca"
+      ],
+      "frames": 750,
+      "fps": 25,
+      "resolution": [
+        960,
+        540
+      ],
+      "cache_shards": 1,
+      "cached_detections": 8285,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT17-04-DPM",
+      "video_sha256": "ab0d2fc03bce5e112abe9a173de7a2d70b39875c0af3eca49d6160c6e317e495",
+      "cache_sha256": [
+        "b537ab8b1a22452ce35e334088fc6579c2ed555b5411e88024696d5e2eb8257f"
+      ],
+      "frames": 1050,
+      "fps": 30,
+      "resolution": [
+        960,
+        540
+      ],
+      "cache_shards": 1,
+      "cached_detections": 20133,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT20-01",
+      "video_sha256": "0105c42857c50f73c6ec50d3456f9bb8a04cbe45944bf7bbc3c77dc755feeae8",
+      "cache_sha256": [
+        "6db33759b20eabd0680c95da9c3808f284869ff919138965db8f3af043c6cea0"
+      ],
+      "frames": 429,
+      "fps": 25,
+      "resolution": [
+        960,
+        540
+      ],
+      "cache_shards": 1,
+      "cached_detections": 7529,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT20-02",
+      "video_sha256": "84b7a7d240522c82b24078de1c3084561b604f0360cec8a0e48d1b2ac06276de",
+      "cache_sha256": [
+        "94a459500229fb3eef68f3f65988dc33e13791739359ad88b5292a058c13aef5",
+        "0e6cb0f1c5f1f380c5c4c5d423eb9b1fb7e012033d50865cec9a93073ed215e6"
+      ],
+      "frames": 2782,
+      "fps": 25,
+      "resolution": [
+        960,
+        540
+      ],
+      "cache_shards": 2,
+      "cached_detections": 59523,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT20-06",
+      "video_sha256": "fc1f0afa16c32ca9218fcaf531fe561a5a6264b0841a21102703139eb0c16ee0",
+      "cache_sha256": [
+        "534b804dd5af74ff998b4b0b601fa4c964948c8e7ce8b79625b1d470c84ee499"
+      ],
+      "frames": 1008,
+      "fps": 25,
+      "resolution": [
+        960,
+        366
+      ],
+      "cache_shards": 1,
+      "cached_detections": 16663,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT20-07",
+      "video_sha256": "e3fa42ee6276a97a1d2af72825531a647d0412243b8cc6b16a3d32e14377ad97",
+      "cache_sha256": [
+        "9a5592944acaec693589b3a17031e5ac62df2fb767cad03374226f46678533f5"
+      ],
+      "frames": 585,
+      "fps": 25,
+      "resolution": [
+        960,
+        540
+      ],
+      "cache_shards": 1,
+      "cached_detections": 11184,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT20-08",
+      "video_sha256": "ef9d89cfb6df80fa56bbe0e0afb8d5ca352119d07db0eabf23876574448767a1",
+      "cache_sha256": [
+        "66f83e3f9d11d9efdae7097848aa09dde38d2c6b67a61d8b3802945589fe07d8"
+      ],
+      "frames": 806,
+      "fps": 25,
+      "resolution": [
+        960,
+        366
+      ],
+      "cache_shards": 1,
+      "cached_detections": 10401,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT17-07-DPM",
+      "video_sha256": "e697175a64408fc198de761374e36ae01ba8edd4f349490e654a2f2293010032",
+      "cache_sha256": [
+        "18835997f2cdd0ac2944b3e66e012e58edac5e7a13bfb426fa260a33c2b4ee55"
+      ],
+      "frames": 500,
+      "fps": 30,
+      "resolution": [
+        960,
+        540
+      ],
+      "cache_shards": 1,
+      "cached_detections": 12733,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT17-08-DPM",
+      "video_sha256": "d105cf5ac8202609086e5610d30f32db4deefb99081912e5995e27c088707b7c",
+      "cache_sha256": [
+        "67392da03cc05a3c364fecec16b01c8e993a9ad3f4426b35e8007d3cdd63454b"
+      ],
+      "frames": 625,
+      "fps": 30,
+      "resolution": [
+        960,
+        540
+      ],
+      "cache_shards": 1,
+      "cached_detections": 11666,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT17-12-DPM",
+      "video_sha256": "db15e4a26907e29d4d32ab3cb393934e99ccc5959d79763b14f5b0fc6f9bbdc4",
+      "cache_sha256": [
+        "79b4742894c7ce6ab6e0575803d1512516c06647db097f7897bbc26dc188754b"
+      ],
+      "frames": 900,
+      "fps": 30,
+      "resolution": [
+        960,
+        540
+      ],
+      "cache_shards": 1,
+      "cached_detections": 7806,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT17-14-DPM",
+      "video_sha256": "8411fb87f3669df8ded029a07f4ef0d6b127953efda5912d1376054fef15be5c",
+      "cache_sha256": [
+        "3e509b33410eccb19290d6f534c1203cb07c9905bb39f8a59e37b19ec9e55ff6"
+      ],
+      "frames": 750,
+      "fps": 25,
+      "resolution": [
+        960,
+        540
+      ],
+      "cache_shards": 1,
+      "cached_detections": 12970,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT20-03",
+      "video_sha256": "a93dc3d6ef9d3f897db2dd493e96f3077ad7b6edc31225fefd5f4d204b9faba3",
+      "cache_sha256": [
+        "e1ecbf13121c176ad98b802186a0f59071e286c943b77f35ff00f57cdb0cc0e9",
+        "2d4f4a2c0166bd9e9e04a75f6f5f2036b0a2fcfa745eb5b09c60f0f1ac447905"
+      ],
+      "frames": 2405,
+      "fps": 25,
+      "resolution": [
+        586,
+        440
+      ],
+      "cache_shards": 2,
+      "cached_detections": 76712,
+      "capped_frames": 0
+    },
+    {
+      "name": "MOT20-05",
+      "video_sha256": "e5d1099517a3d5fe8cded2035fce54ff641171b3be5b97cfcb774db90a64bc8e",
+      "cache_sha256": [
+        "74feedc3beb511a334144f559c19168dd608d0a81d68b56fcacbf13fde67978e",
+        "192f3f01bb762daa8c0e0ac73f45d802db7f6796dc4ea2eaf12aada7041f6115"
+      ],
+      "frames": 3315,
+      "fps": 25,
+      "resolution": [
+        826,
+        540
+      ],
+      "cache_shards": 2,
+      "cached_detections": 89810,
+      "capped_frames": 0
+    }
+  ]
+}

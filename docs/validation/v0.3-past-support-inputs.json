@@ -1,0 +1,32 @@
+{
+  "format": "depthport.past-support-input-lock.v1",
+  "protocol_sha256": "ff4a9720a0cf039e39255b49054dd68d5d3e8e092e970f4020fc1b5d6362c395",
+  "labels_archive_sha256": "6ad1fa0125e3cddcbe4d182e41cd12a854a11b0c733b26c706595f6db5c254e0",
+  "sequences": [
+    {
+      "name": "KITTI-0000",
+      "cache_sha256": "2905e954715d97ec37446a9936c3d04591c112c02c3014701117379208139587",
+      "gt_member_crc32": 2687680377,
+      "gt_member_bytes": 154115
+    },
+    {
+      "name": "KITTI-0001",
+      "cache_sha256": "5912cbe4d6a9ecb4c1d0dccbc42b36edeb9f847f50ff032f0c21a38074df35a2",
+      "gt_member_crc32": 4288272949,
+      "gt_member_bytes": 598346
+    },
+    {
+      "name": "KITTI-0002",
+      "cache_sha256": "817c0adf6a48cfc1b43cd28da9c802922bbf5dfd9427afd7bf5b984f63108de9",
+      "gt_member_crc32": 258407268,
+      "gt_member_bytes": 294462
+    },
+    {
+      "name": "KITTI-0003",
+      "cache_sha256": "9a9cc405f9a284ca4a6f7880b16fa26449bf095ada689f3be4ee909442a98f3d",
+      "gt_member_crc32": 1523532468,
+      "gt_member_bytes": 125150
+    }
+  ],
+  "gt_content_opened": false
+}

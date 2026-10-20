@@ -1,0 +1,1337 @@
+{
+  "format": "depthport.past-exposure.v1",
+  "phase": "discovery",
+  "protocol_sha256": "573b76a8019ce5bb069a6140d2070c26ca7c4071dace026dcef3ea8eba255082",
+  "input_lock_sha256": "8656c55169f6010b1806efe70a691d9bd76e06623826e761721f45239f90544a",
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv-python": "4.11.0.86",
+    "trackers": "2.6.1",
+    "supervision": "0.27.0",
+    "scipy": "1.18.1"
+  },
+  "repeats": 3,
+  "gt_read": false,
+  "accuracy_scoring": false,
+  "retuned": false,
+  "all_scheduled_completed": true,
+  "ledger": [
+    {
+      "name": "MOT17-09-DPM",
+      "phase": "discovery",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "frames": 525,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "9e9361ce0ec717cc2ec65befaf11f65f176f455b4e92fae4c6e475294dbd1777",
+          "trace_sha256": "4b28b5017af288b243ebae83bed632f80cf4f3245029bc7cf41ad9a440d835f1",
+          "counts": {
+            "frames": 525,
+            "candidate_edges": 18,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 27,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 2,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_only": {
+          "prediction_sha256": "14683210baf5370d7bdd3d9ed83720add15d8f5ffd026ebd3a970e1beabc68ce",
+          "trace_sha256": "8be859211748cd258de1890588ce2108b6f183e19eba05912dd2e8307c7ce675",
+          "counts": {
+            "frames": 525,
+            "candidate_edges": 19,
+            "actual_vetoes": 5,
+            "frames_with_veto": 5,
+            "active_alternatives": 34,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 5,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "update_protection_only": {
+          "prediction_sha256": "9e9361ce0ec717cc2ec65befaf11f65f176f455b4e92fae4c6e475294dbd1777",
+          "trace_sha256": "4b28b5017af288b243ebae83bed632f80cf4f3245029bc7cf41ad9a440d835f1",
+          "counts": {
+            "frames": 525,
+            "candidate_edges": 18,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 27,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 2,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_and_protection": {
+          "prediction_sha256": "9e9361ce0ec717cc2ec65befaf11f65f176f455b4e92fae4c6e475294dbd1777",
+          "trace_sha256": "4b28b5017af288b243ebae83bed632f80cf4f3245029bc7cf41ad9a440d835f1",
+          "counts": {
+            "frames": 525,
+            "candidate_edges": 18,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 27,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 2,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 6691,
+      "capped_frames": 0,
+      "cache_shards": 1,
+      "unhooked_reference_equal": true,
+      "historical_reference_equal": true
+    },
+    {
+      "name": "MOT17-10-DPM",
+      "phase": "discovery",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "frames": 654,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "0a2fc2beaa6d8c0c9b1e7158a94973ff7b63acb6830a96994de87e26c6294cbe",
+          "trace_sha256": "ff7b68f7c1902c705a0be81f7e29eba960b0d88b1e078242672ddbb5ab49ce8c",
+          "counts": {
+            "frames": 654,
+            "candidate_edges": 16,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 16,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 5,
+            "protected": 1,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_only": {
+          "prediction_sha256": "1b68dc7da24c3f45eabd7ae7bd4f6dd99f822da8167ca2c579e6b72aa217525e",
+          "trace_sha256": "003fc9ccc885a56f89ea74a07324e1de7fc43f4e5d648ee932b0c857652b85d9",
+          "counts": {
+            "frames": 654,
+            "candidate_edges": 11,
+            "actual_vetoes": 3,
+            "frames_with_veto": 3,
+            "active_alternatives": 11,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 3,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "update_protection_only": {
+          "prediction_sha256": "74deaea9a7b85cd10c95cc067a612b41aa65311a4bbe112fb5e5dec261d8183f",
+          "trace_sha256": "bfb4eaa866e60f32979cbcb9a70555b201bf7df6685351b0b821a61f055edadc",
+          "counts": {
+            "frames": 654,
+            "candidate_edges": 16,
+            "actual_vetoes": 1,
+            "frames_with_veto": 1,
+            "active_alternatives": 15,
+            "retained_alternatives": 1,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 5,
+            "protected": 1,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_and_protection": {
+          "prediction_sha256": "0a2fc2beaa6d8c0c9b1e7158a94973ff7b63acb6830a96994de87e26c6294cbe",
+          "trace_sha256": "ff7b68f7c1902c705a0be81f7e29eba960b0d88b1e078242672ddbb5ab49ce8c",
+          "counts": {
+            "frames": 654,
+            "candidate_edges": 16,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 16,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 5,
+            "protected": 1,
+            "joint": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 10794,
+      "capped_frames": 0,
+      "cache_shards": 1,
+      "unhooked_reference_equal": true,
+      "historical_reference_equal": true
+    },
+    {
+      "name": "MOT17-11-DPM",
+      "phase": "discovery",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "frames": 900,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "5ddcbe1b16f210ec635ce21978baddc857309e2576df387b816aa4196ff4e34b",
+          "trace_sha256": "9ad11e8eddd68c18deed1dbbfe02c9da9e1926b53e2d58a8053204d970efe8de",
+          "counts": {
+            "frames": 900,
+            "candidate_edges": 4,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 4,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 1,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_only": {
+          "prediction_sha256": "77116de69ac5345645cf25f0d3bf21a86d7a5ed057d4f6b96c66ffb56d148147",
+          "trace_sha256": "1dd7fe9334fb178faf545106cbf0a95c0f9c0f0ea738d0e072b8f520bb6fcc57",
+          "counts": {
+            "frames": 900,
+            "candidate_edges": 4,
+            "actual_vetoes": 1,
+            "frames_with_veto": 1,
+            "active_alternatives": 4,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 1,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "update_protection_only": {
+          "prediction_sha256": "5ddcbe1b16f210ec635ce21978baddc857309e2576df387b816aa4196ff4e34b",
+          "trace_sha256": "9ad11e8eddd68c18deed1dbbfe02c9da9e1926b53e2d58a8053204d970efe8de",
+          "counts": {
+            "frames": 900,
+            "candidate_edges": 4,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 4,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 1,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_and_protection": {
+          "prediction_sha256": "5ddcbe1b16f210ec635ce21978baddc857309e2576df387b816aa4196ff4e34b",
+          "trace_sha256": "9ad11e8eddd68c18deed1dbbfe02c9da9e1926b53e2d58a8053204d970efe8de",
+          "counts": {
+            "frames": 900,
+            "candidate_edges": 4,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 4,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 1,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 8558,
+      "capped_frames": 0,
+      "cache_shards": 1,
+      "unhooked_reference_equal": true,
+      "historical_reference_equal": true
+    },
+    {
+      "name": "MOT17-13-DPM",
+      "phase": "discovery",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "frames": 750,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "b9f2817194b648c92081d71779d182ce7c5f901665baf9b4e4d312ecc7c17fef",
+          "trace_sha256": "3eda46d3af987394010274534cd8207a7cc62abffaa65061d928ed695672fbfb",
+          "counts": {
+            "frames": 750,
+            "candidate_edges": 4,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 4,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 1,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_only": {
+          "prediction_sha256": "3ba4f5148622ef12b63d625843b0c7e9170bcae501405fd48f7b17371dd3a900",
+          "trace_sha256": "35cd8f6f75d93b5057ae20fe99cd7f57d75e92642dce3b0211c8fb4512191620",
+          "counts": {
+            "frames": 750,
+            "candidate_edges": 4,
+            "actual_vetoes": 1,
+            "frames_with_veto": 1,
+            "active_alternatives": 4,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 1,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "update_protection_only": {
+          "prediction_sha256": "b9f2817194b648c92081d71779d182ce7c5f901665baf9b4e4d312ecc7c17fef",
+          "trace_sha256": "3eda46d3af987394010274534cd8207a7cc62abffaa65061d928ed695672fbfb",
+          "counts": {
+            "frames": 750,
+            "candidate_edges": 4,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 4,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 1,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_and_protection": {
+          "prediction_sha256": "b9f2817194b648c92081d71779d182ce7c5f901665baf9b4e4d312ecc7c17fef",
+          "trace_sha256": "3eda46d3af987394010274534cd8207a7cc62abffaa65061d928ed695672fbfb",
+          "counts": {
+            "frames": 750,
+            "candidate_edges": 4,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 4,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 1,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 8285,
+      "capped_frames": 0,
+      "cache_shards": 1,
+      "unhooked_reference_equal": true,
+      "historical_reference_equal": true
+    },
+    {
+      "name": "MOT17-04-DPM",
+      "phase": "discovery",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "frames": 1050,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "3e68bb626c3511755ca9e081716739097715842b1eb8785fbd7426da55be3f0e",
+          "trace_sha256": "eee7b55e68048c77a5d68e3e83c68282d0417fcc46f50309c3b3313c09a7d5a7",
+          "counts": {
+            "frames": 1050,
+            "candidate_edges": 1,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 1,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_only": {
+          "prediction_sha256": "3e68bb626c3511755ca9e081716739097715842b1eb8785fbd7426da55be3f0e",
+          "trace_sha256": "eee7b55e68048c77a5d68e3e83c68282d0417fcc46f50309c3b3313c09a7d5a7",
+          "counts": {
+            "frames": 1050,
+            "candidate_edges": 1,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 1,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "update_protection_only": {
+          "prediction_sha256": "3e68bb626c3511755ca9e081716739097715842b1eb8785fbd7426da55be3f0e",
+          "trace_sha256": "eee7b55e68048c77a5d68e3e83c68282d0417fcc46f50309c3b3313c09a7d5a7",
+          "counts": {
+            "frames": 1050,
+            "candidate_edges": 1,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 1,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_and_protection": {
+          "prediction_sha256": "3e68bb626c3511755ca9e081716739097715842b1eb8785fbd7426da55be3f0e",
+          "trace_sha256": "eee7b55e68048c77a5d68e3e83c68282d0417fcc46f50309c3b3313c09a7d5a7",
+          "counts": {
+            "frames": 1050,
+            "candidate_edges": 1,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 1,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 20133,
+      "capped_frames": 0,
+      "cache_shards": 1,
+      "unhooked_reference_equal": true,
+      "historical_reference_equal": true
+    },
+    {
+      "name": "MOT20-01",
+      "phase": "discovery",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "frames": 429,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "97e6ed42766c5387c311a35fb991e9674be8deae7a3adcd162f0a1c97b2135c7",
+          "trace_sha256": "8026a0f3630c5b8a0a3613d1590f69167b045fd8c7a2abef33a729430e91b7ed",
+          "counts": {
+            "frames": 429,
+            "candidate_edges": 6,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 5,
+            "retained_alternatives": 1,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_only": {
+          "prediction_sha256": "97e6ed42766c5387c311a35fb991e9674be8deae7a3adcd162f0a1c97b2135c7",
+          "trace_sha256": "8026a0f3630c5b8a0a3613d1590f69167b045fd8c7a2abef33a729430e91b7ed",
+          "counts": {
+            "frames": 429,
+            "candidate_edges": 6,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 5,
+            "retained_alternatives": 1,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "update_protection_only": {
+          "prediction_sha256": "97e6ed42766c5387c311a35fb991e9674be8deae7a3adcd162f0a1c97b2135c7",
+          "trace_sha256": "8026a0f3630c5b8a0a3613d1590f69167b045fd8c7a2abef33a729430e91b7ed",
+          "counts": {
+            "frames": 429,
+            "candidate_edges": 6,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 5,
+            "retained_alternatives": 1,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_and_protection": {
+          "prediction_sha256": "97e6ed42766c5387c311a35fb991e9674be8deae7a3adcd162f0a1c97b2135c7",
+          "trace_sha256": "8026a0f3630c5b8a0a3613d1590f69167b045fd8c7a2abef33a729430e91b7ed",
+          "counts": {
+            "frames": 429,
+            "candidate_edges": 6,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 5,
+            "retained_alternatives": 1,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 7529,
+      "capped_frames": 0,
+      "cache_shards": 1,
+      "unhooked_reference_equal": true,
+      "historical_reference_equal": true
+    },
+    {
+      "name": "MOT20-02",
+      "phase": "discovery",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "frames": 2782,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "6035203c20049177cb676151bb5c27660bf98ca3f0ff6f5f8fc8d2017f8056b6",
+          "trace_sha256": "e072f125ec7d4fbbbc3940be6bec8f42986d88c4f1a87b64b3bfd2cd9f65ea5a",
+          "counts": {
+            "frames": 2782,
+            "candidate_edges": 56,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 59,
+            "retained_alternatives": 1,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 8,
+            "protected": 2,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_only": {
+          "prediction_sha256": "4cf40df5e24b8908faca5da3464a71b88ce9576439ab79229acd599f1997737b",
+          "trace_sha256": "15a63414036de3d0f2e6c9c3b2d735da9cfa4c5eedce5371f88052ca65d129f4",
+          "counts": {
+            "frames": 2782,
+            "candidate_edges": 61,
+            "actual_vetoes": 12,
+            "frames_with_veto": 12,
+            "active_alternatives": 65,
+            "retained_alternatives": 1,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 13,
+            "protected": 2,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "update_protection_only": {
+          "prediction_sha256": "1739853116d697320acfa96b4c511d23cca218733988fdc391472dbc1abec055",
+          "trace_sha256": "a6a0338e788d8af4456bb69e3162755a0dabab208af4621c75b1d645e010d87d",
+          "counts": {
+            "frames": 2782,
+            "candidate_edges": 57,
+            "actual_vetoes": 2,
+            "frames_with_veto": 2,
+            "active_alternatives": 59,
+            "retained_alternatives": 2,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 8,
+            "protected": 2,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_and_protection": {
+          "prediction_sha256": "6035203c20049177cb676151bb5c27660bf98ca3f0ff6f5f8fc8d2017f8056b6",
+          "trace_sha256": "e072f125ec7d4fbbbc3940be6bec8f42986d88c4f1a87b64b3bfd2cd9f65ea5a",
+          "counts": {
+            "frames": 2782,
+            "candidate_edges": 56,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 59,
+            "retained_alternatives": 1,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 8,
+            "protected": 2,
+            "joint": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 59523,
+      "capped_frames": 0,
+      "cache_shards": 2,
+      "unhooked_reference_equal": true,
+      "historical_reference_equal": true
+    },
+    {
+      "name": "MOT20-06",
+      "phase": "discovery",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "frames": 1008,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "56bf6eba46da59f44ef4566179b1ed3c7d3ca4280e805677553f65ab2d2dccef",
+          "trace_sha256": "c05cdd8b5bf835d67d015fbab7b88116c83684486419ffe7cd57d501c2f8c6f8",
+          "counts": {
+            "frames": 1008,
+            "candidate_edges": 16,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 16,
+            "retained_alternatives": 1,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 4,
+            "protected": 2,
+            "joint": 1
+          },
+          "repeat_equal": true
+        },
+        "past_support_only": {
+          "prediction_sha256": "892aafae31dcace40badcc1c48971b265a7fd2d7b4892c96bb97971a692e4098",
+          "trace_sha256": "a53a13eb560a91b6c3cd984c7234d41dccbf7a7ac22b114d1b56d904d36080ac",
+          "counts": {
+            "frames": 1008,
+            "candidate_edges": 16,
+            "actual_vetoes": 6,
+            "frames_with_veto": 6,
+            "active_alternatives": 16,
+            "retained_alternatives": 3,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 6,
+            "protected": 1,
+            "joint": 1
+          },
+          "repeat_equal": true
+        },
+        "update_protection_only": {
+          "prediction_sha256": "7c7a82dfe696f1abcbac84bb80899e6bc893df84807d9c46268ab5b7aeea70cc",
+          "trace_sha256": "22806b81daf8ad75b3f7122c7186c1e59ae3ad519d0c0509ee3ca3608a3654c6",
+          "counts": {
+            "frames": 1008,
+            "candidate_edges": 13,
+            "actual_vetoes": 1,
+            "frames_with_veto": 1,
+            "active_alternatives": 13,
+            "retained_alternatives": 2,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 3,
+            "protected": 1,
+            "joint": 1
+          },
+          "repeat_equal": true
+        },
+        "past_support_and_protection": {
+          "prediction_sha256": "7c7a82dfe696f1abcbac84bb80899e6bc893df84807d9c46268ab5b7aeea70cc",
+          "trace_sha256": "22806b81daf8ad75b3f7122c7186c1e59ae3ad519d0c0509ee3ca3608a3654c6",
+          "counts": {
+            "frames": 1008,
+            "candidate_edges": 13,
+            "actual_vetoes": 1,
+            "frames_with_veto": 1,
+            "active_alternatives": 13,
+            "retained_alternatives": 2,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 3,
+            "protected": 1,
+            "joint": 1
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 16663,
+      "capped_frames": 0,
+      "cache_shards": 1,
+      "unhooked_reference_equal": true,
+      "historical_reference_equal": true
+    },
+    {
+      "name": "MOT20-07",
+      "phase": "discovery",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "frames": 585,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "c99b2be521424bbcf10e3a5007f31304801070734a1ef20e9f5b2d4621cc6400",
+          "trace_sha256": "b6195e7707cbd06759be69fc730b0d1462cfacf1daeda01286ba950f8dd9d207",
+          "counts": {
+            "frames": 585,
+            "candidate_edges": 1,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 1,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_only": {
+          "prediction_sha256": "c99b2be521424bbcf10e3a5007f31304801070734a1ef20e9f5b2d4621cc6400",
+          "trace_sha256": "b6195e7707cbd06759be69fc730b0d1462cfacf1daeda01286ba950f8dd9d207",
+          "counts": {
+            "frames": 585,
+            "candidate_edges": 1,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 1,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "update_protection_only": {
+          "prediction_sha256": "c99b2be521424bbcf10e3a5007f31304801070734a1ef20e9f5b2d4621cc6400",
+          "trace_sha256": "b6195e7707cbd06759be69fc730b0d1462cfacf1daeda01286ba950f8dd9d207",
+          "counts": {
+            "frames": 585,
+            "candidate_edges": 1,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 1,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_and_protection": {
+          "prediction_sha256": "c99b2be521424bbcf10e3a5007f31304801070734a1ef20e9f5b2d4621cc6400",
+          "trace_sha256": "b6195e7707cbd06759be69fc730b0d1462cfacf1daeda01286ba950f8dd9d207",
+          "counts": {
+            "frames": 585,
+            "candidate_edges": 1,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 1,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 11184,
+      "capped_frames": 0,
+      "cache_shards": 1,
+      "unhooked_reference_equal": true,
+      "historical_reference_equal": true
+    },
+    {
+      "name": "MOT20-08",
+      "phase": "discovery",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "frames": 806,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "fa41146682a963272d486c435d0e377a2404dfc04434f304f55c1a692e499741",
+          "trace_sha256": "e4e25915bcb2b52c7ae44b3814f5fa753522d37411ea24b81849b97b8c7ad998",
+          "counts": {
+            "frames": 806,
+            "candidate_edges": 6,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 6,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 1,
+            "protected": 1,
+            "joint": 1
+          },
+          "repeat_equal": true
+        },
+        "past_support_only": {
+          "prediction_sha256": "622a6d1bc462540a2dd505ff0175f86709703c19a4561c40cbfde97ed3a6f66a",
+          "trace_sha256": "e38afb1618b0e69af358dc9d1f14f1a3dfbf23ea17eecf3642298ac76a46b4a6",
+          "counts": {
+            "frames": 806,
+            "candidate_edges": 6,
+            "actual_vetoes": 1,
+            "frames_with_veto": 1,
+            "active_alternatives": 6,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 1,
+            "protected": 1,
+            "joint": 1
+          },
+          "repeat_equal": true
+        },
+        "update_protection_only": {
+          "prediction_sha256": "622a6d1bc462540a2dd505ff0175f86709703c19a4561c40cbfde97ed3a6f66a",
+          "trace_sha256": "e38afb1618b0e69af358dc9d1f14f1a3dfbf23ea17eecf3642298ac76a46b4a6",
+          "counts": {
+            "frames": 806,
+            "candidate_edges": 6,
+            "actual_vetoes": 1,
+            "frames_with_veto": 1,
+            "active_alternatives": 6,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 1,
+            "protected": 1,
+            "joint": 1
+          },
+          "repeat_equal": true
+        },
+        "past_support_and_protection": {
+          "prediction_sha256": "622a6d1bc462540a2dd505ff0175f86709703c19a4561c40cbfde97ed3a6f66a",
+          "trace_sha256": "e38afb1618b0e69af358dc9d1f14f1a3dfbf23ea17eecf3642298ac76a46b4a6",
+          "counts": {
+            "frames": 806,
+            "candidate_edges": 6,
+            "actual_vetoes": 1,
+            "frames_with_veto": 1,
+            "active_alternatives": 6,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 1,
+            "protected": 1,
+            "joint": 1
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 10401,
+      "capped_frames": 0,
+      "cache_shards": 1,
+      "unhooked_reference_equal": true,
+      "historical_reference_equal": true
+    },
+    {
+      "name": "MOT17-07-DPM",
+      "phase": "discovery",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "frames": 500,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "1d3531f018b7d7dad894feb490cce49b237a3caa5b79de2aa3b76ae4f602a415",
+          "trace_sha256": "a967b9acb83f7d12f18d955884d451db439cb3d9423e7c3520fc3871eac0481b",
+          "counts": {
+            "frames": 500,
+            "candidate_edges": 10,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 12,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 1,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_only": {
+          "prediction_sha256": "419dfb65479e03426a6b9920eb75832000e439e48a148874d2506ee78718582c",
+          "trace_sha256": "3f82b8bd92b0d1f84e8d7bf80ec0eb641dcf552a47c99965bbf663db1d877860",
+          "counts": {
+            "frames": 500,
+            "candidate_edges": 10,
+            "actual_vetoes": 1,
+            "frames_with_veto": 1,
+            "active_alternatives": 12,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 1,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "update_protection_only": {
+          "prediction_sha256": "1d3531f018b7d7dad894feb490cce49b237a3caa5b79de2aa3b76ae4f602a415",
+          "trace_sha256": "a967b9acb83f7d12f18d955884d451db439cb3d9423e7c3520fc3871eac0481b",
+          "counts": {
+            "frames": 500,
+            "candidate_edges": 10,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 12,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 1,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_and_protection": {
+          "prediction_sha256": "1d3531f018b7d7dad894feb490cce49b237a3caa5b79de2aa3b76ae4f602a415",
+          "trace_sha256": "a967b9acb83f7d12f18d955884d451db439cb3d9423e7c3520fc3871eac0481b",
+          "counts": {
+            "frames": 500,
+            "candidate_edges": 10,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 12,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 1,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 12733,
+      "capped_frames": 0,
+      "cache_shards": 1,
+      "unhooked_reference_equal": true,
+      "historical_reference_equal": true
+    },
+    {
+      "name": "MOT17-08-DPM",
+      "phase": "discovery",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "frames": 625,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "9e812b72af5d80219c52f6d773daed865338922e8b09a4ff1296f27d8a8abeb3",
+          "trace_sha256": "b746b591fdcc906ed6b1e664879e5276479663e0803c2db772db25bfd43c0e3c",
+          "counts": {
+            "frames": 625,
+            "candidate_edges": 26,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 26,
+            "retained_alternatives": 3,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 3,
+            "protected": 2,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_only": {
+          "prediction_sha256": "479febc943c171922fc82a4e04144c27edec74480714c6ecf0615c54b5b342c5",
+          "trace_sha256": "bc909c8430258d2d2c5ee021bd8a37982c39c7c4d4dbacfb199afb991b92d563",
+          "counts": {
+            "frames": 625,
+            "candidate_edges": 25,
+            "actual_vetoes": 4,
+            "frames_with_veto": 4,
+            "active_alternatives": 24,
+            "retained_alternatives": 2,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 4,
+            "protected": 2,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "update_protection_only": {
+          "prediction_sha256": "4f090744e7cd846432b50fd105592da42c40fd77b8e39831de25ff48390ce32e",
+          "trace_sha256": "b5f323513775a2054e90ada725ef7d08760c199be0da17e35c3bcb1fcbfa68f6",
+          "counts": {
+            "frames": 625,
+            "candidate_edges": 27,
+            "actual_vetoes": 2,
+            "frames_with_veto": 2,
+            "active_alternatives": 26,
+            "retained_alternatives": 5,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 3,
+            "protected": 2,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_and_protection": {
+          "prediction_sha256": "9e812b72af5d80219c52f6d773daed865338922e8b09a4ff1296f27d8a8abeb3",
+          "trace_sha256": "b746b591fdcc906ed6b1e664879e5276479663e0803c2db772db25bfd43c0e3c",
+          "counts": {
+            "frames": 625,
+            "candidate_edges": 26,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 26,
+            "retained_alternatives": 3,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 3,
+            "protected": 2,
+            "joint": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 11666,
+      "capped_frames": 0,
+      "cache_shards": 1,
+      "unhooked_reference_equal": true,
+      "historical_reference_equal": true
+    },
+    {
+      "name": "MOT17-12-DPM",
+      "phase": "discovery",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "frames": 900,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "457818c0425cad74c9bfdc0b658bcdef9b67be88a6d26ee84e9992657f0a9d4e",
+          "trace_sha256": "8cec58a04a8313deb43d8fe5b88afab04ea17ad9f31eefaa1e87833cd138f761",
+          "counts": {
+            "frames": 900,
+            "candidate_edges": 4,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 4,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 1,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_only": {
+          "prediction_sha256": "f09e48f39ee62a48a6874a9852589e82a2316dac40f5044ff58c59d86b537ba2",
+          "trace_sha256": "60456443b045c81c25d04290c5da901bbce77b26233d3ce456a001c14ec1307f",
+          "counts": {
+            "frames": 900,
+            "candidate_edges": 5,
+            "actual_vetoes": 2,
+            "frames_with_veto": 2,
+            "active_alternatives": 5,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 2,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "update_protection_only": {
+          "prediction_sha256": "457818c0425cad74c9bfdc0b658bcdef9b67be88a6d26ee84e9992657f0a9d4e",
+          "trace_sha256": "8cec58a04a8313deb43d8fe5b88afab04ea17ad9f31eefaa1e87833cd138f761",
+          "counts": {
+            "frames": 900,
+            "candidate_edges": 4,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 4,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 1,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_and_protection": {
+          "prediction_sha256": "457818c0425cad74c9bfdc0b658bcdef9b67be88a6d26ee84e9992657f0a9d4e",
+          "trace_sha256": "8cec58a04a8313deb43d8fe5b88afab04ea17ad9f31eefaa1e87833cd138f761",
+          "counts": {
+            "frames": 900,
+            "candidate_edges": 4,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 4,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 1,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 7806,
+      "capped_frames": 0,
+      "cache_shards": 1,
+      "unhooked_reference_equal": true,
+      "historical_reference_equal": true
+    },
+    {
+      "name": "MOT17-14-DPM",
+      "phase": "discovery",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "frames": 750,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "27da04e4db1f59f397d158d7bfc72dc520cc54f6c26924fb5ac55588ed9680d8",
+          "trace_sha256": "f70639376ddb46cb9087b2f7f800ddb88e9dcf0969e08e739d408f165e66962f",
+          "counts": {
+            "frames": 750,
+            "candidate_edges": 11,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 11,
+            "retained_alternatives": 2,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 1,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_only": {
+          "prediction_sha256": "27da04e4db1f59f397d158d7bfc72dc520cc54f6c26924fb5ac55588ed9680d8",
+          "trace_sha256": "f70639376ddb46cb9087b2f7f800ddb88e9dcf0969e08e739d408f165e66962f",
+          "counts": {
+            "frames": 750,
+            "candidate_edges": 11,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 11,
+            "retained_alternatives": 2,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 1,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "update_protection_only": {
+          "prediction_sha256": "9c810c0ed8c8ca28c149e3426242ad5fabba2f5e116e046b4cd4a252d3c3db36",
+          "trace_sha256": "23edf0a533d1cc237040ed468ceba7ad8d816fc484351b799b9897e8264e09c2",
+          "counts": {
+            "frames": 750,
+            "candidate_edges": 11,
+            "actual_vetoes": 1,
+            "frames_with_veto": 1,
+            "active_alternatives": 11,
+            "retained_alternatives": 2,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 1,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_and_protection": {
+          "prediction_sha256": "27da04e4db1f59f397d158d7bfc72dc520cc54f6c26924fb5ac55588ed9680d8",
+          "trace_sha256": "f70639376ddb46cb9087b2f7f800ddb88e9dcf0969e08e739d408f165e66962f",
+          "counts": {
+            "frames": 750,
+            "candidate_edges": 11,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 11,
+            "retained_alternatives": 2,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 1,
+            "joint": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 12970,
+      "capped_frames": 0,
+      "cache_shards": 1,
+      "unhooked_reference_equal": true,
+      "historical_reference_equal": true
+    },
+    {
+      "name": "MOT20-03",
+      "phase": "discovery",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "frames": 2405,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "b2cb94d9bfb5b80be4c9d392dc5fec46820810c9533e35f0572fb065ab7459a3",
+          "trace_sha256": "13c334be1f9c0761766b9ca3bc1e6b941baa388232c60aae90b72313a5f50904",
+          "counts": {
+            "frames": 2405,
+            "candidate_edges": 5,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 5,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 1,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_only": {
+          "prediction_sha256": "494ebd608fc368b9208ae862323564ee5fa03118e13fad7b6b82671cd48bfd6a",
+          "trace_sha256": "18f40ee2cd50b78c0ad239a622a878ce80f281ee2a3a88d64a4652bde7bf3ad1",
+          "counts": {
+            "frames": 2405,
+            "candidate_edges": 8,
+            "actual_vetoes": 4,
+            "frames_with_veto": 4,
+            "active_alternatives": 8,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 4,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "update_protection_only": {
+          "prediction_sha256": "b2cb94d9bfb5b80be4c9d392dc5fec46820810c9533e35f0572fb065ab7459a3",
+          "trace_sha256": "13c334be1f9c0761766b9ca3bc1e6b941baa388232c60aae90b72313a5f50904",
+          "counts": {
+            "frames": 2405,
+            "candidate_edges": 5,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 5,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 1,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_and_protection": {
+          "prediction_sha256": "b2cb94d9bfb5b80be4c9d392dc5fec46820810c9533e35f0572fb065ab7459a3",
+          "trace_sha256": "13c334be1f9c0761766b9ca3bc1e6b941baa388232c60aae90b72313a5f50904",
+          "counts": {
+            "frames": 2405,
+            "candidate_edges": 5,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 5,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 1,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 76712,
+      "capped_frames": 0,
+      "cache_shards": 2,
+      "unhooked_reference_equal": true,
+      "historical_reference_equal": true
+    },
+    {
+      "name": "MOT20-05",
+      "phase": "discovery",
+      "prior_use": "Previously inspected under older controls; some historical GT scores known. Discovery only.",
+      "frames": 3315,
+      "status": "completed",
+      "arms": {
+        "activation_control": {
+          "prediction_sha256": "b12bf072ec8dd4068dc02cb316268c7e166f26af4b3fb8e4a6f02e289be37b17",
+          "trace_sha256": "b87988476bfcc256a33c50ba5d82f85b0f94876a628fec172b1657f3a449f623",
+          "counts": {
+            "frames": 3315,
+            "candidate_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 0,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_only": {
+          "prediction_sha256": "b12bf072ec8dd4068dc02cb316268c7e166f26af4b3fb8e4a6f02e289be37b17",
+          "trace_sha256": "b87988476bfcc256a33c50ba5d82f85b0f94876a628fec172b1657f3a449f623",
+          "counts": {
+            "frames": 3315,
+            "candidate_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 0,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "update_protection_only": {
+          "prediction_sha256": "b12bf072ec8dd4068dc02cb316268c7e166f26af4b3fb8e4a6f02e289be37b17",
+          "trace_sha256": "b87988476bfcc256a33c50ba5d82f85b0f94876a628fec172b1657f3a449f623",
+          "counts": {
+            "frames": 3315,
+            "candidate_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 0,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        },
+        "past_support_and_protection": {
+          "prediction_sha256": "b12bf072ec8dd4068dc02cb316268c7e166f26af4b3fb8e4a6f02e289be37b17",
+          "trace_sha256": "b87988476bfcc256a33c50ba5d82f85b0f94876a628fec172b1657f3a449f623",
+          "counts": {
+            "frames": 3315,
+            "candidate_edges": 0,
+            "actual_vetoes": 0,
+            "frames_with_veto": 0,
+            "active_alternatives": 0,
+            "retained_alternatives": 0,
+            "unconfirmed_alternatives": 0,
+            "past_qualified": 0,
+            "protected": 0,
+            "joint": 0
+          },
+          "repeat_equal": true
+        }
+      },
+      "cached_detections": 89810,
+      "capped_frames": 0,
+      "cache_shards": 2,
+      "unhooked_reference_equal": true,
+      "historical_reference_equal": true
+    }
+  ],
+  "selection": {
+    "past_support_only": "MOT17-09-DPM",
+    "update_protection_only": "MOT17-10-DPM",
+    "past_support_and_protection": "MOT20-06"
+  }
+}

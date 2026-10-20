@@ -1,0 +1,132 @@
+{
+  "format": "depthport.past-support-protocol.v1",
+  "frozen_at_utc": "2026-10-19T14:21:20.822827+00:00",
+  "base_commit": "8507e0981e710b14ed1bfc0e1a73f375a1dcd7ad",
+  "status": "Locally frozen after synthetic/pinned contracts and source preparation, before new detector, tracker or GT-content evaluation. Prior MOT outcomes known. Not external preregistration.",
+  "source_intent_sha256": "3d02f7717ff870a6ea4b389d53132a85a52baa099fbeb9d8605f7e4c6b89e9f8",
+  "selection": "First four training sequence identifiers in lexical order, complete sequences; no source change after any detector/tracker/GT output. No prior project KITTI runs found in public validation records. Independent from MOT reference histories, not independent detector/runtime.",
+  "sequences": [
+    {
+      "name": "KITTI-0000",
+      "frames": 154,
+      "image_manifest_sha256": "c0743bf0cd291316dc57cb1785cce8d48d1dafd2460fb315110183bcf1b1278b",
+      "video_sha256": "4e7ea710806f97df82f77f943c2c2e2cbe2e503445fecf6abffee274df28094c",
+      "width": 1242,
+      "height": 375,
+      "pixel_identical_frames": 154,
+      "fps": 10
+    },
+    {
+      "name": "KITTI-0001",
+      "frames": 447,
+      "image_manifest_sha256": "cb46cfa56e2723431f358bf595097d994f90d172ddc195da80a1835ac3e146f4",
+      "video_sha256": "352194bdd90a09fd1e0dae59acbd1caeeac266137c2118d3303bba548bebe6c0",
+      "width": 1242,
+      "height": 375,
+      "pixel_identical_frames": 447,
+      "fps": 10
+    },
+    {
+      "name": "KITTI-0002",
+      "frames": 233,
+      "image_manifest_sha256": "17ffd1b1561d02c9a4755153c3c5daf0df910604a66073f2d5cc697a13e6e79f",
+      "video_sha256": "6347e10f4f1b8dfec98d36862b1dd54669e8ca9918ad1e0c89f7218fa1b75eba",
+      "width": 1242,
+      "height": 375,
+      "pixel_identical_frames": 233,
+      "fps": 10
+    },
+    {
+      "name": "KITTI-0003",
+      "frames": 144,
+      "image_manifest_sha256": "5fc1e0b800031976b6a0d04cc7ea54f014e94bf79d72e127cf9956cf4137b1ac",
+      "video_sha256": "5a40436f76662feec102b584eecec2859fa1d161466a84ec3084e5b5ce10dfa0",
+      "width": 1242,
+      "height": 375,
+      "pixel_identical_frames": 144,
+      "fps": 10
+    }
+  ],
+  "arms": [
+    "activation_control",
+    "past_support_only",
+    "update_protection_only",
+    "past_support_and_protection"
+  ],
+  "repeats": 3,
+  "source_preparation": "Official original PNG members with ZIP CRC checks, contiguous zero-based filenames, per-image SHA256 manifest; FFV1 bgr0 at original 10Hz, all decoded frames pixel-identical to PNGs. No resize, crop, resampling or lossy encoding.",
+  "parameters": {
+    "track_activation_threshold": 0.3,
+    "high_conf_det_threshold": 0.6,
+    "lost_track_buffer": 30,
+    "minimum_consecutive_frames": 2
+  },
+  "signed_margin": 0.05,
+  "detector": {
+    "model": "yolo26n.pt",
+    "confidence": 0.1,
+    "imgsz": 640,
+    "source": "ultralytics",
+    "device": "cpu",
+    "classes": [
+      0
+    ],
+    "max_det": 64,
+    "nms_iou": 0.7,
+    "ultralytics": "8.4.176",
+    "weight_sha256": "9b09cc8bf347f0fc8a5f7657480587f25db09b34bf33b0652110fb03a8ad4fef"
+  },
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv-python": "4.11.0.86",
+    "trackers": "2.6.1",
+    "supervision": "0.27.0",
+    "scipy": "1.18.1"
+  },
+  "upstream_bytetrack_class_sha256": "7ea61408b4908da327ba992f09450865bb16019ab95bed23a512e5c03bef8fda",
+  "implementation_sha256": {
+    "depthport/tracking_past_support_control.py": "d760faddc836de6e299240d84ff3046c559e5b52e55d6a56c0a70a1aa5b251e1",
+    "tools/validate_tracking_past_support.py": "f82996c44e13f4e0feeccb9916caa139bf68cdeafa5a9031b42c587151d942ba",
+    "tests/test_tracking_past_support_control.py": "e975d91ab30a7d44b2b1060e08aa631c2501e97d9486a7d1e2617f61d52fcb9b",
+    "tests/test_tracking_past_support_validation.py": "7f6a6d76b9850fbf3840e992bbad1c2b5ebc61a43aa09dd84ec48127bd7c4045",
+    "depthport/tracking_recovery_control.py": "123ed43132d33326a0ec0ca1c7deaa23d20f1fa07f35b2df3ee4735efbe4a7b6",
+    "depthport/tracking_exclusive_control.py": "3f49c1754d1cfbf50c1aa27af05a0c2a2bb01418066d0373cde117c640cb6d10",
+    "depthport/tracking_association_probe.py": "585f2d87b3246644a6df0d96b62fd88998b12dd9bdc86233107e521f4061926e",
+    "depthport/tracking_admission.py": "d327ade6c1a7a72d97e2dcd13a8f2bd6c583bde48b46aca15a3edfc7915d3a89",
+    "depthport/tracking_diagnostics.py": "09838945d8d72da9c28bdb8dad432a335d7ae4be4ff08f62059c70fd05d2ba67",
+    "depthport/video_tracking_benchmark.py": "42fd7739080b4523f64c8425979e0125b8bfbfee7abfc5f22ed5e41668bbca0c",
+    "tools/validate_mot_tracking.py": "6736bd42599bcbfd1d046229e07d061c36fa954b16a44bdf41f55995ea58c766",
+    "tools/diagnose_tracking_competition.py": "eb18aee6c7e7da0a8a1792a23861b08364e126b3690d7633afa6f4ea15cb24a8",
+    "tools/diagnose_tracking_temporal_support.py": "61cab3900143fdff129a54d22d5b1ab02d2ccd5a178e5fd8df98adb9d98fbdcc"
+  },
+  "evaluator_commit": "12c8791b303e0a0b50f753af204249e622d0281a",
+  "rules": {
+    "base": "Confirmed selected weak row age>=2; same-column competitor score >= original weak gate and selected-minus-competitor <= unchanged .05. Active=confirmed and pre-update age1; retained/unconfirmed rows logged but cannot qualify.",
+    "past_support": "Both hypotheses have nonempty recorded accepted-observation histories before this decision. On selected hypothesis last accepted observation strictly before decision, competitor must be in same stage, active confirmed, AND have its own distinct accepted observation; competitor score >= that stage original gate and signed gap <=.05. Check immutable keys. Missing comparison/observation is unknown, never filled or treated as proof of either identity. Birth keys unavailable; do not invent them. No native-ID joins, GT, future +1..+30 or fitted duration.",
+    "protection": "Competitor currently has no other accepted weak update. Force it onto selected column and solve remaining unfiltered one-to-one assignment with original gate afterwards: every OTHER original accepted row/detection pair must remain and accepted count must not decrease. Selected missed-row update deliberately excluded; its deferral is tested as a harm. No opportunity-cost cutoff/equality requirement; solver-returned alternative only.",
+    "action": "Four factorial arms: no veto, past support alone, protection alone, conjunction on SAME competitor. Any qualifying competitor vetoes the selected edge once. Decisions simultaneous from unmodified original matching. Only remove selected edge, return its row/column unmatched; never install alternative or rematch. Weak input unchanged and deferred detection remains upstream output ID -1.",
+    "history": "Each arm owns its causal accepted-edge history; after decisions record only actually accepted high/weak observations (frame, original detection index). Strong object references prevent ownership reuse. No reference-history transfer after divergence.",
+    "unchanged": "Weak detections/continuation, births, lifecycle, activation .3/high .6/buffer30/confirmation2, YOLO26n 8.4.176 CPU confidence .1/imgsz640/person0/max_det64/NMS.7/weight hash, source FPS10, app/worker/defaults. Buffer30 is 3 s at source10Hz, not previous 30Hz timing."
+  },
+  "harm_gate": {
+    "per_scene": "FN, FP, IDSW, Frag must not increase; IDF1/HOTA must not decrease (exact deterministic comparison). Added paired GT-frame FN and IDSW must BOTH be zero; improvements elsewhere cannot offset them. Zero-GT scenes retain false-positive/harm checks but cannot establish identity benefit.",
+    "quality": "Actual veto and nonzero evaluated pedestrian GT required for effective exposure; strict improvement in at least one FN/FP/IDSW/IDF1/HOTA measure with all harm conditions passing.",
+    "group": "All four scene harm gates pass; at least two distinct scenes have effective exposure; every effectively exposed scene passes strict quality gate. Report every arm/scene, all negatives and failures; aggregate cannot override a scene harm. No default promotion or release acceptance.",
+    "paired_keys": "GT-frame FN/IDSW on official preprocessed stable GT ordering; FP keyed by immutable cached detection with coordinate/confidence reconciliation. Paired counts must reconcile to official CLEAR.",
+    "limitations": "These gates do not prove physical identity or universal long-event recovery. New dataset group, same pretrained detector/runtime, four ordered non-random driving sequences; no independent sites/participants/statistical power claim."
+  },
+  "evaluation": "All predictions/three repeats/unhooked reference seal before any GT member decompression/parsing. Before tracking only hash untouched labels ZIP and read directory CRC/size metadata. Official clean pinned TrackEval Kitti2DBox pedestrian preprocessing, CLEAR/Identity/HOTA. Native zero-based KITTI xyxy, no MOT GT conversion. Ignore regions/sitting people/truncation/occlusion/height follow official adapter. No leaderboard submission.",
+  "input_lock": "After freeze, bind full immutable caches, lossless video/pixel manifests, untouched official labels archive/member hashes before first tracking. Same cache across arms; no GT or output selection.",
+  "terms": {
+    "dataset_page": "https://www.cvlibs.net/datasets/kitti/eval_tracking.php",
+    "license_page": "https://www.cvlibs.net/datasets/kitti/",
+    "source_fps_page": "https://www.cvlibs.net/datasets/kitti/setup.php",
+    "license": "CC BY-NC-SA 3.0",
+    "terms_page_sha256": "828a0add3e07f8ae9156ec73bde2ebaa4db0a637ad36e000cf01670b717bcd2a",
+    "attribution": "Andreas Geiger, Philip Lenz, Raquel Urtasun. Are we ready for Autonomous Driving? The KITTI Vision Benchmark Suite. CVPR 2012.",
+    "images_url": "https://s3.eu-central-1.amazonaws.com/avg-kitti/data_tracking_image_2.zip",
+    "labels_url": "https://s3.eu-central-1.amazonaws.com/avg-kitti/data_tracking_label_2.zip",
+    "scope": "Local noncommercial research only; original images, labels, caches and raw results not redistributed; program AGPL does not relicense dataset."
+  },
+  "public_scope": "Only source hashes/counts, fixed parameters/rules, aggregate metrics/reasons/risk groups, synthetic tests and numeric figures. Raw matrices, histories, GT, images/IDs, paths and diagnostics local."
+}

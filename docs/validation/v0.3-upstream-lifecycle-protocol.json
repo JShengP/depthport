@@ -1,0 +1,110 @@
+{
+  "format": "depthport.upstream-lifecycle-protocol.v1",
+  "frozen_at_utc": "2026-10-19T15:48:57.403344+00:00",
+  "base_commit": "e6f28640e6dd8a31af3e7cc41405b8157d795ab2",
+  "status": "Local definition freeze after synthetic contracts and known exposure-gap results, before new reference tracking/telemetry. Descriptive diagnosis of two already-seen sources, not independent confirmation.",
+  "implementation_sha256": {
+    "depthport/tracking_lifecycle_probe.py": "52d787d9d22ca6438dfab2d2d6da2ca3802d9d347576fad96acd55f90561e96d",
+    "depthport/tracking_upstream_diagnostics.py": "51bd7a2e72a68bc964d41bc7bce1ed003bca14230b19810ce23ed2308a908cd0",
+    "tools/diagnose_tracking_upstream.py": "09a96959cc38cd8cd22f89b975e37b4914e3af149c8be081e75846219ef7366b",
+    "tests/test_tracking_lifecycle_probe.py": "c3eb87932d9fe8ecdfdbef22b23aeb2147256e9944314fd86af01967572e6f96",
+    "depthport/video_tracking_benchmark.py": "42fd7739080b4523f64c8425979e0125b8bfbfee7abfc5f22ed5e41668bbca0c",
+    "depthport/tracking_past_exposure.py": "1a43b2bedcb09ecf5c8f0f3d22a9b35d43b81ef78f20560f10559b27a0f083d8",
+    "depthport/tracking_exposure.py": "49026e2ef32cf767bf47845c1daba4e89f438291025d799108137a0019228bc0",
+    "depthport/tracking_recovery_control.py": "123ed43132d33326a0ec0ca1c7deaa23d20f1fa07f35b2df3ee4735efbe4a7b6"
+  },
+  "source_records_sha256": {
+    "docs/validation/v0.3-past-exposure-protocol.json": "573b76a8019ce5bb069a6140d2070c26ca7c4071dace026dcef3ea8eba255082",
+    "docs/validation/v0.3-past-exposure-confirmation.json": "1e19153d2964e5dae07dedcf8c1ca4ed7df4d45a2f57609ab609a44a4ee984f1",
+    "docs/validation/v0.3-past-exposure-confirmation-inputs.json": "bda4cfdb16883431c38eccf6696d11d6610a26ee6cec16a2ad7fdb05b1ab21b1",
+    "docs/validation/v0.3-exposure-gap.json": "d28a0232d972c48621943be0301dfb7b0b0642a4e0fab76d9885f5c8ae9f6842"
+  },
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv-python": "4.11.0.86",
+    "trackers": "2.6.1",
+    "supervision": "0.27.0",
+    "scipy": "1.18.1"
+  },
+  "upstream_sha256": {
+    "tracker": "7ea61408b4908da327ba992f09450865bb16019ab95bed23a512e5c03bef8fda",
+    "tracklet": "66c4b84cb28b1b2abd9b288b2b0f594814e4eb11d55ac8c295386415da022885",
+    "base_tracker": "64813fbf4b6441080b005a99f2908c137435107d54eaaab6bf8625a54395e948",
+    "base_tracklet": "96e4d4a01064b15f178e190e80a88bb8bbed38476a275b7d659181532a21e8d8",
+    "alive": "345242f72dc5fb43b70953546dde8b66759377f6c63ed91d1995c320affb5f84",
+    "estimator": "fe8abe96d398685abe2055a78e51f2f9906522877c5130b1d476ee3dc8c0fff0",
+    "iou": "e7d7de78643ed864f195915c009d400e02b8d3e57159f6aaa90d707f7f1bd4f0",
+    "box_iou": "d9fac5e31c8bbfc6e7c8d16a91cd49eec11cfe0e7d4ef2c3da286997c53a6b63"
+  },
+  "sources": [
+    "KITTI-0004",
+    "KITTI-0005"
+  ],
+  "parameters": {
+    "track_activation_threshold": 0.3,
+    "high_conf_det_threshold": 0.6,
+    "lost_track_buffer": 30,
+    "minimum_consecutive_frames": 2
+  },
+  "execution": {
+    "frames": 611,
+    "fps": 10,
+    "source_process": "Each source/trial isolated, OpenCV one thread/seed0; three full passes: unhooked reference, observed reference twice. Continuous ownership across original cache shards; full source video integrity/decode checked, no inference.",
+    "equality": "Each pass exact canonical confirmed prediction text to original sealed reference; observed repeats raw lifecycle bytes and aggregate identical; original high/weak stage matrices, gate, matching, ownership, states and partitions identical each frame. New unfiltered native output sequence (including unconfirmed detections) and final native tracker pickle identical between unhooked and both observed passes after hook removal.",
+    "failure": "All sources retained in fixed order, failures recorded, no retries/reselection or quality gating. Stop claims if equality/integrity fails; no adjusting code/definitions after new source diagnostics without a dated amendment."
+  },
+  "definitions": {
+    "observation": "Instance hooks forward exact original calls/results. Copy snapshots before/after native prediction, before/after fixed-step budget prune, both association stages, native unmatched-high birth candidates, before full lifecycle prune and after native update. No replacement solver, constructor, track update, birth or pruning; no global monkeypatch.",
+    "birth": "Only native unmatched high-stage detections meeting original activation threshold create hypotheses; birth count separate from confirmed promotion. Weak inputs unchanged; they can update existing tentative or confirmed hypotheses but cannot seed new ones.",
+    "expiry": "Mirror pinned fixed-step keep predicate from state just before native full prune: within budget age_since_update<=maximum_frames_without_update AND (sticky confirmed or consecutive maturity or just updated). Reasons expired / immature_unmatched / both kept separate, actual removals must match. Fixed10Hz buffer30 gives native10frame budget; association happens before inclusive post-update prune. Age11 can still recover if matched before prune. End-of-source retained hypotheses are censored, not expired.",
+    "geometry": "Recompute original stage IoU exactly from captured predicted boxes and unchanged float32 cache boxes. For each confirmed missed age>=2 weak-stage row, partition no weak input / weak input; latter has gate support / zero overlap / positive below gate. Record invalid predicted boxes and horizontal/vertical disjointness for deterministic first best weak column locally; ties are not identity matches.",
+    "past": "Only actual accepted high then weak updates record last accepted bbox; births separately indexed and never imputed as accepted match. Compare best current predicted IoU to best last accepted box IoU over same weak columns (better/equal/worse and old gate support), no added threshold. Diagnostic counterfactual geometry only, no association substitution or correctness claim.",
+    "availability": "Per weak-input frame: remaining weak rows / all rows consumed high / no hypothesis ever born / all previous hypotheses removed. Count missed rows with and without weak input, unchanged raw inputs, native accepted high/weak updates, births, promotions, all removal reasons including zeros. No GT definition of miss/error.",
+    "publication": "Only fixed count whitelist, removal age/gap histograms, source/input/output/code/runtime hashes and equality flags. Bboxes, per-frame indices/IDs/tokens, matrices, native state pickles and raw outputs remain local. Null/zero exposure not benefit/safety/harm acceptance."
+  },
+  "count_keys": [
+    "frames",
+    "inputs",
+    "high_inputs",
+    "weak_inputs",
+    "weak_input_frames",
+    "birth_candidates",
+    "births",
+    "births_rejected_activation",
+    "confirmed_promotions",
+    "high_updates",
+    "weak_updates",
+    "weak_confirmed_updates",
+    "missed_rows",
+    "missed_rows_with_weak_input",
+    "missed_rows_without_weak_input",
+    "missed_weak_rows_gate_supported",
+    "missed_weak_rows_zero_overlap",
+    "missed_weak_rows_positive_below_gate",
+    "missed_weak_rows_invalid_prediction",
+    "missed_weak_rows_without_last_accepted_update",
+    "missed_weak_rows_prediction_better",
+    "missed_weak_rows_prediction_equal",
+    "missed_weak_rows_prediction_worse",
+    "missed_weak_rows_last_update_gate_supported",
+    "missed_weak_rows_best_horizontal_disjoint",
+    "missed_weak_rows_best_vertical_disjoint",
+    "weak_frames_with_remaining_rows",
+    "weak_frames_all_rows_consumed_high",
+    "weak_frames_no_hypothesis_never_born",
+    "weak_frames_no_hypothesis_after_removal",
+    "removed_expired",
+    "removed_immature_unmatched",
+    "removed_expired_and_immature",
+    "expired_confirmed",
+    "expired_unconfirmed",
+    "removed_with_weak_input",
+    "retained_at_source_end",
+    "confirmed_at_source_end",
+    "stage_geometry_checks",
+    "old_stage_checks",
+    "no_association_frames"
+  ],
+  "forbidden": "No GT, annotation paths, scores/evaluation, inference, parameter/default/control changes, detector/input filtering, new sources/windows, tuning or app integration.",
+  "terms": "Original KITTI source terms and attribution inherited from tracking-past-exposure; local noncommercial research, no media/labels/raw-output redistribution or relicensing."
+}

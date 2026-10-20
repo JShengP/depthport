@@ -1,0 +1,667 @@
+{
+  "format": "depthport.exposure-reason-audit.v1",
+  "scope": "Post-selection descriptive counts, not selection criteria or accuracy scores. No retuning. Raw traces local.",
+  "objective_atol": 1e-12,
+  "gt_read": false,
+  "phases": [
+    {
+      "phase": "discovery",
+      "record_sha256": "fe8b549aab7da1ab9a4434c6475418bebde75bedb4528e36159bb18163563ac5",
+      "sequences": [
+        {
+          "name": "MOT17-09-DPM",
+          "arms": {
+            "activation_control": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 27,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.050806790590286255,
+                "max": 0.7317744940519333
+              }
+            },
+            "defer_available_competitor": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 27,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.050806790590286255,
+                "max": 0.7317744940519333
+              }
+            },
+            "defer_equivalent_assignment": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 27,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.050806790590286255,
+                "max": 0.7317744940519333
+              }
+            }
+          }
+        },
+        {
+          "name": "MOT17-10-DPM",
+          "arms": {
+            "activation_control": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 16,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.010064840316772461,
+                "max": 0.6347815990447998
+              }
+            },
+            "defer_available_competitor": {
+              "actual_vetoes": 1,
+              "alternative_reasons": {
+                "positive_objective_loss": 15,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.010064840316772461,
+                "max": 0.6347815990447998
+              }
+            },
+            "defer_equivalent_assignment": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 16,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.010064840316772461,
+                "max": 0.6347815990447998
+              }
+            }
+          }
+        },
+        {
+          "name": "MOT17-11-DPM",
+          "arms": {
+            "activation_control": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 4,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.06135956570506096,
+                "max": 0.2069620043039322
+              }
+            },
+            "defer_available_competitor": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 4,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.06135956570506096,
+                "max": 0.2069620043039322
+              }
+            },
+            "defer_equivalent_assignment": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 4,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.06135956570506096,
+                "max": 0.2069620043039322
+              }
+            }
+          }
+        },
+        {
+          "name": "MOT17-13-DPM",
+          "arms": {
+            "activation_control": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 4,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.16718421876430511,
+                "max": 0.6697472408413887
+              }
+            },
+            "defer_available_competitor": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 4,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.16718421876430511,
+                "max": 0.6697472408413887
+              }
+            },
+            "defer_equivalent_assignment": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 4,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.16718421876430511,
+                "max": 0.6697472408413887
+              }
+            }
+          }
+        },
+        {
+          "name": "MOT17-04-DPM",
+          "arms": {
+            "activation_control": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 1,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.8111991286277771,
+                "max": 0.8111991286277771
+              }
+            },
+            "defer_available_competitor": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 1,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.8111991286277771,
+                "max": 0.8111991286277771
+              }
+            },
+            "defer_equivalent_assignment": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 1,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.8111991286277771,
+                "max": 0.8111991286277771
+              }
+            }
+          }
+        },
+        {
+          "name": "MOT20-01",
+          "arms": {
+            "activation_control": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 5,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.007001712918281555,
+                "max": 0.6832713484764099
+              }
+            },
+            "defer_available_competitor": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 5,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.007001712918281555,
+                "max": 0.6832713484764099
+              }
+            },
+            "defer_equivalent_assignment": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 5,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.007001712918281555,
+                "max": 0.6832713484764099
+              }
+            }
+          }
+        },
+        {
+          "name": "MOT20-02",
+          "arms": {
+            "activation_control": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 59,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.0002982020378112793,
+                "max": 0.9673190996982157
+              }
+            },
+            "defer_available_competitor": {
+              "actual_vetoes": 2,
+              "alternative_reasons": {
+                "positive_objective_loss": 59,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.0002982020378112793,
+                "max": 0.9673190996982157
+              }
+            },
+            "defer_equivalent_assignment": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 59,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.0002982020378112793,
+                "max": 0.9673190996982157
+              }
+            }
+          }
+        },
+        {
+          "name": "MOT20-06",
+          "arms": {
+            "activation_control": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 16,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.011343061923980713,
+                "max": 0.896272640908137
+              }
+            },
+            "defer_available_competitor": {
+              "actual_vetoes": 1,
+              "alternative_reasons": {
+                "positive_objective_loss": 13,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.011343061923980713,
+                "max": 0.896272640908137
+              }
+            },
+            "defer_equivalent_assignment": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 16,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.011343061923980713,
+                "max": 0.896272640908137
+              }
+            }
+          }
+        },
+        {
+          "name": "MOT20-07",
+          "arms": {
+            "activation_control": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 1,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.03278572857379913,
+                "max": 0.03278572857379913
+              }
+            },
+            "defer_available_competitor": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 1,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.03278572857379913,
+                "max": 0.03278572857379913
+              }
+            },
+            "defer_equivalent_assignment": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 1,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.03278572857379913,
+                "max": 0.03278572857379913
+              }
+            }
+          }
+        },
+        {
+          "name": "MOT20-08",
+          "arms": {
+            "activation_control": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 6,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.010354161262512207,
+                "max": 0.549703449010849
+              }
+            },
+            "defer_available_competitor": {
+              "actual_vetoes": 1,
+              "alternative_reasons": {
+                "positive_objective_loss": 6,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.010354161262512207,
+                "max": 0.549703449010849
+              }
+            },
+            "defer_equivalent_assignment": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 6,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.010354161262512207,
+                "max": 0.549703449010849
+              }
+            }
+          }
+        },
+        {
+          "name": "MOT17-07-DPM",
+          "arms": {
+            "activation_control": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 12,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.0670383870601654,
+                "max": 0.5275543332099915
+              }
+            },
+            "defer_available_competitor": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 12,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.0670383870601654,
+                "max": 0.5275543332099915
+              }
+            },
+            "defer_equivalent_assignment": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 12,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.0670383870601654,
+                "max": 0.5275543332099915
+              }
+            }
+          }
+        },
+        {
+          "name": "MOT17-08-DPM",
+          "arms": {
+            "activation_control": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 26,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.0020491480827331543,
+                "max": 0.6767447926104069
+              }
+            },
+            "defer_available_competitor": {
+              "actual_vetoes": 2,
+              "alternative_reasons": {
+                "positive_objective_loss": 26,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.0020491480827331543,
+                "max": 0.6767447926104069
+              }
+            },
+            "defer_equivalent_assignment": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 26,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.0020491480827331543,
+                "max": 0.6767447926104069
+              }
+            }
+          }
+        },
+        {
+          "name": "MOT17-12-DPM",
+          "arms": {
+            "activation_control": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 4,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.09053820371627808,
+                "max": 0.3143468648195267
+              }
+            },
+            "defer_available_competitor": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 4,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.09053820371627808,
+                "max": 0.3143468648195267
+              }
+            },
+            "defer_equivalent_assignment": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 4,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.09053820371627808,
+                "max": 0.3143468648195267
+              }
+            }
+          }
+        },
+        {
+          "name": "MOT17-14-DPM",
+          "arms": {
+            "activation_control": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 11,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.012050330638885498,
+                "max": 0.8481522053480148
+              }
+            },
+            "defer_available_competitor": {
+              "actual_vetoes": 1,
+              "alternative_reasons": {
+                "positive_objective_loss": 11,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.012050330638885498,
+                "max": 0.8481522053480148
+              }
+            },
+            "defer_equivalent_assignment": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 11,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.012050330638885498,
+                "max": 0.8481522053480148
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "phase": "confirmation",
+      "record_sha256": "7c4c37d53716c478f6a687e06d37bd35cd0d99c0c42da2163dfd1434478a34ad",
+      "sequences": [
+        {
+          "name": "MOT20-03",
+          "arms": {
+            "activation_control": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 5,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.154712475836277,
+                "max": 0.8074592426419258
+              }
+            },
+            "defer_available_competitor": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 5,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.154712475836277,
+                "max": 0.8074592426419258
+              }
+            },
+            "defer_equivalent_assignment": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 5,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": {
+                "min": 0.154712475836277,
+                "max": 0.8074592426419258
+              }
+            }
+          }
+        },
+        {
+          "name": "MOT20-05",
+          "arms": {
+            "activation_control": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 0,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": null
+            },
+            "defer_available_competitor": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 0,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": null
+            },
+            "defer_equivalent_assignment": {
+              "actual_vetoes": 0,
+              "alternative_reasons": {
+                "positive_objective_loss": 0,
+                "same_objective_fewer_admissible_pairs": 0,
+                "equivalent_alternative": 0
+              },
+              "positive_loss_range": null
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
