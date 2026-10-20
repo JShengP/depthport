@@ -9,3 +9,6 @@
 *.js text eol=lf
 *.css text eol=lf
 *.png binary
+
+# Curated numeric packs are byte-hashed; preserve LF with Windows autocrlf.
+website/data/**/*.json text eol=lf

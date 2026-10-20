@@ -15,13 +15,13 @@
   "public_data_files": 36,
   "preview_bytes": 2051044,
   "full_pytest": {
-    "passed": 523,
+    "passed": 524,
     "skipped": 92,
     "failed": 0,
     "warning": "existing Starlette TestClient deprecation"
   },
   "focused_pytest": {
-    "passed": 10,
+    "passed": 11,
     "failed": 0
   },
   "browser": {
@@ -35,6 +35,7 @@
       "width": 390,
       "versions": [
         "v0.1",
+        "v0.2",
         "v0.3"
       ],
       "horizontal_overflow": 0
@@ -95,5 +96,10 @@
       }
     ],
     "replay_source": "9b77a4264bb59290335184b77c6300ba43aa6642cb65b594550c44359fd57d4b"
+  },
+  "initial_ci_windows": {
+    "result": "failed",
+    "reason": "core.autocrlf changed byte-hashed JSON LF to CRLF",
+    "fix": ".gitattributes forces LF for curated data JSON; exporter explicitly writes LF; regression exercises autocrlf checkout; numerical arrays unchanged"
   }
 }

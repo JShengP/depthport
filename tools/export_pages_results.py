@@ -18,7 +18,7 @@ ENGINES = ('yolo26','da2-small','da3-small','da3-metric')
 def sha(b): return hashlib.sha256(b).hexdigest()
 def write_json(p, data):
  p.parent.mkdir(parents=True, exist_ok=True)
- p.write_text(json.dumps(data, ensure_ascii=False, separators=(',', ':'), allow_nan=False)+'\n', encoding='utf-8')
+ p.write_text(json.dumps(data, ensure_ascii=False, separators=(',', ':'), allow_nan=False)+'\n', encoding='utf-8', newline='\n')
 def array(a):
  b=np.ascontiguousarray(a,dtype='<f4').tobytes()
  return {'encoding':'gzip-base64-float32-le','shape':list(a.shape),'sha256':sha(b),'data':base64.b64encode(gzip.compress(b,mtime=0)).decode()}

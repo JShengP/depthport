@@ -99,3 +99,19 @@ def test_real_results_browser_helpers_if_node_available():
  node=shutil.which('node')
  if not node:pytest.skip('Node.js is not installed')
  subprocess.run([node,str(ROOT/'tests/test_real_results.cjs')],cwd=ROOT,check=True,capture_output=True,text=True)
+
+
+def test_byte_hashed_packs_survive_windows_autocrlf_checkout(tmp_path):
+    """Exercise checkout conversion, not just an attribute string assertion."""
+    git=shutil.which('git')
+    if not git:pytest.skip('Git is not installed')
+    repo=tmp_path/'checkout';repo.mkdir()
+    subprocess.run([git,'init','--quiet',str(repo)],check=True)
+    subprocess.run([git,'-C',str(repo),'config','core.autocrlf','true'],check=True)
+    (repo/'.gitattributes').write_bytes((ROOT/'.gitattributes').read_bytes())
+    target=repo/'website/data/bus/fixture.json';target.parent.mkdir(parents=True)
+    expected=b'{"depth":[1.25,2.5]}\n';target.write_bytes(expected)
+    subprocess.run([git,'-C',str(repo),'add','.'],check=True,capture_output=True)
+    target.unlink()
+    subprocess.run([git,'-C',str(repo),'checkout-index','--all','--force'],check=True)
+    assert target.read_bytes()==expected
