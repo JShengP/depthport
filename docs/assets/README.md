@@ -6,6 +6,8 @@
 
 原檢視器截圖使用明示的合成示範；空間分析截圖則是公開範例圖的真模型 GPU 推論。兩者不可混為同一種驗證證據；畫面不代表實體相機或測距精度已驗證。
 
+GitHub Pages now copies the exact upstream `bus.jpg` bytes to `website/media/bus.jpg` (verified against the source SHA-256 below) and shows the **existing real** Spatial Analysis / Session screenshots before separately labeled synthetic exercises. No screenshot is converted into a fabricated depth map, 3D cloud or full 24-frame tracking report. The original photos and Pexels screenshots retain their original terms; historical release tags are unchanged.
+
 ## Upstream example attribution / 範例來源
 
 - Image: Ultralytics Assets [`im/bus.jpg`](https://github.com/ultralytics/assets/blob/53d4e2a8fd15f473c29a148c317a8477be559327/im/bus.jpg), copyright retained by its upstream authors; image SHA-256 `c02019c4979c191eb739ddd944445ef408dad5679acab6fd520ef9d434bfbc63`.

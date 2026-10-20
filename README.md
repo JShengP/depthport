@@ -5,7 +5,7 @@
 **Monocular depth & point cloud workbench**<br>
 One camera · Four depth engines · Local-first
 
-English · [繁體中文](README.zh-TW.md) · Experimental Alpha · AGPL-3.0-only
+English · [繁體中文](README.zh-TW.md) · Experimental Alpha · [GNU AGPL v3](LICENSE)
 
 </div>
 
@@ -60,16 +60,16 @@ Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/). First setup creates `.ven
 - **Sessions** `/sessions`: explicitly set `ENABLE_SESSION_STORAGE=1` locally and restart to enable manual saved-frame review. [Session guide](docs/en/sessions.md) · [Optional worker setup](docs/en/tracking-worker.md)
 
 <details>
-<summary>Try the synthetic viewer without installing AI dependencies</summary>
+<summary>Explore real recorded examples and synthetic practice without installing AI dependencies</summary>
 
-[Open the public synthetic demo](https://jshengp.github.io/depthport/), or build it locally with Python's standard library:
+[Open the multi-version public showcase](https://jshengp.github.io/depthport/) — v0.1/v0.2 share the original Ultralytics `bus.jpg` and a documented real CUDA inference screenshot; v0.3 displays three authentic Pexels Session screenshots. Optional interactive exercises are explicitly synthetic. Build locally with Python's standard library:
 
 ```bash
 python tools/build_site.py
 python -m http.server 8765 --directory _site --bind 127.0.0.1
 ```
 
-Open [http://127.0.0.1:8765/](http://127.0.0.1:8765/). This static demo uses synthetic data; it does not run depth models, accept images or connect to RTSP. The included manual Pages workflow deploys the same synthetic-only viewer.
+Open [http://127.0.0.1:8765/](http://127.0.0.1:8765/). GitHub Pages serves recorded public media and separately labeled synthetic practice data. It does not run pretrained depth models, accept visitor uploads, or connect to RTSP. Native depth/XYZ arrays and the complete 24-frame tracking report are not distributed, so recorded examples are shown as genuine images—not fabricated measurements or synthetic IDs. Pages publishes reviewed changes merged to `main`.
 
 </details>
 
@@ -256,6 +256,6 @@ python tools/check_release.py
 
 ## License & acknowledgments
 
-DepthPort application code is provided under **AGPL-3.0-only**; see [LICENSE](LICENSE) and [NOTICE](NOTICE). External code and weights retain their own licenses; this project cannot relicense them. Ultralytics offers AGPL and a separate Enterprise route. The selected V2 Small / DA3 Small / DA3Metric checkpoints have Apache-2.0 model cards; other sizes may differ.
+DepthPort application code is licensed under the **GNU Affero General Public License v3.0** (**SPDX: `AGPL-3.0-only`**; version 3 only, not “or later”); see [LICENSE](LICENSE) and [NOTICE](NOTICE). External code and weights retain their own licenses; this project cannot relicense them. Ultralytics offers AGPL and a separate Enterprise route. The selected V2 Small / DA3 Small / DA3Metric checkpoints have Apache-2.0 model cards; other sizes may differ.
 
 Credit belongs to the [Ultralytics](https://docs.ultralytics.com/tasks/depth/), [Depth Anything V2](https://github.com/DepthAnything/Depth-Anything-V2) and [Depth Anything 3](https://github.com/ByteDance-Seed/Depth-Anything-3) authors for their models and research. DepthPort is independent and is not endorsed by these projects. See the [third-party notices](THIRD_PARTY_NOTICES.md) before redistribution or commercial integration.

@@ -1,0 +1,21 @@
+
+/* Real recorded examples take precedence over distinctly marked synthetic exercises. */
+.recorded-example{border-color:#326d70;background:linear-gradient(145deg,#102b37,#102334);margin-bottom:26px}
+.recorded-grid{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:18px;margin:15px 0}
+.recorded-grid figure,.recorded-replay-figure{margin:0;min-width:0;border:1px solid #345568;border-radius:12px;background:#071925;padding:12px}
+.recorded-grid h3{font-size:13px;line-height:1.3;margin:0 0 8px}
+.recorded-grid img{display:block;width:100%;height:400px;object-fit:contain;border-radius:8px;background:#07121b}
+.recorded-grid figcaption,.recorded-replay-figure figcaption,.recorded-grid output{font-size:12px;line-height:1.5;color:#bed6e0;padding-top:10px}
+.recorded-grid output{display:block;border-top:1px solid #395468;margin-top:8px}
+.recorded-grid a{color:#74dfca}
+.recorded-tags{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0}
+.recorded-tags span{padding:5px 9px;color:#c6eae8;background:#143848;border:1px solid #365d65;border-radius:18px;font:700 11px ui-monospace,monospace}
+.recorded-practice{font-weight:750;font-size:12px;color:#94e3d3;letter-spacing:.04em;margin:14px 0 16px;padding:11px 14px;border:1px solid #315461;border-radius:10px;background:#0d2833}
+.recorded-replay-figure{text-align:center;padding:0;overflow:hidden}
+.recorded-replay-figure img{width:100%;max-height:640px;object-fit:contain}
+.recorded-replay-figure figcaption{padding:10px;background:#143343}
+.recorded-controls{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:15px 0}
+.recorded-frame-buttons{display:flex;gap:7px;flex-wrap:wrap}
+.recorded-frame-buttons button[aria-pressed="true"]{background:#17515a;border-color:#78e1ce;color:white}
+@media(max-width:900px){.recorded-grid{grid-template-columns:1fr}.recorded-grid img{max-height:440px;height:auto}.recorded-controls{justify-content:center}}
+@media(max-width:600px){.recorded-controls{flex-direction:column}.recorded-controls>button{width:100%}.recorded-grid figure{padding:9px}}
