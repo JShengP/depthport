@@ -1,0 +1,139 @@
+{
+  "format": "depthport.geometry-validity-protocol.v1",
+  "frozen_at_utc": "2026-10-20T01:13:52.049063+00:00",
+  "report_date_local": "2026-10-20",
+  "report_timezone": "Asia/Taipei",
+  "base_commit": "7550f7440f22bed7582c62873f0c8d243bb4f489",
+  "status": "Local freeze after synthetic/native contracts and image-directory metadata only, before new image-member reads, detector outputs or control execution. Known four old numerical failures/five old assignment cases disclosed. Not external preregistration.",
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv-python": "4.11.0.86",
+    "trackers": "2.6.1",
+    "supervision": "0.27.0",
+    "scipy": "1.18.1"
+  },
+  "upstream_sha256": {
+    "tracker": "7ea61408b4908da327ba992f09450865bb16019ab95bed23a512e5c03bef8fda",
+    "tracklet": "66c4b84cb28b1b2abd9b288b2b0f594814e4eb11d55ac8c295386415da022885",
+    "base_tracker": "64813fbf4b6441080b005a99f2908c137435107d54eaaab6bf8625a54395e948",
+    "base_tracklet": "96e4d4a01064b15f178e190e80a88bb8bbed38476a275b7d659181532a21e8d8",
+    "alive": "345242f72dc5fb43b70953546dde8b66759377f6c63ed91d1995c320affb5f84",
+    "estimator": "fe8abe96d398685abe2055a78e51f2f9906522877c5130b1d476ee3dc8c0fff0",
+    "iou": "e7d7de78643ed864f195915c009d400e02b8d3e57159f6aaa90d707f7f1bd4f0",
+    "box_iou": "d9fac5e31c8bbfc6e7c8d16a91cd49eec11cfe0e7d4ef2c3da286997c53a6b63"
+  },
+  "numerical_modules_sha256": {
+    "kalman_filter_module": "ba812be3e00fd0386feb48eea5f6c2665a31af925cba28acd4c0d946d300adc2",
+    "motion_models_module": "ccb9b99030ba13c46d8769176d21206380339cdadac8e4d20b8f22f51d3130c3",
+    "state_representations_module": "7db45970850783bd1da31cdc3371fa8a3a5615267b29df9018152946de945b0d",
+    "scipy_lsap_binary": "67871ca804df8da4fadf4e9238ea0536d92ff0915ddae885b368c65ce43e5b3f"
+  },
+  "implementation_sha256": {
+    "depthport/tracking_geometry_control.py": "43b6cb47efb86f5f33a8243d93ee055d5347abd101fc64bf658f697c088c9cf9",
+    "depthport/tracking_geometry_validation.py": "f3216f2a1636e455f2815212ba7a278299ec7e3294498f2106bf69226994851b",
+    "tools/validate_tracking_geometry.py": "804866bbfb993b70f112b63eb25420a9edf0462fabd09d315538fd8c3d273b1e",
+    "tools/prepare_tracking_geometry.py": "8ae51bd1598787ce9faa2b1238170aa71ceef6e69dec6ec2d56a914db4e3c72b",
+    "tests/test_tracking_geometry_control.py": "deba6b3421ec30db062fc1602819a1fc469a9256770d8ccce61b973aaf89895a",
+    "tests/test_tracking_geometry_inputs.py": "65baf90828169c5c57133002ae9f5e85229e85d938a53173b3054d12202e4a03",
+    "tools/cache_video_detections.py": "9fca335da835821476e17ee1daa42298b0ded12b2de502b69549355221fb0380"
+  },
+  "frozen_helpers_sha256": {
+    "depthport/tracking_estimator_shadow.py": "a159fd6803ba542ed59479b1afaeb5af0fa3a0552c4949e0eb0fcec9c92ed1d3",
+    "depthport/tracking_shadow_analysis.py": "d28280ec149add4c0aacd01884423ae2b44dd8dd3b36fc06f5aa7847e4251f1b",
+    "depthport/tracking_high_assignment_audit.py": "232252374c7c08a14156b0d6a525146390f043d4294d9bf1c3c0023dd0871357",
+    "tools/audit_tracking_estimator_shadow.py": "66d472a8b91e845ac060bf03f14a0477e9c0fc0d8edad8acb31d7fe7cdac6a72",
+    "tests/test_tracking_estimator_shadow.py": "336ecc395f2607c06688fbf95ab9fc89658a016a321f43f87f72197120890c80",
+    "tests/test_tracking_high_assignment_audit.py": "5362f961c7adb3a78faf87d1090dd4d7ad7cc43ccf675479c07c7235f1524c49",
+    "depthport/tracking_health_audit.py": "72dbba87bfc3bf6e71e42d0bf6e488f9583ffb11de7d0109c7db785ed420b231",
+    "tools/audit_tracking_health.py": "80068a7862a1de70bf6705d718e4ca34e65a98694958922278473a0f9d8b40a5",
+    "tests/test_tracking_health_audit.py": "0aad4fa4675923868c789a6646e1550d4c97c2da9ac05d44663c3e6fbd90ba39",
+    "depthport/tracking_lifecycle_probe.py": "52d787d9d22ca6438dfab2d2d6da2ca3802d9d347576fad96acd55f90561e96d",
+    "depthport/tracking_upstream_diagnostics.py": "51bd7a2e72a68bc964d41bc7bce1ed003bca14230b19810ce23ed2308a908cd0",
+    "tools/diagnose_tracking_upstream.py": "09a96959cc38cd8cd22f89b975e37b4914e3af149c8be081e75846219ef7366b",
+    "depthport/tracking_past_exposure.py": "1a43b2bedcb09ecf5c8f0f3d22a9b35d43b81ef78f20560f10559b27a0f083d8",
+    "depthport/tracking_exposure.py": "49026e2ef32cf767bf47845c1daba4e89f438291025d799108137a0019228bc0",
+    "depthport/video_tracking_benchmark.py": "42fd7739080b4523f64c8425979e0125b8bfbfee7abfc5f22ed5e41668bbca0c",
+    "tests/test_tracking_lifecycle_probe.py": "c3eb87932d9fe8ecdfdbef22b23aeb2147256e9944314fd86af01967572e6f96",
+    "depthport/tracking_recovery_control.py": "123ed43132d33326a0ec0ca1c7deaa23d20f1fa07f35b2df3ee4735efbe4a7b6"
+  },
+  "source_records_sha256": {
+    "docs/validation/v0.3-estimator-shadow-protocol.json": "a339cfbc3d7f7fab688c7f7419173e7ae71b198471f682959b2a7c2a97514624",
+    "docs/validation/v0.3-estimator-shadow.json": "736f912e4268ca0729a77a03265c11643b5c09a7b5201e5fbd98fd0d5ddcc767",
+    "docs/validation/v0.3-state-observation-health-protocol.json": "4af6002d8f9624c73a7e3623469df7e912ddfed705ccdec35963bff5a09179f3",
+    "docs/validation/v0.3-state-observation-health.json": "0c394d70a6a19869bb1e5d533743f7465af50e8d45ce4781467fa633aee6f967",
+    "docs/validation/v0.3-upstream-lifecycle-protocol.json": "d296d92d0e595c3f53ab9ce727a8cb0e8522007c8f7cd484d74f57f097467a72",
+    "docs/validation/v0.3-upstream-lifecycle.json": "ac5296ab6edf4810d48e41f03b3fdd43697b9641f7554fcb700435ee535e3380",
+    "docs/validation/v0.3-past-exposure-protocol.json": "573b76a8019ce5bb069a6140d2070c26ca7c4071dace026dcef3ea8eba255082",
+    "docs/validation/v0.3-past-exposure-confirmation-inputs.json": "bda4cfdb16883431c38eccf6696d11d6610a26ee6cec16a2ad7fdb05b1ab21b1"
+  },
+  "parameters": {
+    "track_activation_threshold": 0.3,
+    "high_conf_det_threshold": 0.6,
+    "lost_track_buffer": 30,
+    "minimum_consecutive_frames": 2
+  },
+  "detector_settings": {
+    "model": "yolo26n.pt",
+    "confidence": 0.1,
+    "imgsz": 640,
+    "source": "ultralytics",
+    "device": "cpu",
+    "classes": [
+      0
+    ],
+    "max_det": 64,
+    "nms_iou": 0.7,
+    "ultralytics": "8.4.176",
+    "weight_sha256": "9b09cc8bf347f0fc8a5f7657480587f25db09b34bf33b0652110fb03a8ad4fef"
+  },
+  "image_archive": {
+    "url": "https://s3.eu-central-1.amazonaws.com/avg-kitti/data_tracking_image_2.zip",
+    "etag": "\"5eed58a54608975e5c81b610b8461f2b-1886\"",
+    "size": 15813146295
+  },
+  "new_sources": [
+    {
+      "name": "KITTI-0006",
+      "frames": 270,
+      "member_manifest_sha256": "eb54af0961d3575cd6cfe62caae1b3308c49ffbce0f5125135d500b17d7b1a2d"
+    },
+    {
+      "name": "KITTI-0007",
+      "frames": 800,
+      "member_manifest_sha256": "5e2879181b8b45bdd7a88072f6f7d1bd36395c7568bf868091569690f1c50570"
+    }
+  ],
+  "known_sources": [
+    {
+      "name": "KITTI-0004",
+      "frames": 314
+    },
+    {
+      "name": "KITTI-0005",
+      "frames": 297
+    }
+  ],
+  "old_reference_bytes_sha256": {
+    "KITTI-0004": "ee3db3886f6534d16cb6534b61f4b7d9c8f2412a9c408920e9603bfcc51dc4cd",
+    "KITTI-0005": "0d704e9320a06f8db05b3557c49025921ee7769cdffc6431e3425601f1ff66fa"
+  },
+  "definitions": {
+    "selection": "Next two KITTI training IDs in lexical order after all previously used0000-0005, fixed0006/0007 full270/800 original frames. No new output inspected before freeze.0004/0005 are seen mechanism checks only, never independent confirmation. New IDs are source-held-out relative to rule design, same dataset/camera family; no independent site/person/randomized sample claim. Inspect every scheduled source, keep zeros/failures, no replacements/windows/retries or favourable selection.",
+    "preparation": "Official image-only archive, immutable ETag/ranges, full ordered PNG CRC/member manifest, SHA256 and FFV1 bgr0 pixel equality at original10Hz. All frames, no resize/crop/resampling. Frozen YOLO26n/8.4.176 CPU person cache at confidence.1,640px,max64,NMS.7; original weights hash, no tuning. Reject cap frames for acceptance but retain counts/source. No labels archive/member/GT/evaluator is accepted by schemas or read.",
+    "rule": "At each native fixed-step predict, compute prospective mean F(1)*x on positive finite XYXY prestate. If prospective width<=0 or height<=0, independently project the two affected corner velocities to their arithmetic average: T is I8 except both corresponding velocity rows contain .5 in those two velocity columns. x_projected=T*x; P_projected=T*P*T.T including all cross terms, then call unchanged native predict with original F/Q/H/R. No position clamp, epsilon, fitted duration, detector/input/solver/gate/lifetime change. No change when no axis triggers. Both axes can trigger once. The conditional linear projection propagates moments for the selected T; it does not calibrate uncertainty over branch selection.",
+    "state_consistency": "Apply identical projection to live estimator and persistent detached shadow before original predict. Original shadow checks every dtype/shape/value/byte-hash before/after every native predict and accepted update, exact F*x/F*P*F.T+Q, P/Q/R symmetry/PSD screens fixed1e-10. Keep state_post/P_post as last actual accepted update; native predict writes new state_prior/P_prior; no rewriting historical posterior, motion/noise caches or clocks. Unsupported nonpositive prestate in treatment fails, never repaired; reference allows native invalid means. Finite failures retained as failure, not exclusion.",
+    "accepted_and_roles": "All tentative/confirmed hypotheses use the same guard, active pre-predict time_since_update0 versus retained>0 separately counted. No waiting/maturity change. Original high/weak association and Kalman measurement update execute unchanged, once with original measurement. Never project, clip, reject or reroute an accepted update or rewrite its posterior. A nonpositive accepted posterior fails the scene screen. Preserve all weak inputs, weak-stage execution, native births/confirmation and expiry. Effects on actual accepted observations are measured, not assumed unchanged.",
+    "reference_seal": "Before ANY control execution, run unhooked native reference on every source and seal complete prediction JSON/native-output/final-state hashes plus immutable input locks. Old0004/0005 JSON bytes/native outputs/final-state equal original archive; new0006/0007 native references are newly sealed, not historical originals. Two full observed reference passes/source must equal those native byte/state seals, old lifecycle also equals original seal. Two control passes/source must equal each other in complete output, final state, lifecycle, numerical and projection histories and event sets. Fresh isolated process per pass, OpenCV one thread/seed0, no inference during tracking.",
+    "proxy_harm_per_scene": "No pooling across scenes. Every treatment must have zero numerical-screen failures, zero nonpositive predicted/accepted posterior rows, zero lost baseline weak accepted input events(frame,input-index), zero lost baseline confirmed-output input events, zero lost baseline active accepted update pairs(frame,birth-frame,birth-input-index,current-input-index,stage), and zero new birth events(frame,input-index). Lineage is shared input birth key, not transfer/equality of native ID numbers. Lost/new sets, not only count differences. Additional confirmed input events recorded as unverified, not benefits/false positives. Treatment failure or reference mismatch blocks acceptance. These conservative observable proxies cannot establish FP/FN/IDSW/HOTA, correct identity or true harm without GT.",
+    "exposure_gate": "Each of BOTH new full sources must complete all passes, have >=1 actual projected row and strictly fewer nonpositive prediction rows than its own native reference, no detection-cap frames and every per-scene proxy-harm gate true. A zero-trigger source has no effective exposure; it cannot pass replication by equality. Mechanism checks reported separately; no source may compensate another. Even passing this gate is geometry/proxy acceptance only; tracking quality/harm remains unverified and defaults stay unchanged.",
+    "publication": "Only fixed source-level aggregate counts, each scene gate/result including zeros/failures and whole-source input/output/code/runtime hashes. Raw states/covariances/matrices, selected axes per case, frame/IDs/birth keys/events, costs, paths, media, labels and diagnostics stay in ignored local artifacts. No inference caches, source images, private data or model weights in public manifest."
+  },
+  "terms": {
+    "page": "https://www.cvlibs.net/datasets/kitti/",
+    "license": "CC BY-NC-SA 3.0",
+    "terms_page_sha256": "828a0add3e07f8ae9156ec73bde2ebaa4db0a637ad36e000cf01670b717bcd2a",
+    "attribution": "Andreas Geiger, Philip Lenz, Raquel Urtasun. Are we ready for Autonomous Driving? The KITTI Vision Benchmark Suite. CVPR2012.",
+    "scope": "Local noncommercial research, reviewed aggregate publication only; no media/GT/raw redistribution or dataset relicensing."
+  },
+  "forbidden": "No GT/labels/accuracy evaluator or accuracy-score-based selection, no tuning, source substitution, clip selection, input filtering, inference during tracking or app/worker/default integration."
+}

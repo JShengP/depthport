@@ -407,3 +407,14 @@ website/showcase.js
 tests/test_pages_showcase.py
 docs/en/pages-showcase.md
 docs/zh-TW/pages-showcase.md
+
+# Frozen prediction-geometry control, GT-free scene gates and image-only preparation
+depthport/tracking_geometry_control.py
+depthport/tracking_geometry_validation.py
+tools/validate_tracking_geometry.py
+tools/prepare_tracking_geometry.py
+tests/test_tracking_geometry_control.py
+tests/test_tracking_geometry_inputs.py
+docs/validation/v0.3-geometry-validity-protocol.json
+docs/en/tracking-geometry-validity.md
+docs/zh-TW/tracking-geometry-validity.md
