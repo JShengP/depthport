@@ -2,6 +2,8 @@
 
 [English](../en/pages-standalone-browsers.md) · [原內建瀏覽器驗證](pages-browser-compatibility.md) · [ROADMAP](../../ROADMAP.md#current-pages--目前互動展示) · [PR #27](https://github.com/JShengP/depthport/pull/27)
 
+> 下方維持原無頭驗證範圍；後續[原生有視窗驗證](pages-headed-browsers.md)另記對象、證據與未完成門檻，執行模式不增加瀏覽器列。
+
 ## 凍結範圍
 
 沿用原有 [8 項條件／8 個環境列](../validation/pages-browser-protocol.json)，SHA256 為 `fd0851f025d7b1e3bf6cced37c8553a074ce29e33db64e06e8eccaf3d316d38d`。[獨立執行設定](../validation/pages-standalone-plan.json)已在 **`8e94f78` 公開封存後才開始 Pages UI 實測**，對象為部署 **`6498451`**。內建控制介面無法操作獨立瀏覽器後，使用者明確選擇 WebDriver 無頭補驗；原內建瀏覽器清單、更正與失敗不覆寫。

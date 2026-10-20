@@ -2,6 +2,8 @@
 
 [繁體中文](../zh-TW/pages-standalone-browsers.md) · [Original study](pages-browser-compatibility.md) · [Roadmap](../../ROADMAP.md#current-pages--目前互動展示) · [PR #27](https://github.com/JShengP/depthport/pull/27)
 
+> Historical headless scope is preserved below. The subsequent [native headed study](pages-headed-browsers.md) records its own target, evidence and remaining gates; execution modes do not add browser rows.
+
 ## Frozen scope
 
 This follows the unchanged [eight-case/eight-environment protocol](../validation/pages-browser-protocol.json), SHA256 `fd0851f025d7b1e3bf6cced37c8553a074ce29e33db64e06e8eccaf3d316d38d`. The [standalone execution plan](../validation/pages-standalone-plan.json) was publicly sealed in **`8e94f78` before actual Pages UI tests**, targeting deployed **`6498451`**. The user explicitly authorized WebDriver headless testing after independent browsers were unavailable through the in-app control surface. It does not revise the earlier in-app ledger, amendment or failures.

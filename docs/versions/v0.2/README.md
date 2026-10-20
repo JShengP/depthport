@@ -78,7 +78,7 @@ Source / 來源：[Ultralytics bus.jpg](https://github.com/ultralytics/assets/bl
 
 **Limits / 限制:** V2 raw nearness is not geometry Z; final Z uses per-frame **virtual 1–5**, not metres. Camera XYZ uses a 65° HFOV estimate, not measured calibration. No independent distance accuracy, physical IPCam, throughput or fresh Windows pretrained-inference acceptance follows. 原生分數與幾何 Z 分開，不能把色彩或估計內參當成物理測距驗證；網站只讀保存結果，不執行新推論。
 
-[Data, hashes and limits](../../en/real-ai-pages.md) · [繁中來源與限制](../../zh-TW/real-ai-pages.md) · [Screenshot state / 截圖狀態](../../validation/readme-real-pages.json) · [Demo status & next gates / 展示進度與下一步](../../../ROADMAP.md#current-pages--目前互動展示) · [Scoped browser checks / 限定瀏覽器檢查](../../zh-TW/pages-browser-compatibility.md) · [Independent headless follow-up / 獨立無頭補驗](../../zh-TW/pages-standalone-browsers.md)
+[Data, hashes and limits](../../en/real-ai-pages.md) · [繁中來源與限制](../../zh-TW/real-ai-pages.md) · [Screenshot state / 截圖狀態](../../validation/readme-real-pages.json) · [Demo status & next gates / 展示進度與下一步](../../../ROADMAP.md#current-pages--目前互動展示) · [Scoped browser checks / 限定瀏覽器檢查](../../zh-TW/pages-browser-compatibility.md) · [Independent headless follow-up / 獨立無頭補驗](../../zh-TW/pages-standalone-browsers.md) · [Native headed study / 原生有視窗補驗](../../zh-TW/pages-headed-browsers.md)
 
 <details>
 <summary>Historical local CUDA screenshot / 歷史本機 CUDA 截圖</summary>
