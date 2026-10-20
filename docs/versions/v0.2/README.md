@@ -68,20 +68,24 @@ flowchart LR
 
 ## Examples / 範例
 
-**Real single-image CUDA example / 真單圖 CUDA 範例.** Four sequential depth engines and YOLO26n segmentation were run on one public Ultralytics bus image, captured through local HTTP on **2026-10-17**. The screenshot is identical to the image in the v0.2 tag. 同一張公開公車圖的四模型與分割真推論，截圖與 v0.2 Tag 相同。
+**[Open interactive website / 開啟互動網站](https://jshengp.github.io/depthport/v0.2/?lang=zh-TW)** · [English demo](https://jshengp.github.io/depthport/v0.2/?lang=en)
+
+**Current Pages, real numeric inspector / 目前網站的真實數值檢查器。** Four original saved bus depth outputs share v0.1's source. Click RGB/depth to read native Float32 values and camera XYZ; inspect actual YOLO Detect/Segment masks and object clouds. The image shows **Depth Anything V2 Small native relative nearness**, its final virtual Z and genuine semantic overlays. 四模型與 v0.1 共用同一公車來源；點擊 RGB／深度可讀原生 Float32 與 XYZ，切換真 YOLO 框／遮罩並看物件點雲，圖中為 V2 原生相對接近度及最終虛擬 Z。
+
+[![v0.2 current Pages UI with actual saved model results](../../assets/pages-v02-inspector.zh-TW.jpg)](https://jshengp.github.io/depthport/v0.2/?lang=zh-TW)
+
+Source / 來源：[Ultralytics bus.jpg](https://github.com/ultralytics/assets/blob/53d4e2a8fd15f473c29a148c317a8477be559327/im/bus.jpg). Depth reuses **2026-10-17** CUDA exports; semantic masks were rerun because the old export omitted them. This screenshot is the **current static Pages inspector**, not the old local application's four-model comparison screenshot. 深度沿用原 CUDA 匯出，舊匯出未保存遮罩才另行重跑；新圖是目前靜態 Pages 檢查器，不是舊本機四模型比較畫面。
+
+**Limits / 限制:** V2 raw nearness is not geometry Z; final Z uses per-frame **virtual 1–5**, not metres. Camera XYZ uses a 65° HFOV estimate, not measured calibration. No independent distance accuracy, physical IPCam, throughput or fresh Windows pretrained-inference acceptance follows. 原生分數與幾何 Z 分開，不能把色彩或估計內參當成物理測距驗證；網站只讀保存結果，不執行新推論。
+
+[Data, hashes and limits](../../en/real-ai-pages.md) · [繁中來源與限制](../../zh-TW/real-ai-pages.md) · [Screenshot state / 截圖狀態](../../validation/readme-real-pages.json)
 
 <details>
-<summary>View screenshot / 展開範例畫面</summary>
+<summary>Historical local CUDA screenshot / 歷史本機 CUDA 截圖</summary>
 
-<p align="center">
-  <img src="../../assets/spatial-preview.zh-TW.png" width="960" alt="v0.2 real CUDA depth comparison and YOLO segmentation on a public bus image">
-</p>
+[Original v0.2 screenshot](https://github.com/JShengP/depthport/blob/v0.2.0-alpha.1/docs/assets/spatial-preview.zh-TW.png) stays unchanged. It records the original four-engine/YOLO local HTTP application, not the new Pages inspector. 原圖記錄當時本機應用，不被新網站截圖覆寫；已發布 Tag／下載包不變。
 
 </details>
-
-Source / 來源：[Ultralytics Assets bus example](https://github.com/ultralytics/assets/blob/53d4e2a8fd15f473c29a148c317a8477be559327/im/bus.jpg). Its upstream AGPL attribution, input hash and model notices are retained in [asset provenance](../../assets/README.md) / [第三方聲明](../../../THIRD_PARTY_NOTICES.md).
-
-[Tagged screenshot / 本版圖片](https://github.com/JShengP/depthport/blob/v0.2.0-alpha.1/docs/assets/spatial-preview.zh-TW.png). This is neither a physical IPCam capture nor a calibrated distance/throughput benchmark. 不是實體相機影像，也不是標定測距或吞吐量 benchmark。
 
 ## Getting started / 使用入口
 

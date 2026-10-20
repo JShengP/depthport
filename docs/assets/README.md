@@ -88,3 +88,16 @@ Underlying footage: **Lukas Kosc via Pexels**, [Urban Street Scene with People C
 ## New numeric Pages demonstration / 新數值互動展示
 
 The three original screenshots above remain unchanged and retain their original counts. The new saved four-model bus pack and separate 24-frame replay run are described in [real AI Pages provenance](../en/real-ai-pages.md), including model/result hashes and the 2026-10-20 Pexels rights review. The new run contains 9 IDs / 209 detections / 152 associated / 57 unassociated; it is not the original screenshot Session.
+
+
+## Current real-data interactive Pages screenshots — 2026-10-20
+
+`pages-v01-cloud.{en,zh-TW}.jpg`, `pages-v02-inspector.{en,zh-TW}.jpg` and `pages-v03-replay.{en,zh-TW}.jpg` are actual browser viewport crops from the public Pages deployment at commit `7ef6db805fff74032e824599da7af5f7847e66f6`. Only normal UI actions (model/language selection, pixel click, cloud orbit/zoom and replay seek/ID selection) were used. These JPEGs contain no fabricated model values or retouched boxes/IDs; they do not include browser chrome, private Sessions, notes, paths, accounts or credentials. Exact source URLs, states, sizes and SHA-256 are in the [screenshot record](../validation/readme-real-pages.json).
+
+- v0.1: original CloudViewer, **DA3 Metric Large**, actual saved bus XYZRGB, RGB color, rotated/zoomed. Estimated metres and HFOV K are not physical calibration; later v0.2 validation does not change historical v0.1 acceptance.
+- v0.2: **DA V2 Small** native relative-nearness map and final virtual-Z / camera-XYZ query, with actual YOLO masks. Values read Float32 arrays, not preview colors. Native nearness and virtual Z have different meanings.
+- v0.3: **new 2026-10-20 run**, saved #12/source #43, 1.751750 s, `obj-0005` absent and history gaps retained. It has **9 IDs / 209 detections / 152 associated / 57 unassociated** (Ultralytics 8.4.115), distinct from the old three screenshots' **7 / 230 / 125 / 105** (8.4.176). Same-looking IDs across runs are not identity equivalence or accuracy evidence.
+
+Bus attribution and Pexels footage terms above apply. New replay screenshots combine the already reviewed annotated analytical artwork with the real playback/depth-history UI; no original MP4 or standalone original frame sequence is added. No identity GT, long-occlusion recovery, world motion or calibrated depth accuracy is established. Historical screenshots, tags and Alpha downloads remain unchanged.
+
+新圖均為公開網站實際互動後的英／繁中畫面裁切，不加工數值、框或 ID。公車與 Pexels 素材保留上述來源及條款；新舊追蹤分開，不回寫歷史驗收，也不包含私人 Session、備註、帳密或本機路徑。

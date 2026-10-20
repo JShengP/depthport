@@ -18,24 +18,28 @@ Turn RGB images and RTSP frames into interactive **single-view point clouds**. C
 > [!IMPORTANT]
 > **Experimental development preview.** Session storage is off by default. Long-occlusion recovery, physical RTSP, Windows pretrained inference/worker integration, endurance and calibrated distance accuracy remain open. [Validation record](docs/en/validation.md)
 
-## Real replay example
+## Real-data interactive demos
+
+Click a screenshot to open the **saved-result interactive website**. These are screenshots of the current Pages UI, not new live inference or historical Alpha acceptance.
 
 <p align="center">
-  <img src="docs/assets/tracking-replay-crossing.zh-TW.jpg" width="960" alt="Actual v0.3 Session replay: Object IDs during pedestrian crossing and partial occlusion">
+  <a href="https://jshengp.github.io/depthport/v0.1/?lang=en"><img src="docs/assets/pages-v01-cloud.en.jpg" width="30%" alt="v0.1: Saved DA3 Metric cloud in the original CloudViewer"></a>
+  <a href="https://jshengp.github.io/depthport/v0.2/?lang=en"><img src="docs/assets/pages-v02-inspector.en.jpg" width="30%" alt="v0.2: Actual V2 native depth, semantic masks and camera XYZ"></a>
+  <a href="https://jshengp.github.io/depthport/v0.3/?lang=en"><img src="docs/assets/pages-v03-replay.en.jpg" width="30%" alt="v0.3: New 9-ID replay with an observed-frame gap"></a>
 </p>
 
-*Actual Session UI with real YOLO26n + isolated BoT-SORT output; Traditional Chinese interface. Footage: [Lukas Kosc via Pexels](https://www.pexels.com/video/urban-street-scene-with-people-crossing-34597902/), used in edited documentation under the [Pexels terms](https://www.pexels.com/terms-of-service/).*
+**[v0.1 · Rotate real point clouds](https://jshengp.github.io/depthport/v0.1/?lang=en)** · **[v0.2 · Inspect native depth / XYZ / masks](https://jshengp.github.io/depthport/v0.2/?lang=en)** · **[v0.3 · Play real tracking results](https://jshengp.github.io/depthport/v0.3/?lang=en)**
 
-[View all three frames, source attribution & exact conditions →](docs/en/tracking-replay-example.md)
+Bus views reuse the original four-engine CUDA exports of [Ultralytics bus.jpg](https://github.com/ultralytics/assets/blob/53d4e2a8fd15f473c29a148c317a8477be559327/im/bus.jpg). The cloud image shows **DA3 Metric Large**; the inspector shows **V2 native nearness plus final virtual Z**, with new real YOLO masks. Intrinsics are estimated from 65° HFOV, not measured calibration. Relative/virtual depth is not metres; estimated metres are not verified physical distances. This later demonstration does not change v0.1's historical acceptance.
 
-This 24-frame example shows local Object IDs, crossing, partial occlusion and missing/new observations. It has no identity ground truth and does not establish long-occlusion recovery.
+**Two separate tracking runs — do not mix IDs or counts:**
 
-<details>
-<summary>Frame timing and evidence boundaries</summary>
+- **Current Pages run, 2026-10-20:** **9 IDs / 209 detections / 152 associated / 57 unassociated**, YOLO26n **8.4.115**. The original Session was unavailable, so the same hashed video and source frames 32–55 were rerun. The screenshot shows saved #12 = source #43 at 1.751750 s; `obj-0005` has no observation here, so Z/XYZ are blank and its history retains the gap.
+- **Earlier screenshots, 2026-10-19:** **7 IDs / 230 detections / 125 associated / 105 unassociated**, YOLO26n **8.4.176**. [Original three-screen walkthrough](docs/en/tracking-replay-example.md). Those screenshots remain unchanged; matching ID strings across runs do not establish the same object. Different runs are not a controlled accuracy comparison.
 
-The image shows Session #12 = source frame 43 at 1.752 s. Source video is 23.976 fps; the worker advances fixed 30-Hz steps and UI 1× targets 5 saved frames/s. The example reused a documented CUDA environment, not a fresh installation of the complete current dependency recipe. These documentation additions are in main after Alpha.2; published release tags/downloads remain fixed. Raw video, full Session archives, notes and weights are not distributed.
+Footage: **[Lukas Kosc via Pexels](https://www.pexels.com/video/urban-street-scene-with-people-crossing-34597902/)**, under its [own terms](https://www.pexels.com/terms-of-service/), not AGPL; no endorsement. Both examples span only **0.959 s**, have no identity GT, and do not validate long occlusion, ID-switch correctness or tracking accuracy. Unassociated detections are not ground-truth FN. V2 per-frame virtual depth and camera XYZ are not world motion or speed. Pages reads saved static packs; it offers no online model inference, private Session access or RTSP input.
 
-</details>
+[Full provenance, native units and limitations](docs/en/real-ai-pages.md) · [Screenshot states and hashes](docs/validation/readme-real-pages.json)
 
 ## Quick start
 
@@ -108,11 +112,11 @@ Previous packages: [v0.3.0-alpha.1](https://github.com/JShengP/depthport/release
 - **Traceable exports:** same-frame PLY, float32 NPY, original model output, aligned RGB and model/unit metadata. English/Traditional Chinese UI, with browser language persistence or `?lang=en` / `?lang=zh-TW`; language does not change data/API fields. Upstream diagnostics retain their original language.
 
 <details>
-<summary>Original viewer screenshot — synthetic data</summary>
+<summary>Current Pages point-cloud interaction — saved real data</summary>
 
-![DepthPort English interface with synthetic viewer data](docs/assets/preview.en.png)
+[![Actual DA3 Metric Large XYZRGB in CloudViewer](docs/assets/pages-v01-cloud.en.jpg)](https://jshengp.github.io/depthport/v0.1/?lang=en)
 
-*Actual UI with explicitly synthetic data; no camera or AI model produced this point cloud.*
+*Rotate / zoom / pan saved model geometry. Estimated metres and HFOV intrinsics are uncalibrated; this later example is not historical v0.1 acceptance. [Original synthetic screenshot](docs/assets/preview.en.png) remains a separate reference.*
 
 </details>
 
@@ -123,11 +127,11 @@ Inspect raw depth/camera-space XYZ, compare four engines sequentially on one ima
 [Spatial Analysis guide](docs/en/spatial-analysis.md) · [Models & geometry](docs/en/models-and-geometry.md)
 
 <details>
-<summary>Spatial Analysis screenshot — real single-image CUDA inference</summary>
+<summary>Current Pages inspector — real depth, XYZ and YOLO masks</summary>
 
-![Real pretrained depth comparison and YOLO segmentation](docs/assets/spatial-preview.en.png)
+[![Actual native V2 depth, saved camera XYZ and YOLO segmentation](docs/assets/pages-v02-inspector.en.jpg)](https://jshengp.github.io/depthport/v0.2/?lang=en)
 
-*Real pretrained inference on the public [Ultralytics bus example](https://github.com/ultralytics/assets/blob/53d4e2a8fd15f473c29a148c317a8477be559327/im/bus.jpg). This is not a physical IP-camera capture or distance-accuracy benchmark. [Screenshot provenance](docs/assets/README.md)*
+*Native Float32 queries, not preview-color inversion. V2 final geometry uses virtual 1–5 units; K is an HFOV estimate. [Historical v0.2 CUDA screenshot](docs/assets/spatial-preview.en.png) remains unchanged.*
 
 </details>
 

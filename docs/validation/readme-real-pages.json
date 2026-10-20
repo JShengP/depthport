@@ -1,0 +1,133 @@
+{
+  "format": "depthport.readme-pages-screenshots.v1",
+  "captured_on": "2026-10-20",
+  "deployment_commit": "7ef6db805fff74032e824599da7af5f7847e66f6",
+  "method": "Actual public browser viewport screenshots; some viewport crops; JPEG bytes saved directly, no pixel or annotation edits",
+  "privacy_review": "Public curated bus/Pexels results only; no browser chrome, accounts, private sessions, notes, paths, camera URLs or credentials; no EXIF entries",
+  "bus_source_sha256": "c02019c4979c191eb739ddd944445ef408dad5679acab6fd520ef9d434bfbc63",
+  "replay_source_sha256": "9b77a4264bb59290335184b77c6300ba43aa6642cb65b594550c44359fd57d4b",
+  "replay_new_counts": {
+    "ids": 9,
+    "detections": 209,
+    "associated": 152,
+    "unassociated": 57
+  },
+  "replay_old_counts": {
+    "ids": 7,
+    "detections": 230,
+    "associated": 125,
+    "unassociated": 105
+  },
+  "new_detector_version": "8.4.115",
+  "old_detector_version": "8.4.176",
+  "images": [
+    {
+      "path": "docs/assets/pages-v01-cloud.en.jpg",
+      "sha256": "a5bf728fb19620ab1e1abde7248bb88c15dcf040a4b64134de29403cf7f164fc",
+      "bytes": 49013,
+      "url": "https://jshengp.github.io/depthport/v0.1/?lang=en",
+      "language": "en",
+      "state": {
+        "engine": "da3-metric",
+        "color": "rgb",
+        "cloud": "original exported XYZRGB; orbit/zoom; all objects"
+      },
+      "width": 670,
+      "height": 765
+    },
+    {
+      "path": "docs/assets/pages-v01-cloud.zh-TW.jpg",
+      "sha256": "9c1d0c8315ab3df92c17251a5e6f4a09270427dc22f6f1dd0b4dd70de7ebb928",
+      "bytes": 55959,
+      "url": "https://jshengp.github.io/depthport/v0.1/?lang=zh-TW",
+      "language": "zh-TW",
+      "state": {
+        "engine": "da3-metric",
+        "color": "rgb",
+        "cloud": "original exported XYZRGB; orbit/zoom; all objects"
+      },
+      "width": 733,
+      "height": 882
+    },
+    {
+      "path": "docs/assets/pages-v02-inspector.en.jpg",
+      "sha256": "abfa23389d2f9972ea454bfef81676e748be29a6062745d7b1245806e5494c23",
+      "bytes": 88712,
+      "url": "https://jshengp.github.io/depthport/v0.2/?lang=en",
+      "language": "en",
+      "state": {
+        "engine": "da2-small",
+        "depth_map": "raw native relative nearness",
+        "semantics": "actual YOLO segmentation",
+        "query": "source pixel centre of visible aligned RGB; exact values visible in screenshot"
+      },
+      "width": 670,
+      "height": 875
+    },
+    {
+      "path": "docs/assets/pages-v02-inspector.zh-TW.jpg",
+      "sha256": "c3ff89eba447dd2a0ee0f071ebba4227c08c83410ebd1ca193454caa4a8ea6b9",
+      "bytes": 93447,
+      "url": "https://jshengp.github.io/depthport/v0.2/?lang=zh-TW",
+      "language": "zh-TW",
+      "state": {
+        "engine": "da2-small",
+        "depth_map": "raw native relative nearness",
+        "semantics": "actual YOLO segmentation",
+        "query": "source pixel centre of visible aligned RGB; exact values visible in screenshot"
+      },
+      "width": 670,
+      "height": 875
+    },
+    {
+      "path": "docs/assets/pages-v03-replay.en.jpg",
+      "sha256": "17367bbebbd5088abea6f3a91ced7d79909eb7fc2063c146839921ce0bc8cce4",
+      "bytes": 72919,
+      "url": "https://jshengp.github.io/depthport/v0.3/?lang=en",
+      "language": "en",
+      "state": {
+        "run": "new 2026-10-20",
+        "saved_frame": 12,
+        "source_frame": 43,
+        "timestamp": 1.75175,
+        "object_id": "obj-0005",
+        "observed": false,
+        "depth_xyz": null,
+        "gaps": "preserved"
+      },
+      "width": 670,
+      "height": 875
+    },
+    {
+      "path": "docs/assets/pages-v03-replay.zh-TW.jpg",
+      "sha256": "197296479e2ef51c65f245fc4d2e9c775e16044d39ce22873fd474640735699e",
+      "bytes": 72953,
+      "url": "https://jshengp.github.io/depthport/v0.3/?lang=zh-TW",
+      "language": "zh-TW",
+      "state": {
+        "run": "new 2026-10-20",
+        "saved_frame": 12,
+        "source_frame": 43,
+        "timestamp": 1.75175,
+        "object_id": "obj-0005",
+        "observed": false,
+        "depth_xyz": null,
+        "gaps": "preserved"
+      },
+      "width": 733,
+      "height": 882
+    }
+  ],
+  "historical_assets": "unchanged",
+  "limits": [
+    "Later real-model demo is not historical v0.1 acceptance",
+    "HFOV-estimated geometry; relative/virtual is not metres; estimated metres not distance verification",
+    "No identity GT, long-occlusion or tracking accuracy acceptance",
+    "Camera XYZ is not world motion or speed",
+    "Counts and same-named IDs from different runs must not be mixed"
+  ],
+  "attribution": {
+    "bus": "Ultralytics Assets at pinned source revision; source attribution retained",
+    "replay": "Lukas Kosc / Pexels #34597902; Pexels terms, not AGPL; analytical UI artworks, no original MP4; no endorsement"
+  }
+}

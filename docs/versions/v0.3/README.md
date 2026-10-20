@@ -71,22 +71,22 @@ flowchart TD
 
 ## Examples / 範例
 
-**Real short replay example / 真實短片回放範例.** Genuine YOLO26n CPU Detect + isolated BoT-SORT on public footage by **Lukas Kosc via Pexels**, using Alpha.2 code. The 24 consecutive source frames show Object IDs, crossing, partial occlusion and missing/new observations. 真實推論與介面，24 格連續來源影格保留缺框／新 ID，沒有手動修正。
+**[Open interactive website / 開啟互動網站](https://jshengp.github.io/depthport/v0.3/?lang=zh-TW)** · [English demo](https://jshengp.github.io/depthport/v0.3/?lang=en)
 
-<details>
-<summary>View screenshot / 展開範例畫面</summary>
+**Current Pages, new saved replay run / 目前網站，新保存回放執行。** Play/pause, step/seek, change speed, choose local Object IDs and inspect saved depth/XYZ with observation gaps. The image shows **saved frame #12 = source #43 at 1.751750 s**, with `obj-0005` unobserved: depth/XYZ are blank and the history is not interpolated. 可播放／暫停、逐格／拖曳、調速及選擇 ID；圖中 `obj-0005` 在此格無觀測，深度／XYZ 留白，歷史缺口不補值。
 
-<p align="center">
-  <img src="../../assets/tracking-replay-crossing.zh-TW.jpg" width="960" alt="v0.3 real replay with Object IDs during pedestrian crossing and partial occlusion">
-</p>
+[![v0.3 current Pages UI with actual saved model results](../../assets/pages-v03-replay.zh-TW.jpg)](https://jshengp.github.io/depthport/v0.3/?lang=zh-TW)
 
-</details>
+**Keep the two runs separate / 新舊執行分開：**
 
-Source / 來源：[Lukas Kosc / Pexels](https://www.pexels.com/video/urban-street-scene-with-people-crossing-34597902/), combined with actual UI and explanation under the [Pexels terms](https://www.pexels.com/terms-of-service/). Footage retains its own terms, not the application's AGPL; no endorsement is implied. 原素材保留 Pexels 條款，不因程式 AGPL 改授權或暗示背書。
+- **New Pages / 新網站（2026-10-20）：9 IDs / 209 detections / 152 associated / 57 unassociated**, YOLO26n **8.4.115**. The original Session could not be recovered; the same hash-checked Pexels source frames **32–55** were rerun with DA V2 CUDA FP32 and isolated BoT-SORT 2.6.1, no ReID. 原 Session 未找回才重跑，不強迫新數值符合舊結果。
+- **Earlier screenshots / 舊截圖（2026-10-19）：7 IDs / 230 detections / 125 associated / 105 unassociated**, YOLO26n **8.4.176**, using Alpha.2 code. [Original three screenshots and conditions](../../en/tracking-replay-example.md) / [原三張截圖與條件](../../zh-TW/tracking-replay-example.md) remain unchanged. IDs are local to each run; equal strings do not prove equal objects. 不把兩次執行的同名 ID 視為同物件，也不把不同版本的數量差異當成受控精度提升。
 
-[Three-frame walkthrough & exact conditions](../../en/tracking-replay-example.md) · [三張前後影格與完整條件](../../zh-TW/tracking-replay-example.md) · [Curated record / 彙總紀錄](../../validation/v0.3-public-replay-example.json)
+Footage / 素材：**[Lukas Kosc / Pexels](https://www.pexels.com/video/urban-street-scene-with-people-crossing-34597902/)**, combined with actual analysis UI and explanation under the [Pexels terms](https://www.pexels.com/terms-of-service/). Underlying footage is not AGPL; no endorsement. 素材保留自身條款，不因程式 AGPL 改授權或暗示背書；不提供原 MP4、私人 Session 或備註。
 
-Session #12 = source frame 43 at 1.752 s. This example reused a documented CUDA environment, not a fresh installation of the complete Alpha.2 requirements. Screenshots/docs were added after Alpha.2; its tag/download assets are unchanged. 圖中 Session #12 對應來源第 43 格；沿用 CUDA 環境，不是完整依賴配方的新安裝驗收，後補文件不覆寫發布包。
+**Limits / 限制:** both runs span only **0.959 s** without identity GT; no long-occlusion, verified ID-switch or tracking-accuracy acceptance. Unassociated is not ground-truth FN. V2 depth is per-frame virtual 1–5, not metres; HFOV camera XYZ is not world motion or speed. Source 23.976 fps, fixed tracker 30-Hz steps and UI 1× at 5 saved frames/s are separate. 沒有身分真值，不因缺格／新 ID 判定換 ID 正確或長遮擋恢復通過；深度、時間及座標限制維持。
+
+[Current data, hashes and limits](../../en/real-ai-pages.md) · [目前資料與限制](../../zh-TW/real-ai-pages.md) · [Screenshot state / 截圖狀態](../../validation/readme-real-pages.json)
 
 ## Getting started / 使用入口
 

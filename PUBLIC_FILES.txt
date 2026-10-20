@@ -505,3 +505,12 @@ website/data/catalog.json
 docs/en/real-ai-pages.md
 docs/zh-TW/real-ai-pages.md
 docs/validation/real-ai-pages.json
+
+# Reviewed current Pages UI screenshots and provenance
+docs/assets/pages-v01-cloud.en.jpg
+docs/assets/pages-v01-cloud.zh-TW.jpg
+docs/assets/pages-v02-inspector.en.jpg
+docs/assets/pages-v02-inspector.zh-TW.jpg
+docs/assets/pages-v03-replay.en.jpg
+docs/assets/pages-v03-replay.zh-TW.jpg
+docs/validation/readme-real-pages.json
