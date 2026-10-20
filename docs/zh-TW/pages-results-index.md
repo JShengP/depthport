@@ -124,6 +124,17 @@ Safari、實體手機／原生觸控、其他 OS／build、完整新版全新安
 
 修正 `.gitattributes`，讓 `.cjs` 與計畫 JSON 在 Windows 保持原 LF 位元組，另明列資格檢查結果。**原凍結計畫、來源檔內容、120 次規模與通過門檻未改**。原三批失敗完整保留，不改判通過；修正後的執行另列為後續驗證，不能取代首輪或宣稱首輪即通過。三份 artifacts 已另存本機。
 
+### 修正後重複執行結果
+
+[後續 workflow 39467238268（attempt 1）](https://github.com/JShengP/depthport/actions/runs/39467238268)：三批各正常／延後 fetch 20 次，合計 **正常 60／60、延後 60／60 通過**；0 失敗、0 逾時、0 跳過、0 未執行。沒有重試。已逐份下載並核對 120 份 JUnit、輸出檔與逐次清單，所有案例名稱、退出碼、來源雜湊及資格均符合凍結計畫。
+
+- Windows AMD64，build `10.0.26100`；GitHub image `win25-vs2026`，批次 1／3 為 `20261018.275.1`，批次 2 為 `20261007.264.1`。
+- Python `3.11.9`、Node `v22.23.3`、pytest `9.1.1`。PR 測試實際 checkout merge SHA `5b4496d64fab19342446989ced4c681d256fe81a`，來源檔雜湊與 `cad4988d` 參考修正版相同；計畫 LF 位元組 SHA-256 為 `c21b038c63d56b674964a4d50b4b70e1772148fa102b25d715809735aaacdd69`。
+- [公開逐次狀態與版本索引](../validation/windows-node-stability-results.json) 同時保留首輪三批共 120 次未執行與修正後三批共 120 次通過，並附六份 artifact 的 ID、雜湊及 CI 連結。原始 ZIP／輸出／JUnit 另外留本機；公開 JSON 不含私人輸入或原始診斷。
+- 本機 31 項聚焦測試與公開檔案／連結檢查通過，另跑 4 次真實子程序驗證收集流程；本機 Linux 結果不算入 Windows 數字。
+
+這支持**記錄中的三個 Windows runner，在兩種合成 transport 下未再觀察到該測試失敗**；不代表原始歷史故障已唯一歸因，也不代表所有環境零失敗。第一輪資格失敗仍是失敗，後續 PR／main CI 自動回歸另見 [PR #35](https://github.com/JShengP/depthport/pull/35)，不合併成同一次獨立實驗。
+
 ## English summary
 
 The bilingual Results Index renders 26 dated, source-linked records at build time. Numeric metrics come from allowlisted evidence through JSON pointers; no browser API, raw diagnostic data or inference is used. Cohorts, failed gates, CI without weights and unverified platforms stay separate. This is an evidence index, not a global leaderboard or live CI status.
@@ -141,3 +152,5 @@ URL restoration was checked in all three Linux headless browsers, including a ne
 Each comparison also has a copy-link button containing both current cohort choices, the current UI language and the clicked comparison anchor. Only shareable query fields are copied. Success is announced only after the native write resolves; rejected/unavailable clipboard access shows a selected read-only URL for manual copy. Changes to sequence/history clear stale feedback. Three Linux headless browsers completed native writes; Chrome/Edge also verified native readback with test-profile permissions, while Firefox readback remains untested. Controlled success/failure/pending/API-unavailable and bilingual keyboard/narrow-layout cases passed. A first Firefox navigation automation failure is retained locally; a new-document identity wait passed on retry. Accuracy, hardware and frozen-matrix acceptance remain unchanged.
 
 The Windows/Python 3.11 first-run artifact lacks child stdout/stderr, so its exact cause cannot be recovered. A separate synthetic 250ms fetch delay reproducibly exposed an invalid assumption in the old cancellation test: it required two server-side socket closures even if its 100ms deadlines expired before requests arrived. The test now separates controlled-clock deadline checks from observed HTTP readiness/closure. Failed/timed-out Node children report both streams, runtime and phase markers. Normal and delayed transports are tested in pytest; 23 focused checks and ten local repeat runs passed. This repairs a proven test race without claiming a unique diagnosis of the historical failure. Production code, saved evidence and acceptance limits are unchanged.
+
+Windows/Python 3.11 repetitions were frozen before execution: three runners, twenty normal and twenty delayed-fetch cases each, no retries. The initial attempt was ineligible because checkout converted two CJS files to CRLF; all 120 cases remain unrun, never relabelled as passes. LF checkout rules fixed the byte contract without changing test sources or the plan. A separate subsequent workflow executed all 120 cases successfully (60 normal, 60 delayed), with every JUnit and ledger checked against the frozen source hashes. Both runs and all artifact identifiers/hashes remain in the public status index; raw evidence is also archived locally. This is scoped synthetic software stability evidence, not proof of the historical failure cause, zero risk, accuracy or hardware acceptance.
