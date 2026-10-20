@@ -441,3 +441,11 @@ docs/validation/v0.3-geometry-exposure-confirmation.json
 docs/validation/v0.3-geometry-exposure-confirmation-references.json
 docs/validation/v0.3-geometry-exposure-preparation.json
 docs/validation/v0.3-geometry-exposure-pre-inference.json
+
+# Frozen read-only archive-carrier and tentative-role audit
+depthport/tracking_carrier_role_audit.py
+tools/audit_tracking_carrier_roles.py
+tests/test_tracking_carrier_roles.py
+docs/validation/v0.3-carrier-role-audit-protocol.json
+docs/en/tracking-carrier-roles.md
+docs/zh-TW/tracking-carrier-roles.md
