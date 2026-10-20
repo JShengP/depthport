@@ -62,6 +62,21 @@ Safari、實體手機／原生觸控、其他 OS／build、完整新版全新安
 
 以上只驗證網站軟體呈現，不新增追蹤品質或實體手機證據，不改判原瀏覽器凍結矩陣（33 通過／31 未測）。Safari、原生手機／觸控、其他 OS，以及長遮擋恢復與泛化 ID 穩定性仍保留原未驗證／未驗收狀態。原始瀏覽器檢查、截圖與環境紀錄只留本機。
 
+## 逐序列網址還原 — 2026-10-21
+
+兩個場景組的序列選擇現在會各自寫入網址，可重新整理、複製分享，並使用瀏覽器上一頁／下一頁還原。範例：[MOT17-11 與預設對照 MOT17-10](https://jshengp.github.io/depthport/results/?lang=zh-TW&seq-mot17-expanded=MOT17-11-DPM&seq-mot17-parameters-default=MOT17-10-DPM#comparison-mot17-expanded)。兩組仍是獨立條件，不做跨組比較或排名。
+
+- `seq-mot17-expanded` 只接受該組 MOT17-04／11／13；`seq-mot17-parameters-default` 只接受該組 MOT17-09／10。省略參數代表「全組序列（原彙總）」，切回全組會移除對應參數，另一組保持原選擇。
+- 每次實際變更選擇會新增瀏覽歷史；讀取連結、重新整理、歷史返回及清理無效值只更新目前紀錄，不新增歷史。網址優先於瀏覽器可能恢復的舊表單值。
+- 未知、空白、重複或屬於另一場景組的序列值均回到該組全組，並移除該參數；另一組的有效值保留。只使用原選單白名單，不把網址值插入 HTML，也不更動來源指標、順序或比例尺。
+- 保留原網址路徑、其他查詢參數的值及錨點。搜尋、篩選、備註或本機資料不由這個功能寫入網址；篩選重設與語言切換不清除已選序列。分享只還原序列，其他結果篩選仍由訪客自行選擇。
+
+網站持續顯示原序列影格數、FPS、解析度、相機條件、來源日期、配置與驗證限制；全組仍讀原彙總，不重算、不調參、不新增追蹤品質證據。原資料 JSON、弱偵測延續與研究門檻保持原樣。
+
+驗證：20 項聚焦離線測試通過，其中 URL 輔助檢查涵蓋兩組全部 12 種組合、預設省略、編碼、未知／跨組／重複值與查詢／錨點保留。Linux 無頭 Chrome 155.0.8059.84／Edge 155.0.4283.62／Firefox 157.0 另實際檢查直接連結、重新整理、分享至新分頁、上一頁／下一頁、切回全組、無效值清理、篩選／搜尋不寫入網址；並重驗原 7 視圖／72 根長條、每瀏覽器 28 種中英桌面／390px CSS 布局，均通過。Firefox 首輪在換頁時遇到自動化元素失效（StaleElementReference）；將就緒條件改為在單次瀏覽器讀取中檢查新頁面完成與選單可用後重驗通過，網站程式未因此變更，原失敗保留本機。
+
+這仍是網站軟體回歸，原瀏覽器矩陣（33 通過／31 未測）、Safari／原生手機與觸控／其他 OS，以及追蹤品質與實機未驗收項目不改判；原始環境、截圖及瀏覽器紀錄不公開。
+
 ## English summary
 
 The bilingual Results Index renders 26 dated, source-linked records at build time. Numeric metrics come from allowlisted evidence through JSON pointers; no browser API, raw diagnostic data or inference is used. Cohorts, failed gates, CI without weights and unverified platforms stay separate. This is an evidence index, not a global leaderboard or live CI status.
@@ -71,3 +86,7 @@ Homepage tracking details now sit in a closed disclosure. v0.1/v0.2 show the unc
 Within-cohort charts now show HOTA, IDSW, FN and FP separately for the MOT17-04/11/13 comparison and MOT17-09/10 default controls. Values are read from their original source branches; scales start at zero and stay fixed under filtering. Missing values and mismatched cohorts/profiles fail the build instead of becoming zero. No scores are rerun or ranked across cohorts.
 
 Each cohort also has an independent combined/individual-sequence selector. All four metrics and recorded sequence conditions change together; filtering, resets and language changes preserve the selection. Combined scores remain the original aggregates, bar links are explicitly labelled as combined-cohort cards, and axes stay fixed within each cohort. Twenty focused offline tests and three Linux headless browsers cover all seven views, 72 bar values/widths and 28 bilingual desktop/narrow layouts per browser. This remains scoped software regression, not new accuracy, hardware or full frozen-matrix acceptance.
+
+Sequence choices also round-trip through cohort-specific URL parameters for refresh, sharing and browser Back/Forward. Only an exact choice from the matching cohort is accepted; missing, invalid, duplicate or foreign values use the original combined view. Default values are omitted, unrelated query values and anchors remain intact, and filters/search are not added to the URL. Conditions, source scores, fixed within-cohort scales and validation limits are unchanged.
+
+URL restoration was checked in all three Linux headless browsers, including a new-tab shared link and navigation history. The first Firefox automation attempt hit a stale element during navigation; an atomic document/control readiness wait passed on retry, with the original failure retained locally. This does not change the frozen compatibility matrix or acceptance limits.
