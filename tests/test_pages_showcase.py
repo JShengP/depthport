@@ -107,3 +107,50 @@ def test_home_card_images_and_links_follow_language_if_node_available():
         pytest.skip('Node.js is not installed')
     subprocess.run([node, str(ROOT / 'tests/test_home_cards.cjs')],
                    check=True, capture_output=True, text=True)
+
+
+def test_version_navigation_identifies_its_actual_destination(tmp_path):
+    class VersionNavigation(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.in_nav = False
+            self.href = None
+            self.label = ''
+            self.links = []
+            self.in_title = False
+            self.title = ''
+
+        def handle_starttag(self, tag, attrs):
+            attrs = dict(attrs)
+            if tag == 'title':
+                self.in_title = True
+            if tag == 'nav' and attrs.get('aria-label') == 'Version navigation':
+                self.in_nav = True
+            if tag == 'a' and self.in_nav:
+                self.href, self.label = attrs.get('href'), ''
+
+        def handle_data(self, data):
+            if self.in_title:
+                self.title += data
+            if self.href is not None:
+                self.label += data
+
+        def handle_endtag(self, tag):
+            if tag == 'title':
+                self.in_title = False
+            if tag == 'a' and self.href is not None:
+                self.links.append((self.label.strip(), self.href))
+                self.href = None
+            if tag == 'nav':
+                self.in_nav = False
+
+    out = tmp_path / 'site'
+    build(out)
+    versions = {'v0.1', 'v0.2', 'v0.3'}
+    for version in sorted(versions):
+        parser = VersionNavigation()
+        parser.feed((out / version / 'index.html').read_text(encoding='utf-8'))
+        assert version in parser.title
+        links = [(label, href) for label, href in parser.links if label in versions]
+        assert {label for label, _ in links} == versions - {version}
+        assert all(urlsplit(href).path == f'../{label}/' for label, href in links)

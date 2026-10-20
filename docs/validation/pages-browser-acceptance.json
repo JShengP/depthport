@@ -1,0 +1,291 @@
+{
+  "format": "depthport.pages-browser-acceptance.v1",
+  "checked_at": "2026-10-20T12:41:30.604700+00:00",
+  "state": "scoped_retest_complete_full_matrix_incomplete",
+  "protocol_commit": "8c5a25efe68a303d01eb4ccb02557cafa1f91bf3",
+  "protocol_sha256": "fd0851f025d7b1e3bf6cced37c8553a074ce29e33db64e06e8eccaf3d316d38d",
+  "original_target_commit": "884b99685683c4b46c3814e7a1cdb904fa957624",
+  "initial_record_commit": "3f6a9ec342d8897852e0169b58cdc487b34c02a9",
+  "initial_record_sha256": "3afd8db666fb49b231eb9437bfab7bace0c165b046dd63ee89da5bb133acc832",
+  "addendum_sha256": "cff8f6c1f24f454d0a7ef9676f1965dbbf4f70a442726dcecff5b0e51d2a3d1b",
+  "repair_commit": "1a61a1b94be234f9984ead4cf4f293d20da586fc",
+  "runtime": {
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+    "platform": "Linux x86_64",
+    "decompressionStream": "function",
+    "webgl": true,
+    "renderer": "ANGLE (NVIDIA Corporation, NVIDIA GeForce RTX 4090/PCIe/SSE2, OpenGL 4.5.0)"
+  },
+  "runtime_notice": "UA-reported Chrome version and renderer only; exact embedded build/driver version unavailable. Desktop and mobile-size are the same engine, not independent browsers. Renderer string is not full hardware acceptance.",
+  "matrix": [
+    {
+      "id": "IAB-D",
+      "cases": {
+        "B01": "pass",
+        "B02": "not_run",
+        "B03": "pass",
+        "B04": "pass",
+        "B05": "pass",
+        "B06": "pass",
+        "B07": "pass",
+        "B08": "not_run"
+      },
+      "remaining_subchecks": {
+        "B02": "Four models rendered/orbited/zoomed/colors/size/reset on v0.1 and v0.2; modifier/right-button pan not executed by available drag API.",
+        "B08": "Native gzip and WebGL available; naturally unsupported decoding and Canvas fallback not reached."
+      },
+      "basis": "Original target for unchanged data/widgets; local repaired build for B06/B07 and critical query/mask/replay smoke."
+    },
+    {
+      "id": "IAB-M",
+      "cases": {
+        "B01": "pass",
+        "B02": "not_run",
+        "B03": "pass",
+        "B04": "pass",
+        "B05": "pass",
+        "B06": "pass",
+        "B07": "pass",
+        "B08": "not_run"
+      },
+      "remaining_subchecks": {
+        "B02": "Four models rendered/orbited/zoomed/colors/size/reset on v0.1 and v0.2; modifier/right-button pan not executed by available drag API.",
+        "B08": "Native gzip and WebGL available; naturally unsupported decoding and Canvas fallback not reached."
+      },
+      "basis": "Original target for unchanged data/widgets; local repaired build for B06/B07 and critical query/mask/replay smoke."
+    },
+    {
+      "id": "CHROME-D",
+      "cases": {
+        "B01": "not_run",
+        "B02": "not_run",
+        "B03": "not_run",
+        "B04": "not_run",
+        "B05": "not_run",
+        "B06": "not_run",
+        "B07": "not_run",
+        "B08": "not_run"
+      },
+      "reason": "No controllable standalone browser or physical device on enabled surfaces."
+    },
+    {
+      "id": "EDGE-D",
+      "cases": {
+        "B01": "not_run",
+        "B02": "not_run",
+        "B03": "not_run",
+        "B04": "not_run",
+        "B05": "not_run",
+        "B06": "not_run",
+        "B07": "not_run",
+        "B08": "not_run"
+      },
+      "reason": "No controllable standalone browser or physical device on enabled surfaces."
+    },
+    {
+      "id": "FIREFOX-D",
+      "cases": {
+        "B01": "not_run",
+        "B02": "not_run",
+        "B03": "not_run",
+        "B04": "not_run",
+        "B05": "not_run",
+        "B06": "not_run",
+        "B07": "not_run",
+        "B08": "not_run"
+      },
+      "reason": "No controllable standalone browser or physical device on enabled surfaces."
+    },
+    {
+      "id": "SAFARI-D",
+      "cases": {
+        "B01": "not_run",
+        "B02": "not_run",
+        "B03": "not_run",
+        "B04": "not_run",
+        "B05": "not_run",
+        "B06": "not_run",
+        "B07": "not_run",
+        "B08": "not_run"
+      },
+      "reason": "No controllable standalone browser or physical device on enabled surfaces."
+    },
+    {
+      "id": "ANDROID",
+      "cases": {
+        "B01": "not_run",
+        "B02": "not_run",
+        "B03": "not_run",
+        "B04": "not_run",
+        "B05": "not_run",
+        "B06": "not_run",
+        "B07": "not_run",
+        "B08": "not_run"
+      },
+      "reason": "No controllable standalone browser or physical device on enabled surfaces."
+    },
+    {
+      "id": "IOS",
+      "cases": {
+        "B01": "not_run",
+        "B02": "not_run",
+        "B03": "not_run",
+        "B04": "not_run",
+        "B05": "not_run",
+        "B06": "not_run",
+        "B07": "not_run",
+        "B08": "not_run"
+      },
+      "reason": "No controllable standalone browser or physical device on enabled surfaces."
+    }
+  ],
+  "original_corrected_totals": {
+    "pass": 9,
+    "fail": 3,
+    "not_run": 52,
+    "blocked": 0,
+    "denominator": 64
+  },
+  "scoped_final_totals": {
+    "pass": 12,
+    "fail": 0,
+    "not_run": 52,
+    "blocked": 0,
+    "denominator": 64
+  },
+  "full_matrix_accepted": false,
+  "failures_retained": [
+    "F01: wrong v0.1 title/metadata/destination",
+    "F02: contradictory English source-RGB caption",
+    "F03: hidden mobile version link; initial B06 pass superseded by addendum"
+  ],
+  "repair_retest": {
+    "scope": "Local static build; no inference/data/widget logic changed. Retest old failures, actual version clicks in both languages/viewports and critical numeric/mask/gap smoke. No second independent browser.",
+    "navigation_layouts": 12,
+    "actual_navigation_clicks": 6,
+    "initial_caption_checks": 2,
+    "clicked_reference_checks": 2,
+    "independent_numeric_mask_checks": 4,
+    "independent_numeric_mask_passed": 4,
+    "gap_checks": 2,
+    "raw_retest_sha256": "8cef5a718a90e06cf168be21f061adb17d0bb99de76b0cc3ab4f4ad860114b59",
+    "raw_smoke_oracle_sha256": "dbfbde3e6deeef7f3a267a7c3cac423a3e1139fdcad54bd1d33886393cb555c5"
+  },
+  "original_evidence": {
+    "numerical": {
+      "query_checks": 40,
+      "mask_checks": 16,
+      "passed": 56,
+      "max_query_abs_error": 4.941711422290496e-07,
+      "max_mask_median_abs_error": 4.2369079578108426e-07,
+      "formula": "Independent Python/NumPy decoding of repository Float32/RLE plus saved K, compared to visible DOM readouts; no browser app functions reused."
+    },
+    "replay": {
+      "checks": 14,
+      "passed": 14,
+      "track": "obj-0005",
+      "frames": [
+        1,
+        6,
+        7,
+        12,
+        19,
+        20,
+        24
+      ],
+      "observed_indices": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        20,
+        21,
+        22,
+        23,
+        24
+      ],
+      "speeds": [
+        "0.5",
+        "1",
+        "2"
+      ],
+      "playback": "each advances and pauses; 23 to24 stops at end; no timing/throughput acceptance"
+    },
+    "layout": {
+      "routes": [
+        "home",
+        "v0.1",
+        "v0.2",
+        "v0.3"
+      ],
+      "languages": [
+        "en",
+        "zh-TW"
+      ],
+      "checks": 16,
+      "horizontal_overflow": 0,
+      "viewport_css": [
+        [
+          1280,
+          900
+        ],
+        [
+          390,
+          844
+        ]
+      ],
+      "notice": "Viewport-only mouse/keyboard; touch, physical phone and OS are not tested."
+    },
+    "assets": {
+      "checks": 53,
+      "passed": 53,
+      "manifest_sha256": "24abd5e18064147ab14687abe154d973acbe5416c31c48ecc89addf113cbcad7"
+    },
+    "page_console_errors": 0
+  },
+  "original_evidence_notice": "Initial width checks did not establish mobile nav visibility; see F03/addendum. Existing initial file is not rewritten.",
+  "unchanged_input_hashes": {
+    "website/real-results.js": "858f19684f524201b984f997dbc36342b8533cd1ce5153998d91af83e67aa153",
+    "website/showcase.js": "3d160e348297f2321c9ed7122e51c2721b3dc30d43ce3a93a666ef9016708033",
+    "website/real-results.css": "e139d2804642a761467278df5f2e7e913ce1d4bece9301eaee093c7d77cd1fcc",
+    "static/viewer.js": "7e3438831f6517bb023fd2c71c163266010e76716444adb74cc66b9388192f21",
+    "website/v0.3/index.html": "b9e865662d850cab36ecb6a7c26435a7613c89ff4e06e7a979fcc89750abdf6a",
+    "website/data/bus/manifest.json": "385895c7d2560413440615290f49d1c51417889df5c6f95c63f1628f407cb135",
+    "website/data/bus/semantic.json": "a750dbdfae990fa1911ff62d28884cbe799a1b7d072791fab51b223715bbd087",
+    "website/data/tracking/manifest.json": "82f24ae13513ffcd312606ec2d37da1c1a610a307fad0efb7154650be67e871a",
+    "website/data/tracking/frames.json": "40b392afa967ae16942e33e0d19d426aeeba70b5b2ca02a3bdfe3da4161d6b44",
+    "website/data/tracking/tracks.json": "893d137d59c846136a27123b1e38dc10eaa0b3dcfd926d211d261562b8b36796"
+  },
+  "changed_browser_assets_sha256": {
+    "website/v0.1/index.html": "b2d38aefd25d3b07161fdd7eeec4c198c65546dc87927d3f3166e44e15a27c1d",
+    "website/v0.2/index.html": "adb72f75e15e67c99141c4d9f033778a13213de0bed53100efc5a63e8789f532",
+    "website/showcase.css": "2c22efda04396ac8ba3319ef78692f113bfc1d0e1876d5630c58e797e64c7b8c",
+    "website/index.html": "ac80f80c5f5117bb17317e62084a724b92d29fbf164a61a1a40c2afc12535e31"
+  },
+  "local_checks": {
+    "full_pytest_passed": 526,
+    "full_pytest_skipped": 92,
+    "focused_passed": 13,
+    "public_file_links": "pass",
+    "static_build": "pass",
+    "node_canvas_fallback": "pass; not native-browser evidence"
+  },
+  "ci_and_deployment": "See PR #26 and its main workflow/deployment runs. This file records local repaired-build retests; post-merge public byte/link/smoke checks are reported in the PR without claiming a second matrix execution.",
+  "pr": "https://github.com/JShengP/depthport/pull/26",
+  "remaining": [
+    "Six standalone/physical environment rows",
+    "Modifier/right-button browser pan",
+    "Native touch",
+    "Naturally unsupported gzip and actual Canvas fallback",
+    "Exact embedded browser build and driver versions"
+  ],
+  "limits": [
+    "Saved-result presentation only; no GT, tracking/depth accuracy or long-occlusion acceptance",
+    "Renderer observation is not full local-app hardware/installation/performance acceptance",
+    "Viewport emulation is not physical mobile/browser independence",
+    "Original failures and corrected accounting retained; not_run never promoted to pass"
+  ],
+  "publication": "Aggregate outcomes, fixed public-data asset hashes and source changes only. Raw UI/click/diagnostic files and screenshots local; no private Sessions/notes, credentials, camera settings, new raw media or model weights."
+}

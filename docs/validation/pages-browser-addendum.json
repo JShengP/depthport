@@ -1,0 +1,25 @@
+{
+  "format": "depthport.pages-browser-addendum.v1",
+  "recorded_at": "2026-10-20T12:36:14.425206+00:00",
+  "initial_record_commit": "3f6a9ec342d8897852e0169b58cdc487b34c02a9",
+  "initial_record_sha256": "3afd8db666fb49b231eb9437bfab7bace0c165b046dd63ee89da5bb133acc832",
+  "protocol_unchanged": true,
+  "target_commit": "884b99685683c4b46c3814e7a1cdb904fa957624",
+  "failure": {
+    "id": "F03",
+    "case": "B06",
+    "profile": "IAB-M",
+    "observed": "At 390px the shared max-width650 CSS hides header-nav > a:nth-of-type(2). Actual v0.2 v0.1 link is display:none and inaccessible; local fixed v0.1 v0.2 click failed for the same reason.",
+    "initial_accounting_correction": "Initial B06 pass for IAB-M checked width and language but missed link visibility. Superseded by fail; initial file stays unchanged.",
+    "status": "fail"
+  },
+  "corrected_original_totals": {
+    "pass": 9,
+    "fail": 3,
+    "not_run": 52,
+    "blocked": 0,
+    "denominator": 64
+  },
+  "raw_retest_evidence_sha256": "f72838834a887d69d1ae2b9eab3f4d7c01d8525c0ed93c44be54dcca5290d47b",
+  "remediation": "Keep all version-navigation links visible, wrap if needed; homepage GitHub-link hiding remains separate."
+}

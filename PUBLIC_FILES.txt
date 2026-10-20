@@ -517,3 +517,11 @@ docs/validation/readme-real-pages.json
 
 # Homepage language-switch regression
 tests/test_home_cards.cjs
+
+# Frozen saved-result browser compatibility protocol
+docs/validation/pages-browser-protocol.json
+docs/validation/pages-browser-initial.json
+docs/validation/pages-browser-addendum.json
+docs/validation/pages-browser-acceptance.json
+docs/en/pages-browser-compatibility.md
+docs/zh-TW/pages-browser-compatibility.md

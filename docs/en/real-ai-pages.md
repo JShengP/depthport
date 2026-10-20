@@ -35,3 +35,7 @@ Only explicitly reviewed paths in `PUBLIC_FILES.txt` are copied. Native arrays/P
 ## Reproduce and verify / 重建與驗證
 
 `tools/export_pages_results.py --help` documents explicit local inputs. It verifies both source hashes before reading images and reruns only the missing semantic/replay data. The site builder does not call this tool or import model packages. Browser requires gzip DecompressionStream for exact arrays; unsupported browsers show an explicit error instead of substitute geometry. CloudViewer falls back to software Canvas when WebGL is unavailable. Full test details are recorded in [acceptance](../validation/real-ai-pages.json).
+
+## Browser compatibility / 瀏覽器相容性
+
+[Protocol, retained failures and scoped results / 凍結條件、原失敗與限定結果](pages-browser-compatibility.md): one in-app engine at two viewport sizes; standalone browsers, physical phones, modifier/right-button pan and native unsupported/fallback paths remain untested. Full matrix and hardware/accuracy gates stay open. 同一引擎的尺寸檢查不等於跨瀏覽器或實體手機驗收，詳見逐項未測紀錄。
