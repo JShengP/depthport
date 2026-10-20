@@ -6,11 +6,36 @@ function matches(record,filters,search=''){
  for(const [facet,value] of Object.entries(filters))if(value&&!String(record[facet]||'').split(' ').includes(value))return false;
  return normalize(record.text||'').includes(normalize(search).trim());
 }
-if(typeof module==='object'&&module.exports){module.exports={matches};return;}
+function sequenceSelection(params,key,values){
+ const selected=params.getAll(key);
+ return selected.length===1&&values.includes(selected[0])?selected[0]:'all';
+}
+function sequenceURL(href,selections){
+ const url=new URL(href);
+ for(const {key,value} of selections){
+  if(value==='all')url.searchParams.delete(key);else url.searchParams.set(key,value);
+ }
+ return url.href;
+}
+if(typeof module==='object'&&module.exports){module.exports={matches,sequenceSelection,sequenceURL};return;}
 const form=document.querySelector('.results-filters');if(!form)return;
 const cards=Array.from(document.querySelectorAll('[data-result]')),groups=Array.from(document.querySelectorAll('[data-group]'));
 const facets=Array.from(form.querySelectorAll('[data-facet]')),search=document.querySelector('#resultsSearch');
+const sequences=Array.from(document.querySelectorAll('[data-comparison-sequence]')).map(node=>({
+ node,key:'seq-'+node.closest('[data-comparison]').dataset.comparison,values:Array.from(node.options,option=>option.value)
+}));
 const chinese=()=>document.documentElement.lang.startsWith('zh');
+function saveSequences(method){
+ const href=sequenceURL(location.href,sequences.map(({key,node})=>({key,value:node.value})));
+ if(href!==location.href)history[method](history.state,'',href);
+}
+function restoreSequences(){
+ const params=new URLSearchParams(location.search);
+ for(const {node,key,values} of sequences)node.value=sequenceSelection(params,key,values);
+ // The URL is authoritative, including when a browser restores form values.
+ // Invalid, duplicated and explicit "all" values use the default without a new history entry.
+ saveSequences('replaceState');filter();
+}
 function filter(){
  const selected=Object.fromEntries(facets.map(node=>[node.dataset.facet,node.value]));let count=0;
  for(const card of cards){
@@ -32,8 +57,9 @@ function filter(){
  for(const link of document.querySelectorAll('[data-report-en]'))link.href=chinese()?link.dataset.reportZh:link.dataset.reportEn;
 }
 for(const input of form.querySelectorAll('input,select,button'))input.disabled=false;
-for(const sequence of document.querySelectorAll('[data-comparison-sequence]')){sequence.disabled=false;sequence.addEventListener('change',filter);}
+for(const {node} of sequences){node.disabled=false;node.addEventListener('change',()=>{saveSequences('pushState');filter();});}
+root.addEventListener('popstate',restoreSequences);root.addEventListener('pageshow',restoreSequences);
 form.addEventListener('submit',event=>event.preventDefault());form.addEventListener('input',filter);form.addEventListener('change',filter);
 // Reset explicitly: Chromium can flush microtasks before native form reset.
-form.addEventListener('reset',event=>{event.preventDefault();for(const node of facets)node.value='';search.value='';filter();});document.addEventListener('depthport:language',filter);filter();
+form.addEventListener('reset',event=>{event.preventDefault();for(const node of facets)node.value='';search.value='';filter();});document.addEventListener('depthport:language',filter);restoreSequences();
 })(typeof window!=='undefined'?window:globalThis);

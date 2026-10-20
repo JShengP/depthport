@@ -89,3 +89,30 @@ assert.equal(matches(result,{},'未通過'),true);
 assert.equal(matches(result,{status:'not_run'}),false);
 assert.equal(matches({status:'not_run',text:'Physical iOS'}, {status:'not_run'}, 'ios'),true);
 console.log('Results index facet intersections, exact tags, missing outcomes and Unicode search: PASS');
+
+// Sequence URLs use cohort-local allowlists and preserve unrelated parameters
+// and anchors. A missing/invalid/ambiguous value is the original combined view.
+const {sequenceSelection,sequenceURL}=require('../website/results.js');
+const registry=JSON.parse(fs.readFileSync(path.join(__dirname,'../website/results-index.json')));
+const cohorts=registry.comparisons.map(spec=>({key:'seq-'+spec.id,values:['all',...JSON.parse(fs.readFileSync(path.join(__dirname,'..',spec.source))).sequences.map(s=>s.name)]}));
+const initial='https://example.test/depthport/results/?lang=zh-TW&keep=a%20b&keep=c#comparison-mot17-expanded';
+for(const first of cohorts[0].values)for(const second of cohorts[1].values){
+ const choices=[first,second],url=new URL(sequenceURL(initial,cohorts.map((c,i)=>({key:c.key,value:choices[i]}))));
+ assert.equal(url.pathname,'/depthport/results/');assert.equal(url.hash,'#comparison-mot17-expanded');
+ assert.equal(url.searchParams.get('lang'),'zh-TW');assert.deepEqual(url.searchParams.getAll('keep'),['a b','c']);
+ for(const [i,c] of cohorts.entries()){
+  assert.equal(sequenceSelection(url.searchParams,c.key,c.values),choices[i]);
+  assert.equal(url.searchParams.has(c.key),choices[i]!=='all');
+ }
+}
+for(const [index,c] of cohorts.entries()){
+ const other=cohorts[1-index];
+ for(const raw of ['',c.key+'=',c.key+'=unknown',c.key+'='+other.values[1],c.key+'='+c.values[1]+'&'+c.key+'='+c.values[1]]){
+  const params=new URLSearchParams(raw);assert.equal(sequenceSelection(params,c.key,c.values),'all');
+  const input=new URL(initial);input.search=raw;
+  const clean=new URL(sequenceURL(input.href,[{key:c.key,value:sequenceSelection(params,c.key,c.values)}]));assert.equal(clean.searchParams.has(c.key),false);
+ }
+ const encoded=new URLSearchParams(c.key+'='+encodeURIComponent(c.values[1]));
+ assert.equal(sequenceSelection(encoded,c.key,c.values),c.values[1]);
+}
+console.log('Sequence URLs: both cohorts round-trip, default omission, invalid/foreign/duplicate fallback and preserved query/anchor: PASS');

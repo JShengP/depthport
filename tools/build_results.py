@@ -165,6 +165,7 @@ def render_comparison(root, spec, records, approved):
             '<p class="comparison-conditions">' + escape(conditions) + '</p>' + translated('p', spec['note'], ' class="comparison-conditions"') +
             '<div class="comparison-selector">' + translated('label', {'en':'Sequence', 'zh':'序列範圍'}, f' for="{identity}-sequence"') +
             f'<select id="{identity}-sequence" data-comparison-sequence aria-controls="{identity}-views" disabled>' + options + '</select></div>' +
+            translated('p', {'en':'Sequence choices are saved in the URL for refresh and sharing. Browser Back/Forward restores them; filters and search stay on this page.', 'zh':'序列選擇會保存在網址，重新整理或分享連結都可還原；瀏覽器上一頁／下一頁可恢復選擇，篩選與搜尋只留在目前頁面。'}, ' class="comparison-note"') +
             '<noscript><p>全組圖可直接閱讀；逐序列切換需要 JavaScript。 / The combined chart is available; enable JavaScript to switch sequences.</p></noscript>' +
             '<p class="comparison-visible" role="status" aria-live="polite"></p>' +
             f'<div id="{identity}-views">' + ''.join(panels) + '</div>' +
