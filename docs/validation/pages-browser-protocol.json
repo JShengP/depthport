@@ -1,0 +1,156 @@
+{
+  "format": "depthport.pages-browser-protocol.v1",
+  "frozen_at": "2026-10-20T12:23:35.477701+00:00",
+  "target_commit": "884b99685683c4b46c3814e7a1cdb904fa957624",
+  "target": "https://jshengp.github.io/depthport/",
+  "scope": "Saved-result browser compatibility only; no inference, tracking rerun, GT, tuning or hardware/accuracy acceptance.",
+  "languages": [
+    "en",
+    "zh-TW"
+  ],
+  "engines": [
+    "yolo26",
+    "da2-small",
+    "da3-small",
+    "da3-metric"
+  ],
+  "matrix": [
+    {
+      "id": "IAB-D",
+      "browser": "Available in-app browser",
+      "viewport": [
+        1280,
+        900
+      ],
+      "device": "desktop viewport; mouse/keyboard",
+      "execution": "scheduled"
+    },
+    {
+      "id": "IAB-M",
+      "browser": "Same in-app engine",
+      "viewport": [
+        390,
+        844
+      ],
+      "device": "mobile-size viewport only; no touch/real phone claim",
+      "execution": "scheduled"
+    },
+    {
+      "id": "CHROME-D",
+      "browser": "Standalone Google Chrome",
+      "viewport": [
+        1280,
+        900
+      ],
+      "execution": "not_run_if_unavailable"
+    },
+    {
+      "id": "EDGE-D",
+      "browser": "Standalone Microsoft Edge",
+      "viewport": [
+        1280,
+        900
+      ],
+      "execution": "not_run_if_unavailable"
+    },
+    {
+      "id": "FIREFOX-D",
+      "browser": "Mozilla Firefox",
+      "viewport": [
+        1280,
+        900
+      ],
+      "execution": "not_run_if_unavailable"
+    },
+    {
+      "id": "SAFARI-D",
+      "browser": "Safari on macOS",
+      "viewport": [
+        1280,
+        900
+      ],
+      "execution": "not_run_if_unavailable"
+    },
+    {
+      "id": "ANDROID",
+      "browser": "Chrome on physical Android",
+      "execution": "not_run_if_unavailable"
+    },
+    {
+      "id": "IOS",
+      "browser": "Safari on physical iOS",
+      "execution": "not_run_if_unavailable"
+    }
+  ],
+  "cases": [
+    {
+      "id": "B01",
+      "name": "load-integrity",
+      "pass": "All home/version routes load saved data without page-related console errors, alerts or missing visible assets; public payload SHA256 matches pinned repository. Hash verification is separate from UI."
+    },
+    {
+      "id": "B02",
+      "name": "four-clouds",
+      "pass": "On v0.1 and v0.2 each of four models renders a visible real cloud after selection. Orbit, zoom, shift/right pan, point-size, RGB/depth color, reset work for each model. Screenshot evidence required; viewport mode is not hardware WebGL acceptance."
+    },
+    {
+      "id": "B03",
+      "name": "exact-pixel-queries",
+      "pass": "For each model on v0.2 click RGB/depth at centre and edge samples; use the displayed source pixel to independently map floor((u+.5)*w/810), floor((v+.5)*h/1080). Compare native/final Z and XYZ to decoded little-endian Float32 plus saved K. Native/final switch never changes queried values. Absolute error <= max(5e-6, abs(expected)*5e-7) for displayed 7 significant digits. Units must remain explicit."
+    },
+    {
+      "id": "B04",
+      "name": "semantic-queries",
+      "pass": "For each depth model select the bus in Segment and Detect, verify visible overlay/subset cloud, confidence, valid aligned mask/ROI pixel count and median Z independently from semantic run lengths/boxes, pixel-centre mapping and saved final depth. All-objects restores full cloud. Segmentation is a model prediction, not GT."
+    },
+    {
+      "id": "B05",
+      "name": "replay-and-gaps",
+      "pass": "Seek first/12/last gives source32/43/55 and exact saved timestamps. For obj-0005 frames6/7/19/20 straddle observed/missing boundaries; at12 depth/XYZ show no value and history has a visual gap, observed-frame buttons omit7..19. At observed frames compare saved statistics. Prev/next bounds, pause, speed .5/1/2 and playback advancement/ending work; no exact timing/performance claim."
+    },
+    {
+      "id": "B06",
+      "name": "language-and-responsive",
+      "pass": "Home and all versions switch en/zh-TW with working controls/links; home images and version links follow language. Dynamic status, no-observation text and selected object stay consistent. No document horizontal overflow (>1 CSS px beyond viewport), clipped/unreachable controls or overlap at either scheduled viewport. Mixed bilingual model/unit identifiers are intentional."
+    },
+    {
+      "id": "B07",
+      "name": "navigation-and-boundaries",
+      "pass": "Version title/links identify the actual destination; new9/209/152/57 and old7/230/125/105 remain distinct; static data, source/terms, estimated intrinsics, no metric/identity/long-occlusion acceptance remain visible. Legacy reference text must not contradict available exact queries."
+    },
+    {
+      "id": "B08",
+      "name": "unsupported-and-fallback",
+      "pass": "If an available browser naturally lacks gzip DecompressionStream or WebGL, observe explicit load error without invented values or actual Canvas fallback respectively. Do not modify browser globals to simulate support. Node fallback contracts are supplementary, never native-browser evidence; unexercised branch stays not_run."
+    }
+  ],
+  "accounting": {
+    "statuses": [
+      "pass",
+      "fail",
+      "not_run",
+      "blocked"
+    ],
+    "all_scheduled_cases_required": true,
+    "not_run_is_not_pass": true,
+    "original_failures_retained": true,
+    "fixes": "Record initial target and failed cases unchanged; remediate in a separate commit, then retest affected cases plus critical smoke on final deployment; do not count a fix as a second independent browser.",
+    "unsupported_branch_unexercised": "not_run, not a pass or blocker for the supported path; full fallback coverage remains open",
+    "matrix_gate": "No cross-browser/physical-device acceptance unless every corresponding row is actually executed.",
+    "privacy": "Publish protocol, aggregate case outcomes, public-data hashes and reviewed screenshot evidence only. Raw per-click logs and local diagnostic paths stay local; no private Sessions/notes/credentials."
+  },
+  "input_sha256": {
+    "website/real-results.js": "858f19684f524201b984f997dbc36342b8533cd1ce5153998d91af83e67aa153",
+    "website/showcase.js": "3d160e348297f2321c9ed7122e51c2721b3dc30d43ce3a93a666ef9016708033",
+    "website/real-results.css": "e139d2804642a761467278df5f2e7e913ce1d4bece9301eaee093c7d77cd1fcc",
+    "static/viewer.js": "7e3438831f6517bb023fd2c71c163266010e76716444adb74cc66b9388192f21",
+    "website/v0.1/index.html": "d2ef296428bb8d012dba8857d088a95bb95e09d597926b51d6a4699662b62e22",
+    "website/v0.2/index.html": "5b36757275c0f0686274808cd4325f1df85ca466daf9183c7a4a9689ee85edba",
+    "website/v0.3/index.html": "b9e865662d850cab36ecb6a7c26435a7613c89ff4e06e7a979fcc89750abdf6a",
+    "website/data/bus/manifest.json": "385895c7d2560413440615290f49d1c51417889df5c6f95c63f1628f407cb135",
+    "website/data/bus/semantic.json": "a750dbdfae990fa1911ff62d28884cbe799a1b7d072791fab51b223715bbd087",
+    "website/data/tracking/manifest.json": "82f24ae13513ffcd312606ec2d37da1c1a610a307fad0efb7154650be67e871a",
+    "website/data/tracking/frames.json": "40b392afa967ae16942e33e0d19d426aeeba70b5b2ca02a3bdfe3da4161d6b44",
+    "website/data/tracking/tracks.json": "893d137d59c846136a27123b1e38dc10eaa0b3dcfd926d211d261562b8b36796"
+  }
+}
