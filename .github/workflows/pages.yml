@@ -47,10 +47,12 @@ jobs:
           python tools/build_site.py
           node --check website/showcase.js
           node --check website/recorded-examples.js
+          node --check website/real-results.js
+          node tests/test_real_results.cjs
       - name: Verify generated routes and static-only boundary
         run: |
           python -m pip install "pytest>=8,<10"
-          python -m pytest -q tests/test_pages_showcase.py tests/test_recorded_examples.py
+          python -m pytest -q tests/test_pages_showcase.py tests/test_recorded_examples.py tests/test_real_results.py
       # Read existing public Pages metadata in PRs; enablement and deployment stay separate.
       - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
         with:

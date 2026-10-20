@@ -1,0 +1,99 @@
+{
+  "format": "depthport.real-pages-acceptance.v1",
+  "checked_on": "2026-10-20",
+  "base_commit": "daeee6d4fdf6a58828c26ad022f1eb81da1d7f40",
+  "state": "local_verification_complete",
+  "native_bus_depth": "reused original real-comparison.zip; all four raw/final Float32 arrays and exported PLY retained locally",
+  "new_inference": "Only missing bus semantic masks and the missing original source-32..55 replay were rerun",
+  "replay_counts": {
+    "ids": 9,
+    "detections": 209,
+    "associated": 152,
+    "unassociated": 57
+  },
+  "public_data_bytes": 15697035,
+  "public_data_files": 36,
+  "preview_bytes": 2051044,
+  "full_pytest": {
+    "passed": 523,
+    "skipped": 92,
+    "failed": 0,
+    "warning": "existing Starlette TestClient deprecation"
+  },
+  "focused_pytest": {
+    "passed": 10,
+    "failed": 0
+  },
+  "browser": {
+    "surface": "actual local HTTP in-app Chromium",
+    "desktop": [
+      "v0.2 model change and actual mask/cloud selection",
+      "v0.3 playback/pause, step, seek first/last, speed, ID selection and missing observations",
+      "English/Traditional Chinese switch"
+    ],
+    "mobile": {
+      "width": 390,
+      "versions": [
+        "v0.1",
+        "v0.3"
+      ],
+      "horizontal_overflow": 0
+    },
+    "javascript_errors": 0,
+    "rendering": "Software WebGL in browser; original CloudViewer Canvas2D fallback also exercised with all four actual clouds by Node; hardware WebGL not accepted"
+  },
+  "rights": "Official Pexels terms/license and source page checked 2026-10-20; 24 annotated analytical documentation artworks only; originals, weights, full exports and private Sessions excluded",
+  "limitations": [
+    "No depth accuracy or metric calibration claim",
+    "New replay is not the original screenshot Session; counts/IDs differ",
+    "No identity GT, tracking accuracy or long occlusion acceptance",
+    "Full local raw arrays, weights and runtime logs not distributed",
+    "Browser exact arrays require gzip DecompressionStream",
+    "CI and deployed-site verification reported by the PR and deployment runs"
+  ],
+  "hashes": {
+    "bus": [
+      {
+        "id": "yolo26",
+        "path": "yolo26.json",
+        "sha256": "2bd3f79e20f26f33ed4e4fb3e6668c4dbc241b9612b515cfe4abd4d713974332",
+        "raw_sha256": "32aef6561fa5920036fe82de55642c1dea6a23b5f65ad3cdc33cd17df747d6c2",
+        "depth_sha256": "32aef6561fa5920036fe82de55642c1dea6a23b5f65ad3cdc33cd17df747d6c2",
+        "units": "estimated_m",
+        "model": "yolo26n-depth.pt",
+        "weights_sha256": "befed1b8561d8b2eaa66274b070cdfc9c44853bda6d6d62a04759f9383af74e9"
+      },
+      {
+        "id": "da2-small",
+        "path": "da2-small.json",
+        "sha256": "3b8fa53717a6c35f25d68ab0058bedb1d79ec6d28899a0e96c2846dd453bda7f",
+        "raw_sha256": "ef922004aa6e2d73656b2412e14a1e8b0c2ff56df2770fbe94b05ad281d0e66c",
+        "depth_sha256": "df1a825e6b3bf950e290fdceb438cec166efad1fd1c842093811d75d8fa71a27",
+        "units": "relative",
+        "model": "depth-anything/Depth-Anything-V2-Small-hf",
+        "weights_sha256": "3152477ce0d8d6978d76b995120de97cb5b928701fd0f817769f59e249a16b70"
+      },
+      {
+        "id": "da3-small",
+        "path": "da3-small.json",
+        "sha256": "dcd148a0c37b237059b2d1c823b043ad558756d85f5f1ca7b0c42959144df7f8",
+        "raw_sha256": "27332065028b642828ebd47db95c11565645b8bc3a49d76c07ca48bb58cada50",
+        "depth_sha256": "27332065028b642828ebd47db95c11565645b8bc3a49d76c07ca48bb58cada50",
+        "units": "relative",
+        "model": "depth-anything/DA3-SMALL",
+        "weights_sha256": "364492e38a3a06d221ac75da7f6621ada3f2361cd24fde11ba79091e9f40efcf"
+      },
+      {
+        "id": "da3-metric",
+        "path": "da3-metric.json",
+        "sha256": "1d3290649a93453e3f1710522a9ca9857277e832c01c67106300b0e545c53d85",
+        "raw_sha256": "16cc4a7d95287e75f4f178b06a0d52cdb9f32aa56e6ec3f314905cac47edb592",
+        "depth_sha256": "413f24f64d49cc32a32af14e89529bd584b9401d82e9adbb2957321b15344966",
+        "units": "estimated_m",
+        "model": "depth-anything/DA3METRIC-LARGE",
+        "weights_sha256": "bbea5b0b3ee389849cffa7ddae89de064a90abd2b055fc5aa99aac68db324776"
+      }
+    ],
+    "replay_source": "9b77a4264bb59290335184b77c6300ba43aa6642cb65b594550c44359fd57d4b"
+  }
+}

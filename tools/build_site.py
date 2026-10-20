@@ -8,6 +8,7 @@ public *capability demos*, not exact historical binary/runtime snapshots.
 from __future__ import annotations
 import argparse
 import hashlib
+import json
 from pathlib import Path
 import re
 import shutil
@@ -15,10 +16,10 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from depthport.source_archive import source_bytes
+from depthport.source_archive import source_bytes, public_files
 
 STATIC_ASSETS = ('style.css', 'viewer.js', 'i18n.js', 'main.js', 'favicon.svg')
-SHOWCASE_ASSETS = ('showcase.css', 'showcase.js', 'recorded-examples.css', 'recorded-examples.js')
+SHOWCASE_ASSETS = ('showcase.css', 'showcase.js', 'recorded-examples.css', 'recorded-examples.js', 'real-results.js', 'real-results.css')
 SCREENSHOTS = ('preview.en.png', 'spatial-preview.en.png',
                'tracking-replay-start.zh-TW.jpg',
                'tracking-replay-crossing.zh-TW.jpg',
@@ -83,20 +84,34 @@ def main() -> None:
                         '<a style="color:inherit" href="../">'
                         '← All versions / 返回版本入口</a>'
                         ' · Synthetic viewer / 合成檢視器</nav>')
-    html = html.replace('</nav>', '</nav>' + "<section aria-label=\"Recorded real bus example\" style=\"background:#0f2937;color:#e0f3ef;border-bottom:1px solid #38596b;padding:20px 26px;font:14px/1.5 system-ui,sans-serif\">\n<strong style=\"color:#83e0d1\">RECORDED REAL BUS EXAMPLE · 已保存的實際公車範例</strong>\n<p>Original Ultralytics <code>bus.jpg</code> and a later <b>v0.2 verified CUDA inference screenshot</b>. The point cloud in the v0.1 viewer below is still <b>synthetic</b> because the original native depth/XYZ file was not published. / 下方真實圖片及後續 v0.2 推論截圖與合成 3D 練習分開，不能將其視為原本 v0.1 Tag 的實機驗收。</p>\n<div style=\"display:grid;grid-template-columns:minmax(0,.65fr) minmax(0,1.35fr);gap:14px\">\n<figure style=\"margin:0\"><img style=\"width:100%;max-height:290px;object-fit:contain;background:#071625;border:1px solid #346071;border-radius:8px\" src=\"../media/bus.jpg\" alt=\"Original Ultralytics bus.jpg RGB with a bus and pedestrians\"><figcaption>Original RGB / 原始公車照片</figcaption></figure>\n<figure style=\"margin:0\"><a href=\"../media/spatial-preview.en.png\" target=\"_blank\" rel=\"noopener noreferrer\"><img style=\"width:100%;max-height:290px;object-fit:contain;background:#071625;border:1px solid #346071;border-radius:8px\" src=\"../media/spatial-preview.en.png\" alt=\"Later v0.2 four-model real CUDA inference screenshot, not a raw depth tensor\"></a><figcaption>Later v0.2 validated result / 後續 v0.2 真推論截圖（點擊放大）</figcaption></figure>\n</div><p style=\"font-size:12px;color:#a5c6d0\"><a style=\"color:#88decf\" href=\"https://github.com/ultralytics/assets/blob/53d4e2a8fd15f473c29a148c317a8477be559327/im/bus.jpg\">Ultralytics Assets · original bus.jpg</a> · <a style=\"color:#88decf\" href=\"https://github.com/JShengP/depthport/blob/main/docs/validation/v0.2-summary.json\">Verified experiment</a>. No metric distance accuracy or true interactive point cloud is inferred from the screenshot.</p>\n<b style=\"font-size:12px;color:#74d6c9\">↓ Synthetic 3D interaction practice / 下方為合成點雲互動練習</b>\n</section>", 1)
-    (out / 'v0.1' / 'index.html').write_text(html, encoding='utf-8')
+    (out / 'v0.1' / 'synthetic.html').write_text(html, encoding='utf-8')
 
     # v0.2 and v0.3 are standalone read-only canvases with synthetic inputs;
     # they must not fetch API resources, execute models or persist user content.
-    for ver in ('v0.2', 'v0.3'):
-        (out / ver).mkdir()
+    for ver in ('v0.1', 'v0.2', 'v0.3'):
+        (out / ver).mkdir(exist_ok=True)
         shutil.copyfile(ROOT / 'website' / ver / 'index.html', out / ver / 'index.html')
+    catalog = json.loads((ROOT / 'website/data/catalog.json').read_text(encoding='utf-8'))
+    approved = {p.relative_to(ROOT).as_posix() for p in public_files(ROOT)}
+    for entry in catalog['files']:
+        rel = 'website/data/' + entry['path']
+        if rel not in approved:
+            raise SystemExit('Result asset missing from explicit public manifest: ' + rel)
+        payload = (ROOT / rel).read_bytes()
+        if len(payload) != entry['bytes'] or hashlib.sha256(payload).hexdigest() != entry['sha256']:
+            raise SystemExit('Curated result asset hash mismatch: ' + rel)
+    # Curated static result files must appear individually in PUBLIC_FILES.
+    for file in public_files(ROOT):
+        rel = file.relative_to(ROOT).as_posix()
+        if rel.startswith('website/data/'):
+            target = out / rel.removeprefix('website/')
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(file, target)
     shutil.copyfile(ROOT / 'website' / 'index.html', out / 'index.html')
     shutil.copyfile(ROOT / 'LICENSE', out / 'LICENSE.txt')
     (out / 'source.zip').write_bytes(source_bytes(ROOT))
     (out / '.nojekyll').touch()
-    print('Static showcase built: verified bus.jpg, documented real v0.2/v0.3 screenshots,'
-          ' and separately marked synthetic interaction. No API, AI, RTSP, Sessions or deployment.')
+    print('Static showcase built: actual saved model results, attributed artworks, and separate synthetic exercises. No backend or private Sessions.')
 
 
 if __name__ == '__main__':

@@ -28,6 +28,7 @@
       a.setAttribute('href', path + '?lang=' + lang);
     });
     refreshPage();
+    document.dispatchEvent(new Event('depthport:language'));
   }
   q('[data-lang-switch]')?.addEventListener('click', () => setLanguage(chinese() ? 'en' : 'zh-TW'));
 

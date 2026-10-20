@@ -4,14 +4,7 @@
 
 This source produces a **single GitHub Pages site** with three capability demos; it is **not** a public inference service.
 
-| URL within the Pages project | What the browser actually runs | What it does **not** run |
-| --- | --- | --- |
-| `/` | Version hub with reviewed screenshots and links | No inference or accounts |
-| `/v0.1/` | Genuine original `bus.jpg` with a later validated CUDA screenshot; original WebGL viewer remains a clearly synthetic 3D exercise | No native bus depth/XYZ arrays, API, image upload or RTSP |
-| `/v0.2/` | Real original `bus.jpg` and verified RTX 4090 four-model/semantic screenshot; optional separate generated geometry lab | No numeric native depth/XYZ from screenshot, no live YOLO/DA3 inference or metric accuracy |
-| `/v0.3/` | Three unchanged recorded Session UI screenshots (saved #1/#12/#24; source #32/#43/#55) with real YOLO/BoT-SORT IDs; a separate synthetic replay exercise remains | The full 24 real frames / per-frame JSON, real-time online tracking, identity recognition and world trajectories are not provided |
-
-The **main** examples are genuine, attributed public inputs/recorded inference screenshots. The original Ultralytics `bus.jpg` file is copied byte-for-byte from a fixed revision and verified against the original experiment SHA-256. The v0.2 CUDA result is a saved screen, not a native depth matrix. v0.3 reuses three existing unretouched screenshots of one 24-frame analysis on a Lukas Kosc / Pexels source, not all 24 frames or native tracking JSON. The separately labeled synthetic exercises still run entirely in browser JavaScript. See [Screenshot sources](../assets/README.md) for rights and experiment limits. The four depth engines and real Session tracking remain available only after [running DepthPort locally](installation.md).
+Primary demos now use actual saved four-model depth/XYZRGB and a new complete 24-frame tracking replay. See [data provenance, rights and limitations](real-ai-pages.md). Original screenshots and clearly marked synthetic exercises remain.
 
 ## Build and preview locally
 
@@ -23,7 +16,7 @@ python tools/build_site.py
 python -m http.server 8765 --directory _site --bind 127.0.0.1
 ```
 
-Browse `http://127.0.0.1:8765/` and test `/v0.1/`, `/v0.2/`, and `/v0.3/`. The resulting paths are also safe when hosted under `https://jshengp.github.io/depthport/` because links and assets are relative, rather than absolute `/static/` URLs. The original viewer is kept, but becomes `/v0.1/` when a version-hub homepage is enabled.
+Browse `http://127.0.0.1:8765/` and test `/v0.1/`, `/v0.2/`, and `/v0.3/`. The resulting paths are also safe when hosted under `https://jshengp.github.io/depthport/` because links and assets are relative, rather than absolute `/static/` URLs. The original synthetic viewer is retained at `/v0.1/synthetic.html`; the primary `/v0.1/` uses CloudViewer with actual saved clouds.
 
 Run smoke checks:
 
@@ -43,6 +36,6 @@ After deployment, open `https://jshengp.github.io/depthport/` and check all link
 
 - Do not check in any customer/other non-redistributable recordings, credentials, weights, calibration files or saved Session archives.
 - Build assets are explicitly allowlisted; no recursive copying of the project, private outputs, or runtime data.
-- Static demo pages label their synthetic data and never pretend to have real model metrics, calibration accuracy, real tracking IDs or physical camera input.
+- Static pages distinguish saved model results from synthetic practice and unverified physical accuracy.
 - The version labels denote **capability demonstrations**, not runnable clones or frozen binary mirrors of the historical v0.1/v0.2/v0.3 tags.
 - Benchmark Results Dashboard is not included in this site change.
