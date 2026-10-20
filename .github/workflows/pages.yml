@@ -1,6 +1,18 @@
 name: Pages - multi-version static showcase
 on:
   workflow_dispatch:
+  # Publish reviewed website changes from main. PRs only build, never deploy.
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/pages.yml"
+      - "website/**"
+      - "tools/build_site.py"
+      - "tests/test_pages_showcase.py"
+      - "static/**"
+      - "docs/assets/preview.en.png"
+      - "docs/assets/spatial-preview.en.png"
+      - "docs/assets/tracking-replay-crossing.zh-TW.jpg"
   pull_request:
     paths:
       - ".github/workflows/pages.yml"
@@ -31,6 +43,10 @@ jobs:
           python tools/check_release.py
           python tools/build_site.py
           node --check website/showcase.js
+      - name: Verify generated routes and static-only boundary
+        run: |
+          python -m pip install "pytest>=8,<10"
+          python -m pytest -q tests/test_pages_showcase.py
       # Read existing public Pages metadata in PRs; enablement and deployment stay separate.
       - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
         with:
@@ -39,7 +55,7 @@ jobs:
         with:
           path: _site
   deploy:
-    if: github.event_name == 'workflow_dispatch' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 10
