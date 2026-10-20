@@ -1,0 +1,57 @@
+name: Windows Node stability
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/node-stability.yml'
+      - 'tools/node_stability.py'
+      - 'tests/test_node_stability.py'
+      - 'tests/test_real_results*'
+      - 'tests/delayed_fetch.cjs'
+      - 'docs/validation/windows-node-stability*'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/node-stability.yml'
+      - 'tools/node_stability.py'
+      - 'tests/test_node_stability.py'
+      - 'tests/test_real_results*'
+      - 'tests/delayed_fetch.cjs'
+      - 'docs/validation/windows-node-stability*'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: node-stability-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  repeat:
+    name: Windows Python 3.11 / batch ${{ matrix.batch }}
+    runs-on: windows-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        batch: [1, 2, 3]
+    env:
+      PYTHONUTF8: '1'
+      MODEL_OFFLINE: '1'
+      RTSP_URL: ''
+      CAMERA_INTRINSICS_FILE: ''
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -r requirements-test.txt
+      - name: Frozen normal and delayed-fetch repetitions (no retries)
+        run: python tools/node_stability.py --batch ${{ matrix.batch }} --output artifacts/node-stability/batch-${{ matrix.batch }}
+      - name: Preserve every trial, including failures and partial output
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: node-stability-${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.batch }}
+          path: artifacts/node-stability/
+          if-no-files-found: error
+          retention-days: 90

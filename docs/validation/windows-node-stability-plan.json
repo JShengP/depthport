@@ -1,0 +1,19 @@
+{
+  "frozen_date": "2026-10-21",
+  "reference_commit": "cad4988db2b8572a69726541df0f06869ed813be",
+  "batches": 3,
+  "rounds_per_batch": 20,
+  "case_timeout_seconds": 120,
+  "batch_budget_seconds": 600,
+  "order": "odd rounds normal then delayed_fetch; even rounds delayed_fetch then normal",
+  "delayed_fetch_milliseconds": 250,
+  "acceptance": "All 120 planned cases must execute and pass on Windows/Python 3.11. No retries. Missing, failed, skipped, timed-out, cancelled or unrun cases cannot pass. First complete workflow attempt is primary; all later attempts remain separate.",
+  "source_sha256": {
+    "tests/test_real_results.py": "3394a42d4a542600b26c93c6b2ea2a7434249afa4b003178c774fff0f151d53c",
+    "tests/test_real_results.cjs": "b8fda0315b34a9238770ef11df5d52e78e517b181e06014320950d6df01001db",
+    "tests/delayed_fetch.cjs": "3dbfbfeac6cf2ea36e83c20dfff1fdd497955b473b5a12ea29ae134d1261bd82",
+    "website/real-results.js": "c8ed91154d605002d5bd261c367a0e77bfbfefe4c0e2086ae7b66a9290ecc7b2",
+    "website/results.js": "f7209eeccf3de276bf630947f0fddca1a741603a966dadb14255c48e40f95801",
+    "static/viewer.js": "7e3438831f6517bb023fd2c71c163266010e76716444adb74cc66b9388192f21"
+  }
+}

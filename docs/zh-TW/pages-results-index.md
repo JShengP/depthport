@@ -108,6 +108,16 @@ Safari、實體手機／原生觸控、其他 OS／build、完整新版全新安
 
 本機聚焦測試 23 通過；正常／延後 fetch 各重複 5 次，共 10 次通過。修正前失敗、修正後輸出與原始診斷均留本機。正式網站程式與 45 秒載入期限、保存資料、指標、弱偵測延續與研究／實機接受條件均未更動；原瀏覽器凍結矩陣（33 通過／31 未測）與未驗證項目不改判。
 
+## Windows／Python 3.11 重複驗證計畫 — 2026-10-21
+
+先凍結 [機器可讀計畫](../validation/windows-node-stability-plan.json)，再收集結果。參考修正版為 `cad4988d`；測試／網站來源雜湊不變。不調整 production 45 秒期限、不改指標或研究接受條件。
+
+- **固定規模：** 3 個獨立 GitHub `windows-latest` runner，Python 3.11；每個 20 輪，每輪正常與 250ms 合成延後 fetch 各一次，共 120 次。奇數輪正常在先，偶數輪延後在先。每次啟動新 pytest／Node 子程序；沿用 runner 預裝 Node，記錄精確 Node／Python／pytest 與 Windows image 版本。
+- **通過條件：** 120 次均實際執行且成功。逐次核對退出碼與單一預期 JUnit testcase；缺報告、錯案例、失敗、逾時、跳過、取消與未執行不能算通過。不重試、不遇錯即停。單次 pytest watchdog 120 秒（原 Node watchdog 90 秒不變）；每批開始新案例的預算 600 秒、job 上限 15 分鐘；超出預算的剩餘案例明列未執行。
+- **證據保留：** 每次 stdout／stderr、JUnit、耗時與退出碼，追加式逐次清單及 runtime／來源雜湊。輸出目錄已存在就拒絕覆寫。CI artifacts 保留 90 天，原始輸出另下載留本機；公開程式只處理既有公開與合成測試資料，不讀私人影像、Session、相機設定或憑證。公開驗證紀錄只列核准的版本、逐次狀態與 CI 連結。
+- **分析規則：** 第一輪完整 workflow attempt 為預定主要證據；後續 PR／main 回歸各自記錄，不混成獨立樣本，不用重跑抹去失敗。建立計畫時 Windows 重複結果尚未取得，待跑完再填入。
+- **限制：** 同一 runner 的案例共享 OS／Node／資源狀態，120 次不是 120 個獨立平台樣本。只能支持記錄中環境的合成 fetch 回歸穩定性，不證明所有 Windows、自然網路時序、瀏覽器、實機、推論、追蹤精度或零失敗率。前節歷史首輪失敗與根因不確定性保留，原凍結瀏覽器矩陣不改判。
+
 ## English summary
 
 The bilingual Results Index renders 26 dated, source-linked records at build time. Numeric metrics come from allowlisted evidence through JSON pointers; no browser API, raw diagnostic data or inference is used. Cohorts, failed gates, CI without weights and unverified platforms stay separate. This is an evidence index, not a global leaderboard or live CI status.
