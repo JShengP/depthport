@@ -118,6 +118,12 @@ Safari、實體手機／原生觸控、其他 OS／build、完整新版全新安
 - **分析規則：** 第一輪完整 workflow attempt 為預定主要證據；後續 PR／main 回歸各自記錄，不混成獨立樣本，不用重跑抹去失敗。建立計畫時 Windows 重複結果尚未取得，待跑完再填入。
 - **限制：** 同一 runner 的案例共享 OS／Node／資源狀態，120 次不是 120 個獨立平台樣本。只能支持記錄中環境的合成 fetch 回歸穩定性，不證明所有 Windows、自然網路時序、瀏覽器、實機、推論、追蹤精度或零失敗率。前節歷史首輪失敗與根因不確定性保留，原凍結瀏覽器矩陣不改判。
 
+### 首輪保留：換行格式導致來源資格失敗
+
+[首輪 workflow 39466798842（attempt 1）](https://github.com/JShengP/depthport/actions/runs/39466798842) 的三批都在來源資格階段失敗，**120 次全部未執行、0 次通過**。Windows checkout 將 `tests/test_real_results.cjs` 與 `tests/delayed_fetch.cjs` 轉成 CRLF，實際雜湊與凍結 LF 來源不符；本機將相同來源換成 CRLF 後重算，兩個雜湊均與失敗 artifact 一致。其他四個來源雜湊相符，Python／Windows／Node 資格亦符合。
+
+修正 `.gitattributes`，讓 `.cjs` 與計畫 JSON 在 Windows 保持原 LF 位元組，另明列資格檢查結果。**原凍結計畫、來源檔內容、120 次規模與通過門檻未改**。原三批失敗完整保留，不改判通過；修正後的執行另列為後續驗證，不能取代首輪或宣稱首輪即通過。三份 artifacts 已另存本機。
+
 ## English summary
 
 The bilingual Results Index renders 26 dated, source-linked records at build time. Numeric metrics come from allowlisted evidence through JSON pointers; no browser API, raw diagnostic data or inference is used. Cohorts, failed gates, CI without weights and unverified platforms stay separate. This is an evidence index, not a global leaderboard or live CI status.

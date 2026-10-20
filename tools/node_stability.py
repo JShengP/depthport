@@ -98,9 +98,11 @@ def main():
     if node:
         probe = subprocess.run([node, '--version'], capture_output=True, text=True, timeout=10, check=True)
         runtime['node'] = probe.stdout.strip()
+    checks = {'windows': platform.system() == 'Windows', 'python_311': sys.version_info[:2] == (3, 11),
+              'node_present': node is not None, 'frozen_source_bytes': actual == plan['source_sha256']}
+    eligible = all(checks.values())
+    runtime['eligibility_checks'] = checks
     write_json(args.output / 'runtime.json', runtime)
-    eligible = (platform.system() == 'Windows' and sys.version_info[:2] == (3, 11)
-                and node is not None and actual == plan['source_sha256'])
     records = run_trials(args.output, plan['rounds_per_batch'], plan['case_timeout_seconds'],
                          plan['batch_budget_seconds'] if eligible else 0)
     counts = {mode: dict(Counter(r['status'] for r in records if r['mode'] == mode))
