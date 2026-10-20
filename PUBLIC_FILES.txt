@@ -430,3 +430,8 @@ tests/test_tracking_geometry_exposure.py
 docs/validation/v0.3-geometry-exposure-protocol.json
 docs/en/tracking-geometry-exposure.md
 docs/zh-TW/tracking-geometry-exposure.md
+
+# Complete frozen discovery and post-failure serialization accounting
+docs/validation/v0.3-geometry-exposure-discovery.json
+docs/validation/v0.3-geometry-exposure-discovery-references.json
+docs/validation/v0.3-geometry-exposure-archive-compatibility.json

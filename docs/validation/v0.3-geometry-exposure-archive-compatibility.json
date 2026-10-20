@@ -1,0 +1,57 @@
+{
+  "format": "depthport.geometry-archive-compatibility.v1",
+  "scope": "Post-failure read-only serialization diagnosis. Not prospective exposure evidence or a retry; no frozen pass/failure status changed.",
+  "gt_read": false,
+  "accuracy_scoring": false,
+  "tracking_rerun": false,
+  "ledger": [
+    {
+      "name": "KITTI-0000",
+      "historical_archive_sha256": "0b785202cfdb141037a30efe813628c6482e69e21afd777b3bde41b7a3ab357f",
+      "new_native_sha256": "0aa4aebcb3db5d5eae4946aae7f23dcdecaccbd0f4f27ac17fcc294c59aeecc5",
+      "historical_top_level": "session_object",
+      "new_top_level": "frame_list",
+      "frames": 154,
+      "full_frame_list_equal": true,
+      "historical_frames_serialized_sha256": "0aa4aebcb3db5d5eae4946aae7f23dcdecaccbd0f4f27ac17fcc294c59aeecc5",
+      "whole_archive_bytes_equal": false,
+      "frozen_status_changed": false
+    },
+    {
+      "name": "KITTI-0001",
+      "historical_archive_sha256": "f189ff7057af36b6fbc2c175712db02cf4305bd9c0ceaea319f5501317755323",
+      "new_native_sha256": "cd6bb48d7b26cada4509c6e6815ff0e169d48a4e46d6895a41b19e101d05e239",
+      "historical_top_level": "session_object",
+      "new_top_level": "frame_list",
+      "frames": 447,
+      "full_frame_list_equal": true,
+      "historical_frames_serialized_sha256": "cd6bb48d7b26cada4509c6e6815ff0e169d48a4e46d6895a41b19e101d05e239",
+      "whole_archive_bytes_equal": false,
+      "frozen_status_changed": false
+    },
+    {
+      "name": "KITTI-0002",
+      "historical_archive_sha256": "a3be7a54255ddb30691a2553d34a4d438a50cd4d6ed369c463e1020ccd61f5f3",
+      "new_native_sha256": "682270a0ac17a2740e1154aa8644d25f0e51ebd462cd0fbabf0f9318e9a921a4",
+      "historical_top_level": "session_object",
+      "new_top_level": "frame_list",
+      "frames": 233,
+      "full_frame_list_equal": true,
+      "historical_frames_serialized_sha256": "682270a0ac17a2740e1154aa8644d25f0e51ebd462cd0fbabf0f9318e9a921a4",
+      "whole_archive_bytes_equal": false,
+      "frozen_status_changed": false
+    },
+    {
+      "name": "KITTI-0003",
+      "historical_archive_sha256": "dd90236ed61a9d847a64b4a18bb93d0e94db8626f4a2a77c700d74863d8096d1",
+      "new_native_sha256": "c1ee65628bf35f17dc8884eb09b27a5d510fb6605141a37bb9d1c87db86f14d9",
+      "historical_top_level": "session_object",
+      "new_top_level": "frame_list",
+      "frames": 144,
+      "full_frame_list_equal": true,
+      "historical_frames_serialized_sha256": "c1ee65628bf35f17dc8884eb09b27a5d510fb6605141a37bb9d1c87db86f14d9",
+      "whole_archive_bytes_equal": false,
+      "frozen_status_changed": false
+    }
+  ]
+}

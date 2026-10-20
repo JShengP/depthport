@@ -2,7 +2,7 @@
 
 [English](../en/tracking-geometry-exposure.md) · [ROADMAP](../../ROADMAP.md) · [原幾何規則](tracking-geometry-validity.md) · [凍結定義](../validation/v0.3-geometry-exposure-protocol.json)
 
-**流程已前瞻凍結，結果待執行。** 原幾何規則與前輪兩段都需觸發的失敗門檻保留，不宣稱精度或升預設。
+**發現清單已封存，保留組確認待執行。** 原幾何規則與前輪兩段都需觸發的失敗門檻保留，不宣稱精度或升預設。
 
 ## 凍結流程
 
@@ -27,3 +27,25 @@
 [MOT17](https://motchallenge.net/data/MOT17/)、[MOT20](https://motchallenge.net/data/MOT20/)及[KITTI](https://www.cvlibs.net/datasets/kitti/)提供CC BY-NC-SA3.0條款，已重新取得並雜湊。歸屬Milan／Leal-Taixe／Reid／Roth／Schindler（MOT16）、Dendorfer等（MOT20）、Geiger／Lenz／Urtasun（CVPR2012 KITTI）。僅本機非商業研究，不重新發布影像、GT、原始資料或改授權。
 
 公開完整來源順序、彙總、零值／失敗碼、選取及輸入／輸出／程式封存；原圖、偵測、狀態／共變異、座標、病例軸、影格／ID／事件、本機路徑、權重及例外留在忽略的artifacts。不宣稱FP／FN／IDSW／HOTA、身分／定位／長遮擋通過。v0.3仍為實驗性開發預覽，不回填舊Tag驗收或改預設。
+
+## 重現邊界
+
+來源清單只接受完整本機影片／快取路徑及SHA256封存，不接受標籤或分數檔。既有MOT長序列保留明確連續快取起點，跨分片不重置追蹤或影子歷史。追蹤使用原固定研究runtime，保留組推論使用另外固定的8.4.176模型runtime；既有環境不等於全新安裝完整Alpha配方。
+
+公開工具為`tools/`下的`freeze_tracking_geometry_exposure.py`、`select_tracking_geometry_exposure.py`、`prepare_tracking_geometry_exposure.py`，各CLI的`--help`列出協定、本機seal、manifest、輸出及階段參數。執行／準備目的地拒絕覆寫；保留組準備器要求完整發現結果，下載任何影像成員前先寫推論前封存。原始工作／輸出皆放忽略的artifacts，只有檢查過的彙總加入公開清單。已見來源重現不能改稱新未見確認，亦不改本輪凍結失敗或門檻。
+
+## 發現結果 — 保留組準備前封存
+
+[完整有序發現清單](../validation/v0.3-geometry-exposure-discovery.json) · [全部原生參考檢查](../validation/v0.3-geometry-exposure-discovery-references.json) · [失敗後封存格式診斷](../validation/v0.3-geometry-exposure-archive-compatibility.json)
+
+24段預定來源／20,643原格全部保留。20段／19,665原格完成各五次執行；KITTI0000–0003的四次原生重播未通過整檔位元組門檻，阻擋其16次後續觀測執行。共執行24次原生及80次觀測，全部零值／失敗保留，不重試或換來源。完整發現門檻為 **false**，即使之後保留組有曝光，群組重現也不能通過。
+
+完成的20段有584次實際投影：活躍確認3次（1段）、保留確認581次（18段）、兩類未確認均0。每段只計一次，不把重複當新樣本。控制數值失敗／非正預測／非正接受後驗及全部來源偵測上限皆0；完整參考／原生輸出／最終狀態等於無掛鉤封存，兩次觀測參考與控制的完整歷史／計數各自相等。
+
+依固定順序，活躍確認／活躍選 **MOT17-12-DPM**，保留確認／保留／任一選 **MOT17-09-DPM**；兩類未確認及未確認群組保留 **null**。只依自身控制實際曝光與凍結完整性檢查選取，不依品質分數；這些是發現候選，不是獨立確認。
+
+四個失敗為序列化相容性：舊檔為外包Session的`frames`，新重播存影格清單。另做失敗後只讀比對，完整影格清單（含ID）皆相等，依原JSON編碼序列化後雜湊亦等於新原生檔；這項診斷不重跑追蹤。但它 **不符合** 凍結的整檔相等，亦不更改失敗狀態；格式相容流程須日後另行前瞻凍結，不把本輪修成通過。
+
+本次發現發布時0008／0009仍未準備或確認；完整發現雜湊及選取先封存，再讀取／推論保留組。參數、弱延續及預設不變。
+
+原弱階段程式／輸入仍保留，實際接受弱更新合計55,604→55,625，三段完整存檔輸出改變；本輪未做接受事件集合傷害稽核，不據此宣稱恢復或身分效益。

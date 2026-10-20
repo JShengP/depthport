@@ -2,7 +2,7 @@
 
 [繁體中文](../zh-TW/tracking-geometry-exposure.md) · [ROADMAP](../../ROADMAP.md) · [Original geometry rule](tracking-geometry-validity.md) · [Frozen protocol](../validation/v0.3-geometry-exposure-protocol.json)
 
-**Prospective workflow frozen; results pending.** Preserve the previous geometry rule and failed two-source gate. No accuracy or default promotion is claimed.
+**Discovery sealed; reserved confirmation pending.** Preserve the previous geometry rule and failed two-source gate. No accuracy or default promotion is claimed.
 
 ## Frozen process
 
@@ -27,3 +27,25 @@ Reserved preparation uses only the official image ZIP: frozen ETag, bounded four
 [MOT17](https://motchallenge.net/data/MOT17/), [MOT20](https://motchallenge.net/data/MOT20/) and [KITTI](https://www.cvlibs.net/datasets/kitti/) publish CC BY-NC-SA3.0 terms, refreshed and hashed in the protocol. Attribution: Milan, Leal-Taixe, Reid, Roth, Schindler (MOT16); Dendorfer et al. (MOT20); Geiger, Lenz, Urtasun (CVPR2012 KITTI). Local noncommercial research only; no media/GT/raw redistribution or dataset relicensing.
 
 Publish all ordered source aggregates, zeros/failure codes, selections and input/output/code seals. Raw images, detections, states/covariances, coordinates, per-case axes, frame/IDs/events, local paths, weights and exceptions stay in ignored artifacts. No FP/FN/IDSW/HOTA or identity/localisation/long-occlusion acceptance is established. v0.3 remains an experimental development preview; this does not validate historical release tags or change defaults.
+
+## Reproduction boundary
+
+The source manifest accepts only complete local video/cache paths and SHA256 seals, not labels or score files. Long existing MOT sources retain explicit contiguous cache offsets; tracker and shadow history continue across shards. Use the original pinned tracker research runtime, and the separate frozen8.4.176 model runtime for reserved inference. This reused environment is not a fresh complete Alpha installation.
+
+The public tools are `freeze_tracking_geometry_exposure.py`, `select_tracking_geometry_exposure.py` and `prepare_tracking_geometry_exposure.py` under `tools/`. Each CLI documents its required protocol, local seal, manifest, output and phase arguments with `--help`. All run/preparation destinations reject overwrite; the reserved preparer requires the complete discovery result and writes its pre-inference seal before any image-member download. Use ignored artifacts for raw work and outputs; only reviewed aggregates enter the public manifest. Reproduction on already seen sources is not a new untouched confirmation and cannot change this frozen study's failures or gate.
+
+## Discovery result — sealed before reserved preparation
+
+[Complete ordered discovery](../validation/v0.3-geometry-exposure-discovery.json) · [All native reference checks](../validation/v0.3-geometry-exposure-discovery-references.json) · [Post-failure archive diagnosis](../validation/v0.3-geometry-exposure-archive-compatibility.json)
+
+All24 scheduled sources /20,643 original frames remain in the ledger. Twenty sources /19,665 frames complete all five passes; four KITTI0000–0003 native replays fail the frozen whole-archive byte check and block their16 dependent observed passes.24 native plus80 observed passes execute. Every zero and failure is retained, without retries or source replacement. The complete-discovery gate is **false**, so group replication cannot pass even if reserved exposure is later found.
+
+The20 completed sources have584 actual projected rows: active-confirmed3 (one source), retained-confirmed581 (18 sources), both tentative strata0. Count each source once, not repeated passes. All treatment numerical/invalid-prediction/invalid-accepted-posterior counts and all source cap counts are0. Complete reference outputs/native returns/final states equal unhooked seals; both observed-reference and treatment histories/counts repeat exactly.
+
+Fixed-order selections are **MOT17-12-DPM** for active-confirmed/active and **MOT17-09-DPM** for retained-confirmed/retained/any. Both tentative strata and unconfirmed remain **null**. Selection is based on actual own-arm exposure and frozen integrity screens, never a quality score. These are discovery candidates, not independent confirmations.
+
+The four failures are serialization compatibility: old archives have a Session object around `frames`, while the current replay saves the frame list. A separate post-failure read-only comparison finds every full frame list (including IDs) equal and its unchanged JSON serialization equal the new native file hash. No tracker rerun is used for this diagnosis. This does **not** satisfy frozen whole-file equality or change the failure status. A future format-aware protocol needs a separate prospective freeze; do not repair this result into a pass.
+
+Reserved0008/0009 preparation and confirmation remain pending at this discovery publication. Only after this full discovery hash/selection seal may they be read or inferred. Parameters, weak continuation and defaults remain unchanged.
+
+Native weak-stage code/inputs remain enabled; accepted weak updates total55,604→55,625 and three sources have different complete saved outputs. This is not an accepted-event membership harm audit or proof of recovery/identity benefit.
