@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 const assert=require('node:assert/strict');
+console.log(`Node runtime: ${process.version} ${process.platform}/${process.arch}`);
 const {sourcePixel,sample,atFrame}=require('../website/real-results.js');
 assert.deepEqual(sourcePixel(0,0,720,960),[0,0]);
 assert.deepEqual(sourcePixel(809,1079,378,504),[377,503]);
@@ -38,18 +39,52 @@ for(const name of ['yolo26','da2-small','da3-small','da3-metric']){
 }
 viewer.destroy();console.log('Actual CloudViewer Canvas fallback, rotate, zoom, pan, size and color: PASS');
 
-// A server can send headers and then stall its body: the entire read must be
-// bounded, release its connection, and permit a later successful retry.
+// Execute the unchanged production deadline helper with a controlled clock.
+// Network readiness and timeout correctness are separate assertions: a busy
+// runner must not need to open a socket inside a 100ms wall-clock window.
+function deadlineClock(){
+ const timers=new Map();let next=0;
+ const context={module:{exports:{}},AbortController,Error,
+  setTimeout(callback,milliseconds){const id=++next;timers.set(id,{callback,milliseconds});return id;},
+  clearTimeout(id){timers.delete(id);}};
+ vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../website/real-results.js'),'utf8'),context);
+ return {withDeadline:context.module.exports.withDeadline,
+  size:()=>timers.size,
+  expire(milliseconds){
+   assert.equal(timers.size,1);const [id,timer]=[...timers][0];
+   assert.equal(timer.milliseconds,milliseconds);timers.delete(id);timer.callback();
+  }};
+}
+function deferred(){let resolve;const promise=new Promise(done=>{resolve=done});return {promise,resolve};}
+async function bounded(promise,label){
+ let timer;
+ try{return await Promise.race([promise,new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('Test watchdog: '+label)),10000);})]);}
+ finally{clearTimeout(timer);}
+}
 async function checkLoadingRecovery(){
  const {withDeadline,readJSON}=require('../website/real-results.js');
- const http=require('node:http');let aborted=0;const sockets=new Set();
+ console.log('Loading phase: deadline scheduling, cancellation and ignored abort');
+ for(const milliseconds of [20,100,45000]){
+  const clock=deadlineClock();let signal;
+  const task=s=>{signal=s;return new Promise(()=>{});};
+  const pending=milliseconds===45000?clock.withDeadline(task):clock.withDeadline(task,milliseconds);
+  const rejected=assert.rejects(pending,{name:'TimeoutError'});
+  await Promise.resolve();assert.equal(signal.aborted,false);clock.expire(milliseconds);
+  await rejected;assert.ok(signal.aborted);assert.equal(signal.reason.name,'TimeoutError');assert.equal(clock.size(),0);
+ }
+ for(const fail of [false,true]){
+  const clock=deadlineClock(),error=Error('synthetic task failure');
+  const pending=clock.withDeadline(()=>{if(fail)throw error;return 42;},100);
+  if(fail)await assert.rejects(pending,e=>e===error);else assert.equal(await pending,42);
+  assert.equal(clock.size(),0);
+ }
+ const http=require('node:http');let aborted=0;const sockets=new Set(),observations=new Map();
  const server=http.createServer((request,response)=>{
-  if(request.url==='/headers'){
-   request.on('close',()=>aborted++);return;
-  }
-  if(request.url==='/body'){
-   response.writeHead(200,{'Content-Type':'application/json'});response.write('{');
-   response.on('close',()=>aborted++);return;
+  const observation=observations.get(request.url);
+  if(observation){
+   request.socket.once('close',()=>{aborted++;observation.closed.resolve();});
+   if(request.url==='/headers'){observation.entered.resolve();return;}
+   response.writeHead(200,{'Content-Type':'application/json'});response.write('{');return;
   }
   if(request.url==='/404'){response.writeHead(404);response.end();return;}
   if(request.url==='/invalid'){response.end('{');return;}
@@ -59,20 +94,28 @@ async function checkLoadingRecovery(){
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
  const base='http://127.0.0.1:'+server.address().port;
  try{
-  const sizes=[];assert.deepEqual(await withDeadline(signal=>readJSON(base,{signal,onProgress:n=>sizes.push(n)}),2000),{ready:true});
+  console.log('Loading phase: progress, HTTP and JSON errors');
+  const sizes=[];assert.deepEqual(await withDeadline(signal=>readJSON(base,{signal,onProgress:n=>sizes.push(n)}),10000),{ready:true});
   assert.equal(sizes.at(-1),14);
-  await assert.rejects(withDeadline(signal=>readJSON(base+'/404',{signal}),2000),/HTTP 404/);
-  await assert.rejects(withDeadline(signal=>readJSON(base+'/invalid',{signal}),2000),SyntaxError);
+  await assert.rejects(withDeadline(signal=>readJSON(base+'/404',{signal}),10000),/HTTP 404/);
+  await assert.rejects(withDeadline(signal=>readJSON(base+'/invalid',{signal}),10000),SyntaxError);
   for(const route of ['/headers','/body']){
-   const start=Date.now();let signal;
-   await assert.rejects(withDeadline(s=>{signal=s;return readJSON(base+route,{signal:s});},100),{name:'TimeoutError'});
-   assert.ok(signal.aborted);assert.ok(Date.now()-start<1500);
+   console.log('Loading phase: stall '+route);
+   const observation={entered:deferred(),closed:deferred()};observations.set(route,observation);
+   const clock=deadlineClock();let signal;
+   const pending=clock.withDeadline(s=>{signal=s;return readJSON(base+route,{signal:s,onProgress:()=>observation.entered.resolve()});},100);
+   // Attach a rejection handler before waiting for network readiness.
+   const outcome=pending.then(value=>({value}),error=>({error}));
+   await bounded(observation.entered.promise,route+' readiness');assert.equal(signal.aborted,false);
+   clock.expire(100);
+   const result=await bounded(outcome,route+' rejection');assert.equal(result.error?.name,'TimeoutError');
+   assert.ok(signal.aborted);assert.equal(clock.size(),0);
+   await bounded(observation.closed.promise,route+' socket close');
   }
-  // Also bound a task that never observes cancellation (e.g. a stuck decoder).
-  await assert.rejects(withDeadline(()=>new Promise(()=>{}),20),{name:'TimeoutError'});
-  assert.deepEqual(await withDeadline(signal=>readJSON(base,{signal}),2000),{ready:true});
-  await new Promise(resolve=>setTimeout(resolve,30));assert.equal(aborted,2);
-  console.log('Loading: stream progress, HTTP/JSON errors, header/body/decoder deadlines and retry: PASS');
+  assert.equal(aborted,2);
+  console.log('Loading phase: successful retry after both sockets closed');
+  assert.deepEqual(await withDeadline(signal=>readJSON(base,{signal}),10000),{ready:true});
+  console.log('Loading: controlled deadlines, observed header/body stalls, both socket closes and retry: PASS');
  }finally{for(const socket of sockets)socket.destroy();await new Promise(resolve=>server.close(resolve));}
 }
 checkLoadingRecovery().catch(error=>{console.error(error);process.exitCode=1;});

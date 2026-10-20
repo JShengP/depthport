@@ -95,10 +95,49 @@ def test_public_catalog_allowlist_and_no_host_paths_or_api():
  assert all('website/data/'+n in manifest for n in names)
  js=(ROOT/'website/real-results.js').read_text();assert '/api/' not in js and 'XMLHttpRequest' not in js
 
-def test_real_results_browser_helpers_if_node_available():
+def run_node_check(node, script, *node_options):
+ def output(value):
+  return value.decode('utf-8', errors='replace') if isinstance(value, bytes) else value or '(empty)'
+ try:
+  result=subprocess.run([node,*node_options,str(script)],cwd=ROOT,capture_output=True,text=True,
+                        encoding='utf-8',errors='replace',timeout=90)
+ except subprocess.TimeoutExpired as error:
+  pytest.fail(f'Node check timed out after 90 seconds: {script.name}\n'
+              f'stdout:\n{output(error.stdout)}\nstderr:\n{output(error.stderr)}',pytrace=False)
+ if result.returncode:
+  pytest.fail(f'Node check exited {result.returncode}: {script.name}\n'
+              f'stdout:\n{output(result.stdout)}\nstderr:\n{output(result.stderr)}',pytrace=False)
+
+
+@pytest.mark.parametrize('transport', ['normal', 'delayed_fetch'])
+def test_real_results_browser_helpers_if_node_available(transport):
  node=shutil.which('node')
  if not node:pytest.skip('Node.js is not installed')
- subprocess.run([node,str(ROOT/'tests/test_real_results.cjs')],cwd=ROOT,check=True,capture_output=True,text=True)
+ options=['--require',str(ROOT/'tests/delayed_fetch.cjs')] if transport=='delayed_fetch' else []
+ run_node_check(node,ROOT/'tests/test_real_results.cjs',*options)
+
+
+def test_node_failure_reports_both_streams(tmp_path):
+ node=shutil.which('node')
+ if not node:pytest.skip('Node.js is not installed')
+ script=tmp_path/'synthetic-check.cjs'
+ script.write_text("console.log('partial stdout');console.error('部分 stderr');process.exit(7);",encoding='utf-8')
+ with pytest.raises(pytest.fail.Exception) as caught:
+  run_node_check(node,script)
+ text=str(caught.value)
+ assert 'exited 7' in text and 'partial stdout' in text and '部分 stderr' in text
+
+
+def test_node_timeout_reports_partial_byte_streams(monkeypatch):
+ def fail(*args, **kwargs):
+  assert kwargs['timeout']==90 and kwargs['encoding']=='utf-8'
+  raise subprocess.TimeoutExpired(args[0],90,output=b'partial stdout',stderr='部分 stderr'.encode())
+ monkeypatch.setattr(subprocess,'run',fail)
+ with pytest.raises(pytest.fail.Exception) as caught:
+  run_node_check('node',Path('synthetic-check.cjs'))
+ text=str(caught.value)
+ assert 'partial stdout' in text and '部分 stderr' in text
+ assert 'timed out after 90 seconds' in text
 
 
 def test_byte_hashed_packs_survive_windows_autocrlf_checkout(tmp_path):

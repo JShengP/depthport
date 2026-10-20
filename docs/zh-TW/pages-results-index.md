@@ -93,6 +93,21 @@ Safari、實體手機／原生觸控、其他 OS／build、完整新版全新安
 
 以上是網站軟體回歸，不改判凍結矩陣（33 通過／31 未測）、Safari、實體手機／觸控、其他 OS 或追蹤品質／實機限制。原始紀錄、環境與截圖僅留本機。
 
+## Windows Node CI diagnostics — 2026-10-21
+
+追查 [main Windows／Python 3.11 首輪失敗](https://github.com/JShengP/depthport/actions/runs/39460925250/job/118759870059)：原日誌與該輪 JUnit artifact 都只記到 Node 子程序退出碼 1。Python 的 `capture_output=True` 留下輸出在例外物件中，但外層失敗報告沒有列出 stdout／stderr；既有封存無法回溯還原詳細錯誤。原工作重跑通過，**不把重跑當成根因證明，也不抹除原失敗**。
+
+另以合成 transport 延遲重現測試競態：讓 fetch 啟動慢 250ms，修正前 100ms 的 header/body 逾時會先於請求到達伺服器，正確中止後伺服器觀察到的連線關閉為 0，測試卻要求 2，因而退出 1。原本固定等候 30ms 才計數也依賴排程。這確認了一個需修的測試問題，**沒有證據能唯一認定它就是原首輪失敗原因**。
+
+修正範圍只有測試與診斷：
+
+- Node 非零退出或 90 秒測試 watchdog 到期時，pytest 報告會明列退出／逾時原因、stdout、stderr；固定以 UTF-8 解碼，並處理逾時時保留的 byte 輸出。Node 檢查先列出版本、平台／架構與載入階段，不輸出環境變數、憑證或私人輸入。
+- 以 VM 執行**原 production `withDeadline` 原始碼**並注入受控時鐘，嚴格驗證預設 45,000ms、指定 20／100ms、AbortSignal、忽略取消的 task 仍能逾時，以及正常完成／失敗時清理 timer。
+- 真實本機 HTTP 案例先確認請求已到達（header 停滯）或首段本文已讀到（body 停滯），再觸發受控期限；等待兩個實際 socket 關閉後重試，不再要求連線在 100ms 內建立，也不固定等 30ms 猜測關閉完成。10 秒網路測試 watchdog 只防止測試懸掛，不作網站效能宣稱。
+- 正常與 250ms 合成延後 fetch 兩種子程序都加入 pytest，因此四個 CI 平台組合都會檢查這個回歸；另用真 Node 子程序的合成 UTF-8 失敗驗證 stdout／stderr，以及模擬逾時驗證 partial byte 輸出。
+
+本機聚焦測試 23 通過；正常／延後 fetch 各重複 5 次，共 10 次通過。修正前失敗、修正後輸出與原始診斷均留本機。正式網站程式與 45 秒載入期限、保存資料、指標、弱偵測延續與研究／實機接受條件均未更動；原瀏覽器凍結矩陣（33 通過／31 未測）與未驗證項目不改判。
+
 ## English summary
 
 The bilingual Results Index renders 26 dated, source-linked records at build time. Numeric metrics come from allowlisted evidence through JSON pointers; no browser API, raw diagnostic data or inference is used. Cohorts, failed gates, CI without weights and unverified platforms stay separate. This is an evidence index, not a global leaderboard or live CI status.
@@ -108,3 +123,5 @@ Sequence choices also round-trip through cohort-specific URL parameters for refr
 URL restoration was checked in all three Linux headless browsers, including a new-tab shared link and navigation history. The first Firefox automation attempt hit a stale element during navigation; an atomic document/control readiness wait passed on retry, with the original failure retained locally. This does not change the frozen compatibility matrix or acceptance limits.
 
 Each comparison also has a copy-link button containing both current cohort choices, the current UI language and the clicked comparison anchor. Only shareable query fields are copied. Success is announced only after the native write resolves; rejected/unavailable clipboard access shows a selected read-only URL for manual copy. Changes to sequence/history clear stale feedback. Three Linux headless browsers completed native writes; Chrome/Edge also verified native readback with test-profile permissions, while Firefox readback remains untested. Controlled success/failure/pending/API-unavailable and bilingual keyboard/narrow-layout cases passed. A first Firefox navigation automation failure is retained locally; a new-document identity wait passed on retry. Accuracy, hardware and frozen-matrix acceptance remain unchanged.
+
+The Windows/Python 3.11 first-run artifact lacks child stdout/stderr, so its exact cause cannot be recovered. A separate synthetic 250ms fetch delay reproducibly exposed an invalid assumption in the old cancellation test: it required two server-side socket closures even if its 100ms deadlines expired before requests arrived. The test now separates controlled-clock deadline checks from observed HTTP readiness/closure. Failed/timed-out Node children report both streams, runtime and phase markers. Normal and delayed transports are tested in pytest; 23 focused checks and ten local repeat runs passed. This repairs a proven test race without claiming a unique diagnosis of the historical failure. Production code, saved evidence and acceptance limits are unchanged.
