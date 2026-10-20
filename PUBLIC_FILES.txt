@@ -501,6 +501,7 @@ website/v0.1/index.html
 
 tests/test_real_results.py
 tests/test_real_results.cjs
+tests/delayed_fetch.cjs
 website/data/catalog.json
 docs/en/real-ai-pages.md
 docs/zh-TW/real-ai-pages.md
