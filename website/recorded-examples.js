@@ -46,8 +46,8 @@ if(rgb&&out){
   const u=Math.min(rgb.naturalWidth-1,Math.floor(x/scale));
   const v=Math.min(rgb.naturalHeight-1,Math.floor(y/scale));
   const zh=document.documentElement.lang.toLowerCase().startsWith('zh');
-  out.textContent=zh?'原始 RGB 像素 ('+u+', '+v+')；沒有已發布原始 Depth 矩陣，不能推測 Z／XYZ。'
-    :'Original RGB pixel ('+u+', '+v+'); no native depth matrix is published for numeric Z/XYZ.';
+  out.textContent=zh?'原始 RGB 像素 ('+u+', '+v+')；請使用上方真實檢查器查詢原生深度與 XYZ。'
+    :'Original RGB pixel ('+u+', '+v+'); use the real inspector above for native depth and XYZ.';
  });
 }
 })();

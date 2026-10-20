@@ -62,14 +62,14 @@ Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/). First setup creates `.ven
 <details>
 <summary>Explore real recorded examples and synthetic practice without installing AI dependencies</summary>
 
-[Open the multi-version public showcase](https://jshengp.github.io/depthport/) — v0.1/v0.2 share the original Ultralytics `bus.jpg` and a documented real CUDA inference screenshot; v0.3 displays three authentic Pexels Session screenshots. Optional interactive exercises are explicitly synthetic. Build locally with Python's standard library:
+[Open the multi-version public showcase](https://jshengp.github.io/depthport/) — v0.1/v0.2 share four-model Float32 bus depth, interactive XYZRGB and actual YOLO masks. v0.3 plays a new saved 24-frame tracking run (source 32–55), with IDs and depth histories. The original three screenshots and separate synthetic exercises remain. [Data provenance, hashes and limits](docs/en/real-ai-pages.md). Build with Python’s standard library:
 
 ```bash
 python tools/build_site.py
 python -m http.server 8765 --directory _site --bind 127.0.0.1
 ```
 
-Open [http://127.0.0.1:8765/](http://127.0.0.1:8765/). GitHub Pages serves recorded public media and separately labeled synthetic practice data. It does not run pretrained depth models, accept visitor uploads, or connect to RTSP. Native depth/XYZ arrays and the complete 24-frame tracking report are not distributed, so recorded examples are shown as genuine images—not fabricated measurements or synthetic IDs. Pages publishes reviewed changes merged to `main`.
+Open [http://127.0.0.1:8765/](http://127.0.0.1:8765/). GitHub Pages serves recorded public media and separately labeled synthetic practice data. It does not run pretrained depth models, accept visitor uploads, or connect to RTSP. Numeric data is read from curated static packs; full NPY/PLY exports, original videos, weights and private Sessions stay local. Pages publishes reviewed changes merged to `main`.
 
 </details>
 
