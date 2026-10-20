@@ -116,3 +116,20 @@ for(const [index,c] of cohorts.entries()){
  assert.equal(sequenceSelection(encoded,c.key,c.values),c.values[1]);
 }
 console.log('Sequence URLs: both cohorts round-trip, default omission, invalid/foreign/duplicate fallback and preserved query/anchor: PASS');
+
+// Copy links include both current cohorts and the current UI language, with
+// only shareable fields (no search text, cache flags or unrelated query data).
+const {comparisonURL}=require('../website/results.js');
+const extra=new URL(initial);extra.searchParams.set('v','example');extra.searchParams.set('search','example note');
+for(const first of cohorts[0].values)for(const second of cohorts[1].values){
+ const selections=cohorts.map((c,i)=>({key:c.key,value:[first,second][i]}));
+ for(const lang of ['en','zh-TW'])for(const anchor of ['comparison-mot17-expanded','comparison-mot17-parameters-default']){
+  const url=new URL(comparisonURL(extra.href,selections,lang,anchor));
+  assert.equal(url.origin,'https://example.test');assert.equal(url.pathname,'/depthport/results/');
+  assert.equal(url.hash,'#'+anchor);assert.equal(url.searchParams.get('lang'),lang);
+  assert.equal(url.searchParams.has('keep'),false);
+  assert.deepEqual([...url.searchParams.keys()].sort(),['lang',...selections.filter(x=>x.value!=='all').map(x=>x.key)].sort());
+  for(const [i,c] of cohorts.entries())assert.equal(sequenceSelection(url.searchParams,c.key,c.values),[first,second][i]);
+ }
+}
+console.log('Copy comparison links: both cohort choices, current language, clicked comparison anchor and shareable query allowlist: PASS');

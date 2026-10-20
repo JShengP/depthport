@@ -77,6 +77,22 @@ Safari、實體手機／原生觸控、其他 OS／build、完整新版全新安
 
 這仍是網站軟體回歸，原瀏覽器矩陣（33 通過／31 未測）、Safari／原生手機與觸控／其他 OS，以及追蹤品質與實機未驗收項目不改判；原始環境、截圖及瀏覽器紀錄不公開。
 
+## 複製比較連結 — 2026-10-21
+
+每組比較圖的序列選單旁新增「複製比較連結」。按鈕會複製**兩個場景組目前的序列選擇**、目前畫面語言，以及所按比較圖的位置。複製版連結只保留 `lang` 與兩組序列參數；不帶搜尋、篩選、快取識別或其他任意查詢資料，網址列本身仍沿用前節的還原規則。選全組時仍省略該組參數。
+
+- 原生 Clipboard API 成功完成後，才顯示「已複製比較連結」；複製期間停用該按鈕，避免重複操作。提示提供雙語與輔助技術的即時狀態通知。
+- 權限拒絕或 Clipboard API 不可用時，顯示明確失敗提示與已選取的唯讀連結，可手動複製或再次嘗試；不把失敗當成功。鍵盤也可操作按鈕。
+- 變更任一組序列、重新整理或瀏覽歷史還原時，清除舊複製提示；若較早的非同步複製此時才完成，不顯示過期成功訊息。切換語言時提示跟隨翻譯。
+
+保留所有來源、測試條件與驗證限制，組內比例尺與原指標不變，不跨組排名。未重新推論、評分或調參，弱偵測延續與研究／實機接受條件均未更改。
+
+驗證：20 項聚焦離線測試通過，其中複製連結檢查涵蓋 12 種兩組選擇 × 2 語言 × 2 目標圖（48 組）。Linux 無頭 Chrome 155.0.8059.84／Edge 155.0.4283.62／Firefox 157.0 均完成原生剪貼簿寫入；Chrome／Edge 另在隔離測試瀏覽器授予剪貼簿讀取權限後讀回，確認完整連結。**Firefox 未讀回原生剪貼簿**，不繞過其讀取提示，寫入成功只依原生呼叫完成與畫面提示記錄。
+
+三套另以受控回應檢查成功、權限拒絕、API 缺失、等待期間停用、重試、鍵盤、雙語提示、手動連結選取、分享後新分頁還原與過期提示抑制；重驗 7 視圖／72 根長條、每套 28 種中英桌面／390px CSS 布局，無頁面錯誤或水平溢出。Firefox 首輪的舊網址回歸案例在換頁時遇到自動化「Document was unloaded」；等待 `performance.timeOrigin` 改變且新文件／選單就緒後重驗通過，網站程式未因此更改，原失敗留本機。
+
+以上是網站軟體回歸，不改判凍結矩陣（33 通過／31 未測）、Safari、實體手機／觸控、其他 OS 或追蹤品質／實機限制。原始紀錄、環境與截圖僅留本機。
+
 ## English summary
 
 The bilingual Results Index renders 26 dated, source-linked records at build time. Numeric metrics come from allowlisted evidence through JSON pointers; no browser API, raw diagnostic data or inference is used. Cohorts, failed gates, CI without weights and unverified platforms stay separate. This is an evidence index, not a global leaderboard or live CI status.
@@ -90,3 +106,5 @@ Each cohort also has an independent combined/individual-sequence selector. All f
 Sequence choices also round-trip through cohort-specific URL parameters for refresh, sharing and browser Back/Forward. Only an exact choice from the matching cohort is accepted; missing, invalid, duplicate or foreign values use the original combined view. Default values are omitted, unrelated query values and anchors remain intact, and filters/search are not added to the URL. Conditions, source scores, fixed within-cohort scales and validation limits are unchanged.
 
 URL restoration was checked in all three Linux headless browsers, including a new-tab shared link and navigation history. The first Firefox automation attempt hit a stale element during navigation; an atomic document/control readiness wait passed on retry, with the original failure retained locally. This does not change the frozen compatibility matrix or acceptance limits.
+
+Each comparison also has a copy-link button containing both current cohort choices, the current UI language and the clicked comparison anchor. Only shareable query fields are copied. Success is announced only after the native write resolves; rejected/unavailable clipboard access shows a selected read-only URL for manual copy. Changes to sequence/history clear stale feedback. Three Linux headless browsers completed native writes; Chrome/Edge also verified native readback with test-profile permissions, while Firefox readback remains untested. Controlled success/failure/pending/API-unavailable and bilingual keyboard/narrow-layout cases passed. A first Firefox navigation automation failure is retained locally; a new-document identity wait passed on retry. Accuracy, hardware and frozen-matrix acceptance remain unchanged.

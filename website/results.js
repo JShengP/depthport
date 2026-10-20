@@ -17,7 +17,12 @@ function sequenceURL(href,selections){
  }
  return url.href;
 }
-if(typeof module==='object'&&module.exports){module.exports={matches,sequenceSelection,sequenceURL};return;}
+function comparisonURL(href,selections,lang,anchor){
+ const url=new URL(href);url.search='';url.hash=anchor;
+ url.searchParams.set('lang',lang);
+ return sequenceURL(url.href,selections);
+}
+if(typeof module==='object'&&module.exports){module.exports={matches,sequenceSelection,sequenceURL,comparisonURL};return;}
 const form=document.querySelector('.results-filters');if(!form)return;
 const cards=Array.from(document.querySelectorAll('[data-result]')),groups=Array.from(document.querySelectorAll('[data-group]'));
 const facets=Array.from(form.querySelectorAll('[data-facet]')),search=document.querySelector('#resultsSearch');
@@ -25,11 +30,39 @@ const sequences=Array.from(document.querySelectorAll('[data-comparison-sequence]
  node,key:'seq-'+node.closest('[data-comparison]').dataset.comparison,values:Array.from(node.options,option=>option.value)
 }));
 const chinese=()=>document.documentElement.lang.startsWith('zh');
+const copyButtons=Array.from(document.querySelectorAll('[data-copy-comparison]'));
+const choices=()=>sequences.map(({key,node})=>({key,value:node.value}));
+let copyRevision=0;
+function copyFeedback(button,state){
+ const comparison=button.closest('[data-comparison]'),status=comparison.querySelector('[data-copy-status]');
+ const messages={pending:['Copying…','正在複製…'],success:['Comparison link copied.','已複製比較連結'],failed:['Could not copy automatically. Copy the link below.','無法自動複製，請手動複製下方連結。']};
+ const [en,zh]=messages[state]||['',''];status.dataset.en=en;status.dataset.zh=zh;status.textContent=chinese()?zh:en;
+ comparison.querySelector('[data-copy-manual]').hidden=state!=='failed';
+}
+function clearCopyFeedback(){
+ copyRevision++;for(const button of copyButtons){copyFeedback(button,'');button.closest('[data-comparison]').querySelector('[data-copy-url]').value='';}
+}
+for(const button of copyButtons){
+ button.disabled=false;button.addEventListener('click',async()=>{
+  const comparison=button.closest('[data-comparison]'),revision=copyRevision;
+  const href=comparisonURL(location.href,choices(),chinese()?'zh-TW':'en',comparison.id);
+  button.disabled=true;copyFeedback(button,'pending');
+  try{
+   await navigator.clipboard.writeText(href);
+   if(revision===copyRevision)copyFeedback(button,'success');
+  }catch(_){
+   if(revision===copyRevision){
+    copyFeedback(button,'failed');const input=comparison.querySelector('[data-copy-url]');input.value=href;input.focus();input.select();
+   }
+  }finally{button.disabled=false;}
+ });
+}
 function saveSequences(method){
- const href=sequenceURL(location.href,sequences.map(({key,node})=>({key,value:node.value})));
+ const href=sequenceURL(location.href,choices());
  if(href!==location.href)history[method](history.state,'',href);
 }
 function restoreSequences(){
+ clearCopyFeedback();
  const params=new URLSearchParams(location.search);
  for(const {node,key,values} of sequences)node.value=sequenceSelection(params,key,values);
  // The URL is authoritative, including when a browser restores form values.
@@ -57,7 +90,7 @@ function filter(){
  for(const link of document.querySelectorAll('[data-report-en]'))link.href=chinese()?link.dataset.reportZh:link.dataset.reportEn;
 }
 for(const input of form.querySelectorAll('input,select,button'))input.disabled=false;
-for(const {node} of sequences){node.disabled=false;node.addEventListener('change',()=>{saveSequences('pushState');filter();});}
+for(const {node} of sequences){node.disabled=false;node.addEventListener('change',()=>{clearCopyFeedback();saveSequences('pushState');filter();});}
 root.addEventListener('popstate',restoreSequences);root.addEventListener('pageshow',restoreSequences);
 form.addEventListener('submit',event=>event.preventDefault());form.addEventListener('input',filter);form.addEventListener('change',filter);
 // Reset explicitly: Chromium can flush microtasks before native form reset.

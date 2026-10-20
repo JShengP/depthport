@@ -164,9 +164,13 @@ def render_comparison(root, spec, records, approved):
             translated('p', {'en':f'{sequences} · {frames:,} frames · {document["checked_on"]}', 'zh':f'{sequences} · {frames:,} 格 · {document["checked_on"]}'}, ' class="comparison-conditions"') +
             '<p class="comparison-conditions">' + escape(conditions) + '</p>' + translated('p', spec['note'], ' class="comparison-conditions"') +
             '<div class="comparison-selector">' + translated('label', {'en':'Sequence', 'zh':'序列範圍'}, f' for="{identity}-sequence"') +
-            f'<select id="{identity}-sequence" data-comparison-sequence aria-controls="{identity}-views" disabled>' + options + '</select></div>' +
+            f'<select id="{identity}-sequence" data-comparison-sequence aria-controls="{identity}-views" disabled>' + options + '</select>' +
+            translated('button', {'en':'Copy comparison link', 'zh':'複製比較連結'}, f' type="button" class="small-button" data-copy-comparison aria-describedby="{identity}-copy-status" disabled') + '</div>' +
+            f'<p id="{identity}-copy-status" class="comparison-copy-status" data-copy-status role="status" aria-live="polite" aria-atomic="true"></p>' +
+            '<div class="comparison-copy-manual" data-copy-manual hidden>' + translated('label', {'en':'Comparison link (manual copy)', 'zh':'比較連結（手動複製）'}, f' for="{identity}-copy-url"') +
+            f'<input id="{identity}-copy-url" data-copy-url type="url" readonly spellcheck="false" autocomplete="off"></div>' +
             translated('p', {'en':'Sequence choices are saved in the URL for refresh and sharing. Browser Back/Forward restores them; filters and search stay on this page.', 'zh':'序列選擇會保存在網址，重新整理或分享連結都可還原；瀏覽器上一頁／下一頁可恢復選擇，篩選與搜尋只留在目前頁面。'}, ' class="comparison-note"') +
-            '<noscript><p>全組圖可直接閱讀；逐序列切換需要 JavaScript。 / The combined chart is available; enable JavaScript to switch sequences.</p></noscript>' +
+            '<noscript><p>全組圖可直接閱讀；逐序列切換與複製連結需要 JavaScript。 / The combined chart is available; enable JavaScript to switch sequences or copy links.</p></noscript>' +
             '<p class="comparison-visible" role="status" aria-live="polite"></p>' +
             f'<div id="{identity}-views">' + ''.join(panels) + '</div>' +
             translated('p', {'en':'Each axis starts at zero; HOTA uses 0–100%. The combined and individual sequences share fixed error-count scales for this cohort; switching/filtering never rescales them. Bar order follows the records, not scores. No cross-cohort ranking.', 'zh':'各軸從零開始，HOTA 固定 0–100%；全組與各段共用本場景組的固定錯誤計數比例尺，切換或篩選不重算。長條依紀錄順序排列，不按分數排序，不跨組排名。'}, ' class="comparison-note"') +
