@@ -12,3 +12,7 @@
 
 # Curated numeric packs are byte-hashed; preserve LF with Windows autocrlf.
 website/data/**/*.json text eol=lf
+
+# Frozen Node regression inputs must match their Git blob bytes on Windows.
+*.cjs text eol=lf
+docs/validation/windows-node-stability-plan.json text eol=lf

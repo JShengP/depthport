@@ -546,3 +546,8 @@ website/results-index.json
 website/results.js
 website/results.css
 docs/zh-TW/pages-results-index.md
+.github/workflows/node-stability.yml
+tools/node_stability.py
+tests/test_node_stability.py
+docs/validation/windows-node-stability-plan.json
+docs/validation/windows-node-stability-results.json
