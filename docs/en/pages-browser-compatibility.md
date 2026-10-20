@@ -2,6 +2,8 @@
 
 [繁體中文](../zh-TW/pages-browser-compatibility.md) · [Roadmap](../../ROADMAP.md#current-pages--目前互動展示) · [Data provenance](real-ai-pages.md) · [PR #26](https://github.com/JShengP/depthport/pull/26)
 
+> Historical PR #26 record. Its original matrix, failures and retests below retain their dated scope. See the [subsequent independent Chrome/Edge/Firefox headless study](pages-standalone-browsers.md) for the follow-up; do not read the earlier unavailable rows as the latest status.
+
 ## Protocol and scope
 
 The [eight-case protocol and eight-environment matrix](../validation/pages-browser-protocol.json) were publicly frozen in commit `8c5a25e` **before UI tests**, targeting deployment `884b996`. Raw depth, final geometry, semantic masks and replay data are unchanged. No model inference, GT access, tracker run, tuning or default change was performed.

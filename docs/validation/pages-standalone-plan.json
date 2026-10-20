@@ -1,0 +1,131 @@
+{
+  "format": "depthport.pages-standalone-plan.v1",
+  "frozen_at": "2026-10-20T13:00:55.367915+00:00",
+  "protocol_commit": "8c5a25efe68a303d01eb4ccb02557cafa1f91bf3",
+  "protocol_sha256": "fd0851f025d7b1e3bf6cced37c8553a074ce29e33db64e06e8eccaf3d316d38d",
+  "target_commit": "64984519b14b9b3284ac2ba1d058c0936abb622b",
+  "target_url": "https://jshengp.github.io/depthport/",
+  "authorization": "User explicitly selected Playwright/WebDriver independent headless execution; results remain separate from in-app and headed/manual browser evidence.",
+  "cases_unchanged": [
+    "B01",
+    "B02",
+    "B03",
+    "B04",
+    "B05",
+    "B06",
+    "B07",
+    "B08"
+  ],
+  "rows": {
+    "CHROME-D": {
+      "browser": "chrome",
+      "version": "155.0.8059.84",
+      "driver": "155.0.8059.84 (5869fe313571d75152b77813cf0a4ee26a4e6df0-refs/branch-heads/8059@{#1303})",
+      "facts": {
+        "ds": "function",
+        "height": 900,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+        "webgl": true,
+        "width": 1280
+      },
+      "launch": "success"
+    },
+    "EDGE-D": {
+      "browser": "edge",
+      "version": "155.0.4283.62",
+      "driver": "155.0.4283.62 (aa3a7406ba8c53a83536df539f07124d73c899bd)",
+      "facts": {
+        "ds": "function",
+        "height": 900,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+        "webgl": true,
+        "width": 1280
+      },
+      "launch": "success"
+    },
+    "FIREFOX-D": {
+      "browser": "firefox",
+      "version": "157.0",
+      "driver": "0.37.1",
+      "facts": {
+        "ds": "function",
+        "height": 900,
+        "renderer": "NVIDIA GeForce GTX 980, or similar",
+        "ua": "Mozilla/5.0 (X11; Linux x86_64; rv:157.0) Gecko/20100101 Firefox/157.0",
+        "webgl": true,
+        "width": 1280
+      },
+      "launch": "success"
+    }
+  },
+  "runtime": "Selenium 4.51.0 + Pillow in a dedicated disposable environment, no changes to application dependencies",
+  "browser_sources": {
+    "edge-selected": {
+      "version": "155.0.4283.62-1",
+      "url": "https://packages.microsoft.com/repos/edge/pool/main/m/microsoft-edge-stable/microsoft-edge-stable_155.0.4283.62-1_amd64.deb",
+      "sha256": "3e53834d9d6e505bc57e6bff44d92cfe8cf0bed9064e88efc5b0d8f1c75f70fa"
+    },
+    "firefox-source": {
+      "version": "157.0",
+      "url": "https://archive.mozilla.org/pub/firefox/releases/157.0/linux-x86_64/en-US/firefox-157.0.tar.xz",
+      "vendor_checksum_url": "https://archive.mozilla.org/pub/firefox/releases/157.0/SHA512SUMS",
+      "sha512": "80bea033c8c7b90d7d2b4a2abe4dff91f65a4548d9f34da5e055413e1d709ba55fc0ded78dc48bbc275c3ecb0417670f7c1ae7cd7ee554bbe066605e6762bd7e",
+      "sha256": "42f2c62a562316982ef5a796738c57602bf84a984f5c616e80bcff4627f78fff"
+    },
+    "chrome-driver-source": {
+      "version": "155.0.8059.84",
+      "url": "https://storage.googleapis.com/chrome-for-testing-public/155.0.8059.84/linux64/chromedriver-linux64.zip",
+      "archive_sha256": "4fe2433044363e5233d642e70fa50278b471bda08032d922402c8bd7c6d743fd"
+    },
+    "edge-driver-source": {
+      "version": "155.0.4283.62",
+      "url": "https://msedgedriver.microsoft.com/155.0.4283.62/edgedriver_linux64.zip",
+      "sha256": "6b987a938888cfe2a2980212c52f1308d1a8fbe3b1e7acddd98a4a42ed255f9f"
+    },
+    "gecko-driver-source": {
+      "version": "v0.37.1",
+      "url": "https://github.com/mozilla/geckodriver/releases/download/v0.37.1/geckodriver-v0.37.1-linux64.tar.gz",
+      "sha256": "e815130ea95983e162ae91843b48d3a3ce991735635fce83a647afde21e09f7e",
+      "vendor_digest": "sha256:e815130ea95983e162ae91843b48d3a3ce991735635fce83a647afde21e09f7e"
+    }
+  },
+  "execution": {
+    "headless": true,
+    "viewport_desktop": [
+      1280,
+      900
+    ],
+    "viewport_supplemental": [
+      390,
+      844
+    ],
+    "viewport_control": "Native WebDriver BiDi setViewport with devicePixelRatio1; no mobile OS/touch claim",
+    "flags": {
+      "chrome": [
+        "--headless=new",
+        "--window-size=1280,900"
+      ],
+      "edge": [
+        "--headless=new",
+        "--window-size=1280,900"
+      ],
+      "firefox": [
+        "-headless"
+      ]
+    },
+    "security": "Fresh isolated driver-created profiles; certificate validation enabled; no sandbox/GPU disabling, injected missing APIs, test routing/mocks, browser-global or app-state overrides.",
+    "data": "Public deployed saved-data UI; compare payload bytes to pinned repository separately; no inference, GT or tracking rerun.",
+    "UI": "Use native WebDriver select, pointer, key, wheel and shift-drag actions. Read visible DOM outputs. Capture original screenshots, do not edit media. Read-only canvas pixels/screenshot differences support rendering checks.",
+    "console": "Subscribe native WebDriver BiDi console/error events before navigation; keep raw events local and classify page errors separately from browser warnings.",
+    "B02": "For each engine in v0.1/v0.2, verify actual point pixels; compare before/after native rotate, zoom, shift-pan, size, RGB/depth and reset. Visually inspect stored screenshots; DOM success alone is insufficient.",
+    "B03_B04": "Independent stdlib Float32/RLE/K oracle using actual displayed source pixel; same frozen tolerance. Four models, centre/edge both canvases; Segment/Detect bus count/confidence/median, all-objects restore.",
+    "B05": "Frozen frame/gap boundaries/statistics/buttons and speeds; capture real history gaps without fabricated observations.",
+    "B06": "Home/three versions in both languages at desktop and supplemental390px, verify visible version links, images, state and controls; no horizontal overflow.",
+    "B08": "Preserve each unexercised natural no-gzip/Canvas branch as not_run. An available supported browser is not a fallback test; do not manufacture unsupported APIs.",
+    "failure_policy": "Retain every scheduled browser/case, failed assertions, setup/harness failures and zero/not_run outcomes. Distinguish harness defects and reruns from app defects; no silent passing rerun.",
+    "acceptance": "New rows are headless evidence at these exact builds, not universal headed/OS/mobile support. Original in-app records, failures, amendment and unmeasured rows remain immutable.",
+    "publication": "Only source harness, execution plan, aggregate results/hashes and reviewed public-data evidence. Original logs, screenshots, binary packages, profiles and driver details with local paths remain local."
+  }
+}

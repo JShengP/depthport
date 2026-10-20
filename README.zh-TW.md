@@ -165,7 +165,7 @@ Alpha.2 封裝已驗證的 Pages／FastAPI／Hub／DA3 相容性更新與各版�
 
 - **CI：** Ubuntu／Windows × Python 3.11／3.12 的應用契約與真模型 API 安裝／匯入；不含預訓練權重或推論，不等於實機或精度驗收。
 - **真實範例：** 已記錄日期的 v0.2 單圖 CUDA 與 v0.3 短片回放各有獨立來源／環境條件。[驗證歷程](docs/zh-TW/validation.md) · [回放條件](docs/zh-TW/tracking-replay-example.md)
-- **Pages 相容性：** [凍結矩陣／結果](docs/zh-TW/pages-browser-compatibility.md)：同一內建引擎的桌面／手機尺寸檢查，三項介面問題修復，原失敗與更正保留；其他瀏覽器、實體手機、瀏覽器平移與原生備援路徑未測，完整矩陣尚未通過。
+- **Pages 相容性：** [獨立無頭 Chrome155／Edge155／Firefox157](docs/zh-TW/pages-standalone-browsers.md)：各確切 Linux build 的 B01–B07 通過，含 Shift 平移，共21通過／3未測；合併[歷史內建瀏覽器檢查](docs/zh-TW/pages-browser-compatibility.md)為33通過／31未測。原失敗與工具更正保留；Safari、實體手機、有視窗／其他 OS 及自然備援路徑仍待驗證。
 - **仍待驗證：** 長遮擋／交會／移動相機的泛化追蹤、實體 RTSP、Windows 真權重／真 worker 整合、長時 VRAM／穩定性、NVIDIA 硬體 WebGL 與獨立標定距離精度。[驗收路線圖](ROADMAP.md)
 
 <details>

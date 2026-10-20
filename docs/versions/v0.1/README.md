@@ -74,7 +74,7 @@ flowchart LR
 
 Source / 來源：[Ultralytics bus.jpg](https://github.com/ultralytics/assets/blob/53d4e2a8fd15f473c29a148c317a8477be559327/im/bus.jpg). The four original CUDA exports were validated on **2026-10-17**, after v0.1; this website is a capability demonstration, not the historical tag's runtime or acceptance. 這是後續能力展示，不是 v0.1 Tag 當時的真權重驗收。65° HFOV intrinsics are estimated; relative/virtual values are not metres and estimated metres are not independently verified distances. 內參未實測標定，各單位不可直接比較，不宣稱測距精度。
 
-[Data, hashes and limits](../../en/real-ai-pages.md) · [繁中來源與限制](../../zh-TW/real-ai-pages.md) · [Screenshot state / 截圖狀態](../../validation/readme-real-pages.json) · [Demo status & next gates / 展示進度與下一步](../../../ROADMAP.md#current-pages--目前互動展示) · [Scoped browser checks / 限定瀏覽器檢查](../../zh-TW/pages-browser-compatibility.md)
+[Data, hashes and limits](../../en/real-ai-pages.md) · [繁中來源與限制](../../zh-TW/real-ai-pages.md) · [Screenshot state / 截圖狀態](../../validation/readme-real-pages.json) · [Demo status & next gates / 展示進度與下一步](../../../ROADMAP.md#current-pages--目前互動展示) · [Scoped browser checks / 限定瀏覽器檢查](../../zh-TW/pages-browser-compatibility.md) · [Independent headless follow-up / 獨立無頭補驗](../../zh-TW/pages-standalone-browsers.md)
 
 <details>
 <summary>Historical synthetic screenshot / 歷史合成截圖</summary>

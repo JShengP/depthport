@@ -1,0 +1,1181 @@
+{
+  "format": "depthport.pages-standalone-acceptance.v1",
+  "checked_at": "2026-10-20T13:24:12.610721+00:00",
+  "protocol_commit": "8c5a25efe68a303d01eb4ccb02557cafa1f91bf3",
+  "protocol_sha256": "fd0851f025d7b1e3bf6cced37c8553a074ce29e33db64e06e8eccaf3d316d38d",
+  "execution_plan_commit": "8e94f78ccc82ad1f8cc4d7aa472f2b8cc0a10300",
+  "execution_plan_sha256": "60905d62eed561e63c9aac8b604e2088d8b533acbe8c37995fd04c27ee2bc4db",
+  "target_commit": "64984519b14b9b3284ac2ba1d058c0936abb622b",
+  "target_url": "https://jshengp.github.io/depthport/",
+  "scope": "Independent headless saved-result UI compatibility only; no inference, GT, tracking rerun, tuning or data/default changes.",
+  "runtime": {
+    "selenium": "4.51.0",
+    "pillow": "13.0.0",
+    "python": "3.12",
+    "runtime_freeze_sha256": "fea70db9fd04f30eda1343050e2186d31a7fd7c89733f2295580fa3fde9f31b1"
+  },
+  "environments": {
+    "CHROME-D": {
+      "browser": "chrome",
+      "version": "155.0.8059.84",
+      "driver": "155.0.8059.84 (5869fe313571d75152b77813cf0a4ee26a4e6df0-refs/branch-heads/8059@{#1303})",
+      "facts": {
+        "ds": "function",
+        "height": 900,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+        "webgl": true,
+        "width": 1280
+      },
+      "launch": "success"
+    },
+    "EDGE-D": {
+      "browser": "edge",
+      "version": "155.0.4283.62",
+      "driver": "155.0.4283.62 (aa3a7406ba8c53a83536df539f07124d73c899bd)",
+      "facts": {
+        "ds": "function",
+        "height": 900,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+        "webgl": true,
+        "width": 1280
+      },
+      "launch": "success"
+    },
+    "FIREFOX-D": {
+      "browser": "firefox",
+      "version": "157.0",
+      "driver": "0.37.1",
+      "facts": {
+        "ds": "function",
+        "height": 900,
+        "renderer": "NVIDIA GeForce GTX 980, or similar",
+        "ua": "Mozilla/5.0 (X11; Linux x86_64; rv:157.0) Gecko/20100101 Firefox/157.0",
+        "webgl": true,
+        "width": 1280
+      },
+      "launch": "success"
+    }
+  },
+  "attempts": [
+    {
+      "id": "chrome-01",
+      "time": "2026-10-20T13:08:20.039212+00:00",
+      "browser": "chrome",
+      "result_sha256": "206603ff6109da7208ae2b76d760d26c67abd24aca4d7b221bd418bf1c482b1b",
+      "harness_sha256": "28c1d2a05cd39181a9b7e0e8c6c49a85b635bc958f13c20ae442ee26ceb093e9",
+      "cases": {
+        "B01": "blocked",
+        "B02": "fail",
+        "B03": "not_run",
+        "B04": "not_run",
+        "B05": "not_run",
+        "B06": "not_run",
+        "B07": "not_run",
+        "B08": "not_run"
+      },
+      "note": "Native element screenshot timed out; second model interrupted. B01 integrity subcheck passed, passive error review/final case aggregation not reached. Raw empty case map retained; uncompleted cells explicitly accounted here.",
+      "failed_subchecks": [
+        {
+          "case": "B02",
+          "label": "v0.1/yolo26",
+          "error": "TimeoutException"
+        }
+      ],
+      "screenshots": 0,
+      "page_events": 0
+    },
+    {
+      "id": "chrome-02",
+      "time": "2026-10-20T13:10:13.051157+00:00",
+      "browser": "chrome",
+      "result_sha256": "b39c92e1262da74703018d443b34ede8f5e729fa746e411b92fad78c78af36eb",
+      "harness_sha256": "e3697b4cba6852d635e27b4e959554b3bb255ccd47eac0e4cee65b3a8e8f1698",
+      "cases": {
+        "B01": "pass",
+        "B02": "fail",
+        "B03": "pass",
+        "B04": "fail",
+        "B05": "pass",
+        "B06": "fail",
+        "B07": "pass",
+        "B08": "not_run"
+      },
+      "note": "Viewport screenshots avoid native element-capture timeout. CSS smooth-scroll changed capture geometry during reset/subset comparisons; B06 queried article instead of card anchor and incorrectly required language query on home link. Harness failures retained.",
+      "failed_subchecks": [
+        {
+          "case": "B02",
+          "label": "v0.1/yolo26",
+          "error": "AssertionError"
+        },
+        {
+          "case": "B02",
+          "label": "v0.1/da2-small",
+          "error": "AssertionError"
+        },
+        {
+          "case": "B02",
+          "label": "v0.1/da3-small",
+          "error": "AssertionError"
+        },
+        {
+          "case": "B02",
+          "label": "v0.1/da3-metric",
+          "error": "AssertionError"
+        },
+        {
+          "case": "B02",
+          "label": "v0.2/yolo26",
+          "error": "AssertionError"
+        },
+        {
+          "case": "B02",
+          "label": "v0.2/da2-small",
+          "error": "AssertionError"
+        },
+        {
+          "case": "B02",
+          "label": "v0.2/da3-small",
+          "error": "AssertionError"
+        },
+        {
+          "case": "B02",
+          "label": "v0.2/da3-metric",
+          "error": "AssertionError"
+        },
+        {
+          "case": "B04",
+          "label": "yolo26",
+          "error": "AssertionError"
+        },
+        {
+          "case": "B04",
+          "label": "da2-small",
+          "error": "AssertionError"
+        },
+        {
+          "case": "B04",
+          "label": "da3-small",
+          "error": "AssertionError"
+        },
+        {
+          "case": "B04",
+          "label": "da3-metric",
+          "error": "AssertionError"
+        },
+        {
+          "case": "B06",
+          "label": "1280/home",
+          "error": "TypeError"
+        },
+        {
+          "case": "B06",
+          "label": "1280/v0.1/",
+          "error": "AssertionError"
+        },
+        {
+          "case": "B06",
+          "label": "1280/v0.2/",
+          "error": "AssertionError"
+        },
+        {
+          "case": "B06",
+          "label": "1280/v0.3/",
+          "error": "AssertionError"
+        },
+        {
+          "case": "B06",
+          "label": "390/home",
+          "error": "TypeError"
+        },
+        {
+          "case": "B06",
+          "label": "390/v0.1/",
+          "error": "AssertionError"
+        },
+        {
+          "case": "B06",
+          "label": "390/v0.2/",
+          "error": "AssertionError"
+        },
+        {
+          "case": "B06",
+          "label": "390/v0.3/",
+          "error": "AssertionError"
+        }
+      ],
+      "screenshots": 46,
+      "page_events": 0
+    },
+    {
+      "id": "chrome-03",
+      "time": "2026-10-20T13:13:36.022912+00:00",
+      "browser": "chrome",
+      "result_sha256": "c99ac52e01f42371f1dea24fea9392e726c9d83c9e39357cb7ad64ba1c8b46d8",
+      "harness_sha256": "c4ca02214a01ebc7129e008b0964e0e3bf74abe6003003ca1435a4028eb172ea",
+      "cases": {
+        "B01": "pass",
+        "B02": "pass",
+        "B03": "pass",
+        "B04": "pass",
+        "B05": "pass",
+        "B06": "fail",
+        "B07": "pass",
+        "B08": "not_run"
+      },
+      "note": "Instant UI scrolling fixes screenshot geometry; B02/B04 pass. Off-screen language clicks still relied on driver auto-scroll and were intercepted during smooth scrolling; B06 failures retained.",
+      "failed_subchecks": [
+        {
+          "case": "B06",
+          "label": "1280/home",
+          "error": "ElementClickInterceptedException"
+        },
+        {
+          "case": "B06",
+          "label": "1280/v0.1/",
+          "error": "ElementClickInterceptedException"
+        },
+        {
+          "case": "B06",
+          "label": "1280/v0.2/",
+          "error": "ElementClickInterceptedException"
+        },
+        {
+          "case": "B06",
+          "label": "1280/v0.3/",
+          "error": "ElementClickInterceptedException"
+        },
+        {
+          "case": "B06",
+          "label": "390/home",
+          "error": "ElementClickInterceptedException"
+        },
+        {
+          "case": "B06",
+          "label": "390/v0.1/",
+          "error": "ElementClickInterceptedException"
+        },
+        {
+          "case": "B06",
+          "label": "390/v0.2/",
+          "error": "ElementClickInterceptedException"
+        },
+        {
+          "case": "B06",
+          "label": "390/v0.3/",
+          "error": "ElementClickInterceptedException"
+        }
+      ],
+      "screenshots": 126,
+      "page_events": 0
+    },
+    {
+      "id": "chrome-04",
+      "time": "2026-10-20T13:15:14.590037+00:00",
+      "browser": "chrome",
+      "result_sha256": "882e1a00ba6346e5ddd6d5a2102fd8b1be685f55d4672393dc0190079e7f5260",
+      "harness_sha256": "7d04830246e18879b4fab1831fb50e77313610f8c5e45de0c5c89b2d820930d5",
+      "cases": {
+        "B01": "not_run",
+        "B02": "not_run",
+        "B03": "not_run",
+        "B04": "not_run",
+        "B05": "not_run",
+        "B06": "pass",
+        "B07": "not_run",
+        "B08": "not_run"
+      },
+      "note": "B06-only rerun: explicitly position controls before native clicks; selected bus/ID and missing frame persist across language switch. Other cases not rerun in this attempt.",
+      "failed_subchecks": [],
+      "screenshots": 16,
+      "page_events": 0
+    },
+    {
+      "id": "edge-01",
+      "time": "2026-10-20T13:19:12.548685+00:00",
+      "browser": "edge",
+      "result_sha256": "10449bf8c016c45a89cda7be14ffb6b5cc38cc8c563d6ba97065bd3b1e902935",
+      "harness_sha256": "7d04830246e18879b4fab1831fb50e77313610f8c5e45de0c5c89b2d820930d5",
+      "cases": {
+        "B01": "pass",
+        "B02": "pass",
+        "B03": "fail",
+        "B04": "pass",
+        "B05": "pass",
+        "B06": "pass",
+        "B07": "pass",
+        "B08": "not_run"
+      },
+      "note": "Full attempt. B03 failed with out-of-viewport native pointer target after map selection moved view to toolbar. All other supported cases passed. No product patch.",
+      "failed_subchecks": [
+        {
+          "case": "B03",
+          "label": "yolo26",
+          "error": "MoveTargetOutOfBoundsException"
+        },
+        {
+          "case": "B03",
+          "label": "da2-small",
+          "error": "MoveTargetOutOfBoundsException"
+        },
+        {
+          "case": "B03",
+          "label": "da3-small",
+          "error": "MoveTargetOutOfBoundsException"
+        },
+        {
+          "case": "B03",
+          "label": "da3-metric",
+          "error": "MoveTargetOutOfBoundsException"
+        }
+      ],
+      "screenshots": 134,
+      "page_events": 0
+    },
+    {
+      "id": "edge-02",
+      "time": "2026-10-20T13:20:06.145662+00:00",
+      "browser": "edge",
+      "result_sha256": "55f67a18792771b5404a3e61cb420fb92b04ba7f5061f4efc2d1e66cfdab6321",
+      "harness_sha256": "c903bb71816e4e227d818cd9aa755c2d107228a7b83e27806bcb7ed00f19ead4",
+      "cases": {
+        "B01": "not_run",
+        "B02": "not_run",
+        "B03": "pass",
+        "B04": "not_run",
+        "B05": "not_run",
+        "B06": "not_run",
+        "B07": "not_run",
+        "B08": "not_run"
+      },
+      "note": "B03-only rerun: explicitly position canvas before every click, including edge after map switch. Other cases not rerun in this attempt.",
+      "failed_subchecks": [],
+      "screenshots": 4,
+      "page_events": 0
+    },
+    {
+      "id": "firefox-01",
+      "time": "2026-10-20T13:23:50.354526+00:00",
+      "browser": "firefox",
+      "result_sha256": "2a64b2990882d10edeb07dc35d911954ba8964b20a94d1535bfca935e176919e",
+      "harness_sha256": "c903bb71816e4e227d818cd9aa755c2d107228a7b83e27806bcb7ed00f19ead4",
+      "cases": {
+        "B01": "pass",
+        "B02": "pass",
+        "B03": "pass",
+        "B04": "pass",
+        "B05": "pass",
+        "B06": "pass",
+        "B07": "pass",
+        "B08": "not_run"
+      },
+      "note": "Full unchanged-protocol attempt with corrected native UI positioning harness.",
+      "failed_subchecks": [],
+      "screenshots": 138,
+      "page_events": 0
+    }
+  ],
+  "setup_observations": [
+    "In-app control could not select standalone Chrome (Browser is not available); user then authorized external WebDriver headless execution.",
+    "Initial Selenium Manager linux-path guess was absent; installed package uses linux-x86_64. Explicit official matching driver archives used instead.",
+    "Initial Snap geckodriver usr/bin path guess was absent; no Snap/user profile was used. Official native Mozilla archive selected and checksum-verified."
+  ],
+  "matrix": [
+    {
+      "id": "IAB-D",
+      "cases": {
+        "B01": "pass",
+        "B02": "not_run",
+        "B03": "pass",
+        "B04": "pass",
+        "B05": "pass",
+        "B06": "pass",
+        "B07": "pass",
+        "B08": "not_run"
+      },
+      "remaining_subchecks": {
+        "B02": "Four models rendered/orbited/zoomed/colors/size/reset on v0.1 and v0.2; modifier/right-button pan not executed by available drag API.",
+        "B08": "Native gzip and WebGL available; naturally unsupported decoding and Canvas fallback not reached."
+      },
+      "basis": "Original target for unchanged data/widgets; local repaired build for B06/B07 and critical query/mask/replay smoke."
+    },
+    {
+      "id": "IAB-M",
+      "cases": {
+        "B01": "pass",
+        "B02": "not_run",
+        "B03": "pass",
+        "B04": "pass",
+        "B05": "pass",
+        "B06": "pass",
+        "B07": "pass",
+        "B08": "not_run"
+      },
+      "remaining_subchecks": {
+        "B02": "Four models rendered/orbited/zoomed/colors/size/reset on v0.1 and v0.2; modifier/right-button pan not executed by available drag API.",
+        "B08": "Native gzip and WebGL available; naturally unsupported decoding and Canvas fallback not reached."
+      },
+      "basis": "Original target for unchanged data/widgets; local repaired build for B06/B07 and critical query/mask/replay smoke."
+    },
+    {
+      "id": "CHROME-D",
+      "mode": "independent vendor executable, headless, Linux x86_64",
+      "viewport": [
+        1280,
+        900
+      ],
+      "supplemental_B06": [
+        390,
+        844
+      ],
+      "cases": {
+        "B01": "pass",
+        "B02": "pass",
+        "B03": "pass",
+        "B04": "pass",
+        "B05": "pass",
+        "B06": "pass",
+        "B07": "pass",
+        "B08": "not_run"
+      },
+      "case_origin": {
+        "B01": "chrome-03",
+        "B02": "chrome-03",
+        "B03": "chrome-03",
+        "B04": "chrome-03",
+        "B05": "chrome-03",
+        "B06": "chrome-04",
+        "B07": "chrome-03",
+        "B08": "chrome-03"
+      },
+      "B08_remaining": "Natural no-gzip and Canvas-fallback paths not reached; supported path never passes this case."
+    },
+    {
+      "id": "EDGE-D",
+      "mode": "independent vendor executable, headless, Linux x86_64",
+      "viewport": [
+        1280,
+        900
+      ],
+      "supplemental_B06": [
+        390,
+        844
+      ],
+      "cases": {
+        "B01": "pass",
+        "B02": "pass",
+        "B03": "pass",
+        "B04": "pass",
+        "B05": "pass",
+        "B06": "pass",
+        "B07": "pass",
+        "B08": "not_run"
+      },
+      "case_origin": {
+        "B01": "edge-01",
+        "B02": "edge-01",
+        "B03": "edge-02",
+        "B04": "edge-01",
+        "B05": "edge-01",
+        "B06": "edge-01",
+        "B07": "edge-01",
+        "B08": "edge-01"
+      },
+      "B08_remaining": "Natural no-gzip and Canvas-fallback paths not reached; supported path never passes this case."
+    },
+    {
+      "id": "FIREFOX-D",
+      "mode": "independent vendor executable, headless, Linux x86_64",
+      "viewport": [
+        1280,
+        900
+      ],
+      "supplemental_B06": [
+        390,
+        844
+      ],
+      "cases": {
+        "B01": "pass",
+        "B02": "pass",
+        "B03": "pass",
+        "B04": "pass",
+        "B05": "pass",
+        "B06": "pass",
+        "B07": "pass",
+        "B08": "not_run"
+      },
+      "case_origin": {
+        "B01": "firefox-01",
+        "B02": "firefox-01",
+        "B03": "firefox-01",
+        "B04": "firefox-01",
+        "B05": "firefox-01",
+        "B06": "firefox-01",
+        "B07": "firefox-01",
+        "B08": "firefox-01"
+      },
+      "B08_remaining": "Natural no-gzip and Canvas-fallback paths not reached; supported path never passes this case."
+    },
+    {
+      "id": "SAFARI-D",
+      "cases": {
+        "B01": "not_run",
+        "B02": "not_run",
+        "B03": "not_run",
+        "B04": "not_run",
+        "B05": "not_run",
+        "B06": "not_run",
+        "B07": "not_run",
+        "B08": "not_run"
+      },
+      "reason": "No controllable standalone browser or physical device on enabled surfaces."
+    },
+    {
+      "id": "ANDROID",
+      "cases": {
+        "B01": "not_run",
+        "B02": "not_run",
+        "B03": "not_run",
+        "B04": "not_run",
+        "B05": "not_run",
+        "B06": "not_run",
+        "B07": "not_run",
+        "B08": "not_run"
+      },
+      "reason": "No controllable standalone browser or physical device on enabled surfaces."
+    },
+    {
+      "id": "IOS",
+      "cases": {
+        "B01": "not_run",
+        "B02": "not_run",
+        "B03": "not_run",
+        "B04": "not_run",
+        "B05": "not_run",
+        "B06": "not_run",
+        "B07": "not_run",
+        "B08": "not_run"
+      },
+      "reason": "No controllable standalone browser or physical device on enabled surfaces."
+    }
+  ],
+  "new_headless_totals": {
+    "pass": 21,
+    "fail": 0,
+    "not_run": 3,
+    "blocked": 0
+  },
+  "combined_totals": {
+    "pass": 33,
+    "fail": 0,
+    "not_run": 31,
+    "blocked": 0
+  },
+  "aggregation_notice": "Case-level provenance combines completed retests only, not a fictional single all-pass run; unselected cases stay not_run in raw attempts. Supplemental widths and repeated samples are not extra browser rows. Chrome and Edge share Chromium; Firefox uses Gecko.",
+  "full_matrix_accepted": false,
+  "metrics": {
+    "query_samples": 48,
+    "query_maximum_display_error": 4.854751476379704e-07,
+    "semantic_checks": 24,
+    "semantic_maximum_median_error": 4.2369079578108426e-07,
+    "replay_states": 21,
+    "bilingual_route_layouts": 48,
+    "cloud_model_layouts": 24
+  },
+  "visual_review": {
+    "checked_at": "2026-10-20T13:24:07.887456+00:00",
+    "method": "Read original native WebDriver viewport PNGs with image viewer; no edited images or compositing. All24 baseline cloud/model/layout screenshots plus representative operation, mask/ROI, history-gap and EN/zh-TW narrow-layout captures inspected. Automated pixel differences cover every operation; this is not a review of every stored PNG.",
+    "baseline_clouds_reviewed": 24,
+    "reviewed": [
+      {
+        "attempt": "chrome-03",
+        "file": "v0.1-yolo26-cloud.png",
+        "sha256": "06f829955f84cf2a55e31b3d9ef66b906d70a0245a5d6bb794c34098a8eaac59",
+        "review": "visible saved bus point cloud, model/layout identified"
+      },
+      {
+        "attempt": "chrome-03",
+        "file": "v0.1-da2-small-cloud.png",
+        "sha256": "d64bdf9f40d54d7738c35678db65dc6102d4be9130a334bf0ebaacaec18cc72e",
+        "review": "visible saved bus point cloud, model/layout identified"
+      },
+      {
+        "attempt": "chrome-03",
+        "file": "v0.1-da3-small-cloud.png",
+        "sha256": "0d87c3088ab629133a612c5fd9a237ef8c053365a804d26d0317ad8fb932da29",
+        "review": "visible saved bus point cloud, model/layout identified"
+      },
+      {
+        "attempt": "chrome-03",
+        "file": "v0.1-da3-metric-cloud.png",
+        "sha256": "b615817527586d13f1939121f532bc8f59be1be0d105ea513cf53d055c95df1d",
+        "review": "visible saved bus point cloud, model/layout identified"
+      },
+      {
+        "attempt": "chrome-03",
+        "file": "v0.2-yolo26-cloud.png",
+        "sha256": "bb85b375f5014cf729a0e8acab772110ef8b88165d6e4af50fd21300475da5f0",
+        "review": "visible saved bus point cloud, model/layout identified"
+      },
+      {
+        "attempt": "chrome-03",
+        "file": "v0.2-da2-small-cloud.png",
+        "sha256": "3eb0fce05d058151f75ac4c2e9225b7ffd867fcbdb07518ab4878254f3b49cad",
+        "review": "visible saved bus point cloud, model/layout identified"
+      },
+      {
+        "attempt": "chrome-03",
+        "file": "v0.2-da3-small-cloud.png",
+        "sha256": "62357b33cedeba9b3ccbf6c5b1cb422b86d44dc441c2bb290851d3c3a29548a3",
+        "review": "visible saved bus point cloud, model/layout identified"
+      },
+      {
+        "attempt": "chrome-03",
+        "file": "v0.2-da3-metric-cloud.png",
+        "sha256": "36bffed8eafee360d080111680d7d43707dbd9ca883e463ac215dd335c8808b4",
+        "review": "visible saved bus point cloud, model/layout identified"
+      },
+      {
+        "attempt": "edge-01",
+        "file": "v0.1-yolo26-cloud.png",
+        "sha256": "653edfa3c11f420b55a41b5a5e79f60e947ed97ff22b31bb9c2c8b02146a0f7f",
+        "review": "visible saved bus point cloud, model/layout identified"
+      },
+      {
+        "attempt": "edge-01",
+        "file": "v0.1-da2-small-cloud.png",
+        "sha256": "7fb65949bc7d418ad4146931dff2fe50d8fcc6c4d47633c1973a0390062d66b4",
+        "review": "visible saved bus point cloud, model/layout identified"
+      },
+      {
+        "attempt": "edge-01",
+        "file": "v0.1-da3-small-cloud.png",
+        "sha256": "114bd067b769240c6594650167c726c3e2eaeded420c20db7e25ca58c7e083aa",
+        "review": "visible saved bus point cloud, model/layout identified"
+      },
+      {
+        "attempt": "edge-01",
+        "file": "v0.1-da3-metric-cloud.png",
+        "sha256": "d84e886f76139fa7d3518265b0bfaa07dc0389bfe96ad473f35a3335dc955402",
+        "review": "visible saved bus point cloud, model/layout identified"
+      },
+      {
+        "attempt": "edge-01",
+        "file": "v0.2-yolo26-cloud.png",
+        "sha256": "88f47b60262f95a9f889dba7a35aa39ad0bd4c9bfd907fc66d97af32612419c2",
+        "review": "visible saved bus point cloud, model/layout identified"
+      },
+      {
+        "attempt": "edge-01",
+        "file": "v0.2-da2-small-cloud.png",
+        "sha256": "6172fef5bbf66a41ba5613fee8a151ddeceeebd8e7ffcec87d5adc837ad702fc",
+        "review": "visible saved bus point cloud, model/layout identified"
+      },
+      {
+        "attempt": "edge-01",
+        "file": "v0.2-da3-small-cloud.png",
+        "sha256": "07db197aebe0bdeb97c20671e516c53fad8807b11a9611fe86f865baee32a151",
+        "review": "visible saved bus point cloud, model/layout identified"
+      },
+      {
+        "attempt": "edge-01",
+        "file": "v0.2-da3-metric-cloud.png",
+        "sha256": "e8f97af48e14eaa6729d4f28ad031ebccf7cbd1d0e9a326dc31f19d23be9212c",
+        "review": "visible saved bus point cloud, model/layout identified"
+      },
+      {
+        "attempt": "chrome-03",
+        "file": "v0.1-yolo26-pan.png",
+        "sha256": "014be8dc0b90f224702b2ba6ce07662617f1f1eeab1767ad9acc96dc98028b65",
+        "review": "representative operation, mask/ROI, history gap or narrow layout visible"
+      },
+      {
+        "attempt": "chrome-03",
+        "file": "da2-small-segment-overlay.png",
+        "sha256": "3e3689226d670031d14efb321aa7665e3de01d7bbd4182df273832865643f2fa",
+        "review": "representative operation, mask/ROI, history gap or narrow layout visible"
+      },
+      {
+        "attempt": "chrome-03",
+        "file": "gap-history.png",
+        "sha256": "a4c46985f72838c0bfdcc91e2225d0f9cd1cf8122fb9972dbd65b5494098e806",
+        "review": "representative operation, mask/ROI, history gap or narrow layout visible"
+      },
+      {
+        "attempt": "chrome-04",
+        "file": "home-zh-TW-mobile-header.png",
+        "sha256": "f300d9580998c4535e38e05fcf06978160886f974f48b118d7ae841f95036144",
+        "review": "representative operation, mask/ROI, history gap or narrow layout visible"
+      },
+      {
+        "attempt": "chrome-04",
+        "file": "v0.2-zh-TW-mobile-header.png",
+        "sha256": "75dc4bd8bc5c1686ada56135147b8599a3c2bd422afcbcb06999840573992326",
+        "review": "representative operation, mask/ROI, history gap or narrow layout visible"
+      },
+      {
+        "attempt": "chrome-04",
+        "file": "v0.2-zh-TW-mobile.png",
+        "sha256": "a8139dd9330ff2c0222a3c5ecea3fd12a8534706f34ccad41eeba19557173cc3",
+        "review": "representative operation, mask/ROI, history gap or narrow layout visible"
+      },
+      {
+        "attempt": "chrome-04",
+        "file": "v0.3-zh-TW-mobile.png",
+        "sha256": "9f0498879c59f3ae8888f9f3445bfe5de9ddfbbbb8bd3fc3a67d76f6ac9b6140",
+        "review": "representative operation, mask/ROI, history gap or narrow layout visible"
+      },
+      {
+        "attempt": "edge-01",
+        "file": "da3-small-detect-cloud.png",
+        "sha256": "63b9b17b78262d6bbbc6966a08ec0aa32c985b88e1906c5eee8dbdad5d074f79",
+        "review": "representative operation, mask/ROI, history gap or narrow layout visible"
+      },
+      {
+        "attempt": "edge-01",
+        "file": "gap-history.png",
+        "sha256": "76f7ab3593d5d81c845ea7f33f4d1bff8f2e91b17f96eef01426a722e4a69f65",
+        "review": "representative operation, mask/ROI, history gap or narrow layout visible"
+      },
+      {
+        "attempt": "edge-01",
+        "file": "v0.2-en-mobile-header.png",
+        "sha256": "1f02013f2fdf4b46b5757ab20d46f917ac7b0ddd70d80339a550a337a41bc2ea",
+        "review": "representative operation, mask/ROI, history gap or narrow layout visible"
+      },
+      {
+        "attempt": "edge-01",
+        "file": "v0.3-zh-TW-mobile.png",
+        "sha256": "82564aba44011d650ebc7281d7a3b36ac7c1b104ed2d365285353b09837e482b",
+        "review": "representative operation, mask/ROI, history gap or narrow layout visible"
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "v0.1-yolo26-cloud.png",
+        "sha256": "6f37e8f632ca0a76d76fee96348301b4d0b32cdc6c9a6acd4230e60fb8c86c0b",
+        "review": "visible saved bus point cloud, model/layout identified"
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "v0.1-da2-small-cloud.png",
+        "sha256": "b43f21bf04c9c2c9f0be3a850ac98757f5639c674c3d7c74d1937adbcba22d88",
+        "review": "visible saved bus point cloud, model/layout identified"
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "v0.1-da3-small-cloud.png",
+        "sha256": "929ce0e8c3f3cafb1c0ab2c3d926f2d5c72e79713af0e37fdb0f9b88ad1bfe3e",
+        "review": "visible saved bus point cloud, model/layout identified"
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "v0.1-da3-metric-cloud.png",
+        "sha256": "32e65b1580357f3f4cefc75d23d8edf9f3af48446ce7f4bdea993e38a23bf53d",
+        "review": "visible saved bus point cloud, model/layout identified"
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "v0.2-yolo26-cloud.png",
+        "sha256": "52cb6dcb4b9b26757b2dd634dbe21b7746aef675c057835c805e5e844d6abf7b",
+        "review": "visible saved bus point cloud, model/layout identified"
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "v0.2-da2-small-cloud.png",
+        "sha256": "11167eac21c57fa19de910efbd5f659f74f2cdfe62177eee7ea4dfe8b94781e7",
+        "review": "visible saved bus point cloud, model/layout identified"
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "v0.2-da3-small-cloud.png",
+        "sha256": "b21e68f422039cbe92ffd400396021034a7996cf3c91da9bbe2761dee9379347",
+        "review": "visible saved bus point cloud, model/layout identified"
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "v0.2-da3-metric-cloud.png",
+        "sha256": "e5778f8336ffd29fd8398fcde6eae35830ec85e620e17fbf9417f46814d8e99a",
+        "review": "visible saved bus point cloud, model/layout identified"
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "v0.2-da3-metric-pan.png",
+        "sha256": "9700e4ce51060a48f63cada2457b75f917d9a6ffa8edfd38aab08c58aebc9234",
+        "review": "representative operation, mask/ROI, history gap or narrow layout visible"
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "da2-small-segment-overlay.png",
+        "sha256": "c4e85733ff285c7cae22199a7df85b4e5342f07665949fa7ae1611852ab78a04",
+        "review": "representative operation, mask/ROI, history gap or narrow layout visible"
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "gap-history.png",
+        "sha256": "7e2c6034f1863bb2f8a2e6b3fe4cbcf5ffb8905c0ca3a4953d15706703550b6b",
+        "review": "representative operation, mask/ROI, history gap or narrow layout visible"
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "v0.2-en-mobile-header.png",
+        "sha256": "f8cdd1f16470be086b12ac476d31e1a6528a21190157be25ac67a93bddfc5c36",
+        "review": "representative operation, mask/ROI, history gap or narrow layout visible"
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "v0.2-zh-TW-mobile.png",
+        "sha256": "e1b15be8b3a9ba15c98572ca7b9c87d1a7b350e46c8efad86f5103fbe6982f06",
+        "review": "representative operation, mask/ROI, history gap or narrow layout visible"
+      },
+      {
+        "attempt": "firefox-01",
+        "file": "v0.3-zh-TW-mobile.png",
+        "sha256": "b5bbed442de67f227aa98a603d97047759fea51175b13f8fe754c0525498004e",
+        "review": "representative operation, mask/ROI, history gap or narrow layout visible"
+      }
+    ],
+    "outcome": "No visible rendering, gap-interpolation, clipped-control or overlap defect in the inspected states; native font/range styles differ across engines."
+  },
+  "public_asset_checks": [
+    {
+      "path": "index.html",
+      "sha256": "ac80f80c5f5117bb17317e62084a724b92d29fbf164a61a1a40c2afc12535e31",
+      "bytes": 16081,
+      "matches": true
+    },
+    {
+      "path": "v0.1/index.html",
+      "sha256": "b2d38aefd25d3b07161fdd7eeec4c198c65546dc87927d3f3166e44e15a27c1d",
+      "bytes": 8104,
+      "matches": true
+    },
+    {
+      "path": "v0.2/index.html",
+      "sha256": "adb72f75e15e67c99141c4d9f033778a13213de0bed53100efc5a63e8789f532",
+      "bytes": 18092,
+      "matches": true
+    },
+    {
+      "path": "v0.3/index.html",
+      "sha256": "b9e865662d850cab36ecb6a7c26435a7613c89ff4e06e7a979fcc89750abdf6a",
+      "bytes": 17354,
+      "matches": true
+    },
+    {
+      "path": "data/catalog.json",
+      "sha256": "e1f64ffbfc4f9b0ac1aa9ca69475ea1818db57a30ee8acfad0dcacc89859d5b9",
+      "bytes": 5623,
+      "matches": true
+    },
+    {
+      "path": "data/bus/yolo26.json",
+      "sha256": "2bd3f79e20f26f33ed4e4fb3e6668c4dbc241b9612b515cfe4abd4d713974332",
+      "bytes": 3079837,
+      "matches": true
+    },
+    {
+      "path": "data/bus/manifest.json",
+      "sha256": "385895c7d2560413440615290f49d1c51417889df5c6f95c63f1628f407cb135",
+      "bytes": 2780,
+      "matches": true
+    },
+    {
+      "path": "data/bus/da3-metric.json",
+      "sha256": "1d3290649a93453e3f1710522a9ca9857277e832c01c67106300b0e545c53d85",
+      "bytes": 1795315,
+      "matches": true
+    },
+    {
+      "path": "data/bus/da3-small.json",
+      "sha256": "dcd148a0c37b237059b2d1c823b043ad558756d85f5f1ca7b0c42959144df7f8",
+      "bytes": 979195,
+      "matches": true
+    },
+    {
+      "path": "data/bus/da2-small.json",
+      "sha256": "3b8fa53717a6c35f25d68ab0058bedb1d79ec6d28899a0e96c2846dd453bda7f",
+      "bytes": 5824697,
+      "matches": true
+    },
+    {
+      "path": "data/bus/rgb-378.png",
+      "sha256": "e8bae9dd2261206d580eb3f5b584cb8d5f9c9e0ed57e089322ed091b4df349f5",
+      "bytes": 396180,
+      "matches": true
+    },
+    {
+      "path": "data/bus/semantic.json",
+      "sha256": "a750dbdfae990fa1911ff62d28884cbe799a1b7d072791fab51b223715bbd087",
+      "bytes": 79525,
+      "matches": true
+    },
+    {
+      "path": "data/bus/rgb-720.png",
+      "sha256": "a354556550b5771a025138cd85ce8a793e3c13255d1be362d75f85f000892418",
+      "bytes": 1344797,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/manifest.json",
+      "sha256": "82f24ae13513ffcd312606ec2d37da1c1a610a307fad0efb7154650be67e871a",
+      "bytes": 2938,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/tracks.json",
+      "sha256": "893d137d59c846136a27123b1e38dc10eaa0b3dcfd926d211d261562b8b36796",
+      "bytes": 56467,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/frames.json",
+      "sha256": "40b392afa967ae16942e33e0d19d426aeeba70b5b2ca02a3bdfe3da4161d6b44",
+      "bytes": 84260,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/05.jpg",
+      "sha256": "f1842e0832484b748b02fab3f9503f136af26cb02c807c8d65f7da69385036ca",
+      "bytes": 85111,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/01.jpg",
+      "sha256": "374a6be53936a51fa723c52e8ed528c42a7bab34474bd565bc231a08aa04be81",
+      "bytes": 85350,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/02.jpg",
+      "sha256": "62593e2fccbfc5218ddc07989622904074bcdb19713dd4985ee43a98d2562cff",
+      "bytes": 85292,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/08.jpg",
+      "sha256": "7181a1d7095a70ea87a7195ffa188a37b7de4026b7cda98a900979cba5d6efb1",
+      "bytes": 85520,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/14.jpg",
+      "sha256": "3e6d0500a0d7510c416372b5430f2fcb92c50068ea59954d69d01e34fdaf7bd9",
+      "bytes": 85691,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/12.jpg",
+      "sha256": "c24459a9b6a250359904730fd5a5422153a22188a9f1ed7cb7691f479febf4f9",
+      "bytes": 85858,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/06.jpg",
+      "sha256": "e110e4264355d1e55a03ba8ff90bd8cad62209b1b27e5083591d58fcf408d1f4",
+      "bytes": 85126,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/13.jpg",
+      "sha256": "7b861087258ca409b9ce23a95c1737a49a2c5305001e27eb40f92585c20903f9",
+      "bytes": 85757,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/19.jpg",
+      "sha256": "364f4214752259b640a3c6dd120553cdc1dcec19c99ef7526bfbf5cdc224c1ae",
+      "bytes": 85796,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/18.jpg",
+      "sha256": "959caf4c5a55847a54b144d4c857004ef3ed7be2f70564e55eafd73deb480a0b",
+      "bytes": 85910,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/21.jpg",
+      "sha256": "7ec7d68ed12452bf4b58c7db545a8cf78f6150fa15803179fe06c137f653f277",
+      "bytes": 85424,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/17.jpg",
+      "sha256": "f8ac4c9be8abd97b537925a1ac0b22d8d4b2e2c72c22b264e1b79d62ad5710e6",
+      "bytes": 86126,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/24.jpg",
+      "sha256": "f33ae8e10dc66d0ca0240b1cb88f4e9ac556b08055d41f2a07ff427ba2ba0651",
+      "bytes": 85242,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/22.jpg",
+      "sha256": "88edd033f5c23d823a231ed067edcfff55e2a8e6a1eb9e06a7f26777fd2116f0",
+      "bytes": 85590,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/11.jpg",
+      "sha256": "245a4cd96390ee70b278de00629150001c6b8512df977da312fe750c7080bc15",
+      "bytes": 84794,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/04.jpg",
+      "sha256": "d5c218c390fedaa052a1effd9fc9f0bef46ee0e00636abdb17ac6c016f399bd2",
+      "bytes": 84799,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/03.jpg",
+      "sha256": "83b1cbb200afdcc818bf8bb8e7ca3f945012665ac1329f2c5428641e459977a6",
+      "bytes": 84897,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/15.jpg",
+      "sha256": "9d4c38d6cf74d9eadd7cd9d983459981a8080a476431dd8d8e5d7fbae3c971d6",
+      "bytes": 86277,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/10.jpg",
+      "sha256": "2ab9f8c6ddc33d1ce8e8f18fb378121c302fce2d8367cec778b787c2ccca2624",
+      "bytes": 85257,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/20.jpg",
+      "sha256": "99f5cd4854ef680380a30d1a1565ec3e7fbde5e988fa1fe2ce30cc3633b4be20",
+      "bytes": 85625,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/23.jpg",
+      "sha256": "e7af43ac010a77d5216c534e88db1a61d8e36cfd758a4fba0eea666cf6dd3b93",
+      "bytes": 85060,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/16.jpg",
+      "sha256": "09ecda4b65a3cfc42e724575812f50c45574eb239b4bb0b27c8dffd44b27368c",
+      "bytes": 85924,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/09.jpg",
+      "sha256": "befe68945feb4494e52690133502f3479ea2b39d6b74a9bb59aa416ed5e8805f",
+      "bytes": 85167,
+      "matches": true
+    },
+    {
+      "path": "data/tracking/previews/07.jpg",
+      "sha256": "d57984fb2d0e7e14e824fd6c5a07a82bba2413a364c4c474e794e9b038a340bc",
+      "bytes": 85451,
+      "matches": true
+    },
+    {
+      "path": "assets/real-results.js",
+      "sha256": "858f19684f524201b984f997dbc36342b8533cd1ce5153998d91af83e67aa153",
+      "bytes": 13823,
+      "matches": true
+    },
+    {
+      "path": "assets/real-results.css",
+      "sha256": "e139d2804642a761467278df5f2e7e913ce1d4bece9301eaee093c7d77cd1fcc",
+      "bytes": 1520,
+      "matches": true
+    },
+    {
+      "path": "assets/showcase.js",
+      "sha256": "3d160e348297f2321c9ed7122e51c2721b3dc30d43ce3a93a666ef9016708033",
+      "bytes": 15036,
+      "matches": true
+    },
+    {
+      "path": "assets/showcase.css",
+      "sha256": "2c22efda04396ac8ba3319ef78692f113bfc1d0e1876d5630c58e797e64c7b8c",
+      "bytes": 13226,
+      "matches": true
+    },
+    {
+      "path": "assets/recorded-examples.js",
+      "sha256": "f2d85efc88f04cdcd1a15665ee3200557a28723ffcd44f141ad1f67f207e41d2",
+      "bytes": 3093,
+      "matches": true
+    },
+    {
+      "path": "assets/recorded-examples.css",
+      "sha256": "895486948e6028ce69465ab5d8690dbcdfb4e9b83e1116d5cba88c912dd7ba44",
+      "bytes": 2084,
+      "matches": true
+    },
+    {
+      "path": "static/viewer.js",
+      "sha256": "7e3438831f6517bb023fd2c71c163266010e76716444adb74cc66b9388192f21",
+      "bytes": 13233,
+      "matches": true
+    },
+    {
+      "path": "media/pages-v01-cloud.en.jpg",
+      "sha256": "a5bf728fb19620ab1e1abde7248bb88c15dcf040a4b64134de29403cf7f164fc",
+      "bytes": 49013,
+      "matches": true
+    },
+    {
+      "path": "media/pages-v01-cloud.zh-TW.jpg",
+      "sha256": "9c1d0c8315ab3df92c17251a5e6f4a09270427dc22f6f1dd0b4dd70de7ebb928",
+      "bytes": 55959,
+      "matches": true
+    },
+    {
+      "path": "media/pages-v02-inspector.en.jpg",
+      "sha256": "abfa23389d2f9972ea454bfef81676e748be29a6062745d7b1245806e5494c23",
+      "bytes": 88712,
+      "matches": true
+    },
+    {
+      "path": "media/pages-v02-inspector.zh-TW.jpg",
+      "sha256": "c3ff89eba447dd2a0ee0f071ebba4227c08c83410ebd1ca193454caa4a8ea6b9",
+      "bytes": 93447,
+      "matches": true
+    },
+    {
+      "path": "media/pages-v03-replay.en.jpg",
+      "sha256": "17367bbebbd5088abea6f3a91ced7d79909eb7fc2063c146839921ce0bc8cce4",
+      "bytes": 72919,
+      "matches": true
+    },
+    {
+      "path": "media/pages-v03-replay.zh-TW.jpg",
+      "sha256": "197296479e2ef51c65f245fc4d2e9c775e16044d39ce22873fd474640735699e",
+      "bytes": 72953,
+      "matches": true
+    }
+  ],
+  "historical_records_unchanged_sha256": {
+    "pages-browser-protocol.json": "fd0851f025d7b1e3bf6cced37c8553a074ce29e33db64e06e8eccaf3d316d38d",
+    "pages-browser-initial.json": "3afd8db666fb49b231eb9437bfab7bace0c165b046dd63ee89da5bb133acc832",
+    "pages-browser-addendum.json": "cff8f6c1f24f454d0a7ef9676f1965dbbf4f70a442726dcecff5b0e51d2a3d1b",
+    "pages-browser-acceptance.json": "06c8d56fdb5137586222831ef2c7e56e8fcef90493e2ffe13a0bcbb69a632bc8"
+  },
+  "product_repairs": [],
+  "local_checks": {
+    "pages_tests": "13 passed",
+    "public_allowlist_and_markdown_links": "passed before final publication; final recheck recorded with PR"
+  },
+  "ci_and_deployment": "Exact final PR/main checks, merge and deployed-asset smoke are recorded in PR #27; local/headless evidence is separate from CI.",
+  "pr": "https://github.com/JShengP/depthport/pull/27",
+  "remaining": [
+    "Safari/macOS, physical Android/iOS and native touch",
+    "Headed builds and other OS combinations",
+    "IAB-D/IAB-M modifier pan remains unmeasured in historical rows",
+    "Natural unsupported gzip and actual browser Canvas fallback paths",
+    "All original calibration, identity/long-occlusion/moving-camera, RTSP, fresh installation and endurance gates"
+  ],
+  "publication": "Only reviewed aggregate results, public-data hashes and harness source published. Raw logs, traces, screenshots, profiles, binary packages and diagnostic paths stay ignored/local."
+}

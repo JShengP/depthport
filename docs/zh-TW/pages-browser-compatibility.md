@@ -2,6 +2,8 @@
 
 [English](../en/pages-browser-compatibility.md) · [ROADMAP](../../ROADMAP.md#current-pages--目前互動展示) · [資料來源與限制](real-ai-pages.md) · [PR #26](https://github.com/JShengP/depthport/pull/26)
 
+> 本頁為 PR #26 歷史紀錄，下方原矩陣、失敗與重驗維持當時範圍。後續狀態見[獨立 Chrome／Edge／Firefox 無頭補驗](pages-standalone-browsers.md)，不以當時不可用列代表最新進度。
+
 ## 凍結範圍與判讀
 
 [8 項通過條件、8 個環境列](../validation/pages-browser-protocol.json)已於 commit `8c5a25e` 公開凍結，**之後才開始 UI 實測**，對象為部署 `884b996`。保存的原生深度、最終幾何、遮罩與回放資料皆不變；沒有新增推論、讀取 GT、重跑追蹤、調參或改預設。

@@ -38,4 +38,4 @@ Only explicitly reviewed paths in `PUBLIC_FILES.txt` are copied. Native arrays/P
 
 ## Browser compatibility / 瀏覽器相容性
 
-[Protocol, retained failures and scoped results / 凍結條件、原失敗與限定結果](pages-browser-compatibility.md): one in-app engine at two viewport sizes; standalone browsers, physical phones, modifier/right-button pan and native unsupported/fallback paths remain untested. Full matrix and hardware/accuracy gates stay open. 同一引擎的尺寸檢查不等於跨瀏覽器或實體手機驗收，詳見逐項未測紀錄。
+[Historical in-app protocol/results / 原內建瀏覽器紀錄](pages-browser-compatibility.md) · [Independent headless follow-up / 獨立無頭補驗](pages-standalone-browsers.md): exact Linux Chrome155 / Edge155 / Firefox157 builds pass B01–B07, including Shift-pan; B08 remains not_run. Combined matrix33 pass /31 not_run; Safari, physical phones, headed/other OS and natural unsupported/fallback paths remain open. 原失敗／工具更正保留，無頭與視窗尺寸結果不代替實機／精度驗收。
