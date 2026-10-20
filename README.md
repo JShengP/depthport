@@ -39,7 +39,7 @@ Bus views reuse the original four-engine CUDA exports of [Ultralytics bus.jpg](h
 
 Footage: **[Lukas Kosc via Pexels](https://www.pexels.com/video/urban-street-scene-with-people-crossing-34597902/)**, under its [own terms](https://www.pexels.com/terms-of-service/), not AGPL; no endorsement. Both examples span only **0.959 s**, have no identity GT, and do not validate long occlusion, ID-switch correctness or tracking accuracy. Unassociated detections are not ground-truth FN. V2 per-frame virtual depth and camera XYZ are not world motion or speed. Pages reads saved static packs; it offers no online model inference, private Session access or RTSP input.
 
-[Full provenance, native units and limitations](docs/en/real-ai-pages.md) · [Screenshot states and hashes](docs/validation/readme-real-pages.json)
+[Full provenance, native units and limitations](docs/en/real-ai-pages.md) · [Screenshot states and hashes](docs/validation/readme-real-pages.json) · [Demo status and next gates](ROADMAP.md#current-pages--目前互動展示)
 
 ## Quick start
 

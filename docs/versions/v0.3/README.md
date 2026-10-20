@@ -86,7 +86,7 @@ Footage / 素材：**[Lukas Kosc / Pexels](https://www.pexels.com/video/urban-st
 
 **Limits / 限制:** both runs span only **0.959 s** without identity GT; no long-occlusion, verified ID-switch or tracking-accuracy acceptance. Unassociated is not ground-truth FN. V2 depth is per-frame virtual 1–5, not metres; HFOV camera XYZ is not world motion or speed. Source 23.976 fps, fixed tracker 30-Hz steps and UI 1× at 5 saved frames/s are separate. 沒有身分真值，不因缺格／新 ID 判定換 ID 正確或長遮擋恢復通過；深度、時間及座標限制維持。
 
-[Current data, hashes and limits](../../en/real-ai-pages.md) · [目前資料與限制](../../zh-TW/real-ai-pages.md) · [Screenshot state / 截圖狀態](../../validation/readme-real-pages.json)
+[Current data, hashes and limits](../../en/real-ai-pages.md) · [目前資料與限制](../../zh-TW/real-ai-pages.md) · [Screenshot state / 截圖狀態](../../validation/readme-real-pages.json) · [Demo status & next gates / 展示進度與下一步](../../../ROADMAP.md#current-pages--目前互動展示)
 
 ## Getting started / 使用入口
 

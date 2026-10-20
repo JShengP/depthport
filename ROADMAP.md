@@ -2,7 +2,7 @@
 
 Updated / 更新：2026-10-20 · [Project](README.md) · [繁體中文首頁](README.zh-TW.md) · [Alpha.2 notes / 發布說明](docs/releases/0.3.0-alpha.2.md) · [Changelog / 歷程](CHANGELOG.md)
 
-[Status / 狀態判讀](#status--狀態判讀) · [v0.1](#v01--viewer-foundation--檢視器基礎) · [v0.2](#v02--spatial-analysis--空間分析) · [v0.3](#v03--sessions-and-tracking--回放與追蹤) · [Next gates / 下一步驗收](#next-acceptance-gates--下一步驗收) · [Maintenance / 維護](#repository-maintenance--repo-維護)
+[Status / 狀態判讀](#status--狀態判讀) · [Current Pages / 目前互動展示](#current-pages--目前互動展示) · [v0.1](#v01--viewer-foundation--檢視器基礎) · [v0.2](#v02--spatial-analysis--空間分析) · [v0.3](#v03--sessions-and-tracking--回放與追蹤) · [Next gates / 下一步驗收](#next-acceptance-gates--下一步驗收) · [Maintenance / 維護](#repository-maintenance--repo-維護)
 
 > [!IMPORTANT]
 > v0.3 Alpha remains an **experimental development preview**. Implemented features, examples, CI and published source are not product or hardware acceptance. Priorities below are acceptance gates, not promised deadlines.
@@ -17,6 +17,40 @@ Updated / 更新：2026-10-20 · [Project](README.md) · [繁體中文首頁](RE
 Version READMEs describe each generation's differences, architecture, examples and limits. `main` retains the v0.1 viewer and v0.2 analysis alongside v0.3; release tags/downloads preserve their original snapshots.
 各版 README 說明差異、架構、範例與限制；目前 `main` 延續前版功能，Tag／下載包維持原快照。
 
+## Current Pages / 目前互動展示
+
+Status as of / 狀態日期：**2026-10-20** · [Website / 網站](https://jshengp.github.io/depthport/?lang=zh-TW#versions) · [Provenance / 來源與限制](docs/en/real-ai-pages.md) · [繁中紀錄](docs/zh-TW/real-ai-pages.md)
+
+This is a post-release, static **saved-result demonstration**, separate from historical Alpha acceptance and the tracking control studies below. The browser reads curated results; it runs no model, accepts no uploads, connects to no RTSP source and exposes no private Session. Synthetic exercises remain separately labelled.
+這是發布後補充的靜態保存結果展示；不回填舊 Alpha 驗收，也不取代下方追蹤控制研究。網站只讀審查過的資料，不推論、不接上傳／RTSP／私人 Session，合成練習另外標示。
+
+### Completed / 已完成
+
+- [x] **[v0.1 viewer / 檢視器](https://jshengp.github.io/depthport/v0.1/?lang=zh-TW):** switch four original saved CUDA bus point clouds in the original CloudViewer, with orbit, zoom, pan, colors and point size. v0.1/v0.2 share one bus source/pack; these are not independent samples. 四模型原 CUDA 保存點雲可互動操作，與 v0.2 共用一張公車圖，不重複計為獨立證據。
+- [x] **[v0.2 inspector / 檢查器](https://jshengp.github.io/depthport/v0.2/?lang=zh-TW):** query native/final Float32 depth and camera XYZ; inspect genuine YOLO boxes/masks and object clouds. Depth reuses the 2026-10-17 exports; only missing semantic masks were rerun. 原生深度、最終 Z、XYZ 與真語意資料可互動查詢，未從預覽色彩反推數值。
+- [x] **[v0.3 replay / 回放](https://jshengp.github.io/depthport/v0.3/?lang=zh-TW):** play/pause, seek/step, adjust speed and select Object IDs in 24 saved frames, source **32–55**. Missing observations stay blank in depth/XYZ and history; no interpolation or ID reassignment. 保存影格可連續回放與逐格檢查，觀測缺口不補值、不為符合舊圖而改 ID。
+- [x] **Presentation & delivery / 呈現與交付:** main/version READMEs and homepage cards share six reviewed EN/zh-TW UI screenshots with interactive links. Desktop/mobile, language switching, screenshot hashes, static builds and deployed Pages were checked; Ubuntu/Windows × Python 3.11/3.12 application CI passed for the homepage update ([PR #24](https://github.com/JShengP/depthport/pull/24)). [Capture states/hashes](docs/validation/readme-real-pages.json) and [saved-data checks](docs/validation/real-ai-pages.json) retain their original dated scope. 雙語圖、連結與手機排版已核對；CI 不載入真權重，畫面／資料／部署檢查不等於精度或實機驗收。
+
+**Two runs / 兩次執行 — order / 順序：IDs / detections / associated / unassociated**
+
+- **Current Pages / 目前網站，2026-10-20: 9 / 209 / 152 / 57**, YOLO26n via Ultralytics **8.4.115**, DA V2 CUDA FP32 and isolated BoT-SORT 2.6.1 without ReID. Original Session unavailable; the same hash-checked video interval was rerun. 原 Session 未找回，因此重跑相同雜湊影片區間。
+- **Historical screenshots / 舊截圖，2026-10-19: 7 / 230 / 125 / 105**, Ultralytics **8.4.176**; [original walkthrough / 原紀錄](docs/zh-TW/tracking-replay-example.md) unchanged. Same-named IDs do not establish the same object across runs; different versions/counts are not a controlled accuracy comparison. 舊圖與新回放分開保留，不以數量差異宣稱改善。
+
+### Still unverified / 仍未驗證
+
+- **Geometry / 幾何:** all intrinsics use a **65° HFOV estimate**, not measured calibration. V2 raw nearness differs from final per-frame **virtual Z 1–5**; DA3 Small is relative, while YOLO26/DA3 Metric estimated metres are not independently verified distances. Camera XYZ is not motion-compensated world trajectory or speed. 原生單位不可直接混比，虛擬深度不是公尺，估計公尺尚無獨立精度驗收。
+- **Tracking / 追蹤:** this **0.959 s** clip has no identity GT; missing/new IDs do not establish ID switches or successful occlusion recovery. Unassociated detections are not ground-truth FN. No IDSW/HOTA, long-occlusion, moving-camera or general accuracy acceptance follows. Source **23.976 fps**, tracker **30-Hz steps** and UI **5 saved frames/s at 1×** are different. 短片只供檢查，不作長遮擋／身分穩定性驗收或物體速度推算。
+- **Environment / 環境:** tested browser paths are not a browser/device compatibility matrix. Exact arrays require gzip `DecompressionStream`; unsupported browsers show an error. Software WebGL/Canvas fallback does not validate NVIDIA hardware WebGL. Physical RTSP, fresh Windows pretrained inference/real worker integration, full fresh Alpha.2 installation and endurance/VRAM remain open. 已測路徑不代表所有瀏覽器、完整新安裝、實體相機或效能通過。
+
+### Next work / 下一步工作
+
+1. **Demo compatibility / 展示相容性:** define a browser/device acceptance matrix before extending checks; record versions, exact-array decoding, all four clouds, pixel/mask queries, replay gaps, bilingual/mobile behavior and explicit unsupported-browser outcomes. Browser checks do not rerun models or close hardware gates. 先訂相容性通過條件，再補實測，保留失敗，不以替代數值掩蓋不支援。
+2. **Independent tracking evidence / 獨立追蹤證據:** follow [P0](#p0--tracking-reliability--追蹤可靠性) with prospectively frozen rules, terms-reviewed unseen sequences and scene harm gates; separate discovery, confirmation, zero exposure and failures. The Pages clip is already seen demonstration material, not a fresh confirmation source. Retain weak continuation and current defaults. 先完成下方已規劃的接受事件集合稽核，再決定控制；不因展示更新調參、改預設或把舊來源重算獨立證據。
+3. **Physical evidence / 實體證據:** close [installation/camera](#p0--physical-camera-and-installation--實體相機與安裝) and [geometry/time](#p1--geometry-and-temporal-evidence--幾何與時間證據) gates with measured calibration, independent truth and device/runtime records. 真實相機、Windows 真推論、硬體繪圖與測距另做驗收，不由展示畫面代替。
+4. **Keep evidence aligned / 維持一致:** future packs need their own source/terms, hashes, runtime versions, run-local IDs, screenshot states and limits before publication; update README, website and this section together. The existing Pexels scope is 24 attributed analytical artworks, not redistribution of the MP4 or standalone RGB sequence; footage is not AGPL. 原影片、完整 NPY／PLY、權重、私人 Session／備註與原始診斷留本機；歷史 Tag、下載包、舊截圖與原研究失敗不改寫。
+
+These are planned gates, not results collected by this documentation update. 本次只整理證據與後續工作，未新增推論、序列研究或驗收結果。
+
 ## v0.1 — Viewer foundation / 檢視器基礎
 
 [Version README / 分版說明](docs/versions/v0.1/README.md) · [v0.1.0-alpha.1](https://github.com/JShengP/depthport/releases/tag/v0.1.0-alpha.1) · Historical Alpha / 歷史 Alpha
@@ -25,6 +59,7 @@ Version READMEs describe each generation's differences, architecture, examples a
 
 - **Implemented / 功能：** image/RTSP latest-frame input, four switchable depth presets, bilingual XYZRGB viewer and same-frame PLY/NPY/ZIP with raw depth/unit metadata. One shared source/model worker; no per-user model isolation. 圖片／RTSP 最新影格、四模型、雙語點雲及同影格匯出，採共用來源／模型 worker。
 - **Recorded / 證據：** application contracts and actual viewer checks with explicitly synthetic data; the example is not pretrained inference. 應用契約與真介面合成資料檢查，不是真權重推論。
+- **Later Pages / 後補網站：** [current saved four-model cloud demo](#current-pages--目前互動展示) reuses later CUDA results; historical v0.1 validation above stays unchanged. 後補真點雲不回填本版驗收。
 
 [Tagged validation](https://github.com/JShengP/depthport/blob/v0.1.0-alpha.1/docs/en/validation.md) · [本版繁中紀錄](https://github.com/JShengP/depthport/blob/v0.1.0-alpha.1/docs/zh-TW/validation.md)
 
@@ -46,6 +81,7 @@ Validate the retained viewer on current `main` through [P0 installation/camera g
 
 - **Implemented / 功能：** retains v0.1; adds `/spatial` pixel raw-depth/camera-space XYZ inspection, sequential same-image four-engine comparison, optional YOLO Detect/Segment instance-to-point fusion, checkerboard calibration, candidate planes and independent metric-error tools. 延續檢視器，新增像素深度／XYZ、同圖比較、選配語意融合、標定／平面／誤差工具；尚無 Session 或連續追蹤。
 - **Recorded / 證據：** four genuine CUDA depth calls and YOLO Detect/Segment on one public Ultralytics bus image in one fresh Ubuntu GPU environment on **2026-10-17**. Actual HTTP/browser checks used **SwiftShader software WebGL**, not NVIDIA display rendering. 單台全新 Ubuntu GPU 環境的一張公開圖真推論；瀏覽器繪圖是軟體 WebGL。
+- **Later Pages / 後補網站：** [current Float32/XYZ/mask inspector](#current-pages--目前互動展示) reuses the depth exports with rerun semantic masks. It is a static saved-data UI, separate from the historical local CUDA comparison screenshot. 真數值檢查器與舊本機比較介面分開，不增加單圖來源或精度驗收。
 
 [Tagged validation](https://github.com/JShengP/depthport/blob/v0.2.0-alpha.1/docs/en/validation.md) · [本版繁中紀錄](https://github.com/JShengP/depthport/blob/v0.2.0-alpha.1/docs/zh-TW/validation.md) · [Example & provenance / 範例與來源](docs/versions/v0.2/README.md#examples--範例)
 
@@ -86,10 +122,7 @@ Close the shared [P0 hardware/installation gates](#p0--physical-camera-and-insta
 - **Prediction geometry / 預測幾何控制：** [Frozen mean/covariance-consistent projection](docs/en/tracking-geometry-validity.md) / [繁中](docs/zh-TW/tracking-geometry-validity.md):1,070 held-out/611 seen original frames,20 complete passes. New0006 projects one retained-confirmed row and invalid predictions9→0;0007 has48 predictions but zero projection. Seen0004:four projections,18→0;0005 never initializes. All per-scene observable harm screens pass and complete outputs remain equal; native references/repeats reconcile. **Both-new-source exposure gate fails; no independent replication, quality or default promotion.** 另凍結的GT-free實際投影曝光選取及未見確認見下項，角色／零值／失敗分開保留；不調參、不讀GT，弱延續保留，原state／影像／事件集合本機。
 - **Geometry exposure / 幾何曝光：** [Frozen GT-free complete ledger](docs/en/tracking-geometry-exposure.md) / [繁中](docs/zh-TW/tracking-geometry-exposure.md):24 seen sources/20,643 original frames retained;20 sources complete exact native/reference/treatment comparisons, four early Session-wrapper whole-file checks fail despite equal full frame payloads.584 actual projections split active-confirmed3/retained-confirmed581/tentative0; first eligible candidates are MOT17-12-DPM/09-DPM. Both unseen KITTI0008/0009 run only after public discovery sealing:2/1 retained-confirmed projections, invalid predictions8→0/3→0, complete outputs unchanged; active/tentative confirmation exposure0. All formal replication flags remain false because all scheduled discovery sources must complete. **Whole-study replication blocked by four retained failures; exposure is not quality acceptance.** 不調參／新GT計分，弱階段／預設不變，原診斷本機；三段輸出改變需另做事件集合傷害稽核，不把弱更新增加當效益。
 - **Carrier/role audit / 外層與角色稽核：** [Frozen read-only contracts and full ledger](docs/en/tracking-carrier-roles.md) / [繁中](docs/zh-TW/tracking-carrier-roles.md):four978-frame Session carriers reconstruct exactly from derived metadata and original ordered native payload, while whole-file failures remain false.22 sources/20,858 original frames/88 existing histories reconcile; reference/projection681/678 tentative predictions all birth-only active zero-velocity, high promotions395/392, weak promotions264/264, unmatched removals22/22, retained tentative/candidates/projections0. Four blocked sources remain unmeasured. **Diagnosis complete, original failures/replication and quality status unchanged.** 不重跑追蹤／推論、不讀GT／調參，434輸入與原結果雜湊不變；下一步另凍結已變更輸出的事件集合傷害稽核，不強迫結構排除的未確認曝光。
-
-
-
-- **Real example / 真實範例：** 24 consecutive public Pexels frames exercise genuine depth, YOLO26n CPU detection, the isolated worker and browser replay. It has no identity ground truth and spans only **0.959 s** from first to last frame. The reused CUDA environment is not a fresh installation of the complete Alpha.2 recipe; screenshots/docs were added after its frozen release. 真實短片回放，不是長遮擋、精度或完整配方新安裝驗收；後補文件不改 Tag／下載包。
+- **Real example / 真實範例：** [current Pages status](#current-pages--目前互動展示) separates the new **9/209/152/57** saved replay from the earlier **7/230/125/105** screenshots and their different detector versions. Both cover source32–55, only **0.959 s**, without identity GT. The reused CUDA environment is not a fresh installation of the complete Alpha.2 recipe. 真回放與舊圖分開，不作受控精度比較、長遮擋或完整配方新安裝驗收；後補文件不改 Tag／下載包。
 - **Current CI / 目前檢查：** Ubuntu/Windows × Python 3.11/3.12 application contracts and model API installation/import checks; no pretrained weights or inference in CI. 跨平台契約與實際 API 匯入，不等於 Windows 真推論或實機通過。
 
 [Validation history / 驗證紀錄](docs/en/validation.md) · [繁中紀錄](docs/zh-TW/validation.md) · [Tracking studies / 研究入口](docs/versions/v0.3/README.md#validation--驗證紀錄) · [Real replay & terms / 真回放與條款](docs/zh-TW/tracking-replay-example.md)
