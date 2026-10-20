@@ -1,6 +1,10 @@
 # Validation record
 [繁體中文](../zh-TW/validation.md) · [Home](../../README.md)
 
+## Read-only carrier and tentative-role audit — 2026-10-20
+
+[Frozen contracts, full ledger and decision](tracking-carrier-roles.md):four original978-frame Session carriers reconstruct exactly from locked metadata and ordered native payload, while all whole-file failures stay failed.22 sources/20,858 unique frames/88 existing histories reconcile; reference/projection681/678 tentative pre-predict rows all active seed-only zero-velocity, high promotions395/392, weak promotions264/264, immature removals22/22; retained/candidate/projected tentative rows0. Four blocked sources remain unmeasured.434 local inputs and all original records unchanged; no source tracking/inference/GT/scoring/tuning/weak-stage/default change. Conditional lifecycle reachability is not quality/safety acceptance. Next separately freeze accepted-event membership harm auditing for three changed discovery outputs.43 new+46 prior contracts pass; base516 passed/92 optional skipped; method CI8/8 passed.
+
 ## GT-free geometry exposure selection — 2026-10-20
 
 [Complete method, ledgers and decision](tracking-geometry-exposure.md):24 seen sources/20,643 frames,20 complete comparisons and four Session-wrapper whole-file failures retained despite equal full frame payloads.584 actual projected rows split active-confirmed3/retained-confirmed581/tentative0; first eligible selections12-DPM/09-DPM. Public discovery seal precedes new KITTI0008/0009 image/inference output;1,193 native pixel-verified frames/10 complete passes trigger2/1 retained-confirmed projections and invalid predictions8→0/3→0, with complete outputs unchanged. Active/tentative confirmation0; all formal replication flags remain false because the four discovery failures block completeness. No new GT/scoring/tuning; weak stage and defaults unchanged, raw media/diagnostics local. Next prospectively resolve archive-carrier contracts/role reachability and separately freeze accepted-event harm auditing for three changed discovery outputs.22 new/24 geometry contracts pass; base495 passed/70 skipped, method CI8/8 and discovery CI4/4 pass.

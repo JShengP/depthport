@@ -1,0 +1,3244 @@
+{
+  "format": "depthport.carrier-role-audit.v1",
+  "protocol_sha256": "efacb4f1da7e0b60693d1b64cc6517a1054be79f81da36199cdf1ce72520bb9b",
+  "gt_read": false,
+  "accuracy_scoring": false,
+  "inference": false,
+  "tracking_rerun": false,
+  "retuned": false,
+  "weak_stage_changed": false,
+  "defaults_changed": false,
+  "original_records_bytes_unchanged": true,
+  "original_discovery_completed": false,
+  "original_replication_flags": {
+    "active_confirmed": false,
+    "active_tentative": false,
+    "retained_confirmed": false,
+    "retained_tentative": false,
+    "active": false,
+    "retained": false,
+    "unconfirmed": false,
+    "any": false
+  },
+  "original_failures_retained": [
+    "KITTI-0000",
+    "KITTI-0001",
+    "KITTI-0002",
+    "KITTI-0003"
+  ],
+  "sealed_local_inputs_rechecked": 434,
+  "all_available_audits_completed": true,
+  "tracking_quality_accepted": false,
+  "carriers": [
+    {
+      "name": "KITTI-0000",
+      "status": "completed",
+      "original_status": "failed",
+      "original_failure_changed": false,
+      "audit": {
+        "whole_archive_bytes_equal": false,
+        "ordered_payload_encoding_equal": true,
+        "native_writer_encoding_exact": true,
+        "derived_carrier_reconstruction_exact": true,
+        "frames": 154,
+        "observations": 171,
+        "metadata_contract_valid": true,
+        "payload_sha256": "0aa4aebcb3db5d5eae4946aae7f23dcdecaccbd0f4f27ac17fcc294c59aeecc5",
+        "reconstructed_carrier_sha256": "0b785202cfdb141037a30efe813628c6482e69e21afd777b3bde41b7a3ab357f",
+        "original_failure_changed": false,
+        "original_replication_changed": false,
+        "carrier_contract_compatible": true
+      },
+      "repeat_equal": true,
+      "raw_audit_sha256": "4a7367fcc11f16bbd4c97f4b34fb383a3c7c8efe7fadee28688c861ca5a1115e"
+    },
+    {
+      "name": "KITTI-0001",
+      "status": "completed",
+      "original_status": "failed",
+      "original_failure_changed": false,
+      "audit": {
+        "whole_archive_bytes_equal": false,
+        "ordered_payload_encoding_equal": true,
+        "native_writer_encoding_exact": true,
+        "derived_carrier_reconstruction_exact": true,
+        "frames": 447,
+        "observations": 28,
+        "metadata_contract_valid": true,
+        "payload_sha256": "cd6bb48d7b26cada4509c6e6815ff0e169d48a4e46d6895a41b19e101d05e239",
+        "reconstructed_carrier_sha256": "f189ff7057af36b6fbc2c175712db02cf4305bd9c0ceaea319f5501317755323",
+        "original_failure_changed": false,
+        "original_replication_changed": false,
+        "carrier_contract_compatible": true
+      },
+      "repeat_equal": true,
+      "raw_audit_sha256": "418edef00f6e2ebbffbab63ac1c55accde93308bab97c030799197b5cd0714c7"
+    },
+    {
+      "name": "KITTI-0002",
+      "status": "completed",
+      "original_status": "failed",
+      "original_failure_changed": false,
+      "audit": {
+        "whole_archive_bytes_equal": false,
+        "ordered_payload_encoding_equal": true,
+        "native_writer_encoding_exact": true,
+        "derived_carrier_reconstruction_exact": true,
+        "frames": 233,
+        "observations": 115,
+        "metadata_contract_valid": true,
+        "payload_sha256": "682270a0ac17a2740e1154aa8644d25f0e51ebd462cd0fbabf0f9318e9a921a4",
+        "reconstructed_carrier_sha256": "a3be7a54255ddb30691a2553d34a4d438a50cd4d6ed369c463e1020ccd61f5f3",
+        "original_failure_changed": false,
+        "original_replication_changed": false,
+        "carrier_contract_compatible": true
+      },
+      "repeat_equal": true,
+      "raw_audit_sha256": "492f82d7c94c20faa4563b3796b505b216d645e0fdde2eb3a9ca91bbdff56915"
+    },
+    {
+      "name": "KITTI-0003",
+      "status": "completed",
+      "original_status": "failed",
+      "original_failure_changed": false,
+      "audit": {
+        "whole_archive_bytes_equal": false,
+        "ordered_payload_encoding_equal": true,
+        "native_writer_encoding_exact": true,
+        "derived_carrier_reconstruction_exact": true,
+        "frames": 144,
+        "observations": 0,
+        "metadata_contract_valid": true,
+        "payload_sha256": "c1ee65628bf35f17dc8884eb09b27a5d510fb6605141a37bb9d1c87db86f14d9",
+        "reconstructed_carrier_sha256": "dd90236ed61a9d847a64b4a18bb93d0e94db8626f4a2a77c700d74863d8096d1",
+        "original_failure_changed": false,
+        "original_replication_changed": false,
+        "carrier_contract_compatible": true
+      },
+      "repeat_equal": true,
+      "raw_audit_sha256": "7613a0472bcda49c65bfa6214ed0a005669300ee612344c32f8d9994675bf748"
+    }
+  ],
+  "roles": [
+    {
+      "name": "MOT17-09-DPM",
+      "phase": "discovery",
+      "frames": 525,
+      "status": "completed",
+      "arms": {
+        "reference": {
+          "summary": {
+            "counts": {
+              "frames": 525,
+              "births": 38,
+              "tentative_prediction_rows": 38,
+              "tentative_active_pre": 38,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 38,
+              "tentative_after_predict_age_one": 38,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 33,
+              "tentative_weak_promotions": 5,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 5,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 38
+            },
+            "original_native_counts": {
+              "frames": 525,
+              "births": 38,
+              "confirmed_observations": 4140,
+              "accepted_high": 2708,
+              "accepted_weak": 1432,
+              "predictions": 5332,
+              "nonpositive_predictions": 616,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 589,
+              "candidate_rows": 27,
+              "applied_rows": 0,
+              "applied_axes": 0,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "shadow_operations": 9472,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "fffb5ced0af65e1c7e29c8e142f6804f6c297f81013aa6dfeee3c80ad088209b"
+        },
+        "projection": {
+          "summary": {
+            "counts": {
+              "frames": 525,
+              "births": 36,
+              "tentative_prediction_rows": 36,
+              "tentative_active_pre": 36,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 36,
+              "tentative_after_predict_age_one": 36,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 31,
+              "tentative_weak_promotions": 5,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 5,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 36
+            },
+            "original_native_counts": {
+              "frames": 525,
+              "births": 36,
+              "confirmed_observations": 4144,
+              "accepted_high": 2710,
+              "accepted_weak": 1434,
+              "predictions": 5287,
+              "nonpositive_predictions": 0,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 0,
+              "candidate_rows": 41,
+              "applied_rows": 41,
+              "applied_axes": 41,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 41,
+              "retained_tentative": 0,
+              "shadow_operations": 9431,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 41,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 41,
+              "unconfirmed": 0,
+              "any": 41
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 40,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 40,
+              "unconfirmed": 0,
+              "any": 40
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "18b4c2395bdb49ee0105fe14c0d89e934f63e663dbca7e16a7fadea77dd3b774"
+        }
+      }
+    },
+    {
+      "name": "MOT17-10-DPM",
+      "phase": "discovery",
+      "frames": 654,
+      "status": "completed",
+      "arms": {
+        "reference": {
+          "summary": {
+            "counts": {
+              "frames": 654,
+              "births": 39,
+              "tentative_prediction_rows": 39,
+              "tentative_active_pre": 39,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 39,
+              "tentative_after_predict_age_one": 39,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 20,
+              "tentative_weak_promotions": 19,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 19,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 39
+            },
+            "original_native_counts": {
+              "frames": 654,
+              "births": 39,
+              "confirmed_observations": 4482,
+              "accepted_high": 2706,
+              "accepted_weak": 1776,
+              "predictions": 5807,
+              "nonpositive_predictions": 605,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 578,
+              "candidate_rows": 27,
+              "applied_rows": 0,
+              "applied_axes": 0,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "shadow_operations": 10289,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "6913c4c070b0fba3046a15896e13cf72549217a8aaa0bbb1722f58ef7e45c0fe"
+        },
+        "projection": {
+          "summary": {
+            "counts": {
+              "frames": 654,
+              "births": 39,
+              "tentative_prediction_rows": 39,
+              "tentative_active_pre": 39,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 39,
+              "tentative_after_predict_age_one": 39,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 20,
+              "tentative_weak_promotions": 19,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 19,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 39
+            },
+            "original_native_counts": {
+              "frames": 654,
+              "births": 39,
+              "confirmed_observations": 4482,
+              "accepted_high": 2706,
+              "accepted_weak": 1776,
+              "predictions": 5807,
+              "nonpositive_predictions": 0,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 0,
+              "candidate_rows": 37,
+              "applied_rows": 37,
+              "applied_axes": 37,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 37,
+              "retained_tentative": 0,
+              "shadow_operations": 10289,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 37,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 37,
+              "unconfirmed": 0,
+              "any": 37
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 36,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 36,
+              "unconfirmed": 0,
+              "any": 36
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "6913c4c070b0fba3046a15896e13cf72549217a8aaa0bbb1722f58ef7e45c0fe"
+        }
+      }
+    },
+    {
+      "name": "MOT17-11-DPM",
+      "phase": "discovery",
+      "frames": 900,
+      "status": "completed",
+      "arms": {
+        "reference": {
+          "summary": {
+            "counts": {
+              "frames": 900,
+              "births": 47,
+              "tentative_prediction_rows": 47,
+              "tentative_active_pre": 47,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 47,
+              "tentative_after_predict_age_one": 47,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 39,
+              "tentative_weak_promotions": 8,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 8,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 47
+            },
+            "original_native_counts": {
+              "frames": 900,
+              "births": 47,
+              "confirmed_observations": 5751,
+              "accepted_high": 5257,
+              "accepted_weak": 494,
+              "predictions": 7112,
+              "nonpositive_predictions": 917,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 880,
+              "candidate_rows": 37,
+              "applied_rows": 0,
+              "applied_axes": 0,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "shadow_operations": 12863,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "3a75741732c2701902ec7ddcd6d0e1e39ba36aa6d318633a2b87659dbeb48eb4"
+        },
+        "projection": {
+          "summary": {
+            "counts": {
+              "frames": 900,
+              "births": 46,
+              "tentative_prediction_rows": 46,
+              "tentative_active_pre": 46,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 46,
+              "tentative_after_predict_age_one": 46,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 38,
+              "tentative_weak_promotions": 8,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 8,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 46
+            },
+            "original_native_counts": {
+              "frames": 900,
+              "births": 46,
+              "confirmed_observations": 5766,
+              "accepted_high": 5258,
+              "accepted_weak": 508,
+              "predictions": 7172,
+              "nonpositive_predictions": 0,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 0,
+              "candidate_rows": 61,
+              "applied_rows": 61,
+              "applied_axes": 62,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 61,
+              "retained_tentative": 0,
+              "shadow_operations": 12938,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 61,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 61,
+              "unconfirmed": 0,
+              "any": 61
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 59,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 59,
+              "unconfirmed": 0,
+              "any": 59
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "5bd261a20078f58bdac9748258f01d47fe6824b4508c4d9ce685217c81709c8d"
+        }
+      }
+    },
+    {
+      "name": "MOT17-13-DPM",
+      "phase": "discovery",
+      "frames": 750,
+      "status": "completed",
+      "arms": {
+        "reference": {
+          "summary": {
+            "counts": {
+              "frames": 750,
+              "births": 37,
+              "tentative_prediction_rows": 37,
+              "tentative_active_pre": 37,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 37,
+              "tentative_after_predict_age_one": 37,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 20,
+              "tentative_weak_promotions": 17,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 17,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 37
+            },
+            "original_native_counts": {
+              "frames": 750,
+              "births": 37,
+              "confirmed_observations": 2175,
+              "accepted_high": 1052,
+              "accepted_weak": 1123,
+              "predictions": 3134,
+              "nonpositive_predictions": 649,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 618,
+              "candidate_rows": 31,
+              "applied_rows": 0,
+              "applied_axes": 0,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "shadow_operations": 5309,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "be221f868e2f0a1d7384ecca90e4b592739c914e82697eadfac61ff88feee81d"
+        },
+        "projection": {
+          "summary": {
+            "counts": {
+              "frames": 750,
+              "births": 37,
+              "tentative_prediction_rows": 37,
+              "tentative_active_pre": 37,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 37,
+              "tentative_after_predict_age_one": 37,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 20,
+              "tentative_weak_promotions": 17,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 17,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 37
+            },
+            "original_native_counts": {
+              "frames": 750,
+              "births": 37,
+              "confirmed_observations": 2175,
+              "accepted_high": 1052,
+              "accepted_weak": 1123,
+              "predictions": 3134,
+              "nonpositive_predictions": 0,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 0,
+              "candidate_rows": 46,
+              "applied_rows": 46,
+              "applied_axes": 47,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 46,
+              "retained_tentative": 0,
+              "shadow_operations": 5309,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 46,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 46,
+              "unconfirmed": 0,
+              "any": 46
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 45,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 45,
+              "unconfirmed": 0,
+              "any": 45
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "be221f868e2f0a1d7384ecca90e4b592739c914e82697eadfac61ff88feee81d"
+        }
+      }
+    },
+    {
+      "name": "MOT17-04-DPM",
+      "phase": "discovery",
+      "frames": 1050,
+      "status": "completed",
+      "arms": {
+        "reference": {
+          "summary": {
+            "counts": {
+              "frames": 1050,
+              "births": 24,
+              "tentative_prediction_rows": 24,
+              "tentative_active_pre": 24,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 24,
+              "tentative_after_predict_age_one": 24,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 17,
+              "tentative_weak_promotions": 7,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 7,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 24
+            },
+            "original_native_counts": {
+              "frames": 1050,
+              "births": 24,
+              "confirmed_observations": 9673,
+              "accepted_high": 5252,
+              "accepted_weak": 4421,
+              "predictions": 10281,
+              "nonpositive_predictions": 177,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 168,
+              "candidate_rows": 9,
+              "applied_rows": 0,
+              "applied_axes": 0,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "shadow_operations": 19954,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "b31708cf919d9c5c5722d6dd6cb2e2a08ec06d06a7e9d22de881a0fbd4acec79"
+        },
+        "projection": {
+          "summary": {
+            "counts": {
+              "frames": 1050,
+              "births": 24,
+              "tentative_prediction_rows": 24,
+              "tentative_active_pre": 24,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 24,
+              "tentative_after_predict_age_one": 24,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 17,
+              "tentative_weak_promotions": 7,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 7,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 24
+            },
+            "original_native_counts": {
+              "frames": 1050,
+              "births": 24,
+              "confirmed_observations": 9673,
+              "accepted_high": 5252,
+              "accepted_weak": 4421,
+              "predictions": 10281,
+              "nonpositive_predictions": 0,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 0,
+              "candidate_rows": 11,
+              "applied_rows": 11,
+              "applied_axes": 11,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 11,
+              "retained_tentative": 0,
+              "shadow_operations": 19954,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 11,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 11,
+              "unconfirmed": 0,
+              "any": 11
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 11,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 11,
+              "unconfirmed": 0,
+              "any": 11
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "b31708cf919d9c5c5722d6dd6cb2e2a08ec06d06a7e9d22de881a0fbd4acec79"
+        }
+      }
+    },
+    {
+      "name": "MOT20-01",
+      "phase": "discovery",
+      "frames": 429,
+      "status": "completed",
+      "arms": {
+        "reference": {
+          "summary": {
+            "counts": {
+              "frames": 429,
+              "births": 19,
+              "tentative_prediction_rows": 19,
+              "tentative_active_pre": 19,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 19,
+              "tentative_after_predict_age_one": 19,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 12,
+              "tentative_weak_promotions": 7,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 7,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 19
+            },
+            "original_native_counts": {
+              "frames": 429,
+              "births": 19,
+              "confirmed_observations": 2732,
+              "accepted_high": 914,
+              "accepted_weak": 1818,
+              "predictions": 3104,
+              "nonpositive_predictions": 89,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 83,
+              "candidate_rows": 6,
+              "applied_rows": 0,
+              "applied_axes": 0,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "shadow_operations": 5836,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "04623c8d8c13656c2be708910e3c3aeadef8e68a3c1870c37646ef5d6d203136"
+        },
+        "projection": {
+          "summary": {
+            "counts": {
+              "frames": 429,
+              "births": 19,
+              "tentative_prediction_rows": 19,
+              "tentative_active_pre": 19,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 19,
+              "tentative_after_predict_age_one": 19,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 12,
+              "tentative_weak_promotions": 7,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 7,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 19
+            },
+            "original_native_counts": {
+              "frames": 429,
+              "births": 19,
+              "confirmed_observations": 2732,
+              "accepted_high": 914,
+              "accepted_weak": 1818,
+              "predictions": 3104,
+              "nonpositive_predictions": 0,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 0,
+              "candidate_rows": 7,
+              "applied_rows": 7,
+              "applied_axes": 7,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 7,
+              "retained_tentative": 0,
+              "shadow_operations": 5836,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 7,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 7,
+              "unconfirmed": 0,
+              "any": 7
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 7,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 7,
+              "unconfirmed": 0,
+              "any": 7
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "04623c8d8c13656c2be708910e3c3aeadef8e68a3c1870c37646ef5d6d203136"
+        }
+      }
+    },
+    {
+      "name": "MOT20-02",
+      "phase": "discovery",
+      "frames": 2782,
+      "status": "completed",
+      "arms": {
+        "reference": {
+          "summary": {
+            "counts": {
+              "frames": 2782,
+              "births": 122,
+              "tentative_prediction_rows": 122,
+              "tentative_active_pre": 122,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 122,
+              "tentative_after_predict_age_one": 122,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 70,
+              "tentative_weak_promotions": 52,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 52,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 122
+            },
+            "original_native_counts": {
+              "frames": 2782,
+              "births": 122,
+              "confirmed_observations": 25982,
+              "accepted_high": 10345,
+              "accepted_weak": 15637,
+              "predictions": 30021,
+              "nonpositive_predictions": 1118,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 1042,
+              "candidate_rows": 76,
+              "applied_rows": 0,
+              "applied_axes": 0,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "shadow_operations": 56003,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "32da5b3498634bc2444b8fb8e3d6a898771678bda7792b769f9159b407f832b7"
+        },
+        "projection": {
+          "summary": {
+            "counts": {
+              "frames": 2782,
+              "births": 122,
+              "tentative_prediction_rows": 122,
+              "tentative_active_pre": 122,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 122,
+              "tentative_after_predict_age_one": 122,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 70,
+              "tentative_weak_promotions": 52,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 52,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 122
+            },
+            "original_native_counts": {
+              "frames": 2782,
+              "births": 122,
+              "confirmed_observations": 25982,
+              "accepted_high": 10345,
+              "accepted_weak": 15637,
+              "predictions": 30021,
+              "nonpositive_predictions": 0,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 0,
+              "candidate_rows": 106,
+              "applied_rows": 106,
+              "applied_axes": 106,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 106,
+              "retained_tentative": 0,
+              "shadow_operations": 56003,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 106,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 106,
+              "unconfirmed": 0,
+              "any": 106
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 106,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 106,
+              "unconfirmed": 0,
+              "any": 106
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "32da5b3498634bc2444b8fb8e3d6a898771678bda7792b769f9159b407f832b7"
+        }
+      }
+    },
+    {
+      "name": "MOT20-06",
+      "phase": "discovery",
+      "frames": 1008,
+      "status": "completed",
+      "arms": {
+        "reference": {
+          "summary": {
+            "counts": {
+              "frames": 1008,
+              "births": 29,
+              "tentative_prediction_rows": 29,
+              "tentative_active_pre": 29,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 29,
+              "tentative_after_predict_age_one": 29,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 14,
+              "tentative_weak_promotions": 15,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 15,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 29
+            },
+            "original_native_counts": {
+              "frames": 1008,
+              "births": 29,
+              "confirmed_observations": 6422,
+              "accepted_high": 1231,
+              "accepted_weak": 5191,
+              "predictions": 7487,
+              "nonpositive_predictions": 156,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 145,
+              "candidate_rows": 11,
+              "applied_rows": 0,
+              "applied_axes": 0,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "shadow_operations": 13909,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "d42937bcd82b013ff37681a96c721c90de3332f57467ca6358624bdb523f58d7"
+        },
+        "projection": {
+          "summary": {
+            "counts": {
+              "frames": 1008,
+              "births": 29,
+              "tentative_prediction_rows": 29,
+              "tentative_active_pre": 29,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 29,
+              "tentative_after_predict_age_one": 29,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 14,
+              "tentative_weak_promotions": 15,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 15,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 29
+            },
+            "original_native_counts": {
+              "frames": 1008,
+              "births": 29,
+              "confirmed_observations": 6422,
+              "accepted_high": 1231,
+              "accepted_weak": 5191,
+              "predictions": 7487,
+              "nonpositive_predictions": 0,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 0,
+              "candidate_rows": 14,
+              "applied_rows": 14,
+              "applied_axes": 15,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 14,
+              "retained_tentative": 0,
+              "shadow_operations": 13909,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 14,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 14,
+              "unconfirmed": 0,
+              "any": 14
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 14,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 14,
+              "unconfirmed": 0,
+              "any": 14
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "d42937bcd82b013ff37681a96c721c90de3332f57467ca6358624bdb523f58d7"
+        }
+      }
+    },
+    {
+      "name": "MOT20-07",
+      "phase": "discovery",
+      "frames": 585,
+      "status": "completed",
+      "arms": {
+        "reference": {
+          "summary": {
+            "counts": {
+              "frames": 585,
+              "births": 23,
+              "tentative_prediction_rows": 23,
+              "tentative_active_pre": 23,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 23,
+              "tentative_after_predict_age_one": 23,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 9,
+              "tentative_weak_promotions": 14,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 14,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 23
+            },
+            "original_native_counts": {
+              "frames": 585,
+              "births": 23,
+              "confirmed_observations": 3753,
+              "accepted_high": 1825,
+              "accepted_weak": 1928,
+              "predictions": 4227,
+              "nonpositive_predictions": 166,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 157,
+              "candidate_rows": 9,
+              "applied_rows": 0,
+              "applied_axes": 0,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "shadow_operations": 7980,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "9e47f1689889dae47b0ee21e57732fb370438dad836a03cb2717e0545f30f619"
+        },
+        "projection": {
+          "summary": {
+            "counts": {
+              "frames": 585,
+              "births": 23,
+              "tentative_prediction_rows": 23,
+              "tentative_active_pre": 23,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 23,
+              "tentative_after_predict_age_one": 23,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 9,
+              "tentative_weak_promotions": 14,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 14,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 23
+            },
+            "original_native_counts": {
+              "frames": 585,
+              "births": 23,
+              "confirmed_observations": 3758,
+              "accepted_high": 1825,
+              "accepted_weak": 1933,
+              "predictions": 4236,
+              "nonpositive_predictions": 0,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 0,
+              "candidate_rows": 13,
+              "applied_rows": 13,
+              "applied_axes": 13,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 13,
+              "retained_tentative": 0,
+              "shadow_operations": 7994,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 13,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 13,
+              "unconfirmed": 0,
+              "any": 13
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 13,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 13,
+              "unconfirmed": 0,
+              "any": 13
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "9e47f1689889dae47b0ee21e57732fb370438dad836a03cb2717e0545f30f619"
+        }
+      }
+    },
+    {
+      "name": "MOT20-08",
+      "phase": "discovery",
+      "frames": 806,
+      "status": "completed",
+      "arms": {
+        "reference": {
+          "summary": {
+            "counts": {
+              "frames": 806,
+              "births": 22,
+              "tentative_prediction_rows": 22,
+              "tentative_active_pre": 22,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 22,
+              "tentative_after_predict_age_one": 22,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 16,
+              "tentative_weak_promotions": 6,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 6,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 22
+            },
+            "original_native_counts": {
+              "frames": 806,
+              "births": 22,
+              "confirmed_observations": 4231,
+              "accepted_high": 1102,
+              "accepted_weak": 3129,
+              "predictions": 4786,
+              "nonpositive_predictions": 270,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 257,
+              "candidate_rows": 13,
+              "applied_rows": 0,
+              "applied_axes": 0,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "shadow_operations": 9017,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "040b7591266a4f7e99b1412bce574056719748d0874e689314ccd65a44d5b30c"
+        },
+        "projection": {
+          "summary": {
+            "counts": {
+              "frames": 806,
+              "births": 22,
+              "tentative_prediction_rows": 22,
+              "tentative_active_pre": 22,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 22,
+              "tentative_after_predict_age_one": 22,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 16,
+              "tentative_weak_promotions": 6,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 6,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 22
+            },
+            "original_native_counts": {
+              "frames": 806,
+              "births": 22,
+              "confirmed_observations": 4231,
+              "accepted_high": 1102,
+              "accepted_weak": 3129,
+              "predictions": 4786,
+              "nonpositive_predictions": 0,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 0,
+              "candidate_rows": 20,
+              "applied_rows": 20,
+              "applied_axes": 22,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 20,
+              "retained_tentative": 0,
+              "shadow_operations": 9017,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 20,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 20,
+              "unconfirmed": 0,
+              "any": 20
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 20,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 20,
+              "unconfirmed": 0,
+              "any": 20
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "040b7591266a4f7e99b1412bce574056719748d0874e689314ccd65a44d5b30c"
+        }
+      }
+    },
+    {
+      "name": "MOT17-07-DPM",
+      "phase": "discovery",
+      "frames": 500,
+      "status": "completed",
+      "arms": {
+        "reference": {
+          "summary": {
+            "counts": {
+              "frames": 500,
+              "births": 28,
+              "tentative_prediction_rows": 28,
+              "tentative_active_pre": 28,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 28,
+              "tentative_after_predict_age_one": 28,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 13,
+              "tentative_weak_promotions": 15,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 15,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 28
+            },
+            "original_native_counts": {
+              "frames": 500,
+              "births": 28,
+              "confirmed_observations": 3696,
+              "accepted_high": 2133,
+              "accepted_weak": 1563,
+              "predictions": 4446,
+              "nonpositive_predictions": 342,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 325,
+              "candidate_rows": 17,
+              "applied_rows": 0,
+              "applied_axes": 0,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "shadow_operations": 8142,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "b287e012e41866315c7f27506c23bc8b3040ca19b3c046d0c40e50481fd73d91"
+        },
+        "projection": {
+          "summary": {
+            "counts": {
+              "frames": 500,
+              "births": 28,
+              "tentative_prediction_rows": 28,
+              "tentative_active_pre": 28,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 28,
+              "tentative_after_predict_age_one": 28,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 13,
+              "tentative_weak_promotions": 15,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 15,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 28
+            },
+            "original_native_counts": {
+              "frames": 500,
+              "births": 28,
+              "confirmed_observations": 3696,
+              "accepted_high": 2133,
+              "accepted_weak": 1563,
+              "predictions": 4446,
+              "nonpositive_predictions": 0,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 0,
+              "candidate_rows": 25,
+              "applied_rows": 25,
+              "applied_axes": 26,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 25,
+              "retained_tentative": 0,
+              "shadow_operations": 8142,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 25,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 25,
+              "unconfirmed": 0,
+              "any": 25
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 25,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 25,
+              "unconfirmed": 0,
+              "any": 25
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "b287e012e41866315c7f27506c23bc8b3040ca19b3c046d0c40e50481fd73d91"
+        }
+      }
+    },
+    {
+      "name": "MOT17-08-DPM",
+      "phase": "discovery",
+      "frames": 625,
+      "status": "completed",
+      "arms": {
+        "reference": {
+          "summary": {
+            "counts": {
+              "frames": 625,
+              "births": 59,
+              "tentative_prediction_rows": 59,
+              "tentative_active_pre": 59,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 59,
+              "tentative_after_predict_age_one": 59,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 42,
+              "tentative_weak_promotions": 17,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 17,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 59
+            },
+            "original_native_counts": {
+              "frames": 625,
+              "births": 59,
+              "confirmed_observations": 6109,
+              "accepted_high": 3965,
+              "accepted_weak": 2144,
+              "predictions": 8066,
+              "nonpositive_predictions": 966,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 923,
+              "candidate_rows": 43,
+              "applied_rows": 0,
+              "applied_axes": 0,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "shadow_operations": 14175,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "0c4d51584bf15cb2dd9ea5d3994604fbbe75bcf15f5327d235ad919bb206f657"
+        },
+        "projection": {
+          "summary": {
+            "counts": {
+              "frames": 625,
+              "births": 59,
+              "tentative_prediction_rows": 59,
+              "tentative_active_pre": 59,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 59,
+              "tentative_after_predict_age_one": 59,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 42,
+              "tentative_weak_promotions": 17,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 17,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 59
+            },
+            "original_native_counts": {
+              "frames": 625,
+              "births": 59,
+              "confirmed_observations": 6109,
+              "accepted_high": 3965,
+              "accepted_weak": 2144,
+              "predictions": 8066,
+              "nonpositive_predictions": 0,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 0,
+              "candidate_rows": 63,
+              "applied_rows": 63,
+              "applied_axes": 65,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 63,
+              "retained_tentative": 0,
+              "shadow_operations": 14175,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 63,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 63,
+              "unconfirmed": 0,
+              "any": 63
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 61,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 61,
+              "unconfirmed": 0,
+              "any": 61
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "0c4d51584bf15cb2dd9ea5d3994604fbbe75bcf15f5327d235ad919bb206f657"
+        }
+      }
+    },
+    {
+      "name": "MOT17-12-DPM",
+      "phase": "discovery",
+      "frames": 900,
+      "status": "completed",
+      "arms": {
+        "reference": {
+          "summary": {
+            "counts": {
+              "frames": 900,
+              "births": 48,
+              "tentative_prediction_rows": 48,
+              "tentative_active_pre": 48,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 48,
+              "tentative_after_predict_age_one": 48,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 36,
+              "tentative_weak_promotions": 12,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 12,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 48
+            },
+            "original_native_counts": {
+              "frames": 900,
+              "births": 48,
+              "confirmed_observations": 4615,
+              "accepted_high": 3869,
+              "accepted_weak": 746,
+              "predictions": 6098,
+              "nonpositive_predictions": 1008,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 969,
+              "candidate_rows": 39,
+              "applied_rows": 0,
+              "applied_axes": 0,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "shadow_operations": 10713,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "5d2e903ba5dcd43cbaa4839f47698ca283c6ff8443fcd6567c6466b3087d0b0e"
+        },
+        "projection": {
+          "summary": {
+            "counts": {
+              "frames": 900,
+              "births": 48,
+              "tentative_prediction_rows": 48,
+              "tentative_active_pre": 48,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 48,
+              "tentative_after_predict_age_one": 48,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 36,
+              "tentative_weak_promotions": 12,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 12,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 48
+            },
+            "original_native_counts": {
+              "frames": 900,
+              "births": 48,
+              "confirmed_observations": 4615,
+              "accepted_high": 3869,
+              "accepted_weak": 746,
+              "predictions": 6098,
+              "nonpositive_predictions": 0,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 0,
+              "candidate_rows": 62,
+              "applied_rows": 62,
+              "applied_axes": 65,
+              "active_confirmed": 3,
+              "active_tentative": 0,
+              "retained_confirmed": 59,
+              "retained_tentative": 0,
+              "shadow_operations": 10713,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 3,
+              "active_tentative": 0,
+              "retained_confirmed": 59,
+              "retained_tentative": 0,
+              "active": 3,
+              "retained": 59,
+              "unconfirmed": 0,
+              "any": 62
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 3,
+              "active_tentative": 0,
+              "retained_confirmed": 58,
+              "retained_tentative": 0,
+              "active": 3,
+              "retained": 58,
+              "unconfirmed": 0,
+              "any": 61
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "5d2e903ba5dcd43cbaa4839f47698ca283c6ff8443fcd6567c6466b3087d0b0e"
+        }
+      }
+    },
+    {
+      "name": "MOT17-14-DPM",
+      "phase": "discovery",
+      "frames": 750,
+      "status": "completed",
+      "arms": {
+        "reference": {
+          "summary": {
+            "counts": {
+              "frames": 750,
+              "births": 60,
+              "tentative_prediction_rows": 60,
+              "tentative_active_pre": 60,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 60,
+              "tentative_after_predict_age_one": 60,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 26,
+              "tentative_weak_promotions": 33,
+              "tentative_unmatched_removed": 1,
+              "tentative_weak_stage_rows": 34,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 60
+            },
+            "original_native_counts": {
+              "frames": 750,
+              "births": 60,
+              "confirmed_observations": 2480,
+              "accepted_high": 1300,
+              "accepted_weak": 1180,
+              "predictions": 4140,
+              "nonpositive_predictions": 929,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 881,
+              "candidate_rows": 48,
+              "applied_rows": 0,
+              "applied_axes": 0,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "shadow_operations": 6620,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "6e34d4f36a76ca0d90d2c822d6977d45ebba9c0a117dbc65544171b011f3276f"
+        },
+        "projection": {
+          "summary": {
+            "counts": {
+              "frames": 750,
+              "births": 60,
+              "tentative_prediction_rows": 60,
+              "tentative_active_pre": 60,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 60,
+              "tentative_after_predict_age_one": 60,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 26,
+              "tentative_weak_promotions": 33,
+              "tentative_unmatched_removed": 1,
+              "tentative_weak_stage_rows": 34,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 60
+            },
+            "original_native_counts": {
+              "frames": 750,
+              "births": 60,
+              "confirmed_observations": 2480,
+              "accepted_high": 1300,
+              "accepted_weak": 1180,
+              "predictions": 4140,
+              "nonpositive_predictions": 0,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 0,
+              "candidate_rows": 62,
+              "applied_rows": 62,
+              "applied_axes": 65,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 62,
+              "retained_tentative": 0,
+              "shadow_operations": 6620,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 62,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 62,
+              "unconfirmed": 0,
+              "any": 62
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 60,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 60,
+              "unconfirmed": 0,
+              "any": 60
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "6e34d4f36a76ca0d90d2c822d6977d45ebba9c0a117dbc65544171b011f3276f"
+        }
+      }
+    },
+    {
+      "name": "MOT20-03",
+      "phase": "discovery",
+      "frames": 2405,
+      "status": "completed",
+      "arms": {
+        "reference": {
+          "summary": {
+            "counts": {
+              "frames": 2405,
+              "births": 31,
+              "tentative_prediction_rows": 31,
+              "tentative_active_pre": 31,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 31,
+              "tentative_after_predict_age_one": 31,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 15,
+              "tentative_weak_promotions": 16,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 16,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 31
+            },
+            "original_native_counts": {
+              "frames": 2405,
+              "births": 31,
+              "confirmed_observations": 10862,
+              "accepted_high": 927,
+              "accepted_weak": 9935,
+              "predictions": 13103,
+              "nonpositive_predictions": 5,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 3,
+              "candidate_rows": 2,
+              "applied_rows": 0,
+              "applied_axes": 0,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "shadow_operations": 23965,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "3f8998b295fbcc7aee85ba4962d3c80eeaebf8940dd932f9f85f28da6fa70f72"
+        },
+        "projection": {
+          "summary": {
+            "counts": {
+              "frames": 2405,
+              "births": 31,
+              "tentative_prediction_rows": 31,
+              "tentative_active_pre": 31,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 31,
+              "tentative_after_predict_age_one": 31,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 15,
+              "tentative_weak_promotions": 16,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 16,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 31
+            },
+            "original_native_counts": {
+              "frames": 2405,
+              "births": 31,
+              "confirmed_observations": 10862,
+              "accepted_high": 927,
+              "accepted_weak": 9935,
+              "predictions": 13103,
+              "nonpositive_predictions": 0,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 0,
+              "candidate_rows": 2,
+              "applied_rows": 2,
+              "applied_axes": 2,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 2,
+              "retained_tentative": 0,
+              "shadow_operations": 23965,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 2,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 2,
+              "unconfirmed": 0,
+              "any": 2
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 2,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 2,
+              "unconfirmed": 0,
+              "any": 2
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "3f8998b295fbcc7aee85ba4962d3c80eeaebf8940dd932f9f85f28da6fa70f72"
+        }
+      }
+    },
+    {
+      "name": "MOT20-05",
+      "phase": "discovery",
+      "frames": 3315,
+      "status": "completed",
+      "arms": {
+        "reference": {
+          "summary": {
+            "counts": {
+              "frames": 3315,
+              "births": 14,
+              "tentative_prediction_rows": 14,
+              "tentative_active_pre": 14,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 14,
+              "tentative_after_predict_age_one": 14,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 4,
+              "tentative_weak_promotions": 10,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 10,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 14
+            },
+            "original_native_counts": {
+              "frames": 3315,
+              "births": 14,
+              "confirmed_observations": 3202,
+              "accepted_high": 143,
+              "accepted_weak": 3059,
+              "predictions": 3856,
+              "nonpositive_predictions": 98,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 91,
+              "candidate_rows": 7,
+              "applied_rows": 0,
+              "applied_axes": 0,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "shadow_operations": 7058,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "8e400bccdc5ce03be24d9be2d095515b2ad94441086c825525ce639cd6651b90"
+        },
+        "projection": {
+          "summary": {
+            "counts": {
+              "frames": 3315,
+              "births": 14,
+              "tentative_prediction_rows": 14,
+              "tentative_active_pre": 14,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 14,
+              "tentative_after_predict_age_one": 14,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 4,
+              "tentative_weak_promotions": 10,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 10,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 14
+            },
+            "original_native_counts": {
+              "frames": 3315,
+              "births": 14,
+              "confirmed_observations": 3202,
+              "accepted_high": 143,
+              "accepted_weak": 3059,
+              "predictions": 3856,
+              "nonpositive_predictions": 0,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 0,
+              "candidate_rows": 9,
+              "applied_rows": 9,
+              "applied_axes": 9,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 9,
+              "retained_tentative": 0,
+              "shadow_operations": 7058,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 9,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 9,
+              "unconfirmed": 0,
+              "any": 9
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 9,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 9,
+              "unconfirmed": 0,
+              "any": 9
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "8e400bccdc5ce03be24d9be2d095515b2ad94441086c825525ce639cd6651b90"
+        }
+      }
+    },
+    {
+      "name": "KITTI-0000",
+      "phase": "discovery",
+      "frames": 154,
+      "status": "unmeasured_no_observed_history",
+      "original_status": "failed",
+      "original_reason": "native_reference_failed",
+      "roles": null,
+      "original_failure_changed": false
+    },
+    {
+      "name": "KITTI-0001",
+      "phase": "discovery",
+      "frames": 447,
+      "status": "unmeasured_no_observed_history",
+      "original_status": "failed",
+      "original_reason": "native_reference_failed",
+      "roles": null,
+      "original_failure_changed": false
+    },
+    {
+      "name": "KITTI-0002",
+      "phase": "discovery",
+      "frames": 233,
+      "status": "unmeasured_no_observed_history",
+      "original_status": "failed",
+      "original_reason": "native_reference_failed",
+      "roles": null,
+      "original_failure_changed": false
+    },
+    {
+      "name": "KITTI-0003",
+      "phase": "discovery",
+      "frames": 144,
+      "status": "unmeasured_no_observed_history",
+      "original_status": "failed",
+      "original_reason": "native_reference_failed",
+      "roles": null,
+      "original_failure_changed": false
+    },
+    {
+      "name": "KITTI-0004",
+      "phase": "discovery",
+      "frames": 314,
+      "status": "completed",
+      "arms": {
+        "reference": {
+          "summary": {
+            "counts": {
+              "frames": 314,
+              "births": 10,
+              "tentative_prediction_rows": 10,
+              "tentative_active_pre": 10,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 10,
+              "tentative_after_predict_age_one": 10,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 5,
+              "tentative_weak_promotions": 2,
+              "tentative_unmatched_removed": 3,
+              "tentative_weak_stage_rows": 5,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 10
+            },
+            "original_native_counts": {
+              "frames": 314,
+              "births": 10,
+              "confirmed_observations": 22,
+              "accepted_high": 17,
+              "accepted_weak": 5,
+              "predictions": 102,
+              "nonpositive_predictions": 18,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 14,
+              "candidate_rows": 4,
+              "applied_rows": 0,
+              "applied_axes": 0,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "shadow_operations": 124,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "ac1bf0d3c511998a2778cf41b6be6b708965de082e6bd2b70297a4b34eba30fb"
+        },
+        "projection": {
+          "summary": {
+            "counts": {
+              "frames": 314,
+              "births": 10,
+              "tentative_prediction_rows": 10,
+              "tentative_active_pre": 10,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 10,
+              "tentative_after_predict_age_one": 10,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 5,
+              "tentative_weak_promotions": 2,
+              "tentative_unmatched_removed": 3,
+              "tentative_weak_stage_rows": 5,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 10
+            },
+            "original_native_counts": {
+              "frames": 314,
+              "births": 10,
+              "confirmed_observations": 22,
+              "accepted_high": 17,
+              "accepted_weak": 5,
+              "predictions": 102,
+              "nonpositive_predictions": 0,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 0,
+              "candidate_rows": 4,
+              "applied_rows": 4,
+              "applied_axes": 4,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 4,
+              "retained_tentative": 0,
+              "shadow_operations": 124,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 4,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 4,
+              "unconfirmed": 0,
+              "any": 4
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 3,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 3,
+              "unconfirmed": 0,
+              "any": 3
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "ac1bf0d3c511998a2778cf41b6be6b708965de082e6bd2b70297a4b34eba30fb"
+        }
+      }
+    },
+    {
+      "name": "KITTI-0005",
+      "phase": "discovery",
+      "frames": 297,
+      "status": "completed",
+      "arms": {
+        "reference": {
+          "summary": {
+            "counts": {
+              "frames": 297,
+              "births": 0,
+              "tentative_prediction_rows": 0,
+              "tentative_active_pre": 0,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 0,
+              "tentative_after_predict_age_one": 0,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 0,
+              "tentative_weak_promotions": 0,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 0,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 0
+            },
+            "original_native_counts": {
+              "frames": 297,
+              "births": 0,
+              "confirmed_observations": 0,
+              "accepted_high": 0,
+              "accepted_weak": 0,
+              "predictions": 0,
+              "nonpositive_predictions": 0,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 0,
+              "candidate_rows": 0,
+              "applied_rows": 0,
+              "applied_axes": 0,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "shadow_operations": 0,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "tentative_histories_observed": false,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "projection": {
+          "summary": {
+            "counts": {
+              "frames": 297,
+              "births": 0,
+              "tentative_prediction_rows": 0,
+              "tentative_active_pre": 0,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 0,
+              "tentative_after_predict_age_one": 0,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 0,
+              "tentative_weak_promotions": 0,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 0,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 0
+            },
+            "original_native_counts": {
+              "frames": 297,
+              "births": 0,
+              "confirmed_observations": 0,
+              "accepted_high": 0,
+              "accepted_weak": 0,
+              "predictions": 0,
+              "nonpositive_predictions": 0,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 0,
+              "candidate_rows": 0,
+              "applied_rows": 0,
+              "applied_axes": 0,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "shadow_operations": 0,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "tentative_histories_observed": false,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "KITTI-0006",
+      "phase": "discovery",
+      "frames": 270,
+      "status": "completed",
+      "arms": {
+        "reference": {
+          "summary": {
+            "counts": {
+              "frames": 270,
+              "births": 2,
+              "tentative_prediction_rows": 2,
+              "tentative_active_pre": 2,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 2,
+              "tentative_after_predict_age_one": 2,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 0,
+              "tentative_weak_promotions": 2,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 2,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 2
+            },
+            "original_native_counts": {
+              "frames": 270,
+              "births": 2,
+              "confirmed_observations": 5,
+              "accepted_high": 0,
+              "accepted_weak": 5,
+              "predictions": 29,
+              "nonpositive_predictions": 9,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 8,
+              "candidate_rows": 1,
+              "applied_rows": 0,
+              "applied_axes": 0,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "shadow_operations": 34,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "8812b0f685438b44c3d5708dd6d13e4c7447f8ef92c4fde2a826ce32a90f0a51"
+        },
+        "projection": {
+          "summary": {
+            "counts": {
+              "frames": 270,
+              "births": 2,
+              "tentative_prediction_rows": 2,
+              "tentative_active_pre": 2,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 2,
+              "tentative_after_predict_age_one": 2,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 0,
+              "tentative_weak_promotions": 2,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 2,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 2
+            },
+            "original_native_counts": {
+              "frames": 270,
+              "births": 2,
+              "confirmed_observations": 5,
+              "accepted_high": 0,
+              "accepted_weak": 5,
+              "predictions": 29,
+              "nonpositive_predictions": 0,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 0,
+              "candidate_rows": 1,
+              "applied_rows": 1,
+              "applied_axes": 1,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 1,
+              "retained_tentative": 0,
+              "shadow_operations": 34,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 1,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 1,
+              "unconfirmed": 0,
+              "any": 1
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 1,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 1,
+              "unconfirmed": 0,
+              "any": 1
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "8812b0f685438b44c3d5708dd6d13e4c7447f8ef92c4fde2a826ce32a90f0a51"
+        }
+      }
+    },
+    {
+      "name": "KITTI-0007",
+      "phase": "discovery",
+      "frames": 800,
+      "status": "completed",
+      "arms": {
+        "reference": {
+          "summary": {
+            "counts": {
+              "frames": 800,
+              "births": 2,
+              "tentative_prediction_rows": 2,
+              "tentative_active_pre": 2,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 2,
+              "tentative_after_predict_age_one": 2,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 1,
+              "tentative_weak_promotions": 1,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 1,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 2
+            },
+            "original_native_counts": {
+              "frames": 800,
+              "births": 2,
+              "confirmed_observations": 26,
+              "accepted_high": 8,
+              "accepted_weak": 18,
+              "predictions": 48,
+              "nonpositive_predictions": 0,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 0,
+              "candidate_rows": 0,
+              "applied_rows": 0,
+              "applied_axes": 0,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "shadow_operations": 74,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "7977c74e05e91d53ebe0711edfdb5c18f1554cbc78e1fe75f97bc0bd877bed1e"
+        },
+        "projection": {
+          "summary": {
+            "counts": {
+              "frames": 800,
+              "births": 2,
+              "tentative_prediction_rows": 2,
+              "tentative_active_pre": 2,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 2,
+              "tentative_after_predict_age_one": 2,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 1,
+              "tentative_weak_promotions": 1,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 1,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 2
+            },
+            "original_native_counts": {
+              "frames": 800,
+              "births": 2,
+              "confirmed_observations": 26,
+              "accepted_high": 8,
+              "accepted_weak": 18,
+              "predictions": 48,
+              "nonpositive_predictions": 0,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 0,
+              "candidate_rows": 0,
+              "applied_rows": 0,
+              "applied_axes": 0,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "shadow_operations": 74,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "7977c74e05e91d53ebe0711edfdb5c18f1554cbc78e1fe75f97bc0bd877bed1e"
+        }
+      }
+    },
+    {
+      "name": "KITTI-0008",
+      "phase": "confirmation",
+      "frames": 390,
+      "status": "completed",
+      "arms": {
+        "reference": {
+          "summary": {
+            "counts": {
+              "frames": 390,
+              "births": 26,
+              "tentative_prediction_rows": 26,
+              "tentative_active_pre": 26,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 26,
+              "tentative_after_predict_age_one": 26,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 2,
+              "tentative_weak_promotions": 6,
+              "tentative_unmatched_removed": 18,
+              "tentative_weak_stage_rows": 24,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 26
+            },
+            "original_native_counts": {
+              "frames": 390,
+              "births": 26,
+              "confirmed_observations": 44,
+              "accepted_high": 4,
+              "accepted_weak": 40,
+              "predictions": 190,
+              "nonpositive_predictions": 8,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 7,
+              "candidate_rows": 1,
+              "applied_rows": 0,
+              "applied_axes": 0,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "shadow_operations": 234,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "9ce16af5b6c24bd635d157b20312969ed629adaed8dddb0d6664329ac68bfec2"
+        },
+        "projection": {
+          "summary": {
+            "counts": {
+              "frames": 390,
+              "births": 26,
+              "tentative_prediction_rows": 26,
+              "tentative_active_pre": 26,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 26,
+              "tentative_after_predict_age_one": 26,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 2,
+              "tentative_weak_promotions": 6,
+              "tentative_unmatched_removed": 18,
+              "tentative_weak_stage_rows": 24,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 26
+            },
+            "original_native_counts": {
+              "frames": 390,
+              "births": 26,
+              "confirmed_observations": 44,
+              "accepted_high": 4,
+              "accepted_weak": 40,
+              "predictions": 190,
+              "nonpositive_predictions": 0,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 0,
+              "candidate_rows": 2,
+              "applied_rows": 2,
+              "applied_axes": 2,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 2,
+              "retained_tentative": 0,
+              "shadow_operations": 234,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 2,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 2,
+              "unconfirmed": 0,
+              "any": 2
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 2,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 2,
+              "unconfirmed": 0,
+              "any": 2
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "9ce16af5b6c24bd635d157b20312969ed629adaed8dddb0d6664329ac68bfec2"
+        }
+      }
+    },
+    {
+      "name": "KITTI-0009",
+      "phase": "confirmation",
+      "frames": 803,
+      "status": "completed",
+      "arms": {
+        "reference": {
+          "summary": {
+            "counts": {
+              "frames": 803,
+              "births": 1,
+              "tentative_prediction_rows": 1,
+              "tentative_active_pre": 1,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 1,
+              "tentative_after_predict_age_one": 1,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 1,
+              "tentative_weak_promotions": 0,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 0,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 1
+            },
+            "original_native_counts": {
+              "frames": 803,
+              "births": 1,
+              "confirmed_observations": 8,
+              "accepted_high": 8,
+              "accepted_weak": 0,
+              "predictions": 19,
+              "nonpositive_predictions": 3,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 2,
+              "candidate_rows": 1,
+              "applied_rows": 0,
+              "applied_axes": 0,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "shadow_operations": 27,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 0,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 0,
+              "unconfirmed": 0,
+              "any": 0
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "9311076fb8246ac47982fb3ca6395044be0c942c19ef10bc0908913cf1441998"
+        },
+        "projection": {
+          "summary": {
+            "counts": {
+              "frames": 803,
+              "births": 1,
+              "tentative_prediction_rows": 1,
+              "tentative_active_pre": 1,
+              "tentative_retained_pre": 0,
+              "tentative_zero_velocity_pre": 1,
+              "tentative_after_predict_age_one": 1,
+              "tentative_candidate_rows": 0,
+              "tentative_applied_rows": 0,
+              "tentative_high_promotions": 1,
+              "tentative_weak_promotions": 0,
+              "tentative_unmatched_removed": 0,
+              "tentative_weak_stage_rows": 0,
+              "source_end_tentative_censored": 0,
+              "end_frame_tentative_rows": 1
+            },
+            "original_native_counts": {
+              "frames": 803,
+              "births": 1,
+              "confirmed_observations": 8,
+              "accepted_high": 8,
+              "accepted_weak": 0,
+              "predictions": 19,
+              "nonpositive_predictions": 0,
+              "nonpositive_accepted_posteriors": 0,
+              "nonpositive_pre_predict": 0,
+              "candidate_rows": 1,
+              "applied_rows": 1,
+              "applied_axes": 1,
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 1,
+              "retained_tentative": 0,
+              "shadow_operations": 27,
+              "numerical_failures": 0
+            },
+            "original_projection_rows": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 1,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 1,
+              "unconfirmed": 0,
+              "any": 1
+            },
+            "original_exposed_frames": {
+              "active_confirmed": 0,
+              "active_tentative": 0,
+              "retained_confirmed": 1,
+              "retained_tentative": 0,
+              "active": 0,
+              "retained": 1,
+              "unconfirmed": 0,
+              "any": 1
+            },
+            "tentative_histories_observed": true,
+            "induction_checks_pass": true,
+            "empirical_projection_safety_accepted": false
+          },
+          "repeat_equal": true,
+          "raw_audit_sha256": "9311076fb8246ac47982fb3ca6395044be0c942c19ef10bc0908913cf1441998"
+        }
+      }
+    }
+  ]
+}

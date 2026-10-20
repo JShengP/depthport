@@ -182,6 +182,8 @@ Completed studies cover [2,700 frames / 27 runs](docs/en/tracking-expanded-accep
 
 [GT-free geometry exposure search](docs/en/tracking-geometry-exposure.md):all24 seen sources /20,643 original frames retained;20 complete exact comparisons, four early Session-wrapper archives fail the frozen whole-file byte check despite equal full frame payloads.584 actual projections expose active-confirmed3/retained-confirmed581/tentative0; fixed-order candidates are MOT17-12-DPM/09-DPM. No GT scoring or tuning, weak stage/defaults unchanged. Unseen KITTI0008/0009 run only after the public discovery seal:2/1 retained-confirmed projections, invalid predictions8→0/3→0, unchanged complete outputs and equal repeats. Active/tentative confirmation exposure0; all formal replication flags remain false because the four discovery failures are retained. This exposure study does not establish identity benefit or true harm.
 
+[Read-only carrier/role follow-up](docs/en/tracking-carrier-roles.md):four Session carriers reconstruct exactly;681/678 tentative rows are active zero-velocity seeds, with high/weak promotion or same-frame pruning. Retained-tentative projection is excluded under the pinned lifecycle; four missing histories and original failures remain unmeasured/failed, with no tuning or default promotion.
+
 These results apply to the named public sequences, fixed caches and recorded versions, not newer detector profiles or other scenes. Only aggregates are distributed for these studies, without raw frames, GT, per-frame tracks or user bookmarks.
 
 </details>

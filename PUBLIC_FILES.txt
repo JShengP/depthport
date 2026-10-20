@@ -449,3 +449,6 @@ tests/test_tracking_carrier_roles.py
 docs/validation/v0.3-carrier-role-audit-protocol.json
 docs/en/tracking-carrier-roles.md
 docs/zh-TW/tracking-carrier-roles.md
+
+# Complete read-only carrier/role aggregate; raw cases remain local
+docs/validation/v0.3-carrier-role-audit.json
