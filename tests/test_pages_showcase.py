@@ -215,7 +215,7 @@ def test_results_index_metrics_keep_source_cohorts_and_unverified_gates(tmp_path
 
 def test_tracking_comparison_charts_keep_cohort_values_order_and_scales(tmp_path):
     import math
-    from tools.build_results import comparison_series, count_axis_maximum, render_comparison
+    from tools.build_results import comparison_views, count_axis_maximum, render_comparison
     config = json.loads((ROOT / 'website/results-index.json').read_text())
     records = {row['id']: row for row in config['records']}
     approved = set((ROOT / 'PUBLIC_FILES.txt').read_text().splitlines())
@@ -226,7 +226,7 @@ def test_tracking_comparison_charts_keep_cohort_values_order_and_scales(tmp_path
     class Charts(HTMLParser):
         def __init__(self):
             super().__init__()
-            self.chart = self.metric = self.member = None
+            self.chart = self.view = self.metric = self.member = None
             self.figures = {}
             self.rows = []
 
@@ -234,32 +234,36 @@ def test_tracking_comparison_charts_keep_cohort_values_order_and_scales(tmp_path
             a = dict(attrs)
             if 'data-comparison' in a:
                 self.chart = a['data-comparison']
+            if 'data-comparison-view' in a:
+                self.view = a['data-comparison-view']
             if 'data-metric' in a:
                 self.metric = a['data-metric']
-                self.figures[(self.chart, self.metric)] = float(a['data-axis-max'])
+                self.figures[(self.chart, self.view, self.metric)] = float(a['data-axis-max'])
             if 'data-comparison-member' in a:
                 self.member = a['data-comparison-member']
-                self.rows.append({'chart': self.chart, 'metric': self.metric,
+                self.rows.append({'chart': self.chart, 'metric': self.metric, 'view':self.view,
                                   'member': self.member, 'value': float(a['data-value'])})
             if tag == 'i':
                 self.rows[-1]['width'] = float(a['style'].split(':')[1].rstrip('%'))
 
     parser = Charts()
     parser.feed(html)
-    assert len(parser.figures) == 8 and len(parser.rows) == 20
+    assert len(parser.figures) == 28 and len(parser.rows) == 72
     assert all(r['member'] != 'worker' for r in parser.rows)
     for spec in config['comparisons']:
-        source, series = comparison_series(ROOT, spec, records, approved)
+        source, views = comparison_views(ROOT, spec, records, approved)
         for metric in ('HOTA', 'IDSW', 'CLR_FN', 'CLR_FP'):
-            actual = [r for r in parser.rows if r['chart'] == spec['id'] and r['metric'] == metric]
-            assert [r['member'] for r in actual] == [m['record'] for m in spec['members']]
-            values = [v[metric] * 100 if metric == 'HOTA' else v[metric] for _, v in series]
-            upper = 100 if metric == 'HOTA' else count_axis_maximum(values)
-            assert parser.figures[(spec['id'], metric)] == upper
-            for row, value in zip(actual, values):
-                assert row['value'] == value
-                assert math.isclose(row['width'], value / upper * 100, abs_tol=1e-8)
-            assert 'starts at zero' in html and '篩選不重算' in html
+            upper = 100 if metric == 'HOTA' else count_axis_maximum([v[metric] for view in views for _, v in view['series']])
+            for view in views:
+                actual = [r for r in parser.rows if r['chart'] == spec['id'] and r['view'] == view['id'] and r['metric'] == metric]
+                assert [r['member'] for r in actual] == [m['record'] for m in spec['members']]
+                values = [v[metric] * 100 if metric == 'HOTA' else v[metric] for _, v in view['series']]
+                assert parser.figures[(spec['id'], view['id'], metric)] == upper
+                for row, value in zip(actual, values):
+                    assert row['value'] == value
+                    assert math.isclose(row['width'], value / upper * 100, abs_tol=1e-8)
+                assert 'starts at zero' in html and '篩選不重算' in html
+        assert [v['id'] for v in views] == ['all'] + [s['name'] for s in source['sequences']]
         for member in spec['members']:
             assert 'href="#result-' + member['record'] + '"' in html
             assert 'id="result-' + member['record'] + '"' in html
@@ -293,15 +297,18 @@ def test_tracking_comparison_does_not_turn_missing_into_zero(tmp_path):
     for values in source['combined']['all_sequences'].values():
         for key in ('HOTA', 'IDSW', 'CLR_FN', 'CLR_FP'):
             values[key] = 0
+    for sequence in source['sequences']:
+        for member in spec['members']:
+            sequence['methods'][member['arm']]['metrics'].update(HOTA=0, IDSW=0, CLR_FN=0, CLR_FP=0)
     path.write_text(json.dumps(source))
     approved = {spec['source']}
     _, series = comparison_series(tmp_path, spec, records, approved)
     assert all(value == 0 for _, values in series for value in values.values())
     assert count_axis_maximum([0, 0, 0]) == 1
     zero_html = render_comparison(tmp_path, spec, records, approved)
-    assert zero_html.count('width:0.00000000%') == 12
-    assert zero_html.count('<strong>0.00%</strong>') == 3
-    assert zero_html.count('data-axis-max="1"') == 3
+    assert zero_html.count('width:0.00000000%') == 48
+    assert zero_html.count('<strong>0.00%</strong>') == 12
+    assert zero_html.count('data-axis-max="1"') == 12
     for values in source['combined']['all_sequences'].values():
         values.update(IDSW=3, CLR_FN=5, CLR_FP=7)
     path.write_text(json.dumps(source))
@@ -312,3 +319,24 @@ def test_tracking_comparison_does_not_turn_missing_into_zero(tmp_path):
     path.write_text(json.dumps(source))
     with pytest.raises(KeyError):
         comparison_series(tmp_path, spec, records, approved)
+
+
+@pytest.mark.parametrize('fault', ['missing_metric', 'wrong_configuration'])
+def test_sequence_views_reject_missing_and_mismatched_profiles(tmp_path, fault):
+    from tools.build_results import comparison_views
+    config = json.loads((ROOT / 'website/results-index.json').read_text())
+    records = {row['id']: row for row in config['records']}
+    spec = config['comparisons'][1]
+    path = tmp_path / spec['source']
+    path.parent.mkdir(parents=True)
+    source = json.loads((ROOT / spec['source']).read_text())
+    method = source['sequences'][0]['methods']['bytetrack__default']
+    if fault == 'missing_metric':
+        method['metrics'].pop('HOTA')
+        error = KeyError
+    else:
+        method['configuration']['parameters']['track_activation_threshold'] = 0.3
+        error = ValueError
+    path.write_text(json.dumps(source))
+    with pytest.raises(error):
+        comparison_views(tmp_path, spec, records, {spec['source']})

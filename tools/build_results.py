@@ -56,15 +56,47 @@ def comparison_series(root, spec, records, approved):
             if len(matches) != 1:
                 raise ValueError('Comparison metric is missing or from a different arm')
             value = pointer(document, expected)
-            if isinstance(value, str) or not math.isfinite(value) or value < 0:
-                raise ValueError('Invalid comparison value')
-            if key == 'HOTA' and value > 1:
-                raise ValueError('HOTA must be a fraction in [0,1]')
-            if key != 'HOTA' and int(value) != value:
-                raise ValueError('Error counts must be integers')
+            validate_chart_value(value, key)
             values[key] = value
         series.append((row, values))
     return document, series
+
+
+def validate_chart_value(value, key):
+    if isinstance(value, (str, bool)) or not math.isfinite(value) or value < 0:
+        raise ValueError('Invalid comparison value')
+    if key == 'HOTA' and value > 1:
+        raise ValueError('HOTA must be a fraction in [0,1]')
+    if key != 'HOTA' and int(value) != value:
+        raise ValueError('Error counts must be integers')
+
+
+def comparison_views(root, spec, records, approved):
+    document, aggregate = comparison_series(root, spec, records, approved)
+    views = [{'id':'all', 'label':{'en':'All sequences (combined)', 'zh':'全組序列（原彙總）'},
+              'series':aggregate, 'sequence':None}]
+    seen = {'all'}
+    for index, sequence in enumerate(document['sequences']):
+        if not sequence['name'] or sequence['name'] in seen:
+            raise ValueError('Sequence names must be unique within a cohort')
+        seen.add(sequence['name'])
+        series = []
+        for member in spec['members']:
+            values = {}
+            # Only this cohort's exact recorded arm is eligible, never another
+            # profile, combined score or a fallback zero for a missing metric.
+            for key in CHART_METRICS:
+                value = pointer(document, f'/sequences/{index}/methods/{member["arm"]}/metrics/{key}')
+                validate_chart_value(value, key)
+                values[key] = value
+            expected = document['evaluation'].get('configurations', {}).get(member['arm'])
+            actual = sequence['methods'][member['arm']].get('configuration')
+            if expected is not None and actual != expected:
+                raise ValueError('Sequence configuration differs from the recorded arm')
+            series.append((records[member['record']], values))
+        views.append({'id':sequence['name'], 'label':{'en':sequence['name'], 'zh':sequence['name']},
+                      'series':series, 'sequence':sequence})
+    return document, views
 
 
 def count_axis_maximum(values):
@@ -76,7 +108,9 @@ def count_axis_maximum(values):
 
 
 def render_comparison(root, spec, records, approved):
-    document, series = comparison_series(root, spec, records, approved)
+    document, views = comparison_views(root, spec, records, approved)
+    series = views[0]["series"]
+    axes = {key:100 if key == "HOTA" else count_axis_maximum([values[key] for view in views for _, values in view["series"]]) for key in CHART_METRICS}
     identity = 'comparison-' + spec['id']
     frames = sum(s['frames'] for s in document['sequences'])
     sequences = ' / '.join(s['name'] for s in document['sequences'])
@@ -84,25 +118,44 @@ def render_comparison(root, spec, records, approved):
     conditions = (f"{detector['model']} {detector['ultralytics']} · {detector['device'].upper()} · imgsz {detector['imgsz']} · "
                   f"confidence {detector['confidence']} · NMS IoU {detector['nms_iou']} · "
                   f"max_det {detector['max_det']} · classes {detector['classes']} · trackers {document['runtime']['trackers']}")
-    figures = []
-    for key in CHART_METRICS:
-        values = [v[key] * 100 if key == 'HOTA' else v[key] for _, v in series]
-        upper = 100 if key == 'HOTA' else count_axis_maximum(values)
-        ticks = [0, 50, 100] if key == 'HOTA' else ([0, upper // 2, upper] if upper % 2 == 0 else [0, upper])
-        title = CHART_LABELS[key]
-        direction = {'en':'Higher is better (%)', 'zh':'越高越好（%）'} if key == 'HOTA' else {'en':'Lower is better (count)', 'zh':'越低越好（次數）'}
-        bars = []
-        for (row, _), value in zip(series, values):
-            label = {'en':'ByteTrack', 'zh':'ByteTrack'} if row['trackers'] == ['bytetrack'] else {'en':'BoT-SORT (no ReID)', 'zh':'BoT-SORT（無 ReID）'} if row['trackers'] == ['botsort'] else {'en':'Baseline IoU', 'zh':'Baseline IoU'}
-            tracker = row['trackers'][0]
-            display = f'{value:.2f}%' if key == 'HOTA' else f'{value:,}'
-            bars.append(f'<li class="comparison-row tracker-{escape(tracker)}" data-comparison-member="{escape(row["id"])}" data-value="{value}">' +
-                        f'<a href="#result-{escape(row["id"])}">' + translated('span', label, ' class="comparison-label"') +
-                        f'<strong>{display}</strong><span class="comparison-track" aria-hidden="true"><i style="width:{value / upper * 100:.8f}%"></i></span></a></li>')
-        axis = ''.join('<span>' + (f'{t}%' if key == 'HOTA' else f'{t:,}') + '</span>' for t in ticks)
-        figures.append(f'<figure class="comparison-metric" data-metric="{key}" data-axis-max="{upper}" aria-labelledby="{identity}-{key}">' +
-                       f'<figcaption id="{identity}-{key}"><strong>{title}</strong>' + translated('span', direction) + '</figcaption>' +
-                       '<div class="comparison-axis" aria-hidden="true">' + axis + '</div><ul>' + ''.join(bars) + '</ul></figure>')
+    panels = []
+    for view in views:
+        series = view['series']
+        view_identity = identity + '-view-' + view['id']
+        figures = []
+        for key in CHART_METRICS:
+            values = [v[key] * 100 if key == 'HOTA' else v[key] for _, v in series]
+            upper = axes[key]
+            ticks = [0, 50, 100] if key == 'HOTA' else ([0, upper // 2, upper] if upper % 2 == 0 else [0, upper])
+            title = CHART_LABELS[key]
+            direction = {'en':'Higher is better (%)', 'zh':'越高越好（%）'} if key == 'HOTA' else {'en':'Lower is better (count)', 'zh':'越低越好（次數）'}
+            bars = []
+            for (row, _), value in zip(series, values):
+                label = {'en':'ByteTrack', 'zh':'ByteTrack'} if row['trackers'] == ['bytetrack'] else {'en':'BoT-SORT (no ReID)', 'zh':'BoT-SORT（無 ReID）'} if row['trackers'] == ['botsort'] else {'en':'Baseline IoU', 'zh':'Baseline IoU'}
+                tracker = row['trackers'][0]
+                display = f'{value:.2f}%' if key == 'HOTA' else f'{value:,}'
+                bars.append(f'<li class="comparison-row tracker-{escape(tracker)}" data-comparison-member="{escape(row["id"])}" data-value="{value}">' +
+                            f'<a href="#result-{escape(row["id"])}">' + translated('span', label, ' class="comparison-label"') +
+                            f'<strong>{display}</strong><span class="comparison-track" aria-hidden="true"><i style="width:{value / upper * 100:.8f}%"></i></span></a></li>')
+            axis = ''.join('<span>' + (f'{t}%' if key == 'HOTA' else f'{t:,}') + '</span>' for t in ticks)
+            figures.append(f'<figure class="comparison-metric" data-metric="{key}" data-axis-max="{upper}" aria-labelledby="{view_identity}-{key}">' +
+                           f'<figcaption id="{view_identity}-{key}"><strong>{title}</strong>' + translated('span', direction) + '</figcaption>' +
+                           '<div class="comparison-axis" aria-hidden="true">' + axis + '</div><ul>' + ''.join(bars) + '</ul></figure>')
+        sequence = view['sequence']
+        if sequence is None:
+            context = {'en':f'All sequences · {sequences} · {frames:,} frames · {document["checked_on"]}',
+                       'zh':f'全組序列 · {sequences} · {frames:,} 格 · {document["checked_on"]}'}
+        else:
+            motion = {'en':'moving camera', 'zh':'移動相機'} if sequence['camera_motion'] else {'en':'fixed camera', 'zh':'固定相機'}
+            width, height = sequence['resolution']
+            context = {lang:f'{sequence["name"]} · {sequence["frames"]:,} '+('frames' if lang=='en' else '格')+
+                       f' · {sequence["fps"]:g} fps · {width} × {height} · {motion[lang]} · {document["checked_on"]}' for lang in ('en','zh')}
+        panels.append(f'<div class="comparison-view" id="{escape(view_identity)}" data-comparison-view="{escape(view["id"])}"'+
+                      (' hidden' if view['id'] != 'all' else '')+'>'+
+                      translated('p', context, ' class="comparison-sequence-context"')+
+                      '<div class="comparison-plots">'+''.join(figures)+'</div></div>')
+    series = views[0]["series"]
+    options = ''.join(translated('option', view['label'], f' value="{escape(view["id"])}"') for view in views)
     report = series[0][0]['report']
     link = (f'<a href="{GITHUB+report["en"]}" data-report-en="{GITHUB+report["en"]}" data-report-zh="{GITHUB+report["zh"]}" '
             'data-en="Full conditions &amp; evidence ↗" data-zh="完整條件與證據 ↗">Full conditions &amp; evidence ↗</a>')
@@ -110,10 +163,13 @@ def render_comparison(root, spec, records, approved):
             translated('h3', spec['title'], f' id="{identity}-title"') +
             translated('p', {'en':f'{sequences} · {frames:,} frames · {document["checked_on"]}', 'zh':f'{sequences} · {frames:,} 格 · {document["checked_on"]}'}, ' class="comparison-conditions"') +
             '<p class="comparison-conditions">' + escape(conditions) + '</p>' + translated('p', spec['note'], ' class="comparison-conditions"') +
+            '<div class="comparison-selector">' + translated('label', {'en':'Sequence', 'zh':'序列範圍'}, f' for="{identity}-sequence"') +
+            f'<select id="{identity}-sequence" data-comparison-sequence aria-controls="{identity}-views" disabled>' + options + '</select></div>' +
+            '<noscript><p>全組圖可直接閱讀；逐序列切換需要 JavaScript。 / The combined chart is available; enable JavaScript to switch sequences.</p></noscript>' +
             '<p class="comparison-visible" role="status" aria-live="polite"></p>' +
-            '<div class="comparison-plots">' + ''.join(figures) + '</div>' +
-            translated('p', {'en':'Each axis starts at zero; HOTA uses 0–100%. Error-count scales are fixed for this full cohort and stay unchanged when filtering. Bar order follows the records, not scores. No cross-cohort ranking.', 'zh':'各軸從零開始，HOTA 固定 0–100%；錯誤計數比例尺以本場景組完整資料固定，篩選不重算。長條依紀錄順序排列，不按分數排序，不跨組排名。'}, ' class="comparison-note"') +
-            translated('p', {'en':'Compressed training clips, no official leaderboard claim. Lower IDSW may accompany more FN/FP. Long-occlusion recovery and general identity stability remain unaccepted.', 'zh':'使用壓縮訓練影片，不作官方排行榜宣稱；較少換 ID 可能伴隨更多漏追／誤報，長遮擋恢復與泛化身分穩定性仍未驗收。'}, ' class="comparison-note"') + link + '</section>')
+            f'<div id="{identity}-views">' + ''.join(panels) + '</div>' +
+            translated('p', {'en':'Each axis starts at zero; HOTA uses 0–100%. The combined and individual sequences share fixed error-count scales for this cohort; switching/filtering never rescales them. Bar order follows the records, not scores. No cross-cohort ranking.', 'zh':'各軸從零開始，HOTA 固定 0–100%；全組與各段共用本場景組的固定錯誤計數比例尺，切換或篩選不重算。長條依紀錄順序排列，不按分數排序，不跨組排名。'}, ' class="comparison-note"') +
+            translated('p', {'en':'Compressed training clips, no official leaderboard claim. Lower IDSW may accompany more FN/FP. Long-occlusion recovery and general identity stability remain unaccepted.', 'zh':'使用壓縮訓練影片，不作官方排行榜宣稱；較少換 ID 可能伴隨更多漏追／誤報，長遮擋恢復與泛化身分穩定性仍未驗收。'}, ' class="comparison-note"') + translated('p', {'en':'Bars link to the tracker’s combined-cohort result card. Individual-sequence values belong to this view and the full source report; the combined score is not recalculated from displayed rounded values.', 'zh':'點選長條會前往追蹤器的全組結果卡片；逐序列數值以本圖與完整來源報告為準，全組分數沿用原彙總，不從顯示值重算。'}, ' class="comparison-note"') + link + '</section>')
 
 
 def render_results(root: Path, approved: set[str]) -> str:
