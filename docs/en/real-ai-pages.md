@@ -39,3 +39,9 @@ Only explicitly reviewed paths in `PUBLIC_FILES.txt` are copied. Native arrays/P
 ## Browser compatibility / 瀏覽器相容性
 
 [Historical in-app record / 原內建紀錄](pages-browser-compatibility.md) · [Headless / 無頭](pages-standalone-browsers.md) · [Native headed / 原生有視窗](pages-headed-browsers.md): exact Linux Chrome155 / Edge155 / Firefox157 pass B01–B07 in each separate mode; B08 remains not_run. Each mode21 pass/3 not_run; unique matrix33 pass/31 not_run, without counting modes twice. Safari, physical phones, other OS/builds and natural unsupported/fallback paths remain open. 原失敗保留，桌面有視窗與尺寸覆寫不代替實體手機／完整應用硬體／精度驗收。
+
+## Version demo roles — 2026-10-22
+
+The earlier pages shared the entire inspector widget, making v0.1 and v0.2 appear equivalent. Current v0.1 now exposes full-cloud navigation/model/colour/size only, loading the original saved cloud packs without the full depth arrays or semantic masks. Current v0.2 retains exact native Float32/depth/XYZ queries,real Detect/Segment masks and object-specific clouds. Same bus source/results, different operations; no new model execution or historical release acceptance. Existing screenshot/hash records preserve their dated captured UI, not a claim that every current control is identical.
+
+Software checks:25 related site/saved-data/version-boundary tests passed, including the actual cloud loader's four original packs,no full-array/mask requests, failure/retry and language. Current in-app browser desktop observed model switching,bilingual v0.1 and v0.2 exact-data readiness/object selection. This focused check does not rerun or extend the historical frozen Chrome/Edge/Firefox matrix. Updated mobile,independent browsers,Safari and hardware rendering remain untested this round; the existing synthetic fallback-unavailable message is retained. No new accuracy,RTSP,Windows inference or performance acceptance.

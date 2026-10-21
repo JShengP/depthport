@@ -68,6 +68,8 @@ flowchart LR
 
 ## Examples / 範例
 
+**Current demo roles / 目前展示分工（2026-10-22）：** v0.1 = full-cloud navigation only; v0.2 = exact pixel/native-depth/XYZ and real object-mask inspection, same saved source. v0.1只瀏覽完整點雲，v0.2才提供像素／XYZ／物件遮罩分析。下圖保留原拍攝狀態，不重授歷史驗收；目前頁面分工已更新。
+
 **[Open interactive website / 開啟互動網站](https://jshengp.github.io/depthport/v0.1/?lang=zh-TW)** · [English demo](https://jshengp.github.io/depthport/v0.1/?lang=en)
 
 **Current Pages, later real-model validation / 目前網站，後續真模型驗證。** The current CloudViewer reads the original saved bus XYZRGB; switch four engines, orbit/zoom/pan, and adjust point size/color. The image shows **DA3 Metric Large**, estimated metres, RGB coloring and a rotated view. 目前網站沿用原始 CloudViewer，讀取同一張 bus.jpg 的真實保存點雲；可切四模型、旋轉／縮放／平移及調整點大小／顏色，圖中為 DA3 Metric Large 的估計公尺、RGB 與旋轉視角。

@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-22",
+  "kind": "focused software boundary,not accuracy or full browser acceptance",
+  "v0_1": "four saved full-cloud packs,viewer navigation/colour/size only,no full arrays/masks",
+  "v0_2": "shared-source exact native depth/Z/XYZ and real mask/object inspection",
+  "saved_data_changed": false,
+  "historical_screenshot_records_changed": false,
+  "historical_release_tags_changed": false,
+  "related_checks": {
+    "passed": 25,
+    "failed": 0
+  },
+  "application_checks_before_final_reports": {
+    "passed": 644,
+    "optional_skipped": 110,
+    "existing_warning": 1
+  },
+  "observed_browser": "current in-app desktop only, model change,bilingual v0.1,exact-data ready/object selection in v0.2",
+  "not_run_this_round": [
+    "updated physical/responsive mobile",
+    "standalone Chrome",
+    "standalone Edge",
+    "standalone Firefox",
+    "Safari",
+    "NVIDIA hardware WebGL"
+  ],
+  "limits": "Historical browser matrices retain their dated scope; no new inference,depth accuracy,RTSP or performance acceptance.",
+  "source_files": {
+    "website/cloud-demo.js": "c6afb7826d5e481826d3220a99fa4454ddcfc43ca636db95064ea9fd67229391",
+    "website/v0.1/index.html": "8447ce66d5379536a188c3fb64e0584b1bc535c07b437992f9bfbad3361abcc5",
+    "website/v0.2/index.html": "47e950b5026b3a7318d4aaf2511abfaf8273e8987135001977801defd43f4fee",
+    "tools/build_site.py": "804f036d7cfc1754e14e4527c8144db24533858a7e91486a2a7bdfdf19d5f646"
+  }
+}

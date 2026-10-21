@@ -1,0 +1,178 @@
+{
+  "format": "depthport.handoff-exposure-references.v1",
+  "protocol_sha256": "f5533cd901dced5136f67169687566e4a26120b17bf39089925faa272ffdb849",
+  "phase": "discovery",
+  "all_native_before_candidates": true,
+  "ledger": [
+    {
+      "name": "KITTI-0012",
+      "phase": "discovery",
+      "frames": 78,
+      "status": "reference_sealed",
+      "passes": {},
+      "comparisons": null,
+      "source_lock": {
+        "name": "KITTI-0012",
+        "video_sha256": "8e263e2631858d665423141419ac32be0c4130d0f74233a5aea555a920852ec4",
+        "cache_sha256": [
+          "defaedafbbd35a0cab5ec6c6f6af6c3c68c8a229626240819b57fc98ab9b0573"
+        ],
+        "frames": 78,
+        "fps": 10,
+        "resolution": [
+          1242,
+          375
+        ],
+        "cache_shards": 1,
+        "cached_detections": 60,
+        "capped_frames": 0
+      },
+      "native_reference": {
+        "sha256": {
+          "predictions.local.json": "ae288a25548f3ce34c4abf2081812c71084764d0d814973f20b9431f0fb9d9e4",
+          "native-output.local.json": "307cd45b69c5e8d0d4a5fd6971694aa3a588600c133201e97661413a61665284",
+          "final-state.local.pickle": "4a45361ac779b794f8347421a25169432a13b24713477d78bdb4de31577d7675",
+          "lifecycle.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "numerical.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "geometry.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "KITTI-0013",
+      "phase": "discovery",
+      "frames": 340,
+      "status": "reference_sealed",
+      "passes": {},
+      "comparisons": null,
+      "source_lock": {
+        "name": "KITTI-0013",
+        "video_sha256": "dd3bd8b40cff8ffafac8d1d83950823fe30dfef35c97e4cd019e54d62754eab5",
+        "cache_sha256": [
+          "64745258046388b480577d09993537bf2b918c2d9dbe21d9a1cd110084563d4d"
+        ],
+        "frames": 340,
+        "fps": 10,
+        "resolution": [
+          1242,
+          375
+        ],
+        "cache_shards": 1,
+        "cached_detections": 3423,
+        "capped_frames": 0
+      },
+      "native_reference": {
+        "sha256": {
+          "predictions.local.json": "ee6120cc5517554b568b7e8552445b4f52096f300153b4cb4891582e857b43b1",
+          "native-output.local.json": "254d0822ae78da45e32c570adcb8eeb5ff0793b54b60138a5d3e0998c39ea742",
+          "final-state.local.pickle": "9ae33854743996cb344163655a35beb245c1204e03a1b37eb8cb85800c8e4b05",
+          "lifecycle.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "numerical.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "geometry.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "KITTI-0014",
+      "phase": "discovery",
+      "frames": 106,
+      "status": "reference_sealed",
+      "passes": {},
+      "comparisons": null,
+      "source_lock": {
+        "name": "KITTI-0014",
+        "video_sha256": "6791b505f54838300371d750c1f10270885b37d57835a122c08ceff6b96e30b4",
+        "cache_sha256": [
+          "69530c0fde7787cb2d70ea74d4d6db5027e96333aa966558dc2b38b78657b633"
+        ],
+        "frames": 106,
+        "fps": 10,
+        "resolution": [
+          1224,
+          370
+        ],
+        "cache_shards": 1,
+        "cached_detections": 159,
+        "capped_frames": 0
+      },
+      "native_reference": {
+        "sha256": {
+          "predictions.local.json": "278120526304256216434d1c5c51030b91f6996a5ef7a2d8139d713c3c381a47",
+          "native-output.local.json": "423a2006dc096cb57dcf70a10046bd32b9d084e2bfd2037c703f2aacaf1255c8",
+          "final-state.local.pickle": "0c9b13875641142cfe7b4ad8cc6ddcfdd4587ccb5b5cb4baf56ea5f544065a16",
+          "lifecycle.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "numerical.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "geometry.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "KITTI-0015",
+      "phase": "discovery",
+      "frames": 376,
+      "status": "reference_sealed",
+      "passes": {},
+      "comparisons": null,
+      "source_lock": {
+        "name": "KITTI-0015",
+        "video_sha256": "2c375fb1df0d3bab0ec2b65b04bdc628357585b83561ebe73a7d549e4da426b2",
+        "cache_sha256": [
+          "edbbb5308e2c7e05c6559bd5e1a418da5217a8e594e926f7fbfc9c15afedf3b3"
+        ],
+        "frames": 376,
+        "fps": 10,
+        "resolution": [
+          1224,
+          370
+        ],
+        "cache_shards": 1,
+        "cached_detections": 809,
+        "capped_frames": 0
+      },
+      "native_reference": {
+        "sha256": {
+          "predictions.local.json": "24e1ae71c3e5b611bdc2152f49913c2c71777234dad99a657979e69c7da952f1",
+          "native-output.local.json": "5f6825b525d25103f8fc76dc38f44cd9a93bf2b9b52af703e6a567accb92627c",
+          "final-state.local.pickle": "46fd941de47b8101363dbf5fd6adc61c64878cc9af94a9772b1714753ac5501b",
+          "lifecycle.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "numerical.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "geometry.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "KITTI-0016",
+      "phase": "discovery",
+      "frames": 209,
+      "status": "reference_sealed",
+      "passes": {},
+      "comparisons": null,
+      "source_lock": {
+        "name": "KITTI-0016",
+        "video_sha256": "5d59a763a67268f7752f7b1baddeb3c08e5b1a0b7f58ba0814f905a14a461438",
+        "cache_sha256": [
+          "9c797dfaf09d7b4534dbd33068f52813727e17732c1413a33a41c73484a6f097"
+        ],
+        "frames": 209,
+        "fps": 10,
+        "resolution": [
+          1224,
+          370
+        ],
+        "cache_shards": 1,
+        "cached_detections": 2991,
+        "capped_frames": 0
+      },
+      "native_reference": {
+        "sha256": {
+          "predictions.local.json": "4bd9ad2634a2985a086dff854f11ccb8b89cbd59770daf5cd8b8e7abe90b74fe",
+          "native-output.local.json": "0088a16f95e6840c9ca62f3be8a552f735036da2ca856a2a00418ae5197084df",
+          "final-state.local.pickle": "7c63739dd88c8458154c2a5c292e5182be29762fe13eb97e04816c0988f73f8d",
+          "lifecycle.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "numerical.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "geometry.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    }
+  ]
+}

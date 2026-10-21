@@ -27,3 +27,7 @@ Recheck all434 original files plus772 complete prior raw-study inputs/outputs/hi
 ## Software checks at freeze
 
 36 selection/unchanged-candidate/harm/generated-native replay contracts passed, covering zeros/failures,harm-independent lexical selection,role separation,no cross-source compensation and complete native output/pickle/trace repeats. Generated fixtures are not real-source exposure. Actual outcomes and any failures will be recorded after execution, not predeclared passing.
+
+## Discovery release before reserved reads
+
+All five fixed sources/1,109 original frames/45 isolated full-source processes completed without preparation/execution failure or retry. Unhooked/observed full outputs and final states agree; complete per-arm repeats agree. Each of the three actual-action role groups is0 on every source; all three selections are null. Nothing is selected by weakening rules or suppressing negative sources. Original434 and prior772 raw files unchanged. Reserved0017/0018 image members/inference/tracking remain untouched at this public discovery checkpoint; then both will execute as preassigned holdout attempts, not qualified confirmation when discovery selection is null.
