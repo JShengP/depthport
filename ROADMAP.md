@@ -1,6 +1,6 @@
 # Roadmap / 路線圖
 
-Updated / 更新：2026-10-20 · [Project](README.md) · [繁體中文首頁](README.zh-TW.md) · [Alpha.2 notes / 發布說明](docs/releases/0.3.0-alpha.2.md) · [Changelog / 歷程](CHANGELOG.md)
+Updated / 更新：2026-10-21 · [Project](README.md) · [繁體中文首頁](README.zh-TW.md) · [Alpha.2 notes / 發布說明](docs/releases/0.3.0-alpha.2.md) · [Changelog / 歷程](CHANGELOG.md)
 
 [Status / 狀態判讀](#status--狀態判讀) · [Current Pages / 目前互動展示](#current-pages--目前互動展示) · [v0.1](#v01--viewer-foundation--檢視器基礎) · [v0.2](#v02--spatial-analysis--空間分析) · [v0.3](#v03--sessions-and-tracking--回放與追蹤) · [Next gates / 下一步驗收](#next-acceptance-gates--下一步驗收) · [Maintenance / 維護](#repository-maintenance--repo-維護)
 
@@ -154,6 +154,8 @@ These gates apply to current `main`; the version sections above identify which r
 以下以目前 `main` 驗收，對應上方各版功能。執行前先訂通過標準，記錄確切 commit、套件／裝置、輸入／條款、指令、結果與失敗；達標且附上證據後才標為完成。
 
 ### P0 — Tracking reliability / 追蹤可靠性
+
+- [ ] **[Accepted-event audit / 接受事件集合稽核](docs/en/tracking-accepted-events.md)** / [繁中](docs/zh-TW/tracking-accepted-events.md): method frozen for all three changed discovery outputs, full2,010 existing frames, no GT or tuning; extraction pending. 先固定輸入／階段／出生沿革與流失／新增的分母，原四失敗、弱延續及預設不變。
 
 1. **Confirmation & competition / 確認與競爭：** [Geometry exposure](docs/en/tracking-geometry-exposure.md) retains four whole-file failures and false formal replication. [Read-only carrier/role audit](docs/en/tracking-carrier-roles.md) / [繁中](docs/zh-TW/tracking-carrier-roles.md) now verifies strict carrier reconstruction and explains tentative zero projections through the pinned confirmation2 lifecycle, with four missing histories still null. **Diagnosis complete, true harm/quality and active-confirmed independent confirmation open.** Next freeze accepted-event membership auditing on the three changed discovery outputs; no retrospective gate relaxation, forced tentative exposure, tuning or default promotion. 弱階段亦可升格，原弱延續保留。
 2. **Localisation & recovery / 框品質與恢復：** keep detector localisation/resolution, geometry, association and expiry separate. The earlier proxy screen and expanded exposure results do not establish true tracking harm. The read-only audit reconciles changed birth/high-promotion counts (681→678/395→392); it does not classify them as missed/false tracks or benefits. Next prospectively audit lost/new accepted input and lineage events across the three changed discovery outputs. Tentative projection is structurally excluded under current lifecycle conditions; artificial-state operator coverage is distinct from reachable exposure. Keep weak continuation; localisation, identity quality and covariance calibration remain open. 不盲加ReID／buffer或強制改配，不以零投影當安全通過。
