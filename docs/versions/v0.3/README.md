@@ -124,7 +124,7 @@ Private snapshots, bookmarks, notes and JSON backups stay local and are excluded
 - **Accepted-event audit / 接受事件集合：** [Read-only memberships and lineage](../../en/tracking-accepted-events.md) / [繁中](../../zh-TW/tracking-accepted-events.md): all three changed outputs/2,010 original frames; accepted inputs+4/+15/+5 with no lost weak/confirmed inputs. Seed-lineage changes51/39/0 explain active-edge losses51/38/0; two original strict proxies remain failed, not proof of true identity harm. 434封存不變，四失敗／null保留；不讀GT、調參或改弱延續／預設，品質與未見確認仍Open，原病例本機。
 - **Past observation bridge / 決策前共同觀測橋接：** [Frozen causal chain audit](../../en/tracking-observation-bridge.md) / [繁中](../../zh-TW/tracking-observation-bridge.md):1,425 original frames/eight histories;89 original lost-active keys split85 supported merge relations,3 empty reference histories and1 unbridged known-chain event. Broader common inputs contain10 split relations despite unchanged birth keys. Two proxies remain failed; this is no identity/quality acceptance. 434封存／四失敗／null不變；不調參、不讀GT或改弱延續／預設，後續交接證據見下項，原病例本機。
 - **Handoff evidence / 交接證據：** [Strictly prior birth/accepted/removal audit](../../en/tracking-handoff-audit.md) / [繁中](../../zh-TW/tracking-handoff-audit.md): four fixed boundaries/full1,425 frames; three previous-frame reference births versus continued active-confirmed control ownership, one established unbridged pair with zero later same-pair common updates. Historical neighbors separate retained/active/expired. 434原檔／21前輪紀錄相符，當格／後續不補前綴，弱更新與原失敗／null保留；兩段代理仍未過，不讀GT／調參，候選控制與未見確認仍Open，原病例本機。
-- **Separate causal candidates / 分開因果候選：** [Birth/continuation and past-competition handoff](../../en/tracking-handoff-controls.md) / [繁中](../../zh-TW/tracking-handoff-controls.md): two rules/scene harm gates frozen before unseen KITTI0010/0011 images;667 full frames/18 complete processes, exact native/repeat seals. Both candidates have0/0 actual actions, so both exposure/replication gates fail even though inputs and0011's64 weak updates are preserved. 不讀GT／調參或改弱階段／預設，434歷史封存與原失敗保留；兩來源現已見，下一步先凍結GT-free曝光選取，不把相同輸出當控制效益／安全。
+- **Separate causal candidates / 分開因果候選：** [Birth/continuation and past-competition handoff](../../en/tracking-handoff-controls.md) / [繁中](../../zh-TW/tracking-handoff-controls.md): two rules/scene harm gates frozen before unseen KITTI0010/0011 images;667 full frames/18 complete processes, exact native/repeat seals. Both candidates have0/0 actual actions, so both exposure/replication gates fail even though inputs and0011's64 weak updates are preserved. 不讀GT／調參或改弱階段／預設，434歷史封存與原失敗保留；兩來源現已見，後續同規則曝光選取已完整完成但仍零觸發，不把相同輸出當控制效益／安全。
 
 
 
@@ -149,6 +149,9 @@ Private snapshots, bookmarks, notes and JSON backups stay local and are excluded
 Alpha.2 packages reviewed dependency compatibility updates and workflow illustrations. [Alpha.1](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.1) remains available; publication does not close acceptance gates. Alpha.2 封裝相容性更新與流程圖，發布不等於驗收完成。
 
 </details>
+
+- **Causal-candidate exposure / 因果候選曝光：** [Frozen full discovery/reserved ledger](../../en/tracking-handoff-exposure.md) / [繁中](../../zh-TW/tracking-handoff-exposure.md): KITTI0012–0016 discovery publicly sealed before0017/0018 reserved; all7 sources/1,593 frames/63 full processes complete with exact native/repeat receipts. All active/retained continuation and handoff actions0; selectionsnull/all3 confirmation gatesfalse.1,027 weak updates per arm retained;434 old/772 prior raw files unchanged. 不看GT／調參或改弱階段／預設，完整清單不等於有效曝光／品質通過；下一步只讀拆解資格與操作可達性，原診斷本機。
+
 
 ## Limits / 驗證限制
 

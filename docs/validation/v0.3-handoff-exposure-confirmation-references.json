@@ -1,0 +1,76 @@
+{
+  "format": "depthport.handoff-exposure-references.v1",
+  "protocol_sha256": "f5533cd901dced5136f67169687566e4a26120b17bf39089925faa272ffdb849",
+  "phase": "confirmation",
+  "all_native_before_candidates": true,
+  "ledger": [
+    {
+      "name": "KITTI-0017",
+      "phase": "confirmation",
+      "frames": 145,
+      "status": "reference_sealed",
+      "passes": {},
+      "comparisons": null,
+      "source_lock": {
+        "name": "KITTI-0017",
+        "video_sha256": "426a4116baae37ca6aa9e356c0a45c2e5fa1e91500b611ca94b1eeee55fbefa9",
+        "cache_sha256": [
+          "9f595b6c22dc8156999f90634ab59e104d54af76d71022ff1e1da6ba8468c6af"
+        ],
+        "frames": 145,
+        "fps": 10,
+        "resolution": [
+          1224,
+          370
+        ],
+        "cache_shards": 1,
+        "cached_detections": 1256,
+        "capped_frames": 0
+      },
+      "native_reference": {
+        "sha256": {
+          "predictions.local.json": "5848ac93102223da21a358363f83da12a9ddb9b81cbc18ae2a5c14601c396761",
+          "native-output.local.json": "35bbf66dded686403e5f6885a8e360de12c2dded2d972a2612c77854d3625d9e",
+          "final-state.local.pickle": "d556a4ab1367bf7ee5d08c1be103e19cae4bbbe9f1438bbc1c7c3f7ac411d6c8",
+          "lifecycle.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "numerical.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "geometry.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "KITTI-0018",
+      "phase": "confirmation",
+      "frames": 339,
+      "status": "reference_sealed",
+      "passes": {},
+      "comparisons": null,
+      "source_lock": {
+        "name": "KITTI-0018",
+        "video_sha256": "8ff8d449e503bb58e42632c2ae642a4e93422cb5dfea2d42642a266270d6a832",
+        "cache_sha256": [
+          "b1cf02ba31da99120c80bc89c1c571e55a4b5158b3f26f60f012ac304a7d654d"
+        ],
+        "frames": 339,
+        "fps": 10,
+        "resolution": [
+          1238,
+          374
+        ],
+        "cache_shards": 1,
+        "cached_detections": 24,
+        "capped_frames": 0
+      },
+      "native_reference": {
+        "sha256": {
+          "predictions.local.json": "83e1c9567ed4056abd833aa69b49f4fd67ba6cfe647c0e817533bec852b0a69e",
+          "native-output.local.json": "993b8c90fb7f430110e210eb3896fd859b32d4847dd7e8350a9e4f31fb3238ba",
+          "final-state.local.pickle": "4a45361ac779b794f8347421a25169432a13b24713477d78bdb4de31577d7675",
+          "lifecycle.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "numerical.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "geometry.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    }
+  ]
+}
