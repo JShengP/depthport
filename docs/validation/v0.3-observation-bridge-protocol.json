@@ -1,0 +1,274 @@
+{
+  "format": "depthport.observation-bridge-protocol.v1",
+  "frozen_at_utc": "2026-10-21T16:21:44.674943+00:00",
+  "report_date_local": "2026-10-22",
+  "base_commit": "13d3f4f8d168e399956ccb18f95ba38c0087fe18",
+  "audit_python": "3.12.3",
+  "selected_sources": [
+    "MOT17-09-DPM",
+    "MOT17-11-DPM"
+  ],
+  "implementation_sha256": {
+    "depthport/tracking_observation_bridge.py": "0a00d22ed066c3d0517f3f4d930c61d724bf08861b47ee00a5b9d64495460c98",
+    "tools/audit_tracking_observation_bridge.py": "05e2acb01531b9f6959a181f2ef9d8dfef5bd02f52d663ed51403581110ec39e",
+    "tests/test_tracking_observation_bridge.py": "233c8b024a7d2efffc30336364f1f3d591892bcc5303d56610aa5e5985efabb4"
+  },
+  "source_records_sha256": {
+    "depthport/tracking_accepted_events.py": "da1e8a37144327a42374b1d8ce4df538f807d56c47a18eed5a27b8692fd1490d",
+    "tools/audit_tracking_accepted_events.py": "22590d97f749ff133648d15b05a69e0b8991ab1a7cb408fcdf3bf5c39619cc76",
+    "tests/test_tracking_accepted_events.py": "caf62022d81a1412b5083689175e60327e0944ca9e606fb450ceb95ab57305bc",
+    "docs/validation/v0.3-geometry-exposure-protocol.json": "0e17491922bcada995e96882a0fdf53fe40827f10d1d03b2fd301fd758b0b21f",
+    "docs/validation/v0.3-geometry-exposure-discovery.json": "5b80ff38b3b0806b81a5f7cd35fe2c5a4216b487ed412321d396daa6bb113347",
+    "docs/validation/v0.3-geometry-exposure-discovery-references.json": "a9b79f310158e4f59484e468a3b1d66b8bdfc06843d786613a0d04299214ec61",
+    "docs/validation/v0.3-geometry-exposure-archive-compatibility.json": "1abccba7dccf417683b9f4c9c4858824de7f7549e477f5d2c1ecb3bb4e8aae78",
+    "docs/validation/v0.3-geometry-exposure-confirmation.json": "63bbcc4189f5b6cb51ab3f6e2349d23ca734949419f18ec69c88217ae6e3a4b8",
+    "docs/validation/v0.3-geometry-exposure-confirmation-references.json": "c923be9e7c94741b5ec25422ffe817067b6e6e281ffcdf8806a0bcbdebd05b0f",
+    "docs/validation/v0.3-geometry-exposure-preparation.json": "43957259538dfe6c364442e4693e1ae425cbbe9cb00de8c91cc2f3caf9fe9465",
+    "docs/validation/v0.3-geometry-exposure-pre-inference.json": "922ef511097134bdb3b3822fb086f7bd704e33fa7bc6ab7cc85a06477840f0d8",
+    "docs/validation/v0.3-carrier-role-audit-protocol.json": "efacb4f1da7e0b60693d1b64cc6517a1054be79f81da36199cdf1ce72520bb9b",
+    "docs/validation/v0.3-carrier-role-audit.json": "e9783dc0441d9d0cc8389749d6f804e82a4c74204e6c899af725425e90bbb7eb",
+    "docs/validation/v0.3-accepted-events-protocol.json": "6441c390d2fb8ff11a1deb0cb7fd0fbc26386a2e710b5a5577b490d3af59f18f",
+    "docs/validation/v0.3-accepted-events.json": "efb58932ecd07c4e8762b1082edb4ea6c4779812bdc7ac315153f55462724cfc"
+  },
+  "original_local_input_seal": {
+    "record": "docs/validation/v0.3-accepted-events-protocol.json",
+    "field": "local_input_sha256",
+    "files": 434
+  },
+  "prior_information": {
+    "accepted_input_loss": [
+      0,
+      0
+    ],
+    "changed_seed_lineages": [
+      51,
+      39
+    ],
+    "lost_original_active_keys": [
+      51,
+      38
+    ],
+    "all_sources_previously_seen": true
+  },
+  "ledger": [
+    {
+      "name": "MOT17-09-DPM",
+      "phase": "discovery",
+      "frames": 525,
+      "prior_audit_status": "completed",
+      "audit_status": "scheduled",
+      "bridge": null
+    },
+    {
+      "name": "MOT17-10-DPM",
+      "phase": "discovery",
+      "frames": 654,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT17-11-DPM",
+      "phase": "discovery",
+      "frames": 900,
+      "prior_audit_status": "completed",
+      "audit_status": "scheduled",
+      "bridge": null
+    },
+    {
+      "name": "MOT17-13-DPM",
+      "phase": "discovery",
+      "frames": 750,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT17-04-DPM",
+      "phase": "discovery",
+      "frames": 1050,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT20-01",
+      "phase": "discovery",
+      "frames": 429,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT20-02",
+      "phase": "discovery",
+      "frames": 2782,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT20-06",
+      "phase": "discovery",
+      "frames": 1008,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT20-07",
+      "phase": "discovery",
+      "frames": 585,
+      "prior_audit_status": "completed",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT20-08",
+      "phase": "discovery",
+      "frames": 806,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT17-07-DPM",
+      "phase": "discovery",
+      "frames": 500,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT17-08-DPM",
+      "phase": "discovery",
+      "frames": 625,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT17-12-DPM",
+      "phase": "discovery",
+      "frames": 900,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT17-14-DPM",
+      "phase": "discovery",
+      "frames": 750,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT20-03",
+      "phase": "discovery",
+      "frames": 2405,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT20-05",
+      "phase": "discovery",
+      "frames": 3315,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "KITTI-0000",
+      "phase": "discovery",
+      "frames": 154,
+      "prior_audit_status": "unmeasured_original_failure",
+      "audit_status": "unmeasured_original_failure",
+      "bridge": null
+    },
+    {
+      "name": "KITTI-0001",
+      "phase": "discovery",
+      "frames": 447,
+      "prior_audit_status": "unmeasured_original_failure",
+      "audit_status": "unmeasured_original_failure",
+      "bridge": null
+    },
+    {
+      "name": "KITTI-0002",
+      "phase": "discovery",
+      "frames": 233,
+      "prior_audit_status": "unmeasured_original_failure",
+      "audit_status": "unmeasured_original_failure",
+      "bridge": null
+    },
+    {
+      "name": "KITTI-0003",
+      "phase": "discovery",
+      "frames": 144,
+      "prior_audit_status": "unmeasured_original_failure",
+      "audit_status": "unmeasured_original_failure",
+      "bridge": null
+    },
+    {
+      "name": "KITTI-0004",
+      "phase": "discovery",
+      "frames": 314,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "KITTI-0005",
+      "phase": "discovery",
+      "frames": 297,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "KITTI-0006",
+      "phase": "discovery",
+      "frames": 270,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "KITTI-0007",
+      "phase": "discovery",
+      "frames": 800,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "KITTI-0008",
+      "phase": "confirmation",
+      "frames": 390,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "KITTI-0009",
+      "phase": "confirmation",
+      "frames": 803,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    }
+  ],
+  "definitions": {
+    "scope": "Prospective local definition freeze after public accepted-event aggregates, before new bridge extraction. Two previously failed scenes, complete525+900 frames, two archived trials per arm/eight histories. No new source, independent confirmation or external preregistration.",
+    "anchor": "At frame f use ONLY original accepted input keys (t,original detection index) common to both arms with t<f. Incremental prefix intersection, never full-sequence hindsight. Birth seeds, unmatched inputs, single-arm updates, current-frame high/weak updates and future observations cannot anchor. Whole-frame barrier is deliberately stricter than per-stage availability. All accepted high/weak and tentative/confirmed observations qualify equally; no fitted support threshold.",
+    "ownership": "Vertices are per-arm immutable birth(frame,index) keys; equal labels across arms alone are no evidence. Native tokens recover ownership only within one arm; never cross-arm joins. Edge(r,c) exists iff at least one common accepted past observation belongs to those owners. Preserve all edges/support counts forever in this descriptive history graph, including retired lineages; no temporal decay, role eligibility or intervention. A transitive path alone is not a direct bridge.",
+    "categories": "Exclusive priority: direct edge and degrees1/1=unique_continuation;1/>1=merge_relation (multiple reference owners to control);>1/1=split_relation;>1/>1=many_to_many_relation. No direct edge: both positive degrees=unbridged_known_chains; reference degree0 only=missing_reference_support; control degree0 only=missing_control_support; both0=missing_both_support. Indirect connectivity, empty accepted history vs only noncommon history are separate flags. Merge/split describes observation-chain ownership, not true physical identity.",
+    "denominators": "Classify every common accepted input before committing any current anchors. Separately aggregate all_common, changed_lineage, unchanged_lineage and lost_original_active keys. Preserve all8 categories including zeros, per-group distinct owner-pair first-event categories, stage and predecision active/retained x tentative/confirmed strata. Denominators overlap explicitly; do not sum groups as independent cases. Lost-active includes original current owner/stage/role proxy semantics, never redefines its gate.",
+    "integrity": "Reuse immutable AcceptedLedger validation. Read only eight compressed histories and pinned GT-free public records; stream every dense frame. Match complete original input/event receipts and original compare() memberships to previous report; raw JSONL and its digest local. Both archived trials independently analyzed, require exact summaries/ordered receipts. Recheck434 original byte hashes and all old source pins before/after. Pickles hash only; never load. No GT/media/cache/evaluator/solver/inference/tracker reads or execution.",
+    "failure": "No overwrite, retry, imputation or source selection by outcome. Any inconsistent source failed with null bridge and local exception; keep26-row scope ledger, four old KITTI failures/nulls, out-of-scope counts null, incomplete discovery and eight false replication flags. Repeat trials add no independent evidence.",
+    "decision": "Descriptive diagnosis only, no tuning/intervention/default or weak-stage change. Original two failed proxies remain failed regardless of bridge result. Chains are not physical identities: no FN/FP/IDSW/HOTA, merge correctness or true-harm acceptance. Missing evidence stays unknown. Choose further prospective diagnosis only after seeing complete frozen outcomes.",
+    "publication": "Public source-level aggregate counts, denominators, role/stage strata and hashes only. Per-frame keys, owners, IDs, boxes, histories, cases, exceptions and local paths remain ignored local artifacts. Inherit reviewed MOT/KITTI noncommercial research terms; no raw media/GT/results redistribution."
+  }
+}

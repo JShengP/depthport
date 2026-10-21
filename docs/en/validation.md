@@ -1,6 +1,10 @@
 # Validation record
 [繁體中文](../zh-TW/validation.md) · [Home](../../README.md)
 
+## Past common-observation lineage bridge — 2026-10-22
+
+[Frozen method, complete ledger and decision](tracking-observation-bridge.md): both failed scenes/full1,425 original frames/eight histories completed.89 original lost-active keys split85 supported merge relations,3 empty reference histories and1 unbridged known-chain event;10 broader common-input split relations have unchanged seed labels. This is chain correspondence, not identity truth; both old proxies remain failed.434 original files/15 prior records unchanged,26 source rows/nulls/four original failures and false replication preserved. No GT, tracking/inference, tuning, weak-stage/default changes; raw cases local. Next prospectively freeze past-only handoff evidence at the four unsupported event boundaries; no intervention or quality acceptance.
+
 ## Accepted-event and seed-lineage audit — 2026-10-21
 
 [方法／完整清單／決定](tracking-accepted-events.md)：All three changed outputs/2,010 original frames/twelve archived histories complete. Accepted inputs add4/15/5 with zero lost weak/confirmed inputs; common-input seed lineages change51/39/0. Two scenes lose51/38 original active-edge keys through lineage, not dropped inputs; original strict proxies remain failed. All434 inputs and prior statuses unchanged;26 rows/four failures/nulls retained. No GT/inference/tracking/tuning/weak-stage/default change, raw cases local. Quality and independent confirmation remain open; next prospectively define causal common-accepted-observation lineage bridging.
