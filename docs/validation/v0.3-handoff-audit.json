@@ -1,0 +1,891 @@
+{
+  "format": "depthport.handoff-audit.v1",
+  "protocol_sha256": "415c656a748ed0e945fd4d1c93fd971b2b7924ce5c5595ba4bfd5f43eb5f3f03",
+  "selected_sources": [
+    "MOT17-09-DPM",
+    "MOT17-11-DPM"
+  ],
+  "unique_source_frames": 1425,
+  "archived_histories": 8,
+  "all_selected_audits_completed": true,
+  "sealed_original_files_rechecked": 434,
+  "original_records_bytes_unchanged": true,
+  "original_discovery_completed": false,
+  "original_replication_flags": {
+    "active_confirmed": false,
+    "active_tentative": false,
+    "retained_confirmed": false,
+    "retained_tentative": false,
+    "active": false,
+    "retained": false,
+    "unconfirmed": false,
+    "any": false
+  },
+  "original_failures_retained": [
+    "KITTI-0000",
+    "KITTI-0001",
+    "KITTI-0002",
+    "KITTI-0003"
+  ],
+  "gt_read": false,
+  "accuracy_scoring": false,
+  "inference": false,
+  "tracking_rerun": false,
+  "retuned": false,
+  "weak_stage_changed": false,
+  "defaults_changed": false,
+  "tracking_quality_accepted": false,
+  "independent_confirmation": false,
+  "ledger": [
+    {
+      "name": "MOT17-09-DPM",
+      "phase": "discovery",
+      "frames": 525,
+      "prior_audit_status": "completed",
+      "audit_status": "completed",
+      "handoff": {
+        "frames": 525,
+        "boundaries": 2,
+        "groups": {
+          "missing_reference_support": {
+            "boundaries": 2,
+            "owners": {
+              "reference": {
+                "statuses": {
+                  "active_confirmed": 0,
+                  "active_tentative": 2,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0,
+                  "removed_expired": 0,
+                  "removed_immature_unmatched": 0,
+                  "removed_expired_and_immature": 0,
+                  "missing_evidence": 0
+                },
+                "birth_available": 2,
+                "birth_previous_frame": 2,
+                "accepted_history_empty": 2,
+                "accepted_high": 0,
+                "accepted_weak": 0,
+                "recorded_prior_removal": 0,
+                "birth_input_other_arm": {
+                  "birth": 0,
+                  "accepted_high": 2,
+                  "accepted_weak": 0,
+                  "unaccepted": 0,
+                  "missing_evidence": 0
+                },
+                "birth_other_arm_accepted_roles": {
+                  "active_confirmed": 2,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0
+                },
+                "source_end_statuses": {
+                  "active_confirmed": 1,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0,
+                  "removed_expired": 1,
+                  "removed_immature_unmatched": 0,
+                  "removed_expired_and_immature": 0,
+                  "missing_evidence": 0
+                },
+                "source_end_censored": 1,
+                "following_high": 48,
+                "following_weak": 1
+              },
+              "control": {
+                "statuses": {
+                  "active_confirmed": 2,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0,
+                  "removed_expired": 0,
+                  "removed_immature_unmatched": 0,
+                  "removed_expired_and_immature": 0,
+                  "missing_evidence": 0
+                },
+                "birth_available": 2,
+                "birth_previous_frame": 0,
+                "accepted_history_empty": 0,
+                "accepted_high": 194,
+                "accepted_weak": 89,
+                "recorded_prior_removal": 0,
+                "birth_input_other_arm": {
+                  "birth": 2,
+                  "accepted_high": 0,
+                  "accepted_weak": 0,
+                  "unaccepted": 0,
+                  "missing_evidence": 0
+                },
+                "birth_other_arm_accepted_roles": {
+                  "active_confirmed": 0,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0
+                },
+                "source_end_statuses": {
+                  "active_confirmed": 1,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0,
+                  "removed_expired": 1,
+                  "removed_immature_unmatched": 0,
+                  "removed_expired_and_immature": 0,
+                  "missing_evidence": 0
+                },
+                "source_end_censored": 1,
+                "following_high": 48,
+                "following_weak": 1
+              }
+            },
+            "past_neighbors": {
+              "control_neighbors_of_reference": {
+                "statuses": {
+                  "active_confirmed": 0,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0,
+                  "removed_expired": 0,
+                  "removed_immature_unmatched": 0,
+                  "removed_expired_and_immature": 0,
+                  "missing_evidence": 0
+                },
+                "neighbors": 0,
+                "recorded_prior_removal": 0,
+                "accepted_high": 0,
+                "accepted_weak": 0,
+                "past_common_anchors": 0
+              },
+              "reference_neighbors_of_control": {
+                "statuses": {
+                  "active_confirmed": 0,
+                  "active_tentative": 0,
+                  "retained_confirmed": 2,
+                  "retained_tentative": 0,
+                  "removed_expired": 0,
+                  "removed_immature_unmatched": 0,
+                  "removed_expired_and_immature": 0,
+                  "missing_evidence": 0
+                },
+                "neighbors": 2,
+                "recorded_prior_removal": 0,
+                "accepted_high": 192,
+                "accepted_weak": 87,
+                "past_common_anchors": 279
+              }
+            },
+            "following_same_pair_categories": {
+              "unique_continuation": 0,
+              "merge_relation": 49,
+              "split_relation": 0,
+              "many_to_many_relation": 0,
+              "unbridged_known_chains": 0,
+              "missing_reference_support": 0,
+              "missing_control_support": 0,
+              "missing_both_support": 0
+            },
+            "following_other_control_for_reference": 0,
+            "following_other_reference_for_control": 0,
+            "following_same_pair_strata": [
+              {
+                "category": "merge_relation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 48
+              },
+              {
+                "category": "merge_relation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "weak",
+                "control_stage": "weak",
+                "events": 1
+              }
+            ]
+          },
+          "unbridged_known_chains": {
+            "boundaries": 0,
+            "owners": {
+              "reference": {
+                "statuses": {
+                  "active_confirmed": 0,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0,
+                  "removed_expired": 0,
+                  "removed_immature_unmatched": 0,
+                  "removed_expired_and_immature": 0,
+                  "missing_evidence": 0
+                },
+                "birth_available": 0,
+                "birth_previous_frame": 0,
+                "accepted_history_empty": 0,
+                "accepted_high": 0,
+                "accepted_weak": 0,
+                "recorded_prior_removal": 0,
+                "birth_input_other_arm": {
+                  "birth": 0,
+                  "accepted_high": 0,
+                  "accepted_weak": 0,
+                  "unaccepted": 0,
+                  "missing_evidence": 0
+                },
+                "birth_other_arm_accepted_roles": {
+                  "active_confirmed": 0,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0
+                },
+                "source_end_statuses": {
+                  "active_confirmed": 0,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0,
+                  "removed_expired": 0,
+                  "removed_immature_unmatched": 0,
+                  "removed_expired_and_immature": 0,
+                  "missing_evidence": 0
+                },
+                "source_end_censored": 0,
+                "following_high": 0,
+                "following_weak": 0
+              },
+              "control": {
+                "statuses": {
+                  "active_confirmed": 0,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0,
+                  "removed_expired": 0,
+                  "removed_immature_unmatched": 0,
+                  "removed_expired_and_immature": 0,
+                  "missing_evidence": 0
+                },
+                "birth_available": 0,
+                "birth_previous_frame": 0,
+                "accepted_history_empty": 0,
+                "accepted_high": 0,
+                "accepted_weak": 0,
+                "recorded_prior_removal": 0,
+                "birth_input_other_arm": {
+                  "birth": 0,
+                  "accepted_high": 0,
+                  "accepted_weak": 0,
+                  "unaccepted": 0,
+                  "missing_evidence": 0
+                },
+                "birth_other_arm_accepted_roles": {
+                  "active_confirmed": 0,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0
+                },
+                "source_end_statuses": {
+                  "active_confirmed": 0,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0,
+                  "removed_expired": 0,
+                  "removed_immature_unmatched": 0,
+                  "removed_expired_and_immature": 0,
+                  "missing_evidence": 0
+                },
+                "source_end_censored": 0,
+                "following_high": 0,
+                "following_weak": 0
+              }
+            },
+            "past_neighbors": {
+              "control_neighbors_of_reference": {
+                "statuses": {
+                  "active_confirmed": 0,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0,
+                  "removed_expired": 0,
+                  "removed_immature_unmatched": 0,
+                  "removed_expired_and_immature": 0,
+                  "missing_evidence": 0
+                },
+                "neighbors": 0,
+                "recorded_prior_removal": 0,
+                "accepted_high": 0,
+                "accepted_weak": 0,
+                "past_common_anchors": 0
+              },
+              "reference_neighbors_of_control": {
+                "statuses": {
+                  "active_confirmed": 0,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0,
+                  "removed_expired": 0,
+                  "removed_immature_unmatched": 0,
+                  "removed_expired_and_immature": 0,
+                  "missing_evidence": 0
+                },
+                "neighbors": 0,
+                "recorded_prior_removal": 0,
+                "accepted_high": 0,
+                "accepted_weak": 0,
+                "past_common_anchors": 0
+              }
+            },
+            "following_same_pair_categories": {
+              "unique_continuation": 0,
+              "merge_relation": 0,
+              "split_relation": 0,
+              "many_to_many_relation": 0,
+              "unbridged_known_chains": 0,
+              "missing_reference_support": 0,
+              "missing_control_support": 0,
+              "missing_both_support": 0
+            },
+            "following_other_control_for_reference": 0,
+            "following_other_reference_for_control": 0,
+            "following_same_pair_strata": []
+          }
+        },
+        "original_bridge_receipt_sha256": "8d2d7ee330034f529aa6aafee55fe59fe9e49895f1933f8c86b07dab943c937f",
+        "current_or_future_used_as_prior_evidence": false,
+        "identity_accepted": false
+      },
+      "local_case_receipt_sha256": "28d8d1e2caa59b5645bdcb423e723d6b0fe06009a0e83358ecae31709bda8e78",
+      "archived_repeat_equal": true,
+      "original_proxy_gates": {
+        "no_lost_weak_accepted_inputs": true,
+        "no_lost_active_update_pairs": false,
+        "no_lost_confirmed_output_inputs": true,
+        "no_new_birth_events": true
+      }
+    },
+    {
+      "name": "MOT17-10-DPM",
+      "phase": "discovery",
+      "frames": 654,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "handoff": null
+    },
+    {
+      "name": "MOT17-11-DPM",
+      "phase": "discovery",
+      "frames": 900,
+      "prior_audit_status": "completed",
+      "audit_status": "completed",
+      "handoff": {
+        "frames": 900,
+        "boundaries": 2,
+        "groups": {
+          "missing_reference_support": {
+            "boundaries": 1,
+            "owners": {
+              "reference": {
+                "statuses": {
+                  "active_confirmed": 0,
+                  "active_tentative": 1,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0,
+                  "removed_expired": 0,
+                  "removed_immature_unmatched": 0,
+                  "removed_expired_and_immature": 0,
+                  "missing_evidence": 0
+                },
+                "birth_available": 1,
+                "birth_previous_frame": 1,
+                "accepted_history_empty": 1,
+                "accepted_high": 0,
+                "accepted_weak": 0,
+                "recorded_prior_removal": 0,
+                "birth_input_other_arm": {
+                  "birth": 0,
+                  "accepted_high": 1,
+                  "accepted_weak": 0,
+                  "unaccepted": 0,
+                  "missing_evidence": 0
+                },
+                "birth_other_arm_accepted_roles": {
+                  "active_confirmed": 1,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0
+                },
+                "source_end_statuses": {
+                  "active_confirmed": 0,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0,
+                  "removed_expired": 1,
+                  "removed_immature_unmatched": 0,
+                  "removed_expired_and_immature": 0,
+                  "missing_evidence": 0
+                },
+                "source_end_censored": 0,
+                "following_high": 34,
+                "following_weak": 3
+              },
+              "control": {
+                "statuses": {
+                  "active_confirmed": 1,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0,
+                  "removed_expired": 0,
+                  "removed_immature_unmatched": 0,
+                  "removed_expired_and_immature": 0,
+                  "missing_evidence": 0
+                },
+                "birth_available": 1,
+                "birth_previous_frame": 0,
+                "accepted_history_empty": 0,
+                "accepted_high": 70,
+                "accepted_weak": 15,
+                "recorded_prior_removal": 0,
+                "birth_input_other_arm": {
+                  "birth": 1,
+                  "accepted_high": 0,
+                  "accepted_weak": 0,
+                  "unaccepted": 0,
+                  "missing_evidence": 0
+                },
+                "birth_other_arm_accepted_roles": {
+                  "active_confirmed": 0,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0
+                },
+                "source_end_statuses": {
+                  "active_confirmed": 0,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0,
+                  "removed_expired": 1,
+                  "removed_immature_unmatched": 0,
+                  "removed_expired_and_immature": 0,
+                  "missing_evidence": 0
+                },
+                "source_end_censored": 0,
+                "following_high": 34,
+                "following_weak": 3
+              }
+            },
+            "past_neighbors": {
+              "control_neighbors_of_reference": {
+                "statuses": {
+                  "active_confirmed": 0,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0,
+                  "removed_expired": 0,
+                  "removed_immature_unmatched": 0,
+                  "removed_expired_and_immature": 0,
+                  "missing_evidence": 0
+                },
+                "neighbors": 0,
+                "recorded_prior_removal": 0,
+                "accepted_high": 0,
+                "accepted_weak": 0,
+                "past_common_anchors": 0
+              },
+              "reference_neighbors_of_control": {
+                "statuses": {
+                  "active_confirmed": 1,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0,
+                  "removed_expired": 1,
+                  "removed_immature_unmatched": 0,
+                  "removed_expired_and_immature": 0,
+                  "missing_evidence": 0
+                },
+                "neighbors": 2,
+                "recorded_prior_removal": 1,
+                "accepted_high": 135,
+                "accepted_weak": 5,
+                "past_common_anchors": 71
+              }
+            },
+            "following_same_pair_categories": {
+              "unique_continuation": 0,
+              "merge_relation": 37,
+              "split_relation": 0,
+              "many_to_many_relation": 0,
+              "unbridged_known_chains": 0,
+              "missing_reference_support": 0,
+              "missing_control_support": 0,
+              "missing_both_support": 0
+            },
+            "following_other_control_for_reference": 0,
+            "following_other_reference_for_control": 0,
+            "following_same_pair_strata": [
+              {
+                "category": "merge_relation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 34
+              },
+              {
+                "category": "merge_relation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "weak",
+                "control_stage": "weak",
+                "events": 2
+              },
+              {
+                "category": "merge_relation",
+                "reference_role": "retained_confirmed",
+                "control_role": "retained_confirmed",
+                "reference_stage": "weak",
+                "control_stage": "weak",
+                "events": 1
+              }
+            ]
+          },
+          "unbridged_known_chains": {
+            "boundaries": 1,
+            "owners": {
+              "reference": {
+                "statuses": {
+                  "active_confirmed": 1,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0,
+                  "removed_expired": 0,
+                  "removed_immature_unmatched": 0,
+                  "removed_expired_and_immature": 0,
+                  "missing_evidence": 0
+                },
+                "birth_available": 1,
+                "birth_previous_frame": 0,
+                "accepted_history_empty": 0,
+                "accepted_high": 59,
+                "accepted_weak": 3,
+                "recorded_prior_removal": 0,
+                "birth_input_other_arm": {
+                  "birth": 1,
+                  "accepted_high": 0,
+                  "accepted_weak": 0,
+                  "unaccepted": 0,
+                  "missing_evidence": 0
+                },
+                "birth_other_arm_accepted_roles": {
+                  "active_confirmed": 0,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0
+                },
+                "source_end_statuses": {
+                  "active_confirmed": 0,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0,
+                  "removed_expired": 1,
+                  "removed_immature_unmatched": 0,
+                  "removed_expired_and_immature": 0,
+                  "missing_evidence": 0
+                },
+                "source_end_censored": 0,
+                "following_high": 9,
+                "following_weak": 1
+              },
+              "control": {
+                "statuses": {
+                  "active_confirmed": 1,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0,
+                  "removed_expired": 0,
+                  "removed_immature_unmatched": 0,
+                  "removed_expired_and_immature": 0,
+                  "missing_evidence": 0
+                },
+                "birth_available": 1,
+                "birth_previous_frame": 0,
+                "accepted_history_empty": 0,
+                "accepted_high": 68,
+                "accepted_weak": 11,
+                "recorded_prior_removal": 0,
+                "birth_input_other_arm": {
+                  "birth": 1,
+                  "accepted_high": 0,
+                  "accepted_weak": 0,
+                  "unaccepted": 0,
+                  "missing_evidence": 0
+                },
+                "birth_other_arm_accepted_roles": {
+                  "active_confirmed": 0,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0
+                },
+                "source_end_statuses": {
+                  "active_confirmed": 0,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0,
+                  "removed_expired": 1,
+                  "removed_immature_unmatched": 0,
+                  "removed_expired_and_immature": 0,
+                  "missing_evidence": 0
+                },
+                "source_end_censored": 0,
+                "following_high": 36,
+                "following_weak": 7
+              }
+            },
+            "past_neighbors": {
+              "control_neighbors_of_reference": {
+                "statuses": {
+                  "active_confirmed": 1,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0,
+                  "removed_expired": 0,
+                  "removed_immature_unmatched": 0,
+                  "removed_expired_and_immature": 0,
+                  "missing_evidence": 0
+                },
+                "neighbors": 1,
+                "recorded_prior_removal": 0,
+                "accepted_high": 59,
+                "accepted_weak": 3,
+                "past_common_anchors": 62
+              },
+              "reference_neighbors_of_control": {
+                "statuses": {
+                  "active_confirmed": 0,
+                  "active_tentative": 0,
+                  "retained_confirmed": 0,
+                  "retained_tentative": 0,
+                  "removed_expired": 1,
+                  "removed_immature_unmatched": 0,
+                  "removed_expired_and_immature": 0,
+                  "missing_evidence": 0
+                },
+                "neighbors": 1,
+                "recorded_prior_removal": 1,
+                "accepted_high": 68,
+                "accepted_weak": 2,
+                "past_common_anchors": 70
+              }
+            },
+            "following_same_pair_categories": {
+              "unique_continuation": 0,
+              "merge_relation": 0,
+              "split_relation": 0,
+              "many_to_many_relation": 0,
+              "unbridged_known_chains": 0,
+              "missing_reference_support": 0,
+              "missing_control_support": 0,
+              "missing_both_support": 0
+            },
+            "following_other_control_for_reference": 10,
+            "following_other_reference_for_control": 38,
+            "following_same_pair_strata": []
+          }
+        },
+        "original_bridge_receipt_sha256": "ebe72562e28f3c759d99a423ee0a03441aa6f124b22fb485d7e5439f696eb135",
+        "current_or_future_used_as_prior_evidence": false,
+        "identity_accepted": false
+      },
+      "local_case_receipt_sha256": "84f398a467ba44e100d898a4cf58d4613cfcecf61adec199c7f008afde068c13",
+      "archived_repeat_equal": true,
+      "original_proxy_gates": {
+        "no_lost_weak_accepted_inputs": true,
+        "no_lost_active_update_pairs": false,
+        "no_lost_confirmed_output_inputs": true,
+        "no_new_birth_events": true
+      }
+    },
+    {
+      "name": "MOT17-13-DPM",
+      "phase": "discovery",
+      "frames": 750,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "handoff": null
+    },
+    {
+      "name": "MOT17-04-DPM",
+      "phase": "discovery",
+      "frames": 1050,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "handoff": null
+    },
+    {
+      "name": "MOT20-01",
+      "phase": "discovery",
+      "frames": 429,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "handoff": null
+    },
+    {
+      "name": "MOT20-02",
+      "phase": "discovery",
+      "frames": 2782,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "handoff": null
+    },
+    {
+      "name": "MOT20-06",
+      "phase": "discovery",
+      "frames": 1008,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "handoff": null
+    },
+    {
+      "name": "MOT20-07",
+      "phase": "discovery",
+      "frames": 585,
+      "prior_audit_status": "completed",
+      "audit_status": "out_of_scope",
+      "handoff": null
+    },
+    {
+      "name": "MOT20-08",
+      "phase": "discovery",
+      "frames": 806,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "handoff": null
+    },
+    {
+      "name": "MOT17-07-DPM",
+      "phase": "discovery",
+      "frames": 500,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "handoff": null
+    },
+    {
+      "name": "MOT17-08-DPM",
+      "phase": "discovery",
+      "frames": 625,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "handoff": null
+    },
+    {
+      "name": "MOT17-12-DPM",
+      "phase": "discovery",
+      "frames": 900,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "handoff": null
+    },
+    {
+      "name": "MOT17-14-DPM",
+      "phase": "discovery",
+      "frames": 750,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "handoff": null
+    },
+    {
+      "name": "MOT20-03",
+      "phase": "discovery",
+      "frames": 2405,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "handoff": null
+    },
+    {
+      "name": "MOT20-05",
+      "phase": "discovery",
+      "frames": 3315,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "handoff": null
+    },
+    {
+      "name": "KITTI-0000",
+      "phase": "discovery",
+      "frames": 154,
+      "prior_audit_status": "unmeasured_original_failure",
+      "audit_status": "unmeasured_original_failure",
+      "handoff": null
+    },
+    {
+      "name": "KITTI-0001",
+      "phase": "discovery",
+      "frames": 447,
+      "prior_audit_status": "unmeasured_original_failure",
+      "audit_status": "unmeasured_original_failure",
+      "handoff": null
+    },
+    {
+      "name": "KITTI-0002",
+      "phase": "discovery",
+      "frames": 233,
+      "prior_audit_status": "unmeasured_original_failure",
+      "audit_status": "unmeasured_original_failure",
+      "handoff": null
+    },
+    {
+      "name": "KITTI-0003",
+      "phase": "discovery",
+      "frames": 144,
+      "prior_audit_status": "unmeasured_original_failure",
+      "audit_status": "unmeasured_original_failure",
+      "handoff": null
+    },
+    {
+      "name": "KITTI-0004",
+      "phase": "discovery",
+      "frames": 314,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "handoff": null
+    },
+    {
+      "name": "KITTI-0005",
+      "phase": "discovery",
+      "frames": 297,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "handoff": null
+    },
+    {
+      "name": "KITTI-0006",
+      "phase": "discovery",
+      "frames": 270,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "handoff": null
+    },
+    {
+      "name": "KITTI-0007",
+      "phase": "discovery",
+      "frames": 800,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "handoff": null
+    },
+    {
+      "name": "KITTI-0008",
+      "phase": "confirmation",
+      "frames": 390,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "handoff": null
+    },
+    {
+      "name": "KITTI-0009",
+      "phase": "confirmation",
+      "frames": 803,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "handoff": null
+    }
+  ]
+}

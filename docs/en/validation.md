@@ -1,6 +1,10 @@
 # Validation record
 [繁體中文](../zh-TW/validation.md) · [Home](../../README.md)
 
+## Strictly prior handoff evidence — 2026-10-22
+
+[Frozen method, complete ledger and decision](tracking-handoff-audit.md): all four fixed boundaries/full1,425 original frames/eight histories completed. Three reference birth-only owners originated in the previous frame while control accepted those seed inputs into active-confirmed ownership; past neighbors distinguish active/retained/explicitly expired. The established unbridged pair has zero later same-pair common updates and10/38 other-counterpart common exposures. Future evidence never repairs prior support.434 original files/21 prior records unchanged; original failures/nulls and both failed proxies retained. No GT, tuning, tracking/inference or weak/default changes; raw cases local. Next separately freeze candidate features/rules and scene harm standards, not a future-informed veto.
+
 ## Past common-observation lineage bridge — 2026-10-22
 
 [Frozen method, complete ledger and decision](tracking-observation-bridge.md): both failed scenes/full1,425 original frames/eight histories completed.89 original lost-active keys split85 supported merge relations,3 empty reference histories and1 unbridged known-chain event;10 broader common-input split relations have unchanged seed labels. This is chain correspondence, not identity truth; both old proxies remain failed.434 original files/15 prior records unchanged,26 source rows/nulls/four original failures and false replication preserved. No GT, tracking/inference, tuning, weak-stage/default changes; raw cases local. Next prospectively freeze past-only handoff evidence at the four unsupported event boundaries; no intervention or quality acceptance.
