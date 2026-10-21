@@ -1,6 +1,10 @@
 # Validation record
 [繁體中文](../zh-TW/validation.md) · [Home](../../README.md)
 
+## Separate causal birth/handoff controls on unseen KITTI sources — 2026-10-22
+
+[Two-rule freeze, terms, full ledger and decision](tracking-handoff-controls.md):667 full pixel-identical frames/18 isolated source processes on held-out KITTI0010/0011. Native/observed outputs/state and complete arm repeats match. Both candidates have0/0 actual actions and fail frozen exposure/replication; observable-input gates alone pass without establishing efficacy/safety.0010:49 detections/3 births/no accepted updates;0011:293 detections/4 births/57 high+64 weak updates, all retained. No GT, tuning, weak-stage/default change;434 historical seals and prior failures/nulls unchanged, raw diagnoses local. Both sources are now seen. Next freeze GT-free eligibility/exposure selection and untouched confirmation without changing rules.
+
 ## Strictly prior handoff evidence — 2026-10-22
 
 [Frozen method, complete ledger and decision](tracking-handoff-audit.md): all four fixed boundaries/full1,425 original frames/eight histories completed. Three reference birth-only owners originated in the previous frame while control accepted those seed inputs into active-confirmed ownership; past neighbors distinguish active/retained/explicitly expired. The established unbridged pair has zero later same-pair common updates and10/38 other-counterpart common exposures. Future evidence never repairs prior support.434 original files/21 prior records unchanged; original failures/nulls and both failed proxies retained. No GT, tuning, tracking/inference or weak/default changes; raw cases local. Next separately freeze candidate features/rules and scene harm standards, not a future-informed veto.
