@@ -1,0 +1,982 @@
+{
+  "format": "depthport.observation-bridge-audit.v1",
+  "protocol_sha256": "d780714e476ea42cd56559e869e11e732c712282c04d8956b30082da35e6be97",
+  "selected_sources": [
+    "MOT17-09-DPM",
+    "MOT17-11-DPM"
+  ],
+  "unique_source_frames": 1425,
+  "archived_histories": 8,
+  "all_selected_audits_completed": true,
+  "sealed_original_files_rechecked": 434,
+  "original_records_bytes_unchanged": true,
+  "original_discovery_completed": false,
+  "original_replication_flags": {
+    "active_confirmed": false,
+    "active_tentative": false,
+    "retained_confirmed": false,
+    "retained_tentative": false,
+    "active": false,
+    "retained": false,
+    "unconfirmed": false,
+    "any": false
+  },
+  "original_failures_retained": [
+    "KITTI-0000",
+    "KITTI-0001",
+    "KITTI-0002",
+    "KITTI-0003"
+  ],
+  "gt_read": false,
+  "accuracy_scoring": false,
+  "inference": false,
+  "tracking_rerun": false,
+  "retuned": false,
+  "weak_stage_changed": false,
+  "defaults_changed": false,
+  "tracking_quality_accepted": false,
+  "independent_confirmation": false,
+  "ledger": [
+    {
+      "name": "MOT17-09-DPM",
+      "phase": "discovery",
+      "frames": 525,
+      "prior_audit_status": "completed",
+      "audit_status": "completed",
+      "bridge": {
+        "frames": 525,
+        "common_anchors": 4140,
+        "graph_edges": 38,
+        "reference_degree_histogram": {
+          "1": 38
+        },
+        "control_degree_histogram": {
+          "1": 34,
+          "2": 2
+        },
+        "groups": {
+          "all_common": {
+            "events": 4140,
+            "categories": {
+              "unique_continuation": 4053,
+              "merge_relation": 49,
+              "split_relation": 0,
+              "many_to_many_relation": 0,
+              "unbridged_known_chains": 0,
+              "missing_reference_support": 2,
+              "missing_control_support": 0,
+              "missing_both_support": 36
+            },
+            "flags": {
+              "direct_supported": 4102,
+              "direct_unsupported": 38,
+              "indirect_connected_without_direct": 0,
+              "reference_accepted_history_empty": 38,
+              "control_accepted_history_empty": 36,
+              "reference_only_noncommon_history": 0,
+              "control_only_noncommon_history": 0
+            },
+            "distinct_owner_pairs": 38,
+            "first_event_per_pair_categories": {
+              "unique_continuation": 0,
+              "merge_relation": 0,
+              "split_relation": 0,
+              "many_to_many_relation": 0,
+              "unbridged_known_chains": 0,
+              "missing_reference_support": 2,
+              "missing_control_support": 0,
+              "missing_both_support": 36
+            },
+            "strata": [
+              {
+                "category": "merge_relation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 48
+              },
+              {
+                "category": "merge_relation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "weak",
+                "control_stage": "weak",
+                "events": 1
+              },
+              {
+                "category": "missing_both_support",
+                "reference_role": "active_tentative",
+                "control_role": "active_tentative",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 31
+              },
+              {
+                "category": "missing_both_support",
+                "reference_role": "active_tentative",
+                "control_role": "active_tentative",
+                "reference_stage": "weak",
+                "control_stage": "weak",
+                "events": 5
+              },
+              {
+                "category": "missing_reference_support",
+                "reference_role": "active_tentative",
+                "control_role": "active_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 2
+              },
+              {
+                "category": "unique_continuation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 2624
+              },
+              {
+                "category": "unique_continuation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "weak",
+                "control_stage": "weak",
+                "events": 1365
+              },
+              {
+                "category": "unique_continuation",
+                "reference_role": "retained_confirmed",
+                "control_role": "retained_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 3
+              },
+              {
+                "category": "unique_continuation",
+                "reference_role": "retained_confirmed",
+                "control_role": "retained_confirmed",
+                "reference_stage": "weak",
+                "control_stage": "weak",
+                "events": 61
+              }
+            ]
+          },
+          "changed_lineage": {
+            "events": 51,
+            "categories": {
+              "unique_continuation": 0,
+              "merge_relation": 49,
+              "split_relation": 0,
+              "many_to_many_relation": 0,
+              "unbridged_known_chains": 0,
+              "missing_reference_support": 2,
+              "missing_control_support": 0,
+              "missing_both_support": 0
+            },
+            "flags": {
+              "direct_supported": 49,
+              "direct_unsupported": 2,
+              "indirect_connected_without_direct": 0,
+              "reference_accepted_history_empty": 2,
+              "control_accepted_history_empty": 0,
+              "reference_only_noncommon_history": 0,
+              "control_only_noncommon_history": 0
+            },
+            "distinct_owner_pairs": 2,
+            "first_event_per_pair_categories": {
+              "unique_continuation": 0,
+              "merge_relation": 0,
+              "split_relation": 0,
+              "many_to_many_relation": 0,
+              "unbridged_known_chains": 0,
+              "missing_reference_support": 2,
+              "missing_control_support": 0,
+              "missing_both_support": 0
+            },
+            "strata": [
+              {
+                "category": "merge_relation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 48
+              },
+              {
+                "category": "merge_relation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "weak",
+                "control_stage": "weak",
+                "events": 1
+              },
+              {
+                "category": "missing_reference_support",
+                "reference_role": "active_tentative",
+                "control_role": "active_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 2
+              }
+            ]
+          },
+          "lost_original_active": {
+            "events": 51,
+            "categories": {
+              "unique_continuation": 0,
+              "merge_relation": 49,
+              "split_relation": 0,
+              "many_to_many_relation": 0,
+              "unbridged_known_chains": 0,
+              "missing_reference_support": 2,
+              "missing_control_support": 0,
+              "missing_both_support": 0
+            },
+            "flags": {
+              "direct_supported": 49,
+              "direct_unsupported": 2,
+              "indirect_connected_without_direct": 0,
+              "reference_accepted_history_empty": 2,
+              "control_accepted_history_empty": 0,
+              "reference_only_noncommon_history": 0,
+              "control_only_noncommon_history": 0
+            },
+            "distinct_owner_pairs": 2,
+            "first_event_per_pair_categories": {
+              "unique_continuation": 0,
+              "merge_relation": 0,
+              "split_relation": 0,
+              "many_to_many_relation": 0,
+              "unbridged_known_chains": 0,
+              "missing_reference_support": 2,
+              "missing_control_support": 0,
+              "missing_both_support": 0
+            },
+            "strata": [
+              {
+                "category": "merge_relation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 48
+              },
+              {
+                "category": "merge_relation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "weak",
+                "control_stage": "weak",
+                "events": 1
+              },
+              {
+                "category": "missing_reference_support",
+                "reference_role": "active_tentative",
+                "control_role": "active_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 2
+              }
+            ]
+          },
+          "unchanged_lineage": {
+            "events": 4089,
+            "categories": {
+              "unique_continuation": 4053,
+              "merge_relation": 0,
+              "split_relation": 0,
+              "many_to_many_relation": 0,
+              "unbridged_known_chains": 0,
+              "missing_reference_support": 0,
+              "missing_control_support": 0,
+              "missing_both_support": 36
+            },
+            "flags": {
+              "direct_supported": 4053,
+              "direct_unsupported": 36,
+              "indirect_connected_without_direct": 0,
+              "reference_accepted_history_empty": 36,
+              "control_accepted_history_empty": 36,
+              "reference_only_noncommon_history": 0,
+              "control_only_noncommon_history": 0
+            },
+            "distinct_owner_pairs": 36,
+            "first_event_per_pair_categories": {
+              "unique_continuation": 0,
+              "merge_relation": 0,
+              "split_relation": 0,
+              "many_to_many_relation": 0,
+              "unbridged_known_chains": 0,
+              "missing_reference_support": 0,
+              "missing_control_support": 0,
+              "missing_both_support": 36
+            },
+            "strata": [
+              {
+                "category": "missing_both_support",
+                "reference_role": "active_tentative",
+                "control_role": "active_tentative",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 31
+              },
+              {
+                "category": "missing_both_support",
+                "reference_role": "active_tentative",
+                "control_role": "active_tentative",
+                "reference_stage": "weak",
+                "control_stage": "weak",
+                "events": 5
+              },
+              {
+                "category": "unique_continuation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 2624
+              },
+              {
+                "category": "unique_continuation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "weak",
+                "control_stage": "weak",
+                "events": 1365
+              },
+              {
+                "category": "unique_continuation",
+                "reference_role": "retained_confirmed",
+                "control_role": "retained_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 3
+              },
+              {
+                "category": "unique_continuation",
+                "reference_role": "retained_confirmed",
+                "control_role": "retained_confirmed",
+                "reference_stage": "weak",
+                "control_stage": "weak",
+                "events": 61
+              }
+            ]
+          }
+        },
+        "local_bridge_receipt_sha256": "8d2d7ee330034f529aa6aafee55fe59fe9e49895f1933f8c86b07dab943c937f",
+        "identity_accepted": false
+      },
+      "archived_repeat_equal": true,
+      "original_proxy_gates": {
+        "no_lost_weak_accepted_inputs": true,
+        "no_lost_active_update_pairs": false,
+        "no_lost_confirmed_output_inputs": true,
+        "no_new_birth_events": true
+      }
+    },
+    {
+      "name": "MOT17-10-DPM",
+      "phase": "discovery",
+      "frames": 654,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT17-11-DPM",
+      "phase": "discovery",
+      "frames": 900,
+      "prior_audit_status": "completed",
+      "audit_status": "completed",
+      "bridge": {
+        "frames": 900,
+        "common_anchors": 5751,
+        "graph_edges": 48,
+        "reference_degree_histogram": {
+          "1": 46,
+          "2": 1
+        },
+        "control_degree_histogram": {
+          "1": 45,
+          "3": 1
+        },
+        "groups": {
+          "all_common": {
+            "events": 5751,
+            "categories": {
+              "unique_continuation": 5656,
+              "merge_relation": 37,
+              "split_relation": 10,
+              "many_to_many_relation": 0,
+              "unbridged_known_chains": 1,
+              "missing_reference_support": 1,
+              "missing_control_support": 0,
+              "missing_both_support": 46
+            },
+            "flags": {
+              "direct_supported": 5703,
+              "direct_unsupported": 48,
+              "indirect_connected_without_direct": 0,
+              "reference_accepted_history_empty": 47,
+              "control_accepted_history_empty": 46,
+              "reference_only_noncommon_history": 0,
+              "control_only_noncommon_history": 0
+            },
+            "distinct_owner_pairs": 48,
+            "first_event_per_pair_categories": {
+              "unique_continuation": 0,
+              "merge_relation": 0,
+              "split_relation": 0,
+              "many_to_many_relation": 0,
+              "unbridged_known_chains": 1,
+              "missing_reference_support": 1,
+              "missing_control_support": 0,
+              "missing_both_support": 46
+            },
+            "strata": [
+              {
+                "category": "merge_relation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 34
+              },
+              {
+                "category": "merge_relation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "weak",
+                "control_stage": "weak",
+                "events": 2
+              },
+              {
+                "category": "merge_relation",
+                "reference_role": "retained_confirmed",
+                "control_role": "retained_confirmed",
+                "reference_stage": "weak",
+                "control_stage": "weak",
+                "events": 1
+              },
+              {
+                "category": "missing_both_support",
+                "reference_role": "active_tentative",
+                "control_role": "active_tentative",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 38
+              },
+              {
+                "category": "missing_both_support",
+                "reference_role": "active_tentative",
+                "control_role": "active_tentative",
+                "reference_stage": "weak",
+                "control_stage": "weak",
+                "events": 8
+              },
+              {
+                "category": "missing_reference_support",
+                "reference_role": "active_tentative",
+                "control_role": "active_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 1
+              },
+              {
+                "category": "split_relation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 9
+              },
+              {
+                "category": "split_relation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "weak",
+                "control_stage": "weak",
+                "events": 1
+              },
+              {
+                "category": "unbridged_known_chains",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 1
+              },
+              {
+                "category": "unique_continuation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 5173
+              },
+              {
+                "category": "unique_continuation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "weak",
+                "control_stage": "weak",
+                "events": 463
+              },
+              {
+                "category": "unique_continuation",
+                "reference_role": "retained_confirmed",
+                "control_role": "retained_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 1
+              },
+              {
+                "category": "unique_continuation",
+                "reference_role": "retained_confirmed",
+                "control_role": "retained_confirmed",
+                "reference_stage": "weak",
+                "control_stage": "weak",
+                "events": 19
+              }
+            ]
+          },
+          "changed_lineage": {
+            "events": 39,
+            "categories": {
+              "unique_continuation": 0,
+              "merge_relation": 37,
+              "split_relation": 0,
+              "many_to_many_relation": 0,
+              "unbridged_known_chains": 1,
+              "missing_reference_support": 1,
+              "missing_control_support": 0,
+              "missing_both_support": 0
+            },
+            "flags": {
+              "direct_supported": 37,
+              "direct_unsupported": 2,
+              "indirect_connected_without_direct": 0,
+              "reference_accepted_history_empty": 1,
+              "control_accepted_history_empty": 0,
+              "reference_only_noncommon_history": 0,
+              "control_only_noncommon_history": 0
+            },
+            "distinct_owner_pairs": 2,
+            "first_event_per_pair_categories": {
+              "unique_continuation": 0,
+              "merge_relation": 0,
+              "split_relation": 0,
+              "many_to_many_relation": 0,
+              "unbridged_known_chains": 1,
+              "missing_reference_support": 1,
+              "missing_control_support": 0,
+              "missing_both_support": 0
+            },
+            "strata": [
+              {
+                "category": "merge_relation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 34
+              },
+              {
+                "category": "merge_relation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "weak",
+                "control_stage": "weak",
+                "events": 2
+              },
+              {
+                "category": "merge_relation",
+                "reference_role": "retained_confirmed",
+                "control_role": "retained_confirmed",
+                "reference_stage": "weak",
+                "control_stage": "weak",
+                "events": 1
+              },
+              {
+                "category": "missing_reference_support",
+                "reference_role": "active_tentative",
+                "control_role": "active_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 1
+              },
+              {
+                "category": "unbridged_known_chains",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 1
+              }
+            ]
+          },
+          "lost_original_active": {
+            "events": 38,
+            "categories": {
+              "unique_continuation": 0,
+              "merge_relation": 36,
+              "split_relation": 0,
+              "many_to_many_relation": 0,
+              "unbridged_known_chains": 1,
+              "missing_reference_support": 1,
+              "missing_control_support": 0,
+              "missing_both_support": 0
+            },
+            "flags": {
+              "direct_supported": 36,
+              "direct_unsupported": 2,
+              "indirect_connected_without_direct": 0,
+              "reference_accepted_history_empty": 1,
+              "control_accepted_history_empty": 0,
+              "reference_only_noncommon_history": 0,
+              "control_only_noncommon_history": 0
+            },
+            "distinct_owner_pairs": 2,
+            "first_event_per_pair_categories": {
+              "unique_continuation": 0,
+              "merge_relation": 0,
+              "split_relation": 0,
+              "many_to_many_relation": 0,
+              "unbridged_known_chains": 1,
+              "missing_reference_support": 1,
+              "missing_control_support": 0,
+              "missing_both_support": 0
+            },
+            "strata": [
+              {
+                "category": "merge_relation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 34
+              },
+              {
+                "category": "merge_relation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "weak",
+                "control_stage": "weak",
+                "events": 2
+              },
+              {
+                "category": "missing_reference_support",
+                "reference_role": "active_tentative",
+                "control_role": "active_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 1
+              },
+              {
+                "category": "unbridged_known_chains",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 1
+              }
+            ]
+          },
+          "unchanged_lineage": {
+            "events": 5712,
+            "categories": {
+              "unique_continuation": 5656,
+              "merge_relation": 0,
+              "split_relation": 10,
+              "many_to_many_relation": 0,
+              "unbridged_known_chains": 0,
+              "missing_reference_support": 0,
+              "missing_control_support": 0,
+              "missing_both_support": 46
+            },
+            "flags": {
+              "direct_supported": 5666,
+              "direct_unsupported": 46,
+              "indirect_connected_without_direct": 0,
+              "reference_accepted_history_empty": 46,
+              "control_accepted_history_empty": 46,
+              "reference_only_noncommon_history": 0,
+              "control_only_noncommon_history": 0
+            },
+            "distinct_owner_pairs": 46,
+            "first_event_per_pair_categories": {
+              "unique_continuation": 0,
+              "merge_relation": 0,
+              "split_relation": 0,
+              "many_to_many_relation": 0,
+              "unbridged_known_chains": 0,
+              "missing_reference_support": 0,
+              "missing_control_support": 0,
+              "missing_both_support": 46
+            },
+            "strata": [
+              {
+                "category": "missing_both_support",
+                "reference_role": "active_tentative",
+                "control_role": "active_tentative",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 38
+              },
+              {
+                "category": "missing_both_support",
+                "reference_role": "active_tentative",
+                "control_role": "active_tentative",
+                "reference_stage": "weak",
+                "control_stage": "weak",
+                "events": 8
+              },
+              {
+                "category": "split_relation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 9
+              },
+              {
+                "category": "split_relation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "weak",
+                "control_stage": "weak",
+                "events": 1
+              },
+              {
+                "category": "unique_continuation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 5173
+              },
+              {
+                "category": "unique_continuation",
+                "reference_role": "active_confirmed",
+                "control_role": "active_confirmed",
+                "reference_stage": "weak",
+                "control_stage": "weak",
+                "events": 463
+              },
+              {
+                "category": "unique_continuation",
+                "reference_role": "retained_confirmed",
+                "control_role": "retained_confirmed",
+                "reference_stage": "high",
+                "control_stage": "high",
+                "events": 1
+              },
+              {
+                "category": "unique_continuation",
+                "reference_role": "retained_confirmed",
+                "control_role": "retained_confirmed",
+                "reference_stage": "weak",
+                "control_stage": "weak",
+                "events": 19
+              }
+            ]
+          }
+        },
+        "local_bridge_receipt_sha256": "ebe72562e28f3c759d99a423ee0a03441aa6f124b22fb485d7e5439f696eb135",
+        "identity_accepted": false
+      },
+      "archived_repeat_equal": true,
+      "original_proxy_gates": {
+        "no_lost_weak_accepted_inputs": true,
+        "no_lost_active_update_pairs": false,
+        "no_lost_confirmed_output_inputs": true,
+        "no_new_birth_events": true
+      }
+    },
+    {
+      "name": "MOT17-13-DPM",
+      "phase": "discovery",
+      "frames": 750,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT17-04-DPM",
+      "phase": "discovery",
+      "frames": 1050,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT20-01",
+      "phase": "discovery",
+      "frames": 429,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT20-02",
+      "phase": "discovery",
+      "frames": 2782,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT20-06",
+      "phase": "discovery",
+      "frames": 1008,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT20-07",
+      "phase": "discovery",
+      "frames": 585,
+      "prior_audit_status": "completed",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT20-08",
+      "phase": "discovery",
+      "frames": 806,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT17-07-DPM",
+      "phase": "discovery",
+      "frames": 500,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT17-08-DPM",
+      "phase": "discovery",
+      "frames": 625,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT17-12-DPM",
+      "phase": "discovery",
+      "frames": 900,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT17-14-DPM",
+      "phase": "discovery",
+      "frames": 750,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT20-03",
+      "phase": "discovery",
+      "frames": 2405,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "MOT20-05",
+      "phase": "discovery",
+      "frames": 3315,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "KITTI-0000",
+      "phase": "discovery",
+      "frames": 154,
+      "prior_audit_status": "unmeasured_original_failure",
+      "audit_status": "unmeasured_original_failure",
+      "bridge": null
+    },
+    {
+      "name": "KITTI-0001",
+      "phase": "discovery",
+      "frames": 447,
+      "prior_audit_status": "unmeasured_original_failure",
+      "audit_status": "unmeasured_original_failure",
+      "bridge": null
+    },
+    {
+      "name": "KITTI-0002",
+      "phase": "discovery",
+      "frames": 233,
+      "prior_audit_status": "unmeasured_original_failure",
+      "audit_status": "unmeasured_original_failure",
+      "bridge": null
+    },
+    {
+      "name": "KITTI-0003",
+      "phase": "discovery",
+      "frames": 144,
+      "prior_audit_status": "unmeasured_original_failure",
+      "audit_status": "unmeasured_original_failure",
+      "bridge": null
+    },
+    {
+      "name": "KITTI-0004",
+      "phase": "discovery",
+      "frames": 314,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "KITTI-0005",
+      "phase": "discovery",
+      "frames": 297,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "KITTI-0006",
+      "phase": "discovery",
+      "frames": 270,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "KITTI-0007",
+      "phase": "discovery",
+      "frames": 800,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "KITTI-0008",
+      "phase": "confirmation",
+      "frames": 390,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    },
+    {
+      "name": "KITTI-0009",
+      "phase": "confirmation",
+      "frames": 803,
+      "prior_audit_status": "out_of_scope_unchanged_output",
+      "audit_status": "out_of_scope",
+      "bridge": null
+    }
+  ]
+}
