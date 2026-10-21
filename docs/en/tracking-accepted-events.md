@@ -18,8 +18,24 @@ Retain all 26 source rows: three selected, nineteen unchanged outputs out of sco
 
 Only aggregate counts, denominators, integrity/failure flags and hashes are public. Raw input/seed/token/ID/box cases, exceptions and local paths remain ignored locally. Previously reviewed MOT/KITTI noncommercial local-research terms apply; no media/GT/cache/raw-output redistribution or relicensing.
 
-## Status
+## Results and decision
 
-Method frozen; event extraction pending. Six optional native fixture tests initially failed before freeze due to a helper package import; fixing that import yielded 107 passing related contracts. The original failure summary remains local. No method change follows real-source extraction.
+[Complete ledger and denominators](../validation/v0.3-accepted-events.json) · [Method published before extraction](https://github.com/JShengP/depthport/commit/5dc33a4dcd2cfea0ae29a2e9c261f711ba214587)
 
-Use `tools/audit_tracking_accepted_events.py freeze|analyze --archive-root <existing artifacts directory>`. The tool refuses overwrites/retries and retains failed rows. Diagnosis does not close tracking quality, physical acceptance or genuinely unseen confirmation gates.
+All twelve archived histories covering three sources/2,010 original frames were read completely. Both trials per arm agree on counts, input and ordered event receipts, and membership differences. No source audit failed or retried. All434 original inputs and ten public records remain unchanged. The26-row ledger retains3 completed,19 out-of-scope and4 originally failed/unmeasured rows with null counts; discovery completeness and all eight formal replication flags remain false.
+
+- **MOT17-09-DPM:** accepted inputs4,140→4,144; common4,140/lost0/added4 (high2/weak2). All1,432 original weak inputs retained. Births38→36, two lost/no new. Among common inputs,51 seed lineages and51 posterior-box encodings change;51 original active-edge keys are lost, all due to lineage, with no missing input/stage/retained-role loss.
+- **MOT17-11-DPM:** inputs5,751→5,766; common5,751/lost0/added15 (high1/weak14). All494 original weak inputs retained. Births47→46, one lost/no new. Common inputs have39 lineage and49 posterior-box encoding changes.38 original active edges are lost through lineage; the other changed lineage was originally retained and does not belong to active loss.
+- **MOT20-07:** inputs3,753→3,758; common3,753/lost0/added5, all weak. All1,928 original weak inputs retained; births23→23. Common-input stage/lineage/box-encoding changes and original active-edge losses are all zero.
+
+No original weak or confirmed accepted input is lost, no common input changes high/weak stage, and no new birth appears in any scene. **Two scenes still fail the original no-lost-active-update-pair proxy:** that key includes seed lineage, so51/38 changed keys do not mean89 dropped accepted inputs. Do not relax or retrospectively pass the original gate. MOT20-07 passing these four membership proxies is not overall quality acceptance. Extra coverage, fewer births and equal boxes do not establish correct identity, true FN improvement or occlusion recovery. Without GT, legitimate chain merging versus incorrect association is unresolved.
+
+**No next intervention is selected.** Prospectively define a causal bridge using only common accepted observations available before a decision, separating chain continuation, merges/splits and absent support, before considering intervention. Birth-key equality is not identity truth; zero lost inputs does not justify removing protection. Quality, long-occlusion and genuinely unseen confirmation remain open. Weak continuation, geometry, parameters, decisions, application/worker and defaults are unchanged. Raw cases remain local.
+
+## Validation and reproduction
+
+107 synthetic/native contracts passed before freeze. Six new optional fixture tests initially failed on a helper package import; correcting it passed before any real-history extraction, with the original failure summary retained locally. Public-report checks separately verify membership balance, stage deltas, all26 rows/nulls/four failures and434 seals. CI is software/import evidence without pretrained weights; subsequent PR/main results are recorded in[PR #36](https://github.com/JShengP/depthport/pull/36).
+
+Use `tools/audit_tracking_accepted_events.py freeze|analyze --archive-root <existing artifacts directory>`. Existing sealed artifacts must be obtained under their original terms; they are not included publicly. Source tracking reconstruction is a different experiment and cannot substitute for this read-only audit.
+
+Final local validation:566 passed/98 optional skipped in the application environment, retaining one existing Starlette/httpx deprecation warning;110 current/related contracts passed in the pinned NumPy2 research environment. Skips are not passes. Public-manifest/local-link/obvious-secret-pattern checks pass; this is not a full security audit.

@@ -1,0 +1,535 @@
+{
+  "format": "depthport.accepted-events-audit.v1",
+  "protocol_sha256": "6441c390d2fb8ff11a1deb0cb7fd0fbc26386a2e710b5a5577b490d3af59f18f",
+  "gt_read": false,
+  "accuracy_scoring": false,
+  "inference": false,
+  "tracking_rerun": false,
+  "retuned": false,
+  "weak_stage_changed": false,
+  "defaults_changed": false,
+  "original_records_bytes_unchanged": true,
+  "original_discovery_completed": false,
+  "original_replication_flags": {
+    "active_confirmed": false,
+    "active_tentative": false,
+    "retained_confirmed": false,
+    "retained_tentative": false,
+    "active": false,
+    "retained": false,
+    "unconfirmed": false,
+    "any": false
+  },
+  "original_failures_retained": [
+    "KITTI-0000",
+    "KITTI-0001",
+    "KITTI-0002",
+    "KITTI-0003"
+  ],
+  "sealed_local_inputs_rechecked": 434,
+  "selected_sources": [
+    "MOT17-09-DPM",
+    "MOT17-11-DPM",
+    "MOT20-07"
+  ],
+  "all_selected_audits_completed": true,
+  "tracking_quality_accepted": false,
+  "ledger": [
+    {
+      "name": "MOT17-09-DPM",
+      "phase": "discovery",
+      "frames": 525,
+      "original_status": "completed",
+      "audit_status": "completed",
+      "event_counts": {
+        "reference": {
+          "frames": 525,
+          "births": 38,
+          "accepted_high": 2708,
+          "accepted_weak": 1432,
+          "confirmed_observations": 4140,
+          "active_updates": 4076,
+          "retained_updates": 64,
+          "tentative_promotions": 38,
+          "accepted_inputs": 4140,
+          "input_receipt_sha256": "93a626beb49ab4221c40769220adc42d815fb4604732e386fe0619cb4a54eac0",
+          "event_receipt_sha256": "2dd2b0f03d50ed88247ddb31855ef89fa4a2402dd7e98e622a2265c94db32fdb"
+        },
+        "projection": {
+          "frames": 525,
+          "births": 36,
+          "accepted_high": 2710,
+          "accepted_weak": 1434,
+          "confirmed_observations": 4144,
+          "active_updates": 4078,
+          "retained_updates": 66,
+          "tentative_promotions": 36,
+          "accepted_inputs": 4144,
+          "input_receipt_sha256": "93a626beb49ab4221c40769220adc42d815fb4604732e386fe0619cb4a54eac0",
+          "event_receipt_sha256": "591f08427424d82e470446471b616c4705c3dd1d0fb8660335eb0b79e657e47e"
+        }
+      },
+      "membership": {
+        "membership": {
+          "input_membership": {
+            "reference": 4140,
+            "control": 4144,
+            "common": 4140,
+            "lost": 0,
+            "added": 4
+          },
+          "stage_membership": {
+            "reference": 4140,
+            "control": 4144,
+            "common": 4140,
+            "lost": 0,
+            "added": 4
+          },
+          "lineage_membership": {
+            "reference": 4140,
+            "control": 4144,
+            "common": 4089,
+            "lost": 51,
+            "added": 55
+          },
+          "stage_lineage_membership": {
+            "reference": 4140,
+            "control": 4144,
+            "common": 4089,
+            "lost": 51,
+            "added": 55
+          }
+        },
+        "common_input_stage_changes": 0,
+        "common_input_birth_lineage_changes": 51,
+        "common_input_posterior_box_encoding_changes": 51,
+        "birth_membership": {
+          "reference": 38,
+          "control": 36,
+          "lost": 2,
+          "added": 0
+        },
+        "original_proxy_loss_counts": {
+          "weak": 0,
+          "active": 51,
+          "confirmed": 0
+        },
+        "lost_weak_partition": {
+          "input_missing": 0,
+          "moved_to_high": 0
+        },
+        "lost_confirmed_partition": {
+          "input_missing": 0,
+          "accepted_but_unconfirmed": 0
+        },
+        "lost_active_partition_priority": {
+          "input_missing": 0,
+          "birth_lineage_changed": 51,
+          "stage_changed": 0,
+          "became_retained": 0
+        },
+        "original_membership_proxy_gates": {
+          "no_lost_weak_accepted_inputs": true,
+          "no_lost_active_update_pairs": false,
+          "no_lost_confirmed_output_inputs": true,
+          "no_new_birth_events": true
+        },
+        "identity_or_accuracy_accepted": false
+      },
+      "archived_repeat_equal": true,
+      "local_difference_sha256": "4067117638d68c316c12a8b79a610a96bbbef4c29e16f74451e1073a89098694"
+    },
+    {
+      "name": "MOT17-10-DPM",
+      "phase": "discovery",
+      "frames": 654,
+      "original_status": "completed",
+      "audit_status": "out_of_scope_unchanged_output",
+      "event_counts": null
+    },
+    {
+      "name": "MOT17-11-DPM",
+      "phase": "discovery",
+      "frames": 900,
+      "original_status": "completed",
+      "audit_status": "completed",
+      "event_counts": {
+        "reference": {
+          "frames": 900,
+          "births": 47,
+          "accepted_high": 5257,
+          "accepted_weak": 494,
+          "confirmed_observations": 5751,
+          "active_updates": 5730,
+          "retained_updates": 21,
+          "tentative_promotions": 47,
+          "accepted_inputs": 5751,
+          "input_receipt_sha256": "5d849b617b0bcc595b0330cacf409f76d312f2d32f599bde3195aa3c3c08060f",
+          "event_receipt_sha256": "fd482d43aa21b23e51eac3c617c7313a3749ab0e1d5e489d7417ce184e218984"
+        },
+        "projection": {
+          "frames": 900,
+          "births": 46,
+          "accepted_high": 5258,
+          "accepted_weak": 508,
+          "confirmed_observations": 5766,
+          "active_updates": 5740,
+          "retained_updates": 26,
+          "tentative_promotions": 46,
+          "accepted_inputs": 5766,
+          "input_receipt_sha256": "5d849b617b0bcc595b0330cacf409f76d312f2d32f599bde3195aa3c3c08060f",
+          "event_receipt_sha256": "b7cb23eb97210d231de4b962158a54e310ec411d98c20f8853f8c2bf35cc6a76"
+        }
+      },
+      "membership": {
+        "membership": {
+          "input_membership": {
+            "reference": 5751,
+            "control": 5766,
+            "common": 5751,
+            "lost": 0,
+            "added": 15
+          },
+          "stage_membership": {
+            "reference": 5751,
+            "control": 5766,
+            "common": 5751,
+            "lost": 0,
+            "added": 15
+          },
+          "lineage_membership": {
+            "reference": 5751,
+            "control": 5766,
+            "common": 5712,
+            "lost": 39,
+            "added": 54
+          },
+          "stage_lineage_membership": {
+            "reference": 5751,
+            "control": 5766,
+            "common": 5712,
+            "lost": 39,
+            "added": 54
+          }
+        },
+        "common_input_stage_changes": 0,
+        "common_input_birth_lineage_changes": 39,
+        "common_input_posterior_box_encoding_changes": 49,
+        "birth_membership": {
+          "reference": 47,
+          "control": 46,
+          "lost": 1,
+          "added": 0
+        },
+        "original_proxy_loss_counts": {
+          "weak": 0,
+          "active": 38,
+          "confirmed": 0
+        },
+        "lost_weak_partition": {
+          "input_missing": 0,
+          "moved_to_high": 0
+        },
+        "lost_confirmed_partition": {
+          "input_missing": 0,
+          "accepted_but_unconfirmed": 0
+        },
+        "lost_active_partition_priority": {
+          "input_missing": 0,
+          "birth_lineage_changed": 38,
+          "stage_changed": 0,
+          "became_retained": 0
+        },
+        "original_membership_proxy_gates": {
+          "no_lost_weak_accepted_inputs": true,
+          "no_lost_active_update_pairs": false,
+          "no_lost_confirmed_output_inputs": true,
+          "no_new_birth_events": true
+        },
+        "identity_or_accuracy_accepted": false
+      },
+      "archived_repeat_equal": true,
+      "local_difference_sha256": "da68008982d2ac2c5de63ddf0422486e93b9739393f0f8ba06141b18fb58d50f"
+    },
+    {
+      "name": "MOT17-13-DPM",
+      "phase": "discovery",
+      "frames": 750,
+      "original_status": "completed",
+      "audit_status": "out_of_scope_unchanged_output",
+      "event_counts": null
+    },
+    {
+      "name": "MOT17-04-DPM",
+      "phase": "discovery",
+      "frames": 1050,
+      "original_status": "completed",
+      "audit_status": "out_of_scope_unchanged_output",
+      "event_counts": null
+    },
+    {
+      "name": "MOT20-01",
+      "phase": "discovery",
+      "frames": 429,
+      "original_status": "completed",
+      "audit_status": "out_of_scope_unchanged_output",
+      "event_counts": null
+    },
+    {
+      "name": "MOT20-02",
+      "phase": "discovery",
+      "frames": 2782,
+      "original_status": "completed",
+      "audit_status": "out_of_scope_unchanged_output",
+      "event_counts": null
+    },
+    {
+      "name": "MOT20-06",
+      "phase": "discovery",
+      "frames": 1008,
+      "original_status": "completed",
+      "audit_status": "out_of_scope_unchanged_output",
+      "event_counts": null
+    },
+    {
+      "name": "MOT20-07",
+      "phase": "discovery",
+      "frames": 585,
+      "original_status": "completed",
+      "audit_status": "completed",
+      "event_counts": {
+        "reference": {
+          "frames": 585,
+          "births": 23,
+          "accepted_high": 1825,
+          "accepted_weak": 1928,
+          "confirmed_observations": 3753,
+          "active_updates": 3731,
+          "retained_updates": 22,
+          "tentative_promotions": 23,
+          "accepted_inputs": 3753,
+          "input_receipt_sha256": "c017d806f0cfa52dbbf76b78348c5b3d9de50430e7add9b6cbe76c377c379fa5",
+          "event_receipt_sha256": "c35091c7ccf1e304405fcd5f7f2d7a6f8ec885416938c1ecedd3e7bd5a2de18f"
+        },
+        "projection": {
+          "frames": 585,
+          "births": 23,
+          "accepted_high": 1825,
+          "accepted_weak": 1933,
+          "confirmed_observations": 3758,
+          "active_updates": 3735,
+          "retained_updates": 23,
+          "tentative_promotions": 23,
+          "accepted_inputs": 3758,
+          "input_receipt_sha256": "c017d806f0cfa52dbbf76b78348c5b3d9de50430e7add9b6cbe76c377c379fa5",
+          "event_receipt_sha256": "8838d33ceae57d820bc333fd358684d30c817ce4bd6a341ac9ad4faeb08967b2"
+        }
+      },
+      "membership": {
+        "membership": {
+          "input_membership": {
+            "reference": 3753,
+            "control": 3758,
+            "common": 3753,
+            "lost": 0,
+            "added": 5
+          },
+          "stage_membership": {
+            "reference": 3753,
+            "control": 3758,
+            "common": 3753,
+            "lost": 0,
+            "added": 5
+          },
+          "lineage_membership": {
+            "reference": 3753,
+            "control": 3758,
+            "common": 3753,
+            "lost": 0,
+            "added": 5
+          },
+          "stage_lineage_membership": {
+            "reference": 3753,
+            "control": 3758,
+            "common": 3753,
+            "lost": 0,
+            "added": 5
+          }
+        },
+        "common_input_stage_changes": 0,
+        "common_input_birth_lineage_changes": 0,
+        "common_input_posterior_box_encoding_changes": 0,
+        "birth_membership": {
+          "reference": 23,
+          "control": 23,
+          "lost": 0,
+          "added": 0
+        },
+        "original_proxy_loss_counts": {
+          "weak": 0,
+          "active": 0,
+          "confirmed": 0
+        },
+        "lost_weak_partition": {
+          "input_missing": 0,
+          "moved_to_high": 0
+        },
+        "lost_confirmed_partition": {
+          "input_missing": 0,
+          "accepted_but_unconfirmed": 0
+        },
+        "lost_active_partition_priority": {
+          "input_missing": 0,
+          "birth_lineage_changed": 0,
+          "stage_changed": 0,
+          "became_retained": 0
+        },
+        "original_membership_proxy_gates": {
+          "no_lost_weak_accepted_inputs": true,
+          "no_lost_active_update_pairs": true,
+          "no_lost_confirmed_output_inputs": true,
+          "no_new_birth_events": true
+        },
+        "identity_or_accuracy_accepted": false
+      },
+      "archived_repeat_equal": true,
+      "local_difference_sha256": "baa9d9e1644abb0196967e1414f7545a10ea5ae854f17dd6a603b8e372648a54"
+    },
+    {
+      "name": "MOT20-08",
+      "phase": "discovery",
+      "frames": 806,
+      "original_status": "completed",
+      "audit_status": "out_of_scope_unchanged_output",
+      "event_counts": null
+    },
+    {
+      "name": "MOT17-07-DPM",
+      "phase": "discovery",
+      "frames": 500,
+      "original_status": "completed",
+      "audit_status": "out_of_scope_unchanged_output",
+      "event_counts": null
+    },
+    {
+      "name": "MOT17-08-DPM",
+      "phase": "discovery",
+      "frames": 625,
+      "original_status": "completed",
+      "audit_status": "out_of_scope_unchanged_output",
+      "event_counts": null
+    },
+    {
+      "name": "MOT17-12-DPM",
+      "phase": "discovery",
+      "frames": 900,
+      "original_status": "completed",
+      "audit_status": "out_of_scope_unchanged_output",
+      "event_counts": null
+    },
+    {
+      "name": "MOT17-14-DPM",
+      "phase": "discovery",
+      "frames": 750,
+      "original_status": "completed",
+      "audit_status": "out_of_scope_unchanged_output",
+      "event_counts": null
+    },
+    {
+      "name": "MOT20-03",
+      "phase": "discovery",
+      "frames": 2405,
+      "original_status": "completed",
+      "audit_status": "out_of_scope_unchanged_output",
+      "event_counts": null
+    },
+    {
+      "name": "MOT20-05",
+      "phase": "discovery",
+      "frames": 3315,
+      "original_status": "completed",
+      "audit_status": "out_of_scope_unchanged_output",
+      "event_counts": null
+    },
+    {
+      "name": "KITTI-0000",
+      "phase": "discovery",
+      "frames": 154,
+      "original_status": "failed",
+      "audit_status": "unmeasured_original_failure",
+      "event_counts": null
+    },
+    {
+      "name": "KITTI-0001",
+      "phase": "discovery",
+      "frames": 447,
+      "original_status": "failed",
+      "audit_status": "unmeasured_original_failure",
+      "event_counts": null
+    },
+    {
+      "name": "KITTI-0002",
+      "phase": "discovery",
+      "frames": 233,
+      "original_status": "failed",
+      "audit_status": "unmeasured_original_failure",
+      "event_counts": null
+    },
+    {
+      "name": "KITTI-0003",
+      "phase": "discovery",
+      "frames": 144,
+      "original_status": "failed",
+      "audit_status": "unmeasured_original_failure",
+      "event_counts": null
+    },
+    {
+      "name": "KITTI-0004",
+      "phase": "discovery",
+      "frames": 314,
+      "original_status": "completed",
+      "audit_status": "out_of_scope_unchanged_output",
+      "event_counts": null
+    },
+    {
+      "name": "KITTI-0005",
+      "phase": "discovery",
+      "frames": 297,
+      "original_status": "completed",
+      "audit_status": "out_of_scope_unchanged_output",
+      "event_counts": null
+    },
+    {
+      "name": "KITTI-0006",
+      "phase": "discovery",
+      "frames": 270,
+      "original_status": "completed",
+      "audit_status": "out_of_scope_unchanged_output",
+      "event_counts": null
+    },
+    {
+      "name": "KITTI-0007",
+      "phase": "discovery",
+      "frames": 800,
+      "original_status": "completed",
+      "audit_status": "out_of_scope_unchanged_output",
+      "event_counts": null
+    },
+    {
+      "name": "KITTI-0008",
+      "phase": "confirmation",
+      "frames": 390,
+      "original_status": "completed",
+      "audit_status": "out_of_scope_unchanged_output",
+      "event_counts": null
+    },
+    {
+      "name": "KITTI-0009",
+      "phase": "confirmation",
+      "frames": 803,
+      "original_status": "completed",
+      "audit_status": "out_of_scope_unchanged_output",
+      "event_counts": null
+    }
+  ]
+}
