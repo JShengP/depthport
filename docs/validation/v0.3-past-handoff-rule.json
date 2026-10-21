@@ -1,0 +1,8 @@
+{
+  "format": "depthport.causal-candidate-rule.v1",
+  "arm": "past_competition_handoff",
+  "report_date_local": "2026-10-22",
+  "rule": "After native HIGH assignment, reassign a selected edge r,c only to its unique qualified currently unmatched high row q. Both r/q must be PRE-active, PRE-confirmed with own last accepted observation at f-1. At r last HIGH acceptance f-1, q was active-confirmed, gate-admissible and within existing margin .05, and q accepted a distinct original input in that frame (high OR weak). Current q,c must clear unchanged native gate and selected-score minus q-score<=.05. Exclude q if any current weak edge clears native gate. No q may be claimed by two selected edges; otherwise skip all such claims. Replace only intended r,c with q,c, keep all other accepted high pairs/cardinality, return r to original weak availability. Native measurement update occurs once; never force another solver assignment.",
+  "decision_features": "Past contexts and accepted keys commit only after the whole frame; current/future acceptance and whether a pair repeats later are unavailable and forbidden. Current native assignment/IoU and weak boxes are known at the high-stage decision. No cross-execution graph, GT, raw ID matching, birth-only support, expiry inference, new fitted time or source-dependent parameter. No native weak result is modified.",
+  "status": "Frozen independent hypothesis, no efficacy/identity/default claim; no combined arm."
+}

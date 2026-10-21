@@ -1,0 +1,992 @@
+{
+  "format": "depthport.handoff-controls-public.v1",
+  "protocol_sha256": "53cd9794aaabe8544379b705373779ef187d82b90588c88901ca9986c91ffe28",
+  "references_sha256": "f9eadbbbb8722253a0acbae5082bb98eeb240167b24b476e189306b075fe4fa1",
+  "new_sources": [
+    "KITTI-0010",
+    "KITTI-0011"
+  ],
+  "unique_source_frames": 667,
+  "all_scheduled_completed": true,
+  "candidate_replication_gates": {
+    "birth_continuation": false,
+    "past_competition_handoff": false
+  },
+  "sealed_original_files_rechecked": 434,
+  "prior_records_unchanged": true,
+  "prior_discovery_complete": false,
+  "prior_formal_replication_flags": {
+    "active_confirmed": false,
+    "active_tentative": false,
+    "retained_confirmed": false,
+    "retained_tentative": false,
+    "active": false,
+    "retained": false,
+    "unconfirmed": false,
+    "any": false
+  },
+  "original_failures_retained": [
+    "KITTI-0000",
+    "KITTI-0001",
+    "KITTI-0002",
+    "KITTI-0003"
+  ],
+  "gt_read": false,
+  "accuracy_scoring": false,
+  "retuned": false,
+  "weak_stage_changed": false,
+  "defaults_changed": false,
+  "tracking_quality_accepted": false,
+  "ledger": [
+    {
+      "name": "KITTI-0010",
+      "frames": 294,
+      "status": "completed",
+      "comparisons": {
+        "birth_continuation": {
+          "membership": {
+            "membership": {
+              "input_membership": {
+                "reference": 0,
+                "control": 0,
+                "common": 0,
+                "lost": 0,
+                "added": 0
+              },
+              "stage_membership": {
+                "reference": 0,
+                "control": 0,
+                "common": 0,
+                "lost": 0,
+                "added": 0
+              },
+              "lineage_membership": {
+                "reference": 0,
+                "control": 0,
+                "common": 0,
+                "lost": 0,
+                "added": 0
+              },
+              "stage_lineage_membership": {
+                "reference": 0,
+                "control": 0,
+                "common": 0,
+                "lost": 0,
+                "added": 0
+              }
+            },
+            "common_input_stage_changes": 0,
+            "common_input_birth_lineage_changes": 0,
+            "common_input_posterior_box_encoding_changes": 0,
+            "birth_membership": {
+              "reference": 3,
+              "control": 3,
+              "lost": 0,
+              "added": 0
+            },
+            "original_proxy_loss_counts": {
+              "weak": 0,
+              "active": 0,
+              "confirmed": 0
+            },
+            "lost_weak_partition": {
+              "input_missing": 0,
+              "moved_to_high": 0
+            },
+            "lost_confirmed_partition": {
+              "input_missing": 0,
+              "accepted_but_unconfirmed": 0
+            },
+            "lost_active_partition_priority": {
+              "input_missing": 0,
+              "birth_lineage_changed": 0,
+              "stage_changed": 0,
+              "became_retained": 0
+            },
+            "original_membership_proxy_gates": {
+              "no_lost_weak_accepted_inputs": true,
+              "no_lost_active_update_pairs": true,
+              "no_lost_confirmed_output_inputs": true,
+              "no_new_birth_events": true
+            },
+            "identity_or_accuracy_accepted": false
+          },
+          "observable_input_gates": {
+            "no_lost_accepted_inputs": true,
+            "no_lost_weak_inputs": true,
+            "no_lost_confirmed_inputs": true,
+            "no_new_births": true,
+            "no_numerical_failures": true,
+            "no_invalid_accepted_posteriors": true,
+            "no_added_invalid_predictions": true,
+            "protected_other_updates": true
+          },
+          "all_observable_input_gates_pass": true,
+          "effective_candidate_exposure": false,
+          "legacy_strict_active_gate_pass": true,
+          "identity_or_accuracy_accepted": false
+        },
+        "past_competition_handoff": {
+          "membership": {
+            "membership": {
+              "input_membership": {
+                "reference": 0,
+                "control": 0,
+                "common": 0,
+                "lost": 0,
+                "added": 0
+              },
+              "stage_membership": {
+                "reference": 0,
+                "control": 0,
+                "common": 0,
+                "lost": 0,
+                "added": 0
+              },
+              "lineage_membership": {
+                "reference": 0,
+                "control": 0,
+                "common": 0,
+                "lost": 0,
+                "added": 0
+              },
+              "stage_lineage_membership": {
+                "reference": 0,
+                "control": 0,
+                "common": 0,
+                "lost": 0,
+                "added": 0
+              }
+            },
+            "common_input_stage_changes": 0,
+            "common_input_birth_lineage_changes": 0,
+            "common_input_posterior_box_encoding_changes": 0,
+            "birth_membership": {
+              "reference": 3,
+              "control": 3,
+              "lost": 0,
+              "added": 0
+            },
+            "original_proxy_loss_counts": {
+              "weak": 0,
+              "active": 0,
+              "confirmed": 0
+            },
+            "lost_weak_partition": {
+              "input_missing": 0,
+              "moved_to_high": 0
+            },
+            "lost_confirmed_partition": {
+              "input_missing": 0,
+              "accepted_but_unconfirmed": 0
+            },
+            "lost_active_partition_priority": {
+              "input_missing": 0,
+              "birth_lineage_changed": 0,
+              "stage_changed": 0,
+              "became_retained": 0
+            },
+            "original_membership_proxy_gates": {
+              "no_lost_weak_accepted_inputs": true,
+              "no_lost_active_update_pairs": true,
+              "no_lost_confirmed_output_inputs": true,
+              "no_new_birth_events": true
+            },
+            "identity_or_accuracy_accepted": false
+          },
+          "observable_input_gates": {
+            "no_lost_accepted_inputs": true,
+            "no_lost_weak_inputs": true,
+            "no_lost_confirmed_inputs": true,
+            "no_new_births": true,
+            "no_numerical_failures": true,
+            "no_invalid_accepted_posteriors": true,
+            "no_added_invalid_predictions": true,
+            "protected_other_updates": true
+          },
+          "all_observable_input_gates_pass": true,
+          "effective_candidate_exposure": false,
+          "legacy_strict_active_gate_pass": true,
+          "identity_or_accuracy_accepted": false
+        }
+      },
+      "passes": {
+        "observed_native-0": {
+          "counts": {
+            "invalid_predictions": 0,
+            "invalid_accepted_posteriors": 0,
+            "numerical_failures": 0,
+            "protected_other_updates_lost": 0,
+            "actions": 0,
+            "active_birth_continuations": 0,
+            "retained_birth_continuations": 0,
+            "weak_blocked_rows": 0,
+            "weak_stages": 38,
+            "geometry_projections": 0
+          },
+          "accepted_summary": {
+            "frames": 294,
+            "births": 3,
+            "accepted_high": 0,
+            "accepted_weak": 0,
+            "confirmed_observations": 0,
+            "active_updates": 0,
+            "retained_updates": 0,
+            "tentative_promotions": 0,
+            "accepted_inputs": 0,
+            "input_receipt_sha256": "310c5f82d70f50fc67cc68feb5fb8f44f952850e73995cf2bc90734c6de98ac5",
+            "event_receipt_sha256": "d657426ef99b69c6e4d1009e88d85d5130ccff0c959e66a657ac6a0a5518bc79"
+          },
+          "sha256": {
+            "predictions.local.json": "3cdcc26499105fa149dcd3f780df268614d05f325919a12fb33ceec1d9341cda",
+            "native-output.local.json": "38a5d1c9447c89a91a2c3bbef57e216972e63f80aa4f18c75e9623672b7508d1",
+            "final-state.local.pickle": "4a45361ac779b794f8347421a25169432a13b24713477d78bdb4de31577d7675",
+            "trace.local.jsonl.gz": "ccaf6b089b338d6faee5b0688737bd3e41938dd6d8aa5164d653d560cde82014",
+            "accepted.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "observed_native-1": {
+          "counts": {
+            "invalid_predictions": 0,
+            "invalid_accepted_posteriors": 0,
+            "numerical_failures": 0,
+            "protected_other_updates_lost": 0,
+            "actions": 0,
+            "active_birth_continuations": 0,
+            "retained_birth_continuations": 0,
+            "weak_blocked_rows": 0,
+            "weak_stages": 38,
+            "geometry_projections": 0
+          },
+          "accepted_summary": {
+            "frames": 294,
+            "births": 3,
+            "accepted_high": 0,
+            "accepted_weak": 0,
+            "confirmed_observations": 0,
+            "active_updates": 0,
+            "retained_updates": 0,
+            "tentative_promotions": 0,
+            "accepted_inputs": 0,
+            "input_receipt_sha256": "310c5f82d70f50fc67cc68feb5fb8f44f952850e73995cf2bc90734c6de98ac5",
+            "event_receipt_sha256": "d657426ef99b69c6e4d1009e88d85d5130ccff0c959e66a657ac6a0a5518bc79"
+          },
+          "sha256": {
+            "predictions.local.json": "3cdcc26499105fa149dcd3f780df268614d05f325919a12fb33ceec1d9341cda",
+            "native-output.local.json": "38a5d1c9447c89a91a2c3bbef57e216972e63f80aa4f18c75e9623672b7508d1",
+            "final-state.local.pickle": "4a45361ac779b794f8347421a25169432a13b24713477d78bdb4de31577d7675",
+            "trace.local.jsonl.gz": "ccaf6b089b338d6faee5b0688737bd3e41938dd6d8aa5164d653d560cde82014",
+            "accepted.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "projection-0": {
+          "counts": {
+            "invalid_predictions": 0,
+            "invalid_accepted_posteriors": 0,
+            "numerical_failures": 0,
+            "protected_other_updates_lost": 0,
+            "actions": 0,
+            "active_birth_continuations": 0,
+            "retained_birth_continuations": 0,
+            "weak_blocked_rows": 0,
+            "weak_stages": 38,
+            "geometry_projections": 0
+          },
+          "accepted_summary": {
+            "frames": 294,
+            "births": 3,
+            "accepted_high": 0,
+            "accepted_weak": 0,
+            "confirmed_observations": 0,
+            "active_updates": 0,
+            "retained_updates": 0,
+            "tentative_promotions": 0,
+            "accepted_inputs": 0,
+            "input_receipt_sha256": "310c5f82d70f50fc67cc68feb5fb8f44f952850e73995cf2bc90734c6de98ac5",
+            "event_receipt_sha256": "d657426ef99b69c6e4d1009e88d85d5130ccff0c959e66a657ac6a0a5518bc79"
+          },
+          "sha256": {
+            "predictions.local.json": "3cdcc26499105fa149dcd3f780df268614d05f325919a12fb33ceec1d9341cda",
+            "native-output.local.json": "38a5d1c9447c89a91a2c3bbef57e216972e63f80aa4f18c75e9623672b7508d1",
+            "final-state.local.pickle": "4a45361ac779b794f8347421a25169432a13b24713477d78bdb4de31577d7675",
+            "trace.local.jsonl.gz": "ccaf6b089b338d6faee5b0688737bd3e41938dd6d8aa5164d653d560cde82014",
+            "accepted.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "projection-1": {
+          "counts": {
+            "invalid_predictions": 0,
+            "invalid_accepted_posteriors": 0,
+            "numerical_failures": 0,
+            "protected_other_updates_lost": 0,
+            "actions": 0,
+            "active_birth_continuations": 0,
+            "retained_birth_continuations": 0,
+            "weak_blocked_rows": 0,
+            "weak_stages": 38,
+            "geometry_projections": 0
+          },
+          "accepted_summary": {
+            "frames": 294,
+            "births": 3,
+            "accepted_high": 0,
+            "accepted_weak": 0,
+            "confirmed_observations": 0,
+            "active_updates": 0,
+            "retained_updates": 0,
+            "tentative_promotions": 0,
+            "accepted_inputs": 0,
+            "input_receipt_sha256": "310c5f82d70f50fc67cc68feb5fb8f44f952850e73995cf2bc90734c6de98ac5",
+            "event_receipt_sha256": "d657426ef99b69c6e4d1009e88d85d5130ccff0c959e66a657ac6a0a5518bc79"
+          },
+          "sha256": {
+            "predictions.local.json": "3cdcc26499105fa149dcd3f780df268614d05f325919a12fb33ceec1d9341cda",
+            "native-output.local.json": "38a5d1c9447c89a91a2c3bbef57e216972e63f80aa4f18c75e9623672b7508d1",
+            "final-state.local.pickle": "4a45361ac779b794f8347421a25169432a13b24713477d78bdb4de31577d7675",
+            "trace.local.jsonl.gz": "ccaf6b089b338d6faee5b0688737bd3e41938dd6d8aa5164d653d560cde82014",
+            "accepted.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "birth_continuation-0": {
+          "counts": {
+            "invalid_predictions": 0,
+            "invalid_accepted_posteriors": 0,
+            "numerical_failures": 0,
+            "protected_other_updates_lost": 0,
+            "actions": 0,
+            "active_birth_continuations": 0,
+            "retained_birth_continuations": 0,
+            "weak_blocked_rows": 0,
+            "weak_stages": 38,
+            "geometry_projections": 0
+          },
+          "accepted_summary": {
+            "frames": 294,
+            "births": 3,
+            "accepted_high": 0,
+            "accepted_weak": 0,
+            "confirmed_observations": 0,
+            "active_updates": 0,
+            "retained_updates": 0,
+            "tentative_promotions": 0,
+            "accepted_inputs": 0,
+            "input_receipt_sha256": "310c5f82d70f50fc67cc68feb5fb8f44f952850e73995cf2bc90734c6de98ac5",
+            "event_receipt_sha256": "d657426ef99b69c6e4d1009e88d85d5130ccff0c959e66a657ac6a0a5518bc79"
+          },
+          "sha256": {
+            "predictions.local.json": "3cdcc26499105fa149dcd3f780df268614d05f325919a12fb33ceec1d9341cda",
+            "native-output.local.json": "38a5d1c9447c89a91a2c3bbef57e216972e63f80aa4f18c75e9623672b7508d1",
+            "final-state.local.pickle": "4a45361ac779b794f8347421a25169432a13b24713477d78bdb4de31577d7675",
+            "trace.local.jsonl.gz": "18d4442cef4acdd232599b2c8832629ba83d56ff979b9a2a05526fa0400c9e40",
+            "accepted.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "birth_continuation-1": {
+          "counts": {
+            "invalid_predictions": 0,
+            "invalid_accepted_posteriors": 0,
+            "numerical_failures": 0,
+            "protected_other_updates_lost": 0,
+            "actions": 0,
+            "active_birth_continuations": 0,
+            "retained_birth_continuations": 0,
+            "weak_blocked_rows": 0,
+            "weak_stages": 38,
+            "geometry_projections": 0
+          },
+          "accepted_summary": {
+            "frames": 294,
+            "births": 3,
+            "accepted_high": 0,
+            "accepted_weak": 0,
+            "confirmed_observations": 0,
+            "active_updates": 0,
+            "retained_updates": 0,
+            "tentative_promotions": 0,
+            "accepted_inputs": 0,
+            "input_receipt_sha256": "310c5f82d70f50fc67cc68feb5fb8f44f952850e73995cf2bc90734c6de98ac5",
+            "event_receipt_sha256": "d657426ef99b69c6e4d1009e88d85d5130ccff0c959e66a657ac6a0a5518bc79"
+          },
+          "sha256": {
+            "predictions.local.json": "3cdcc26499105fa149dcd3f780df268614d05f325919a12fb33ceec1d9341cda",
+            "native-output.local.json": "38a5d1c9447c89a91a2c3bbef57e216972e63f80aa4f18c75e9623672b7508d1",
+            "final-state.local.pickle": "4a45361ac779b794f8347421a25169432a13b24713477d78bdb4de31577d7675",
+            "trace.local.jsonl.gz": "18d4442cef4acdd232599b2c8832629ba83d56ff979b9a2a05526fa0400c9e40",
+            "accepted.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "past_competition_handoff-0": {
+          "counts": {
+            "invalid_predictions": 0,
+            "invalid_accepted_posteriors": 0,
+            "numerical_failures": 0,
+            "protected_other_updates_lost": 0,
+            "actions": 0,
+            "active_birth_continuations": 0,
+            "retained_birth_continuations": 0,
+            "weak_blocked_rows": 0,
+            "weak_stages": 38,
+            "geometry_projections": 0
+          },
+          "accepted_summary": {
+            "frames": 294,
+            "births": 3,
+            "accepted_high": 0,
+            "accepted_weak": 0,
+            "confirmed_observations": 0,
+            "active_updates": 0,
+            "retained_updates": 0,
+            "tentative_promotions": 0,
+            "accepted_inputs": 0,
+            "input_receipt_sha256": "310c5f82d70f50fc67cc68feb5fb8f44f952850e73995cf2bc90734c6de98ac5",
+            "event_receipt_sha256": "d657426ef99b69c6e4d1009e88d85d5130ccff0c959e66a657ac6a0a5518bc79"
+          },
+          "sha256": {
+            "predictions.local.json": "3cdcc26499105fa149dcd3f780df268614d05f325919a12fb33ceec1d9341cda",
+            "native-output.local.json": "38a5d1c9447c89a91a2c3bbef57e216972e63f80aa4f18c75e9623672b7508d1",
+            "final-state.local.pickle": "4a45361ac779b794f8347421a25169432a13b24713477d78bdb4de31577d7675",
+            "trace.local.jsonl.gz": "8cdb34a15b09ac7e0ab5890f979efccbe5c56d85b7c3fb00595a225866feb925",
+            "accepted.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "past_competition_handoff-1": {
+          "counts": {
+            "invalid_predictions": 0,
+            "invalid_accepted_posteriors": 0,
+            "numerical_failures": 0,
+            "protected_other_updates_lost": 0,
+            "actions": 0,
+            "active_birth_continuations": 0,
+            "retained_birth_continuations": 0,
+            "weak_blocked_rows": 0,
+            "weak_stages": 38,
+            "geometry_projections": 0
+          },
+          "accepted_summary": {
+            "frames": 294,
+            "births": 3,
+            "accepted_high": 0,
+            "accepted_weak": 0,
+            "confirmed_observations": 0,
+            "active_updates": 0,
+            "retained_updates": 0,
+            "tentative_promotions": 0,
+            "accepted_inputs": 0,
+            "input_receipt_sha256": "310c5f82d70f50fc67cc68feb5fb8f44f952850e73995cf2bc90734c6de98ac5",
+            "event_receipt_sha256": "d657426ef99b69c6e4d1009e88d85d5130ccff0c959e66a657ac6a0a5518bc79"
+          },
+          "sha256": {
+            "predictions.local.json": "3cdcc26499105fa149dcd3f780df268614d05f325919a12fb33ceec1d9341cda",
+            "native-output.local.json": "38a5d1c9447c89a91a2c3bbef57e216972e63f80aa4f18c75e9623672b7508d1",
+            "final-state.local.pickle": "4a45361ac779b794f8347421a25169432a13b24713477d78bdb4de31577d7675",
+            "trace.local.jsonl.gz": "8cdb34a15b09ac7e0ab5890f979efccbe5c56d85b7c3fb00595a225866feb925",
+            "accepted.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      },
+      "source_lock": {
+        "name": "KITTI-0010",
+        "video_sha256": "7cdab589b947e6b8b725b3a6977e82c98cf9b39e13884fc9614a0fa5b424b9d4",
+        "cache_sha256": [
+          "d9d8d7f4d732e51343ae6e64c479524c80fb302a113a672511bb41cb570e9648"
+        ],
+        "frames": 294,
+        "fps": 10,
+        "resolution": [
+          1242,
+          375
+        ],
+        "cache_shards": 1,
+        "cached_detections": 49,
+        "capped_frames": 0
+      },
+      "native_reference": {
+        "sha256": {
+          "predictions.local.json": "3cdcc26499105fa149dcd3f780df268614d05f325919a12fb33ceec1d9341cda",
+          "native-output.local.json": "38a5d1c9447c89a91a2c3bbef57e216972e63f80aa4f18c75e9623672b7508d1",
+          "final-state.local.pickle": "4a45361ac779b794f8347421a25169432a13b24713477d78bdb4de31577d7675",
+          "lifecycle.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "numerical.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "geometry.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "repeat_equal": true,
+      "native_instrumentation_equal": true
+    },
+    {
+      "name": "KITTI-0011",
+      "frames": 373,
+      "status": "completed",
+      "comparisons": {
+        "birth_continuation": {
+          "membership": {
+            "membership": {
+              "input_membership": {
+                "reference": 121,
+                "control": 121,
+                "common": 121,
+                "lost": 0,
+                "added": 0
+              },
+              "stage_membership": {
+                "reference": 121,
+                "control": 121,
+                "common": 121,
+                "lost": 0,
+                "added": 0
+              },
+              "lineage_membership": {
+                "reference": 121,
+                "control": 121,
+                "common": 121,
+                "lost": 0,
+                "added": 0
+              },
+              "stage_lineage_membership": {
+                "reference": 121,
+                "control": 121,
+                "common": 121,
+                "lost": 0,
+                "added": 0
+              }
+            },
+            "common_input_stage_changes": 0,
+            "common_input_birth_lineage_changes": 0,
+            "common_input_posterior_box_encoding_changes": 0,
+            "birth_membership": {
+              "reference": 4,
+              "control": 4,
+              "lost": 0,
+              "added": 0
+            },
+            "original_proxy_loss_counts": {
+              "weak": 0,
+              "active": 0,
+              "confirmed": 0
+            },
+            "lost_weak_partition": {
+              "input_missing": 0,
+              "moved_to_high": 0
+            },
+            "lost_confirmed_partition": {
+              "input_missing": 0,
+              "accepted_but_unconfirmed": 0
+            },
+            "lost_active_partition_priority": {
+              "input_missing": 0,
+              "birth_lineage_changed": 0,
+              "stage_changed": 0,
+              "became_retained": 0
+            },
+            "original_membership_proxy_gates": {
+              "no_lost_weak_accepted_inputs": true,
+              "no_lost_active_update_pairs": true,
+              "no_lost_confirmed_output_inputs": true,
+              "no_new_birth_events": true
+            },
+            "identity_or_accuracy_accepted": false
+          },
+          "observable_input_gates": {
+            "no_lost_accepted_inputs": true,
+            "no_lost_weak_inputs": true,
+            "no_lost_confirmed_inputs": true,
+            "no_new_births": true,
+            "no_numerical_failures": true,
+            "no_invalid_accepted_posteriors": true,
+            "no_added_invalid_predictions": true,
+            "protected_other_updates": true
+          },
+          "all_observable_input_gates_pass": true,
+          "effective_candidate_exposure": false,
+          "legacy_strict_active_gate_pass": true,
+          "identity_or_accuracy_accepted": false
+        },
+        "past_competition_handoff": {
+          "membership": {
+            "membership": {
+              "input_membership": {
+                "reference": 121,
+                "control": 121,
+                "common": 121,
+                "lost": 0,
+                "added": 0
+              },
+              "stage_membership": {
+                "reference": 121,
+                "control": 121,
+                "common": 121,
+                "lost": 0,
+                "added": 0
+              },
+              "lineage_membership": {
+                "reference": 121,
+                "control": 121,
+                "common": 121,
+                "lost": 0,
+                "added": 0
+              },
+              "stage_lineage_membership": {
+                "reference": 121,
+                "control": 121,
+                "common": 121,
+                "lost": 0,
+                "added": 0
+              }
+            },
+            "common_input_stage_changes": 0,
+            "common_input_birth_lineage_changes": 0,
+            "common_input_posterior_box_encoding_changes": 0,
+            "birth_membership": {
+              "reference": 4,
+              "control": 4,
+              "lost": 0,
+              "added": 0
+            },
+            "original_proxy_loss_counts": {
+              "weak": 0,
+              "active": 0,
+              "confirmed": 0
+            },
+            "lost_weak_partition": {
+              "input_missing": 0,
+              "moved_to_high": 0
+            },
+            "lost_confirmed_partition": {
+              "input_missing": 0,
+              "accepted_but_unconfirmed": 0
+            },
+            "lost_active_partition_priority": {
+              "input_missing": 0,
+              "birth_lineage_changed": 0,
+              "stage_changed": 0,
+              "became_retained": 0
+            },
+            "original_membership_proxy_gates": {
+              "no_lost_weak_accepted_inputs": true,
+              "no_lost_active_update_pairs": true,
+              "no_lost_confirmed_output_inputs": true,
+              "no_new_birth_events": true
+            },
+            "identity_or_accuracy_accepted": false
+          },
+          "observable_input_gates": {
+            "no_lost_accepted_inputs": true,
+            "no_lost_weak_inputs": true,
+            "no_lost_confirmed_inputs": true,
+            "no_new_births": true,
+            "no_numerical_failures": true,
+            "no_invalid_accepted_posteriors": true,
+            "no_added_invalid_predictions": true,
+            "protected_other_updates": true
+          },
+          "all_observable_input_gates_pass": true,
+          "effective_candidate_exposure": false,
+          "legacy_strict_active_gate_pass": true,
+          "identity_or_accuracy_accepted": false
+        }
+      },
+      "passes": {
+        "observed_native-0": {
+          "counts": {
+            "invalid_predictions": 0,
+            "invalid_accepted_posteriors": 0,
+            "numerical_failures": 0,
+            "protected_other_updates_lost": 0,
+            "actions": 0,
+            "active_birth_continuations": 0,
+            "retained_birth_continuations": 0,
+            "weak_blocked_rows": 0,
+            "weak_stages": 216,
+            "geometry_projections": 0
+          },
+          "accepted_summary": {
+            "frames": 373,
+            "births": 4,
+            "accepted_high": 57,
+            "accepted_weak": 64,
+            "confirmed_observations": 121,
+            "active_updates": 120,
+            "retained_updates": 1,
+            "tentative_promotions": 4,
+            "accepted_inputs": 121,
+            "input_receipt_sha256": "ca48aa15448fdfb55be130b440ff2649127117c8ab66ecbc0a8b36881230691b",
+            "event_receipt_sha256": "ba852f02e08bb8a1afc97d668352d62743ea703d31134000f57e701a3d66263b"
+          },
+          "sha256": {
+            "predictions.local.json": "8cd33db4e3270b9ef4dd1be0d0422d4dee7722a625c400295279476e68897c8f",
+            "native-output.local.json": "9ff27698a57a4060a4f1cc311fb9117634fb4ab50e660c377b0ab3b68c49390d",
+            "final-state.local.pickle": "58f191168b2c17789982ef0daa82cbc15d7a88ecee5304e4f398beb56073119b",
+            "trace.local.jsonl.gz": "7ad332eb6f63bc0b7b14464522b981ef6034449323c4d5fc0c49b325188f7f69",
+            "accepted.local.jsonl": "64f05842c942b7bf73866d605c769adbc663e430543f1c2dacbaebed9590c11a"
+          }
+        },
+        "observed_native-1": {
+          "counts": {
+            "invalid_predictions": 0,
+            "invalid_accepted_posteriors": 0,
+            "numerical_failures": 0,
+            "protected_other_updates_lost": 0,
+            "actions": 0,
+            "active_birth_continuations": 0,
+            "retained_birth_continuations": 0,
+            "weak_blocked_rows": 0,
+            "weak_stages": 216,
+            "geometry_projections": 0
+          },
+          "accepted_summary": {
+            "frames": 373,
+            "births": 4,
+            "accepted_high": 57,
+            "accepted_weak": 64,
+            "confirmed_observations": 121,
+            "active_updates": 120,
+            "retained_updates": 1,
+            "tentative_promotions": 4,
+            "accepted_inputs": 121,
+            "input_receipt_sha256": "ca48aa15448fdfb55be130b440ff2649127117c8ab66ecbc0a8b36881230691b",
+            "event_receipt_sha256": "ba852f02e08bb8a1afc97d668352d62743ea703d31134000f57e701a3d66263b"
+          },
+          "sha256": {
+            "predictions.local.json": "8cd33db4e3270b9ef4dd1be0d0422d4dee7722a625c400295279476e68897c8f",
+            "native-output.local.json": "9ff27698a57a4060a4f1cc311fb9117634fb4ab50e660c377b0ab3b68c49390d",
+            "final-state.local.pickle": "58f191168b2c17789982ef0daa82cbc15d7a88ecee5304e4f398beb56073119b",
+            "trace.local.jsonl.gz": "7ad332eb6f63bc0b7b14464522b981ef6034449323c4d5fc0c49b325188f7f69",
+            "accepted.local.jsonl": "64f05842c942b7bf73866d605c769adbc663e430543f1c2dacbaebed9590c11a"
+          }
+        },
+        "projection-0": {
+          "counts": {
+            "invalid_predictions": 0,
+            "invalid_accepted_posteriors": 0,
+            "numerical_failures": 0,
+            "protected_other_updates_lost": 0,
+            "actions": 0,
+            "active_birth_continuations": 0,
+            "retained_birth_continuations": 0,
+            "weak_blocked_rows": 0,
+            "weak_stages": 216,
+            "geometry_projections": 0
+          },
+          "accepted_summary": {
+            "frames": 373,
+            "births": 4,
+            "accepted_high": 57,
+            "accepted_weak": 64,
+            "confirmed_observations": 121,
+            "active_updates": 120,
+            "retained_updates": 1,
+            "tentative_promotions": 4,
+            "accepted_inputs": 121,
+            "input_receipt_sha256": "ca48aa15448fdfb55be130b440ff2649127117c8ab66ecbc0a8b36881230691b",
+            "event_receipt_sha256": "ba852f02e08bb8a1afc97d668352d62743ea703d31134000f57e701a3d66263b"
+          },
+          "sha256": {
+            "predictions.local.json": "8cd33db4e3270b9ef4dd1be0d0422d4dee7722a625c400295279476e68897c8f",
+            "native-output.local.json": "9ff27698a57a4060a4f1cc311fb9117634fb4ab50e660c377b0ab3b68c49390d",
+            "final-state.local.pickle": "58f191168b2c17789982ef0daa82cbc15d7a88ecee5304e4f398beb56073119b",
+            "trace.local.jsonl.gz": "7ad332eb6f63bc0b7b14464522b981ef6034449323c4d5fc0c49b325188f7f69",
+            "accepted.local.jsonl": "64f05842c942b7bf73866d605c769adbc663e430543f1c2dacbaebed9590c11a"
+          }
+        },
+        "projection-1": {
+          "counts": {
+            "invalid_predictions": 0,
+            "invalid_accepted_posteriors": 0,
+            "numerical_failures": 0,
+            "protected_other_updates_lost": 0,
+            "actions": 0,
+            "active_birth_continuations": 0,
+            "retained_birth_continuations": 0,
+            "weak_blocked_rows": 0,
+            "weak_stages": 216,
+            "geometry_projections": 0
+          },
+          "accepted_summary": {
+            "frames": 373,
+            "births": 4,
+            "accepted_high": 57,
+            "accepted_weak": 64,
+            "confirmed_observations": 121,
+            "active_updates": 120,
+            "retained_updates": 1,
+            "tentative_promotions": 4,
+            "accepted_inputs": 121,
+            "input_receipt_sha256": "ca48aa15448fdfb55be130b440ff2649127117c8ab66ecbc0a8b36881230691b",
+            "event_receipt_sha256": "ba852f02e08bb8a1afc97d668352d62743ea703d31134000f57e701a3d66263b"
+          },
+          "sha256": {
+            "predictions.local.json": "8cd33db4e3270b9ef4dd1be0d0422d4dee7722a625c400295279476e68897c8f",
+            "native-output.local.json": "9ff27698a57a4060a4f1cc311fb9117634fb4ab50e660c377b0ab3b68c49390d",
+            "final-state.local.pickle": "58f191168b2c17789982ef0daa82cbc15d7a88ecee5304e4f398beb56073119b",
+            "trace.local.jsonl.gz": "7ad332eb6f63bc0b7b14464522b981ef6034449323c4d5fc0c49b325188f7f69",
+            "accepted.local.jsonl": "64f05842c942b7bf73866d605c769adbc663e430543f1c2dacbaebed9590c11a"
+          }
+        },
+        "birth_continuation-0": {
+          "counts": {
+            "invalid_predictions": 0,
+            "invalid_accepted_posteriors": 0,
+            "numerical_failures": 0,
+            "protected_other_updates_lost": 0,
+            "actions": 0,
+            "active_birth_continuations": 0,
+            "retained_birth_continuations": 0,
+            "weak_blocked_rows": 69,
+            "weak_stages": 216,
+            "geometry_projections": 0
+          },
+          "accepted_summary": {
+            "frames": 373,
+            "births": 4,
+            "accepted_high": 57,
+            "accepted_weak": 64,
+            "confirmed_observations": 121,
+            "active_updates": 120,
+            "retained_updates": 1,
+            "tentative_promotions": 4,
+            "accepted_inputs": 121,
+            "input_receipt_sha256": "ca48aa15448fdfb55be130b440ff2649127117c8ab66ecbc0a8b36881230691b",
+            "event_receipt_sha256": "ba852f02e08bb8a1afc97d668352d62743ea703d31134000f57e701a3d66263b"
+          },
+          "sha256": {
+            "predictions.local.json": "8cd33db4e3270b9ef4dd1be0d0422d4dee7722a625c400295279476e68897c8f",
+            "native-output.local.json": "9ff27698a57a4060a4f1cc311fb9117634fb4ab50e660c377b0ab3b68c49390d",
+            "final-state.local.pickle": "58f191168b2c17789982ef0daa82cbc15d7a88ecee5304e4f398beb56073119b",
+            "trace.local.jsonl.gz": "22ec17c8430de85a356b6c5aa0826601976361f8c2980bd2722ce3e252039795",
+            "accepted.local.jsonl": "64f05842c942b7bf73866d605c769adbc663e430543f1c2dacbaebed9590c11a"
+          }
+        },
+        "birth_continuation-1": {
+          "counts": {
+            "invalid_predictions": 0,
+            "invalid_accepted_posteriors": 0,
+            "numerical_failures": 0,
+            "protected_other_updates_lost": 0,
+            "actions": 0,
+            "active_birth_continuations": 0,
+            "retained_birth_continuations": 0,
+            "weak_blocked_rows": 69,
+            "weak_stages": 216,
+            "geometry_projections": 0
+          },
+          "accepted_summary": {
+            "frames": 373,
+            "births": 4,
+            "accepted_high": 57,
+            "accepted_weak": 64,
+            "confirmed_observations": 121,
+            "active_updates": 120,
+            "retained_updates": 1,
+            "tentative_promotions": 4,
+            "accepted_inputs": 121,
+            "input_receipt_sha256": "ca48aa15448fdfb55be130b440ff2649127117c8ab66ecbc0a8b36881230691b",
+            "event_receipt_sha256": "ba852f02e08bb8a1afc97d668352d62743ea703d31134000f57e701a3d66263b"
+          },
+          "sha256": {
+            "predictions.local.json": "8cd33db4e3270b9ef4dd1be0d0422d4dee7722a625c400295279476e68897c8f",
+            "native-output.local.json": "9ff27698a57a4060a4f1cc311fb9117634fb4ab50e660c377b0ab3b68c49390d",
+            "final-state.local.pickle": "58f191168b2c17789982ef0daa82cbc15d7a88ecee5304e4f398beb56073119b",
+            "trace.local.jsonl.gz": "22ec17c8430de85a356b6c5aa0826601976361f8c2980bd2722ce3e252039795",
+            "accepted.local.jsonl": "64f05842c942b7bf73866d605c769adbc663e430543f1c2dacbaebed9590c11a"
+          }
+        },
+        "past_competition_handoff-0": {
+          "counts": {
+            "invalid_predictions": 0,
+            "invalid_accepted_posteriors": 0,
+            "numerical_failures": 0,
+            "protected_other_updates_lost": 0,
+            "actions": 0,
+            "active_birth_continuations": 0,
+            "retained_birth_continuations": 0,
+            "weak_blocked_rows": 69,
+            "weak_stages": 216,
+            "geometry_projections": 0
+          },
+          "accepted_summary": {
+            "frames": 373,
+            "births": 4,
+            "accepted_high": 57,
+            "accepted_weak": 64,
+            "confirmed_observations": 121,
+            "active_updates": 120,
+            "retained_updates": 1,
+            "tentative_promotions": 4,
+            "accepted_inputs": 121,
+            "input_receipt_sha256": "ca48aa15448fdfb55be130b440ff2649127117c8ab66ecbc0a8b36881230691b",
+            "event_receipt_sha256": "ba852f02e08bb8a1afc97d668352d62743ea703d31134000f57e701a3d66263b"
+          },
+          "sha256": {
+            "predictions.local.json": "8cd33db4e3270b9ef4dd1be0d0422d4dee7722a625c400295279476e68897c8f",
+            "native-output.local.json": "9ff27698a57a4060a4f1cc311fb9117634fb4ab50e660c377b0ab3b68c49390d",
+            "final-state.local.pickle": "58f191168b2c17789982ef0daa82cbc15d7a88ecee5304e4f398beb56073119b",
+            "trace.local.jsonl.gz": "5abdaacb68c084f4acb203f3c5f828dfe93d25a7d3e663e36bd828d8b0eee0d3",
+            "accepted.local.jsonl": "64f05842c942b7bf73866d605c769adbc663e430543f1c2dacbaebed9590c11a"
+          }
+        },
+        "past_competition_handoff-1": {
+          "counts": {
+            "invalid_predictions": 0,
+            "invalid_accepted_posteriors": 0,
+            "numerical_failures": 0,
+            "protected_other_updates_lost": 0,
+            "actions": 0,
+            "active_birth_continuations": 0,
+            "retained_birth_continuations": 0,
+            "weak_blocked_rows": 69,
+            "weak_stages": 216,
+            "geometry_projections": 0
+          },
+          "accepted_summary": {
+            "frames": 373,
+            "births": 4,
+            "accepted_high": 57,
+            "accepted_weak": 64,
+            "confirmed_observations": 121,
+            "active_updates": 120,
+            "retained_updates": 1,
+            "tentative_promotions": 4,
+            "accepted_inputs": 121,
+            "input_receipt_sha256": "ca48aa15448fdfb55be130b440ff2649127117c8ab66ecbc0a8b36881230691b",
+            "event_receipt_sha256": "ba852f02e08bb8a1afc97d668352d62743ea703d31134000f57e701a3d66263b"
+          },
+          "sha256": {
+            "predictions.local.json": "8cd33db4e3270b9ef4dd1be0d0422d4dee7722a625c400295279476e68897c8f",
+            "native-output.local.json": "9ff27698a57a4060a4f1cc311fb9117634fb4ab50e660c377b0ab3b68c49390d",
+            "final-state.local.pickle": "58f191168b2c17789982ef0daa82cbc15d7a88ecee5304e4f398beb56073119b",
+            "trace.local.jsonl.gz": "5abdaacb68c084f4acb203f3c5f828dfe93d25a7d3e663e36bd828d8b0eee0d3",
+            "accepted.local.jsonl": "64f05842c942b7bf73866d605c769adbc663e430543f1c2dacbaebed9590c11a"
+          }
+        }
+      },
+      "source_lock": {
+        "name": "KITTI-0011",
+        "video_sha256": "bcc33299ce54be2e98484a576dff2cce11dd0e638f1b325b09f27962409ad495",
+        "cache_sha256": [
+          "e02a0287a02fd2f992306edbe5b6f6a02b8970e37d8178954db742ef88bbcb91"
+        ],
+        "frames": 373,
+        "fps": 10,
+        "resolution": [
+          1242,
+          375
+        ],
+        "cache_shards": 1,
+        "cached_detections": 293,
+        "capped_frames": 0
+      },
+      "native_reference": {
+        "sha256": {
+          "predictions.local.json": "8cd33db4e3270b9ef4dd1be0d0422d4dee7722a625c400295279476e68897c8f",
+          "native-output.local.json": "9ff27698a57a4060a4f1cc311fb9117634fb4ab50e660c377b0ab3b68c49390d",
+          "final-state.local.pickle": "58f191168b2c17789982ef0daa82cbc15d7a88ecee5304e4f398beb56073119b",
+          "lifecycle.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "numerical.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "geometry.local.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "repeat_equal": true,
+      "native_instrumentation_equal": true
+    }
+  ]
+}

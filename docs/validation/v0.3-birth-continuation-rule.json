@@ -1,0 +1,8 @@
+{
+  "format": "depthport.causal-candidate-rule.v1",
+  "arm": "birth_continuation",
+  "report_date_local": "2026-10-22",
+  "rule": "After native HIGH assignment, append only mutually unique gate-eligible edges between unmatched high columns above unchanged activation threshold and unmatched PRE-confirmed owners with >=1 recorded accepted observation t<f. Predicted box must be positive. Each candidate row/column has exactly one edge in this eligible free graph. No native accepted pair is removed. No new duration/count/IoU parameter; native gate/activation reused. Native update executes once, so the input continues an existing owner rather than entering unmatched-high spawn.",
+  "decision_features": "Only original current high/weak input partitions, native predicted boxes/IoU/gate/free rows+columns, frozen pre-update confirmed role and own strictly earlier accepted keys. Birth seeds do not qualify. If the candidate row has ANY native-gate-admissible current weak box, exclude it to protect weak opportunities; original weak association, inputs and updates are never intercepted.",
+  "status": "Frozen independent hypothesis, no efficacy/identity/default claim; no combined arm."
+}
