@@ -38,4 +38,6 @@
 
 `tools/audit_tracking_accepted_events.py freeze|analyze --archive-root <既有artifacts目錄>`；freeze封存原輸入，analyze拒絕覆寫／重試。公開檔不附原資料，需自備條款允許且符合凍結雜湊的原封存；重建追蹤屬另一實驗，不能代替本次既有歷史。
 
-最終本機驗證：主環境566通過／98選配略過，保留一個既有Starlette/httpx棄用警告；固定NumPy2研究環境的本輪與相關契約110通過。選配略過不當通過。公開清單／連結／明顯憑證樣式檢查通過，不代表完整安全稽核。
+最終本機驗證：主環境567通過／98選配略過，保留一個既有Starlette/httpx棄用警告；固定NumPy2研究環境的本輪與相關契約111通過。選配略過不當通過。公開清單／連結／明顯憑證樣式檢查通過，不代表完整安全稽核。
+
+Windows格式回歸：結果提交的[首輪應用CI](https://github.com/JShengP/depthport/actions/runs/39529352201)在Python3.11／3.12各有1項公開協定位元雜湊失敗，兩個Linux工作通過。Windows雜湊`f2ca378d…`精確等於原LF協定轉成CRLF的結果；原LF雜湊`6441c390…`不變。補`docs/validation/*.json`的LF checkout規則及真Git autocrlf匯出契約，不修改凍結定義、來源、原檔或稽核數字。兩份原應用失敗JUnit與完整job log另存本機；[Model API同輪](https://github.com/JShengP/depthport/actions/runs/39529352215)兩個Windows工作也因相同測試失敗，兩份完整log另存本機。合計四個Windows工作原失敗不改判，四個Linux工作通過。

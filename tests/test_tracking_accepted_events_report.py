@@ -56,3 +56,28 @@ def test_published_membership_and_original_proxy_partitions_reconcile():
         assert v['control'] - v['reference'] == sum(counts['projection']['accepted_' + stage]
             - counts['reference']['accepted_' + stage] for stage in ('high', 'weak'))
         assert not compare['identity_or_accuracy_accepted']
+
+
+def test_public_json_seals_survive_actual_git_autocrlf_checkout(tmp_path):
+    import shutil
+    import subprocess
+    import pytest
+    git = shutil.which('git')
+    if not git: pytest.skip('Git required for actual checkout contract')
+    repo = tmp_path / 'repo'; repo.mkdir()
+    checkout = tmp_path / 'checkout'; checkout.mkdir()
+    def run(*args):
+        subprocess.run([git, '-c', 'core.autocrlf=true', '-c', 'core.safecrlf=false', *args],
+                       cwd=repo, check=True, capture_output=True)
+    run('init')
+    names = ['.gitattributes', 'docs/validation/v0.3-accepted-events-protocol.json',
+             'docs/validation/v0.3-accepted-events.json']
+    names += list(read('v0.3-accepted-events-protocol')['source_records_sha256'])
+    for name in names:
+        dest = repo / name; dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_bytes((ROOT / name).read_bytes())
+    run('add', '--', *names)
+    run('checkout-index', '--all', '--prefix=' + checkout.as_posix() + '/')
+    for name in names:
+        if name.endswith('.json'):
+            assert (checkout / name).read_bytes() == (ROOT / name).read_bytes(), name
