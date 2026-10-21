@@ -22,7 +22,9 @@
 
 ## 真實資料互動展示
 
-點擊截圖即可開啟**保存結果的互動網站**。圖中是目前 Pages 的實際介面，不是新的即時推論，也不代表歷史 Alpha 已完成驗收。
+點擊截圖即可開啟**保存結果的互動網站**。圖中是當時 Pages 的實際介面截圖，不是新的即時推論，也不代表歷史 Alpha 已完成驗收。
+
+目前 v0.1 聚焦完整點雲瀏覽，只載保存點雲包；v0.2 使用相同公車來源，加入完整 Float32 深度／XYZ、真實遮罩與物件點雲查詢。截圖保留原拍攝狀態，不視為新版介面或新增驗收。
 
 <p align="center">
   <a href="https://jshengp.github.io/depthport/v0.1/?lang=zh-TW"><img src="docs/assets/pages-v01-cloud.zh-TW.jpg" width="30%" alt="v0.1: 原始 CloudViewer 的 DA3 Metric 真實點雲"></a>
@@ -68,7 +70,7 @@ bash RUN_UBUNTU.sh
 <details>
 <summary>不安裝 AI，體驗真實記錄範例與合成互動練習</summary>
 
-[開啟多版本展示網站](https://jshengp.github.io/depthport/)：v0.1／v0.2 共用同一張 bus.jpg 的四模型 Float32 真實深度、互動 XYZRGB 與 YOLO 遮罩；v0.3 提供來源影格 32–55 的 24 格真實追蹤新執行回放、ID 及深度歷史，另保留舊三張截圖與合成練習。[資料來源、雜湊與限制](docs/zh-TW/real-ai-pages.md)。用 Python 標準函式庫建立：
+[開啟多版本展示網站](https://jshengp.github.io/depthport/)：v0.1 只瀏覽四模型的完整保存點雲；v0.2 使用同一張 bus.jpg，加入完整 Float32 深度／XYZ 與 YOLO 遮罩、物件點雲分析；v0.3 提供來源影格 32–55 的 24 格真實追蹤新執行回放、ID 及深度歷史，另保留舊三張截圖與合成練習。[資料來源、雜湊與限制](docs/zh-TW/real-ai-pages.md)。用 Python 標準函式庫建立：
 
 ```bash
 python tools/build_site.py

@@ -1,0 +1,41 @@
+{
+  "protocol_sha256": "f5533cd901dced5136f67169687566e4a26120b17bf39089925faa272ffdb849",
+  "frozen_before_preparation": true,
+  "ledger": [
+    {
+      "name": "KITTI-0012",
+      "status": "completed",
+      "frames": 78,
+      "pixel_identical_frames": 78,
+      "image_manifest_sha256": "838e3815d80249e0990d6cb3f741356307ddff8d26cd86d90245ed2054bb48e7"
+    },
+    {
+      "name": "KITTI-0013",
+      "status": "completed",
+      "frames": 340,
+      "pixel_identical_frames": 340,
+      "image_manifest_sha256": "e32b3a6d02952447fb7d4950d8c176a41628291cf799cf4895207b6573bc00ed"
+    },
+    {
+      "name": "KITTI-0014",
+      "status": "completed",
+      "frames": 106,
+      "pixel_identical_frames": 106,
+      "image_manifest_sha256": "00b47f5e629e9c4e50e9b13e30f1367dd42d7c435547497b0c0ccacb270af3fc"
+    },
+    {
+      "name": "KITTI-0015",
+      "status": "completed",
+      "frames": 376,
+      "pixel_identical_frames": 376,
+      "image_manifest_sha256": "4e3b6971c27b25e59fe7e57c3fc5af835ae9d2c7a4d696ce04efdd43f406b7a4"
+    },
+    {
+      "name": "KITTI-0016",
+      "status": "completed",
+      "frames": 209,
+      "pixel_identical_frames": 209,
+      "image_manifest_sha256": "6d6f81e77850b1a41aaa8ca176db5d4f2404ba090122e7b6fab210589c1daca0"
+    }
+  ]
+}

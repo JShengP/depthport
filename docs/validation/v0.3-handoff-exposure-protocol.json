@@ -1,0 +1,242 @@
+{
+  "format": "depthport.handoff-exposure-protocol.v1",
+  "report_date_local": "2026-10-22",
+  "frozen_at_utc": "2026-10-21T18:12:07.013934+00:00",
+  "base_commit": "0cd0b4e1e8f974903454fa5136c4c7789d1d165f",
+  "implementation_sha256": {
+    "depthport/tracking_handoff_selection.py": "6ce2d3e34c7876a9b9b79ff74ea264f978cd17a5f94de73bb5a9d3e1b3304722",
+    "tools/select_tracking_handoff_exposure.py": "8e79b23c504fbefd868c145a9bd145e4264fe75a853db0d637abe77a866a9dce",
+    "tools/prepare_tracking_handoff_exposure.py": "1bc9d3a015957028d052b696d327d7d0ce8a792d82b010726c83e332b5bd6a9a",
+    "tests/test_tracking_handoff_selection.py": "5c446c129d5bf907f75a4411373b731671b86449c8573cd63673b789cc2842f6"
+  },
+  "source_records_sha256": {
+    "depthport/tracking_accepted_events.py": "da1e8a37144327a42374b1d8ce4df538f807d56c47a18eed5a27b8692fd1490d",
+    "tools/audit_tracking_accepted_events.py": "22590d97f749ff133648d15b05a69e0b8991ab1a7cb408fcdf3bf5c39619cc76",
+    "tests/test_tracking_accepted_events.py": "caf62022d81a1412b5083689175e60327e0944ca9e606fb450ceb95ab57305bc",
+    "docs/validation/v0.3-geometry-exposure-protocol.json": "0e17491922bcada995e96882a0fdf53fe40827f10d1d03b2fd301fd758b0b21f",
+    "docs/validation/v0.3-geometry-exposure-discovery.json": "5b80ff38b3b0806b81a5f7cd35fe2c5a4216b487ed412321d396daa6bb113347",
+    "docs/validation/v0.3-geometry-exposure-discovery-references.json": "a9b79f310158e4f59484e468a3b1d66b8bdfc06843d786613a0d04299214ec61",
+    "docs/validation/v0.3-geometry-exposure-archive-compatibility.json": "1abccba7dccf417683b9f4c9c4858824de7f7549e477f5d2c1ecb3bb4e8aae78",
+    "docs/validation/v0.3-geometry-exposure-confirmation.json": "63bbcc4189f5b6cb51ab3f6e2349d23ca734949419f18ec69c88217ae6e3a4b8",
+    "docs/validation/v0.3-geometry-exposure-confirmation-references.json": "c923be9e7c94741b5ec25422ffe817067b6e6e281ffcdf8806a0bcbdebd05b0f",
+    "docs/validation/v0.3-geometry-exposure-preparation.json": "43957259538dfe6c364442e4693e1ae425cbbe9cb00de8c91cc2f3caf9fe9465",
+    "docs/validation/v0.3-geometry-exposure-pre-inference.json": "922ef511097134bdb3b3822fb086f7bd704e33fa7bc6ab7cc85a06477840f0d8",
+    "docs/validation/v0.3-carrier-role-audit-protocol.json": "efacb4f1da7e0b60693d1b64cc6517a1054be79f81da36199cdf1ce72520bb9b",
+    "docs/validation/v0.3-carrier-role-audit.json": "e9783dc0441d9d0cc8389749d6f804e82a4c74204e6c899af725425e90bbb7eb",
+    "docs/validation/v0.3-accepted-events-protocol.json": "6441c390d2fb8ff11a1deb0cb7fd0fbc26386a2e710b5a5577b490d3af59f18f",
+    "docs/validation/v0.3-accepted-events.json": "efb58932ecd07c4e8762b1082edb4ea6c4779812bdc7ac315153f55462724cfc",
+    "depthport/tracking_observation_bridge.py": "0a00d22ed066c3d0517f3f4d930c61d724bf08861b47ee00a5b9d64495460c98",
+    "tools/audit_tracking_observation_bridge.py": "05e2acb01531b9f6959a181f2ef9d8dfef5bd02f52d663ed51403581110ec39e",
+    "tests/test_tracking_observation_bridge.py": "233c8b024a7d2efffc30336364f1f3d591892bcc5303d56610aa5e5985efabb4",
+    "docs/validation/v0.3-observation-bridge-protocol.json": "d780714e476ea42cd56559e869e11e732c712282c04d8956b30082da35e6be97",
+    "docs/validation/v0.3-observation-bridge.json": "4b88ff004e61fcd3a9955f519b25a9500aaddf358ac5de2824f3768337f10a80",
+    "depthport/tracking_lifecycle_probe.py": "52d787d9d22ca6438dfab2d2d6da2ca3802d9d347576fad96acd55f90561e96d",
+    "depthport/tracking_handoff_audit.py": "65796dc4af38180a465db6f6b9d286344f09d711552322857ec5d306709bc557",
+    "tools/audit_tracking_handoff.py": "55b711303bec5f5495a4aa93c48e87b71367b72fad62c68dbe48463d26c7ab35",
+    "tests/test_tracking_handoff_audit.py": "22f036deaff351dbcecc96bd471b40e37aea23a329e5bcaf73bcfab33b0aac77",
+    "docs/validation/v0.3-handoff-audit-protocol.json": "415c656a748ed0e945fd4d1c93fd971b2b7924ce5c5595ba4bfd5f43eb5f3f03",
+    "docs/validation/v0.3-handoff-audit.json": "780b1523bd358ae9f43e73f06361489b2a3118f7ad2699e3e3e3e3925ce20617",
+    "tools/prepare_tracking_geometry.py": "8ae51bd1598787ce9faa2b1238170aa71ceef6e69dec6ec2d56a914db4e3c72b",
+    "tools/prepare_tracking_geometry_exposure.py": "d6f4189a769886cc922ec8edb1ee5fa16dce659b1a390d6932cfedd08933a635",
+    "tools/validate_tracking_geometry.py": "804866bbfb993b70f112b63eb25420a9edf0462fabd09d315538fd8c3d273b1e",
+    "tools/diagnose_tracking_upstream.py": "09a96959cc38cd8cd22f89b975e37b4914e3af149c8be081e75846219ef7366b",
+    "tools/audit_tracking_estimator_shadow.py": "66d472a8b91e845ac060bf03f14a0477e9c0fc0d8edad8acb31d7fe7cdac6a72",
+    "depthport/tracking_geometry_control.py": "43b6cb47efb86f5f33a8243d93ee055d5347abd101fc64bf658f697c088c9cf9",
+    "depthport/tracking_geometry_validation.py": "f3216f2a1636e455f2815212ba7a278299ec7e3294498f2106bf69226994851b",
+    "depthport/tracking_estimator_shadow.py": "a159fd6803ba542ed59479b1afaeb5af0fa3a0552c4949e0eb0fcec9c92ed1d3",
+    "depthport/tracking_exposure.py": "49026e2ef32cf767bf47845c1daba4e89f438291025d799108137a0019228bc0",
+    "depthport/tracking_past_exposure.py": "1a43b2bedcb09ecf5c8f0f3d22a9b35d43b81ef78f20560f10559b27a0f083d8",
+    "depthport/video_tracking_benchmark.py": "42fd7739080b4523f64c8425979e0125b8bfbfee7abfc5f22ed5e41668bbca0c",
+    "docs/validation/v0.3-handoff-controls-protocol.json": "53cd9794aaabe8544379b705373779ef187d82b90588c88901ca9986c91ffe28",
+    "depthport/tracking_handoff_control.py": "883efc6b4994371ed98a8a97c522dc313765d7a97144e2d427f6a6142b577310",
+    "depthport/tracking_handoff_screen.py": "ea9733d4870668e03319c5c80440f22a619a4ad471fb6344435c57ce13895726",
+    "tools/validate_tracking_handoff_controls.py": "f19003626f34ecdf5f6553eea507c76253dec138c6b9505b0849743e7c482a7b",
+    "tools/prepare_handoff_controls.py": "7229619a670772bbac51c5d92bdf18b827e1c23cda9173d678b1f367a3cf1977",
+    "tests/test_tracking_handoff_control.py": "d0f73a65911a93c2746cc713015b22fb7d4fca5f40c9f238ef06d76626589472",
+    "tests/test_tracking_handoff_screen.py": "73967d6d2095eefc00430e017ab2dbb3f2099804168ffde07095e274a5ba3db2",
+    "tests/test_tracking_handoff_controls_replay.py": "b0c31d91b42bfe43763a684607aea632f301e5566445afbdf5ab7a095dd40eaf",
+    "docs/validation/v0.3-birth-continuation-rule.json": "1490a3cec5f9d16c8c7f9c6342f7ba16db283674b7f778439a4d51a33f137ecd",
+    "docs/validation/v0.3-past-handoff-rule.json": "6850224ae4f9ebac290899d6bf159146577aab33990e423b961f32c3fac0d618",
+    "docs/validation/v0.3-handoff-controls.json": "f372fc074aafa08cc075259a4feda417232211330066361da808af2337d3c9ba",
+    "docs/validation/v0.3-handoff-controls-references.json": "f9eadbbbb8722253a0acbae5082bb98eeb240167b24b476e189306b075fe4fa1",
+    "docs/validation/v0.3-handoff-controls-preparation.json": "46b94bdb7d478ecf52e66c16a5859f86a2c182853dea28f9e5b2cecfccd75433"
+  },
+  "rule_sha256": {
+    "docs/validation/v0.3-birth-continuation-rule.json": "1490a3cec5f9d16c8c7f9c6342f7ba16db283674b7f778439a4d51a33f137ecd",
+    "docs/validation/v0.3-past-handoff-rule.json": "6850224ae4f9ebac290899d6bf159146577aab33990e423b961f32c3fac0d618"
+  },
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv-python": "4.11.0.86",
+    "trackers": "2.6.1",
+    "supervision": "0.27.0",
+    "scipy": "1.18.1"
+  },
+  "audit_python": "3.12.3",
+  "upstream_sha256": {
+    "tracker": "7ea61408b4908da327ba992f09450865bb16019ab95bed23a512e5c03bef8fda",
+    "tracklet": "66c4b84cb28b1b2abd9b288b2b0f594814e4eb11d55ac8c295386415da022885",
+    "base_tracker": "64813fbf4b6441080b005a99f2908c137435107d54eaaab6bf8625a54395e948",
+    "base_tracklet": "96e4d4a01064b15f178e190e80a88bb8bbed38476a275b7d659181532a21e8d8",
+    "alive": "345242f72dc5fb43b70953546dde8b66759377f6c63ed91d1995c320affb5f84",
+    "estimator": "fe8abe96d398685abe2055a78e51f2f9906522877c5130b1d476ee3dc8c0fff0",
+    "iou": "e7d7de78643ed864f195915c009d400e02b8d3e57159f6aaa90d707f7f1bd4f0",
+    "box_iou": "d9fac5e31c8bbfc6e7c8d16a91cd49eec11cfe0e7d4ef2c3da286997c53a6b63"
+  },
+  "numerical_modules_sha256": {
+    "kalman_filter_module": "ba812be3e00fd0386feb48eea5f6c2665a31af925cba28acd4c0d946d300adc2",
+    "motion_models_module": "ccb9b99030ba13c46d8769176d21206380339cdadac8e4d20b8f22f51d3130c3",
+    "state_representations_module": "7db45970850783bd1da31cdc3371fa8a3a5615267b29df9018152946de945b0d",
+    "scipy_lsap_binary": "67871ca804df8da4fadf4e9238ea0536d92ff0915ddae885b368c65ce43e5b3f"
+  },
+  "parameters": {
+    "track_activation_threshold": 0.3,
+    "high_conf_det_threshold": 0.6,
+    "lost_track_buffer": 30,
+    "minimum_consecutive_frames": 2
+  },
+  "margin": 0.05,
+  "detector_settings": {
+    "model": "yolo26n.pt",
+    "confidence": 0.1,
+    "imgsz": 640,
+    "source": "ultralytics",
+    "device": "cpu",
+    "classes": [
+      0
+    ],
+    "max_det": 64,
+    "nms_iou": 0.7,
+    "ultralytics": "8.4.176",
+    "weight_sha256": "9b09cc8bf347f0fc8a5f7657480587f25db09b34bf33b0652110fb03a8ad4fef"
+  },
+  "detector_runtime": {
+    "ultralytics": "8.4.176",
+    "torch": "2.10.0+cu128",
+    "numpy": "1.26.4",
+    "opencv-python": "4.11.0.86"
+  },
+  "image_archive": {
+    "url": "https://s3.eu-central-1.amazonaws.com/avg-kitti/data_tracking_image_2.zip",
+    "etag": "\"5eed58a54608975e5c81b610b8461f2b-1886\"",
+    "size": 15813146295,
+    "central_start": 15811016707
+  },
+  "new_sources": [
+    {
+      "name": "KITTI-0012",
+      "phase": "discovery",
+      "fps": 10,
+      "frames": 78,
+      "member_manifest_sha256": "438ed42d43e2a2c0bc7e946b071e5effda8270119d16bb26cd3962523eb7ac14",
+      "byte_start": 4505566511,
+      "byte_end": 4568095870
+    },
+    {
+      "name": "KITTI-0013",
+      "phase": "discovery",
+      "fps": 10,
+      "frames": 340,
+      "member_manifest_sha256": "f25a511c6417cdc58d557efd9478de6593ce0c1584756f535cd22ac159d518f8",
+      "byte_start": 2197207547,
+      "byte_end": 2484680652
+    },
+    {
+      "name": "KITTI-0014",
+      "phase": "discovery",
+      "fps": 10,
+      "frames": 106,
+      "member_manifest_sha256": "e346f8328cbb3f0129589d5bb0b0b77d411fc295f22683bb5c6fa53aa869c36e",
+      "byte_start": 5627214961,
+      "byte_end": 5710126037
+    },
+    {
+      "name": "KITTI-0015",
+      "phase": "discovery",
+      "fps": 10,
+      "frames": 376,
+      "member_manifest_sha256": "42d759e51a27395828d5ad68f348c1db5e35eb11609198aeb3f73968ffc7116a",
+      "byte_start": 666932857,
+      "byte_end": 955201719
+    },
+    {
+      "name": "KITTI-0016",
+      "phase": "discovery",
+      "fps": 10,
+      "frames": 209,
+      "member_manifest_sha256": "efbbeca7b1831c3f8910f59588d5b32faad40ae1119857e2fb7a3ecabb83ac73",
+      "byte_start": 5457618458,
+      "byte_end": 5627214880
+    },
+    {
+      "name": "KITTI-0017",
+      "phase": "confirmation",
+      "fps": 10,
+      "frames": 145,
+      "member_manifest_sha256": "b7efd6e0cb6b002308f06427b9c2b980af50d2b1c82c5e24af172eefdf32f3fd",
+      "byte_start": 4385508591,
+      "byte_end": 4505566430
+    },
+    {
+      "name": "KITTI-0018",
+      "phase": "confirmation",
+      "fps": 10,
+      "frames": 339,
+      "member_manifest_sha256": "d215ee215b88268db65f31a6f9d38d29dd7e6e3f7b8a78c29d729df3dca77c40",
+      "byte_start": 3960635919,
+      "byte_end": 4253144610
+    }
+  ],
+  "original_archive_files": 434,
+  "prior_information": "All16 previously recorded MOT and KITTI0000-0011; finite next lexical KITTI0012-0016 discovery,0017-0018 reserved.0019-0020 not inspected beyond archive directory metadata and not scheduled. Same dataset/camera family, not independent sites/people/datasets or external preregistration.",
+  "arms": [
+    "native",
+    "observed_native",
+    "projection",
+    "birth_continuation",
+    "past_competition_handoff"
+  ],
+  "definitions": {
+    "separation": "Two separately hashed rule records. Each candidate independently adds only its own high-stage rule over identical unchanged geometry-projected baseline; no joint arm or tuning. Extra observed native arm checks full instrumentation neutrality against unhooked native. Same dataset/camera family source-held-out validation, not independent sites/people/datasets or external preregistration. No leaderboard/GT-score selection.",
+    "preparation": "Image-only official ZIP metadata/ETag/ranges locked, full phase-specific original PNG CRC/SHA manifests, native10Hz FFV1 bgr0 decoded pixel equality. Same8.4.176 YOLO26n CPU recipe confidence.1/img640/class0/cap64/NMS.7 and weight hash; no frame cropping, filtering, resampling, GT/labels archive or evaluator. All original inputs including weak remain. Cap frames fail source screen, never silently exclude frames. Raw media/cache stay local.",
+    "reference": "Seal ALL full unhooked native references and input locks BEFORE any candidate execution. Two observed native repeats must equal complete native prediction JSON bytes, raw native outputs and final pickle. Two isolated repeats per projection/A/B arm require exact full output/native/final-state/trace/event receipts and aggregate equality. Fresh spawned process each pass, OpenCV1 thread seed0, no inference in tracking. Original434 files and all prior source/code records checked before/after; old pickle hash only. New native seals do not rewrite historical seals.",
+    "harm_per_scene": "No cross-scene compensation. Against its own projection baseline require ZERO lost original accepted input keys(frame,index), ZERO lost weak-stage accepted input keys, ZERO lost confirmed-output input keys, ZERO new birth keys, ZERO numerical-check failures, ZERO invalid accepted posteriors, no added nonpositive predictions and ZERO lost protected OTHER high-stage pairs at each action. Current intended handoff edge change is explicit, not hidden as protection. Preserve/record complete lost/new stage/lineage sets, not just totals. Legacy strict seed-key active gate is computed UNCHANGED and reported separately; the new observable-input/protected-update screen does not pass or replace old studies. Any identity consequences remain unknown without GT.",
+    "exposure": "Separately for each role-group: ALL scheduled discovery+reserved sources complete, discovery selection exists, BOTH reserved sources have>=1 actual role-specific action, and both same-arm per-scene observable harm gates pass. No pooling, no zero-exposure success. Legacy strict active-lineage proxy separately unchanged. Even true flags establish neither identity/accuracy/safety nor default promotion.",
+    "failure": "Keep every scheduled source, zero and failure. No overwrite/retry/resume under same output; missing preparation or execution remains failed/null. Preserve prior26-source failures, incomplete discovery and false replication flags without reclassification. Test fixture errors before freeze and software failures remain dated, not erased.",
+    "publication": "Only reviewed source-level aggregates, role/action/gate counts, zeros/nulls/failures and hashes. Raw frames, detections, per-input/owner/native IDs, costs, histories, full predictions/pickles/diagnostics and exceptions local ignored artifacts. Code AGPL does not relicense KITTI; no data/weights redistribution."
+  },
+  "terms": {
+    "url": "https://www.cvlibs.net/datasets/kitti/",
+    "license": "CC BY-NC-SA 3.0",
+    "terms_sha256": "828a0add3e07f8ae9156ec73bde2ebaa4db0a637ad36e000cf01670b717bcd2a",
+    "attribution": "Andreas Geiger, Philip Lenz, Raquel Urtasun. Are we ready for Autonomous Driving? The KITTI Vision Benchmark Suite. CVPR2012.",
+    "scope": "Local noncommercial research, aggregates only; no data redistribution or relicensing."
+  },
+  "parent_protocol_sha256": "53cd9794aaabe8544379b705373779ef187d82b90588c88901ca9986c91ffe28",
+  "prior_raw_files": 772,
+  "prior_raw_inventory_sha256": "bec3582a26d16dac6fec2ff2c0c01eb087f1d0c796108fe3e2d7edfbce351655",
+  "seen_before_freeze": "All16 previously recorded MOT and KITTI0000-0011; finite next lexical KITTI0012-0016 discovery,0017-0018 reserved.0019-0020 not inspected beyond archive directory metadata and not scheduled. Same dataset/camera family, not independent sites/people/datasets or external preregistration.",
+  "selection": {
+    "groups": {
+      "birth_active": [
+        "birth_continuation",
+        "active_birth_continuations"
+      ],
+      "birth_retained": [
+        "birth_continuation",
+        "retained_birth_continuations"
+      ],
+      "past_handoff": [
+        "past_competition_handoff",
+        "actions"
+      ]
+    },
+    "eligibility": "Complete original source, cap0, every native/observed/repeated output/state/trace seal equal as applicable. Any failure is retained with null exposure. Zeros never qualify. No GT/labels/evaluator or later pair non-repetition.",
+    "discovery": "Run ALL five full sources regardless of exposure or harm. Per group select first lexical complete source with ACTUAL candidate actions in that role>0. Counts from candidate trajectory, not baseline counterfactual. Never select by harm gates, future events, identity/accuracy or favourable count. Roles are group labels, not new control conditions. Report full passes/denominators and all selections including null.",
+    "reserved": "No reserved image reads/inference/tracking before full discovery report AND reference seals publicly committed and local release receipt verifies their hashes/commit. Then execute BOTH fixed reserved sources for BOTH unchanged candidates regardless of discovered exposure. If discovery has no candidate for a group, reserved measurements remain preassigned holdout attempts, not qualified independent confirmation. Never replace failed/zero sources or borrow discovery as confirmation.",
+    "confirmation_gate": "Separately for each role-group: ALL scheduled discovery+reserved sources complete, discovery selection exists, BOTH reserved sources have>=1 actual role-specific action, and both same-arm per-scene observable harm gates pass. No pooling, no zero-exposure success. Legacy strict active-lineage proxy separately unchanged. Even true flags establish neither identity/accuracy/safety nor default promotion.",
+    "history": "Original434 files plus prior raw two-source study inventory must match before/after each phase; prior public/code/rules pinned. Previous source failures/nulls and false replication retained. Newly sealed native reference is not an historical reference rewrite.",
+    "failure": "No overwritten outputs, retries, substitutions, dropped frames, cap filtering, windows, altered settings or early stopping. Preparation failure slots remain in inputs and ledger. Exposure null on execution/integrity failure; partial raw diagnostics local. All inspected protocol sources listed even when never selected.",
+    "privacy": "Reviewed whole-source aggregates/hashes only; no media, boxes, native IDs, costs, local paths, traces, pickle, source cache or exceptions published."
+  }
+}

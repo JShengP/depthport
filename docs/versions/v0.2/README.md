@@ -70,6 +70,8 @@ flowchart LR
 
 ## Examples / 範例
 
+**Current demo roles / 目前展示分工（2026-10-22）：** v0.1 = full-cloud navigation only; v0.2 = exact pixel/native-depth/XYZ and real object-mask inspection, same saved source. v0.1只瀏覽完整點雲，v0.2才提供像素／XYZ／物件遮罩分析。下圖保留原拍攝狀態，不重授歷史驗收；目前頁面分工已更新。
+
 **[Open interactive website / 開啟互動網站](https://jshengp.github.io/depthport/v0.2/?lang=zh-TW)** · [English demo](https://jshengp.github.io/depthport/v0.2/?lang=en)
 
 **Current Pages, real numeric inspector / 目前網站的真實數值檢查器。** Four original saved bus depth outputs share v0.1's source. Click RGB/depth to read native Float32 values and camera XYZ; inspect actual YOLO Detect/Segment masks and object clouds. The image shows **Depth Anything V2 Small native relative nearness**, its final virtual Z and genuine semantic overlays. 四模型與 v0.1 共用同一公車來源；點擊 RGB／深度可讀原生 Float32 與 XYZ，切換真 YOLO 框／遮罩並看物件點雲，圖中為 V2 原生相對接近度及最終虛擬 Z。

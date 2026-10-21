@@ -39,3 +39,9 @@ Only explicitly reviewed paths in `PUBLIC_FILES.txt` are copied. Native arrays/P
 ## Browser compatibility / 瀏覽器相容性
 
 [Historical in-app record / 原內建紀錄](pages-browser-compatibility.md) · [Headless / 無頭](pages-standalone-browsers.md) · [Native headed / 原生有視窗](pages-headed-browsers.md): exact Linux Chrome155 / Edge155 / Firefox157 pass B01–B07 in each separate mode; B08 remains not_run. Each mode21 pass/3 not_run; unique matrix33 pass/31 not_run, without counting modes twice. Safari, physical phones, other OS/builds and natural unsupported/fallback paths remain open. 原失敗保留，桌面有視窗與尺寸覆寫不代替實體手機／完整應用硬體／精度驗收。
+
+## 版本展示分工 — 2026-10-22
+
+先前兩版共用整套檢查器，因此看起來幾乎一樣。目前v0.1只提供完整點雲的模型切換／旋轉／平移／縮放／顏色／點大小，只讀原保存點雲包，不讀完整深度陣列或語意遮罩。v0.2保留完整Float32原生深度／Z／XYZ查詢、真實Detect／Segment遮罩與物件點雲。同一公車來源與推論結果、不同操作分工；沒有新增推論或回填歷史驗收。原截圖／雜湊紀錄保留原拍攝介面，不宣稱每項控制與目前完全相同。
+
+25項網站／保存資料／版本邊界測試通過，涵蓋實際點雲載入器四模型原包、不讀完整陣列／遮罩、失敗重試與語言切換。內建瀏覽器桌面已操作模型切換、雙語v0.1及v0.2完整數值載入／物件選取。本次局部檢查不重跑或擴張原Chrome／Edge／Firefox凍結矩陣；新版手機、獨立瀏覽器、Safari與硬體繪圖本輪未測，既有合成區繪圖備援無法使用訊息保留。不增加精度、RTSP、Windows真推論或效能驗收。

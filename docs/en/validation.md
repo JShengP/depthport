@@ -1,6 +1,10 @@
 # Validation record
 [繁體中文](../zh-TW/validation.md) · [Home](../../README.md)
 
+## Frozen same-rule GT-free exposure ledger — 2026-10-22
+
+[Method, complete discovery/reserved ledger and decision / 方法與完整清單](tracking-handoff-exposure.md)：Seven full sources/1,593 original frames/63 isolated processes complete, all native/repeat seals equal. Discovery0012–0016 has no actual actions in active/retained continuation or past handoff; selections null. Reserved0017/0018 opens only after public discovery, also zero actions; all three confirmation gates FALSE. All1,027 weak updates per arm retained;434 old files/772 prior raw files unchanged. No GT/tuning, defaults unchanged. Full negative ledger complete, effective exposure/quality unverified; next prospectively freeze read-only eligibility/action-reachability audit, not more favourable source replacement.
+
 ## Separate causal birth/handoff controls on unseen KITTI sources — 2026-10-22
 
 [Two-rule freeze, terms, full ledger and decision](tracking-handoff-controls.md):667 full pixel-identical frames/18 isolated source processes on held-out KITTI0010/0011. Native/observed outputs/state and complete arm repeats match. Both candidates have0/0 actual actions and fail frozen exposure/replication; observable-input gates alone pass without establishing efficacy/safety.0010:49 detections/3 births/no accepted updates;0011:293 detections/4 births/57 high+64 weak updates, all retained. No GT, tuning, weak-stage/default change;434 historical seals and prior failures/nulls unchanged, raw diagnoses local. Both sources are now seen. Next freeze GT-free eligibility/exposure selection and untouched confirmation without changing rules.

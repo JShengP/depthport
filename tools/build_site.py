@@ -20,7 +20,7 @@ from depthport.source_archive import source_bytes, public_files
 from tools.build_results import render_results
 
 STATIC_ASSETS = ('style.css', 'viewer.js', 'i18n.js', 'main.js', 'favicon.svg')
-SHOWCASE_ASSETS = ('showcase.css', 'showcase.js', 'recorded-examples.css', 'recorded-examples.js', 'real-results.js', 'real-results.css', 'results.js', 'results.css')
+SHOWCASE_ASSETS = ('showcase.css', 'showcase.js', 'recorded-examples.css', 'recorded-examples.js', 'real-results.js', 'cloud-demo.js', 'real-results.css', 'results.js', 'results.css')
 SCREENSHOTS = ('preview.en.png', 'spatial-preview.en.png',
                'tracking-replay-start.zh-TW.jpg',
                'tracking-replay-crossing.zh-TW.jpg',

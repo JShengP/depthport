@@ -125,7 +125,6 @@ tests/test_tracking.py
 tests/test_sessions_i18n.cjs
 docs/en/sessions.md
 docs/zh-TW/sessions.md
-
 # v0.3 Tracking Acceptance — offline annotated-object matching
 depthport/tracking_eval.py
 tools/evaluate_tracking.py
@@ -138,7 +137,6 @@ docs/assets/README.md
 docs/assets/spatial-preview.en.png
 docs/assets/spatial-preview.zh-TW.png
 docs/validation/v0.3-tracking-pilot.json
-
 # Optional isolated offline continuous-video tracking comparison
 depthport/video_tracking_benchmark.py
 tools/cache_video_detections.py
@@ -147,7 +145,6 @@ tests/test_video_tracking_benchmark.py
 docs/en/offline-video-tracking.md
 docs/zh-TW/offline-video-tracking.md
 requirements-tracking-benchmark.txt
-
 # Optional isolated BoT-SORT worker
 depthport/tracking_protocol.py
 depthport/tracking_worker.py
@@ -157,15 +154,12 @@ tests/test_tracking_worker.py
 docs/en/tracking-worker.md
 docs/zh-TW/tracking-worker.md
 docs/validation/v0.3-botsort-worker.json
-
 # Exact-frame tracking overlays
 static/tracking-overlay.js
 tests/test_tracking_overlay.cjs
-
 # Saved-frame playback controller
 static/replay-playback.js
 tests/test_replay_playback.cjs
-
 # Expanded MOT17 fixed-detection acceptance (aggregates only)
 depthport/mot_scenarios.py
 tools/validate_mot_tracking.py
@@ -174,7 +168,6 @@ docs/en/tracking-expanded-acceptance.md
 docs/zh-TW/tracking-expanded-acceptance.md
 docs/validation/v0.3-mot17-expanded.json
 docs/assets/tracking-v03-mot17.png
-
 # New-group tracker parameter sensitivity study (aggregates only)
 tests/test_tracking_parameters.py
 docs/en/tracking-parameter-acceptance.md
@@ -182,7 +175,6 @@ docs/zh-TW/tracking-parameter-acceptance.md
 docs/validation/v0.3-tracking-tuning-protocol.json
 docs/validation/v0.3-mot17-parameters.json
 docs/assets/tracking-v03-parameters.png
-
 # Activation error diagnosis (aggregates only; local traces/images excluded)
 depthport/tracking_diagnostics.py
 tools/diagnose_tracking_errors.py
@@ -191,19 +183,15 @@ docs/en/tracking-error-diagnosis.md
 docs/zh-TW/tracking-error-diagnosis.md
 docs/validation/v0.3-tracking-error-diagnosis.json
 docs/assets/tracking-v03-errors.png
-
 # Shared model dependency compatibility CI
 .github/workflows/model-compatibility.yml
-
 # v0.3 Alpha release notes (public source only)
 docs/releases/0.3.0-alpha.1.md
 docs/releases/0.3.0-alpha.2.md
-
 # Maintained version READMEs; immutable release snapshots stay at tags
 docs/versions/v0.1/README.md
 docs/versions/v0.2/README.md
 docs/versions/v0.3/README.md
-
 # Original generated version diagrams and reproducible standard-library builder
 tools/build_version_visuals.py
 docs/assets/versions-overview.svg
@@ -211,7 +199,6 @@ docs/assets/v0.1-workflow.svg
 docs/assets/v0.2-workflow.svg
 docs/assets/v0.3-workflow.svg
 docs/validation/v0.3-dependency-followup.json
-
 # Attributed real public-video replay documentation (not the original footage)
 docs/assets/tracking-replay-start.zh-TW.jpg
 docs/assets/tracking-replay-crossing.zh-TW.jpg
@@ -219,7 +206,6 @@ docs/assets/tracking-replay-later.zh-TW.jpg
 docs/en/tracking-replay-example.md
 docs/zh-TW/tracking-replay-example.md
 docs/validation/v0.3-public-replay-example.json
-
 # Controlled new-ID admission study; aggregates only, raw cases remain local
 depthport/tracking_admission.py
 tools/plot_tracking_admission.py
@@ -229,7 +215,6 @@ docs/zh-TW/tracking-admission-acceptance.md
 docs/validation/v0.3-tracking-admission-protocol.json
 docs/validation/v0.3-mot17-admission.json
 docs/assets/tracking-v03-admission.png
-
 # Association-cost observation; raw matrices, row IDs and events stay local
 depthport/tracking_association_probe.py
 tests/test_tracking_association_probe.py
@@ -271,7 +256,6 @@ docs/en/tracking-recovery-history.md
 docs/zh-TW/tracking-recovery-history.md
 docs/validation/v0.3-recovery-history.json
 docs/assets/tracking-v03-recovery-history.png
-
 # Frozen exclusive-competition controls and reviewed aggregates
 depthport/tracking_exclusive_control.py
 tests/test_tracking_exclusive_control.py
@@ -282,7 +266,6 @@ docs/zh-TW/tracking-exclusive-competition.md
 docs/validation/v0.3-exclusive-competition-protocol.json
 docs/validation/v0.3-exclusive-competition.json
 docs/assets/tracking-v03-exclusive-competition.png
-
 # GT-free complete discovery and reserved-confirmation exposure ledgers
 depthport/tracking_exposure.py
 tests/test_tracking_exposure.py
@@ -299,7 +282,6 @@ docs/validation/v0.3-exposure-discovery.json
 docs/validation/v0.3-exposure-confirmation.json
 docs/validation/v0.3-exposure-audit.json
 docs/assets/tracking-v03-exposure-selection.png
-
 # Frozen reference alternative cost and exchange-component diagnosis
 tools/diagnose_tracking_competition.py
 tools/plot_tracking_competition.py
@@ -308,7 +290,6 @@ docs/en/tracking-competition-structure.md
 docs/zh-TW/tracking-competition-structure.md
 docs/validation/v0.3-competition-structure.json
 docs/assets/tracking-v03-competition-structure.png
-
 # Frozen effective-update risk groups and temporal observation-history support
 tools/diagnose_tracking_temporal_support.py
 tools/plot_tracking_temporal_support.py
@@ -318,7 +299,6 @@ docs/validation/v0.3-temporal-support.json
 docs/en/tracking-temporal-support.md
 docs/zh-TW/tracking-temporal-support.md
 docs/assets/tracking-v03-temporal-support.png
-
 # Frozen causal past-support / update-protection independent KITTI controls
 depthport/tracking_past_support_control.py
 tools/validate_tracking_past_support.py
@@ -334,7 +314,6 @@ docs/assets/tracking-v03-past-support.png
 tests/test_tracking_past_support_reporting.py
 docs/validation/v0.3-past-support-report-amendment.json
 docs/validation/v0.3-past-support-report-fix.patch
-
 # Frozen same-rule GT-free discovery and untouched reserved confirmation
 depthport/tracking_past_exposure.py
 tools/select_tracking_past_exposure.py
@@ -350,7 +329,6 @@ docs/validation/v0.3-past-exposure-prepared-sources.json
 docs/validation/v0.3-past-exposure-discovery.json
 docs/validation/v0.3-past-exposure-confirmation.json
 docs/assets/tracking-v03-past-exposure.png
-
 # Read-only frozen-history exposure-gap diagnosis and buffer-semantics erratum
 depthport/tracking_exposure_gap.py
 tools/diagnose_tracking_exposure_gap.py
@@ -363,7 +341,6 @@ docs/validation/v0.3-buffer-semantics-erratum.json
 docs/en/tracking-exposure-gap.md
 docs/zh-TW/tracking-exposure-gap.md
 docs/assets/tracking-v03-exposure-gap.png
-
 # Frozen read-only KITTI prediction / birth / expiry observation
 depthport/tracking_lifecycle_probe.py
 depthport/tracking_upstream_diagnostics.py
@@ -373,7 +350,6 @@ docs/validation/v0.3-upstream-lifecycle-protocol.json
 docs/validation/v0.3-upstream-lifecycle.json
 docs/en/tracking-upstream-lifecycle.md
 docs/zh-TW/tracking-upstream-lifecycle.md
-
 # Frozen state-estimation / observation-health audit and publication projection
 depthport/tracking_health_audit.py
 tools/audit_tracking_health.py
@@ -385,7 +361,6 @@ docs/validation/v0.3-state-observation-health.json
 docs/validation/v0.3-state-observation-health-publication.json
 docs/en/tracking-state-observation-health.md
 docs/zh-TW/tracking-state-observation-health.md
-
 # Frozen numerical shadow replay and independent high-stage assignment audit
 depthport/tracking_estimator_shadow.py
 depthport/tracking_shadow_analysis.py
@@ -397,7 +372,6 @@ docs/validation/v0.3-estimator-shadow-protocol.json
 docs/validation/v0.3-estimator-shadow.json
 docs/en/tracking-estimator-shadow.md
 docs/zh-TW/tracking-estimator-shadow.md
-
 # Static GitHub Pages multi-version showcase
 website/index.html
 website/v0.2/index.html
@@ -407,7 +381,6 @@ website/showcase.js
 tests/test_pages_showcase.py
 docs/en/pages-showcase.md
 docs/zh-TW/pages-showcase.md
-
 # Frozen prediction-geometry control, GT-free scene gates and image-only preparation
 depthport/tracking_geometry_control.py
 depthport/tracking_geometry_validation.py
@@ -420,7 +393,6 @@ docs/en/tracking-geometry-validity.md
 docs/zh-TW/tracking-geometry-validity.md
 docs/validation/v0.3-geometry-validity-references.json
 docs/validation/v0.3-geometry-validity.json
-
 # Frozen geometry exposure discovery and untouched confirmation
 depthport/tracking_geometry_exposure.py
 tools/select_tracking_geometry_exposure.py
@@ -430,18 +402,15 @@ tests/test_tracking_geometry_exposure.py
 docs/validation/v0.3-geometry-exposure-protocol.json
 docs/en/tracking-geometry-exposure.md
 docs/zh-TW/tracking-geometry-exposure.md
-
 # Complete frozen discovery and post-failure serialization accounting
 docs/validation/v0.3-geometry-exposure-discovery.json
 docs/validation/v0.3-geometry-exposure-discovery-references.json
 docs/validation/v0.3-geometry-exposure-archive-compatibility.json
-
 # Untouched source preparation seal and complete geometry confirmation
 docs/validation/v0.3-geometry-exposure-confirmation.json
 docs/validation/v0.3-geometry-exposure-confirmation-references.json
 docs/validation/v0.3-geometry-exposure-preparation.json
 docs/validation/v0.3-geometry-exposure-pre-inference.json
-
 # Frozen read-only archive-carrier and tentative-role audit
 depthport/tracking_carrier_role_audit.py
 tools/audit_tracking_carrier_roles.py
@@ -449,15 +418,12 @@ tests/test_tracking_carrier_roles.py
 docs/validation/v0.3-carrier-role-audit-protocol.json
 docs/en/tracking-carrier-roles.md
 docs/zh-TW/tracking-carrier-roles.md
-
 # Complete read-only carrier/role aggregate; raw cases remain local
 docs/validation/v0.3-carrier-role-audit.json
-
 website/recorded-examples.css
 website/recorded-examples.js
 website/media/bus.jpg
 tests/test_recorded_examples.py
-
 # Reviewed saved real AI Pages results (no weights, sessions or logs)
 tools/export_pages_results.py
 website/data/bus/da2-small.json
@@ -498,7 +464,6 @@ website/data/tracking/tracks.json
 website/real-results.css
 website/real-results.js
 website/v0.1/index.html
-
 tests/test_real_results.py
 tests/test_real_results.cjs
 tests/delayed_fetch.cjs
@@ -506,7 +471,6 @@ website/data/catalog.json
 docs/en/real-ai-pages.md
 docs/zh-TW/real-ai-pages.md
 docs/validation/real-ai-pages.json
-
 # Reviewed current Pages UI screenshots and provenance
 docs/assets/pages-v01-cloud.en.jpg
 docs/assets/pages-v01-cloud.zh-TW.jpg
@@ -515,10 +479,8 @@ docs/assets/pages-v02-inspector.zh-TW.jpg
 docs/assets/pages-v03-replay.en.jpg
 docs/assets/pages-v03-replay.zh-TW.jpg
 docs/validation/readme-real-pages.json
-
 # Homepage language-switch regression
 tests/test_home_cards.cjs
-
 # Frozen saved-result browser compatibility protocol
 docs/validation/pages-browser-protocol.json
 docs/validation/pages-browser-initial.json
@@ -526,7 +488,6 @@ docs/validation/pages-browser-addendum.json
 docs/validation/pages-browser-acceptance.json
 docs/en/pages-browser-compatibility.md
 docs/zh-TW/pages-browser-compatibility.md
-
 # Independent headless browser follow-up
 docs/validation/pages-standalone-plan.json
 tools/pages_browser_acceptance.py
@@ -534,7 +495,6 @@ requirements-browser-tests.txt
 docs/en/pages-standalone-browsers.md
 docs/zh-TW/pages-standalone-browsers.md
 docs/validation/pages-standalone-acceptance.json
-
 # Native headed browser follow-up
 docs/validation/pages-headed-plan.json
 docs/en/pages-headed-browsers.md
@@ -591,3 +551,21 @@ docs/validation/v0.3-handoff-controls.json
 docs/validation/v0.3-handoff-controls-references.json
 docs/validation/v0.3-handoff-controls-preparation.json
 tests/test_tracking_handoff_controls_report.py
+depthport/tracking_handoff_selection.py
+docs/en/tracking-handoff-exposure.md
+docs/validation/v0.3-handoff-exposure-protocol.json
+docs/zh-TW/tracking-handoff-exposure.md
+tests/test_cloud_demo.cjs
+tests/test_tracking_handoff_selection.py
+tests/test_version_demo_boundaries.py
+tools/prepare_tracking_handoff_exposure.py
+tools/select_tracking_handoff_exposure.py
+website/cloud-demo.js
+docs/validation/pages-version-roles.json
+docs/validation/v0.3-handoff-exposure-discovery.json
+docs/validation/v0.3-handoff-exposure-discovery-references.json
+docs/validation/v0.3-handoff-exposure-discovery-preparation.json
+tests/test_tracking_handoff_exposure_report.py
+docs/validation/v0.3-handoff-exposure-confirmation.json
+docs/validation/v0.3-handoff-exposure-confirmation-references.json
+docs/validation/v0.3-handoff-exposure-confirmation-preparation.json

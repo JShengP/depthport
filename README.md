@@ -22,7 +22,7 @@ Turn RGB images and RTSP frames into interactive **single-view point clouds**. C
 
 ## Real-data interactive demos
 
-Click a screenshot to open the **saved-result interactive website**. These are screenshots of the current Pages UI, not new live inference or historical Alpha acceptance.
+Click a screenshot to open the **saved-result interactive website**. These are dated screenshots of the saved-result Pages UI, not new live inference or historical Alpha acceptance.
 
 <p align="center">
   <a href="https://jshengp.github.io/depthport/v0.1/?lang=en"><img src="docs/assets/pages-v01-cloud.en.jpg" width="30%" alt="v0.1: Saved DA3 Metric cloud in the original CloudViewer"></a>
@@ -32,7 +32,7 @@ Click a screenshot to open the **saved-result interactive website**. These are s
 
 **[v0.1 · Rotate real point clouds](https://jshengp.github.io/depthport/v0.1/?lang=en)** · **[v0.2 · Inspect native depth / XYZ / masks](https://jshengp.github.io/depthport/v0.2/?lang=en)** · **[v0.3 · Play real tracking results](https://jshengp.github.io/depthport/v0.3/?lang=en)**
 
-Bus views reuse the original four-engine CUDA exports of [Ultralytics bus.jpg](https://github.com/ultralytics/assets/blob/53d4e2a8fd15f473c29a148c317a8477be559327/im/bus.jpg). The cloud image shows **DA3 Metric Large**; the inspector shows **V2 native nearness plus final virtual Z**, with new real YOLO masks. Intrinsics are estimated from 65° HFOV, not measured calibration. Relative/virtual depth is not metres; estimated metres are not verified physical distances. This later demonstration does not change v0.1's historical acceptance.
+The current v0.1 page focuses on cloud navigation; pixel/XYZ/mask inspection is in v0.2. The dated screenshots remain evidence of their captured UI. Bus views reuse the original four-engine CUDA exports of [Ultralytics bus.jpg](https://github.com/ultralytics/assets/blob/53d4e2a8fd15f473c29a148c317a8477be559327/im/bus.jpg). The cloud image shows **DA3 Metric Large**; the inspector shows **V2 native nearness plus final virtual Z**, with new real YOLO masks. Intrinsics are estimated from 65° HFOV, not measured calibration. Relative/virtual depth is not metres; estimated metres are not verified physical distances. This later demonstration does not change v0.1's historical acceptance.
 
 **Two separate tracking runs — do not mix IDs or counts:**
 
@@ -68,7 +68,7 @@ Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/). First setup creates `.ven
 <details>
 <summary>Explore real recorded examples and synthetic practice without installing AI dependencies</summary>
 
-[Open the multi-version public showcase](https://jshengp.github.io/depthport/) — v0.1/v0.2 share four-model Float32 bus depth, interactive XYZRGB and actual YOLO masks. v0.3 plays a new saved 24-frame tracking run (source 32–55), with IDs and depth histories. The original three screenshots and separate synthetic exercises remain. [Data provenance, hashes and limits](docs/en/real-ai-pages.md). Build with Python’s standard library:
+[Open the multi-version public showcase](https://jshengp.github.io/depthport/) — v0.1 focuses on full-cloud navigation and loads only the saved cloud packs; v0.2 adds exact Float32 depth/XYZ queries, real YOLO masks and object-specific clouds using the same four-model bus source. v0.3 plays a new saved 24-frame tracking run (source 32–55), with IDs and depth histories. The original three screenshots and separate synthetic exercises remain. [Data provenance, hashes and limits](docs/en/real-ai-pages.md). Build with Python’s standard library:
 
 ```bash
 python tools/build_site.py
