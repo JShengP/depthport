@@ -16,3 +16,6 @@ website/data/**/*.json text eol=lf
 # Frozen Node regression inputs must match their Git blob bytes on Windows.
 *.cjs text eol=lf
 docs/validation/windows-node-stability-plan.json text eol=lf
+
+# Public validation protocols/results retain exact sealed Git bytes on Windows.
+docs/validation/*.json text eol=lf

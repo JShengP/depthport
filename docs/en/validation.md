@@ -1,6 +1,10 @@
 # Validation record
 [繁體中文](../zh-TW/validation.md) · [Home](../../README.md)
 
+## Accepted-event and seed-lineage audit — 2026-10-21
+
+[方法／完整清單／決定](tracking-accepted-events.md)：All three changed outputs/2,010 original frames/twelve archived histories complete. Accepted inputs add4/15/5 with zero lost weak/confirmed inputs; common-input seed lineages change51/39/0. Two scenes lose51/38 original active-edge keys through lineage, not dropped inputs; original strict proxies remain failed. All434 inputs and prior statuses unchanged;26 rows/four failures/nulls retained. No GT/inference/tracking/tuning/weak-stage/default change, raw cases local. Quality and independent confirmation remain open; next prospectively define causal common-accepted-observation lineage bridging.
+
 ## Read-only carrier and tentative-role audit — 2026-10-20
 
 [Frozen contracts, full ledger and decision](tracking-carrier-roles.md):four original978-frame Session carriers reconstruct exactly from locked metadata and ordered native payload, while all whole-file failures stay failed.22 sources/20,858 unique frames/88 existing histories reconcile; reference/projection681/678 tentative pre-predict rows all active seed-only zero-velocity, high promotions395/392, weak promotions264/264, immature removals22/22; retained/candidate/projected tentative rows0. Four blocked sources remain unmeasured.434 local inputs and all original records unchanged; no source tracking/inference/GT/scoring/tuning/weak-stage/default change. Conditional lifecycle reachability is not quality/safety acceptance. Next separately freeze accepted-event membership harm auditing for three changed discovery outputs.43 new+46 prior contracts pass; base516 passed/92 optional skipped; method CI8/8 passed.
