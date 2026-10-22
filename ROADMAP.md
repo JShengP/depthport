@@ -2,16 +2,24 @@
 
 Updated / 更新：2026-10-22 · [Project](README.md) · [繁體中文首頁](README.zh-TW.md) · [Alpha.2 notes / 發布說明](docs/releases/0.3.0-alpha.2.md) · [Changelog / 歷程](CHANGELOG.md)
 
-[Status / 狀態判讀](#status--狀態判讀) · [Current Pages / 目前互動展示](#current-pages--目前互動展示) · [v0.1](#v01--viewer-foundation--檢視器基礎) · [v0.2](#v02--spatial-analysis--空間分析) · [v0.3](#v03--sessions-and-tracking--回放與追蹤) · [Next gates / 下一步驗收](#next-acceptance-gates--下一步驗收) · [Maintenance / 維護](#repository-maintenance--repo-維護)
+[Project scope / 專案定位](#open-source-project-status--開源專案定位) · [Status / 狀態判讀](#status--狀態判讀) · [Current Pages / 目前互動展示](#current-pages--目前互動展示) · [v0.1](#v01--viewer-foundation--檢視器基礎) · [v0.2](#v02--spatial-analysis--空間分析) · [v0.3](#v03--sessions-and-tracking--回放與追蹤) · [Research & optional validation / 研究與選用驗證](#follow-up-research-and-optional-validation--後續研究與選用驗證) · [Maintenance / 維護](#repository-maintenance--repo-維護)
 
 > [!IMPORTANT]
-> v0.3 Alpha remains an **experimental development preview**. Implemented features, examples, CI and published source are not product or hardware acceptance. Priorities below are acceptance gates, not promised deadlines.
-> v0.3 Alpha 維持**實驗性開發預覽**。功能完成、範例、CI 與發布程式不等於產品或實機驗收；以下為驗收優先順序，不承諾期限。
+> DepthPort is an **open-source local workbench**, with experimental Alpha releases and a static public showcase. Completed repository work, follow-up research and optional use-case validation are separate. Open validation items do not block source publication or scoped Alpha maintenance.
+> DepthPort 定位為**開源本機工作台**，提供實驗性 Alpha 與靜態公開展示。已完成的 repo 工作、後續研究及依用途選用的驗證分開追蹤；未驗證項目不阻擋原始碼公開或依已記錄範圍維護 Alpha。
+
+## Open-source project status / 開源專案定位
+
+- **Completed open-source baseline / 已完成的開源基礎：** published AGPL source, installation/usage/version documentation, contribution/security guidance, Alpha source packages/checksums, CI, static real-result demos and Results Index. 已公開程式、授權、安裝／使用／分版文件、貢獻與安全說明、Alpha 原始碼包／校驗檔、CI、靜態展示及結果索引；持續修回報問題、維護依賴與文件。
+- **Follow-up research / 後續研究：** [#8](https://github.com/JShengP/depthport/issues/8) retains tracking mechanisms, independent exposure and evidence for any algorithm/default claim. Completed studies and their failed/zero results remain recorded; a new question is future work, not an unfinished publication step. 研究完成與研究條件通過分開；不因開源定位調整而把 false/null 改判通過。
+- **Optional validation / 選用驗證：** [#6](https://github.com/JShengP/depthport/issues/6) records selected installation, camera, device, geometry and performance evidence. Choose targets when they serve a local use case or a claim; missing evidence remains unverified. 不要求每個環境／相機／裝置都驗完才能公開 repo，但特定相容性、物理精度或可靠性宣稱仍需證據。
+
+Multi-user hosting is **outside the current goal**. The conditional extension below applies only if a hosted backend is deliberately chosen; it is separate from publishing source or serving reviewed static Pages. No account system or hosted-service release is promised. 多人託管只在未來有明確需求時另行規劃，不是開源 repo、Alpha 或靜態 Pages 的必要門檻。
 
 ## Status / 狀態判讀
 
 - **Implemented & recorded / 已完成與已記錄：** distinguish available code from the evidence actually collected. CI contracts, synthetic UI, real model execution and tracking benchmarks establish different things. 功能與證據分開說明，不把合成畫面、真模型執行或 benchmark 混為同一種驗收。
-- **Unverified / 未驗證：** a missing acceptance result stays open even when the corresponding tool exists. 工具存在不表示精度、可靠性或實機項目已通過。
+- **Unverified / 未驗證：** missing evidence stays unverified even when the tool exists. Research and optional-validation issues may remain open without blocking repository publication. 工具存在不表示精度、可靠性或實機通過；研究與選用驗證可以保持 Open，不代表開源發布未完成。
 - **Next / 下一步：** future work targets current `main`, recording versions, conditions, results and failures separately. It does not retroactively validate historical tags. 後續以目前 `main` 為對象，另記版本、條件、結果與失敗，不回填成舊 Tag 的驗收。
 
 Version READMEs describe each generation's differences, architecture, examples and limits. `main` retains the v0.1 viewer and v0.2 analysis alongside v0.3; release tags/downloads preserve their original snapshots.
@@ -57,12 +65,12 @@ This is a post-release, static **saved-result demonstration**, separate from his
 
 ### Next work / 下一步工作
 
-1. **Demo compatibility / 展示相容性:** [native headed follow-up](docs/en/pages-headed-browsers.md) and [headless study](docs/en/pages-standalone-browsers.md) completed within their exact Linux builds/modes; full acceptance open. Next execute Safari/macOS, physical Android/iOS, native touch, other OS/build combinations, historical IAB modifier pan and naturally unsupported gzip/WebGL paths under the frozen cases. Record versions/zeros/failures separately; prospectively freeze any scope extension. 三套有視窗／無頭分開留證，不重複加列，唯一矩陣仍31未測；不以Node備援或窄版覆寫代替原生路徑／實體手機，不重跑模型或關閉完整硬體門檻。
-2. **Independent tracking evidence / 獨立追蹤證據:** follow [P0](#p0--tracking-reliability--追蹤可靠性) with prospectively frozen rules, terms-reviewed unseen sequences and scene harm gates; separate discovery, confirmation, zero exposure and failures. The Pages clip is already seen demonstration material, not a fresh confirmation source. Retain weak continuation and current defaults. 接受集合、橋接、交接、兩候選及七段曝光／只讀資格稽核已完成，完整合格提案仍0；下一步另凍結決策前時序幾何／競爭稽核，不用後續結果作決策前特徵；不因展示更新調參、改預設或把舊來源重算獨立證據。
-3. **Physical evidence / 實體證據:** close [installation/camera](#p0--physical-camera-and-installation--實體相機與安裝) and [geometry/time](#p1--geometry-and-temporal-evidence--幾何與時間證據) gates with measured calibration, independent truth and device/runtime records. 真實相機、Windows 真推論、硬體繪圖與測距另做驗收，不由展示畫面代替。
+1. **Demo compatibility / 展示相容性:** [native headed follow-up](docs/en/pages-headed-browsers.md) and [headless study](docs/en/pages-standalone-browsers.md) completed within their exact Linux builds/modes; full target coverage remains incomplete. Optional follow-ups can select Safari/macOS, physical Android/iOS, native touch, other OS/build combinations, historical IAB modifier pan or naturally unsupported gzip/WebGL paths under the frozen cases, when relevant to a target use case. Record versions/zeros/failures separately; prospectively freeze any scope extension. 三套有視窗／無頭分開留證，不重複加列，唯一矩陣仍31未測；不以Node備援或窄版覆寫代替原生路徑／實體手機，不重跑模型或關閉完整硬體門檻。
+2. **Independent tracking evidence / 獨立追蹤證據:** follow the [tracking research backlog](#p0--tracking-reliability--追蹤可靠性) with prospectively frozen rules, terms-reviewed unseen sequences and scene harm gates; separate discovery, confirmation, zero exposure and failures. The Pages clip is already seen demonstration material, not a fresh confirmation source. Retain weak continuation and current defaults. 接受集合、橋接、交接、兩候選及七段曝光／只讀資格稽核已完成，完整合格提案仍0；下一步另凍結決策前時序幾何／競爭稽核，不用後續結果作決策前特徵；不因展示更新調參、改預設或把舊來源重算獨立證據。
+3. **Optional physical evidence / 選用實體證據:** select [installation/camera](#p0--physical-camera-and-installation--實體相機與安裝) and [geometry/time](#p1--geometry-and-temporal-evidence--幾何與時間證據) validation for the intended local use case; claims require measured calibration, independent truth and device/runtime records. 真實相機、Windows 真推論、硬體繪圖與測距依用途補驗，不能由展示畫面代替，也不作為 repo 公開必要門檻。
 4. **Keep evidence aligned / 維持一致:** future packs need their own source/terms, hashes, runtime versions, run-local IDs, screenshot states and limits before publication; update README, website and this section together. The existing Pexels scope is 24 attributed analytical artworks, not redistribution of the MP4 or standalone RGB sequence; footage is not AGPL. 原影片、完整 NPY／PLY、權重、私人 Session／備註與原始診斷留本機；歷史 Tag、下載包、舊截圖與原研究失敗不改寫。
 
-Unexecuted gates remain planned; this round adds only scoped browser evidence, not new inference, sequence studies or tracking/geometry quality acceptance. 未執行項目仍為後續工作，本輪只增加限定瀏覽器證據，不新增推論、序列研究或追蹤／幾何品質驗收。
+Unexecuted studies remain future research or optional validation; scoped browser evidence does not establish new inference or tracking/geometry quality. 未執行項目保留為後續研究或選用驗證，不影響 repo 公開；限定瀏覽器證據不代替推論、追蹤或幾何品質驗收。
 
 ## v0.1 — Viewer foundation / 檢視器基礎
 
@@ -83,8 +91,8 @@ Pretrained inference, fresh target/Windows installation and GPU execution were u
 
 ### Next / 下一步
 
-Validate the retained viewer on current `main` through [P0 installation/camera gates](#p0--physical-camera-and-installation--實體相機與安裝) and [P1 geometry gates](#p1--geometry-and-temporal-evidence--幾何與時間證據). Spatial Analysis belongs to v0.2; Sessions and cross-frame Object IDs belong to v0.3.
-以目前 `main` 補驗延續的檢視器能力，另記安裝／相機與幾何證據；空間分析及 Session／跨影格 ID 分別屬於後版新增功能。
+For selected local targets, validate the retained viewer on current `main` through [optional installation/camera checks](#p0--physical-camera-and-installation--實體相機與安裝) and [optional geometry evidence](#p1--geometry-and-temporal-evidence--幾何與時間證據). Spatial Analysis belongs to v0.2; Sessions and cross-frame Object IDs belong to v0.3.
+依本機用途選擇目前 `main` 的安裝／相機與幾何驗證，不作為公開原始碼必要門檻；空間分析及 Session／跨影格 ID 分別屬於後版新增功能。
 
 ## v0.2 — Spatial Analysis / 空間分析
 
@@ -105,8 +113,8 @@ Physical RTSP/codecs/reconnect, fresh Windows pretrained inference, endurance/VR
 
 ### Next / 下一步
 
-Close the shared [P0 hardware/installation gates](#p0--physical-camera-and-installation--實體相機與安裝), then document measured intrinsics, independent distance truth and near/medium/far errors under [P1](#p1--geometry-and-temporal-evidence--幾何與時間證據). Keep native model units explicit.
-補齊共用實機驗收及實測內參／獨立真值／近中遠距誤差；保留各模型原生單位，不能把相對或虛擬深度當公尺。
+For selected hardware or measurement use cases, use the [optional installation/camera checklist](#p0--physical-camera-and-installation--實體相機與安裝) and document measured intrinsics, independent distance truth and near/medium/far errors under [optional geometry validation](#p1--geometry-and-temporal-evidence--幾何與時間證據). Keep native model units explicit.
+依用途選擇實機驗證及實測內參／獨立真值／近中遠距誤差，不要求全部完成才發布開源更新；保留原生單位，不能把相對或虛擬深度當公尺。
 
 ## v0.3 — Sessions and tracking / 回放與追蹤
 
@@ -158,12 +166,16 @@ The [two separately frozen causal candidates](docs/en/tracking-handoff-controls.
 
 True identity/localisation harm, long-occlusion quality and genuinely unseen confirmation remain open. Keep weak continuation, geometry, thresholds, confirmation/buffer, assignment and defaults unchanged. 不調參、不回改原研究，不強迫結構排除的未確認曝光；外層相容的新執行契約仍需前瞻訂定並保留原失敗。
 
-## Next acceptance gates / 下一步驗收
+<a id="next-acceptance-gates--下一步驗收"></a>
 
-These gates apply to current `main`; the version sections above identify which retained or new capabilities they cover. Define acceptance criteria before running; record exact commits, dependencies/devices, inputs/terms, commands, results and failures. A gate stays open until those criteria are met and supporting evidence is recorded.
-以下以目前 `main` 驗收，對應上方各版功能。執行前先訂通過標準，記錄確切 commit、套件／裝置、輸入／條款、指令、結果與失敗；達標且附上證據後才標為完成。
+## Follow-up research and optional validation / 後續研究與選用驗證
 
-### P0 — Tracking reliability / 追蹤可靠性
+These are research questions and selectable validation targets for current `main`, not a checklist that must all close before source publication. For any selected study, define criteria before execution and record commits, dependencies/devices, inputs/terms, commands, failures and limits. Existing scientific gates still apply to their claims; changing project positioning does not change their results or validate historical tags.
+以下是目前 `main` 的後續研究及選用目標，不要求全部結案才公開原始碼。選定研究後仍須先訂標準並記錄版本、環境、輸入／條款、命令、失敗與限制；原科學門檻及歷史結果不變，不回填為舊 Tag 驗收。
+
+<a id="p0--tracking-reliability--追蹤可靠性"></a>
+
+### Follow-up research — tracking reliability / 後續研究：追蹤可靠性
 
 - [x] **[Accepted-event audit / 接受事件集合稽核](docs/en/tracking-accepted-events.md)** / [繁中](docs/zh-TW/tracking-accepted-events.md): all three changed outputs/full2,010 existing frames audited; accepted inputs+4/+15/+5, no lost weak/confirmed inputs. Seed-lineage changes51/39/0 explain active-edge losses51/38/0. 434原輸入不變，26列／原四失敗／null保留；兩段原活躍代理條件仍失敗，不讀GT／調參、不改弱延續或預設，品質未通過。
 
@@ -186,24 +198,33 @@ The new causal-candidate study prospectively reserved complete KITTI0010/0011 on
 
 [Diagnosis / 錯誤診斷](docs/en/tracking-error-diagnosis.md) · [繁中診斷](docs/zh-TW/tracking-error-diagnosis.md) · [Parameter study / 參數研究](docs/en/tracking-parameter-acceptance.md) · [Expanded comparison / 三場景比較](docs/en/tracking-expanded-acceptance.md)
 
-### P0 — Physical camera and installation / 實體相機與安裝
+<a id="p0--physical-camera-and-installation--實體相機與安裝"></a>
+
+### Optional validation — camera and installation / 選用驗證：相機與安裝
 
 - **Fresh installation / 全新安裝：** Windows pretrained depth/semantic inference and real isolated-worker Session integration; record exact dependency/device versions and actual results per engine. Windows 真權重與真 worker，逐模型記錄結果。
 - **Physical RTSP / 實體串流：** authentication, H.264/H.265, reconnect, camera-to-browser latency, long-run stability and sustained memory/VRAM use. 實測認證、編碼、重連、相機到瀏覽器延遲與長時資源。
-- **Rendering / 繪圖：** NVIDIA hardware WebGL, separately from CUDA inference; previous browser checks used SwiftShader. 硬體 WebGL 與 CUDA 推論分開驗收，不能以軟體繪圖或 CI 替代。
+- **Rendering / 繪圖：** Target local-app hardware WebGL, separately from CUDA inference; the historical local-app checks used SwiftShader, while later Pages browser studies retain their own mode/renderer records. 目標本機應用的硬體繪圖與 CUDA 推論分開驗證，不以軟體繪圖、限定 Pages 紀錄或 CI 代替完整目標環境證據。
 
-[Hardware acceptance issue #6](https://github.com/JShengP/depthport/issues/6) · [Validation / 驗證紀錄](docs/en/validation.md) · [繁中紀錄](docs/zh-TW/validation.md)
+[Optional hardware/use-case validation #6](https://github.com/JShengP/depthport/issues/6) · [Validation / 驗證紀錄](docs/en/validation.md) · [繁中紀錄](docs/zh-TW/validation.md)
 
-### P1 — Geometry and temporal evidence / 幾何與時間證據
+<a id="p1--geometry-and-temporal-evidence--幾何與時間證據"></a>
+
+### Optional validation — geometry and timing / 選用驗證：幾何與時間
 
 - **Metric accuracy / 測距精度：** measured intrinsics, independent ground-truth distances and near/medium/far errors before metric-accuracy claims. 實測內參、獨立真值及近中遠距誤差。
 - **Temporal stability / 時間穩定性：** movement-controlled same-grid depth stability and camera-motion effects; distinguish source timestamps, snapshot gaps, tracker steps and replay timing. 受控運動與同網格深度穩定性，分清來源時間、快照間隔、追蹤步長與回放時間。
 - **Scope / 範圍：** visible-surface 2.5D only; relative/virtual depth is not metres. No hidden-surface reconstruction, world trajectories, SLAM, identity recognition or certified distance claim. 僅可見表面 2.5D，不宣稱遮擋還原、世界追蹤或認證測距。
 
-### P2 — Performance and deployment / 效能與部署
+- **Optional performance evidence / 選用效能量測：** reproducible local end-to-end latency, throughput, IPC/process overhead and sustained RAM/VRAM measurements when needed for a performance claim. 依用途另訂延遲、吞吐量、程序開銷及長時資源標準，不以來源 FPS 或追蹤器局部時間代替完整效能。
 
-- Reproducible end-to-end latency, throughput, VRAM and multi-client load measurements. 可重現端到端延遲／吞吐量／VRAM／多人負載。
-- Authentication, egress controls and source/model/session isolation before multi-user exposure. The local backend is not a public unauthenticated service. 多人部署前先補認證、連線控管及來源／模型／Session 隔離。
+<a id="p2--performance-and-deployment--效能與部署"></a>
+
+### Conditional extension — multi-user hosting / 有需求才規劃：多人託管
+
+This extension is outside the current local-workbench scope and has no completion commitment. It is not required for open-source releases or static Pages. 這是目前範圍外的條件式延伸，不承諾完成，也不是開源發布或靜態 Pages 的門檻。
+
+- Only if a multi-user backend is chosen: plan authentication, egress controls, source/model/Session isolation and multi-client load measurements before that exposure. The local backend is intended for local use. 只有選擇提供多人後端時，才另規劃認證、對外連線控管、來源／模型／Session 隔離及多人負載；本機後端維持本機用途。
 
 ## Repository maintenance / Repo 維護
 

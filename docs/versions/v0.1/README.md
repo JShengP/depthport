@@ -14,6 +14,8 @@ Historical Alpha / 歷史 Alpha
 The viewer foundation retained in later versions: images/RTSP → four depth engines → interactive single-view geometry.
 後續版本延續的檢視器基礎：圖片／RTSP → 四套深度引擎 → 互動式單視角幾何。
 
+**Open-source scope / 開源定位：** implemented features and recorded evidence are available; [#8](https://github.com/JShengP/depthport/issues/8) tracks follow-up research and [#6](https://github.com/JShengP/depthport/issues/6) optional validation. These do not block source/Alpha maintenance; multi-user hosting is outside the current goal. 功能與紀錄已提供，研究及選用驗證分開追蹤，不阻擋開源更新；多人服務不列必要門檻，原失敗、限制與 Tag 快照保留。[Project status / 專案狀態](../../../ROADMAP.md#open-source-project-status--開源專案定位)
+
 **Release / 發布快照:** [v0.1.0-alpha.1](https://github.com/JShengP/depthport/releases/tag/v0.1.0-alpha.1) · [Exact source / 對應程式](https://github.com/JShengP/depthport/tree/v0.1.0-alpha.1) · [Original README](https://github.com/JShengP/depthport/blob/v0.1.0-alpha.1/README.md) · [原版繁中 README](https://github.com/JShengP/depthport/blob/v0.1.0-alpha.1/README.zh-TW.md)
 
 [Differences / 差異](#differences--差異) · [Architecture / 架構](#architecture--架構) · [Examples / 範例](#examples--範例) · [Getting started / 使用入口](#getting-started--使用入口) · [Validation / 驗證紀錄](#validation--驗證紀錄) · [Limits / 驗證限制](#limits--驗證限制)
@@ -105,7 +107,7 @@ Model weights and local camera settings are separate from the public source pack
 ## Limits / 驗證限制
 
 - **Unverified in this snapshot / 本版當時未驗證:** pretrained inference, fresh Windows/target installation and GPU execution. 真權重、全新目標環境與 GPU。
-- **Hardware gates / 實機項目:** physical RTSP, reconnect/codecs, endurance/VRAM and calibrated metric accuracy remain unverified. 實體串流、重連／編碼、長時穩定性與標定測距。
+- **Optional hardware validation / 選用實機驗證:** physical RTSP, reconnect/codecs, endurance/VRAM and calibrated metric accuracy remain unverified. 實體串流、重連／編碼、長時穩定性與標定測距。
 - **Geometry / 幾何:** visible-surface 2.5D only; V2 virtual depth and DA3 relative depth are not metres. No hidden-surface reconstruction, SLAM or certified distance claim. 僅可見表面 2.5D，相對／虛擬深度不能當公尺。
 
 [Original release scope / 原版範圍](https://github.com/JShengP/depthport/releases/tag/v0.1.0-alpha.1) · [Current roadmap / 目前路線圖](../../../ROADMAP.md)
