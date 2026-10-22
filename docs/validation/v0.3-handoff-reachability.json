@@ -1,0 +1,2430 @@
+{
+  "format": "depthport.handoff-reachability-results.v1",
+  "protocol_sha256": "d404103bc439c43f08fb6c3e656b4d83e8971fc511fd8f88397f2088cad8a279",
+  "unique_source_frames": 1593,
+  "scheduled_histories": 28,
+  "scheduled_trace_frames": 6372,
+  "all_scheduled_completed": true,
+  "original434_unchanged": true,
+  "earlier772_unchanged": true,
+  "seven_source_raw_unchanged": true,
+  "seven_source_raw_files": 1956,
+  "prior_records_unchanged": true,
+  "original_failures_retained": [
+    "KITTI-0000",
+    "KITTI-0001",
+    "KITTI-0002",
+    "KITTI-0003"
+  ],
+  "prior_formal_replication_flags": {
+    "active_confirmed": false,
+    "active_tentative": false,
+    "retained_confirmed": false,
+    "retained_tentative": false,
+    "active": false,
+    "retained": false,
+    "unconfirmed": false,
+    "any": false
+  },
+  "prior_candidate_replication_gates": {
+    "birth_continuation": false,
+    "past_competition_handoff": false
+  },
+  "prior_confirmation_gates": {
+    "birth_active": false,
+    "birth_retained": false,
+    "past_handoff": false
+  },
+  "gt_read": false,
+  "accuracy_scoring": false,
+  "inference": false,
+  "tracking_rerun": false,
+  "solver_rerun": false,
+  "retuned": false,
+  "weak_stage_changed": false,
+  "defaults_changed": false,
+  "tracking_quality_accepted": false,
+  "independent_confirmation": false,
+  "ledger": [
+    {
+      "name": "KITTI-0012",
+      "phase": "discovery",
+      "frames": 78,
+      "status": "completed",
+      "audit": {
+        "birth_continuation": {
+          "counters": {
+            "frames": 78,
+            "high_stage_frames": 33,
+            "no_high_stage_frames": 45,
+            "high_rows": 0,
+            "high_columns": 0,
+            "weak_columns": 60,
+            "high_matched_pairs": 0,
+            "high_free_rows": 0,
+            "high_free_columns": 0,
+            "activation_columns": 0,
+            "high_free_activation_columns": 0,
+            "broad_weak_blocked_rows": 0,
+            "free_weak_blocked_rows": 0
+          },
+          "availability_masks": {
+            "0000": 33,
+            "0001": 0,
+            "0010": 0,
+            "0011": 0,
+            "0100": 0,
+            "0101": 0,
+            "0110": 0,
+            "0111": 0,
+            "1000": 0,
+            "1001": 0,
+            "1010": 0,
+            "1011": 0,
+            "1100": 0,
+            "1101": 0,
+            "1110": 0,
+            "1111": 0
+          },
+          "roles": {
+            "high_rows": {
+              "active_confirmed": 0,
+              "retained_confirmed": 0,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            },
+            "free_rows": {
+              "active_confirmed": 0,
+              "retained_confirmed": 0,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            },
+            "qualified_free_rows": {
+              "active_confirmed": 0,
+              "retained_confirmed": 0,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            },
+            "weak_blocked_rows": {
+              "active_confirmed": 0,
+              "retained_confirmed": 0,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            }
+          },
+          "row_qualification_masks": {
+            "high_rows": {
+              "000": 0,
+              "001": 0,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 0
+            },
+            "free_rows": {
+              "000": 0,
+              "001": 0,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 0
+            }
+          },
+          "birth_by_role": {
+            "active_confirmed": {
+              "free_pairs": 0,
+              "confirmed": 0,
+              "accepted_before": 0,
+              "positive_prediction": 0,
+              "activation": 0,
+              "current_gate": 0,
+              "no_weak": 0,
+              "weak_excluded_preproposal_edges": 0,
+              "ambiguous_nonproposal_edges": 0,
+              "qualified_proposals": 0,
+              "rejected_qualified_proposals": 0,
+              "rule_action_edges": 0
+            },
+            "retained_confirmed": {
+              "free_pairs": 0,
+              "confirmed": 0,
+              "accepted_before": 0,
+              "positive_prediction": 0,
+              "activation": 0,
+              "current_gate": 0,
+              "no_weak": 0,
+              "weak_excluded_preproposal_edges": 0,
+              "ambiguous_nonproposal_edges": 0,
+              "qualified_proposals": 0,
+              "rejected_qualified_proposals": 0,
+              "rule_action_edges": 0
+            },
+            "tentative": {
+              "free_pairs": 0,
+              "confirmed": 0,
+              "accepted_before": 0,
+              "positive_prediction": 0,
+              "activation": 0,
+              "current_gate": 0,
+              "no_weak": 0,
+              "weak_excluded_preproposal_edges": 0,
+              "ambiguous_nonproposal_edges": 0,
+              "qualified_proposals": 0,
+              "rejected_qualified_proposals": 0,
+              "rule_action_edges": 0
+            }
+          },
+          "handoff": null,
+          "handoff_pair_roles": null,
+          "handoff_nonproposal_priority": null,
+          "weak_stage_calls": 33,
+          "accepted_summary": {
+            "frames": 78,
+            "births": 0,
+            "accepted_high": 0,
+            "accepted_weak": 0,
+            "confirmed_observations": 0,
+            "active_updates": 0,
+            "retained_updates": 0,
+            "tentative_promotions": 0,
+            "accepted_inputs": 0,
+            "input_receipt_sha256": "caccf3481f197bb82563c5f42af06db77bf2f99214abbcee0cbcc2d75aaf7c3b",
+            "event_receipt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "audit_receipt_sha256": "5ee1d60fd470250ceaaf7f4c92cbd34a41f21fe44e203476bec68c4472d31266",
+          "current_or_future_used_as_prior": false,
+          "identity_or_quality_accepted": false
+        },
+        "past_competition_handoff": {
+          "counters": {
+            "frames": 78,
+            "high_stage_frames": 33,
+            "no_high_stage_frames": 45,
+            "high_rows": 0,
+            "high_columns": 0,
+            "weak_columns": 60,
+            "high_matched_pairs": 0,
+            "high_free_rows": 0,
+            "high_free_columns": 0,
+            "activation_columns": 0,
+            "high_free_activation_columns": 0,
+            "broad_weak_blocked_rows": 0,
+            "free_weak_blocked_rows": 0
+          },
+          "availability_masks": {
+            "0000": 33,
+            "0001": 0,
+            "0010": 0,
+            "0011": 0,
+            "0100": 0,
+            "0101": 0,
+            "0110": 0,
+            "0111": 0,
+            "1000": 0,
+            "1001": 0,
+            "1010": 0,
+            "1011": 0,
+            "1100": 0,
+            "1101": 0,
+            "1110": 0,
+            "1111": 0
+          },
+          "roles": {
+            "high_rows": {
+              "active_confirmed": 0,
+              "retained_confirmed": 0,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            },
+            "free_rows": {
+              "active_confirmed": 0,
+              "retained_confirmed": 0,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            },
+            "qualified_free_rows": {
+              "active_confirmed": 0,
+              "retained_confirmed": 0,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            },
+            "weak_blocked_rows": {
+              "active_confirmed": 0,
+              "retained_confirmed": 0,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            }
+          },
+          "row_qualification_masks": {
+            "high_rows": {
+              "000": 0,
+              "001": 0,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 0
+            },
+            "free_rows": {
+              "000": 0,
+              "001": 0,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 0
+            }
+          },
+          "birth_by_role": null,
+          "handoff": {
+            "selected_free_triples": 0,
+            "both_qualified": 0,
+            "both_active": 0,
+            "both_previous_acceptance": 0,
+            "selected_previous_high_context": 0,
+            "competitor_in_context": 0,
+            "past_active_confirmed": 0,
+            "past_gate": 0,
+            "past_margin": 0,
+            "distinct_previous_inputs": 0,
+            "current_gate": 0,
+            "current_margin": 0,
+            "no_weak": 0,
+            "weak_excluded_preproposal_edges": 0,
+            "selected_zero_alternative": 0,
+            "selected_multiple_alternatives": 0,
+            "unique_alternative_proposals": 0,
+            "claim_conflict_proposals": 0,
+            "rule_action_edges": 0
+          },
+          "handoff_pair_roles": {
+            "active_confirmed__active_confirmed": 0,
+            "active_confirmed__retained_confirmed": 0,
+            "active_confirmed__active_tentative": 0,
+            "active_confirmed__retained_tentative": 0,
+            "retained_confirmed__active_confirmed": 0,
+            "retained_confirmed__retained_confirmed": 0,
+            "retained_confirmed__active_tentative": 0,
+            "retained_confirmed__retained_tentative": 0,
+            "active_tentative__active_confirmed": 0,
+            "active_tentative__retained_confirmed": 0,
+            "active_tentative__active_tentative": 0,
+            "active_tentative__retained_tentative": 0,
+            "retained_tentative__active_confirmed": 0,
+            "retained_tentative__retained_confirmed": 0,
+            "retained_tentative__active_tentative": 0,
+            "retained_tentative__retained_tentative": 0
+          },
+          "handoff_nonproposal_priority": {
+            "not_proposed_at_both_qualified": 0,
+            "not_proposed_at_both_active": 0,
+            "not_proposed_at_both_previous_acceptance": 0,
+            "not_proposed_at_selected_previous_high_context": 0,
+            "not_proposed_at_competitor_in_context": 0,
+            "not_proposed_at_past_active_confirmed": 0,
+            "not_proposed_at_past_gate": 0,
+            "not_proposed_at_past_margin": 0,
+            "not_proposed_at_distinct_previous_inputs": 0,
+            "not_proposed_at_current_gate": 0,
+            "not_proposed_at_current_margin": 0,
+            "not_proposed_at_no_weak": 0
+          },
+          "weak_stage_calls": 33,
+          "accepted_summary": {
+            "frames": 78,
+            "births": 0,
+            "accepted_high": 0,
+            "accepted_weak": 0,
+            "confirmed_observations": 0,
+            "active_updates": 0,
+            "retained_updates": 0,
+            "tentative_promotions": 0,
+            "accepted_inputs": 0,
+            "input_receipt_sha256": "caccf3481f197bb82563c5f42af06db77bf2f99214abbcee0cbcc2d75aaf7c3b",
+            "event_receipt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "audit_receipt_sha256": "5ee1d60fd470250ceaaf7f4c92cbd34a41f21fe44e203476bec68c4472d31266",
+          "current_or_future_used_as_prior": false,
+          "identity_or_quality_accepted": false
+        }
+      },
+      "trials": {
+        "birth_continuation-0": {
+          "status": "completed",
+          "frames": 78,
+          "original_trace_sha256": "845df814fda715162a67e251f2f5f056ac10c0b1f629466ad36a268ca7664cbf",
+          "original_trace_uncompressed_sha256": "681e11ab271e13be33a6b2fe0da5ff1d473a43b1a98d3e44d48f8ee380a1889a",
+          "local_decisions_sha256": "24d94567e2f4db61f4d680d47dbe19e3e19a12426be5fd1208c5f2ffe81bedf2"
+        },
+        "birth_continuation-1": {
+          "status": "completed",
+          "frames": 78,
+          "original_trace_sha256": "845df814fda715162a67e251f2f5f056ac10c0b1f629466ad36a268ca7664cbf",
+          "original_trace_uncompressed_sha256": "681e11ab271e13be33a6b2fe0da5ff1d473a43b1a98d3e44d48f8ee380a1889a",
+          "local_decisions_sha256": "24d94567e2f4db61f4d680d47dbe19e3e19a12426be5fd1208c5f2ffe81bedf2"
+        },
+        "past_competition_handoff-0": {
+          "status": "completed",
+          "frames": 78,
+          "original_trace_sha256": "46ef2743e910ed75fc03f6cbf2a03f6f6ad94b6266b28a5c0c53082cdb2c1a76",
+          "original_trace_uncompressed_sha256": "2e0407d501dd34c01f7ab91d782f9f10e7410e67352e0037f1068215354807d8",
+          "local_decisions_sha256": "24d94567e2f4db61f4d680d47dbe19e3e19a12426be5fd1208c5f2ffe81bedf2"
+        },
+        "past_competition_handoff-1": {
+          "status": "completed",
+          "frames": 78,
+          "original_trace_sha256": "46ef2743e910ed75fc03f6cbf2a03f6f6ad94b6266b28a5c0c53082cdb2c1a76",
+          "original_trace_uncompressed_sha256": "2e0407d501dd34c01f7ab91d782f9f10e7410e67352e0037f1068215354807d8",
+          "local_decisions_sha256": "24d94567e2f4db61f4d680d47dbe19e3e19a12426be5fd1208c5f2ffe81bedf2"
+        }
+      },
+      "archived_repeats_equal": true
+    },
+    {
+      "name": "KITTI-0013",
+      "phase": "discovery",
+      "frames": 340,
+      "status": "completed",
+      "audit": {
+        "birth_continuation": {
+          "counters": {
+            "frames": 340,
+            "high_stage_frames": 340,
+            "no_high_stage_frames": 0,
+            "high_rows": 971,
+            "high_columns": 400,
+            "weak_columns": 3023,
+            "high_matched_pairs": 355,
+            "high_free_rows": 616,
+            "high_free_columns": 45,
+            "activation_columns": 400,
+            "high_free_activation_columns": 45,
+            "broad_weak_blocked_rows": 252,
+            "free_weak_blocked_rows": 196
+          },
+          "availability_masks": {
+            "0000": 51,
+            "0001": 0,
+            "0010": 0,
+            "0011": 0,
+            "0100": 0,
+            "0101": 2,
+            "0110": 0,
+            "0111": 0,
+            "1000": 0,
+            "1001": 0,
+            "1010": 96,
+            "1011": 0,
+            "1100": 30,
+            "1101": 4,
+            "1110": 124,
+            "1111": 33
+          },
+          "roles": {
+            "high_rows": {
+              "active_confirmed": 545,
+              "retained_confirmed": 381,
+              "active_tentative": 45,
+              "retained_tentative": 0
+            },
+            "free_rows": {
+              "active_confirmed": 214,
+              "retained_confirmed": 379,
+              "active_tentative": 23,
+              "retained_tentative": 0
+            },
+            "qualified_free_rows": {
+              "active_confirmed": 214,
+              "retained_confirmed": 379,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            },
+            "weak_blocked_rows": {
+              "active_confirmed": 221,
+              "retained_confirmed": 6,
+              "active_tentative": 25,
+              "retained_tentative": 0
+            }
+          },
+          "row_qualification_masks": {
+            "high_rows": {
+              "000": 0,
+              "001": 45,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 926
+            },
+            "free_rows": {
+              "000": 0,
+              "001": 23,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 593
+            }
+          },
+          "birth_by_role": {
+            "active_confirmed": {
+              "free_pairs": 24,
+              "confirmed": 24,
+              "accepted_before": 24,
+              "positive_prediction": 24,
+              "activation": 24,
+              "current_gate": 0,
+              "no_weak": 0,
+              "weak_excluded_preproposal_edges": 0,
+              "ambiguous_nonproposal_edges": 0,
+              "qualified_proposals": 0,
+              "rejected_qualified_proposals": 0,
+              "rule_action_edges": 0
+            },
+            "retained_confirmed": {
+              "free_pairs": 77,
+              "confirmed": 77,
+              "accepted_before": 77,
+              "positive_prediction": 77,
+              "activation": 77,
+              "current_gate": 0,
+              "no_weak": 0,
+              "weak_excluded_preproposal_edges": 0,
+              "ambiguous_nonproposal_edges": 0,
+              "qualified_proposals": 0,
+              "rejected_qualified_proposals": 0,
+              "rule_action_edges": 0
+            },
+            "tentative": {
+              "free_pairs": 5,
+              "confirmed": 0,
+              "accepted_before": 0,
+              "positive_prediction": 0,
+              "activation": 0,
+              "current_gate": 0,
+              "no_weak": 0,
+              "weak_excluded_preproposal_edges": 0,
+              "ambiguous_nonproposal_edges": 0,
+              "qualified_proposals": 0,
+              "rejected_qualified_proposals": 0,
+              "rule_action_edges": 0
+            }
+          },
+          "handoff": null,
+          "handoff_pair_roles": null,
+          "handoff_nonproposal_priority": null,
+          "weak_stage_calls": 340,
+          "accepted_summary": {
+            "frames": 340,
+            "births": 45,
+            "accepted_high": 355,
+            "accepted_weak": 195,
+            "confirmed_observations": 550,
+            "active_updates": 543,
+            "retained_updates": 7,
+            "tentative_promotions": 41,
+            "accepted_inputs": 550,
+            "input_receipt_sha256": "484fb49740e999ed1c5aaae22b9eaafca4d11c0b969ef33160f474617353ac9d",
+            "event_receipt_sha256": "b9e50f81a2b022638f33917d6d965fc106ca6c3e9503bf24d0354758a4427cd8"
+          },
+          "audit_receipt_sha256": "a1ea42fe12a2129b439822713b10ba6afee4b93a9325116567c2a26417096df9",
+          "current_or_future_used_as_prior": false,
+          "identity_or_quality_accepted": false
+        },
+        "past_competition_handoff": {
+          "counters": {
+            "frames": 340,
+            "high_stage_frames": 340,
+            "no_high_stage_frames": 0,
+            "high_rows": 971,
+            "high_columns": 400,
+            "weak_columns": 3023,
+            "high_matched_pairs": 355,
+            "high_free_rows": 616,
+            "high_free_columns": 45,
+            "activation_columns": 400,
+            "high_free_activation_columns": 45,
+            "broad_weak_blocked_rows": 252,
+            "free_weak_blocked_rows": 196
+          },
+          "availability_masks": {
+            "0000": 51,
+            "0001": 0,
+            "0010": 0,
+            "0011": 0,
+            "0100": 0,
+            "0101": 2,
+            "0110": 0,
+            "0111": 0,
+            "1000": 0,
+            "1001": 0,
+            "1010": 96,
+            "1011": 0,
+            "1100": 30,
+            "1101": 4,
+            "1110": 124,
+            "1111": 33
+          },
+          "roles": {
+            "high_rows": {
+              "active_confirmed": 545,
+              "retained_confirmed": 381,
+              "active_tentative": 45,
+              "retained_tentative": 0
+            },
+            "free_rows": {
+              "active_confirmed": 214,
+              "retained_confirmed": 379,
+              "active_tentative": 23,
+              "retained_tentative": 0
+            },
+            "qualified_free_rows": {
+              "active_confirmed": 214,
+              "retained_confirmed": 379,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            },
+            "weak_blocked_rows": {
+              "active_confirmed": 221,
+              "retained_confirmed": 6,
+              "active_tentative": 25,
+              "retained_tentative": 0
+            }
+          },
+          "row_qualification_masks": {
+            "high_rows": {
+              "000": 0,
+              "001": 45,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 926
+            },
+            "free_rows": {
+              "000": 0,
+              "001": 23,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 593
+            }
+          },
+          "birth_by_role": null,
+          "handoff": {
+            "selected_free_triples": 730,
+            "both_qualified": 661,
+            "both_active": 225,
+            "both_previous_acceptance": 225,
+            "selected_previous_high_context": 197,
+            "competitor_in_context": 197,
+            "past_active_confirmed": 180,
+            "past_gate": 10,
+            "past_margin": 2,
+            "distinct_previous_inputs": 2,
+            "current_gate": 2,
+            "current_margin": 0,
+            "no_weak": 0,
+            "weak_excluded_preproposal_edges": 0,
+            "selected_zero_alternative": 355,
+            "selected_multiple_alternatives": 0,
+            "unique_alternative_proposals": 0,
+            "claim_conflict_proposals": 0,
+            "rule_action_edges": 0
+          },
+          "handoff_pair_roles": {
+            "active_confirmed__active_confirmed": 225,
+            "active_confirmed__retained_confirmed": 430,
+            "active_confirmed__active_tentative": 19,
+            "active_confirmed__retained_tentative": 0,
+            "retained_confirmed__active_confirmed": 3,
+            "retained_confirmed__retained_confirmed": 3,
+            "retained_confirmed__active_tentative": 0,
+            "retained_confirmed__retained_tentative": 0,
+            "active_tentative__active_confirmed": 14,
+            "active_tentative__retained_confirmed": 31,
+            "active_tentative__active_tentative": 5,
+            "active_tentative__retained_tentative": 0,
+            "retained_tentative__active_confirmed": 0,
+            "retained_tentative__retained_confirmed": 0,
+            "retained_tentative__active_tentative": 0,
+            "retained_tentative__retained_tentative": 0
+          },
+          "handoff_nonproposal_priority": {
+            "not_proposed_at_both_qualified": 69,
+            "not_proposed_at_both_active": 436,
+            "not_proposed_at_both_previous_acceptance": 0,
+            "not_proposed_at_selected_previous_high_context": 28,
+            "not_proposed_at_competitor_in_context": 0,
+            "not_proposed_at_past_active_confirmed": 17,
+            "not_proposed_at_past_gate": 170,
+            "not_proposed_at_past_margin": 8,
+            "not_proposed_at_distinct_previous_inputs": 0,
+            "not_proposed_at_current_gate": 0,
+            "not_proposed_at_current_margin": 2,
+            "not_proposed_at_no_weak": 0
+          },
+          "weak_stage_calls": 340,
+          "accepted_summary": {
+            "frames": 340,
+            "births": 45,
+            "accepted_high": 355,
+            "accepted_weak": 195,
+            "confirmed_observations": 550,
+            "active_updates": 543,
+            "retained_updates": 7,
+            "tentative_promotions": 41,
+            "accepted_inputs": 550,
+            "input_receipt_sha256": "484fb49740e999ed1c5aaae22b9eaafca4d11c0b969ef33160f474617353ac9d",
+            "event_receipt_sha256": "b9e50f81a2b022638f33917d6d965fc106ca6c3e9503bf24d0354758a4427cd8"
+          },
+          "audit_receipt_sha256": "a1ea42fe12a2129b439822713b10ba6afee4b93a9325116567c2a26417096df9",
+          "current_or_future_used_as_prior": false,
+          "identity_or_quality_accepted": false
+        }
+      },
+      "trials": {
+        "birth_continuation-0": {
+          "status": "completed",
+          "frames": 340,
+          "original_trace_sha256": "22f8da157f91d3f5c8ec87066a2db3b4b83f58ea1574e6333d709e3fd3ffacc7",
+          "original_trace_uncompressed_sha256": "efa30f0f8d38e6ee9595611b7369e8f34e6bc2302282634a9e2b5de880bf3a70",
+          "local_decisions_sha256": "b0bf299146973aed29c4a98f457609b4c8e234c40b2e636f5f2d1169474fab0b"
+        },
+        "birth_continuation-1": {
+          "status": "completed",
+          "frames": 340,
+          "original_trace_sha256": "22f8da157f91d3f5c8ec87066a2db3b4b83f58ea1574e6333d709e3fd3ffacc7",
+          "original_trace_uncompressed_sha256": "efa30f0f8d38e6ee9595611b7369e8f34e6bc2302282634a9e2b5de880bf3a70",
+          "local_decisions_sha256": "b0bf299146973aed29c4a98f457609b4c8e234c40b2e636f5f2d1169474fab0b"
+        },
+        "past_competition_handoff-0": {
+          "status": "completed",
+          "frames": 340,
+          "original_trace_sha256": "69ec0edff8903898b82415693f6e10813b9ed164750db9fd9f0eb2f50948d66f",
+          "original_trace_uncompressed_sha256": "5cc393a30468300e492639e1945bb9db77b88570edfab7c6c2dbd7068196cf88",
+          "local_decisions_sha256": "b0bf299146973aed29c4a98f457609b4c8e234c40b2e636f5f2d1169474fab0b"
+        },
+        "past_competition_handoff-1": {
+          "status": "completed",
+          "frames": 340,
+          "original_trace_sha256": "69ec0edff8903898b82415693f6e10813b9ed164750db9fd9f0eb2f50948d66f",
+          "original_trace_uncompressed_sha256": "5cc393a30468300e492639e1945bb9db77b88570edfab7c6c2dbd7068196cf88",
+          "local_decisions_sha256": "b0bf299146973aed29c4a98f457609b4c8e234c40b2e636f5f2d1169474fab0b"
+        }
+      },
+      "archived_repeats_equal": true
+    },
+    {
+      "name": "KITTI-0014",
+      "phase": "discovery",
+      "frames": 106,
+      "status": "completed",
+      "audit": {
+        "birth_continuation": {
+          "counters": {
+            "frames": 106,
+            "high_stage_frames": 62,
+            "no_high_stage_frames": 44,
+            "high_rows": 36,
+            "high_columns": 5,
+            "weak_columns": 154,
+            "high_matched_pairs": 0,
+            "high_free_rows": 36,
+            "high_free_columns": 5,
+            "activation_columns": 5,
+            "high_free_activation_columns": 5,
+            "broad_weak_blocked_rows": 19,
+            "free_weak_blocked_rows": 19
+          },
+          "availability_masks": {
+            "0000": 25,
+            "0001": 0,
+            "0010": 0,
+            "0011": 0,
+            "0100": 0,
+            "0101": 2,
+            "0110": 0,
+            "0111": 0,
+            "1000": 0,
+            "1001": 0,
+            "1010": 33,
+            "1011": 0,
+            "1100": 0,
+            "1101": 0,
+            "1110": 0,
+            "1111": 2
+          },
+          "roles": {
+            "high_rows": {
+              "active_confirmed": 19,
+              "retained_confirmed": 12,
+              "active_tentative": 5,
+              "retained_tentative": 0
+            },
+            "free_rows": {
+              "active_confirmed": 19,
+              "retained_confirmed": 12,
+              "active_tentative": 5,
+              "retained_tentative": 0
+            },
+            "qualified_free_rows": {
+              "active_confirmed": 19,
+              "retained_confirmed": 12,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            },
+            "weak_blocked_rows": {
+              "active_confirmed": 16,
+              "retained_confirmed": 2,
+              "active_tentative": 1,
+              "retained_tentative": 0
+            }
+          },
+          "row_qualification_masks": {
+            "high_rows": {
+              "000": 0,
+              "001": 5,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 31
+            },
+            "free_rows": {
+              "000": 0,
+              "001": 5,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 31
+            }
+          },
+          "birth_by_role": {
+            "active_confirmed": {
+              "free_pairs": 0,
+              "confirmed": 0,
+              "accepted_before": 0,
+              "positive_prediction": 0,
+              "activation": 0,
+              "current_gate": 0,
+              "no_weak": 0,
+              "weak_excluded_preproposal_edges": 0,
+              "ambiguous_nonproposal_edges": 0,
+              "qualified_proposals": 0,
+              "rejected_qualified_proposals": 0,
+              "rule_action_edges": 0
+            },
+            "retained_confirmed": {
+              "free_pairs": 0,
+              "confirmed": 0,
+              "accepted_before": 0,
+              "positive_prediction": 0,
+              "activation": 0,
+              "current_gate": 0,
+              "no_weak": 0,
+              "weak_excluded_preproposal_edges": 0,
+              "ambiguous_nonproposal_edges": 0,
+              "qualified_proposals": 0,
+              "rejected_qualified_proposals": 0,
+              "rule_action_edges": 0
+            },
+            "tentative": {
+              "free_pairs": 3,
+              "confirmed": 0,
+              "accepted_before": 0,
+              "positive_prediction": 0,
+              "activation": 0,
+              "current_gate": 0,
+              "no_weak": 0,
+              "weak_excluded_preproposal_edges": 0,
+              "ambiguous_nonproposal_edges": 0,
+              "qualified_proposals": 0,
+              "rejected_qualified_proposals": 0,
+              "rule_action_edges": 0
+            }
+          },
+          "handoff": null,
+          "handoff_pair_roles": null,
+          "handoff_nonproposal_priority": null,
+          "weak_stage_calls": 62,
+          "accepted_summary": {
+            "frames": 106,
+            "births": 5,
+            "accepted_high": 0,
+            "accepted_weak": 19,
+            "confirmed_observations": 19,
+            "active_updates": 17,
+            "retained_updates": 2,
+            "tentative_promotions": 1,
+            "accepted_inputs": 19,
+            "input_receipt_sha256": "6eee7b0bff5977db970c2c901164c52cca9519ffd9d740b390e1d49c8cb6f0d9",
+            "event_receipt_sha256": "58760fafa1aab4081c983c48df64940cb2799303f0b18368567c35a07c5a6bee"
+          },
+          "audit_receipt_sha256": "fd372323fa1d9ad0bad2c0d83dc9a36cbce8e39f7e6a713c4b163a8b236fbe16",
+          "current_or_future_used_as_prior": false,
+          "identity_or_quality_accepted": false
+        },
+        "past_competition_handoff": {
+          "counters": {
+            "frames": 106,
+            "high_stage_frames": 62,
+            "no_high_stage_frames": 44,
+            "high_rows": 36,
+            "high_columns": 5,
+            "weak_columns": 154,
+            "high_matched_pairs": 0,
+            "high_free_rows": 36,
+            "high_free_columns": 5,
+            "activation_columns": 5,
+            "high_free_activation_columns": 5,
+            "broad_weak_blocked_rows": 19,
+            "free_weak_blocked_rows": 19
+          },
+          "availability_masks": {
+            "0000": 25,
+            "0001": 0,
+            "0010": 0,
+            "0011": 0,
+            "0100": 0,
+            "0101": 2,
+            "0110": 0,
+            "0111": 0,
+            "1000": 0,
+            "1001": 0,
+            "1010": 33,
+            "1011": 0,
+            "1100": 0,
+            "1101": 0,
+            "1110": 0,
+            "1111": 2
+          },
+          "roles": {
+            "high_rows": {
+              "active_confirmed": 19,
+              "retained_confirmed": 12,
+              "active_tentative": 5,
+              "retained_tentative": 0
+            },
+            "free_rows": {
+              "active_confirmed": 19,
+              "retained_confirmed": 12,
+              "active_tentative": 5,
+              "retained_tentative": 0
+            },
+            "qualified_free_rows": {
+              "active_confirmed": 19,
+              "retained_confirmed": 12,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            },
+            "weak_blocked_rows": {
+              "active_confirmed": 16,
+              "retained_confirmed": 2,
+              "active_tentative": 1,
+              "retained_tentative": 0
+            }
+          },
+          "row_qualification_masks": {
+            "high_rows": {
+              "000": 0,
+              "001": 5,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 31
+            },
+            "free_rows": {
+              "000": 0,
+              "001": 5,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 31
+            }
+          },
+          "birth_by_role": null,
+          "handoff": {
+            "selected_free_triples": 0,
+            "both_qualified": 0,
+            "both_active": 0,
+            "both_previous_acceptance": 0,
+            "selected_previous_high_context": 0,
+            "competitor_in_context": 0,
+            "past_active_confirmed": 0,
+            "past_gate": 0,
+            "past_margin": 0,
+            "distinct_previous_inputs": 0,
+            "current_gate": 0,
+            "current_margin": 0,
+            "no_weak": 0,
+            "weak_excluded_preproposal_edges": 0,
+            "selected_zero_alternative": 0,
+            "selected_multiple_alternatives": 0,
+            "unique_alternative_proposals": 0,
+            "claim_conflict_proposals": 0,
+            "rule_action_edges": 0
+          },
+          "handoff_pair_roles": {
+            "active_confirmed__active_confirmed": 0,
+            "active_confirmed__retained_confirmed": 0,
+            "active_confirmed__active_tentative": 0,
+            "active_confirmed__retained_tentative": 0,
+            "retained_confirmed__active_confirmed": 0,
+            "retained_confirmed__retained_confirmed": 0,
+            "retained_confirmed__active_tentative": 0,
+            "retained_confirmed__retained_tentative": 0,
+            "active_tentative__active_confirmed": 0,
+            "active_tentative__retained_confirmed": 0,
+            "active_tentative__active_tentative": 0,
+            "active_tentative__retained_tentative": 0,
+            "retained_tentative__active_confirmed": 0,
+            "retained_tentative__retained_confirmed": 0,
+            "retained_tentative__active_tentative": 0,
+            "retained_tentative__retained_tentative": 0
+          },
+          "handoff_nonproposal_priority": {
+            "not_proposed_at_both_qualified": 0,
+            "not_proposed_at_both_active": 0,
+            "not_proposed_at_both_previous_acceptance": 0,
+            "not_proposed_at_selected_previous_high_context": 0,
+            "not_proposed_at_competitor_in_context": 0,
+            "not_proposed_at_past_active_confirmed": 0,
+            "not_proposed_at_past_gate": 0,
+            "not_proposed_at_past_margin": 0,
+            "not_proposed_at_distinct_previous_inputs": 0,
+            "not_proposed_at_current_gate": 0,
+            "not_proposed_at_current_margin": 0,
+            "not_proposed_at_no_weak": 0
+          },
+          "weak_stage_calls": 62,
+          "accepted_summary": {
+            "frames": 106,
+            "births": 5,
+            "accepted_high": 0,
+            "accepted_weak": 19,
+            "confirmed_observations": 19,
+            "active_updates": 17,
+            "retained_updates": 2,
+            "tentative_promotions": 1,
+            "accepted_inputs": 19,
+            "input_receipt_sha256": "6eee7b0bff5977db970c2c901164c52cca9519ffd9d740b390e1d49c8cb6f0d9",
+            "event_receipt_sha256": "58760fafa1aab4081c983c48df64940cb2799303f0b18368567c35a07c5a6bee"
+          },
+          "audit_receipt_sha256": "fd372323fa1d9ad0bad2c0d83dc9a36cbce8e39f7e6a713c4b163a8b236fbe16",
+          "current_or_future_used_as_prior": false,
+          "identity_or_quality_accepted": false
+        }
+      },
+      "trials": {
+        "birth_continuation-0": {
+          "status": "completed",
+          "frames": 106,
+          "original_trace_sha256": "492fc96bcd72ecb125aa813442aef80c06f9a4b554255433f273ec2c3a7dc97e",
+          "original_trace_uncompressed_sha256": "813a702174161a34f7d17fb35395ec61f0c83fadb1e2290c9bc1c697f23702e1",
+          "local_decisions_sha256": "6b88557ba003fc69ab25a73bb13fb006cdf45284c32bd5eeb8eebb5955c6077b"
+        },
+        "birth_continuation-1": {
+          "status": "completed",
+          "frames": 106,
+          "original_trace_sha256": "492fc96bcd72ecb125aa813442aef80c06f9a4b554255433f273ec2c3a7dc97e",
+          "original_trace_uncompressed_sha256": "813a702174161a34f7d17fb35395ec61f0c83fadb1e2290c9bc1c697f23702e1",
+          "local_decisions_sha256": "6b88557ba003fc69ab25a73bb13fb006cdf45284c32bd5eeb8eebb5955c6077b"
+        },
+        "past_competition_handoff-0": {
+          "status": "completed",
+          "frames": 106,
+          "original_trace_sha256": "da617e4514bf4b0760b375a68a1d82942e4f227239cb83db43d0933aa73fae3e",
+          "original_trace_uncompressed_sha256": "61918670fdd1180c47623d0d85662b9764dd836ef80ce7b4d59bdf0509de03c4",
+          "local_decisions_sha256": "6b88557ba003fc69ab25a73bb13fb006cdf45284c32bd5eeb8eebb5955c6077b"
+        },
+        "past_competition_handoff-1": {
+          "status": "completed",
+          "frames": 106,
+          "original_trace_sha256": "da617e4514bf4b0760b375a68a1d82942e4f227239cb83db43d0933aa73fae3e",
+          "original_trace_uncompressed_sha256": "61918670fdd1180c47623d0d85662b9764dd836ef80ce7b4d59bdf0509de03c4",
+          "local_decisions_sha256": "6b88557ba003fc69ab25a73bb13fb006cdf45284c32bd5eeb8eebb5955c6077b"
+        }
+      },
+      "archived_repeats_equal": true
+    },
+    {
+      "name": "KITTI-0015",
+      "phase": "discovery",
+      "frames": 376,
+      "status": "completed",
+      "audit": {
+        "birth_continuation": {
+          "counters": {
+            "frames": 376,
+            "high_stage_frames": 210,
+            "no_high_stage_frames": 166,
+            "high_rows": 525,
+            "high_columns": 233,
+            "weak_columns": 576,
+            "high_matched_pairs": 222,
+            "high_free_rows": 303,
+            "high_free_columns": 11,
+            "activation_columns": 233,
+            "high_free_activation_columns": 11,
+            "broad_weak_blocked_rows": 220,
+            "free_weak_blocked_rows": 181
+          },
+          "availability_masks": {
+            "0000": 22,
+            "0001": 0,
+            "0010": 0,
+            "0011": 0,
+            "0100": 0,
+            "0101": 1,
+            "0110": 0,
+            "0111": 0,
+            "1000": 0,
+            "1001": 0,
+            "1010": 56,
+            "1011": 0,
+            "1100": 36,
+            "1101": 1,
+            "1110": 85,
+            "1111": 9
+          },
+          "roles": {
+            "high_rows": {
+              "active_confirmed": 399,
+              "retained_confirmed": 115,
+              "active_tentative": 11,
+              "retained_tentative": 0
+            },
+            "free_rows": {
+              "active_confirmed": 184,
+              "retained_confirmed": 114,
+              "active_tentative": 5,
+              "retained_tentative": 0
+            },
+            "qualified_free_rows": {
+              "active_confirmed": 184,
+              "retained_confirmed": 114,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            },
+            "weak_blocked_rows": {
+              "active_confirmed": 210,
+              "retained_confirmed": 4,
+              "active_tentative": 6,
+              "retained_tentative": 0
+            }
+          },
+          "row_qualification_masks": {
+            "high_rows": {
+              "000": 0,
+              "001": 11,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 514
+            },
+            "free_rows": {
+              "000": 0,
+              "001": 5,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 298
+            }
+          },
+          "birth_by_role": {
+            "active_confirmed": {
+              "free_pairs": 9,
+              "confirmed": 9,
+              "accepted_before": 9,
+              "positive_prediction": 9,
+              "activation": 9,
+              "current_gate": 0,
+              "no_weak": 0,
+              "weak_excluded_preproposal_edges": 0,
+              "ambiguous_nonproposal_edges": 0,
+              "qualified_proposals": 0,
+              "rejected_qualified_proposals": 0,
+              "rule_action_edges": 0
+            },
+            "retained_confirmed": {
+              "free_pairs": 2,
+              "confirmed": 2,
+              "accepted_before": 2,
+              "positive_prediction": 2,
+              "activation": 2,
+              "current_gate": 0,
+              "no_weak": 0,
+              "weak_excluded_preproposal_edges": 0,
+              "ambiguous_nonproposal_edges": 0,
+              "qualified_proposals": 0,
+              "rejected_qualified_proposals": 0,
+              "rule_action_edges": 0
+            },
+            "tentative": {
+              "free_pairs": 0,
+              "confirmed": 0,
+              "accepted_before": 0,
+              "positive_prediction": 0,
+              "activation": 0,
+              "current_gate": 0,
+              "no_weak": 0,
+              "weak_excluded_preproposal_edges": 0,
+              "ambiguous_nonproposal_edges": 0,
+              "qualified_proposals": 0,
+              "rejected_qualified_proposals": 0,
+              "rule_action_edges": 0
+            }
+          },
+          "handoff": null,
+          "handoff_pair_roles": null,
+          "handoff_nonproposal_priority": null,
+          "weak_stage_calls": 210,
+          "accepted_summary": {
+            "frames": 376,
+            "births": 11,
+            "accepted_high": 222,
+            "accepted_weak": 177,
+            "confirmed_observations": 399,
+            "active_updates": 396,
+            "retained_updates": 3,
+            "tentative_promotions": 11,
+            "accepted_inputs": 399,
+            "input_receipt_sha256": "e4df7961fb54dd4d337de6a528a8b04ff8156dcbffa4641b6483a8e36de11002",
+            "event_receipt_sha256": "c185b5b5fc160c9e433cf6c561dbaaa539c4ce570d30c076e7e80a57269753a5"
+          },
+          "audit_receipt_sha256": "b2ef8fa17f0839adf36f48c5c61de32e20c78d0737b80c31e475a36d7862513e",
+          "current_or_future_used_as_prior": false,
+          "identity_or_quality_accepted": false
+        },
+        "past_competition_handoff": {
+          "counters": {
+            "frames": 376,
+            "high_stage_frames": 210,
+            "no_high_stage_frames": 166,
+            "high_rows": 525,
+            "high_columns": 233,
+            "weak_columns": 576,
+            "high_matched_pairs": 222,
+            "high_free_rows": 303,
+            "high_free_columns": 11,
+            "activation_columns": 233,
+            "high_free_activation_columns": 11,
+            "broad_weak_blocked_rows": 220,
+            "free_weak_blocked_rows": 181
+          },
+          "availability_masks": {
+            "0000": 22,
+            "0001": 0,
+            "0010": 0,
+            "0011": 0,
+            "0100": 0,
+            "0101": 1,
+            "0110": 0,
+            "0111": 0,
+            "1000": 0,
+            "1001": 0,
+            "1010": 56,
+            "1011": 0,
+            "1100": 36,
+            "1101": 1,
+            "1110": 85,
+            "1111": 9
+          },
+          "roles": {
+            "high_rows": {
+              "active_confirmed": 399,
+              "retained_confirmed": 115,
+              "active_tentative": 11,
+              "retained_tentative": 0
+            },
+            "free_rows": {
+              "active_confirmed": 184,
+              "retained_confirmed": 114,
+              "active_tentative": 5,
+              "retained_tentative": 0
+            },
+            "qualified_free_rows": {
+              "active_confirmed": 184,
+              "retained_confirmed": 114,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            },
+            "weak_blocked_rows": {
+              "active_confirmed": 210,
+              "retained_confirmed": 4,
+              "active_tentative": 6,
+              "retained_tentative": 0
+            }
+          },
+          "row_qualification_masks": {
+            "high_rows": {
+              "000": 0,
+              "001": 11,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 514
+            },
+            "free_rows": {
+              "000": 0,
+              "001": 5,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 298
+            }
+          },
+          "birth_by_role": null,
+          "handoff": {
+            "selected_free_triples": 368,
+            "both_qualified": 357,
+            "both_active": 227,
+            "both_previous_acceptance": 227,
+            "selected_previous_high_context": 196,
+            "competitor_in_context": 196,
+            "past_active_confirmed": 190,
+            "past_gate": 9,
+            "past_margin": 0,
+            "distinct_previous_inputs": 0,
+            "current_gate": 0,
+            "current_margin": 0,
+            "no_weak": 0,
+            "weak_excluded_preproposal_edges": 0,
+            "selected_zero_alternative": 222,
+            "selected_multiple_alternatives": 0,
+            "unique_alternative_proposals": 0,
+            "claim_conflict_proposals": 0,
+            "rule_action_edges": 0
+          },
+          "handoff_pair_roles": {
+            "active_confirmed__active_confirmed": 227,
+            "active_confirmed__retained_confirmed": 127,
+            "active_confirmed__active_tentative": 4,
+            "active_confirmed__retained_tentative": 0,
+            "retained_confirmed__active_confirmed": 2,
+            "retained_confirmed__retained_confirmed": 1,
+            "retained_confirmed__active_tentative": 0,
+            "retained_confirmed__retained_tentative": 0,
+            "active_tentative__active_confirmed": 6,
+            "active_tentative__retained_confirmed": 1,
+            "active_tentative__active_tentative": 0,
+            "active_tentative__retained_tentative": 0,
+            "retained_tentative__active_confirmed": 0,
+            "retained_tentative__retained_confirmed": 0,
+            "retained_tentative__active_tentative": 0,
+            "retained_tentative__retained_tentative": 0
+          },
+          "handoff_nonproposal_priority": {
+            "not_proposed_at_both_qualified": 11,
+            "not_proposed_at_both_active": 130,
+            "not_proposed_at_both_previous_acceptance": 0,
+            "not_proposed_at_selected_previous_high_context": 31,
+            "not_proposed_at_competitor_in_context": 0,
+            "not_proposed_at_past_active_confirmed": 6,
+            "not_proposed_at_past_gate": 181,
+            "not_proposed_at_past_margin": 9,
+            "not_proposed_at_distinct_previous_inputs": 0,
+            "not_proposed_at_current_gate": 0,
+            "not_proposed_at_current_margin": 0,
+            "not_proposed_at_no_weak": 0
+          },
+          "weak_stage_calls": 210,
+          "accepted_summary": {
+            "frames": 376,
+            "births": 11,
+            "accepted_high": 222,
+            "accepted_weak": 177,
+            "confirmed_observations": 399,
+            "active_updates": 396,
+            "retained_updates": 3,
+            "tentative_promotions": 11,
+            "accepted_inputs": 399,
+            "input_receipt_sha256": "e4df7961fb54dd4d337de6a528a8b04ff8156dcbffa4641b6483a8e36de11002",
+            "event_receipt_sha256": "c185b5b5fc160c9e433cf6c561dbaaa539c4ce570d30c076e7e80a57269753a5"
+          },
+          "audit_receipt_sha256": "b2ef8fa17f0839adf36f48c5c61de32e20c78d0737b80c31e475a36d7862513e",
+          "current_or_future_used_as_prior": false,
+          "identity_or_quality_accepted": false
+        }
+      },
+      "trials": {
+        "birth_continuation-0": {
+          "status": "completed",
+          "frames": 376,
+          "original_trace_sha256": "7b5ed84045838800aff5aad8cd458d59e22b02093f94e8eb9bfe160c3da3ae17",
+          "original_trace_uncompressed_sha256": "4a60afd1530b4d719f57fd23ca8c5401c026c721ea0fd8cb2c0c33fbf250a12d",
+          "local_decisions_sha256": "8e31a9d27fa5d70cbbab5a4652fb6134d75ac7f35d9164fface801864506a826"
+        },
+        "birth_continuation-1": {
+          "status": "completed",
+          "frames": 376,
+          "original_trace_sha256": "7b5ed84045838800aff5aad8cd458d59e22b02093f94e8eb9bfe160c3da3ae17",
+          "original_trace_uncompressed_sha256": "4a60afd1530b4d719f57fd23ca8c5401c026c721ea0fd8cb2c0c33fbf250a12d",
+          "local_decisions_sha256": "8e31a9d27fa5d70cbbab5a4652fb6134d75ac7f35d9164fface801864506a826"
+        },
+        "past_competition_handoff-0": {
+          "status": "completed",
+          "frames": 376,
+          "original_trace_sha256": "6355bc33a89d5df891053272fd8966885c17af8cde763e1d875362af57d5a6ea",
+          "original_trace_uncompressed_sha256": "110b99705d0bf4779df2392abd92c6819e0e8aa559cbefb3ad65e8f3c54fa42f",
+          "local_decisions_sha256": "8e31a9d27fa5d70cbbab5a4652fb6134d75ac7f35d9164fface801864506a826"
+        },
+        "past_competition_handoff-1": {
+          "status": "completed",
+          "frames": 376,
+          "original_trace_sha256": "6355bc33a89d5df891053272fd8966885c17af8cde763e1d875362af57d5a6ea",
+          "original_trace_uncompressed_sha256": "110b99705d0bf4779df2392abd92c6819e0e8aa559cbefb3ad65e8f3c54fa42f",
+          "local_decisions_sha256": "8e31a9d27fa5d70cbbab5a4652fb6134d75ac7f35d9164fface801864506a826"
+        }
+      },
+      "archived_repeats_equal": true
+    },
+    {
+      "name": "KITTI-0016",
+      "phase": "discovery",
+      "frames": 209,
+      "status": "completed",
+      "audit": {
+        "birth_continuation": {
+          "counters": {
+            "frames": 209,
+            "high_stage_frames": 209,
+            "no_high_stage_frames": 0,
+            "high_rows": 1426,
+            "high_columns": 623,
+            "weak_columns": 2368,
+            "high_matched_pairs": 602,
+            "high_free_rows": 824,
+            "high_free_columns": 21,
+            "activation_columns": 623,
+            "high_free_activation_columns": 21,
+            "broad_weak_blocked_rows": 767,
+            "free_weak_blocked_rows": 596
+          },
+          "availability_masks": {
+            "0000": 0,
+            "0001": 0,
+            "0010": 0,
+            "0011": 0,
+            "0100": 0,
+            "0101": 1,
+            "0110": 0,
+            "0111": 0,
+            "1000": 0,
+            "1001": 0,
+            "1010": 17,
+            "1011": 0,
+            "1100": 5,
+            "1101": 0,
+            "1110": 169,
+            "1111": 17
+          },
+          "roles": {
+            "high_rows": {
+              "active_confirmed": 1186,
+              "retained_confirmed": 219,
+              "active_tentative": 21,
+              "retained_tentative": 0
+            },
+            "free_rows": {
+              "active_confirmed": 598,
+              "retained_confirmed": 216,
+              "active_tentative": 10,
+              "retained_tentative": 0
+            },
+            "qualified_free_rows": {
+              "active_confirmed": 598,
+              "retained_confirmed": 216,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            },
+            "weak_blocked_rows": {
+              "active_confirmed": 735,
+              "retained_confirmed": 19,
+              "active_tentative": 13,
+              "retained_tentative": 0
+            }
+          },
+          "row_qualification_masks": {
+            "high_rows": {
+              "000": 0,
+              "001": 21,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 1405
+            },
+            "free_rows": {
+              "000": 0,
+              "001": 10,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 814
+            }
+          },
+          "birth_by_role": {
+            "active_confirmed": {
+              "free_pairs": 52,
+              "confirmed": 52,
+              "accepted_before": 52,
+              "positive_prediction": 52,
+              "activation": 52,
+              "current_gate": 0,
+              "no_weak": 0,
+              "weak_excluded_preproposal_edges": 0,
+              "ambiguous_nonproposal_edges": 0,
+              "qualified_proposals": 0,
+              "rejected_qualified_proposals": 0,
+              "rule_action_edges": 0
+            },
+            "retained_confirmed": {
+              "free_pairs": 21,
+              "confirmed": 21,
+              "accepted_before": 21,
+              "positive_prediction": 21,
+              "activation": 21,
+              "current_gate": 0,
+              "no_weak": 0,
+              "weak_excluded_preproposal_edges": 0,
+              "ambiguous_nonproposal_edges": 0,
+              "qualified_proposals": 0,
+              "rejected_qualified_proposals": 0,
+              "rule_action_edges": 0
+            },
+            "tentative": {
+              "free_pairs": 0,
+              "confirmed": 0,
+              "accepted_before": 0,
+              "positive_prediction": 0,
+              "activation": 0,
+              "current_gate": 0,
+              "no_weak": 0,
+              "weak_excluded_preproposal_edges": 0,
+              "ambiguous_nonproposal_edges": 0,
+              "qualified_proposals": 0,
+              "rejected_qualified_proposals": 0,
+              "rule_action_edges": 0
+            }
+          },
+          "handoff": null,
+          "handoff_pair_roles": null,
+          "handoff_nonproposal_priority": null,
+          "weak_stage_calls": 209,
+          "accepted_summary": {
+            "frames": 209,
+            "births": 21,
+            "accepted_high": 602,
+            "accepted_weak": 585,
+            "confirmed_observations": 1187,
+            "active_updates": 1172,
+            "retained_updates": 15,
+            "tentative_promotions": 21,
+            "accepted_inputs": 1187,
+            "input_receipt_sha256": "d4035c49788aee0e69c052a5ca18c42a417d48327f656699c60ccfa7a21a053d",
+            "event_receipt_sha256": "ed4b44dda5f538bc7943716d3371290eec0e609b1b89461088c01acf83dc8d91"
+          },
+          "audit_receipt_sha256": "b469375df7f167760fa92507baf93f0f38a9cf69f5352b372f3e8954a9c31cb7",
+          "current_or_future_used_as_prior": false,
+          "identity_or_quality_accepted": false
+        },
+        "past_competition_handoff": {
+          "counters": {
+            "frames": 209,
+            "high_stage_frames": 209,
+            "no_high_stage_frames": 0,
+            "high_rows": 1426,
+            "high_columns": 623,
+            "weak_columns": 2368,
+            "high_matched_pairs": 602,
+            "high_free_rows": 824,
+            "high_free_columns": 21,
+            "activation_columns": 623,
+            "high_free_activation_columns": 21,
+            "broad_weak_blocked_rows": 767,
+            "free_weak_blocked_rows": 596
+          },
+          "availability_masks": {
+            "0000": 0,
+            "0001": 0,
+            "0010": 0,
+            "0011": 0,
+            "0100": 0,
+            "0101": 1,
+            "0110": 0,
+            "0111": 0,
+            "1000": 0,
+            "1001": 0,
+            "1010": 17,
+            "1011": 0,
+            "1100": 5,
+            "1101": 0,
+            "1110": 169,
+            "1111": 17
+          },
+          "roles": {
+            "high_rows": {
+              "active_confirmed": 1186,
+              "retained_confirmed": 219,
+              "active_tentative": 21,
+              "retained_tentative": 0
+            },
+            "free_rows": {
+              "active_confirmed": 598,
+              "retained_confirmed": 216,
+              "active_tentative": 10,
+              "retained_tentative": 0
+            },
+            "qualified_free_rows": {
+              "active_confirmed": 598,
+              "retained_confirmed": 216,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            },
+            "weak_blocked_rows": {
+              "active_confirmed": 735,
+              "retained_confirmed": 19,
+              "active_tentative": 13,
+              "retained_tentative": 0
+            }
+          },
+          "row_qualification_masks": {
+            "high_rows": {
+              "000": 0,
+              "001": 21,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 1405
+            },
+            "free_rows": {
+              "000": 0,
+              "001": 10,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 814
+            }
+          },
+          "birth_by_role": null,
+          "handoff": {
+            "selected_free_triples": 2315,
+            "both_qualified": 2254,
+            "both_active": 1648,
+            "both_previous_acceptance": 1648,
+            "selected_previous_high_context": 1287,
+            "competitor_in_context": 1287,
+            "past_active_confirmed": 1241,
+            "past_gate": 51,
+            "past_margin": 1,
+            "distinct_previous_inputs": 1,
+            "current_gate": 1,
+            "current_margin": 0,
+            "no_weak": 0,
+            "weak_excluded_preproposal_edges": 0,
+            "selected_zero_alternative": 602,
+            "selected_multiple_alternatives": 0,
+            "unique_alternative_proposals": 0,
+            "claim_conflict_proposals": 0,
+            "rule_action_edges": 0
+          },
+          "handoff_pair_roles": {
+            "active_confirmed__active_confirmed": 1648,
+            "active_confirmed__retained_confirmed": 590,
+            "active_confirmed__active_tentative": 22,
+            "active_confirmed__retained_tentative": 0,
+            "retained_confirmed__active_confirmed": 10,
+            "retained_confirmed__retained_confirmed": 6,
+            "retained_confirmed__active_tentative": 1,
+            "retained_confirmed__retained_tentative": 0,
+            "active_tentative__active_confirmed": 23,
+            "active_tentative__retained_confirmed": 12,
+            "active_tentative__active_tentative": 3,
+            "active_tentative__retained_tentative": 0,
+            "retained_tentative__active_confirmed": 0,
+            "retained_tentative__retained_confirmed": 0,
+            "retained_tentative__active_tentative": 0,
+            "retained_tentative__retained_tentative": 0
+          },
+          "handoff_nonproposal_priority": {
+            "not_proposed_at_both_qualified": 61,
+            "not_proposed_at_both_active": 606,
+            "not_proposed_at_both_previous_acceptance": 0,
+            "not_proposed_at_selected_previous_high_context": 361,
+            "not_proposed_at_competitor_in_context": 0,
+            "not_proposed_at_past_active_confirmed": 46,
+            "not_proposed_at_past_gate": 1190,
+            "not_proposed_at_past_margin": 50,
+            "not_proposed_at_distinct_previous_inputs": 0,
+            "not_proposed_at_current_gate": 0,
+            "not_proposed_at_current_margin": 1,
+            "not_proposed_at_no_weak": 0
+          },
+          "weak_stage_calls": 209,
+          "accepted_summary": {
+            "frames": 209,
+            "births": 21,
+            "accepted_high": 602,
+            "accepted_weak": 585,
+            "confirmed_observations": 1187,
+            "active_updates": 1172,
+            "retained_updates": 15,
+            "tentative_promotions": 21,
+            "accepted_inputs": 1187,
+            "input_receipt_sha256": "d4035c49788aee0e69c052a5ca18c42a417d48327f656699c60ccfa7a21a053d",
+            "event_receipt_sha256": "ed4b44dda5f538bc7943716d3371290eec0e609b1b89461088c01acf83dc8d91"
+          },
+          "audit_receipt_sha256": "b469375df7f167760fa92507baf93f0f38a9cf69f5352b372f3e8954a9c31cb7",
+          "current_or_future_used_as_prior": false,
+          "identity_or_quality_accepted": false
+        }
+      },
+      "trials": {
+        "birth_continuation-0": {
+          "status": "completed",
+          "frames": 209,
+          "original_trace_sha256": "2ef61d961a40ba5f705ffe2ce6db9f7b1e0e33892c5057950a7be1f46da2a343",
+          "original_trace_uncompressed_sha256": "1e4cc651d21d6eb66b10d08416178c986742f867107973856c6764a1ba313472",
+          "local_decisions_sha256": "2a05229a3b00cc3074ed5dd10fb8cd31ac0c421b096dacd493aa7cc2549a93d2"
+        },
+        "birth_continuation-1": {
+          "status": "completed",
+          "frames": 209,
+          "original_trace_sha256": "2ef61d961a40ba5f705ffe2ce6db9f7b1e0e33892c5057950a7be1f46da2a343",
+          "original_trace_uncompressed_sha256": "1e4cc651d21d6eb66b10d08416178c986742f867107973856c6764a1ba313472",
+          "local_decisions_sha256": "2a05229a3b00cc3074ed5dd10fb8cd31ac0c421b096dacd493aa7cc2549a93d2"
+        },
+        "past_competition_handoff-0": {
+          "status": "completed",
+          "frames": 209,
+          "original_trace_sha256": "2127b30864974fa287dacccc8c84e5aacaa4889325c5550b06a851425b1cf5d4",
+          "original_trace_uncompressed_sha256": "478b96e55a187d81677a200c7ee92f864280caab16101a17101e948c150e4964",
+          "local_decisions_sha256": "2a05229a3b00cc3074ed5dd10fb8cd31ac0c421b096dacd493aa7cc2549a93d2"
+        },
+        "past_competition_handoff-1": {
+          "status": "completed",
+          "frames": 209,
+          "original_trace_sha256": "2127b30864974fa287dacccc8c84e5aacaa4889325c5550b06a851425b1cf5d4",
+          "original_trace_uncompressed_sha256": "478b96e55a187d81677a200c7ee92f864280caab16101a17101e948c150e4964",
+          "local_decisions_sha256": "2a05229a3b00cc3074ed5dd10fb8cd31ac0c421b096dacd493aa7cc2549a93d2"
+        }
+      },
+      "archived_repeats_equal": true
+    },
+    {
+      "name": "KITTI-0017",
+      "phase": "confirmation",
+      "frames": 145,
+      "status": "completed",
+      "audit": {
+        "birth_continuation": {
+          "counters": {
+            "frames": 145,
+            "high_stage_frames": 145,
+            "no_high_stage_frames": 0,
+            "high_rows": 589,
+            "high_columns": 476,
+            "weak_columns": 780,
+            "high_matched_pairs": 467,
+            "high_free_rows": 122,
+            "high_free_columns": 9,
+            "activation_columns": 476,
+            "high_free_activation_columns": 9,
+            "broad_weak_blocked_rows": 85,
+            "free_weak_blocked_rows": 51
+          },
+          "availability_masks": {
+            "0000": 0,
+            "0001": 0,
+            "0010": 0,
+            "0011": 0,
+            "0100": 0,
+            "0101": 1,
+            "0110": 0,
+            "0111": 0,
+            "1000": 0,
+            "1001": 0,
+            "1010": 0,
+            "1011": 0,
+            "1100": 76,
+            "1101": 3,
+            "1110": 61,
+            "1111": 4
+          },
+          "roles": {
+            "high_rows": {
+              "active_confirmed": 516,
+              "retained_confirmed": 64,
+              "active_tentative": 9,
+              "retained_tentative": 0
+            },
+            "free_rows": {
+              "active_confirmed": 59,
+              "retained_confirmed": 62,
+              "active_tentative": 1,
+              "retained_tentative": 0
+            },
+            "qualified_free_rows": {
+              "active_confirmed": 59,
+              "retained_confirmed": 62,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            },
+            "weak_blocked_rows": {
+              "active_confirmed": 80,
+              "retained_confirmed": 1,
+              "active_tentative": 4,
+              "retained_tentative": 0
+            }
+          },
+          "row_qualification_masks": {
+            "high_rows": {
+              "000": 0,
+              "001": 9,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 580
+            },
+            "free_rows": {
+              "000": 0,
+              "001": 1,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 121
+            }
+          },
+          "birth_by_role": {
+            "active_confirmed": {
+              "free_pairs": 2,
+              "confirmed": 2,
+              "accepted_before": 2,
+              "positive_prediction": 2,
+              "activation": 2,
+              "current_gate": 0,
+              "no_weak": 0,
+              "weak_excluded_preproposal_edges": 0,
+              "ambiguous_nonproposal_edges": 0,
+              "qualified_proposals": 0,
+              "rejected_qualified_proposals": 0,
+              "rule_action_edges": 0
+            },
+            "retained_confirmed": {
+              "free_pairs": 5,
+              "confirmed": 5,
+              "accepted_before": 5,
+              "positive_prediction": 5,
+              "activation": 5,
+              "current_gate": 0,
+              "no_weak": 0,
+              "weak_excluded_preproposal_edges": 0,
+              "ambiguous_nonproposal_edges": 0,
+              "qualified_proposals": 0,
+              "rejected_qualified_proposals": 0,
+              "rule_action_edges": 0
+            },
+            "tentative": {
+              "free_pairs": 0,
+              "confirmed": 0,
+              "accepted_before": 0,
+              "positive_prediction": 0,
+              "activation": 0,
+              "current_gate": 0,
+              "no_weak": 0,
+              "weak_excluded_preproposal_edges": 0,
+              "ambiguous_nonproposal_edges": 0,
+              "qualified_proposals": 0,
+              "rejected_qualified_proposals": 0,
+              "rule_action_edges": 0
+            }
+          },
+          "handoff": null,
+          "handoff_pair_roles": null,
+          "handoff_nonproposal_priority": null,
+          "weak_stage_calls": 145,
+          "accepted_summary": {
+            "frames": 145,
+            "births": 9,
+            "accepted_high": 467,
+            "accepted_weak": 51,
+            "confirmed_observations": 518,
+            "active_updates": 515,
+            "retained_updates": 3,
+            "tentative_promotions": 9,
+            "accepted_inputs": 518,
+            "input_receipt_sha256": "b6ae80206620351ead5b791764c27805cd9250000a4ff7e5f7d982c01f56b318",
+            "event_receipt_sha256": "2d3e3185031790936e4c1a7f5a4797c5102a2f7260d1c41f1d7b4c95503c7cab"
+          },
+          "audit_receipt_sha256": "adb1e9f8c7c82df2f08016312c40804ae0f1ac8c2fd24a4b910210843a99649b",
+          "current_or_future_used_as_prior": false,
+          "identity_or_quality_accepted": false
+        },
+        "past_competition_handoff": {
+          "counters": {
+            "frames": 145,
+            "high_stage_frames": 145,
+            "no_high_stage_frames": 0,
+            "high_rows": 589,
+            "high_columns": 476,
+            "weak_columns": 780,
+            "high_matched_pairs": 467,
+            "high_free_rows": 122,
+            "high_free_columns": 9,
+            "activation_columns": 476,
+            "high_free_activation_columns": 9,
+            "broad_weak_blocked_rows": 85,
+            "free_weak_blocked_rows": 51
+          },
+          "availability_masks": {
+            "0000": 0,
+            "0001": 0,
+            "0010": 0,
+            "0011": 0,
+            "0100": 0,
+            "0101": 1,
+            "0110": 0,
+            "0111": 0,
+            "1000": 0,
+            "1001": 0,
+            "1010": 0,
+            "1011": 0,
+            "1100": 76,
+            "1101": 3,
+            "1110": 61,
+            "1111": 4
+          },
+          "roles": {
+            "high_rows": {
+              "active_confirmed": 516,
+              "retained_confirmed": 64,
+              "active_tentative": 9,
+              "retained_tentative": 0
+            },
+            "free_rows": {
+              "active_confirmed": 59,
+              "retained_confirmed": 62,
+              "active_tentative": 1,
+              "retained_tentative": 0
+            },
+            "qualified_free_rows": {
+              "active_confirmed": 59,
+              "retained_confirmed": 62,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            },
+            "weak_blocked_rows": {
+              "active_confirmed": 80,
+              "retained_confirmed": 1,
+              "active_tentative": 4,
+              "retained_tentative": 0
+            }
+          },
+          "row_qualification_masks": {
+            "high_rows": {
+              "000": 0,
+              "001": 9,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 580
+            },
+            "free_rows": {
+              "000": 0,
+              "001": 1,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 121
+            }
+          },
+          "birth_by_role": null,
+          "handoff": {
+            "selected_free_triples": 339,
+            "both_qualified": 330,
+            "both_active": 148,
+            "both_previous_acceptance": 148,
+            "selected_previous_high_context": 138,
+            "competitor_in_context": 138,
+            "past_active_confirmed": 128,
+            "past_gate": 6,
+            "past_margin": 0,
+            "distinct_previous_inputs": 0,
+            "current_gate": 0,
+            "current_margin": 0,
+            "no_weak": 0,
+            "weak_excluded_preproposal_edges": 0,
+            "selected_zero_alternative": 467,
+            "selected_multiple_alternatives": 0,
+            "unique_alternative_proposals": 0,
+            "claim_conflict_proposals": 0,
+            "rule_action_edges": 0
+          },
+          "handoff_pair_roles": {
+            "active_confirmed__active_confirmed": 148,
+            "active_confirmed__retained_confirmed": 179,
+            "active_confirmed__active_tentative": 3,
+            "active_confirmed__retained_tentative": 0,
+            "retained_confirmed__active_confirmed": 2,
+            "retained_confirmed__retained_confirmed": 1,
+            "retained_confirmed__active_tentative": 0,
+            "retained_confirmed__retained_tentative": 0,
+            "active_tentative__active_confirmed": 2,
+            "active_tentative__retained_confirmed": 4,
+            "active_tentative__active_tentative": 0,
+            "active_tentative__retained_tentative": 0,
+            "retained_tentative__active_confirmed": 0,
+            "retained_tentative__retained_confirmed": 0,
+            "retained_tentative__active_tentative": 0,
+            "retained_tentative__retained_tentative": 0
+          },
+          "handoff_nonproposal_priority": {
+            "not_proposed_at_both_qualified": 9,
+            "not_proposed_at_both_active": 182,
+            "not_proposed_at_both_previous_acceptance": 0,
+            "not_proposed_at_selected_previous_high_context": 10,
+            "not_proposed_at_competitor_in_context": 0,
+            "not_proposed_at_past_active_confirmed": 10,
+            "not_proposed_at_past_gate": 122,
+            "not_proposed_at_past_margin": 6,
+            "not_proposed_at_distinct_previous_inputs": 0,
+            "not_proposed_at_current_gate": 0,
+            "not_proposed_at_current_margin": 0,
+            "not_proposed_at_no_weak": 0
+          },
+          "weak_stage_calls": 145,
+          "accepted_summary": {
+            "frames": 145,
+            "births": 9,
+            "accepted_high": 467,
+            "accepted_weak": 51,
+            "confirmed_observations": 518,
+            "active_updates": 515,
+            "retained_updates": 3,
+            "tentative_promotions": 9,
+            "accepted_inputs": 518,
+            "input_receipt_sha256": "b6ae80206620351ead5b791764c27805cd9250000a4ff7e5f7d982c01f56b318",
+            "event_receipt_sha256": "2d3e3185031790936e4c1a7f5a4797c5102a2f7260d1c41f1d7b4c95503c7cab"
+          },
+          "audit_receipt_sha256": "adb1e9f8c7c82df2f08016312c40804ae0f1ac8c2fd24a4b910210843a99649b",
+          "current_or_future_used_as_prior": false,
+          "identity_or_quality_accepted": false
+        }
+      },
+      "trials": {
+        "birth_continuation-0": {
+          "status": "completed",
+          "frames": 145,
+          "original_trace_sha256": "2686b7cb856a1b03601c5dc8de83fc3e4d3fbde9bb1cbe2c6da673a65815ae89",
+          "original_trace_uncompressed_sha256": "fd93e7c72a5e9eed922a1f785e0564dc33f3a22b53e2c0268b5db3e674717aba",
+          "local_decisions_sha256": "3b76512e1f503fe6efbeefed4c0f225480572af25c9b013b335e157a05512430"
+        },
+        "birth_continuation-1": {
+          "status": "completed",
+          "frames": 145,
+          "original_trace_sha256": "2686b7cb856a1b03601c5dc8de83fc3e4d3fbde9bb1cbe2c6da673a65815ae89",
+          "original_trace_uncompressed_sha256": "fd93e7c72a5e9eed922a1f785e0564dc33f3a22b53e2c0268b5db3e674717aba",
+          "local_decisions_sha256": "3b76512e1f503fe6efbeefed4c0f225480572af25c9b013b335e157a05512430"
+        },
+        "past_competition_handoff-0": {
+          "status": "completed",
+          "frames": 145,
+          "original_trace_sha256": "f358990030645fa9effeac41fb6add2fd1479830f38ea80ef586d89d5ac932aa",
+          "original_trace_uncompressed_sha256": "3967472ff1c1e9c80daf47937e1208ec49c073f32f4c2b6ea79e1becd3f29f77",
+          "local_decisions_sha256": "3b76512e1f503fe6efbeefed4c0f225480572af25c9b013b335e157a05512430"
+        },
+        "past_competition_handoff-1": {
+          "status": "completed",
+          "frames": 145,
+          "original_trace_sha256": "f358990030645fa9effeac41fb6add2fd1479830f38ea80ef586d89d5ac932aa",
+          "original_trace_uncompressed_sha256": "3967472ff1c1e9c80daf47937e1208ec49c073f32f4c2b6ea79e1becd3f29f77",
+          "local_decisions_sha256": "3b76512e1f503fe6efbeefed4c0f225480572af25c9b013b335e157a05512430"
+        }
+      },
+      "archived_repeats_equal": true
+    },
+    {
+      "name": "KITTI-0018",
+      "phase": "confirmation",
+      "frames": 339,
+      "status": "completed",
+      "audit": {
+        "birth_continuation": {
+          "counters": {
+            "frames": 339,
+            "high_stage_frames": 22,
+            "no_high_stage_frames": 317,
+            "high_rows": 0,
+            "high_columns": 0,
+            "weak_columns": 24,
+            "high_matched_pairs": 0,
+            "high_free_rows": 0,
+            "high_free_columns": 0,
+            "activation_columns": 0,
+            "high_free_activation_columns": 0,
+            "broad_weak_blocked_rows": 0,
+            "free_weak_blocked_rows": 0
+          },
+          "availability_masks": {
+            "0000": 22,
+            "0001": 0,
+            "0010": 0,
+            "0011": 0,
+            "0100": 0,
+            "0101": 0,
+            "0110": 0,
+            "0111": 0,
+            "1000": 0,
+            "1001": 0,
+            "1010": 0,
+            "1011": 0,
+            "1100": 0,
+            "1101": 0,
+            "1110": 0,
+            "1111": 0
+          },
+          "roles": {
+            "high_rows": {
+              "active_confirmed": 0,
+              "retained_confirmed": 0,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            },
+            "free_rows": {
+              "active_confirmed": 0,
+              "retained_confirmed": 0,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            },
+            "qualified_free_rows": {
+              "active_confirmed": 0,
+              "retained_confirmed": 0,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            },
+            "weak_blocked_rows": {
+              "active_confirmed": 0,
+              "retained_confirmed": 0,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            }
+          },
+          "row_qualification_masks": {
+            "high_rows": {
+              "000": 0,
+              "001": 0,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 0
+            },
+            "free_rows": {
+              "000": 0,
+              "001": 0,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 0
+            }
+          },
+          "birth_by_role": {
+            "active_confirmed": {
+              "free_pairs": 0,
+              "confirmed": 0,
+              "accepted_before": 0,
+              "positive_prediction": 0,
+              "activation": 0,
+              "current_gate": 0,
+              "no_weak": 0,
+              "weak_excluded_preproposal_edges": 0,
+              "ambiguous_nonproposal_edges": 0,
+              "qualified_proposals": 0,
+              "rejected_qualified_proposals": 0,
+              "rule_action_edges": 0
+            },
+            "retained_confirmed": {
+              "free_pairs": 0,
+              "confirmed": 0,
+              "accepted_before": 0,
+              "positive_prediction": 0,
+              "activation": 0,
+              "current_gate": 0,
+              "no_weak": 0,
+              "weak_excluded_preproposal_edges": 0,
+              "ambiguous_nonproposal_edges": 0,
+              "qualified_proposals": 0,
+              "rejected_qualified_proposals": 0,
+              "rule_action_edges": 0
+            },
+            "tentative": {
+              "free_pairs": 0,
+              "confirmed": 0,
+              "accepted_before": 0,
+              "positive_prediction": 0,
+              "activation": 0,
+              "current_gate": 0,
+              "no_weak": 0,
+              "weak_excluded_preproposal_edges": 0,
+              "ambiguous_nonproposal_edges": 0,
+              "qualified_proposals": 0,
+              "rejected_qualified_proposals": 0,
+              "rule_action_edges": 0
+            }
+          },
+          "handoff": null,
+          "handoff_pair_roles": null,
+          "handoff_nonproposal_priority": null,
+          "weak_stage_calls": 22,
+          "accepted_summary": {
+            "frames": 339,
+            "births": 0,
+            "accepted_high": 0,
+            "accepted_weak": 0,
+            "confirmed_observations": 0,
+            "active_updates": 0,
+            "retained_updates": 0,
+            "tentative_promotions": 0,
+            "accepted_inputs": 0,
+            "input_receipt_sha256": "7c28dd42737bbd036e954df237fc6e6a01c4aec2e8306633752c129adc05adc1",
+            "event_receipt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "audit_receipt_sha256": "89fe1eaaa0fca0f1d544438095835f5887eb9c923ee3cf504392e3c311b89ff4",
+          "current_or_future_used_as_prior": false,
+          "identity_or_quality_accepted": false
+        },
+        "past_competition_handoff": {
+          "counters": {
+            "frames": 339,
+            "high_stage_frames": 22,
+            "no_high_stage_frames": 317,
+            "high_rows": 0,
+            "high_columns": 0,
+            "weak_columns": 24,
+            "high_matched_pairs": 0,
+            "high_free_rows": 0,
+            "high_free_columns": 0,
+            "activation_columns": 0,
+            "high_free_activation_columns": 0,
+            "broad_weak_blocked_rows": 0,
+            "free_weak_blocked_rows": 0
+          },
+          "availability_masks": {
+            "0000": 22,
+            "0001": 0,
+            "0010": 0,
+            "0011": 0,
+            "0100": 0,
+            "0101": 0,
+            "0110": 0,
+            "0111": 0,
+            "1000": 0,
+            "1001": 0,
+            "1010": 0,
+            "1011": 0,
+            "1100": 0,
+            "1101": 0,
+            "1110": 0,
+            "1111": 0
+          },
+          "roles": {
+            "high_rows": {
+              "active_confirmed": 0,
+              "retained_confirmed": 0,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            },
+            "free_rows": {
+              "active_confirmed": 0,
+              "retained_confirmed": 0,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            },
+            "qualified_free_rows": {
+              "active_confirmed": 0,
+              "retained_confirmed": 0,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            },
+            "weak_blocked_rows": {
+              "active_confirmed": 0,
+              "retained_confirmed": 0,
+              "active_tentative": 0,
+              "retained_tentative": 0
+            }
+          },
+          "row_qualification_masks": {
+            "high_rows": {
+              "000": 0,
+              "001": 0,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 0
+            },
+            "free_rows": {
+              "000": 0,
+              "001": 0,
+              "010": 0,
+              "011": 0,
+              "100": 0,
+              "101": 0,
+              "110": 0,
+              "111": 0
+            }
+          },
+          "birth_by_role": null,
+          "handoff": {
+            "selected_free_triples": 0,
+            "both_qualified": 0,
+            "both_active": 0,
+            "both_previous_acceptance": 0,
+            "selected_previous_high_context": 0,
+            "competitor_in_context": 0,
+            "past_active_confirmed": 0,
+            "past_gate": 0,
+            "past_margin": 0,
+            "distinct_previous_inputs": 0,
+            "current_gate": 0,
+            "current_margin": 0,
+            "no_weak": 0,
+            "weak_excluded_preproposal_edges": 0,
+            "selected_zero_alternative": 0,
+            "selected_multiple_alternatives": 0,
+            "unique_alternative_proposals": 0,
+            "claim_conflict_proposals": 0,
+            "rule_action_edges": 0
+          },
+          "handoff_pair_roles": {
+            "active_confirmed__active_confirmed": 0,
+            "active_confirmed__retained_confirmed": 0,
+            "active_confirmed__active_tentative": 0,
+            "active_confirmed__retained_tentative": 0,
+            "retained_confirmed__active_confirmed": 0,
+            "retained_confirmed__retained_confirmed": 0,
+            "retained_confirmed__active_tentative": 0,
+            "retained_confirmed__retained_tentative": 0,
+            "active_tentative__active_confirmed": 0,
+            "active_tentative__retained_confirmed": 0,
+            "active_tentative__active_tentative": 0,
+            "active_tentative__retained_tentative": 0,
+            "retained_tentative__active_confirmed": 0,
+            "retained_tentative__retained_confirmed": 0,
+            "retained_tentative__active_tentative": 0,
+            "retained_tentative__retained_tentative": 0
+          },
+          "handoff_nonproposal_priority": {
+            "not_proposed_at_both_qualified": 0,
+            "not_proposed_at_both_active": 0,
+            "not_proposed_at_both_previous_acceptance": 0,
+            "not_proposed_at_selected_previous_high_context": 0,
+            "not_proposed_at_competitor_in_context": 0,
+            "not_proposed_at_past_active_confirmed": 0,
+            "not_proposed_at_past_gate": 0,
+            "not_proposed_at_past_margin": 0,
+            "not_proposed_at_distinct_previous_inputs": 0,
+            "not_proposed_at_current_gate": 0,
+            "not_proposed_at_current_margin": 0,
+            "not_proposed_at_no_weak": 0
+          },
+          "weak_stage_calls": 22,
+          "accepted_summary": {
+            "frames": 339,
+            "births": 0,
+            "accepted_high": 0,
+            "accepted_weak": 0,
+            "confirmed_observations": 0,
+            "active_updates": 0,
+            "retained_updates": 0,
+            "tentative_promotions": 0,
+            "accepted_inputs": 0,
+            "input_receipt_sha256": "7c28dd42737bbd036e954df237fc6e6a01c4aec2e8306633752c129adc05adc1",
+            "event_receipt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "audit_receipt_sha256": "89fe1eaaa0fca0f1d544438095835f5887eb9c923ee3cf504392e3c311b89ff4",
+          "current_or_future_used_as_prior": false,
+          "identity_or_quality_accepted": false
+        }
+      },
+      "trials": {
+        "birth_continuation-0": {
+          "status": "completed",
+          "frames": 339,
+          "original_trace_sha256": "5811fd979529a55ab1c87ca603242efd77f9a8ac415ec073c6968575901b65b8",
+          "original_trace_uncompressed_sha256": "a29f02c598939adfcd10fc7ce0667609617ff71d20cee4ecf41e6878f67a9c4e",
+          "local_decisions_sha256": "c85575f759696906dbe3f12ad485f4dd53060065f57bdc939c21af6176be1052"
+        },
+        "birth_continuation-1": {
+          "status": "completed",
+          "frames": 339,
+          "original_trace_sha256": "5811fd979529a55ab1c87ca603242efd77f9a8ac415ec073c6968575901b65b8",
+          "original_trace_uncompressed_sha256": "a29f02c598939adfcd10fc7ce0667609617ff71d20cee4ecf41e6878f67a9c4e",
+          "local_decisions_sha256": "c85575f759696906dbe3f12ad485f4dd53060065f57bdc939c21af6176be1052"
+        },
+        "past_competition_handoff-0": {
+          "status": "completed",
+          "frames": 339,
+          "original_trace_sha256": "f11b0e607c7798790955eb0d1ed2a7925cf6f2e42e1c4bfe0d4abb1964de0d92",
+          "original_trace_uncompressed_sha256": "3fce9825393559b0258a9c80e70f71d2e1cf3d736a912d542c905e78db1e2fda",
+          "local_decisions_sha256": "c85575f759696906dbe3f12ad485f4dd53060065f57bdc939c21af6176be1052"
+        },
+        "past_competition_handoff-1": {
+          "status": "completed",
+          "frames": 339,
+          "original_trace_sha256": "f11b0e607c7798790955eb0d1ed2a7925cf6f2e42e1c4bfe0d4abb1964de0d92",
+          "original_trace_uncompressed_sha256": "3fce9825393559b0258a9c80e70f71d2e1cf3d736a912d542c905e78db1e2fda",
+          "local_decisions_sha256": "c85575f759696906dbe3f12ad485f4dd53060065f57bdc939c21af6176be1052"
+        }
+      },
+      "archived_repeats_equal": true
+    }
+  ]
+}
