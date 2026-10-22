@@ -1,6 +1,6 @@
 # Roadmap / 路線圖
 
-Updated / 更新：2026-10-22 · [Project](README.md) · [繁體中文首頁](README.zh-TW.md) · [Alpha.2 notes / 發布說明](docs/releases/0.3.0-alpha.2.md) · [Changelog / 歷程](CHANGELOG.md)
+Updated / 更新：2026-10-22 · [Project](README.md) · [繁體中文首頁](README.zh-TW.md) · [Alpha.2 notes / 發布說明](docs/releases/0.3.0-alpha.2.md) · [Changelog / 歷程](CHANGELOG.md) · [Handoff / 收尾與接續（繁中）](docs/zh-TW/maintenance-handoff.md)
 
 [Project scope / 專案定位](#open-source-project-status--開源專案定位) · [Status / 狀態判讀](#status--狀態判讀) · [Current Pages / 目前互動展示](#current-pages--目前互動展示) · [v0.1](#v01--viewer-foundation--檢視器基礎) · [v0.2](#v02--spatial-analysis--空間分析) · [v0.3](#v03--sessions-and-tracking--回放與追蹤) · [Research & optional validation / 研究與選用驗證](#follow-up-research-and-optional-validation--後續研究與選用驗證) · [Maintenance / 維護](#repository-maintenance--repo-維護)
 

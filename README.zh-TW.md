@@ -24,7 +24,7 @@
 
 DepthPort 是供探索、可重現實驗與結果檢查的**開源本機工作台**。原始碼、Alpha 下載與靜態 Pages 範例已依文件記錄的範圍公開。
 
-**維護階段 — 2026-10-22：** 目前開發階段依文件記錄的範圍告一段落，接下來以已確認問題修正、安全／依賴更新與文件維護為主。[Issue #6](https://github.com/JShengP/depthport/issues/6) 保留作選用驗證，[Issue #8](https://github.com/JShengP/depthport/issues/8) 保留作後續研究；進一步實驗待有具體需求時再選定。實驗性 Alpha、未驗證項目與原失敗紀錄維持不變。[維護範圍](ROADMAP.md#repository-maintenance--repo-維護)
+**維護階段 — 2026-10-22：** 目前開發階段依文件記錄的範圍告一段落，接下來以已確認問題修正、安全／依賴更新與文件維護為主。[Issue #6](https://github.com/JShengP/depthport/issues/6) 保留作選用驗證，[Issue #8](https://github.com/JShengP/depthport/issues/8) 保留作後續研究；進一步實驗待有具體需求時再選定。實驗性 Alpha、未驗證項目與原失敗紀錄維持不變。[維護範圍](ROADMAP.md#repository-maintenance--repo-維護) · [收尾與接續交接摘要](docs/zh-TW/maintenance-handoff.md)
 
 - **已完成：** 檢視器、空間分析與選用 Session／回放流程；分版文件、原始碼包／校驗檔、CI、註明來源的展示及有日期的驗證紀錄。功能完成與實測證據分開呈現。
 - **後續研究：** 追蹤可靠性、時序幾何／競爭、未見來源確認，以及更換預設所需的證據。由 [Issue #8](https://github.com/JShengP/depthport/issues/8) 追蹤，原零值與失敗結果保留。
