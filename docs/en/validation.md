@@ -1,6 +1,11 @@
 # Validation record
 [繁體中文](../zh-TW/validation.md) · [Home](../../README.md)
 
+
+## Read-only eligibility/action reachability — 2026-10-22
+
+[Public freeze, complete ledger, denominators and decision](tracking-handoff-reachability.md):all7 sources/28 archived histories/6,372 read trace frames (1,593 unique) complete, no extraction failure/retry.192 qualified free birth edges all fail current gate;3 handoff triples reach past margin/current gate but fail current margin. No formed proposals, qualified claim rejections or conditional weak exclusions;1,343 broad weak-blocked rows are not rejected proposals. All1,027 weak updates and original434/earlier772/seven-source1,956 raw-file seals unchanged. No GT, tuning, inference/tracker/solver/numerical replay or defaults change. Original failures/nulls/false gates retained; quality/independent exposure open. Next separately freeze decision-prefix temporal geometry/competition diagnosis; historical next steps below refer to their earlier checkpoints.
+
 ## Frozen same-rule GT-free exposure ledger — 2026-10-22
 
 [Method, complete discovery/reserved ledger and decision / 方法與完整清單](tracking-handoff-exposure.md)：Seven full sources/1,593 original frames/63 isolated processes complete, all native/repeat seals equal. Discovery0012–0016 has no actual actions in active/retained continuation or past handoff; selections null. Reserved0017/0018 opens only after public discovery, also zero actions; all three confirmation gates FALSE. All1,027 weak updates per arm retained;434 old files/772 prior raw files unchanged. No GT/tuning, defaults unchanged. Full negative ledger complete, effective exposure/quality unverified; next prospectively freeze read-only eligibility/action-reachability audit, not more favourable source replacement.
