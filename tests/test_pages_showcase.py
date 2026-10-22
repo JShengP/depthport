@@ -340,3 +340,14 @@ def test_sequence_views_reject_missing_and_mismatched_profiles(tmp_path, fault):
     path.write_text(json.dumps(source))
     with pytest.raises(error):
         comparison_views(tmp_path, spec, records, {spec['source']})
+
+
+def test_spatial_practice_loads_actual_renderer_before_initialization(tmp_path):
+    node = shutil.which('node')
+    if node is None:
+        pytest.skip('Node.js is not installed')
+    out = tmp_path / 'site'
+    build(out)
+    subprocess.run([node, str(ROOT / 'tests/test_spatial_showcase.cjs'),
+                    str(out / 'v0.2/index.html')],
+                   check=True, capture_output=True, text=True)
