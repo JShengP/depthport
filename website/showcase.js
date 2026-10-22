@@ -259,7 +259,19 @@
     refreshPage = render; render();
   }
 
-  if (page === 'spatial') setupSpatial();
+  if (page === 'spatial') {
+    const practice = q('#syntheticPractice');
+    let initialized = false;
+    const initialize = () => {
+      if (initialized || (practice && !practice.open)) return;
+      initialized = true;
+      // Fit the cloud only after the native disclosure has visible dimensions.
+      setupSpatial();
+      setLanguage(lang);
+    };
+    practice?.addEventListener('toggle', initialize);
+    initialize();
+  }
   if (page === 'tracking') setupTracking();
   setLanguage(lang);
 })();
