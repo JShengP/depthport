@@ -1,0 +1,214 @@
+{
+  "format": "depthport.handoff-reachability-protocol.v1",
+  "report_date_local": "2026-10-22",
+  "frozen_at_utc": "2026-10-22T01:57:44.463151+00:00",
+  "base_commit": "3b7af54bc2eccb578c688bf5bb14cbce91f43df0",
+  "audit_python": "3.12.3",
+  "runtime": {
+    "numpy": "2.2.6",
+    "opencv-python": "4.11.0.86",
+    "trackers": "2.6.1",
+    "supervision": "0.27.0",
+    "scipy": "1.18.1"
+  },
+  "upstream_sha256": {
+    "tracker": "7ea61408b4908da327ba992f09450865bb16019ab95bed23a512e5c03bef8fda",
+    "tracklet": "66c4b84cb28b1b2abd9b288b2b0f594814e4eb11d55ac8c295386415da022885",
+    "base_tracker": "64813fbf4b6441080b005a99f2908c137435107d54eaaab6bf8625a54395e948",
+    "base_tracklet": "96e4d4a01064b15f178e190e80a88bb8bbed38476a275b7d659181532a21e8d8",
+    "alive": "345242f72dc5fb43b70953546dde8b66759377f6c63ed91d1995c320affb5f84",
+    "estimator": "fe8abe96d398685abe2055a78e51f2f9906522877c5130b1d476ee3dc8c0fff0",
+    "iou": "e7d7de78643ed864f195915c009d400e02b8d3e57159f6aaa90d707f7f1bd4f0",
+    "box_iou": "d9fac5e31c8bbfc6e7c8d16a91cd49eec11cfe0e7d4ef2c3da286997c53a6b63"
+  },
+  "parameters": {
+    "track_activation_threshold": 0.3,
+    "high_conf_det_threshold": 0.6,
+    "lost_track_buffer": 30,
+    "minimum_consecutive_frames": 2
+  },
+  "margin": 0.05,
+  "native_gate": 0.1,
+  "implementation_sha256": {
+    "depthport/tracking_handoff_reachability.py": "ba2a8efef5944582ea23111dcbe02f66b49e79a81a614f5f27ee44b70f75b8bc",
+    "tools/audit_tracking_handoff_reachability.py": "b7db6b92846ca056f332ad010d3f10c193559de2a7f9381e3f9d0cf3e42d589e",
+    "tests/test_tracking_handoff_reachability.py": "522e12bcc5be288f88ce050094bef73e4f4dc075ebd51cf1323f4e0a45724cec"
+  },
+  "source_records_sha256": {
+    "depthport/tracking_accepted_events.py": "da1e8a37144327a42374b1d8ce4df538f807d56c47a18eed5a27b8692fd1490d",
+    "tools/audit_tracking_accepted_events.py": "22590d97f749ff133648d15b05a69e0b8991ab1a7cb408fcdf3bf5c39619cc76",
+    "tests/test_tracking_accepted_events.py": "caf62022d81a1412b5083689175e60327e0944ca9e606fb450ceb95ab57305bc",
+    "docs/validation/v0.3-geometry-exposure-protocol.json": "0e17491922bcada995e96882a0fdf53fe40827f10d1d03b2fd301fd758b0b21f",
+    "docs/validation/v0.3-geometry-exposure-discovery.json": "5b80ff38b3b0806b81a5f7cd35fe2c5a4216b487ed412321d396daa6bb113347",
+    "docs/validation/v0.3-geometry-exposure-discovery-references.json": "a9b79f310158e4f59484e468a3b1d66b8bdfc06843d786613a0d04299214ec61",
+    "docs/validation/v0.3-geometry-exposure-archive-compatibility.json": "1abccba7dccf417683b9f4c9c4858824de7f7549e477f5d2c1ecb3bb4e8aae78",
+    "docs/validation/v0.3-geometry-exposure-confirmation.json": "63bbcc4189f5b6cb51ab3f6e2349d23ca734949419f18ec69c88217ae6e3a4b8",
+    "docs/validation/v0.3-geometry-exposure-confirmation-references.json": "c923be9e7c94741b5ec25422ffe817067b6e6e281ffcdf8806a0bcbdebd05b0f",
+    "docs/validation/v0.3-geometry-exposure-preparation.json": "43957259538dfe6c364442e4693e1ae425cbbe9cb00de8c91cc2f3caf9fe9465",
+    "docs/validation/v0.3-geometry-exposure-pre-inference.json": "922ef511097134bdb3b3822fb086f7bd704e33fa7bc6ab7cc85a06477840f0d8",
+    "docs/validation/v0.3-carrier-role-audit-protocol.json": "efacb4f1da7e0b60693d1b64cc6517a1054be79f81da36199cdf1ce72520bb9b",
+    "docs/validation/v0.3-carrier-role-audit.json": "e9783dc0441d9d0cc8389749d6f804e82a4c74204e6c899af725425e90bbb7eb",
+    "docs/validation/v0.3-accepted-events-protocol.json": "6441c390d2fb8ff11a1deb0cb7fd0fbc26386a2e710b5a5577b490d3af59f18f",
+    "docs/validation/v0.3-accepted-events.json": "efb58932ecd07c4e8762b1082edb4ea6c4779812bdc7ac315153f55462724cfc",
+    "depthport/tracking_observation_bridge.py": "0a00d22ed066c3d0517f3f4d930c61d724bf08861b47ee00a5b9d64495460c98",
+    "tools/audit_tracking_observation_bridge.py": "05e2acb01531b9f6959a181f2ef9d8dfef5bd02f52d663ed51403581110ec39e",
+    "tests/test_tracking_observation_bridge.py": "233c8b024a7d2efffc30336364f1f3d591892bcc5303d56610aa5e5985efabb4",
+    "docs/validation/v0.3-observation-bridge-protocol.json": "d780714e476ea42cd56559e869e11e732c712282c04d8956b30082da35e6be97",
+    "docs/validation/v0.3-observation-bridge.json": "4b88ff004e61fcd3a9955f519b25a9500aaddf358ac5de2824f3768337f10a80",
+    "depthport/tracking_lifecycle_probe.py": "52d787d9d22ca6438dfab2d2d6da2ca3802d9d347576fad96acd55f90561e96d",
+    "depthport/tracking_handoff_audit.py": "65796dc4af38180a465db6f6b9d286344f09d711552322857ec5d306709bc557",
+    "tools/audit_tracking_handoff.py": "55b711303bec5f5495a4aa93c48e87b71367b72fad62c68dbe48463d26c7ab35",
+    "tests/test_tracking_handoff_audit.py": "22f036deaff351dbcecc96bd471b40e37aea23a329e5bcaf73bcfab33b0aac77",
+    "docs/validation/v0.3-handoff-audit-protocol.json": "415c656a748ed0e945fd4d1c93fd971b2b7924ce5c5595ba4bfd5f43eb5f3f03",
+    "docs/validation/v0.3-handoff-audit.json": "780b1523bd358ae9f43e73f06361489b2a3118f7ad2699e3e3e3e3925ce20617",
+    "tools/prepare_tracking_geometry.py": "8ae51bd1598787ce9faa2b1238170aa71ceef6e69dec6ec2d56a914db4e3c72b",
+    "tools/prepare_tracking_geometry_exposure.py": "d6f4189a769886cc922ec8edb1ee5fa16dce659b1a390d6932cfedd08933a635",
+    "tools/validate_tracking_geometry.py": "804866bbfb993b70f112b63eb25420a9edf0462fabd09d315538fd8c3d273b1e",
+    "tools/diagnose_tracking_upstream.py": "09a96959cc38cd8cd22f89b975e37b4914e3af149c8be081e75846219ef7366b",
+    "tools/audit_tracking_estimator_shadow.py": "66d472a8b91e845ac060bf03f14a0477e9c0fc0d8edad8acb31d7fe7cdac6a72",
+    "depthport/tracking_geometry_control.py": "43b6cb47efb86f5f33a8243d93ee055d5347abd101fc64bf658f697c088c9cf9",
+    "depthport/tracking_geometry_validation.py": "f3216f2a1636e455f2815212ba7a278299ec7e3294498f2106bf69226994851b",
+    "depthport/tracking_estimator_shadow.py": "a159fd6803ba542ed59479b1afaeb5af0fa3a0552c4949e0eb0fcec9c92ed1d3",
+    "depthport/tracking_exposure.py": "49026e2ef32cf767bf47845c1daba4e89f438291025d799108137a0019228bc0",
+    "depthport/tracking_past_exposure.py": "1a43b2bedcb09ecf5c8f0f3d22a9b35d43b81ef78f20560f10559b27a0f083d8",
+    "depthport/video_tracking_benchmark.py": "42fd7739080b4523f64c8425979e0125b8bfbfee7abfc5f22ed5e41668bbca0c",
+    "docs/validation/v0.3-handoff-controls-protocol.json": "53cd9794aaabe8544379b705373779ef187d82b90588c88901ca9986c91ffe28",
+    "depthport/tracking_handoff_control.py": "883efc6b4994371ed98a8a97c522dc313765d7a97144e2d427f6a6142b577310",
+    "depthport/tracking_handoff_screen.py": "ea9733d4870668e03319c5c80440f22a619a4ad471fb6344435c57ce13895726",
+    "tools/validate_tracking_handoff_controls.py": "f19003626f34ecdf5f6553eea507c76253dec138c6b9505b0849743e7c482a7b",
+    "tools/prepare_handoff_controls.py": "7229619a670772bbac51c5d92bdf18b827e1c23cda9173d678b1f367a3cf1977",
+    "tests/test_tracking_handoff_control.py": "d0f73a65911a93c2746cc713015b22fb7d4fca5f40c9f238ef06d76626589472",
+    "tests/test_tracking_handoff_screen.py": "73967d6d2095eefc00430e017ab2dbb3f2099804168ffde07095e274a5ba3db2",
+    "tests/test_tracking_handoff_controls_replay.py": "b0c31d91b42bfe43763a684607aea632f301e5566445afbdf5ab7a095dd40eaf",
+    "docs/validation/v0.3-birth-continuation-rule.json": "1490a3cec5f9d16c8c7f9c6342f7ba16db283674b7f778439a4d51a33f137ecd",
+    "docs/validation/v0.3-past-handoff-rule.json": "6850224ae4f9ebac290899d6bf159146577aab33990e423b961f32c3fac0d618",
+    "docs/validation/v0.3-handoff-controls.json": "f372fc074aafa08cc075259a4feda417232211330066361da808af2337d3c9ba",
+    "docs/validation/v0.3-handoff-controls-references.json": "f9eadbbbb8722253a0acbae5082bb98eeb240167b24b476e189306b075fe4fa1",
+    "docs/validation/v0.3-handoff-controls-preparation.json": "46b94bdb7d478ecf52e66c16a5859f86a2c182853dea28f9e5b2cecfccd75433",
+    "depthport/tracking_handoff_selection.py": "6ce2d3e34c7876a9b9b79ff74ea264f978cd17a5f94de73bb5a9d3e1b3304722",
+    "tools/select_tracking_handoff_exposure.py": "8e79b23c504fbefd868c145a9bd145e4264fe75a853db0d637abe77a866a9dce",
+    "tools/prepare_tracking_handoff_exposure.py": "1bc9d3a015957028d052b696d327d7d0ce8a792d82b010726c83e332b5bd6a9a",
+    "tests/test_tracking_handoff_selection.py": "5c446c129d5bf907f75a4411373b731671b86449c8573cd63673b789cc2842f6",
+    "docs/validation/v0.3-handoff-exposure-protocol.json": "f5533cd901dced5136f67169687566e4a26120b17bf39089925faa272ffdb849",
+    "docs/validation/v0.3-handoff-exposure-discovery.json": "45b207d777e05fc87e6469df3917630bce6bfe1b8b696bc8e355f1304295ae3d",
+    "docs/validation/v0.3-handoff-exposure-discovery-references.json": "5fc5bd9faef0a3e31654bb43b7548621490ff8e75afc2b69682cbf95f08469ec",
+    "docs/validation/v0.3-handoff-exposure-discovery-preparation.json": "53e3bc5fe475170ef74632577b8a8f62d8fd57f0f684f4c6e6cd0528dd107605",
+    "docs/validation/v0.3-handoff-exposure-confirmation.json": "a9dc500ca3e76c644c40f4378df108776b6e022e4bcd25fd9ca46777952d540e",
+    "docs/validation/v0.3-handoff-exposure-confirmation-references.json": "42340a72666879a2a0fc19d58f5fe1883ce91d01b7999b0457d412b7cf0e14ec",
+    "docs/validation/v0.3-handoff-exposure-confirmation-preparation.json": "05939167b73ef6e48eb4281391d5b5b5c3477bdd14cbaa00a46afa8d7ee84e0a",
+    "depthport/tracking_recovery_control.py": "123ed43132d33326a0ec0ca1c7deaa23d20f1fa07f35b2df3ee4735efbe4a7b6",
+    "tests/test_tracking_handoff_exposure_report.py": "094005305a02588d8a24395f6a66bb669e18d2bbbb7bbad149a30f13aac7078c"
+  },
+  "rule_sha256": {
+    "docs/validation/v0.3-birth-continuation-rule.json": "1490a3cec5f9d16c8c7f9c6342f7ba16db283674b7f778439a4d51a33f137ecd",
+    "docs/validation/v0.3-past-handoff-rule.json": "6850224ae4f9ebac290899d6bf159146577aab33990e423b961f32c3fac0d618"
+  },
+  "sources": [
+    {
+      "name": "KITTI-0012",
+      "phase": "discovery",
+      "frames": 78,
+      "fps": 10
+    },
+    {
+      "name": "KITTI-0013",
+      "phase": "discovery",
+      "frames": 340,
+      "fps": 10
+    },
+    {
+      "name": "KITTI-0014",
+      "phase": "discovery",
+      "frames": 106,
+      "fps": 10
+    },
+    {
+      "name": "KITTI-0015",
+      "phase": "discovery",
+      "frames": 376,
+      "fps": 10
+    },
+    {
+      "name": "KITTI-0016",
+      "phase": "discovery",
+      "frames": 209,
+      "fps": 10
+    },
+    {
+      "name": "KITTI-0017",
+      "phase": "confirmation",
+      "frames": 145,
+      "fps": 10
+    },
+    {
+      "name": "KITTI-0018",
+      "phase": "confirmation",
+      "frames": 339,
+      "fps": 10
+    }
+  ],
+  "geometry_class_sha256": "b6c01e2dc2bef1807485e989f9572f55c578ba492bff78c5a12fa9fedbfa6909",
+  "actual_candidate_arms": [
+    "birth_continuation",
+    "past_competition_handoff"
+  ],
+  "archived_trials": [
+    0,
+    1
+  ],
+  "unique_source_frames": 1593,
+  "archived_histories": 28,
+  "expected_read_trace_frames": 6372,
+  "original434_files": 434,
+  "earlier_raw_files": 772,
+  "seven_source_raw_files": 1956,
+  "seven_source_raw_inventory_sha256": "c49ca0078758b67b3fafd2d44e5591806e78db522a728b52c00fef02fe955a9e",
+  "known_before_freeze": "Public seven-source study already reports all candidate actions0, selectionsnull, three confirmation gatesfalse,1027 accepted weak updates per arm. Those totals are prior information; new row/column/qualification/past/weak decision decomposition not extracted before this freeze. All seven are seen. This audit is descriptive, not independent confirmation or quality acceptance.",
+  "definitions": {
+    "scope": "Read BOTH actual candidate arms, both original trials on EACH of seven complete sources:28 histories,6372 trace frames,1593 unique source frames. No discovery/confirmation reselection, frame/window filtering, solver, tracker construction/update, prediction/numerical replay, inference, GT/labels/evaluator, media decode, cache parsing or pickle loading. All other native/observed/projection outputs and states hash-only checked against their original public seals.",
+    "time": "At f, own accepted keys and high-match contexts are committed through f-1 only. Query before committing ANY current high/weak accepted observation. Birth registers ownership but never qualifies accepted history. Pre-active means before_update.age_since_update==0; stage age has already incremented1, so never derive active from stage age. Confirmed is the archived pre-update sticky ID>=0 role, not true identity. Prior high contexts may include a competitor subsequently accepted weak at f-1; require separate distinct accepted input receipts. Current/future observations, absence of later pairing, implicit expiry and cross-run native-ID equality cannot provide support.",
+    "matrices": "Reuse archived original high matched/free partitions; published zero actions must match each frame before any use. Never rerun assignment. Recompute pure ORIGINAL pinned IoU on recorded float64 predicted boxes and original float32 input boxes; high matrix must match exactly. Weak matrix for original high-free rows must also match exactly. Only additionally derive full high-row versus current weak-input gate mask using same IoU, no new geometry/threshold. Per-frame broad weak-blocked count must match original candidate receipt; accepted/input/operation summary must equal original public receipt.",
+    "availability": "Count high-stage calls and native empty no-stage frames separately. For calls publish high rows/columns, matched pairs, free rows/columns, activation columns and four-bit presence mask(row/high-column/free-row/free-column). Role counts active/retained x confirmed/tentative; independent3-bit row prerequisite mask confirmed/strictly-past-accepted/positive-prediction. Free-row qualification and available eligible columns are separate. Empty Cartesian universes are missing opportunities, not rejected proposals.",
+    "birth_funnel": "Units are original high-free row/column edges, split active-confirmed/retained-confirmed/tentative. Ordered diagnostic conjunction free_pairs->confirmed->accepted_before->positive_prediction->activation->current_gate->no_weak. Row masks expose overlaps; diagnostic order is bookkeeping, not runtime short-circuit order or causal first cause. Current-gate-qualified edges lost at weak exclusion are PRE-PROPOSAL exclusions, not rejected formed proposals. Remaining admissible graph must be mutually unique in row AND column. Ambiguous edges are nonproposals. Only mutual-unique full-rule edges are qualified proposals; this rule has no post-proposal veto, so rejected-qualified-proposals stays0 and proposals must equal reconstructed actions.",
+    "handoff_funnel": "Units are original selected high edge(r,c) x original high-free q triples. Diagnostic conjunction both positive confirmed strictly-past-accepted -> both pre-active -> both accepted at f-1 -> selected high context at f-1 keyed to its own latest accepted update -> q present -> past active-confirmed/gate/margin -> distinct previous inputs -> current gate/margin -> no weak opportunity. All original .05/native gates unchanged. Missing prerequisites are NONPROPOSALS, including missing context. Diagnostic first-nonproposal priority is not causal blame or an exclusive physical incident count. Pair-role16-way counts retain all overlaps. Weak exclusions after all other predicates are preproposal; broad blocked rows alone never count as rejected proposals.",
+    "proposals": "For handoff, per-selected-edge zero alternatives and multiple alternatives are nonproposals; exactly one fully admissible alternative forms a qualified proposal. If two such proposals claim the same q, only this ORIGINAL one-to-one claim veto counts rejected qualified proposals. Count selected-edge, triple, admissible-edge, unique-proposal and conflict-proposal units separately. Never turn unconfirmed/no accepted/no prior context/no free slot/weak opportunity into rejected qualified proposals. Primary counters/actions reconcile ONLY to matching original candidate arm, not counterfactual reruns; other predicate calculator output remains local.",
+    "integrity": "28 dense full reads; every accepted event and numerical update operation reconciles to immutable AcceptedLedger. Full original summary/input/event receipts, weak-stage call counts and broad weak-row totals exact. Original two archived trials yield equal new aggregate and deterministic local decision-receipt bytes. Original434 files, earlier772 raw files and complete newly frozen seven-source raw inventory verified before/after; original predictions/native outputs/final states unchanged, old pickle hash only. All prior public/code/rules pinned.",
+    "failure": "Refuse output overwrite/retry. Keep all seven rows in original discovery/reserved phase order, including zero sources with zero denominators. Missing/mismatched geometry, original zero action, prefix, runtime, receipt or repeat fails source with null audit, local exception and retained trial status; never substitute0. Old four failures/nulls, incomplete historical discovery, all false replication/confirmation flags stay unchanged.",
+    "publication": "Source/arm-level fixed aggregate counters, role/mask/funnel denominators, zeros/nulls, failures and hashes only. Per-frame rows/columns/inputs/native IDs/tokens, accepted keys, contexts, similarities, boxes and full decisions remain ignored local. No true ID/FP/FN/HOTA/benefit/safety/default claim. Inherit official KITTI CC BY-NC-SA3.0 local noncommercial research/attribution, no media or raw distribution/relicensing."
+  },
+  "row_bits": [
+    "confirmed",
+    "accepted_before",
+    "positive_prediction"
+  ],
+  "roles": [
+    "active_confirmed",
+    "retained_confirmed",
+    "active_tentative",
+    "retained_tentative"
+  ],
+  "birth_steps": [
+    "free_pairs",
+    "confirmed",
+    "accepted_before",
+    "positive_prediction",
+    "activation",
+    "current_gate",
+    "no_weak"
+  ],
+  "handoff_steps": [
+    "selected_free_triples",
+    "both_qualified",
+    "both_active",
+    "both_previous_acceptance",
+    "selected_previous_high_context",
+    "competitor_in_context",
+    "past_active_confirmed",
+    "past_gate",
+    "past_margin",
+    "distinct_previous_inputs",
+    "current_gate",
+    "current_margin",
+    "no_weak"
+  ]
+}

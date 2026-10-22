@@ -569,3 +569,9 @@ tests/test_tracking_handoff_exposure_report.py
 docs/validation/v0.3-handoff-exposure-confirmation.json
 docs/validation/v0.3-handoff-exposure-confirmation-references.json
 docs/validation/v0.3-handoff-exposure-confirmation-preparation.json
+depthport/tracking_handoff_reachability.py
+tools/audit_tracking_handoff_reachability.py
+tests/test_tracking_handoff_reachability.py
+docs/validation/v0.3-handoff-reachability-protocol.json
+docs/en/tracking-handoff-reachability.md
+docs/zh-TW/tracking-handoff-reachability.md
