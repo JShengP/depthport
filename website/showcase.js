@@ -136,7 +136,10 @@
       viewer.setPoints(coords, colors, true);
     } catch (e) {
       const note = document.createElement('p'); note.className = 'micro-note';
-      note.textContent = tr('3D renderer unavailable in this browser.', '此瀏覽器無法使用 3D 繪圖。');
+      note.setAttribute('role', 'status');
+      note.dataset.en = 'Point cloud could not initialize. Refresh the page to try again.';
+      note.dataset.zh = '點雲未能初始化，請重新整理頁面再試一次。';
+      note.textContent = tr(note.dataset.en, note.dataset.zh);
       q('#syntheticCloud').insertAdjacentElement('afterend', note);
     }
     refreshPage = redraw;

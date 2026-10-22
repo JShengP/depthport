@@ -39,3 +39,11 @@ After deployment, open `https://jshengp.github.io/depthport/` and check all link
 - Static pages distinguish saved model results from synthetic practice and unverified physical accuracy.
 - The version labels denote **capability demonstrations**, not runnable clones or frozen binary mirrors of the historical v0.1/v0.2/v0.3 tags.
 - Benchmark Results Dashboard is not included in this site change.
+
+## v0.2 synthetic cloud initialization — 2026-10-22
+
+A deployed-page screenshot exposed an empty synthetic cloud with a misleading browser-support message. Reproduced on deployed v0.2: deferred `showcase.js` ran before `viewer.js`, so constructing `window.CloudViewer` failed before the renderer was available. The real saved bus viewer runs later and is a separate widget; this was not evidence that the browser lacked WebGL/Canvas or inference data had failed.
+
+Load the existing renderer before the spatial initializer. Initialization failures now say “Point cloud could not initialize. Refresh the page to try again.” in both languages, with a status role and language updates. The synthetic section/histogram/limitations remain separate from real saved results above; no model/data/geometry/point count or research gate changed.
+
+The regression executes the built page's deferred scripts in actual HTML order with the original software renderer: supported Canvas2D must draw the cloud, pointer controls remain bound and pixel/mask interaction works. A forced no-context fixture verifies bilingual initialization failure without blaming browser support. The old build fails the supported-renderer assertion; the repaired build passes. Pages/build contracts:13 passed; existing real-results contracts:9 passed. Local IAB visibly renders the previously blank synthetic canvas. These generated/forced checks and scoped UI verification do not rerun/expand the historical frozen browser matrix or establish hardware/model quality acceptance. CI and deployment follow-up are tracked with the repair PR.
