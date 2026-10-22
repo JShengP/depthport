@@ -8,6 +8,8 @@ Updated / 更新：2026-10-22 · [Project](README.md) · [繁體中文首頁](RE
 > DepthPort is an **open-source local workbench**, with experimental Alpha releases and a static public showcase. Completed repository work, follow-up research and optional use-case validation are separate. Open validation items do not block source publication or scoped Alpha maintenance.
 > DepthPort 定位為**開源本機工作台**，提供實驗性 Alpha 與靜態公開展示。已完成的 repo 工作、後續研究及依用途選用的驗證分開追蹤；未驗證項目不阻擋原始碼公開或依已記錄範圍維護 Alpha。
 
+**Current phase / 目前階段 — Maintenance / 維護（2026-10-22）：** the current development stage is complete within its documented scope; further experiments are deferred until a specific need is selected. 目前開發階段依記錄範圍告一段落，進入維護；後續實驗待有具體需求時再選定。Experimental Alpha status, original failures and unverified items remain unchanged. 實驗性 Alpha、原失敗與未驗證項目維持不變。[Maintenance scope / 維護範圍](#repository-maintenance--repo-維護)
+
 ## Open-source project status / 開源專案定位
 
 - **Completed open-source baseline / 已完成的開源基礎：** published AGPL source, installation/usage/version documentation, contribution/security guidance, Alpha source packages/checksums, CI, static real-result demos and Results Index. 已公開程式、授權、安裝／使用／分版文件、貢獻與安全說明、Alpha 原始碼包／校驗檔、CI、靜態展示及結果索引；持續修回報問題、維護依賴與文件。
@@ -227,6 +229,10 @@ This extension is outside the current local-workbench scope and has no completio
 - Only if a multi-user backend is chosen: plan authentication, egress controls, source/model/Session isolation and multi-client load measurements before that exposure. The local backend is intended for local use. 只有選擇提供多人後端時，才另規劃認證、對外連線控管、來源／模型／Session 隔離及多人負載；本機後端維持本機用途。
 
 ## Repository maintenance / Repo 維護
+
+**Maintenance phase / 維護階段 — 2026-10-22：** focus on confirmed bug fixes, security/dependency updates and documentation, with checks appropriate to each change. 以已確認問題修正、安全／依賴更新及文件維護為主，依變更執行相應檢查。
+
+[Issue #6](https://github.com/JShengP/depthport/issues/6) remains open for optional target/use-case validation; [Issue #8](https://github.com/JShengP/depthport/issues/8) remains open for follow-up research. Select any future study explicitly and freeze its criteria before execution. Both backlogs can remain open during maintenance without blocking scoped Alpha updates. #6 保留作選用驗證、#8 保留作後續研究，有需求再選定並先凍結標準；不要求兩者結案才維護 Alpha。Existing evidence, defaults, tagged snapshots and the local-use scope remain unchanged; multi-user hosting is still outside the current goal. 原證據、預設、Tag 快照與本機用途保留，多人託管仍非目前目標。
 
 - **Integration / 整合：** `main` is the integration branch; version tags preserve release snapshots. Remove only fully merged, unprotected branches with no open PR. Keep unmerged dependency proposals separate until compatibility/deployment checks pass. Do not bundle them into a release for tidiness. 只清理完整合併、無開啟 PR 且未受保護的分支；未合併依賴保持獨立驗證。
 - **Documentation / 文件：** update each version README's validation/limits and this roadmap together when evidence changes. Link dated records; distinguish post-release examples from tagged assets. 證據有變時同步分版 README 與路線圖，保留日期／版本及後補範例的界線，不改寫舊發布包。
