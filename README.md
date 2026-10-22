@@ -13,12 +13,22 @@ Turn RGB images and RTSP frames into interactive **single-view point clouds**. C
 
 **Download v0.3.0-alpha.2:** [Release notes](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.2) · [Source ZIP](https://github.com/JShengP/depthport/releases/download/v0.3.0-alpha.2/depthport-0.3.0-alpha.2-source.zip) · [SHA-256](https://github.com/JShengP/depthport/releases/download/v0.3.0-alpha.2/SHA256SUMS.txt)
 
-[Quick start](#quick-start) · [Versions](#versions) · [Features](#features) · [Validation & limits](#validation-and-limits) · [Documentation](#documentation)
+[Project scope](#project-scope-and-status) · [Quick start](#quick-start) · [Versions](#versions) · [Features](#features) · [Validation & limits](#validation-and-limits) · [Documentation](#documentation)
 
 > [!IMPORTANT]
-> **Experimental development preview.** Session storage is off by default. Long-occlusion recovery, physical RTSP, Windows pretrained inference/worker integration, endurance and calibrated distance accuracy remain open. [Validation record](docs/en/validation.md)
+> **Experimental open-source preview for local use.** Session storage is off by default. Follow-up research and optional target/use-case validation are tracked separately; their open status does not block publishing the source or documented Alpha updates. Recorded failures and accuracy limits remain. [Validation record](docs/en/validation.md)
 
 **Test results:** [Results Index](https://jshengp.github.io/depthport/results/?lang=en) — browse models, trackers and platforms with scoped results, same-cohort HOTA/IDSW/FN/FP charts with shareable combined/individual-sequence selections and copy-link buttons, CI, failed gates and unverified items.
+
+## Project scope and status
+
+DepthPort is an **open-source local workbench** for exploration, reproducible experiments and inspectable results. The published source, Alpha downloads and static Pages examples are available within their documented scope.
+
+- **Completed:** viewer, Spatial Analysis and opt-in Session/replay workflows; version guides, source packages/checksums, CI, attributed demos and dated validation records. Feature implementation and measured evidence remain distinct.
+- **Follow-up research:** tracking reliability, temporal geometry/competition, unseen-source confirmation and evidence for any default change. [Issue #8](https://github.com/JShengP/depthport/issues/8) tracks these investigations with their original zero/failed outcomes.
+- **Optional validation:** select fresh-installation targets, authorized cameras, calibration/distance references, devices and performance measurements for the use case being studied. [Issue #6](https://github.com/JShengP/depthport/issues/6) records what has and has not been verified. Evidence is required before making the corresponding hardware, compatibility or accuracy claim; completing every target is not a source-publication requirement.
+
+Multi-user hosting is outside the current project goal. Accounts, authentication, egress controls, multi-client load testing and source/model/Session isolation become a separate design task only if such hosting is chosen. The Python backend is intended for local use; public Pages serves reviewed static results. Open research/validation issues do not mean the repository is unpublished or that all listed work must finish before an Alpha update. [Roadmap and status categories](ROADMAP.md#open-source-project-status--開源專案定位)
 
 ## Real-data interactive demos
 
@@ -41,7 +51,7 @@ The current v0.1 page focuses on cloud navigation; pixel/XYZ/mask inspection is 
 
 Footage: **[Lukas Kosc via Pexels](https://www.pexels.com/video/urban-street-scene-with-people-crossing-34597902/)**, under its [own terms](https://www.pexels.com/terms-of-service/), not AGPL; no endorsement. Both examples span only **0.959 s**, have no identity GT, and do not validate long occlusion, ID-switch correctness or tracking accuracy. Unassociated detections are not ground-truth FN. V2 per-frame virtual depth and camera XYZ are not world motion or speed. Pages reads saved static packs; it offers no online model inference, private Session access or RTSP input.
 
-[Full provenance, native units and limitations](docs/en/real-ai-pages.md) · [Screenshot states and hashes](docs/validation/readme-real-pages.json) · [Demo status and next gates](ROADMAP.md#current-pages--目前互動展示)
+[Full provenance, native units and limitations](docs/en/real-ai-pages.md) · [Screenshot states and hashes](docs/validation/readme-real-pages.json) · [Demo status and follow-ups](ROADMAP.md#current-pages--目前互動展示)
 
 ## Quick start
 
@@ -168,7 +178,8 @@ Estimated metres, relative depth and V2's virtual 1–5 display geometry remain 
 - **CI:** Ubuntu/Windows × Python 3.11/3.12 application contracts and real model API installation/import checks. CI uses no pretrained weights or inference and does not establish hardware or accuracy acceptance.
 - **Real examples:** dated v0.2 single-image CUDA evidence and the short v0.3 replay example have separate source/runtime records. [Validation history](docs/en/validation.md) · [Replay conditions](docs/en/tracking-replay-example.md)
 - **Pages compatibility:** exact Linux Chrome155 / Edge155 / Firefox157 builds pass B01–B07 in separate [native headed](docs/en/pages-headed-browsers.md) and [headless](docs/en/pages-standalone-browsers.md) studies,21 pass/3 not_run per mode. The unique matrix remains33 pass/31 not_run; modes are not extra browsers. Original failures remain recorded; Safari, physical phones, other OS/builds and natural fallback paths remain open.
-- **Still open:** generalised long-occlusion/crossing/camera-motion reliability, physical RTSP, Windows pretrained inference/real worker integration, endurance/VRAM, NVIDIA hardware WebGL and independently calibrated distance accuracy. [Acceptance roadmap](ROADMAP.md)
+- **Follow-up research:** generalised long-occlusion/crossing/camera-motion reliability and independent evidence for algorithm/default changes remain unverified.
+- **Optional target/use-case validation:** physical RTSP, fresh Windows pretrained inference/real worker integration, endurance/VRAM, target hardware WebGL and independently calibrated distances remain unverified where noted. These limit claims, not publication of the open-source project. [Research and optional validation roadmap](ROADMAP.md)
 
 <details>
 <summary>Tracking studies and next experiments</summary>

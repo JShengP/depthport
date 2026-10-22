@@ -14,6 +14,8 @@ Experimental Alpha / 實驗性 Alpha
 Adds opt-in local Sessions, replay review and offline Object IDs while retaining the viewer and Spatial Analysis.
 保留檢視器與空間分析，新增選用本機 Session、回放檢查與離線 Object ID。
 
+**Open-source scope / 開源定位：** implemented features and recorded evidence are available; [#8](https://github.com/JShengP/depthport/issues/8) tracks follow-up research and [#6](https://github.com/JShengP/depthport/issues/6) optional validation. These do not block source/Alpha maintenance; multi-user hosting is outside the current goal. 功能與紀錄已提供，研究及選用驗證分開追蹤，不阻擋開源更新；多人服務不列必要門檻，原失敗、限制與 Tag 快照保留。[Project status / 專案狀態](../../../ROADMAP.md#open-source-project-status--開源專案定位)
+
 **Release / 發布快照:** [v0.3.0-alpha.2](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.2) · [Exact source / 對應程式](https://github.com/JShengP/depthport/tree/v0.3.0-alpha.2) · [Original README](https://github.com/JShengP/depthport/blob/v0.3.0-alpha.2/README.md) · [原版繁中 README](https://github.com/JShengP/depthport/blob/v0.3.0-alpha.2/README.zh-TW.md)
 
 [Differences / 差異](#differences--差異) · [Architecture / 架構](#architecture--架構) · [Examples / 範例](#examples--範例) · [Getting started / 使用入口](#getting-started--使用入口) · [Validation / 驗證紀錄](#validation--驗證紀錄) · [Limits / 驗證限制](#limits--驗證限制)
@@ -159,7 +161,7 @@ Alpha.2 packages reviewed dependency compatibility updates and workflow illustra
 
 - **Tracking / 追蹤:** generalised long occlusion, crossing/camera-motion ID stability and independent confirmation/competition/localisation/recovery tests remain open. The example spans only 0.959 s between first/last frames and is not long-occlusion acceptance; missing/new IDs are not verified ID switches. 短片不代表長遮擋或確認換 ID。
 - **Timing / 時間:** worker steps are fixed at 30 Hz per saved frame; replay 1× targets 5 saved frames/s. These do not represent the source's 23.976 fps or real-time speed. worker 步長與 UI 回放速度不同於此來源影片，不宣稱即時性或物體速度。
-- **Hardware gates / 實機項目:** physical RTSP, fresh Windows pretrained depth/semantic inference and real worker integration, endurance/VRAM and NVIDIA hardware WebGL remain unverified. 實體串流、Windows 真權重／worker、長時穩定性與硬體繪圖仍待驗證。
+- **Optional hardware validation / 選用實機驗證:** physical RTSP, fresh Windows pretrained depth/semantic inference and real worker integration, endurance/VRAM and NVIDIA hardware WebGL remain unverified. 實體串流、Windows 真權重／worker、長時穩定性與硬體繪圖仍待驗證。
 - **Geometry / 幾何:** measured intrinsics and independent calibrated distance accuracy remain open. Relative/virtual depth is not metres; camera-space IDs/XYZ are not identities, world trajectories, hidden-surface reconstruction, SLAM or certified measurement. 深度與相機座標不能視為身分、世界軌跡或認證測量。
 
-[Release scope / 本版範圍](../../releases/0.3.0-alpha.2.md) · [Acceptance roadmap / 驗收路線圖](../../../ROADMAP.md)
+[Release scope / 本版範圍](../../releases/0.3.0-alpha.2.md) · [Research and optional validation / 研究與選用驗證](../../../ROADMAP.md)

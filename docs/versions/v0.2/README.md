@@ -14,6 +14,8 @@ Historical Alpha / 歷史 Alpha
 Adds same-frame inspection, model comparison, semantic fusion and calibration/error tools to the v0.1 viewer.
 在 v0.1 檢視器上加入同影格檢查、模型比較、語意融合與標定／誤差工具。
 
+**Open-source scope / 開源定位：** implemented features and recorded evidence are available; [#8](https://github.com/JShengP/depthport/issues/8) tracks follow-up research and [#6](https://github.com/JShengP/depthport/issues/6) optional validation. These do not block source/Alpha maintenance; multi-user hosting is outside the current goal. 功能與紀錄已提供，研究及選用驗證分開追蹤，不阻擋開源更新；多人服務不列必要門檻，原失敗、限制與 Tag 快照保留。[Project status / 專案狀態](../../../ROADMAP.md#open-source-project-status--開源專案定位)
+
 **Release / 發布快照:** [v0.2.0-alpha.1](https://github.com/JShengP/depthport/releases/tag/v0.2.0-alpha.1) · [Exact source / 對應程式](https://github.com/JShengP/depthport/tree/v0.2.0-alpha.1) · [Original README](https://github.com/JShengP/depthport/blob/v0.2.0-alpha.1/README.md) · [原版繁中 README](https://github.com/JShengP/depthport/blob/v0.2.0-alpha.1/README.zh-TW.md)
 
 [Differences / 差異](#differences--差異) · [Architecture / 架構](#architecture--架構) · [Examples / 範例](#examples--範例) · [Getting started / 使用入口](#getting-started--使用入口) · [Validation / 驗證紀錄](#validation--驗證紀錄) · [Limits / 驗證限制](#limits--驗證限制)
@@ -111,7 +113,7 @@ Source / 來源：[Ultralytics bus.jpg](https://github.com/ultralytics/assets/bl
 
 ## Limits / 驗證限制
 
-- **Hardware gates / 實機項目:** physical RTSP/codecs/reconnect, fresh Windows pretrained inference, endurance/VRAM and NVIDIA hardware WebGL remain unverified. 實體串流／編碼／重連、Windows 真權重、長時穩定性與硬體繪圖。
+- **Optional hardware validation / 選用實機驗證:** physical RTSP/codecs/reconnect, fresh Windows pretrained inference, endurance/VRAM and NVIDIA hardware WebGL remain unverified. 實體串流／編碼／重連、Windows 真權重、長時穩定性與硬體繪圖。
 - **Accuracy / 精度:** measured intrinsics and independent ground-truth distances are still needed; model-estimated metres and calibration tools do not establish metric accuracy. 仍需實測內參與獨立真值，估計公尺與工具不代表精度。
 - **Geometry / 幾何:** visible-surface 2.5D only; relative/virtual outputs are not metres. No hidden-surface reconstruction, SLAM or certified distance claim. 相對／虛擬深度不能當公尺，不提供遮擋還原或認證測距。
 

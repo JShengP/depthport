@@ -13,12 +13,22 @@
 
 **下載 v0.3.0-alpha.2：** [Release 說明](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.2) · [原始碼 ZIP](https://github.com/JShengP/depthport/releases/download/v0.3.0-alpha.2/depthport-0.3.0-alpha.2-source.zip) · [SHA-256 校驗檔](https://github.com/JShengP/depthport/releases/download/v0.3.0-alpha.2/SHA256SUMS.txt)
 
-[快速開始](#快速開始) · [版本導覽](#版本導覽) · [功能](#功能) · [驗證與限制](#驗證與限制) · [文件與開發](#文件與開發)
+[專案定位](#專案定位與狀態) · [快速開始](#快速開始) · [版本導覽](#版本導覽) · [功能](#功能) · [驗證與限制](#驗證與限制) · [文件與開發](#文件與開發)
 
 > [!IMPORTANT]
-> **實驗性開發預覽。** Session 儲存預設關閉；長遮擋恢復、實體 RTSP、Windows 真權重／worker 整合、長時穩定性與標定距離精度仍待驗證。[驗證紀錄](docs/zh-TW/validation.md)
+> **供本機使用的實驗性開源預覽。** Session 儲存預設關閉；後續研究與依環境／用途選用的驗證分開追蹤，尚未完成不阻擋公開原始碼或依已記錄範圍更新 Alpha。既有失敗與精度限制保留。[驗證紀錄](docs/zh-TW/validation.md)
 
 **測試結果總覽：** [Results Index](https://jshengp.github.io/depthport/results/?lang=zh-TW) — 依模型、追蹤器與平台查看實測、CI、未通過與未驗證項目；同場景組可切換全組／逐序列的 HOTA／IDSW／FN／FP 比較，序列選擇可由網址分享與還原，並可一鍵複製比較連結。
+
+## 專案定位與狀態
+
+DepthPort 是供探索、可重現實驗與結果檢查的**開源本機工作台**。原始碼、Alpha 下載與靜態 Pages 範例已依文件記錄的範圍公開。
+
+- **已完成：**檢視器、空間分析與選用 Session／回放流程；分版文件、原始碼包／校驗檔、CI、註明來源的展示及有日期的驗證紀錄。功能完成與實測證據分開呈現。
+- **後續研究：**追蹤可靠性、時序幾何／競爭、未見來源確認，以及更換預設所需的證據。由 [Issue #8](https://github.com/JShengP/depthport/issues/8) 追蹤，原零值與失敗結果保留。
+- **選用驗證：**依研究用途選擇全新安裝目標、授權相機、標定／測距參考、裝置及效能量測；[Issue #6](https://github.com/JShengP/depthport/issues/6) 記錄已驗證與未驗證範圍。宣稱特定實機、相容性或精度前仍須取得對應證據，但不必完成所有目標才能公開原始碼。
+
+多人服務託管不在目前專案目標內。只有未來選擇提供多人服務時，才另行規劃帳號、認證、對外連線控管、多人負載與來源／模型／Session 隔離。Python 後端供本機使用，公開 Pages 提供已審查的靜態結果。研究／驗證 Issue 保持開啟，不表示 repo 尚未完成公開整理，也不要求全部結案才能更新 Alpha。[路線圖與狀態分類](ROADMAP.md#open-source-project-status--開源專案定位)
 
 ## 真實資料互動展示
 
@@ -170,7 +180,8 @@ Alpha.2 封裝已驗證的 Pages／FastAPI／Hub／DA3 相容性更新與各版�
 - **CI：** Ubuntu／Windows × Python 3.11／3.12 的應用契約與真模型 API 安裝／匯入；不含預訓練權重或推論，不等於實機或精度驗收。
 - **真實範例：** 已記錄日期的 v0.2 單圖 CUDA 與 v0.3 短片回放各有獨立來源／環境條件。[驗證歷程](docs/zh-TW/validation.md) · [回放條件](docs/zh-TW/tracking-replay-example.md)
 - **Pages 相容性：** 確切 Linux Chrome155／Edge155／Firefox157 build 分別完成[原生有視窗](docs/zh-TW/pages-headed-browsers.md)與[無頭](docs/zh-TW/pages-standalone-browsers.md)驗證，各模式 B01–B07 通過、共21通過／3未測；模式不重複算瀏覽器，唯一矩陣仍33通過／31未測。原失敗保留，Safari、實體手機、其他 OS／build 及自然備援路徑仍待驗證。
-- **仍待驗證：** 長遮擋／交會／移動相機的泛化追蹤、實體 RTSP、Windows 真權重／真 worker 整合、長時 VRAM／穩定性、NVIDIA 硬體 WebGL 與獨立標定距離精度。[驗收路線圖](ROADMAP.md)
+- **後續研究：**長遮擋／交會／移動相機的泛化追蹤，以及演算法／預設調整所需的獨立證據仍未驗證。
+- **選用環境／用途驗證：**依紀錄保留實體 RTSP、全新 Windows 真權重／真 worker 整合、長時 VRAM／穩定性、目標硬體 WebGL 與獨立標定距離的未驗證狀態。這些限制對外宣稱的範圍，不阻擋開源專案發布。[研究與選用驗證路線圖](ROADMAP.md)
 
 <details>
 <summary>追蹤研究與下一步實驗</summary>
