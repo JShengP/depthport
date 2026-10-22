@@ -3,13 +3,16 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
 const page=path.resolve(process.argv[2]),html=fs.readFileSync(page,'utf8');
 const scripts=[...html.matchAll(/<script\b([^>]+)>/g)].map(m=>({src:m[1].match(/src="([^"]+)"/)[1],defer:/\bdefer\b/.test(m[1])}));
+assert.match(html,/<details\s+id="syntheticPractice"[^>]*>/);
+assert.doesNotMatch(html.match(/<details\s+id="syntheticPractice"[^>]*>/)[0],/\sopen(?:\s|=|>)/);
 function run(unavailable=false){
- const notes=[],nodes=new Map(),rafs=[];let toggle,draws=0;
+ const notes=[],nodes=new Map(),rafs=[];let toggle,draws=0,contexts=0;
+ const practice={open:false,events:{},addEventListener(n,f){this.events[n]=f;}};nodes.set('#syntheticPractice',practice);
  function context(cloud){return new Proxy({createImageData:(w,h)=>({data:new Uint8ClampedArray(w*h*4)}),fillRect(){if(cloud)draws++;}},{get:(o,k)=>k in o?o[k]:()=>{}});}
  for(const id of ['rgbField','depthField','depthHistogram','syntheticCloud','pixelValue','depthValue','xyzValue','semanticValue','maskToggle','spatialReset']){
   const ctx=context(id==='syntheticCloud');nodes.set('#'+id,{id,width:640,height:360,clientWidth:640,clientHeight:360,dataset:{},events:{},textContent:'',
    addEventListener(n,f){this.events[n]=f;},setAttribute(k,v){this[k]=v;},setPointerCapture(){},
-   getContext(type){return type==='2d'&&!(unavailable&&id==='syntheticCloud')?ctx:null;},
+   getContext(type){contexts++;return type==='2d'&&!(unavailable&&id==='syntheticCloud')?ctx:null;},
    getBoundingClientRect(){return{left:0,top:0,width:640,height:360};},insertAdjacentElement(where,n){notes.push(n);}});
  }
  const button={addEventListener(n,f){toggle=f;}};
@@ -23,19 +26,30 @@ function run(unavailable=false){
   assert.ok(script.defer,'Order under test is the actual deferred HTML order');
   vm.runInContext(fs.readFileSync(path.resolve(path.dirname(page),script.src.split('?')[0]),'utf8'),sandbox,{filename:script.src});
  }
+ assert.equal(contexts,0,'Collapsed exercises must not initialize hidden canvases');
+ assert.equal(rafs.length,0);assert.equal(notes.length,0);
+ assert.equal(nodes.get('#rgbField').events.click,undefined);
+ toggle(); // First open must use the current language, even after a collapsed switch.
+ practice.open=true;practice.events.toggle();
  if(!unavailable){
   assert.equal(notes.length,0,'Supported Canvas2D must not display an initialization failure');
   assert.equal(rafs.length,1,'Synthetic CloudViewer must be constructed after its dependency');
   rafs.shift()();assert.ok(draws>1000,'Real software renderer must draw the generated cloud');
   assert.ok(nodes.get('#syntheticCloud').events.pointerdown,'Cloud retains orbit controls');
  }else{
-  assert.equal(notes.length,1);assert.equal(notes[0].role,'status');assert.match(notes[0].textContent,/點雲未能初始化/);
-  toggle();assert.match(notes[0].textContent,/Point cloud could not initialize/);
+  assert.equal(notes.length,1);assert.equal(notes[0].role,'status');assert.match(notes[0].textContent,/Point cloud could not initialize/);
   toggle();assert.match(notes[0].textContent,/點雲未能初始化/);
+  toggle();assert.match(notes[0].textContent,/Point cloud could not initialize/);
   assert.doesNotMatch(notes[0].textContent,/瀏覽器無法/);
  }
  nodes.get('#rgbField').events.click({currentTarget:nodes.get('#rgbField'),clientX:100,clientY:120});
  assert.equal(nodes.get('#pixelValue').textContent,'(100, 120)');
  nodes.get('#maskToggle').events.click();assert.equal(nodes.get('#maskToggle')['aria-pressed'],'true');
+ const before={contexts,rafs:rafs.length,notes:notes.length};
+ practice.open=false;practice.events.toggle();practice.open=true;practice.events.toggle();
+ assert.equal(contexts,before.contexts,'Reopen must reuse the initialized exercise');
+ assert.equal(rafs.length,before.rafs);assert.equal(notes.length,before.notes);
+ assert.equal(nodes.get('#pixelValue').textContent,'(100, 120)');
+ assert.equal(nodes.get('#maskToggle')['aria-pressed'],'true');
 }
-run();run(true);console.log('Built v0.2 deferred renderer order, software drawing, inspector/mask and bilingual failure: PASS');
+run();run(true);console.log('Built v0.2 collapsed/lazy first open, renderer order, retained state and bilingual failure: PASS');

@@ -76,6 +76,8 @@ flowchart LR
 
 **Current Pages, real numeric inspector / 目前網站的真實數值檢查器。** Four original saved bus depth outputs share v0.1's source. Click RGB/depth to read native Float32 values and camera XYZ; inspect actual YOLO Detect/Segment masks and object clouds. The image shows **Depth Anything V2 Small native relative nearness**, its final virtual Z and genuine semantic overlays. 四模型與 v0.1 共用同一公車來源；點擊 RGB／深度可讀原生 Float32 與 XYZ，切換真 YOLO 框／遮罩並看物件點雲，圖中為 V2 原生相對接近度及最終虛擬 Z。
 
+**Real results first / 真實結果優先：** the optional generated geometry exercise is collapsed by default and explicitly separate from the saved bus depth/XYZ/mask inspector. 選用合成幾何練習預設收合；展開才初始化，真實公車深度、XYZ與遮罩查詢保持在上方，兩者不混為實際推論證據。
+
 [![v0.2 current Pages UI with actual saved model results](../../assets/pages-v02-inspector.zh-TW.jpg)](https://jshengp.github.io/depthport/v0.2/?lang=zh-TW)
 
 Source / 來源：[Ultralytics bus.jpg](https://github.com/ultralytics/assets/blob/53d4e2a8fd15f473c29a148c317a8477be559327/im/bus.jpg). Depth reuses **2026-10-17** CUDA exports; semantic masks were rerun because the old export omitted them. This screenshot is the **current static Pages inspector**, not the old local application's four-model comparison screenshot. 深度沿用原 CUDA 匯出，舊匯出未保存遮罩才另行重跑；新圖是目前靜態 Pages 檢查器，不是舊本機四模型比較畫面。

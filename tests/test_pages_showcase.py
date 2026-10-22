@@ -351,3 +351,39 @@ def test_spatial_practice_loads_actual_renderer_before_initialization(tmp_path):
     subprocess.run([node, str(ROOT / 'tests/test_spatial_showcase.cjs'),
                     str(out / 'v0.2/index.html')],
                    check=True, capture_output=True, text=True)
+
+
+def test_spatial_disclosure_defaults_closed_and_contains_only_synthetic_practice(tmp_path):
+    class Sections(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.stack, self.ids, self.practice = [], {}, None
+
+        def handle_starttag(self, tag, attrs):
+            attrs = dict(attrs)
+            if attrs.get('id') == 'syntheticPractice':
+                self.practice = (tag, attrs)
+            if 'id' in attrs:
+                self.ids[attrs['id']] = any(a.get('id') == 'syntheticPractice' for _, a in self.stack)
+            if tag not in {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'}:
+                self.stack.append((tag, attrs))
+
+        def handle_endtag(self, tag):
+            for i in range(len(self.stack) - 1, -1, -1):
+                if self.stack[i][0] == tag:
+                    self.stack = self.stack[:i]
+                    break
+
+    out = tmp_path / 'site'
+    build(out)
+    html = (out / 'v0.2/index.html').read_text()
+    parser = Sections()
+    parser.feed(html)
+    assert parser.practice[0] == 'details' and 'open' not in parser.practice[1]
+    for name in ('rgbField', 'depthField', 'depthHistogram', 'syntheticCloud', 'maskToggle', 'spatialReset'):
+        assert parser.ids[name], name
+    for name in ('realBus', 'realRGB', 'realDepth', 'realCloud', 'realEngine', 'realSemanticMode', 'realObject'):
+        assert not parser.ids[name], name
+    assert html.index('id="realBus"') < html.index('id="syntheticPractice"')
+    assert '合成幾何練習（選用，與真實公車結果分開）' in html
+    assert 'Synthetic geometry practice (optional; separate from real bus results)' in html

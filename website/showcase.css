@@ -16,3 +16,9 @@
 .run-note summary{cursor:pointer;color:var(--accent);font-weight:700;padding:8px 0}.run-note details[open] summary{margin-bottom:12px}.run-note summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 
 @media(max-width:650px){.header-nav[aria-label="Main navigation"]{flex-wrap:wrap;justify-content:flex-end;gap:8px}.header-nav[aria-label="Main navigation"]>a{display:block}}
+
+/* Optional v0.2 exercises remain distinct from the saved real-data inspector. */
+.synthetic-practice{margin:24px 0;border:1px solid var(--edge);border-radius:16px;background:#0c1a2a}
+.synthetic-practice>summary{cursor:pointer;padding:18px;color:var(--accent);font-size:14px;font-weight:750;overflow-wrap:anywhere}
+.synthetic-practice>summary:focus-visible{outline:2px solid var(--accent);outline-offset:-4px;border-radius:16px}
+.synthetic-practice-content{padding:0 16px 16px}
