@@ -67,3 +67,7 @@ Broad weak-blocked rows are1,343, including1,043 high-free rows. **Both actual-a
 ### Decision and next boundary
 
 Keep both candidates research-only and defaults/weak continuation unchanged. Zero exposure is explained within these archives; independent exposure, true harm/identity quality and default promotion remain unverified, with all old failures/false gates retained. No new control or parameter change follows. Before another experiment, prospectively freeze a read-only temporal geometry/competition audit of the192 qualified free edges and3 past-supported triples using only decision-prefix observations. Separate predicted localisation/observation geometry from competitor replacement and score-gap persistence; never relax a margin, remove weak protection or use future outcomes to manufacture eligibility. New definitions or source expansion require a new public freeze, not a retrospective rewrite of this evidence.
+
+## Local software validation after extraction
+
+Application NumPy1 suite:668 passed/110 pre-existing optional skips/one existing Starlette–httpx deprecation warning; then all11 added provenance/denominator/privacy report contracts passed. Pinned NumPy2 predicate contracts:20 passed. These are software/evidence-format checks, not model-quality or full hardware acceptance. Public manifest, local Markdown links, obvious-secret-pattern and whitespace checks pass; this is not a complete security audit. PR/main platform CI status is tracked in [PR #41](https://github.com/JShengP/depthport/pull/41).

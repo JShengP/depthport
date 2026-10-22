@@ -153,6 +153,8 @@ Alpha.2 packages reviewed dependency compatibility updates and workflow illustra
 - **Causal-candidate exposure / 因果候選曝光：** [Frozen full discovery/reserved ledger](../../en/tracking-handoff-exposure.md) / [繁中](../../zh-TW/tracking-handoff-exposure.md): KITTI0012–0016 discovery publicly sealed before0017/0018 reserved; all7 sources/1,593 frames/63 full processes complete with exact native/repeat receipts. All active/retained continuation and handoff actions0; selectionsnull/all3 confirmation gatesfalse.1,027 weak updates per arm retained;434 old/772 prior raw files unchanged. 不看GT／調參或改弱階段／預設，完整清單不等於有效曝光／品質通過；後續只讀資格與操作可達性稽核已完成下項，原診斷本機。
 
 
+- **Read-only eligibility / 只讀資格：** [Seven-source action reachability](../../en/tracking-handoff-reachability.md) / [繁中](../../zh-TW/tracking-handoff-reachability.md): public method freeze before28 complete archived reads/6,372 trace frames (1,593 unique); all repeats/native seals match.192 qualified free birth edges fail current gate;3 past-supported handoff triples fail current margin. No formed proposals/qualified claim vetoes/conditional weak exclusions; broad weak-blocked rows are separate.1,027 weak updates,434 old/772 previous/1,956 seven-source files unchanged; no extraction failure/retry. 缺前提不當被拒提案，原失敗／null／false保留；不看GT／調參、不重跑推論／追蹤或改弱階段／預設，獨立曝光／品質仍未驗證。下一步另凍結決策前時序幾何／競爭稽核。
+
 ## Limits / 驗證限制
 
 - **Tracking / 追蹤:** generalised long occlusion, crossing/camera-motion ID stability and independent confirmation/competition/localisation/recovery tests remain open. The example spans only 0.959 s between first/last frames and is not long-occlusion acceptance; missing/new IDs are not verified ID switches. 短片不代表長遮擋或確認換 ID。
@@ -161,5 +163,3 @@ Alpha.2 packages reviewed dependency compatibility updates and workflow illustra
 - **Geometry / 幾何:** measured intrinsics and independent calibrated distance accuracy remain open. Relative/virtual depth is not metres; camera-space IDs/XYZ are not identities, world trajectories, hidden-surface reconstruction, SLAM or certified measurement. 深度與相機座標不能視為身分、世界軌跡或認證測量。
 
 [Release scope / 本版範圍](../../releases/0.3.0-alpha.2.md) · [Acceptance roadmap / 驗收路線圖](../../../ROADMAP.md)
-
-- **Read-only eligibility / 只讀資格：** [Seven-source action reachability](../../en/tracking-handoff-reachability.md) / [繁中](../../zh-TW/tracking-handoff-reachability.md): public method freeze before28 complete archived reads/6,372 trace frames (1,593 unique); all repeats/native seals match.192 qualified free birth edges fail current gate;3 past-supported handoff triples fail current margin. No formed proposals/qualified claim vetoes/conditional weak exclusions; broad weak-blocked rows are separate.1,027 weak updates,434 old/772 previous/1,956 seven-source files unchanged; no extraction failure/retry. 缺前提不當被拒提案，原失敗／null／false保留；不看GT／調參、不重跑推論／追蹤或改弱階段／預設，獨立曝光／品質仍未驗證。下一步另凍結決策前時序幾何／競爭稽核。
