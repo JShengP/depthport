@@ -1,5 +1,14 @@
 # Changelog / 版本紀錄
 
+## Unreleased — maintenance / 維護（2026-11-04）
+
+- Integrate reviewed dependency PRs [#45](https://github.com/JShengP/depthport/pull/45), [#46](https://github.com/JShengP/depthport/pull/46), [#47](https://github.com/JShengP/depthport/pull/47) and [#48](https://github.com/JShengP/depthport/pull/48): SHA-pinned setup-python 7.1.0, pytest minimum 9.2.0, FastAPI minimum 0.162.0, and Torch/torchvision minimums 2.15.0/0.29.2. The model API workflow now installs that explicit pair from the official CPU index before resolving model requirements.
+- Exact-head application and model API checks cover Ubuntu/Windows × Python 3.11/3.12 without pretrained weights or inference. Preserve the NumPy 1 application / optional NumPy 2 worker boundary, research defaults, original failed/zero outcomes and existing hardware/accuracy limits. Batch closure requires integrated-main CI; results remain linked from the PRs and maintenance milestone.
+- Add explicit roadmap/GitHub milestones for published v0.1/v0.2/v0.3 feature scope, this bounded maintenance batch, follow-up research #8 and optional use-case validation #6. Historical feature-scope closure is not quality acceptance; #6/#8 remain open without deadlines. No new release or changes to tagged downloads and dated handoff/evidence snapshots.
+- 合併已驗證的維護依賴，明列模型 CI 的 CPU 配對；整理已發布版本、維護批次、後續研究及選用驗證的里程碑。原始診斷與私人資料留本機，維持實驗性 Alpha 與本機工作台定位，不要求多人服務部署。
+
+[Milestone status / 里程碑狀態](ROADMAP.md#milestones--里程碑) · [Maintenance batch / 本次維護](https://github.com/JShengP/depthport/milestone/3)
+
 ## Unreleased — research and documentation after v0.3.0-alpha.2 / Alpha.2 後的研究與文件
 
 - Add GT-free frozen exposure selection, continuous bounded-cache shards and complete discovery/reserved-confirmation ledgers for 16 full sources / 17,984 frames / 144 runs. Availability triggers eight times in discovery only; equivalent assignment remains unexposed, neither replicates in reserved sources. Keep weak continuation and original controls/settings; raw observations/diagnoses local. Add post-selection objective-reason audit and correct the earlier MOT17-04 new-scene provenance claim without rewriting frozen records.

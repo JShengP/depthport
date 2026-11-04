@@ -1,14 +1,27 @@
 # Roadmap / 路線圖
 
-Updated / 更新：2026-10-22 · [Project](README.md) · [繁體中文首頁](README.zh-TW.md) · [Alpha.2 notes / 發布說明](docs/releases/0.3.0-alpha.2.md) · [Changelog / 歷程](CHANGELOG.md) · [Handoff / 收尾與接續（繁中）](docs/zh-TW/maintenance-handoff.md)
+Updated / 更新：2026-11-04 · [Project](README.md) · [繁體中文首頁](README.zh-TW.md) · [Alpha.2 notes / 發布說明](docs/releases/0.3.0-alpha.2.md) · [Changelog / 歷程](CHANGELOG.md) · [Handoff / 收尾與接續（繁中）](docs/zh-TW/maintenance-handoff.md)
 
-[Project scope / 專案定位](#open-source-project-status--開源專案定位) · [Status / 狀態判讀](#status--狀態判讀) · [Current Pages / 目前互動展示](#current-pages--目前互動展示) · [v0.1](#v01--viewer-foundation--檢視器基礎) · [v0.2](#v02--spatial-analysis--空間分析) · [v0.3](#v03--sessions-and-tracking--回放與追蹤) · [Research & optional validation / 研究與選用驗證](#follow-up-research-and-optional-validation--後續研究與選用驗證) · [Maintenance / 維護](#repository-maintenance--repo-維護)
+[Milestones / 里程碑](#milestones--里程碑) · [Project scope / 專案定位](#open-source-project-status--開源專案定位) · [Status / 狀態判讀](#status--狀態判讀) · [Current Pages / 目前互動展示](#current-pages--目前互動展示) · [v0.1](#v01--viewer-foundation--檢視器基礎) · [v0.2](#v02--spatial-analysis--空間分析) · [v0.3](#v03--sessions-and-tracking--回放與追蹤) · [Research & optional validation / 研究與選用驗證](#follow-up-research-and-optional-validation--後續研究與選用驗證) · [Maintenance / 維護](#repository-maintenance--repo-維護)
 
 > [!IMPORTANT]
 > DepthPort is an **open-source local workbench**, with experimental Alpha releases and a static public showcase. Completed repository work, follow-up research and optional use-case validation are separate. Open validation items do not block source publication or scoped Alpha maintenance.
 > DepthPort 定位為**開源本機工作台**，提供實驗性 Alpha 與靜態公開展示。已完成的 repo 工作、後續研究及依用途選用的驗證分開追蹤；未驗證項目不阻擋原始碼公開或依已記錄範圍維護 Alpha。
 
 **Current phase / 目前階段 — Maintenance / 維護（2026-10-22）：** the current development stage is complete within its documented scope; further experiments are deferred until a specific need is selected. 目前開發階段依記錄範圍告一段落，進入維護；後續實驗待有具體需求時再選定。Experimental Alpha status, original failures and unverified items remain unchanged. 實驗性 Alpha、原失敗與未驗證項目維持不變。[Maintenance scope / 維護範圍](#repository-maintenance--repo-維護)
+
+## Milestones / 里程碑
+
+[GitHub milestones / GitHub 里程碑](https://github.com/JShengP/depthport/milestones) separate published feature/release scope, bounded maintenance batches and open evidence backlogs. 版本功能／發布完成、單次維護批次、研究及選用驗證分開追蹤；未排研究不承諾期限。
+
+- [x] **[v0.1 Alpha — Viewer foundation](https://github.com/JShengP/depthport/milestone/4)** — published viewer/source scope, closed. 檢視器與來源發布範圍完成；歷史 [v0.1.0-alpha.1](https://github.com/JShengP/depthport/releases/tag/v0.1.0-alpha.1) 的未驗證限制不變。
+- [x] **[v0.2 Alpha — Spatial Analysis](https://github.com/JShengP/depthport/milestone/5)** — published analysis/source scope, closed. 空間分析功能／來源發布完成；單圖 CUDA 證據不代表實機或測距精度全面通過。
+- [x] **[v0.3 Alpha — Sessions and replay](https://github.com/JShengP/depthport/milestone/6)** — published experimental [v0.3.0-alpha.2](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.2) scope, closed. Session／回放／書籤及選配 worker 已提供，維持實驗性 Alpha；2026-10-22 起進入維護。
+- [x] **[2026-11 — Maintenance refresh](https://github.com/JShengP/depthport/milestone/3)** — integrate reviewed PRs [#45](https://github.com/JShengP/depthport/pull/45) / [#46](https://github.com/JShengP/depthport/pull/46) / [#47](https://github.com/JShengP/depthport/pull/47) / [#48](https://github.com/JShengP/depthport/pull/48), explicit Torch 2.15.0 / torchvision 0.29.2 CPU model CI and milestone documentation. 本次依賴／設定與文件整理已實作；批次的最終 main CI 及結案狀態以連結為準，關閉前須確認檢查通過。不另發 Release，也不新增真權重、實機或精度驗收。
+- [ ] **[Tracking reliability research](https://github.com/JShengP/depthport/milestone/1)** — [Issue #8](https://github.com/JShengP/depthport/issues/8), open follow-up research, no due date. 有需求時另凍結決策前時序幾何／競爭稽核與未見確認；原預設、弱偵測延續、零值／失敗及原封存保留。
+- [ ] **[Optional local-use validation](https://github.com/JShengP/depthport/milestone/2)** — [Issue #6](https://github.com/JShengP/depthport/issues/6), open use-case validation, no due date. 依用途選擇安裝、授權相機、標定／獨立測距、裝置與效能；未做的仍為未驗證。
+
+Closed published-scope milestones do not establish new quality, hardware or safety acceptance and do not close #6/#8. 維護批次完成亦不等於研究門檻通過；原 false/null、歷史 Tag、下載包及交接快照不改寫。多人託管仍不列必要門檻。
 
 ## Open-source project status / 開源專案定位
 
