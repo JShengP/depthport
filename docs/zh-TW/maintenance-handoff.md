@@ -4,6 +4,8 @@
 
 此文件保存本輪收尾狀態，供日後接續；不是持續更新的 CI 或 Issue 狀態頁。重新開始前，先核對最新 `main`、ROADMAP 與 Issue。本次只補交接文件，不另發新版，也不改寫歷史 Tag 或下載包。
 
+**後續維護補記：** [2026-11 依賴、CI 與里程碑結案（2026-11-05 補記）](#maintenance-2026-11)。原始 2026-10-22 快照與研究限制保留；補記中的 CI 對應列明的提交，不代表日後所有 main 提交都已驗證。
+
 ## 版本與專案階段
 
 - 發布版本：**[v0.3.0-alpha.2](https://github.com/JShengP/depthport/releases/tag/v0.3.0-alpha.2)**，維持實驗性 Alpha。
@@ -54,3 +56,36 @@
 4. 公開內容只限經審查的彙總、文件及條款允許且註明來源的範例。新資料先確認使用條款，repo 的 AGPL 不替資料或模型重新授權。
 
 私人相機 URL／帳密、影像、Session、書籤備註／備份、標定資料、權重、GT、完整快取、逐格追蹤及原始診斷留在本機。接續時不要將這些資料加入提交。[安全政策](../../SECURITY.md) · [第三方聲明](../../THIRD_PARTY_NOTICES.md)
+
+<a id="maintenance-2026-11"></a>
+
+## 2026-11 依賴維護與里程碑結案（2026-11-05 補記）
+
+本節記錄 **2026-11-04 已完成的維護批次**，交接基準為 [`1220dc8`](https://github.com/JShengP/depthport/commit/1220dc8d124cfa380cb99086193c2b57e85ec975)。以下是固定的批次收據；本文件後續提交及下次接續時，仍須另查最新 main CI。
+
+### 已整合的依賴與文件
+
+- [PR #45](https://github.com/JShengP/depthport/pull/45)：五個 workflow 的 setup-python 更新為 **7.1.0**，繼續固定官方提交 SHA。
+- [PR #46](https://github.com/JShengP/depthport/pull/46)：pytest 最低版本 **9.2.0**，保留 `<10`。
+- [PR #47](https://github.com/JShengP/depthport/pull/47)：FastAPI 最低版本 **0.162.0**，保留 `<1`。
+- [PR #48](https://github.com/JShengP/depthport/pull/48)：Torch／torchvision 最低版本 **2.15.0／0.29.2**，分別保留 `<3`／`<1`；模型 API CI 先從官方 CPU index 明確安裝 `torch==2.15.0 torchvision==0.29.2`，再安裝模型需求，避免先裝舊 CPU 配對再由解析器升級。
+- [PR #49](https://github.com/JShengP/depthport/pull/49)：README／ROADMAP／CHANGELOG 補齊已發布版本、單次維護、後續研究與選用驗證的里程碑分工。上述五筆 PR 均已合併，本次維護分支已整理。
+
+NumPy 1 應用／選配 NumPy 2 worker 的隔離、追蹤預設、弱偵測延續與原研究結果不變。發布版本仍是 **v0.3.0-alpha.2**；本輪未另發 Release，既有 Tag／下載包及原失敗、零值、false／null 均保留。
+
+### 已通過的限定 CI
+
+- **依賴整合 main `6763778`：** [Application contracts](https://github.com/JShengP/depthport/actions/runs/41841147945) **4／4**、[Model API compatibility](https://github.com/JShengP/depthport/actions/runs/41841147998) **4／4** 通過；各覆蓋 Ubuntu／Windows × Python 3.11／3.12。
+- **文件 PR `d7c6407`：** [Application contracts](https://github.com/JShengP/depthport/actions/runs/41841620558) **4／4** 通過。
+- **本批最終 main `1220dc8`：** [Application contracts](https://github.com/JShengP/depthport/actions/runs/41842179372) **4／4** 首輪通過。最後一批只改 Markdown，模型 API workflow 沒有重新觸發；其模型驗證收據仍是上方程式／依賴相同的 `6763778`，不能另算一次模型驗證。
+- **setup-python 整合 main `a144cc8`：** [Pages 建置／部署](https://github.com/JShengP/depthport/actions/runs/41839753178) 與 [Windows Node stability](https://github.com/JShengP/depthport/actions/runs/41839753419) 亦通過，範圍依各自 workflow 與既有協定。
+
+以上是軟體契約、真模型 API 安裝／匯入與部署流程證據；沒有下載預訓練權重或執行模型推論，不新增實機、瀏覽器矩陣、效能、追蹤品質或物理距離精度驗收。原驗證 JSON、保存結果、研究程式與日期紀錄未因依賴更新改寫。
+
+### 里程碑與下次接續
+
+- **已結案 4 項：** [v0.1 功能／發布範圍](https://github.com/JShengP/depthport/milestone/4)、[v0.2 功能／發布範圍](https://github.com/JShengP/depthport/milestone/5)、[v0.3 實驗性 Alpha 範圍](https://github.com/JShengP/depthport/milestone/6)，以及 [2026-11 維護批次](https://github.com/JShengP/depthport/milestone/3)。本次維護里程碑內五筆 PR 均已關閉且合併；版本里程碑結案不代表所有品質／實機門檻通過。
+- **持續開啟 2 項：** [Tracking reliability research](https://github.com/JShengP/depthport/milestone/1) 對應 [Issue #8](https://github.com/JShengP/depthport/issues/8)；[Optional local-use validation](https://github.com/JShengP/depthport/milestone/2) 對應 [Issue #6](https://github.com/JShengP/depthport/issues/6)。兩者無到期日，Issue 原內容與限制保留，不阻擋開源維護。
+- 下次先同步最新 main 並核對 [ROADMAP 里程碑](../../ROADMAP.md#milestones--里程碑)、PR 與 CI；這五筆維護 PR 已完成，不必重做。研究仍可從上方 **192 筆空閒出生邊／3 組交接組合**的決策前只讀稽核接續，或依用途選做 #6；本輪沒有執行新研究、調參或升級追蹤預設。
+
+維持開源本機工作台與維護階段定位，不把多人服務部署列為必要門檻。原始診斷、私人影像／Session／備註、帳密、權重及完整快取繼續保留本機，公開交接僅列經確認的版本、彙總與 GitHub 收據連結。
